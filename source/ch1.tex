@@ -1,0 +1,1995 @@
+% Modified 31 Oct 2005:  Conditioning fallacy alluded to.
+% This chapter has been modified on 6-4-05.
+% There are two \choice
+\pagestyle{headings}
+\setcounter{chapter}{0}
+\chapter{Distribusi Peluang Diskret} \label{chp 1}
+\setcounter{page}{1}
+
+\section{Simulasi Peluang Diskret} \label{sec 1.1}
+
+\subsection*{Peluang}
+
+Dalam bab ini, pertama-tama kita akan membahas percobaan acak dengan sejumlah
+terhingga hasil yang mungkin, yaitu $\omega_1$, $\omega_2$, \dots, $\omega_n$.  Sebagai contoh, kita
+melempar sebuah dadu dan hasil yang mungkin adalah 1, 2, 3, 4, 5, 6, sesuai dengan
+sisi yang muncul.  Kita melempar sebuah koin dengan hasil yang mungkin H (kepala) dan T
+(ekor).  
+\par
+Sering kali kita perlu dapat merujuk pada suatu hasil percobaan.  Sebagai 
+contoh, kita mungkin ingin menuliskan ekspresi matematika yang menyatakan jumlah dari empat kali pelemparan
+sebuah dadu.  Untuk itu, kita dapat menetapkan $X_i$, $i = 1, 2, 3, 4,$ sebagai nilai
+hasil dari keempat pelemparan tersebut, lalu menuliskan ekspresi
+$$X_1 + X_2 + X_3 + X_4$$
+untuk jumlah keempat pelemparan.  Besaran $X_i$ disebut \emx {peubah acak}\index{peubah 
+acak}.
+Peubah acak hanyalah sebuah ekspresi yang nilainya merupakan hasil suatu
+percobaan tertentu.  Seperti jenis peubah lain dalam matematika, peubah acak
+dapat memiliki nilai yang berbeda-beda.
+\par
+Misalkan $X$ adalah peubah acak yang menyatakan hasil pelemparan sebuah dadu.  Kita akan menetapkan
+peluang bagi setiap hasil yang mungkin dari percobaan ini.  Caranya adalah dengan memasangkan pada setiap
+hasil $\omega_j$ sebuah bilangan taknegatif $m(\omega_j)$ sedemikian rupa sehingga
+$$ 
+m(\omega_1) + m(\omega_2) + \cdots + m(\omega_6) = 1\ .
+$$
+Fungsi $m(\omega_j)$ disebut \emx {fungsi distribusi}\index{fungsi
+distribusi} dari peubah acak
+$X$.  Dalam kasus pelemparan dadu, kita menetapkan peluang yang sama, yakni
+peluang 1/6, pada setiap hasil.  Dengan penetapan peluang ini, kita dapat menulis
+$$
+P(X \le 4) = {2\over 3}
+$$
+untuk menyatakan bahwa peluangnya adalah $2/3$ bagi sebuah pelemparan dadu untuk menghasilkan nilai yang
+tidak melebihi 4.  
+\par
+Misalkan $Y$ adalah peubah acak yang menyatakan hasil pelemparan sebuah koin.  Dalam kasus ini, terdapat
+dua hasil yang mungkin, yang dapat kita beri label H dan T.  Kecuali jika ada alasan untuk menduga bahwa
+salah satu sisi koin muncul lebih sering daripada sisi lainnya, wajar jika kita menetapkan
+peluang 1/2 pada masing-masing hasil.
+\par
+Dalam kedua percobaan di atas, setiap hasil diberi peluang yang sama.  Tentu saja, secara umum
+tidak selalu demikian.  Sebagai contoh, jika suatu obat diketahui efektif pada 30 persen dari seluruh
+penggunaannya, kita dapat menetapkan peluang .3 bahwa obat itu efektif pada penggunaan berikutnya dan
+.7 bahwa obat itu tidak efektif.  Contoh terakhir ini menggambarkan \emx {konsep frekuensi
+peluang}\index{peluang!konsep frekuensi}.  Artinya, jika kita memiliki peluang $p$ bahwa 
+suatu percobaan memberikan hasil $A$, maka apabila percobaan itu diulangi berkali-kali, 
+kita mengharapkan bahwa
+proporsi kemunculan $A$ kira-kira sebesar $p$.  Untuk menguji gagasan intuitif semacam ini, kita akan
+terbantu dengan menelaah beberapa masalah tersebut melalui percobaan.  Sebagai 
+contoh, kita dapat melempar koin berkali-kali dan melihat apakah proporsi kemunculan sisi kepala 
+mendekati 1/2.  Kita juga dapat menyimulasikan percobaan ini pada komputer.
+
+\subsection*{Simulasi}
+
+Kita ingin dapat melakukan percobaan yang bersesuaian dengan suatu himpunan
+peluang tertentu; misalnya, $m(\omega_1) = 1/2$, $m(\omega_2) = 1/3$, dan
+$m(\omega_3) = 1/6$.  Dalam hal ini, tiga sisi sebuah dadu bersisi enam dapat diberi tanda $\omega_1$,
+dua sisi diberi tanda $\omega_2$, dan satu sisi diberi tanda $\omega_3$.  
+\par
+Dalam kasus umum, kita mengasumsikan bahwa $m(\omega_1)$, $m(\omega_2)$, \dots, $m(\omega_n)$ semuanya merupakan bilangan
+rasional dengan penyebut bersama terkecil $n$.  Jika $n > 2$, kita dapat membayangkan sebuah dadu silindris panjang dengan
+penampang berupa segi-$n$ beraturan.  Jika $m(\omega_j) = n_j/n$, kita dapat memberi tanda pada $n_j$ dari
+sisi panjang silinder itu dengan $\omega_j$; jika salah satu sisi ujung yang muncul, kita cukup
+melempar dadu tersebut lagi.  Jika $n = 2$, percobaan dapat dilakukan dengan sebuah koin.
+\par
+Kita terutama akan menaruh perhatian pada pengulangan suatu percobaan acak
+berkali-kali.  Meskipun dadu silindris memudahkan kita melakukan
+beberapa pengulangan, cara itu akan sulit digunakan untuk menjalankan sangat banyak
+percobaan.  Karena komputer modern dapat melakukan banyak operasi
+dalam waktu yang sangat singkat, wajar jika kita menggunakan komputer untuk tugas ini.
+
+\subsection*{Bilangan Acak}
+
+Pertama-tama kita harus mencari padanan pelemparan dadu pada komputer.  Hal ini dilakukan
+dengan menggunakan \emx {generator bilangan acak}.\index{generator bilangan acak}
+Bergantung pada paket perangkat lunak yang digunakan,
+komputer dapat diminta menghasilkan bilangan real antara 0 dan 1, atau bilangan bulat dalam suatu
+himpunan bilangan bulat berurutan.  Dalam kasus pertama, bilangan real dipilih sedemikian rupa sehingga
+peluang bilangan tersebut terletak pada sembarang subinterval tertentu dari interval satuan ini
+sama dengan panjang subinterval tersebut.  Dalam kasus kedua, setiap bilangan bulat memiliki
+peluang yang sama untuk dipilih.
+\par
+Misalkan $X$ adalah peubah acak dengan fungsi distribusi $m(\omega)$, dengan $\omega$ berada dalam himpunan $\{\omega_1,
+\omega_2, \omega_3\}$, serta $m(\omega_1) = 1/2$, $m(\omega_2) = 1/3$, dan $m(\omega_3) = 1/6$.  Jika
+paket komputer kita dapat menghasilkan bilangan bulat acak dalam himpunan $\{1, 2, ..., 6\}$, kita cukup memintanya
+melakukan hal itu, lalu mengaitkan 1, 2, dan 3 dengan $\omega_1$, 4 dan 5 dengan $\omega_2$, serta 6
+dengan $\omega_3$.  Jika paket komputer kita menghasilkan bilangan real acak $r$ dalam interval
+$(0,~1)$, maka ekspresi
+$$\lfloor {6r}\rfloor + 1$$
+akan menjadi bilangan bulat acak antara 1 dan 6.  (Notasi $\lfloor x \rfloor$ berarti bilangan bulat terbesar
+yang tidak melebihi $x$, dan dibaca ``lantai dari $x$.")
+\par
+Metode yang digunakan komputer untuk menghasilkan bilangan real acak dijelaskan dalam pembahasan
+sejarah pada akhir bagian ini.  Contoh berikut memberikan cuplikan keluaran program {\bf
+RandomNumbers}.\index{RandomNumbers (program)}
+\begin{example}(Pembangkitan Bilangan Acak) \label{exam 1.05}
+Program {\bf RandomNumbers} menghasilkan $n$ bilangan real acak dalam interval $[0, 1]$, dengan
+$n$ dipilih oleh pengguna.  Ketika kami menjalankan program dengan $n = 20$, kami memperoleh data yang ditampilkan pada
+Tabel~\ref{table 1.1}.
+\begin{table}
+\centering
+\begin{tabular}{llll} 
+.203309 &
+.762057 &
+.151121 &
+.623868 \\
+.932052 &
+.415178 &
+.716719 &
+.967412 \\
+.069664 & 
+.670982 &
+.352320 &
+.049723 \\
+.750216 &
+.784810 &
+.089734 &
+.966730 \\
+.946708 &
+.380365 &
+.027381 &
+.900794 \\
+\end{tabular}
+\caption{Contoh keluaran program {\bf RandomNumbers}.}
+\label{table 1.1}
+\end{table}
+\end{example}
+
+\begin{example}(Pelemparan Koin) \label{exam 1.1}
+ Seperti telah kita catat, intuisi kita menyatakan bahwa peluang
+memperoleh sisi kepala dalam sekali pelemparan koin adalah 1/2.  Agar komputer
+melempar koin, kita dapat memintanya memilih bilangan real acak dalam interval $[0, 1]$, lalu
+memeriksa apakah bilangan itu kurang dari 1/2.  Jika ya, hasilnya kita sebut \emx {kepala}; jika
+tidak,
+kita menyebutnya \emx {ekor}.  Cara lain adalah meminta komputer memilih bilangan bulat
+acak dari himpunan $\{0, 1\}$.  Program {\bf CoinTosses}\index{CoinTosses (program)} menjalankan
+percobaan pelemparan koin sebanyak $n$ kali.  Menjalankan program ini dengan
+$n = 20$ menghasilkan:
+\vskip .1in
+\begin{center}
+THTTTHTTTTHTTTTTHHTT.
+\end{center}
+\vskip .1in
+
+Perhatikan bahwa dalam 20 pelemparan, kita memperoleh 5 kepala dan 15 ekor.  Mari kita lempar
+koin sebanyak $n$ kali, dengan $n$ jauh lebih besar dari 20, lalu kita lihat apakah proporsi kepala yang diperoleh lebih dekat dengan
+dugaan intuitif kita, yaitu 1/2.  Program {\bf CoinTosses} mencatat jumlah kepala.  Ketika
+kita menjalankan program ini dengan $n = 1000$, kita memperoleh 494 kepala.  Ketika kita menjalankannya dengan $n = 10000$, kita memperoleh
+5039 kepala.
+
+Kita melihat bahwa ketika koin dilempar 10{,}000 kali, proporsi
+kepala
+mendekati ``nilai sebenarnya" .5 untuk memperoleh sisi kepala ketika sebuah koin
+dilempar.  Model matematika untuk percobaan ini disebut Percobaan Bernoulli (lihat Bab~
+\ref{chp 3}).
+\emx {Hukum Bilangan Besar}, yang akan kita pelajari kemudian (lihat Bab~\ref{chp
+8}), 
+akan menunjukkan bahwa dalam model Percobaan Bernoulli, proporsi kepala seharusnya mendekati .5,
+sesuai dengan gagasan intuitif kita mengenai interpretasi frekuensi dari peluang.
+\par
+Tentu saja, program kita dapat dengan mudah diubah untuk menyimulasikan koin
+yang peluang munculnya sisi kepala adalah $p$, dengan $p$ merupakan bilangan real antara 0 dan 1.
+\end{example}
+
+\par
+Dalam kasus pelemparan koin, kita telah mengetahui peluang terjadinya kejadian
+pada setiap percobaan.  Kekuatan simulasi yang sesungguhnya terletak pada
+kemampuannya memperkirakan peluang yang belum diketahui sebelumnya. 
+Metode
+ini telah digunakan dalam penemuan strategi-strategi baru yang membuat permainan kasino
+blackjack menguntungkan pemain.  Kita akan menggambarkan gagasan ini melalui
+sebuah
+situasi sederhana yang memungkinkan kita menghitung peluang sebenarnya dan melihat seberapa
+efektif simulasi tersebut.
+
+\begin{example}(Pelemparan Dadu)\label{exam 1.2}
+Kita membahas sebuah permainan dadu yang berperan penting dalam
+perkembangan sejarah peluang.  Surat-surat terkenal
+antara Pascal\index{PASCAL, B.} dan Fermat\index{FERMAT, P.}, 
+yang oleh banyak orang dianggap mengawali kajian serius tentang
+peluang, dipicu oleh permintaan bantuan dari seorang bangsawan sekaligus
+penjudi Prancis, Chevalier de~M\'er\'e\index{de M\'ER\'E, CHEVALIER}.  
+Konon, de~M\'er\'e bertaruh
+bahwa dalam empat kali pelemparan sebuah dadu, setidaknya satu angka enam akan muncul.  Ia menang
+secara konsisten dan, untuk menarik lebih banyak orang agar bermain, ia mengubah permainan menjadi taruhan
+bahwa
+dalam 24 kali pelemparan dua dadu, sepasang angka enam akan muncul. Dikisahkan bahwa
+de~M\'er\'e kalah dengan 24 pelemparan dan merasa bahwa diperlukan 25 pelemparan
+agar
+permainan itu menguntungkan.  Bahwa matematika ternyata keliru merupakan \emx {un grand scandale}.
+\par
+Kita akan mencoba melihat apakah de~M\'er\'e benar dengan menyimulasikan berbagai taruhannya. 
+Program {\bf DeMere1}\index{DeMere1 (program)} menyimulasikan sejumlah besar percobaan 
+dan, dalam setiap percobaan, memeriksa apakah angka enam muncul dalam empat kali pelemparan dadu. Ketika program ini dijalankan untuk
+1000 permainan, angka enam muncul dalam empat pelemparan pertama pada 48.6 persen permainan.  Ketika program dijalankan
+untuk 10,000 permainan, hal ini terjadi pada 51.98 persen permainan.
+\par
+Kita mencatat bahwa hasil pelaksanaan kedua menunjukkan bahwa de~M\'er\'e benar
+ketika meyakini bahwa taruhannya dengan satu dadu menguntungkan; namun, seandainya
+kesimpulan kita didasarkan pada pelaksanaan pertama, kita akan memutuskan bahwa ia keliru. 
+\emx {Hasil simulasi yang akurat memerlukan sejumlah besar percobaan.}
+\end{example}
+\par
+Program {\bf DeMere2}\index{DeMere2 (program)} menyimulasikan taruhan kedua de~M\'er\'e, yaitu bahwa 
+sepasang angka enam akan muncul dalam 
+$n$ kali pelemparan sepasang dadu.  Simulasi sebelumnya menunjukkan bahwa penting untuk mengetahui berapa
+banyak uji coba yang harus kita simulasikan agar dapat mengharapkan tingkat ketelitian tertentu dalam
+pendekatan kita.  Kelak akan kita lihat bahwa dalam percobaan jenis
+ini, aturan praktis kasarnya adalah bahwa, setidaknya pada 95\% kesempatan, galat tidak melebihi
+kebalikan dari akar kuadrat jumlah uji coba.  Untungnya, untuk permainan dadu ini, 
+peluang eksaknya mudah dihitung.  Pada bagian berikutnya akan kita tunjukkan bahwa untuk taruhan pertama,
+peluang de~M\'er\'e menang adalah $1 - (5/6)^4 = .518$. 
+\par 
+Perhitungan ini dapat dipahami sebagai berikut:  Peluang angka 6 tidak
+muncul pada pelemparan pertama adalah $(5/6)$.  Peluang angka 6 tidak muncul pada
+kedua pelemparan pertama adalah $(5/6)^2$.  Dengan penalaran yang sama,
+peluang angka 6 tidak muncul pada satu pun dari empat pelemparan pertama adalah $(5/6)^4$. 
+Jadi, peluang setidaknya satu angka 6 muncul dalam empat pelemparan pertama adalah $1 -
+(5/6)^4$.  Demikian pula, untuk taruhan kedua dengan 24 pelemparan, peluang
+de~M\'er\'e
+menang adalah $1 - (35/36)^{24} = .491$, sedangkan untuk 25 pelemparan peluangnya adalah $1 - (35/36)^{25}
+= .506$.  
+\par
+Menurut aturan praktis yang disebutkan di atas,
+diperlukan 27,000 pelemparan agar terdapat kemungkinan yang wajar untuk menentukan peluang-peluang ini dengan
+ketelitian yang cukup guna memastikan bahwa keduanya berada pada sisi yang berlawanan dari .5.  Menarik untuk direnungkan
+apakah seorang penjudi dapat mengenali peluang seperti itu dengan ketelitian yang diperlukan hanya dari pengalaman
+berjudi.  Beberapa penulis sejarah peluang menduga bahwa de~M\'er\'e sebenarnya
+hanya tertarik pada persoalan-persoalan tersebut sebagai masalah peluang yang memikat.
+
+\begin{example}(Kepala atau Ekor)\label{exam 1.3}
+Untuk contoh berikutnya, kita membahas suatu masalah
+yang jawaban eksaknya sulit diperoleh, tetapi hasil kualitatifnya mudah
+diperoleh melalui simulasi.  Peter dan Paul memainkan permainan yang disebut \emx {kepala
+atau
+ekor}.  Dalam permainan ini, sebuah koin seimbang dilempar berulang kali---kita pilih
+40 kali.  Setiap kali sisi kepala muncul, Peter memenangkan 1 penny dari Paul, dan setiap kali sisi
+ekor muncul, Peter kehilangan 1 penny kepada Paul.  Sebagai contoh, jika hasil
+40 pelemparan tersebut adalah
+\begin{center}
+THTHHHHTTHTHHTTHHTTTTHHHTHHTHHHTHHHTTTHH.
+\end{center}
+\noindent Perolehan Peter dapat digambarkan seperti pada Gambar~\ref{fig 1.3}.
+\putfig{3.5truein}{PSfig1-3}{Perolehan Peter dalam 40 permainan kepala atau ekor.}{fig 1.3}
+\par
+Dalam permainan ini, Peter memenangkan 6 penny.  Wajar jika kita menanyakan
+peluang bahwa ia akan memenangkan $j$ penny; di sini $j$ dapat berupa bilangan genap
+mana pun dari $-40$ sampai $40$.  Masuk akal untuk menduga bahwa nilai $j$ dengan
+peluang tertinggi adalah $j = 0$, sebab hal ini terjadi ketika jumlah kepala
+sama dengan jumlah ekor.  Demikian pula, kita dapat menduga bahwa nilai $j$ dengan
+peluang terendah adalah $j = \pm 40$.
+\par
+Pertanyaan menarik kedua tentang permainan ini adalah: Berapa kali
+dalam 40 pelemparan Peter akan berada dalam posisi unggul?  Dengan melihat grafik
+perolehannya (Gambar~\ref{fig 1.3}), kita melihat bahwa Peter unggul ketika perolehannya 
+positif. Namun,
+kita harus menetapkan suatu kesepakatan ketika perolehannya 0 jika kita ingin semua pelemparan
+turut dihitung dalam jumlah saat ia unggul.  Kita menggunakan kesepakatan
+bahwa ketika perolehan Peter 0, ia dianggap unggul jika ia unggul pada
+pelemparan sebelumnya, dan tidak dianggap unggul jika sebelumnya ia tertinggal.  Dengan
+kesepakatan ini, Peter unggul 34 kali dalam contoh kita.  Sekali lagi,
+intuisi kita mungkin menyatakan bahwa jumlah saat unggul yang paling mungkin adalah
+1/2 dari 40, yaitu 20, sedangkan jumlah yang paling kecil kemungkinannya adalah kasus ekstrem 40
+atau 0.
+\par
+Hal ini mudah dipastikan dengan menyimulasikan permainan berkali-kali dan
+mencatat berapa kali perolehan akhir Peter bernilai $j$, serta
+berapa kali Peter akhirnya unggul sebanyak $k$ kali.  Proporsi
+dari seluruh permainan kemudian memberikan perkiraan bagi
+peluang yang bersesuaian.  Program {\bf HTSimulation}\index{HTSimulation (program)} menjalankan
+simulasi ini.  Perhatikan bahwa jika jumlah pelemparan dalam permainan genap,
+jumlah saat berada dalam posisi unggul hanya mungkin berupa bilangan genap.  Kita telah menyimulasikan 
+permainan ini 10{,}000 kali. 
+Hasilnya ditampilkan pada Gambar~\ref{fig 1.4.5} dan \ref{fig 1.4.6}.  Grafik-grafik ini,
+yang kita sebut grafik paku\index{grafik paku}, dibuat menggunakan program {\bf Spikegraph}.
+\index{Spikegraph (program)}  
+Garis vertikal, atau paku, pada posisi $x$ di sumbu horizontal memiliki tinggi yang sama dengan
+proporsi hasil yang bernilai
+$x$.  Intuisi kita mengenai perolehan akhir Peter ternyata cukup tepat, tetapi intuisi kita
+mengenai jumlah saat Peter unggul sama sekali keliru.  Simulasi
+menunjukkan bahwa jumlah saat unggul yang paling kecil kemungkinannya adalah 20, sedangkan yang paling mungkin adalah 0
+atau 40.  Hal ini memang benar, dan penjelasannya dapat dibayangkan dengan memainkan
+permainan kepala atau ekor dengan sangat banyak pelemparan dan mengamati grafik
+perolehan Peter.  Pada Gambar~\ref{fig 1.4.1} kita menampilkan hasil simulasi permainan untuk
+1000 pelemparan, dan pada Gambar~\ref{fig 1.4.2} untuk 10{,}000 pelemparan.
+\par
+Dalam contoh kedua, Peter unggul hampir sepanjang waktu.  Meskipun demikian, terdapat fakta yang luar biasa:
+jika permainan dilanjutkan cukup lama, perolehan Peter akan terus
+kembali ke 0, tetapi terdapat selang waktu yang sangat panjang antara dua kejadian
+semacam itu.  Hasil ini dan hasil-hasil terkait akan dibahas dalam
+Bab~\ref{chp 12}.
+\end{example}
+
+Dalam semua contoh sejauh ini, kita telah menyimulasikan hasil-hasil yang berpeluang sama.  Selanjutnya,
+kita akan melihat contoh dengan hasil-hasil yang peluangnya tidak sama.
+
+\putfig{4truein }{PSfig1-4-5}{Distribusi perolehan.}{fig 1.4.5}
+
+\putfig{4truein }{PSfig1-4-6}{Distribusi jumlah saat berada dalam posisi unggul.}{fig 1.4.6}
+
+\putfig{4truein}{PSfig1-4}{Perolehan Peter dalam 1000 permainan kepala atau ekor.}{fig 1.4.1}
+
+\putfig{4truein} {PSfig1-5}{Perolehan Peter dalam 10,000 permainan kepala atau ekor.}{fig 1.4.2}
+
+
+\begin{example}(Pacuan Kuda)\label{exam 1.4}
+Empat ekor kuda (Acorn, Balky, Chestnut, dan Dolby) telah berpacu berkali-kali.
+Diperkirakan bahwa Acorn menang pada 30 persen perlombaan, Balky 40
+persen, Chestnut 20 persen, dan Dolby 10 persen.
+\par
+Kita dapat meminta komputer menyelenggarakan satu perlombaan sebagai berikut:  
+Pilih bilangan acak $x$.  Jika $x < .3$, kita katakan Acorn menang.  Jika $.3 \le x < .7$,
+Balky menang.  Jika $.7 \le x < .9$, Chestnut menang.  Terakhir, jika $.9 \le x$,
+Dolby menang. 
+\par
+Program {\bf HorseRace}\index{HorseRace (program)} menggunakan metode ini untuk menyimulasikan hasil
+$n$ perlombaan.   Setelah menjalankan program ini untuk $n = 10$, kita mendapati bahwa Acorn menang pada 40 persen perlombaan,
+Balky 20 persen, Chestnut 10 persen, dan Dolby 30 persen.  
+Diperlukan lebih banyak perlombaan agar hasilnya lebih sesuai dengan pengalaman sebelumnya.
+Karena itu, kita menjalankan program untuk menyimulasikan 1000 perlombaan dengan keempat kuda kita. 
+Meskipun sangat lelah setelah semua perlombaan ini, penampilan mereka cukup sesuai
+dengan perkiraan kemampuan masing-masing. Acorn menang pada 29.8 persen perlombaan,
+Balky 39.4 persen, Chestnut 19.5 persen, dan Dolby 11.3 persen. 
+\par
+Program {\bf GeneralSimulation}\index{GeneralSimulation (program)} menggunakan metode ini untuk menyimulasikan
+pengulangan sembarang percobaan dengan sejumlah terhingga hasil yang memiliki
+peluang diketahui.
+\end{example}
+
+\subsection*{Catatan Sejarah}
+
+Siapa pun yang memainkan permainan acak yang sama berulang-ulang sesungguhnya sedang menjalankan
+simulasi; dalam pengertian ini, proses simulasi telah berlangsung selama
+berabad-abad.  Seperti telah kita catat, banyak masalah awal dalam kajian peluang
+mungkin saja terilhami oleh pengalaman para penjudi.  
+\par
+Wajar bagi siapa pun yang mencoba memahami teori peluang untuk melakukan
+percobaan sederhana dengan melempar koin, melempar dadu, dan sebagainya.  Naturalis
+Buffon\index{BUFFON, G. L.} melempar sebuah koin 4040 kali dan memperoleh 2048 kepala serta 1992 ekor.  Ia
+juga memperkirakan bilangan $\pi$ dengan menjatuhkan jarum pada permukaan bergaris dan
+mencatat berapa kali jarum melintasi sebuah garis\choice{.\footnote{Lihat Bagian 2.1
+dalam buku lengkap Grinstead-Snell. Hal ini juga diperagakan dalam Probability
+Demo.}}{\ (lihat Bagian~\ref{sec 2.1}).}   Biolog Inggris W. F. R. Weldon\index{WELDON,
+W. F. R.}\footnote{T.~C.~Fry,
+\emx {Probability and Its Engineering Uses,} 2nd~ed. (Princeton: Van Nostrand, 1965).}
+mencatat 26{,}306 kali pelemparan 12 dadu, sedangkan
+ilmuwan Swiss Rudolf Wolf\index{WOLF, R.}\footnote{E.~Czuber, \emx
+{Wahrscheinlichkeitsrechnung,} 3rd~ed. (Berlin: Teubner, 1914).} mencatat
+100{,}000 kali pelemparan sebuah dadu tanpa komputer.  Percobaan semacam itu
+sangat
+memakan waktu dan mungkin tidak menggambarkan secara akurat fenomena acak yang sedang
+dikaji.  Sebagai contoh, analisis lebih lanjut atas data yang dicatat dalam
+percobaan dadu Weldon dan Wolf menimbulkan dugaan bahwa dadu mereka tidak seimbang.
+Statistikawan Karl Pearson\index{PEARSON, K.} menganalisis sejumlah besar hasil pada beberapa
+meja rolet dan menduga bahwa roda-roda tersebut tidak seimbang.  Pada 1894 ia menulis:
+
+\begin{quote} 
+Jelaslah, karena Kasino tidak menjalankan tujuan berharga sebagai sebuah
+laboratorium besar untuk penyusunan statistik peluang, kasino tidak memiliki
+\emx {raison d'\^etre} ilmiah.  Para ilmuwan tidak boleh membiarkan teori-teori mereka yang paling
+halus diabaikan dengan cara yang tidak tahu malu ini!  Pemerintah Prancis harus
+didesak oleh hierarki ilmu pengetahuan untuk menutup ruang-ruang perjudian; tentu
+saja, akan merupakan tindakan yang mulia jika sumber daya Kasino yang tersisa diserahkan kepada
+Acad\'emie des Sciences untuk mendanai sebuah laboratorium peluang
+ortodoks; terutama bagi cabang baru kajian tersebut, yakni penerapan
+teori peluang pada masalah-masalah biologis evolusi, yang tampaknya akan
+menyita begitu banyak pemikiran manusia dalam waktu dekat.\footnote{K. Pearson,
+``Science and Monte Carlo," \emx {Fortnightly Review}, vol.~55 (1894),
+p.~193;
+disitir dalam S. M. Stigler, \emx {The History of Statistics} (Cambridge: Harvard
+University Press, 1986).}
+\end{quote}
+
+Meskipun demikian, percobaan-percobaan awal ini memberikan petunjuk dan menghasilkan
+penemuan penting dalam peluang dan statistika.  Percobaan tersebut mengantarkan Pearson pada \emx
+{uji khi-kuadrat}, yang sangat penting untuk menguji apakah data
+yang diamati sesuai dengan suatu distribusi peluang tertentu.
+
+Pada awal 1900-an, jelas bahwa diperlukan cara yang lebih baik untuk menghasilkan bilangan acak.
+Pada 1927, L. H. C. Tippett\index{TIPPETT, L. H. C.} menerbitkan daftar 41{,}600 digit
+yang diperoleh dengan memilih bilangan secara sembarang dari laporan sensus.  Pada 1955, RAND
+Corporation\index{RAND Corporation} mencetak tabel berisi 1{,}000{,}000 bilangan acak yang dihasilkan dari
+derau elektronik.  Kehadiran komputer berkecepatan tinggi membuka
+kemungkinan
+untuk menghasilkan bilangan acak secara langsung pada komputer, dan pada akhir 1940-an
+John von~Neumann\index{von NEUMANN, J.} mengusulkan cara berikut: Misalkan Anda menginginkan
+barisan acak bilangan empat digit.  Pilih sembarang bilangan empat digit, misalnya
+6235, sebagai awal.  Kuadratkan bilangan ini untuk memperoleh 38{,}875{,}225.  Sebagai bilangan
+kedua, pilih empat digit tengah dari kuadrat tersebut (yaitu 8752).  Ulangi
+proses yang sama mulai dari 8752 untuk memperoleh bilangan ketiga, dan seterusnya.  
+\par
+Metode yang lebih modern melibatkan
+konsep aritmetika modular\index{aritmetika modular}.  
+Jika $a$ merupakan bilangan bulat dan $m$ merupakan bilangan bulat positif, maka
+$a\ (\mbox{mod}\  m)$
+berarti sisa pembagian $a$ oleh $m$.  Sebagai contoh, $10\ (
+\mbox{mod}\  4) = 2$,
+$8\ (\mbox{mod}\  2) = 0$, dan seterusnya.  Untuk menghasilkan barisan acak $X_0,
+X_1, X_2,
+\dots$, pilih bilangan awal $X_0$, lalu peroleh bilangan
+$X_{n+1}$ dari $X_n$ dengan rumus 
+$$X_{n+1} = (aX_n + c)\ (\mbox{mod}\ m)\ ,$$
+di mana $a$, $c$, dan $m$ merupakan konstanta yang dipilih dengan cermat.  Barisan 
+$ X_0,  X_1,$ 
+$X_2, \dots$ 
+kemudian menjadi barisan bilangan bulat antara 0 dan $m-1$.  Untuk memperoleh barisan bilangan real dalam $[0,1)$,
+kita membagi setiap $X_j$ dengan $m$.  Barisan yang dihasilkan terdiri atas bilangan rasional berbentuk $j/m$,
+dengan $0 \le j \le m-1$.  Karena $m$ biasanya merupakan bilangan bulat yang sangat besar, kita menganggap bilangan dalam barisan
+tersebut sebagai bilangan real acak dalam $[0, 1)$.
+\par
+Baik dalam metode penguadratan von~Neumann maupun teknik aritmetika modular, barisan
+bilangan sebenarnya sepenuhnya ditentukan oleh bilangan pertama.  Jadi,
+tidak ada sesuatu yang sungguh-sungguh acak dalam barisan ini.  Meskipun demikian, barisan tersebut menghasilkan
+bilangan yang perilakunya sangat menyerupai prediksi teori bagi percobaan acak.  Untuk
+memperoleh barisan yang berbeda bagi percobaan yang berbeda, bilangan awal $X_0$
+dipilih dengan prosedur lain yang, misalnya, dapat melibatkan waktu
+saat itu.\footnote{Untuk pembahasan terperinci tentang bilangan acak, lihat D.~E.~Knuth, \emx {The Art of
+Computer Programming,} vol.~II (Reading: Addison-Wesley, 1969).}
+\par
+Selama Perang Dunia Kedua, para fisikawan di Los Alamos Scientific
+Laboratory
+perlu mengetahui, untuk keperluan perisai radiasi, seberapa jauh neutron bergerak menembus
+berbagai bahan.  Pertanyaan ini berada di luar jangkauan perhitungan
+teoretis. Daniel McCracken\index{McCRACKEN, D.}, dalam tulisannya di \emx
+{Scientific American}, merangkum data fisik yang tersedia bagi para peneliti:
+jarak rata-rata yang ditempuh neutron berkecepatan tertentu sebelum bertumbukan
+dengan inti atom, peluang neutron dipantulkan alih-alih diserap, dan sebaran
+energi yang hilang dalam tumbukan.\footnote{D.~D.~McCracken, ``The Monte Carlo
+Method," \emx {Scientific American,} vol.~192 (May 1955), p.~90. Ringkasan
+editorial; ungkapan sumber tidak diterjemahkan atau direproduksi.}
+
+John von~Neumann\index{von NEUMANN, J.} dan Stanislas Ulam\index{ULAM, S.} 
+mengusulkan agar masalah tersebut diselesaikan dengan
+memodelkan percobaan menggunakan perangkat acak pada komputer.  Karena pekerjaan mereka
+bersifat rahasia, pekerjaan itu perlu diberi nama sandi.  Von~Neumann memilih nama
+``Monte Carlo."  Sejak saat itu, metode simulasi ini disebut
+\emx {Metode Monte Carlo}.
+
+William Feller\index{FELLER, W.} menunjukkan kemungkinan penggunaan simulasi
+komputer untuk menggambarkan konsep-konsep dasar peluang dalam bukunya \emx
+{An Introduction to Probability Theory and Its Applications.}  Ketika membahas
+masalah jumlah saat unggul dalam permainan ``kepala atau ekor," Feller
+menekankan bahwa fluktuasi yang diprediksi teori bertentangan dengan banyak
+intuisi populer tentang hukum bilangan besar. Karena bahkan pembaca yang
+berpengalaman dapat meragukan perilaku tersebut, ia menyertakan catatan
+percobaan simulasi.\footnote{W.~Feller, \emx {Introduction to Probability Theory
+and its Applications,} vol.~1, 3rd~ed. (New York: John Wiley \& Sons, 1968),
+p.~xi. Ringkasan editorial; ungkapan sumber tidak diterjemahkan atau
+direproduksi.}
+
+\noindent Feller memberikan grafik hasil 10{,}000 permainan \emx
+{kepala atau ekor} yang serupa dengan Gambar~\ref{fig 1.4.2}.
+
+Sistem taruhan martingale\index{sistem taruhan martingale} 
+yang dijelaskan dalam Latihan~\ref{exer 1.1.10} 
+memiliki sejarah yang panjang dan menarik.  Russell Barnhart\index{BARNHART, R.} memberi tahu para
+penulis bahwa penggunaannya setidaknya dapat dilacak hingga 1754, ketika Casanova\index{CASANOVA, G.}
+menulis dalam memoarnya, \emx {History of My Life}. Ia menceritakan penggunaan
+martingale di Ridotto di Venesia dengan terus menggandakan taruhan, memperoleh
+tiga atau empat kemenangan per hari selama sisa Karnaval, dan tidak pernah
+mencapai kekalahan pada taruhan keenam; menurut perhitungannya, kekalahan pada
+tahap itu akan menghabiskan modal dua ribu zecchini.\footnote{G.~Casanova,
+\emx {History of My Life,} vol.~IV, Chap.~7, trans.\ W.~R. Trask (New York:
+Harcourt-Brace, 1968), p.~124. Ringkasan editorial; ungkapan terjemahan modern
+tidak diterjemahkan ulang atau direproduksi.}
+
+Bahkan seandainya tidak ada angka nol pada roda rolet sehingga permainan itu sepenuhnya
+adil, sistem martingale, ataupun sistem lain apa pun, tidak dapat mengubahnya
+menjadi permainan yang menguntungkan.  Gagasan bahwa permainan adil tetap adil dan
+permainan tidak adil tetap tidak adil di bawah sistem perjudian telah dimanfaatkan oleh para matematikawan 
+untuk memperoleh hasil-hasil penting dalam kajian peluang.  Kita akan memperkenalkan konsep umum 
+martingale dalam Bab~\ref{chp 6}.
+
+Kata \emx {martingale}\index{martingale!asal kata} sendiri juga memiliki sejarah yang 
+menarik.  Asal-usul kata tersebut tidak jelas.  Edisi baru \emx {Oxford English Dictionary} memberikan contoh
+penggunaannya pada awal 1600-an dan menyatakan bahwa kata itu mungkin berasal dari rujukan
+dalam Buku Satu, Bab 20, karya Rabelais\index{RABELAIS, F.}. Dalam adegan itu,
+Gargantua mempertimbangkan beberapa potongan celana bagi seorang orator,
+termasuk potongan bernama \emx{martingale}, di samping gaya pelaut, Swiss, dan
+``ekor ikan kod."\footnote{Dikutip dalam \emx {Portable Rabelais,}
+ed.~S.~Putnam (New York: Viking, 1946), p.~113. Ringkasan editorial; ungkapan
+terjemahan modern tidak diterjemahkan ulang atau direproduksi.}
+
+Dominic Lusinchi\index{LUSINCHI, D.} mencatat kemunculan kata martingale yang lebih awal.  Menurut kamus bahasa Prancis \emx{Le Petit Robert},
+kata tersebut berasal dari kata Proven\c{c}al ``martegalo," yang berarti ``dari Martigues."  Martigues adalah sebuah kota tepat di sebelah barat Merseille.  Kamus itu memberikan contoh ``chausses \`{a} la martinguale" (yang berarti celana bergaya Martigues) dan tahun 1491.  
+
+Dalam penggunaan modern, martingale memiliki beberapa arti berbeda selain penggunaannya dalam perjudian; semuanya berkaitan dengan tindakan \emx
+{menahan}.  Sebagai contoh, martingale adalah tali pada
+perlengkapan kuda yang digunakan untuk menahan kepala kuda, dan juga bagian dari
+perlengkapan layar yang digunakan untuk menahan tiang cucur.
+
+Sistem Labouchere\index{sistem taruhan Labouchere} yang dijelaskan dalam Latihan~\ref{exer 1.1.9} 
+dinamai menurut Henry du~Pre Labouchere\index{LABOUCHERE, H. du P.} 
+(1831--1912), seorang wartawan Inggris dan anggota Parlemen.  La\-bou\-chere mengaitkan 
+sistem tersebut dengan Condorcet\index{CONDORCET, Le Marquis de}.  Condorcet (1743--1794) adalah seorang pemimpin 
+politik pada masa Revolusi Prancis yang tertarik menerapkan teori peluang 
+pada ekonomi dan politik.  Sebagai contoh, ia menghitung peluang bahwa sebuah juri yang menggunakan
+suara mayoritas akan memberikan keputusan yang benar apabila setiap juri memiliki peluang yang sama untuk
+memutuskan dengan benar.  Tulisan-tulisannya menyediakan banyak gagasan tentang bagaimana
+peluang dapat diterapkan pada urusan manusia.\footnote{ Le Marquise de~Condorcet, 
+\emx {Essai sur l'Application de l'Analyse \`a la Probabilit\'e d\`es D\'ecisions
+Rendues a la Pluralit\'e des Voix} (Paris: Imprimerie Royale, 1785).}
+
+\exercises
+\begin{LJSItem}
+
+\i\label{exer 1.1.1} Ubah program {\bf CoinTosses} agar melempar sebuah koin sebanyak $n$
+kali dan, setelah setiap 100 pelemparan, mencetak proporsi kepala dikurangi 1/2.  Apakah 
+bilangan-bilangan ini tampak mendekati 0 ketika $n$ meningkat?  Ubah lagi program tersebut agar,
+setiap 100 kali, mencetak kedua besaran berikut: proporsi kepala 
+dikurangi 1/2, dan jumlah kepala dikurangi setengah jumlah pelemparan.  Apakah bilangan-bilangan ini 
+tampak mendekati 0 ketika $n$ meningkat?
+
+\i\label{exer 1.1.2} Ubah program {\bf CoinTosses} agar melempar sebuah
+koin sebanyak $n$ kali
+dan mencatat apakah proporsi kepala berjarak tidak lebih dari .1 terhadap .5 (yaitu,
+berada antara .4 dan~.6).  Minta program Anda mengulangi percobaan ini 100 kali. 
+Kira-kira
+seberapa besar $n$ harus dipilih agar pada sekitar 95 dari 100 pengulangan,
+proporsi
+kepala berada antara .4 dan .6?
+
+\i\label{exer 1.1.3} Pada awal 1600-an, Galileo\index{GALILEO, G.} diminta menjelaskan fakta
+bahwa,
+meskipun banyaknya tripel bilangan bulat dari 1 sampai 6 yang berjumlah 9 sama
+dengan
+banyaknya tripel semacam itu yang berjumlah 10, ketika tiga dadu dilempar, jumlah 9 tampaknya
+muncul lebih jarang daripada jumlah 10---setidaknya menurut pengalaman para penjudi.
+
+\begin{enumerate}
+\item Tulis program untuk menyimulasikan pelemparan tiga dadu berkali-kali
+dan mencatat proporsi pelemparan yang jumlahnya 9 serta
+proporsi pelemparan yang jumlahnya 10.
+\item Dapatkah Anda menyimpulkan dari simulasi tersebut bahwa para penjudi itu benar?
+\end{enumerate}
+
+\i\label{exer 1.1.4} Dalam racquetball\index{racquetball}, seorang pemain terus melakukan servis selama
+ia menang; sebuah
+poin hanya diperoleh ketika seorang pemain sedang melakukan servis dan memenangkan reli.  Pemain pertama
+yang memperoleh 21 poin memenangkan permainan.  Asumsikan bahwa Anda melakukan servis lebih dahulu dan memiliki
+peluang .6 untuk memenangkan reli ketika Anda melakukan servis dan peluang .5 ketika
+lawan Anda
+melakukan servis.  Perkirakan, melalui simulasi, peluang bahwa Anda akan memenangkan
+sebuah
+permainan.
+
+\i\label{exer 1.1.5} Pertimbangkan taruhan bahwa ketiga dadu akan memperlihatkan
+angka enam setidaknya sekali dalam $n$ kali pelemparan tiga dadu.  Hitung $f(n)$, yaitu peluang 
+setidaknya satu tripel-enam ketika tiga dadu dilempar $n$ kali.  
+Tentukan nilai terkecil $n$ yang diperlukan agar taruhan bahwa 
+tripel-enam akan muncul ketika tiga dadu dilempar $n$ kali menjadi menguntungkan.  (DeMoivre akan
+mengatakan bahwa nilainya
+seharusnya sekitar $216\log 2 = 149.7$ dan karena itu akan menjawab 150---lihat
+Latihan~\ref{sec 1.2}.\ref{exer 1.2.16}.
+Apakah Anda sependapat dengannya?)                           
+
+\i\label{exer 1.1.6} Di Las Vegas, sebuah roda rolet\index{rolet} memiliki 38 petak
+bernomor 0, 00, 1, 2, \dots, 36.  Petak 0 dan 00 berwarna hijau, sedangkan separuh dari
+36 petak
+yang tersisa berwarna merah dan separuhnya berwarna hitam.  Seorang bandar memutar roda
+dan
+melemparkan bola gading ke dalamnya.  Jika Anda mempertaruhkan 1 dolar pada merah, Anda memenangkan 1 dolar jika
+bola berhenti di petak merah; jika tidak, Anda kehilangan 1 dolar.  Tulis program untuk
+menentukan total perolehan seorang pemain yang memasang 1000 taruhan pada merah.
+
+\i\label{exer 1.1.7} Bentuk taruhan lain dalam rolet adalah bertaruh bahwa suatu
+angka tertentu (misalnya 17) akan muncul.  Jika bola berhenti pada angka Anda, Anda
+mendapatkan kembali satu dolar Anda ditambah 35 dolar.  Jika tidak, Anda kehilangan satu dolar tersebut.  Tulis
+program yang menggambarkan perolehan Anda ketika bermain rolet 500 kali di
+Las
+Vegas: pertama, ketika Anda setiap kali bertaruh pada merah (lihat Latihan~\ref{exer 1.1.6}), 
+kemudian, pada kunjungan kedua ke Las Vegas, ketika Anda bermain 500 kali dan setiap
+kali
+bertaruh pada angka 17.  Perbedaan apa yang Anda lihat pada grafik perolehan
+dalam
+kedua kesempatan tersebut?
+
+\i\label{exer 1.1.8} Seorang mahasiswa yang cermat memperhatikan bahwa, dalam simulasi kita atas
+permainan kepala
+atau ekor (lihat Contoh~\ref{exam 1.3}), proporsi permainan ketika
+pemain selalu unggul sangat dekat dengan proporsi permainan ketika
+perolehan total
+pemain berakhir pada~0.  Hitung peluang-peluang ini dengan
+mencacah
+semua kasus untuk dua pelemparan dan empat pelemparan, lalu tentukan apakah menurut Anda
+kedua peluang tersebut memang sama.
+
+\i\label{exer 1.1.9} \emx {Sistem Labouchere}\index{sistem taruhan Labouchere} 
+untuk rolet dimainkan
+sebagai berikut.  Tuliskan sebuah daftar bilangan, biasanya 1, 2, 3, 4.  Pertaruhkan jumlah
+bilangan
+pertama dan terakhir, $1 + 4 = 5$, pada merah.  Jika menang, hapus bilangan pertama dan
+terakhir
+dari daftar Anda.  Jika kalah, tambahkan besar taruhan terakhir ke
+akhir daftar.  Kemudian gunakan daftar baru itu dan pertaruhkan jumlah bilangan pertama dan
+terakhir
+(jika hanya ada satu bilangan, pertaruhkan sebesar bilangan tersebut).  Lanjutkan sampai
+daftar Anda kosong.  Tunjukkan bahwa, jika hal ini terjadi, Anda memenangkan jumlah, $1 + 2 + 3
++ 4
+= 10$, dari daftar awal Anda.  Simulasikan sistem ini dan periksa apakah Anda memang selalu
+berhenti dan, dengan demikian, selalu menang.  Jika ya, mengapa sistem ini bukan sistem perjudian yang
+selalu berhasil?
+
+\i\label{exer 1.1.10} Sistem perjudian terkenal lainnya adalah \emx
+{sistem penggandaan martingale}\index{sistem taruhan martingale}.  
+Misalkan Anda bertaruh bahwa merah akan muncul
+dalam rolet.  Setiap kali menang, pertaruhkan 1 dolar pada permainan berikutnya.  Setiap kali
+kalah,
+gandakan taruhan sebelumnya.  Misalkan Anda menggunakan sistem ini sampai telah memenangkan sedikitnya 5
+dolar atau telah kehilangan lebih dari 100 dolar.  Tulis program untuk menyimulasikan
+sistem ini, mainkan beberapa kali, lalu lihat hasilnya.  Dalam bukunya
+\emx
+{The Newcomes,} W.~M.~Thackeray\index{THACKERAY, W. M.} berkomentar, 
+``Anda belum pernah bermain?  Jangan
+bermain; terutama, hindarilah martingale jika Anda bermain."\footnote{W.~M.~Thackerey, \emx
+{The
+Newcomes} (London: Bradbury and Evans, 1854--55).}  Apakah ini nasihat yang baik?
+
+\i\label{exer 1.1.11} Ubah program {\bf HTSimulation} agar
+mencatat
+perolehan maksimum Peter dalam setiap permainan yang terdiri atas 40 pelemparan.  Minta program Anda
+mencetak
+proporsi permainan ketika perolehan total bernilai $0,\ 2,\ 
+4,\ \dots,\ 40$.  Hitung peluang eksak yang bersesuaian untuk permainan dengan
+dua
+pelemparan dan empat pelemparan.
+
+\i\label{exer 1.1.12} 
+Dalam pemilihan nasional mendatang untuk Presiden Amerika Serikat, seorang
+peneliti jajak pendapat berencana memprediksi pemenang suara rakyat dengan mengambil
+sampel acak
+sebanyak 1000 pemilih dan menyatakan bahwa pemenangnya adalah kandidat yang memperoleh
+suara terbanyak
+dalam sampelnya. Misalkan 48 persen pemilih berencana memilih
+kandidat
+Partai Republik dan 52 persen berencana memilih kandidat Partai
+Demokrat.  
+Untuk memperoleh gambaran tentang kewajaran rencana tersebut, tulis program yang membuat
+prediksi ini
+melalui simulasi.  Ulangi simulasi 100 kali dan lihat berapa kali prediksi peneliti tersebut
+terbukti benar.  Ulangi percobaan Anda, kini dengan mengasumsikan bahwa 49 persen
+populasi berencana memilih kandidat Partai Republik; pertama dengan sampel 1000, kemudian
+dengan sampel 3000.  (Gallup\index{Gallup Poll} Poll menggunakan sekitar 3000.)  (Gagasan ini
+dibahas lebih lanjut dalam Bab~\ref{chp 9}, Bagian~\ref{sec 9.1}.)
+
+\i\label{exer 1.1.13} Tversky\index{TVERSKY, A.} dan para koleganya melaporkan
+bahwa sekitar empat dari lima responden memilih jawaban (a) pada persoalan ukuran
+sampel berikut.\footnote{Rujukan historis: K.~McKean, ``Decisions, Decisions,"
+\emx {Discover,} June 1985, pp.~22--31, yang melaporkan karya Tversky et.\ al.\
+dalam \emx {Judgement Under Uncertainty: Heuristics and Biases} (Cambridge:
+Cambridge University Press, 1982). Tidak ada teks artikel tersebut yang
+diterjemahkan atau direproduksi dalam rumusan latihan ini.}
+
+Sebuah kota dilayani dua rumah sakit\index{rumah sakit}. Rumah sakit besar mencatat
+sekitar 45 kelahiran per hari dan rumah sakit kecil sekitar 15. Secara keseluruhan,
+proporsi bayi laki-laki sekitar 50 persen, tetapi proporsi harian dapat menyimpang.
+Selama satu tahun, rumah sakit mana yang diperkirakan mencatat lebih banyak hari ketika
+lebih dari 60 persen bayi yang lahir adalah laki-laki?
+\begin{enumerate}
+\item rumah sakit besar
+\item rumah sakit kecil
+\item tidak keduanya---jumlah harinya akan kurang lebih sama.
+\end{enumerate}
+
+Asumsikan peluang kelahiran bayi laki-laki adalah~.5; taksiran sebenarnya lebih dekat
+ke~.513. Tentukan jawabannya melalui simulasi. Dapatkah Anda menjelaskan hasilnya
+dan mengapa banyak orang keliru dengan membandingkan variasi proporsi sampel
+untuk ukuran sampel 45 dan 15?
+
+\i\label{exer 1.1.14} Anda ditawari permainan berikut.  Sebuah koin seimbang akan
+dilempar sampai
+sisi kepala muncul untuk pertama kalinya.  Jika hal ini terjadi pada pelemparan ke-$j$, Anda dibayar
+$2^j$ dolar.  Anda pasti memenangkan setidaknya 2 dolar, jadi semestinya Anda
+bersedia
+membayar untuk memainkan permainan ini---tetapi berapa banyak?  Hanya sedikit orang yang bersedia membayar sebanyak 10
+dolar untuk memainkannya.  Cobalah menentukan, melalui simulasi, jumlah
+wajar
+yang bersedia Anda bayar per permainan jika Anda diperbolehkan
+memainkannya berkali-kali.
+Apakah jumlah yang bersedia Anda bayar per permainan bergantung pada
+banyaknya permainan yang diperbolehkan?
+
+\i\label{exer 1.1.15} Tversky dan para koleganya menelaah catatan 48 pertandingan
+Philadelphia 76ers\index{Philadelphia 76ers} pada musim 1980--81. Para pemain
+memperkirakan bahwa peluang tembakan berhasil setelah keberhasilan sebelumnya sekitar
+25 persen lebih besar daripada setelah kegagalan; catatan pertandingan justru menunjukkan
+peluang berhasil 6 persen lebih besar setelah kegagalan. Banyaknya rentetan panas dan dingin
+dinilai sesuai dengan variasi acak.\footnote{Ringkasan editorial berdasarkan K.~McKean,
+``Decisions, Decisions," \emx{Discover}, June 1985, pp.~22--31; ungkapan artikel tidak
+diterjemahkan atau direproduksi.} Rumuskan model sederhana: dalam setiap pertandingan,
+seorang pemain melakukan 20 tembakan yang saling bebas, dan setiap tembakan berhasil dengan
+peluang~.5. Perkirakan melalui simulasi proporsi pertandingan yang memuat sedikitnya satu
+rentetan lima keberhasilan berturut-turut.
+
+\i\label{1.1.16} Perkirakan, melalui simulasi, rata-rata jumlah anak
+dalam suatu keluarga 
+jika semua orang memiliki anak sampai memperoleh seorang anak laki-laki.  Lakukan hal yang sama
+jika semua
+orang memiliki anak sampai memperoleh setidaknya satu anak laki-laki dan setidaknya satu anak perempuan. 
+Berapa
+banyak tambahan anak yang Anda perkirakan akan terdapat dalam skema kedua dibandingkan
+dengan skema pertama pada 100{,}000 keluarga?  (Asumsikan bahwa anak laki-laki dan perempuan
+memiliki peluang yang
+sama.)
+
+\putfig{4truein}{PSfig1-6}{Jalan acak.}{fig 1.5}
+
+\i\label{exer 1.1.17} Pada awal 1900-an, George
+P\'olya\index{P\'OLYA, G.} sering berjalan di hutan dekat tempat tinggalnya di
+Zurich sambil memikirkan matematika. Dalam sebuah tulisan kemudian, ia
+menceritakan secara garis besar bahwa pertemuan berulang yang tidak disengaja
+dengan pasangan yang sama dalam satu perjalanan membuatnya memikirkan apakah
+dua pejalan acak pasti akan bertemu.\footnote{Ringkasan editorial berdasarkan
+G.~P\'olya, ``Two Incidents," \emx {Scientists at Work: Festschrift in Honour
+of Herman Wold,} ed. T. Dalenius, G. Karlsson, dan S. Malmquist (Uppsala:
+Almquist \& Wiksells Boktryckeri AB, 1970). Kutipan asli tidak direproduksi
+atau diterjemahkan di sini.}
+\par
+P\'olya membahas pejalan acak dalam satu, dua, dan tiga dimensi\index{jalan acak!dalam $n$ 
+dimensi}.  Dalam satu dimensi, ia membayangkan pejalan itu berada di sebuah jalan yang sangat panjang.  Pada setiap
+persimpangan, pejalan tersebut melempar koin seimbang untuk menentukan arah langkah
+berikutnya (lihat Gambar~\ref {fig 1.5}a).  Dalam dua dimensi, pejalan tersebut berjalan
+pada kisi jalan, dan di setiap persimpangan ia memilih salah satu dari empat
+arah yang mungkin dengan peluang sama (lihat Gambar~\ref {fig 1.5}b).  Dalam
+tiga dimensi (mungkin lebih tepat jika kita menyebutnya pemanjat acak), pejalan tersebut
+bergerak pada kisi tiga dimensi, dan di setiap persimpangan kini terdapat enam
+arah berbeda yang dapat dipilih, masing-masing dengan peluang sama
+(lihat Gambar~\ref {fig 1.5}c).
+\par
+Pembaca dipersilakan melihat Bagian~\ref{sec 12.1}, tempat masalah ini dan masalah-masalah terkait 
+dibahas.
+
+\begin{enumerate}
+
+\item Tulis program untuk menyimulasikan jalan acak satu dimensi yang dimulai dari
+0.  Minta program mencetak panjang selang waktu antara setiap kembalinya pejalan ke
+titik
+awal (kembali ke 0).  Periksa apakah dari simulasi ini Anda dapat menebak
+jawaban atas pertanyaan berikut: Apakah pejalan pada akhirnya selalu kembali ke
+titik
+awal, atau mungkinkah ia terus menjauh selamanya?
+
+\item Lintasan dua pejalan dalam dua dimensi yang bertemu setelah $n$ langkah
+dapat dipandang sebagai satu lintasan yang dimulai dari $(0,0)$ dan kembali ke
+$(0,0)$ setelah $2n$ langkah.  Ini berarti bahwa peluang dua pejalan
+acak dalam dua dimensi bertemu sama dengan peluang bahwa satu
+pejalan dalam dua dimensi pernah kembali ke titik awal.  Jadi,
+pertanyaan apakah dua pejalan pasti bertemu sama dengan pertanyaan
+apakah
+satu pejalan pasti kembali ke titik awal.
+
+Tulis program untuk menyimulasikan jalan acak dalam dua dimensi dan tentukan apakah menurut Anda
+pejalan itu pasti kembali ke $(0,0)$.  Jika ya, P\'olya tentu
+akan
+terus bertemu teman-temannya di taman.  Mungkin sekarang Anda telah membuat dugaan 
+atas pertanyaan berikut: Apakah pejalan acak dalam satu atau dua dimensi pasti
+kembali
+ke titik awal?  P\'olya menjawab pertanyaan ini untuk dimensi
+satu, dua, dan tiga.  Ia membuktikan hasil luar biasa bahwa jawabannya adalah
+\emx {ya} dalam satu dan dua dimensi, serta \emx {tidak} dalam tiga dimensi.
+
+\item Tulis program untuk menyimulasikan jalan acak dalam tiga dimensi dan tentukan
+apakah, berdasarkan simulasi ini serta hasil pada (a) dan (b), 
+Anda dapat menebak hasil P\'olya.  
+\end{enumerate}
+
+\end{LJSItem}
+
+\section{Distribusi Peluang Diskret}\label{sec 1.2}  
+
+Dalam buku ini kita akan mempelajari berbagai percobaan dari sudut pandang
+peluang.  Cakupan kajian ini akan menjadi jelas seiring dengan dikembangkannya
+teori dan dianalisisnya contoh-contoh.  Namun, gagasan umumnya dapat
+dijelaskan dan digambarkan sebagai berikut: dengan setiap percobaan yang kita bahas
+akan dikaitkan suatu peubah acak yang menyatakan hasil dari
+percobaan tertentu.  Himpunan semua hasil yang mungkin disebut \emx
+{ruang sampel}\index{ruang sampel}.  Pada bagian awal ini, kita akan membahas
+kasus ketika percobaan hanya memiliki sejumlah terhingga hasil yang mungkin, yaitu ruang sampelnya
+terhingga.  Kemudian kita akan memperumum ke kasus ketika ruang sampel terhingga atau
+takhingga terhitung.  Hal ini membawa kita pada definisi berikut.
+
+\subsection*{Peubah Acak dan Ruang Sampel}
+
+\begin{definition}\label{def 1.1} 
+Misalkan kita memiliki sebuah percobaan yang hasilnya bergantung pada faktor acak.
+Kita menyatakan hasil percobaan tersebut dengan
+huruf Romawi kapital, seperti $X$, yang disebut \emx {peubah acak}\index{peubah acak}.
+\emx {Ruang sampel}\index{ruang sampel} percobaan adalah himpunan semua 
+hasil yang mungkin.  Jika ruang sampel terhingga atau takhingga terhitung, peubah acak
+tersebut disebut \emx {diskret}.\index{peubah acak!diskret}
+\end{definition}
+Umumnya kita menyatakan ruang sampel dengan huruf Yunani kapital $\Omega$.  Seperti
+dinyatakan di atas, dalam korespondensi antara suatu percobaan dan
+teori matematika yang digunakan untuk mengkajinya, ruang sampel $\Omega$ bersesuaian dengan
+himpunan hasil yang mungkin dari percobaan tersebut.    
+\par
+Sekarang kita memberikan dua definisi tambahan.  Definisi ini melengkapi
+definisi ruang sampel dan memperjelas beberapa istilah umum yang digunakan
+bersama ruang sampel.  Pertama, elemen-elemen suatu ruang sampel kita sebut
+\emx {hasil}\index{hasil}.  Kedua, setiap himpunan bagian dari ruang sampel disebut 
+\emx {kejadian}\index{kejadian}. Biasanya, hasil akan kita nyatakan dengan huruf kecil dan
+kejadian dengan huruf kapital.
+ 
+\begin{example}\label{exam 1.5}
+Sebuah dadu dilempar sekali.  Misalkan $X$ menyatakan hasil percobaan ini.  Maka ruang
+sampel percobaan ini adalah himpunan dengan 6 elemen
+$$
+\Omega = \{1,2,3,4,5,6\}\ ,
+$$
+di mana setiap hasil $i$, untuk~$i = 1$, \dots, 6, bersesuaian dengan banyaknya
+titik pada sisi yang muncul.  Kejadian
+$$
+E = \{2,4,6\}
+$$
+bersesuaian dengan pernyataan bahwa hasil pelemparan merupakan bilangan genap.  Kejadian $E$
+juga dapat dijelaskan dengan mengatakan bahwa $X$ genap.  Kecuali ada alasan untuk meyakini bahwa dadu
+tersebut tidak seimbang, asumsi yang wajar adalah bahwa setiap hasil memiliki peluang sama.  Menggunakan
+kesepakatan ini berarti kita menetapkan peluang 1/6 pada masing-masing dari keenam hasil, yaitu $m(i) =
+1/6$, untuk $1 \le i \le 6$.
+\end{example}
+
+\subsection*{Fungsi Distribusi}
+
+Selanjutnya kita menjelaskan penetapan peluang.  Definisi-definisi berikut
+dimotivasi oleh contoh di atas, ketika kita memasangkan pada setiap hasil dalam
+ruang sampel sebuah bilangan taknegatif sedemikian rupa sehingga jumlah semua bilangan yang dipasangkan
+sama dengan 1.
+
+\begin{definition}\label{def 1.2} 
+Misalkan $X$ adalah peubah acak yang menyatakan nilai hasil suatu percobaan tertentu,
+dan asumsikan bahwa percobaan ini hanya memiliki sejumlah terhingga hasil yang mungkin.  Misalkan $\Omega$ adalah
+ruang sampel percobaan (yaitu himpunan semua nilai yang mungkin dari $X$, atau secara ekuivalen,
+himpunan semua hasil yang mungkin dari percobaan tersebut).  \emx {Fungsi
+distribusi}\index{fungsi distribusi} bagi $X$ adalah fungsi bernilai
+real $m$ yang berdomain $\Omega$ dan memenuhi:
+\begin{enumerate}
+\item $m(\omega) \geq 0\ , \qquad$untuk semua $\,\,\omega\in\Omega\ $, dan  
+\medbreak
+\item $\sum\limits_{\omega \in \Omega} m(\omega) = 1\ $.  
+\end{enumerate}
+Untuk setiap himpunan bagian $E$ dari $\Omega$, kita mendefinisikan \emx {peluang}\index{peluang!suatu kejadian}
+dari
+$E$ sebagai bilangan $P(E)$ yang diberikan oleh
+$$
+P(E) = \sum_{\omega\in E} m(\omega)\ .
+$$
+\end{definition}
+ 
+\begin{example}\label{exam 1.6}
+Pertimbangkan percobaan ketika sebuah koin dilempar dua kali.  Misalkan $X$ adalah peubah acak yang
+bersesuaian dengan percobaan ini.  Perhatikan bahwa terdapat beberapa cara untuk mencatat hasil
+percobaan tersebut.  Sebagai contoh, kita dapat mencatat kedua pelemparan menurut urutan
+terjadinya.  Dalam hal ini, kita memiliki $\Omega = $\{HH,HT,TH,TT\}.  Kita juga dapat mencatat hasil
+dengan hanya mencatat jumlah kepala yang muncul.  Dalam hal ini, kita memiliki $\Omega =
+$\{0,1,2\}.  Terakhir, kita dapat mencatat kedua hasil tanpa memperhatikan urutan
+terjadinya.  Dalam hal ini, kita memiliki $\Omega = $\{HH,HT,TT\}.
+\par
+Untuk sementara, kita akan menggunakan ruang sampel pertama yang diberikan di atas.  Kita akan mengasumsikan bahwa
+keempat hasil memiliki peluang sama, dan mendefinisikan fungsi distribusi $m(\omega)$ dengan
+$$
+m(\mbox{HH}) = m(\mbox{HT}) = m(\mbox{TH}) = m(\mbox{TT}) = \frac14\ .
+$$
+\par
+Misalkan $E = $\{HH,HT,TH\} adalah kejadian bahwa setidaknya satu kepala muncul.  Maka peluang
+$E$ dapat dihitung sebagai berikut: 
+\begin{eqnarray*}
+P(E) &=& m(\mbox{HH}) + m(\mbox{HT}) + m(\mbox{TH}) \\
+     &=& \frac14 + \frac14 + \frac14 = \frac34\ .
+\end{eqnarray*}
+
+Demikian pula, jika $F = $\{HH,HT\} adalah kejadian bahwa kepala muncul pada pelemparan pertama, maka kita memperoleh
+\begin{eqnarray*}
+P(F) &=& m(\mbox{HH}) + m(\mbox{HT}) \\
+     &=& \frac14 + \frac14 = \frac12\ .
+\end{eqnarray*}
+\end{example}
+ 
+\begin{example}\label{1.8}(Lanjutan Contoh \ref{exam 1.5})
+Ruang sampel percobaan pelemparan dadu adalah
+himpunan dengan 6 elemen
+$\Omega = \{1,2,3,4,5,6\}$.  Kita mengasumsikan bahwa dadu itu seimbang dan memilih
+fungsi distribusi yang didefinisikan oleh
+$$
+m(i) = \frac16, \qquad {\rm{untuk}}\,\, i = 1, \dots, 6\ .
+$$
+Jika $E$ adalah kejadian bahwa hasil pelemparan merupakan bilangan genap, maka $E =
+\{2,4,6\}$ dan
+\begin{eqnarray*}
+P(E) &=& m(2) + m(4) + m(6) \\
+     &=& \frac16 + \frac16 + \frac16 = \frac12\ .
+\end{eqnarray*}
+\end{example}
+\par
+Perhatikan bahwa definisi di atas langsung mengakibatkan bahwa, untuk
+setiap $\omega \in \Omega$,
+$$
+P(\{\omega\}) = m(\omega)\ .
+$$
+Artinya, peluang kejadian elementer $\{\omega\}$, yang terdiri atas
+satu hasil $\omega$, sama dengan nilai $m(\omega)$ yang dipasangkan pada
+hasil $\omega$ oleh fungsi distribusi.
+ 
+\begin{example}\label{exam 1.7}
+Tiga orang, A,~B, dan~C, mencalonkan diri untuk jabatan yang sama, dan kita mengasumsikan
+bahwa
+tepat satu dari mereka menang.  Ruang sampelnya dapat dipilih sebagai
+himpunan dengan 3 elemen
+$\Omega = $\{A,B,C\}, dengan setiap elemen bersesuaian dengan hasil berupa kemenangan
+kandidat tersebut.  Misalkan A dan B memiliki peluang menang yang sama,
+tetapi peluang C hanya 1/2 dari peluang A atau B.  Maka kita menetapkan
+$$
+m(\mbox{A}) = m(\mbox{B}) = 2m(\mbox{C})\ .
+$$
+Karena
+$$
+m(\mbox{A}) + m(\mbox{B}) + m(\mbox{C}) = 1\ ,
+$$
+kita melihat bahwa
+$$
+2m(\mbox{C}) + 2m(\mbox{C}) + m(\mbox{C}) = 1\ ,
+$$
+yang menyiratkan bahwa $5m(\mbox{C}) = 1$.  Oleh karena itu,
+$$
+m(\mbox{A}) = \frac25\ , \qquad m(\mbox{B}) = \frac25\ , \qquad m(\mbox{C}) =
+\frac15\ .
+$$
+Misalkan $E$ adalah kejadian bahwa A atau C menang.  Maka $E = $\{A,C\}, dan
+$$
+P(E) = m(\mbox{A}) + m(\mbox{C}) = \frac25 + \frac15 = \frac35\ .
+$$
+\end{example}
+\par
+Dalam banyak kasus, kejadian dapat dijelaskan melalui kejadian lain dengan menggunakan
+konstruksi baku teori himpunan.  Kita akan meninjau secara singkat definisi
+konstruksi-konstruksi tersebut.  Lihat Gambar~\ref{fig 1.6} untuk diagram Venn
+yang menggambarkan konstruksi ini. 
+\par
+Misalkan $A$ dan $B$ adalah dua himpunan.  Gabungan $A$ dan $B$ adalah himpunan
+$$A \cup B = \{x\,|\, x \in A\ \mbox{atau}\ x \in B\}\ .$$
+Irisan $A$ dan $B$ adalah himpunan
+$$A \cap B = \{x\,|\, x \in A\ \mbox{dan}\ x \in B\}\ .$$
+Selisih $A$ dan $B$ adalah himpunan
+$$A - B = \{x\,|\, x \in A\ \mbox{dan}\ x \not \in B\}\ .$$
+Himpunan $A$ adalah himpunan bagian dari $B$, ditulis 
+$A \subset B$, jika setiap elemen $A$ juga merupakan elemen $B$.  Terakhir,
+komplemen $A$ adalah himpunan
+$$\tilde A = \{x\,|\, x \in \Omega\ \mbox{dan}\ x \not \in A\}\ .$$
+\par
+Konstruksi ini penting karena biasanya
+kejadian rumit yang dijelaskan dengan bahasa sehari-hari dapat diuraikan menjadi kejadian yang lebih sederhana
+dengan menggunakan konstruksi tersebut.  Sebagai contoh, jika $A$ adalah kejadian ``besok akan turun salju
+dan lusa akan
+turun hujan," $B$ adalah kejadian ``besok akan turun salju," dan
+$C$ adalah
+kejadian ``dua hari lagi akan turun hujan," maka $A$ merupakan irisan
+kejadian
+$B$ dan $C$.  Demikian pula, jika $D$ adalah kejadian ``besok akan turun salju atau
+lusa akan turun hujan," maka $D = B \cup C$.  (Perhatikan bahwa kita harus
+berhati-hati di sini,
+sebab kadang-kadang kata ``atau" berarti tepat satu dari kedua
+alternatif
+akan terjadi.  Maknanya biasanya jelas dari konteks.  Dalam buku ini, kita
+selalu menggunakan
+kata ``atau" dalam arti inklusif, yaitu $A$ atau $B$ berarti setidaknya
+satu dari kedua
+kejadian $A$, $B$ terjadi.)  Kejadian $\tilde B$ adalah kejadian ``besok
+tidak turun
+salju."  Terakhir, jika $E$ adalah kejadian ``besok akan turun salju, tetapi lusa
+tidak akan turun hujan," maka $E = B - C$. 
+
+\putfig{5truein}{PSfig1-7}{Operasi dasar himpunan.}{fig 1.6} 
+
+
+\subsection*{Sifat-sifat}
+\nopagebreak
+\begin{theorem}\label{thm 1.1}
+Peluang yang dipasangkan pada kejadian oleh suatu fungsi distribusi\index{fungsi distribusi!
+sifat-sifat} pada ruang sampel
+$\Omega$ 
+memenuhi sifat-sifat berikut: 
+\begin{enumerate}
+\item  $P(E) \geq 0$ untuk setiap $E \subset \Omega\ $.
+\item  $P(\Omega) = 1\ $.
+\item  Jika $E \subset F \subset \Omega$, maka $P(E) \leq P(F)\ $.
+\item  Jika $A$ dan $B$ adalah himpunan bagian \emx {saling lepas} dari $\Omega$, maka $P(A
+\cup B)
+= P(A) + P(B)\ $.
+\item  $P(\tilde A) = 1 - P(A)$ untuk setiap $A \subset \Omega\ $.
+\end{enumerate}
+\proof
+Untuk setiap kejadian $E$, peluang $P(E)$ ditentukan dari distribusi $m$
+oleh
+$$
+P(E) = \sum_{\omega \in E} m(\omega)\ ,
+$$
+untuk setiap $E \subset \Omega$.
+Karena fungsi $m$ taknegatif, $P(E)$ juga
+taknegatif.  Jadi, Sifat 1 benar.  
+\par
+Sifat 2 dibuktikan oleh persamaan
+$$
+P(\Omega) = \sum_{\omega \in \Omega} m(\omega) = 1\ .
+$$
+\par
+Misalkan $E \subset F \subset \Omega$.  Maka setiap elemen $\omega$ yang
+termasuk dalam $E$ juga termasuk dalam $F$.  Oleh karena itu,
+$$
+\sum_{\omega \in E} m(\omega) \leq \sum_{\omega \in F} m(\omega)\ ,
+$$
+karena setiap suku dalam jumlah di sebelah kiri terdapat dalam jumlah di sebelah kanan, dan semua suku 
+dalam kedua jumlah tersebut taknegatif.  Hal ini menyiratkan bahwa
+$$P(E) \le P(F)\ ,$$
+dan Sifat 3 terbukti.  
+\par
+Selanjutnya, misalkan $A$ dan $B$ adalah himpunan bagian yang saling lepas dari
+$\Omega$.  Maka setiap elemen $\omega$ dari $A \cup B$ berada dalam $A$ dan
+tidak berada
+dalam $B$, atau berada dalam $B$ dan tidak berada dalam $A$.  Akibatnya,
+$$\begin{array}{ll}
+P(A \cup B) &= \sum_{\omega \in A \cup B} m(\omega) = \sum_{\omega \in A}
+m(\omega) + \sum_{\omega \in B} m(\omega) \\
+            &                             \\
+            &= P(A) + P(B)\ ,
+\end{array}
+$$
+dan Sifat 4 terbukti.  
+\par
+Terakhir, untuk membuktikan Sifat 5, perhatikan gabungan saling lepas
+$$
+\Omega = A \cup \tilde A\ .
+$$
+Karena $P(\Omega) = 1$, sifat aditivitas saling lepas (Sifat 4) menyiratkan
+bahwa
+$$
+1 = P(A) + P(\tilde A)\ ,
+$$
+sehingga $P(\tilde A) = 1 - P(A)$.
+\end{theorem}
+\par
+Penting untuk dipahami bahwa Sifat~4 dalam Teorema~\ref{thm 1.1} 
+dapat diperluas untuk lebih dari dua himpunan.  Sifat aditivitas hingga
+umum\index{sifat aditivitas hingga} diberikan oleh
+teorema berikut.\hfil\break
+\begin{theorem}\label{thm 1.1.5}
+Jika $A_1$, \dots, $A_n$ merupakan himpunan bagian $\Omega$ yang saling lepas berpasangan
+(yaitu, tidak ada dua dari himpunan $A_i$ yang memiliki elemen yang sama), maka
+$$
+P(A_1 \cup \cdots \cup A_n) = \sum_{i = 1}^n P(A_i)\ .
+$$
+\proof
+Misalkan $\omega$ adalah sebarang elemen dalam gabungan
+$$A_1 \cup \cdots \cup A_n\ .$$
+Maka $m(\omega)$ muncul tepat satu kali pada masing-masing ruas kesamaan dalam
+pernyataan teorema.
+\end{theorem} 
+\par
+Kita akan sering menggunakan akibat berikut dari teorema di atas.
+\begin{theorem}\label{thm 1.2}
+ Misalkan $A_1$, \dots, $A_n$ adalah kejadian yang saling lepas berpasangan dengan $\Omega = A_1
+\cup \cdots \cup A_n$, dan misalkan $E$ adalah sebarang kejadian.  Maka
+$$
+P(E) = \sum_{i = 1}^n P(E \cap A_i)\ .
+$$
+\proof
+Himpunan $E \cap A_1$, \dots, $E \cap A_n$ saling lepas berpasangan, dan 
+gabungannya adalah himpunan $E$.  Hasil tersebut kemudian mengikuti dari Teorema~\ref{thm 1.1.5}.
+\end{theorem}
+\begin{corollary}\label{cor 1.1}
+Untuk sebarang dua kejadian $A$ dan $B$,
+$$
+P(A) = P(A \cap B) + P(A \cap \tilde B)\ .
+$$
+\end{corollary}
+\par
+Sifat~4 dapat diperumum dengan cara lain.  Misalkan $A$ dan $B$ adalah
+himpunan bagian $\Omega$ yang tidak harus saling lepas.  Maka:\hfil\break
+\begin{theorem}\label{thm 1.2.5}
+Jika $A$ dan $B$ merupakan himpunan bagian dari $\Omega$, maka
+\begin{equation}
+P(A \cup B) = P(A) + P(B) - P(A \cap B)\ .
+\label{eq 1.1}
+\end{equation}                                                        
+\proof
+Ruas kiri Persamaan~\ref{eq 1.1} adalah jumlah $m(\omega)$ untuk     
+$\omega$ yang berada dalam $A$ atau $B$.  Kita harus menunjukkan bahwa ruas kanan 
+Persamaan~\ref{eq 1.1} juga menjumlahkan $m(\omega)$ untuk $\omega$ dalam $A$ atau $B$. 
+Jika $\omega$ berada tepat dalam salah satu dari kedua himpunan, maka ia hanya dihitung dalam satu
+dari tiga suku pada ruas kanan Persamaan~\ref{eq 1.1}.                
+Jika ia berada dalam $A$ sekaligus $B$, ia dijumlahkan dua kali dari perhitungan
+$P(A)$ dan $P(B)$
+dan dikurangi satu kali untuk $P(A \cap B)$.  Jadi, ia dihitung tepat satu kali oleh
+ruas kanan.  Tentu saja, jika $A \cap B = \emptyset$, Persamaan~\ref{eq 1.1} 
+tereduksi menjadi Sifat~4.
+(Persamaan~\ref{eq 1.1} juga dapat diperumum; lihat Teorema~\ref{thm 3.10}.)               
+\end{theorem}
+
+
+\subsection*{Diagram Pohon}
+
+\begin{example}\label{exam 1.8}
+Mari kita gambarkan sifat-sifat peluang kejadian melalui tiga kali
+pelemparan sebuah koin.  Jika suatu percobaan berlangsung secara bertahap
+seperti
+ini, sering kali lebih mudah untuk menyatakan hasilnya dengan \emx {diagram
+pohon}\index{diagram pohon} seperti ditunjukkan pada Gambar~\ref {fig 1.7}.
+
+\putfig{4truein}{PSfig1-8}{Diagram pohon untuk tiga kali pelemparan koin.}{fig 1.7} 
+
+Suatu \emx {lintasan} pada pohon bersesuaian dengan salah satu hasil yang mungkin dari
+percobaan.  Untuk tiga kali pelemparan koin, terdapat delapan lintasan,
+$\omega_1$,~$\omega_2$, \dots,~$\omega_8$; dengan mengasumsikan bahwa setiap hasil
+berpeluang sama, kita menetapkan bobot yang sama, 1/8, pada setiap lintasan.  Misalkan $E$ adalah
+kejadian
+``setidaknya satu kepala muncul."  Maka $\tilde E$ adalah kejadian ``tidak ada kepala yang
+muncul."  Kejadian ini hanya terjadi untuk satu hasil, yaitu $\omega_8 = \mbox{TTT}$. 
+Jadi, $\tilde E = \{\mbox{TTT}\}$ dan kita memperoleh
+$$
+P(\tilde E) = P(\{\mbox{TTT}\}) = m(\mbox{TTT}) = \frac18\ .
+$$
+Menurut Sifat~5 dari Teorema~\ref{thm 1.1},
+$$
+P(E) = 1 - P(\tilde E) = 1 - \frac18 = \frac78\ .
+$$
+Perhatikan bahwa sering kali lebih mudah menghitung peluang bahwa suatu
+kejadian tidak terjadi daripada peluang bahwa kejadian itu terjadi.  Selanjutnya kita menggunakan
+Sifat~5 untuk memperoleh peluang yang diinginkan.
+
+Misalkan $A$ adalah kejadian ``hasil pertama adalah kepala," dan $B$ adalah kejadian ``hasil
+kedua adalah ekor."  Dengan melihat lintasan pada Gambar~\ref{fig 1.7},
+kita memperoleh
+$$
+P(A) = P(B) = \frac12\ .
+$$
+Selain itu, $A \cap B = \{\omega_3,\omega_4\}$, sehingga $P(A \cap B) = 1/4.$ 
+Dengan menggunakan Teorema~\ref{thm 1.2.5}, kita memperoleh
+\begin{eqnarray*}
+P(A \cup B) & = & P(A) + P(B) - P(A \cap B) \\
+& = & \frac 12 + \frac 12 - \frac 14 = \frac 34\ .
+\end{eqnarray*}
+Karena $A \cup B$ merupakan himpunan dengan 6 elemen,
+$$
+A \cup B = \{\mbox{HHH,HHT,HTH,HTT,TTH,TTT}\}\ ,
+$$
+kita melihat bahwa pencacahan langsung memberikan hasil yang sama.
+\end{example}
+\par
+Dalam contoh pelemparan koin dan contoh pelemparan dadu, kita telah menetapkan
+peluang yang sama pada setiap hasil percobaan yang mungkin. 
+Bersesuaian
+dengan cara penetapan peluang ini, kita memiliki definisi berikut.
+
+\subsection*{Distribusi Seragam}
+
+\begin{definition}\label{def 1.3} 
+\emx {Distribusi seragam}\index{distribusi seragam} pada ruang sampel $\Omega$ 
+yang memuat $n$ elemen adalah fungsi $m$ yang didefinisikan oleh
+$$
+m(\omega) = \frac1n\ ,
+$$
+untuk setiap $\omega \in \Omega$.
+\end{definition}
+Penting untuk dipahami bahwa ketika suatu percobaan dianalisis untuk menjelaskan
+hasil-hasil yang
+mungkin, tidak ada satu pilihan ruang sampel yang selalu benar.  Untuk
+percobaan
+pelemparan koin dua kali dalam Contoh~\ref{exam 1.1},
+kita memilih himpunan dengan 4 elemen $\Omega = $\{HH,HT,TH,TT\} sebagai ruang sampel
+dan
+menetapkan fungsi distribusi seragam.  Pilihan-pilihan ini tentu
+wajar secara intuitif.  Namun, untuk tujuan tertentu mungkin lebih
+berguna
+mempertimbangkan ruang sampel dengan 3 elemen $\bar\Omega = \{0,1,2\}$, dengan
+0
+merupakan hasil ``tidak ada kepala yang muncul," 1 merupakan hasil ``tepat satu kepala
+muncul," dan 2 merupakan hasil ``dua kepala muncul."  Fungsi distribusi
+$\bar m$ pada $\bar\Omega$ yang didefinisikan oleh persamaan
+$$
+\bar m(0) = \frac14\ ,\qquad \bar m(1) = \frac12\ , \qquad \bar
+m(2) =
+\frac14
+$$
+adalah fungsi yang bersesuaian dengan kerapatan peluang seragam pada
+ruang sampel asal $\Omega$.  Perhatikan bahwa kita sepenuhnya dapat memilih
+fungsi distribusi lain.  Sebagai contoh, kita dapat mempertimbangkan fungsi
+distribusi seragam pada $\bar\Omega$, yaitu fungsi $\bar q$
+yang didefinisikan oleh
+$$
+\bar q(0) = \bar q(1) = \bar q(2) = \frac13\ .
+$$
+Meskipun $\bar q$ merupakan fungsi distribusi yang sah, fungsi ini tidak
+sesuai dengan data pengamatan pelemparan koin.
+\begin{example}\label{exam 1.11}
+Pertimbangkan percobaan yang terdiri atas pelemparan sepasang dadu.  Sebagai
+ruang
+sampel $\Omega$, kita ambil himpunan semua pasangan terurut $(i,j)$ dari
+bilangan bulat dengan $1\leq i\leq 6$ dan $1\leq j\leq 6$.  Jadi,
+$$
+\Omega = \{\,(i,j):1\leq i,\space j \leq 6\,\}\ .
+$$
+(Setidaknya terdapat satu pilihan ruang sampel lain yang ``wajar," yaitu
+himpunan semua pasangan takterurut bilangan bulat, masing-masing antara 1 dan 6.  Untuk pembahasan
+mengapa himpunan ini tidak digunakan, lihat Contoh~\ref{exam 3.15}.)
+Untuk menentukan ukuran $\Omega$, perhatikan bahwa terdapat enam pilihan bagi $i$,
+dan untuk setiap pilihan $i$ terdapat enam pilihan bagi $j$, sehingga menghasilkan 36
+hasil berbeda.  Asumsikan bahwa dadu-dadu tersebut seimbang.  Dalam istilah matematika, hal ini
+berarti
+kita mengasumsikan setiap dari 36 hasil berpeluang sama, atau
+secara ekuivalen,
+kita menggunakan fungsi distribusi seragam pada $\Omega$ dengan menetapkan
+$$
+m((i,j)) = \frac1{36},\qquad 1\leq i,\space j \leq 6\ .
+$$
+Berapakah peluang memperoleh jumlah 7 dalam pelemparan dua dadu---atau
+memperoleh jumlah 11?  Kejadian pertama, yang dinyatakan dengan $E$, adalah himpunan bagian
+$$
+E = \{(1,6),(6,1),(2,5),(5,2),(3,4),(4,3)\}\ .
+$$
+Jumlah 11 adalah himpunan bagian $F$ yang diberikan oleh
+$$
+F = \{(5,6),(6,5)\}\ .
+$$
+Akibatnya,
+$$\begin{array}{ll}
+P(E) = &\sum_{\omega \in E} m(\omega) = 6\cdot\frac1{36} = \frac16\ , \\
+       &                                                            \\
+P(F) = &\sum_{\omega \in F} m(\omega) = 2\cdot\frac1{36} = \frac1{18}\ .
+\end{array}
+$$
+
+Berapakah peluang untuk tidak memperoleh \emx {mata ular (snakeeyes)}\index{mata ular} (dua angka satu)
+maupun
+\emx {sepasang enam (boxcars)}\index{sepasang enam} (dua angka enam)?  Kejadian memperoleh salah satu dari kedua
+hasil tersebut adalah himpunan
+$$
+E = \{(1,1),(6,6)\}\ .
+$$
+Jadi, peluang untuk tidak memperoleh keduanya diberikan oleh
+$$
+P(\tilde E) = 1 - P(E) = 1 - \frac2{36} = \frac{17}{18}\ .
+$$
+\end{example}
+\par
+Dalam percobaan pelemparan koin dan dadu di atas, kita telah menetapkan
+peluang yang sama pada setiap hasil.  Artinya, dalam setiap contoh kita telah memilih
+fungsi distribusi seragam.  Pilihan ini wajar asalkan
+koinnya seimbang dan dadu-dadunya tidak diberi pemberat.  Namun, keputusan mengenai
+fungsi distribusi mana yang dipilih untuk menjelaskan suatu percobaan \emx {bukan} bagian
+dari teori matematika dasar peluang.  Teori tersebut baru dimulai ketika
+ruang sampel dan fungsi distribusi telah didefinisikan.
+
+\subsection*{Penentuan Peluang}
+
+Penting untuk mempertimbangkan bagaimana distribusi peluang
+ditentukan dalam praktik.  Salah satu caranya adalah melalui \emx {simetri}.  Dalam kasus
+pelemparan koin, kita tidak melihat perbedaan fisik antara kedua sisi
+koin
+yang semestinya memengaruhi peluang munculnya salah satu sisi. 
+Demikian pula, pada dadu biasa tidak ada perbedaan hakiki antara
+dua sisi mana pun, sehingga berdasarkan simetri kita menetapkan peluang yang sama bagi
+setiap
+hasil yang mungkin.  Secara umum, pertimbangan simetri sering menyarankan penggunaan
+fungsi distribusi seragam.  Namun, kita harus berhati-hati.  Kita tidak selalu boleh mengasumsikan
+bahwa,
+hanya karena tidak mengetahui alasan yang menunjukkan bahwa satu hasil lebih
+mungkin daripada yang lain, kita patut menetapkan peluang yang sama.  Sebagai
+contoh, pertimbangkan percobaan menebak jenis kelamin bayi yang baru lahir.  Telah
+diamati bahwa proporsi bayi baru lahir yang berjenis kelamin laki-laki kira-kira
+.513.  Jadi, lebih tepat menggunakan fungsi distribusi yang
+menetapkan peluang .513 pada hasil \emx {laki-laki} dan peluang .487 pada
+hasil
+\emx {perempuan} daripada menetapkan peluang 1/2 pada masing-masing hasil.  Ini merupakan
+contoh ketika kita menggunakan pengamatan statistik untuk menentukan peluang. 
+Perhatikan
+bahwa peluang tersebut dapat berubah seiring adanya penelitian baru dan dapat berbeda dari
+satu negara
+ke negara lain.  Rekayasa genetika bahkan mungkin memungkinkan seseorang memengaruhi
+peluang ini dalam kasus tertentu.
+
+\subsection*{Rasio Peluang}\index{rasio peluang}
+
+Perkiraan statistik untuk peluang dapat digunakan jika percobaan yang
+dibahas dapat diulangi berkali-kali dalam keadaan serupa. 
+Namun, misalkan pada awal musim sepak bola Amerika Anda ingin
+menetapkan
+peluang bagi kejadian bahwa Dartmouth\index{Dartmouth} akan mengalahkan Harvard\index{Harvard}.  
+Anda sebenarnya tidak
+memiliki data yang berkaitan dengan tim sepak bola tahun ini.  Meskipun demikian, Anda dapat
+menentukan peluang pribadi dengan melihat jenis taruhan yang
+bersedia
+Anda pasang.  Sebagai contoh, misalkan Anda bersedia memasang taruhan 1
+dolar dengan rasio peluang 2 banding 1 bahwa Dartmouth akan menang.  Artinya, Anda bersedia
+membayar
+2 dolar jika Dartmouth kalah untuk memperoleh 1 dolar jika
+Dartmouth
+menang.  Ini berarti bahwa menurut Anda peluang yang tepat bagi kemenangan Dartmouth
+adalah 2/3.
+
+Mari kita telaah lebih cermat hubungan antara rasio peluang dan peluang.
+Misalkan kita bertaruh dengan rasio $r$ banding $1$ bahwa kejadian $E$ terjadi. 
+Ini berarti kita menganggap bahwa $r$ kali lebih mungkin $E$ terjadi
+daripada $E$
+tidak terjadi.  Secara umum, rasio peluang $r$ banding $s$ diartikan sama
+dengan
+$r/s$ banding 1; dengan kata lain, hanya perbandingan antara kedua bilangan yang
+penting ketika menyatakan rasio peluang.  
+\par
+Jika $r$ kali lebih mungkin $E$ terjadi daripada $E$
+tidak terjadi, maka peluang $E$ terjadi haruslah $r/(r+1)$, sebab kita
+memiliki
+$$P(E) = r\,P(\tilde E)$$
+dan
+$$P(E) + P(\tilde E) = 1\ .$$
+Secara umum, pernyataan bahwa rasio peluangnya adalah $r$ banding $s$ untuk mendukung kejadian
+$E$
+ekuivalen dengan pernyataan bahwa 
+\begin{eqnarray*}
+P(E) & = & \frac{r/s}{(r/s) + 1}\\
+& = & \frac {r}{r+s}\ .
+\end{eqnarray*}
+Jika kita menetapkan $P(E) = p$, persamaan di atas dapat dengan mudah diselesaikan untuk $r/s$
+sebagai fungsi dari
+$p$; kita memperoleh $r/s = p/(1-p)$.  Pembahasan di atas dirangkum dalam
+definisi berikut. 
+
+\begin{definition}\label{def 1.4} 
+Jika $P(E) = p$, \emx {rasio peluang} yang mendukung terjadinya kejadian $E$ adalah $r :
+s$ ($r$ banding $s$), dengan $r/s = p/(1-p)$.  Jika $r$ dan $s$ diberikan, maka $p$ 
+dapat diperoleh menggunakan persamaan $p = r/(r+s)$.
+\end{definition}
+\begin{example}(Lanjutan Contoh~\ref{exam 1.7})\label{exam 1.9}
+Dalam Contoh~\ref{exam 1.7}, kita menetapkan peluang 1/5 pada kejadian bahwa
+kandidat C memenangi pemilihan.  Jadi, rasio peluang yang mendukung kemenangan C adalah $1/5 :
+4/5$.  Rasio ini juga dapat ditulis sebagai $1 : 4$, $2
+: 8$, dan seterusnya.  Taruhan bahwa C menang bersifat adil jika kita menerima 4 dolar
+ketika C menang dan membayar 1 dolar ketika C kalah.
+\end{example}
+
+\subsection*{Ruang Sampel Takhingga}\index{ruang sampel!takhingga}
+
+Jika suatu ruang sampel memiliki takhingga banyak titik, cara mendefinisikan
+fungsi distribusi
+bergantung pada apakah ruang sampel tersebut terhitung.  Suatu
+ruang
+sampel disebut \emx {takhingga terhitung}\index{ruang sampel!takhingga terhitung} 
+jika elemen-elemennya dapat dihitung, yaitu dapat
+dipasangkan satu-satu dengan bilangan bulat positif, dan disebut \emx {takhingga
+takterhitung} jika tidak.  Secara umum, ruang sampel takhingga memerlukan konsep baru
+\choice{}{(lihat Bab~\ref{chp 2})}, 
+tetapi ruang takhingga terhitung tidak.  Jika
+$$
+\Omega = \{\omega_1,\omega_2,\omega_3, \dots\}
+$$
+adalah ruang sampel takhingga terhitung, fungsi distribusi didefinisikan
+tepat seperti dalam Definisi \ref{def 1.2}, kecuali bahwa jumlahnya kini harus
+berupa deret takhingga yang \emx {konvergen}. Teorema~\ref{thm 1.1}
+tetap berlaku, demikian pula perluasannya, Teorema~\ref{thm 1.1.5} dan \ref{thm 1.2.5}.  
+Satu hal yang tidak dapat kita lakukan pada ruang sampel takhingga terhitung, tetapi dapat dilakukan pada 
+ruang sampel terhingga, adalah
+mendefinisikan fungsi distribusi \emx {seragam} seperti dalam Definisi~\ref{def
+1.3}.
+Dalam Latihan~\ref{exer 1.2.19}, Anda diminta menjelaskan mengapa hal ini tidak
+mungkin.
+\begin{example}\label{exam 1.10}
+Sebuah koin dilempar sampai sisi kepala muncul untuk pertama kalinya.  Misalkan hasil
+percobaan, yaitu $\omega$, adalah nomor pelemparan ketika kepala pertama kali muncul.  Maka
+hasil yang mungkin dari percobaan kita adalah
+$$
+\Omega = \{1,2,3, \dots\}\ .
+$$
+Perhatikan bahwa meskipun koin dapat saja selalu menunjukkan ekor, kita belum
+memasukkan kemungkinan ini.  Alasannya akan segera dijelaskan.  Peluang
+kepala muncul pada pelemparan pertama adalah 1/2.  Peluang
+ekor muncul pada pelemparan pertama dan kepala pada pelemparan kedua adalah 1/4.  Peluang
+memperoleh dua ekor yang diikuti satu kepala adalah 1/8, dan seterusnya. 
+Hal ini menyarankan penetapan fungsi distribusi $m(n) = 1/2^n$ untuk $n = 1$,~2, 3, \dots. 
+Untuk
+melihat bahwa ini merupakan fungsi distribusi, kita harus menunjukkan bahwa
+$$
+\sum_{\omega} m(\omega) = \frac12 + \frac14 + \frac18 + \cdots = 1\ .
+$$
+Kebenaran persamaan ini mengikuti rumus jumlah deret geometri\index{deret
+geometri},
+$$
+1 + r + r^2 + r^3 + \cdots = \frac1{1-r}\ ,
+$$
+atau
+\begin{equation}
+r + r^2 + r^3 + r^4 + \cdots = \frac r{1-r}\ ,
+\label{eq 1.2}
+\end{equation} 
+untuk $-1 < r < 1$.
+\par
+Dengan menetapkan $r = 1/2$, kita melihat bahwa peluang koin pada akhirnya
+menunjukkan kepala adalah 1.  Hasil yang mungkin berupa ekor pada setiap pelemparan harus
+diberi
+peluang 0, sehingga kita mengeluarkannya dari ruang sampel
+hasil yang mungkin.
+
+Misalkan $E$ adalah kejadian bahwa kepala pertama kali muncul setelah jumlah
+pelemparan yang genap.  Maka
+$$
+E = \{2,4,6,8, \dots\}\ ,
+$$
+dan
+$$
+P(E) = \frac14 + \frac1{16} + \frac1{64} +\cdots\ .
+$$
+Dengan menetapkan $r = 1/4$ dalam Persamaan~\ref{eq 1.2}, kita melihat bahwa              
+$$
+P(E) = \frac{1/4}{1 - 1/4} = \frac13\ .
+$$
+Jadi, peluang bahwa kepala pertama kali muncul setelah jumlah
+pelemparan yang genap adalah 1/3, sedangkan setelah jumlah pelemparan yang ganjil adalah 2/3.
+\end{example}
+
+\subsection*{Catatan Sejarah}
+
+Sebuah pertanyaan menarik dalam sejarah ilmu pengetahuan adalah: Mengapa peluang belum
+dikembangkan hingga abad keenam belas?  Kita mengetahui bahwa pada abad keenam belas,
+masalah perjudian dan permainan untung-untungan membuat orang mulai memikirkan
+peluang.  Namun, perjudian dan permainan untung-untungan hampir sama tuanya dengan
+peradaban itu sendiri.  Di Mesir kuno\index{Mesir} (pada masa Dinasti Pertama,
+sekitar~3500~{\footnotesize\rm {B.C.}}), dimainkan suatu permainan yang kini disebut ``Hounds and Jackals."
+Dalam permainan ini, pergerakan anjing pemburu dan jakal didasarkan pada hasil
+pelemparan
+dadu bersisi empat yang terbuat dari tulang hewan, yang disebut astragali. 
+Dadu bersisi
+enam dari berbagai bahan telah ada sejak abad keenam belas
+~{\footnotesize\rm {B.C.}}  Perjudian
+tersebar luas di Yunani kuno\index{Yunani} dan Roma\index{Roma}.  Bahkan, 
+di Kekaisaran Romawi kadang-kadang
+dianggap perlu untuk memberlakukan undang-undang yang melarang perjudian.  Lalu, mengapa
+peluang belum dihitung hingga abad keenam belas?
+
+Beberapa penjelasan telah diajukan mengenai perkembangan yang terlambat ini.  Salah satunya adalah
+bahwa
+matematika yang relevan belum dikembangkan dan memang tidak mudah dikembangkan.  Notasi
+matematika kuno membuat perhitungan numerik rumit, sedangkan notasi aljabar yang
+kita kenal baru dikembangkan pada abad keenam belas. 
+Namun, seperti akan kita lihat, banyak gagasan kombinatorial yang diperlukan untuk menghitung
+peluang telah dibahas jauh sebelum abad keenam belas.  Karena banyak
+kejadian acak pada masa itu berkaitan dengan pengundian yang berhubungan dengan
+urusan
+keagamaan, diduga mungkin terdapat hambatan agama terhadap
+kajian keacakan dan perjudian.  Dugaan lain adalah bahwa diperlukan
+pendorong yang lebih kuat, seperti perkembangan perdagangan.  Meskipun demikian, tidak satu pun
+penjelasan ini tampak sepenuhnya memuaskan, dan orang masih bertanya-tanya
+mengapa diperlukan waktu begitu lama sebelum peluang dikaji secara serius.  Pembahasan yang
+menarik mengenai masalah ini dapat ditemukan dalam karya Hacking\index{HACKING, I.}.\footnote{I.~Hacking,
+\emx
+{The Emergence of Probability} (Cambridge: Cambridge University Press,
+1975).}
+\par
+Orang pertama yang menghitung peluang secara sistematis adalah Gerolamo
+Cardano\index{CARDANO, G.|(}
+(1501--1576) dalam bukunya \emx {Liber de Ludo Aleae.}  Karya ini diterjemahkan dari
+bahasa Latin oleh Gould dan dimuat dalam buku \emx {Cardano: The Gambling
+Scholar}
+karya Ore\index{ORE, O.}.\footnote{O.~Ore, \emx {Cardano: The Gambling Scholar}
+(Princeton:
+Princeton University Press, 1953).}  Ore memberikan pembahasan menarik mengenai
+kehidupan cendekiawan penuh warna ini, termasuk minatnya pada berbagai
+bidang seperti kedokteran, astrologi, dan matematika.  Di sana Anda juga akan
+menemukan uraian terperinci mengenai perseteruan Cardano yang terkenal dengan Tartaglia
+tentang penyelesaian persamaan kubik.
+
+Dalam bukunya tentang peluang, Cardano hanya membahas kasus khusus yang kita
+sebut fungsi distribusi seragam.  Pembatasan pada hasil-hasil berpeluang sama ini
+bertahan
+untuk waktu yang lama.  Dalam kasus ini, Cardano menyadari bahwa
+peluang terjadinya suatu kejadian adalah rasio jumlah hasil yang
+mendukung terhadap jumlah seluruh hasil.
+
+Sebagian besar contoh Cardano membahas pelemparan dadu.  Di sini ia menyadari bahwa
+hasil
+dua pelemparan seharusnya dipandang sebagai 36 pasangan terurut $(i,j)$,
+bukan 21 pasangan takterurut.  Ini merupakan pokok yang halus dan masih
+menimbulkan masalah jauh kemudian bagi penulis lain tentang peluang.  Sebagai contoh,
+pada
+abad kedelapan belas, matematikawan Prancis terkenal d'Alembert, penulis beberapa
+karya tentang peluang, menyatakan bahwa ketika sebuah koin dilempar dua kali,
+jumlah kepala yang muncul adalah 0, 1, atau~2, sehingga kita seharusnya
+menetapkan peluang yang sama pada ketiga hasil yang mungkin
+tersebut.\footnote{J.~d'Alembert, ``Croix ou Pile," dalam \emx
+{L'Encyclop\'edie,}
+ed.~Diderot, vol.~4 (Paris, 1754).}  Cardano memilih ruang sampel yang benar
+untuk
+masalah dadunya dan menghitung peluang yang benar bagi berbagai
+kejadian.
+\par
+Karya matematika Cardano diselingi banyak nasihat bagi calon
+penjudi dalam paragraf-paragraf pendek yang, misalnya, berjudul ``Who Should
+Play
+and When," ``Why Gambling Was Condemned by Aristotle," ``Do Those Who Teach
+Also Play Well?," dan sebagainya. Dalam paragraf berjudul ``The Fundamental
+Principle of Gambling," Cardano menjadikan kesetaraan kondisi sebagai asas
+utama: lawan, penonton, uang, keadaan, kotak dadu, dan dadu itu sendiri harus
+diperlakukan setara. Penyimpangan yang menguntungkan lawan merugikan diri
+sendiri, sedangkan penyimpangan yang menguntungkan diri sendiri tidak adil.
+\footnote{O.~Ore, op.\ cit., p.~189. Ringkasan editorial; ungkapan terjemahan
+modern tidak diterjemahkan ulang atau direproduksi.}
+
+Cardano memang membuat kesalahan, dan jika kemudian menyadarinya, ia tidak kembali untuk
+memperbaiki kesalahan tersebut.  Sebagai contoh, untuk kejadian yang menguntungkan dalam tiga dari
+empat kasus,
+Cardano menetapkan rasio peluang yang benar, yaitu $3 : 1$, bahwa kejadian tersebut akan
+terjadi.  Namun, ia kemudian menetapkan rasio peluang dengan menguadratkan bilangan-bilangan ini (yaitu $9 :
+1$) untuk kejadian yang terjadi dua kali berturut-turut.  Kemudian, dengan mempertimbangkan kasus
+ketika rasio peluangnya $1 : 1$, ia menyadari bahwa hal ini tidak mungkin benar dan
+sampai pada hasil yang benar: ketika $f$ dari $n$ hasil
+menguntungkan, rasio peluang bagi hasil yang menguntungkan dua kali berturut-turut adalah $f^2 : n^2 -
+f^2$.  Ore menunjukkan bahwa hal ini ekuivalen dengan pemahaman bahwa jika
+peluang suatu kejadian terjadi dalam satu percobaan adalah $p$, maka peluang
+kejadian itu
+terjadi dua kali adalah $p^2$.  Cardano kemudian membuktikan bahwa untuk tiga
+keberhasilan rumusnya adalah $p^3$ dan untuk empat keberhasilan $p^4$, sehingga
+jelas bahwa ia memahami bahwa peluangnya adalah $p^n$ untuk $n$ keberhasilan dalam
+$n$
+pengulangan independen percobaan tersebut.  Hal ini akan mengikuti dari
+konsep independensi yang kita perkenalkan dalam Bagian~\ref{sec 4.1}\index{CARDANO, G.|)}. 
+\par
+Karya Cardano merupakan upaya pertama yang luar biasa untuk menuliskan hukum-hukum
+peluang, tetapi bukan karya itulah yang memicu kajian sistematis
+tentang bidang ini.  Pemicunya adalah rangkaian surat terkenal antara Pascal dan Fermat. 
+Korespondensi ini dimulai oleh Pascal untuk meminta pendapat Fermat mengenai masalah yang
+diberikan kepadanya oleh Chevalier de M\'er\'e,\index{de M\'ER\'E, CHEVALIER} seorang penulis terkenal,
+tokoh terkemuka di istana Louis XIV, dan penjudi yang bersemangat.
+\par
+Masalah pertama yang diajukan de M\'er\'e adalah masalah dadu.  Menurut cerita, ia
+bertaruh bahwa setidaknya satu angka enam akan muncul dalam empat kali pelemparan sebuah dadu dan
+terlalu sering menang, sehingga ia kemudian bertaruh bahwa sepasang angka enam akan muncul dalam 24 kali
+pelemparan sepasang dadu.  Peluang munculnya angka enam pada satu dadu adalah 1/6 dan, menurut
+hukum perkalian bagi percobaan independen, peluang munculnya dua angka enam ketika
+sepasang dadu dilempar adalah $(1/6)(1/6) = 1/36$.  Ore\footnote{O.\ Ore,
+``Pascal and the Invention of Probability Theory,'' \emx {American Mathematics
+Monthly}, vol. 67 (1960), pp. 409--419.}\index{ORE, O.} menyatakan bahwa suatu aturan perjudian pada
+masa itu menyarankan bahwa, karena empat pengulangan menguntungkan bagi terjadinya
+kejadian dengan peluang 1/6, bagi kejadian yang enam kali lebih kecil kemungkinannya, $6 \cdot 4 =
+24$ pengulangan akan cukup untuk taruhan yang menguntungkan.  Melalui
+perhitungan eksak, Pascal menunjukkan bahwa diperlukan 25 pelemparan agar taruhan pada sepasang
+angka enam menguntungkan.
+\par
+Masalah kedua jauh lebih sulit: ini merupakan masalah lama tentang
+penentuan pembagian taruhan yang adil dalam sebuah turnamen ketika
+rangkaian pertandingan, karena alasan tertentu, dihentikan sebelum selesai.  Masalah ini
+kini disebut masalah pembagian taruhan.\index{masalah pembagian taruhan}  Masalah tersebut
+telah menjadi masalah baku dalam teks matematika; masalah itu muncul dalam buku Fra Luca
+Paccioli, \emx {summa de Arithmetica, Geometria, Proportioni et
+Proportionalit\`a}, yang dicetak di Venesia pada 1494.\footnote{ibid., p. 414.
+Ringkasan editorial; ungkapan terjemahan modern tidak diterjemahkan ulang atau
+direproduksi.} Paccioli membahas permainan bola yang dimenangi pada 60 poin,
+dengan 10 poin per babak dan taruhan 10 dukat. Permainan terhenti ketika satu
+pihak memiliki 50 poin dan pihak lain 20; masalahnya ialah menentukan pembagian
+taruhan yang adil.
+\par
+Penyelesaian yang masuk akal, seperti membagi taruhan menurut rasio
+pertandingan yang dimenangi masing-masing pemain, telah diajukan, tetapi belum ada penyelesaian benar yang
+ditemukan pada masa korespondensi Pascal-Fermat.\index{PASCAL, B.|(}\index{FERMAT, P.|(} 
+Surat-surat tersebut terutama membahas upaya Pascal dan Fermat menyelesaikan masalah ini.  Blaise
+Pascal (1623--1662) adalah anak ajaib yang menerbitkan
+risalahnya tentang irisan kerucut pada usia enam belas tahun dan menciptakan mesin
+hitung pada usia delapan belas tahun.  Pada masa surat-surat tersebut, pembuktiannya mengenai berat
+atmosfer telah menempatkannya di barisan terdepan
+fisikawan sezamannya.  Pierre de~Fermat (1601--1665) adalah ahli hukum terpelajar di
+Toulouse yang mempelajari matematika pada waktu luangnya.  Ia disebut oleh sebagian orang sebagai pangeran
+matematikawan amatir dan salah satu matematikawan murni terbesar sepanjang masa.
+\par
+Surat-surat tersebut, yang diterjemahkan oleh Maxine Merrington, dimuat dalam karya sejarah peluang
+yang menarik oleh Florence David, \emx {Games, Gods and Gambling}.\footnote{F. N.
+David, \emx {Games, Gods and Gambling\/} (London: G. Griffin, 1962), p. 230
+ff.}\index{DAVID, F.\ N.}  Dalam surat bertanggal Rabu, 29 Juli 1654, Pascal menjelaskan
+kepada Fermat sebuah penyelesaian bagi masalah pembagian taruhan. Ringkasan berikut mempertahankan
+isi matematis surat tersebut tanpa menerjemahkan atau mereproduksi ungkapan terjemahan modern yang
+dikutip oleh David.
+\par
+Kedua pemain masing-masing mempertaruhkan 32~pistole dalam pertandingan yang ditentukan oleh tiga
+kemenangan. Pada keadaan yang dibahas, pemain pertama telah menang dua kali dan pemain kedua sekali.
+Jika pemain pertama memenangi pertandingan berikutnya, ia memperoleh seluruh taruhan, yaitu
+64~pistole. Jika ia kalah, kedudukan menjadi imbang dua kemenangan sehingga, bila permainan dihentikan,
+masing-masing pemain berhak atas 32~pistole. Karena itu pemain pertama sudah pasti memperoleh
+32~pistole; sisa 32~pistole bergantung pada satu pertandingan berpeluang seimbang dan harus dibagi dua.
+Pembagian yang adil ialah 48~pistole untuk pemain pertama dan 16~pistole untuk pemain kedua.
+
+Argumen Pascal menghasilkan tabel pada Gambar~\ref{fig 1.9} untuk jumlah yang
+menjadi hak pemain A pada setiap titik penghentian.
+\putfig{3truein}{PSfig1-9}{Tabel Pascal.}{fig 1.9} 
+\par
+Setiap entri dalam tabel merupakan rata-rata dari bilangan tepat di atas dan di
+sebelah kanannya.  Fakta ini, bersama nilai yang diketahui ketika
+turnamen selesai, menentukan semua nilai dalam tabel.  Jika pemain A
+memenangi pertandingan pertama, ia memerlukan dua kemenangan lagi dan B memerlukan tiga kemenangan untuk
+menang; jadi, jika turnamen dibatalkan, A seharusnya menerima 44 pistole.
+\par
+Surat tempat Fermat menyampaikan penyelesaiannya telah hilang; tetapi
+untungnya, Pascal menjelaskan metode Fermat dalam surat bertanggal Senin, 24
+Agustus 1654.  Menurut uraian Pascal,\footnote{ibid., p. 239ff.} jika pemain pertama
+masih memerlukan dua kemenangan dan pemain kedua tiga kemenangan, paling banyak empat pertandingan
+tambahan diperlukan untuk menentukan pemenang. Metode Fermat memperpanjang semua kemungkinan jalannya
+permainan hingga panjang yang sama, yaitu empat pertandingan, lalu menghitung banyaknya urutan yang
+membuat masing-masing pemain menang dan membagi taruhan menurut perbandingan hitungan tersebut. Ini
+merupakan ringkasan editorial; ungkapan terjemahan modern surat itu tidak diterjemahkan atau direproduksi.
+\par
+Fermat menyadari bahwa berbagai cara permainan dapat berakhir mungkin tidak
+berpeluang sama.  Sebagai contoh, jika A memerlukan dua kemenangan lagi dan B memerlukan tiga kemenangan untuk
+menang, dua urutan yang mungkin bagi kemenangan A dalam turnamen adalah WLW dan
+LWLW.  Kedua urutan ini tidak memiliki peluang terjadi yang sama.  Untuk menghindari
+kesulitan ini, Fermat memperpanjang permainan dengan menambahkan pertandingan semu agar semua
+cara pertandingan dapat berlangsung memiliki panjang yang sama, yaitu empat.  Ia cukup
+cerdik untuk menyadari bahwa perpanjangan ini tidak akan mengubah pemenang dan
+bahwa kini ia cukup menghitung jumlah urutan yang menguntungkan masing-masing pemain
+karena semuanya telah dibuat berpeluang sama.  Jika kita mendaftarkan semua cara yang mungkin bagi
+permainan empat pertandingan yang diperpanjang ini, kita memperoleh 16 hasil permainan yang
+mungkin berikut:
+\vskip .1in
+\begin{table}[h]
+\centering
+\begin{tabular}{llll}
+{\underline{WWWW}} & {\underline{WLWW}} & {\underline{LWWW}} &
+{\underline{LLWW}} \\
+{\underline{WWWL}} & {\underline{WLWL}} &
+{\underline{LWWL}} & {LLWL} \\
+{\underline{WWLW}} &
+{\underline{WLLW}} & {\underline{LWLW}} & {LLLW} \\
+{\underline{WWLL}} & {WLLL} & {LWLL} & {LLLL}\ .
+\end{tabular}
+\end{table}
+\vskip .1in
+Pemain A menang dalam kasus yang memuat setidaknya dua kemenangan (11 kasus yang
+digarisbawahi), sedangkan B menang dalam kasus yang memuat setidaknya tiga
+kekalahan (5 kasus lainnya).  Karena A menang dalam 11 dari 16 kasus yang mungkin, Fermat
+berpendapat bahwa peluang A menang adalah 11/16.  Jika taruhannya 64
+pistole, A seharusnya menerima 44 pistole, sesuai dengan hasil Pascal. 
+Pascal dan Fermat mengembangkan metode yang lebih sistematis untuk menghitung jumlah
+hasil yang menguntungkan bagi masalah semacam ini, dan hal tersebut akan menjadi salah satu masalah utama
+kita.  Metode penghitungan semacam itu termasuk dalam bidang \emx {kombinatorika},
+yang menjadi pokok Bab~\ref{chp 3}.
+\par
+Kita melihat bahwa kedua matematikawan ini sampai pada dua cara yang sangat berbeda untuk
+menyelesaikan masalah pembagian taruhan.  Metode Pascal adalah mengembangkan algoritme dan
+menggunakannya untuk menghitung pembagian yang adil.  Metode ini mudah diterapkan pada
+komputer dan mudah diperumum.  Sebaliknya, metode Fermat adalah
+mengubah masalah menjadi masalah ekuivalen yang dapat ditangani dengan metode pencacahan
+atau kombinatorial.  Dalam Bab~\ref{chp 3}, kita akan melihat bahwa Fermat sebenarnya menggunakan 
+apa yang kemudian dikenal sebagai segitiga Pascal!  Dalam kajian peluang masa kini, kita 
+akan mendapati bahwa pendekatan algoritmik dan pendekatan kombinatorial mendapat tempat yang
+setara, sama seperti 300 tahun yang lalu ketika kajian peluang bermula.
+\index{PASCAL, B.|)}\index{FERMAT, P.|)}
+
+\exercises
+\begin{LJSItem}
+
+\i\label{exer1.2.1} Misalkan $\Omega = \{a,b,c\}$ adalah ruang sampel.  Misalkan $m(a)
+= 1/2$, $m(b) =
+1/3$, dan $m(c) = 1/6$.  Tentukan peluang bagi kedelapan himpunan bagian dari
+$\Omega$.
+
+\i\label{exer 1.2.2} Berikan salah satu ruang sampel yang mungkin, $\Omega$, bagi setiap
+percobaan berikut:
+\begin{enumerate}
+\item Sebuah pemilihan menentukan pemenang antara dua kandidat, A dan B.
+\item Sebuah koin bersisi dua dilempar.
+\item Seorang mahasiswa ditanya mengenai bulan dan hari dalam sepekan
+ketika ulang tahunnya jatuh.
+\item Seorang mahasiswa dipilih secara acak dari kelas yang berisi sepuluh mahasiswa.
+\item Anda memperoleh suatu nilai dalam mata kuliah ini.
+\end{enumerate}
+
+\i\label{exer 1.2.3} Untuk kasus mana dalam Latihan~\ref{exer 1.2.2}  
+penggunaan fungsi distribusi seragam merupakan pilihan yang wajar?
+
+\i\label{exer 1.2.4} Jelaskan dengan kata-kata kejadian yang dinyatakan oleh
+himpunan bagian berikut dari 
+$$\Omega = \{HHH,\ HHT,\ HTH,\ HTT,\ THH,\ THT,\ TTH,\ TTT\}$$
+(lihat Contoh~\ref{exam 1.5}).
+\begin{enumerate}
+\item $E = \{\mbox{HHH,HHT,HTH,HTT}\}$. 
+\item $E = \{\mbox{HHH,TTT}\}$.
+\item $E = \{\mbox{HHT,HTH,THH}\}$. 
+\item $E =
+\{\mbox{HHT,HTH,HTT,THH,THT,TTH,TTT}\}$.
+\end{enumerate}
+
+\i\label{exer 1.2.5} Berapakah peluang kejadian yang dijelaskan dalam
+Latihan~\ref{exer 1.2.4}?
+
+\i\label{exer 1.2.6} Sebuah dadu diberi pemberat sedemikian rupa sehingga peluang
+munculnya setiap sisi
+sebanding dengan jumlah titik pada sisi tersebut.  (Sebagai contoh, angka enam
+tiga kali
+lebih mungkin daripada angka dua.)  Berapakah peluang memperoleh bilangan
+genap
+dalam satu pelemparan?
+
+\i\label{exer 1.2.7} Misalkan $A$ dan $B$ adalah kejadian sedemikian rupa sehingga $P(A \cap B) =
+1/4$, $P(\tilde A) =
+1/3$, dan $P(B) = 1/2$.  Berapakah $P(A \cup B)$?
+
+\i\label{exer 1.2.8} Seorang mahasiswa harus memilih satu dari mata kuliah seni,
+geologi, atau psikologi
+sebagai mata kuliah pilihan.  Peluang ia memilih seni sama dengan peluang memilih psikologi, sedangkan peluangnya
+memilih geologi dua kali lebih besar.  Secara berurutan, berapakah peluang ia
+memilih seni, geologi, dan psikologi?
+
+\i\label{exer 1.2.9} Seorang mahasiswa harus memilih tepat dua dari tiga mata kuliah
+pilihan: seni, bahasa Prancis,
+dan matematika.  Ia memilih seni dengan peluang 5/8, bahasa Prancis dengan
+peluang
+5/8, serta seni dan bahasa Prancis sekaligus dengan peluang 1/4.  Berapakah
+peluang
+ia memilih matematika?  Berapakah peluang ia memilih seni
+atau bahasa Prancis?
+
+\i\label{exer 1.2.10} Agar sebuah rancangan undang-undang diajukan kepada Presiden
+Amerika Serikat, rancangan itu harus
+disahkan oleh Dewan Perwakilan Rakyat dan Senat.  Asumsikan bahwa dari
+semua
+rancangan undang-undang yang diajukan kepada kedua lembaga ini, 60 persen disahkan oleh Dewan, 80
+persen
+disahkan oleh Senat, dan 90 persen disahkan oleh setidaknya salah satu dari keduanya.  Hitung
+peluang bahwa rancangan undang-undang berikutnya yang diajukan kepada kedua lembaga akan diteruskan kepada
+Presiden.
+
+\i\label{exer 1.2.11} Berapakah rasio peluang yang semestinya diberikan seseorang untuk mendukung
+kejadian berikut?
+\begin{enumerate}
+\item Sebuah kartu yang dipilih secara acak dari setumpuk 52 kartu adalah kartu as.
+\item Dua kepala akan muncul ketika sebuah koin dilempar dua kali.
+\item Boxcars (dua angka enam) akan muncul ketika dua dadu dilempar.
+\end{enumerate}
+
+\i\label{exer 1.2.12} Anda menawarkan rasio peluang $3 : 1$ bahwa teman Anda, Smith, akan
+terpilih sebagai wali kota
+di kota Anda.  Peluang berapakah yang Anda tetapkan bagi kejadian bahwa Smith
+menang?
+
+\i\label{exer 1.2.13} Dalam sebuah pacuan kuda, rasio peluang kemenangan Romance
+tercantum sebagai $2 :
+3$, sedangkan rasio kemenangan Downhill adalah $1 : 2$.  Berapakah rasio peluang yang semestinya diberikan bagi
+kejadian bahwa Romance atau Downhill menang?
+
+\i\label{exer 1.2.13.1} Misalkan $X$ adalah peubah acak dengan fungsi distribusi
+$m_X(x)$ yang didefinisikan oleh
+$$
+m_X(-1) = 1/5,\ \  m_X(0) = 1/5,\ \ m_X(1) = 2/5,\ \  m_X(2) = 1/5\ .
+$$
+\begin{enumerate}
+\item Misalkan $Y$ adalah peubah acak yang didefinisikan oleh persamaan $Y = X + 3$.  Tentukan
+fungsi distribusi $m_Y(y)$ dari $Y$.
+\item Misalkan $Z$ adalah peubah acak yang didefinisikan oleh persamaan $Z = X^2$.  Tentukan 
+fungsi distribusi $m_Z(z)$ dari $Z$.
+\end{enumerate}
+
+\istar\label{exer 1.2.14} John dan Mary mengikuti mata kuliah matematika.  Mata kuliah ini
+hanya memiliki
+tiga nilai: A, B, dan C.  Peluang John memperoleh B adalah .3.  Peluang
+Mary memperoleh B adalah .4.  Peluang bahwa keduanya tidak memperoleh A,
+tetapi setidaknya salah seorang memperoleh B, adalah .1.  Berapakah peluang setidaknya salah seorang
+memperoleh B, tetapi keduanya tidak memperoleh C?
+
+\i\label{exer 1.2.15} Dalam sebuah pertempuran sengit, tidak kurang dari 70 persen
+prajurit kehilangan satu
+mata, tidak kurang dari 75 persen kehilangan satu telinga, tidak kurang dari 80 persen kehilangan satu
+tangan, dan tidak kurang dari 85 persen kehilangan satu kaki.  Berapakah persentase minimum yang
+mungkin
+bagi mereka yang sekaligus kehilangan satu telinga, satu mata, satu tangan, dan
+satu
+kaki?\footnote{Lihat Knot X, dalam Lewis Carroll, \emx {Mathematical Recreations,}
+vol.~2 (Dover, 1958).}
+
+\istar\label{exer 1.2.16}
+Asumsikan bahwa peluang sebuah ``keberhasilan" dalam
+satu percobaan dengan $n$ hasil adalah $1/n$.  Misalkan $m$ adalah jumlah
+percobaan yang diperlukan agar taruhan bahwa setidaknya satu keberhasilan
+akan
+terjadi menjadi menguntungkan (lihat Latihan~\ref{sec 1.1}.\ref{exer 1.1.5}).
+
+\begin{enumerate}
+\item Tunjukkan bahwa peluang tidak ada keberhasilan dalam $m$ uji coba
+adalah $(1 - 1/n)^m$.
+
+\item (de Moivre)\index{de MOIVRE, A.} Tunjukkan bahwa jika $m = n \log 2$, maka
+$$
+\lim_{n \to \infty} \left(1 - \frac1n \right)^m = \frac12\ .
+$$
+\emx {Petunjuk}:
+$$
+\lim_{n \to \infty} \left(1 - \frac1n \right)^n = e^{-1}\ .
+$$
+Jadi, untuk $n$ besar, kita sebaiknya memilih $m$ kira-kira sebesar $n \log 2$.
+
+\item Apakah DeMoivre akan sampai pada jawaban yang benar bagi dua taruhan de~M\'er\'e
+\index{de M\'ER\'E, CHEVALIER}
+jika ia menggunakan pendekatannya?
+\end{enumerate}
+
+\i\label{exer 1.2.17}
+\begin{enumerate}
+\item Untuk kejadian $A_1$, \dots, $A_n$, buktikan bahwa 
+$$P(A_1 \cup \cdots \cup A_n) \leq P(A_1) + \cdots + P(A_n)\ .$$
+\item Untuk kejadian $A$ dan $B$, buktikan bahwa
+$$
+P(A \cap B) \geq P(A) + P(B) - 1.
+$$
+\end{enumerate}
+
+\i\label{exer 1.2.18}
+Jika $A$, $B$, dan~$C$ adalah sebarang tiga kejadian, tunjukkan bahwa
+$$\begin{array}{ll}
+P(A \cup B \cup C) &= P(A) + P(B) + P(C) \\
+                   &\ \  -\, P(A \cap B) - P(B \cap C) - P(C \cap A) \\
+                   &\ \  +\, P(A \cap B \cap C)\ .
+\end{array}
+$$
+
+\i\label{exer 1.2.19} Jelaskan mengapa kita tidak mungkin mendefinisikan
+fungsi distribusi seragam (lihat Definisi~\ref{def 1.3}) 
+pada ruang sampel takhingga terhitung.  \emx {Petunjuk}: Asumsikan $m(\omega) = a$
+untuk semua
+$\omega$, dengan $0 \leq a \leq 1$.  Apakah $m(\omega)$ memiliki semua sifat
+fungsi
+distribusi?
+
+\i\label{exer 1.2.20} Dalam Contoh~\ref{exam 1.10}, tentukan peluang bahwa
+koin
+menunjukkan kepala untuk pertama kalinya pada pelemparan kesepuluh, kesebelas, atau kedua belas.
+
+\i\label{exer 1.2.21} Sebuah dadu dilempar sampai angka enam muncul untuk
+pertama kalinya.  Kita akan
+melihat bahwa peluang hal ini terjadi pada pelemparan ke-$n$ adalah
+$(5/6)^{n-1}\cdot(1/6)$.  Dengan menggunakan fakta ini, jelaskan ruang sampel takhingga
+dan fungsi distribusi yang sesuai bagi percobaan melempar dadu sampai angka enam
+muncul
+untuk pertama kalinya.  Verifikasikan bahwa untuk fungsi distribusi Anda, $\sum_{\omega} m(\omega)
+=
+1$.
+
+\i\label{exer 1.2.22} 
+Misalkan $\Omega$ adalah ruang sampel
+$$
+\Omega = \{0,1,2,\dots\}\ ,
+$$
+dan definisikan fungsi distribusi dengan
+$$
+m(j) = (1 - r)^j r\ ,
+$$
+untuk suatu $r$ tetap, $0 < r < 1$, dan untuk $j = 0, 1, 2, \ldots$.
+Tunjukkan bahwa ini merupakan fungsi distribusi bagi $\Omega$.
+
+\i\label{exer 1.2.23} Kalender kita\index{kalender} memiliki siklus 400 tahun.  
+B.~H.~Brown\index{BROWN, B. H.}
+memperhatikan bahwa
+jumlah kemunculan tanggal tiga belas pada setiap hari dalam
+sepekan selama
+4800 bulan dalam satu siklus adalah sebagai berikut:
+
+\par Minggu 687
+\par Senin 685
+\par Selasa 685
+\par Rabu 687
+\par Kamis 684
+\par Jumat 688
+\par Sabtu 684
+
+\noindent Dari sini ia menyimpulkan bahwa tanggal tiga belas lebih mungkin jatuh pada
+hari Jumat daripada hari lainnya.  Jelaskan maksud pernyataan tersebut.
+
+\i\label{exer 1.2.24} Tversky dan Kahneman\footnote{K.~McKean, ``Decisions,
+Decisions," pp.~22--31.} meminta sekelompok subjek mengerjakan sebuah tugas yang kini dikenal
+sebagai \emx{masalah Linda}.\index{masalah Linda} Profil tokoh fiktif berusia 31 tahun dalam
+tugas itu dirancang agar aktivitas dalam gerakan feminis terasa sangat representatif. Alih-alih
+mereproduksi profil tersebut, nyatakan
+$F=$ kejadian bahwa tokoh itu aktif dalam gerakan feminis dan $B=$ kejadian bahwa ia adalah teller bank.
+Para subjek diminta mengurutkan kemungkinan:
+\hfill\break
+\indent(1)~$F$.\hfill\break
+\indent(2)~$B$.\hfill\break
+\indent(3)~$B\cap F$.\hfill\break
+
+\noindent Tversky\index{TVERSKY, A.} dan Kahneman\index{KAHNEMAN, D.} menemukan bahwa 
+antara 85 dan 90 persen subjek menilai
+alternatif (1) sebagai yang paling mungkin, tetapi menilai alternatif (3) lebih mungkin daripada alternatif
+(2).  Benarkah demikian?  Mereka menyebut fenomena ini \emx {kekeliruan konjungsi},\index{kekeliruan
+konjungsi}\index{kekeliruan} dan
+mencatat bahwa fenomena ini tampaknya tidak dipengaruhi oleh pelatihan sebelumnya dalam peluang atau
+statistika.  Apakah fenomena ini merupakan kekeliruan?  Jika ya, mengapa? Dapatkah Anda memberikan
+penjelasan yang mungkin bagi pilihan para subjek?
+
+\i\label{exer 1.2.25} Dua kartu diambil secara berurutan dari setumpuk 52
+kartu.  Tentukan
+peluang bahwa peringkat kartu kedua lebih tinggi daripada kartu pertama.  \emx
+{Petunjuk}: Tunjukkan bahwa $1 = P(\mbox{lebih tinggi}) + P(\mbox{lebih rendah}) + P(\mbox{sama})$
+dan gunakan fakta bahwa $P(\mbox{lebih tinggi}) = P(\mbox{lebih rendah})$.
+
+\i\label{exer 1.2.26} \emx {Tabel hayat}\index{tabel hayat} adalah tabel yang, untuk suatu
+jumlah kelahiran tertentu, mencantumkan perkiraan jumlah orang yang akan hidup sampai
+usia tertentu.  Dalam Lampiran~C, kami memberikan tabel hayat berdasarkan 100{,}000
+kelahiran untuk usia 0 sampai 85, baik bagi perempuan maupun laki-laki.  Tunjukkan bagaimana 
+tabel ini dapat digunakan untuk memperkirakan peluang $m(x)$ bahwa seseorang yang lahir pada 1981 
+akan hidup sampai usia $x$.  Tulis program untuk menggambarkan $m(x)$ bagi laki-laki dan perempuan, 
+lalu komentari perbedaan yang Anda lihat antara kedua kasus.
+
+\istar\label{exer 1.2.27} Berikut adalah upaya untuk mengatasi kenyataan bahwa kita
+tidak dapat 
+memilih suatu ``bilangan bulat acak."\index{bilangan bulat acak}
+\begin{enumerate}
+\item Secara intuitif, berapakah peluang bahwa bilangan bulat positif yang
+``dipilih secara acak" merupakan kelipatan 3?
+
+\item Misalkan $P_3(N)$ adalah peluang bahwa suatu bilangan bulat yang dipilih secara acak
+antara 1 dan $N$ merupakan kelipatan 3 (karena ruang sampelnya terhingga, ini
+merupakan peluang yang sah).  Tunjukkan bahwa limit
+$$
+P_3 = \lim_{N \to \infty} P_3(N)
+$$
+ada dan sama dengan 1/3.  Hal ini memformalkan intuisi pada
+(a), dan memberi kita cara untuk menetapkan ``peluang" pada
+kejadian tertentu yang merupakan himpunan bagian takhingga dari bilangan bulat positif.
+
+\item Jika $A$ adalah sebarang himpunan bilangan bulat positif, misalkan $A(N)$ menyatakan jumlah
+elemen $A$ yang kurang dari atau sama dengan $N$.  Kemudian definisikan
+``peluang" $A$ sebagai 
+$$
+P(A) = \lim_{N \to \infty} A(N)/N\ ,
+$$
+asalkan limit ini ada.  Tunjukkan bahwa definisi ini akan menetapkan
+peluang 0 pada setiap himpunan terhingga dan peluang 1 pada himpunan semua bilangan bulat positif. 
+Jadi, peluang himpunan semua bilangan bulat bukanlah jumlah dari
+peluang setiap bilangan bulat dalam himpunan tersebut.  Ini berarti bahwa
+definisi peluang yang diberikan di sini belum sepenuhnya
+memuaskan.
+
+\item Misalkan $A$ adalah himpunan semua bilangan bulat positif dengan jumlah digit ganjil.
+Tunjukkan bahwa $P(A)$ tidak ada.  Hal ini menunjukkan bahwa menurut definisi
+peluang di atas, tidak semua himpunan memiliki peluang.
+
+\end{enumerate}
+
+
+\i\label{exer 1.2.28}
+(dari Sholander\footnote{M. Sholander, Problem \#1034, \emx {Mathematics Magazine,} vol.~52,
+no.\ 3 (May 1979), p.~183.})\index{SHOLANDER, M.}\index{simpang susun semanggi} Dalam sebuah
+simpang susun semanggi baku, terdapat empat jalur landai untuk berbelok ke kanan, dan di sebelah dalam
+keempat jalur tersebut terdapat empat jalur landai lain untuk berbelok ke kiri.  Mobil Anda mendekati
+simpang susun dari arah selatan.  Sebuah mekanisme dipasang sehingga pada setiap titik yang
+menawarkan pilihan arah, mobil berbelok ke kanan dengan peluang tetap~$r$. 
+\begin{enumerate}
+\item
+Jika $r = 1/2$, berapakah peluang Anda keluar dari simpang susun menuju barat?
+\item
+Tentukan nilai $r$ yang memaksimumkan peluang Anda keluar dari simpang susun menuju barat.
+\end{enumerate}
+
+\i\label{exer 1.2.29}
+(dari Benkoski\footnote{S. Benkoski, Comment on Problem \#1034, \emx {Mathematics Magazine,}
+vol.~52, no.\ 3 (May 1979), pp.~183-184.})\index{BENKOSKI, S.} Pertimbangkan simpang susun
+semanggi ``murni" yang tidak memiliki jalur landai untuk berbelok ke kanan, melainkan hanya dua
+jalan raya lurus yang berpotongan dengan jalur semanggi untuk berbelok ke kiri.  (Jadi, untuk berbelok ke kanan di
+simpang susun semacam ini, seseorang harus berbelok ke kiri tiga kali.)  Seperti dalam masalah sebelumnya, mobil Anda
+mendekati simpang susun dari arah selatan.  Berapakah nilai $r$ yang memaksimumkan
+peluang Anda keluar dari simpang susun menuju timur?
+
+\i\label{exer 1.2.30}
+(berdasarkan pertanyaan yang dibahas vos~Savant\footnote{M.~vos~Savant,
+\emx{Parade Magazine}, 3 March 1996, p. 14.}\index{vos SAVANT, M.}) Dalam ujian
+susulan, dua mahasiswa terlebih dahulu menjawab pertanyaan 5 poin, kemudian ditempatkan
+terpisah untuk menjawab pertanyaan 95 poin yang meminta mereka menyebut salah satu dari empat
+posisi ban mobil. Jika keduanya memilih posisi secara acak dan independen, berapakah peluang
+bahwa jawaban mereka sama? Ringkasan mandiri ini mempertahankan persoalan peluangnya tanpa
+menerjemahkan atau mereproduksi cerita surat pembaca.
+
+
+\begin{enumerate}
+\item
+Apakah jawabannya 1/16?
+\item
+Pertanyaan berikut diajukan kepada satu kelas mahasiswa.  ``Hari ini saya berkendara ke
+kampus dan salah satu ban saya kempis.  Menurut Anda, ban yang mana?"
+Jawabannya adalah sebagai berikut: kanan depan, 58\%, kiri depan, 11\%, kanan belakang, 
+18\%, kiri belakang, 13\%.  Misalkan distribusi ini berlaku pada populasi umum,
+dan asumsikan bahwa kedua peserta ujian dipilih secara acak dari populasi umum.  Berapakah
+peluang mereka memberikan jawaban yang sama untuk pertanyaan kedua?
+\end{enumerate}
+
+
+\end{LJSItem}

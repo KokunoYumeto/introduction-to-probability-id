@@ -1,0 +1,1665 @@
+%This chapter was modified on 6-4-05.
+%\newcommand{\NA}{{\rm NA}}
+%\setcounter{chapter}{8}
+\chapter {Teorema Limit Pusat}\label{chp 9} 
+\section[Percobaan Bernoulli]{Teorema Limit Pusat untuk Percobaan Bernoulli}\label{sec 9.1}
+Teorema dasar kedua dalam probabilitas adalah \emx {Teorema Limit
+Pusat.}\index{Teorema Limit Pusat}  Teorema ini menyatakan bahwa jika $S_n$ merupakan jumlah $n$
+peubah acak yang saling bebas, maka fungsi distribusi $S_n$ dapat
+diaproksimasi dengan baik oleh jenis fungsi kontinu tertentu yang dikenal sebagai fungsi densitas
+normal, yang diberikan oleh rumus
+$$f_{\mu,\sigma}(x) = \frac{1}{\sqrt {2\pi}\sigma}e^{-(x-\mu)^2/(2\sigma^2)}\ ,$$
+seperti telah kita lihat dalam Bab~\ref{chp 5}.  Dalam bagian ini, kita hanya akan membahas kasus 
+ketika $\mu = 0$ dan $\sigma = 1$.  Fungsi densitas normal khusus ini akan kita sebut densitas normal 
+{\emx baku}, dan kita lambangkan dengan $\phi(x)$:
+$$\phi(x) = \frac {1}{\sqrt{2\pi}}e^{-x^2/2}\ .$$
+Grafik fungsi ini diberikan dalam Gambar~\ref{fig 9.0}.  Dapat ditunjukkan bahwa luas
+di bawah setiap densitas normal sama dengan 1.
+\putfig{3truein}{PSfig9-0}
+{Densitas normal baku.}{fig 9.0} 
+\par
+Secara cukup umum, Teorema Limit Pusat menjelaskan apa yang
+terjadi ketika kita menjumlahkan sejumlah besar peubah acak yang saling bebas,
+yang masing-masing hanya menyumbang sedikit terhadap jumlah keseluruhan.  Dalam bagian ini kita
+akan membahas penerapan teorema ini pada percobaan Bernoulli, sedangkan dalam
+Bagian~\ref{sec 9.3} kita akan mempertimbangkan proses yang lebih umum.  Kita akan membahas
+teorema ini untuk kasus ketika setiap peubah acak berdistribusi identik,
+tetapi, dengan syarat tertentu, teorema ini tetap berlaku meskipun setiap
+peubah acak memiliki distribusi yang berbeda.
+
+
+\subsection*{Percobaan Bernoulli}
+Perhatikan suatu proses percobaan Bernoulli dengan peluang keberhasilan~$p$ pada setiap
+percobaan.  Tetapkan $X_i = 1$ atau~0 menurut apakah hasil ke-$i$ merupakan keberhasilan atau
+kegagalan, dan tetapkan $S_n = X_1 + X_2 +\cdots+ X_n$.  Maka $S_n$ adalah banyaknya
+keberhasilan dalam $n$ percobaan.  Kita tahu bahwa distribusi $S_n$ diberikan oleh peluang binomial
+$b(n,p,j)$.  Dalam Bagian~\ref{sec 3.2}, kita telah menggambarkan
+distribusi ini untuk $p = .3$ dan $p = .5$ pada berbagai nilai~$n$ (lihat Gambar~\ref{fig 3.8}).
+\par
+Kita melihat bahwa nilai maksimum distribusi muncul di dekat nilai harapan
+$np$, sehingga grafik pakunya bergeser ke kanan ketika
+$n$ bertambah.  Selain itu, nilai maksimum ini mendekati 0 ketika $n$ bertambah,
+sehingga grafik paku tersebut semakin mendatar.
+
+\subsection*{Jumlah Terstandardisasi}
+Kita dapat mencegah pergeseran grafik paku ini dengan mengurangkan banyaknya
+keberhasilan yang diharapkan, $np$, dari~$S_n$, sehingga diperoleh peubah acak baru $S_n -
+np$.  Sekarang nilai maksimum distribusi akan selalu berada di dekat 0.
+\par
+Untuk mencegah grafik paku ini melebar, kita dapat menormalkan $S_n - np$ agar
+memiliki varians~1 dengan membaginya dengan simpangan baku $\sqrt{npq}$ (lihat
+Latihan~\ref{sec 6.2}.\ref{exer 6.2.13}~dan~Latihan~\ref{sec 6.2}.\ref{exer 6.2.17}).
+
+\begin{definition}
+\emx {Jumlah terstandardisasi}\index{jumlah terstandardisasi} dari $S_n$ diberikan oleh
+\[
+S_n^* = \frac {S_n - np}{\sqrt{npq}}\ .
+\]
+$S_n^*$ selalu memiliki nilai harapan~0 dan varians~1.
+\end{definition}
+
+Misalkan kita menggambar grafik paku dengan paku-paku yang ditempatkan pada nilai-nilai yang mungkin
+dari~$S_n^*$: $x_0$,~$x_1$, \dots,~$x_n$, dengan
+
+\begin{equation}
+x_j = \frac {j - np}{\sqrt{npq}}\ .
+\label{eq 9.1}
+\end{equation}                                                        
+Kita menetapkan tinggi paku pada $x_j$ sama dengan nilai distribusi $b(n, p, j)$.  Contoh
+grafik paku terstandardisasi ini, dengan $n = 270$ dan $p = .3$, ditunjukkan dalam Gambar~\ref{fig 9.1}.
+Grafik ini berbentuk lonceng yang sangat indah.  Kita ingin mencocokkan suatu densitas normal dengan
+grafik paku ini.  Pilihan yang paling jelas ialah densitas normal baku karena pusatnya berada di
+0, sama seperti grafik paku terstandardisasi tersebut.  Dalam gambar ini, kita telah menggambar densitas normal
+baku itu.  Pembaca akan melihat bahwa sesuatu yang tidak menyenangkan telah terjadi: meskipun bentuk
+kedua grafik sama, tingginya sangat berbeda.
+
+\putfig{4truein}{PSfig9-1}
+{Distribusi binomial ternormalisasi dan densitas normal baku.}{fig 9.1} 
+
+\par
+Jika kita ingin kedua grafik itu saling berimpit, salah satunya harus diubah; kita memilih mengubah
+grafik paku.   Karena bentuk kedua grafik tampak cukup serupa, kita akan mencoba mengubah
+grafik paku tanpa mengubah bentuknya.  Perbedaan tinggi terjadi karena jumlah
+tinggi semua paku sama dengan 1, sedangkan luas di bawah densitas normal baku sama dengan 1. 
+Jika kita menggambar kurva kontinu melalui puncak paku-paku tersebut dan mencari luas di bawah
+kurva ini, kira-kira kita akan memperoleh jumlah tinggi paku dikalikan
+dengan jarak antara dua paku berurutan, yang akan kita sebut $\epsilon$.  Karena jumlah
+tinggi paku sama dengan satu, luas di bawah kurva ini kira-kira $\epsilon$. 
+Jadi, untuk mengubah grafik paku agar luas di bawah kurva ini bernilai 1, kita hanya perlu
+mengalikan tinggi paku dengan $1/\epsilon$.  Dari Persamaan~\ref{eq 9.1}, mudah dilihat
+bahwa 
+$$\epsilon = \frac {1}{\sqrt {npq}}\ .$$ 
+\putfig{4truein}{PSfig9-2}
+{Grafik paku yang dikoreksi bersama densitas normal baku.}{fig 9.2} 
+Dalam Gambar~\ref{fig 9.2} kita menampilkan jumlah terstandardisasi $S^*_n$ untuk $n = 270$ dan $p = .3$, 
+setelah tingginya dikoreksi, bersama densitas normal baku.  (Gambar ini
+dihasilkan dengan program {\bf CLTBernoulliPlot}.)\index{CLTBernoulliPlot (program)}  Pembaca
+akan melihat bahwa densitas normal baku sangat cocok dengan grafik paku yang tingginya telah dikoreksi. 
+Sesungguhnya, salah satu versi Teorema Limit Pusat (lihat Teorema~\ref{thm 9.1.1}) menyatakan bahwa ketika $n$
+bertambah, densitas normal baku akan semakin baik dalam mengaproksimasi
+grafik paku dengan tinggi terkoreksi yang bersesuaian dengan proses percobaan Bernoulli dengan $n$ suku. 
+\par
+Tetapkan suatu nilai~$x$ pada sumbu-$x$ dan suatu bilangan bulat positif tetap $n$.  Dengan menggunakan
+Persamaan~\ref{eq 9.1}, titik $x_j$ yang paling dekat dengan $x$ memiliki subskrip $j$ yang diberikan oleh
+rumus
+$$
+j = \langle np + x \sqrt{npq} \rangle\ ,
+$$
+dengan $\langle a \rangle$ menyatakan bilangan bulat yang paling dekat dengan~$a$.  
+Dengan demikian, tinggi
+paku di atas $x_j$ adalah
+$$
+\sqrt{npq}\,b(n,p,j) = \sqrt{npq}\,b(n,p,\langle np + x_j \sqrt{npq}
+\rangle)\ .
+$$
+Untuk $n$ yang besar, kita telah melihat bahwa tinggi paku sangat dekat dengan tinggi
+densitas normal pada $x$.  Hal ini mengisyaratkan teorema berikut.
+
+\begin{theorem}{\bf (Teorema Limit Pusat untuk Distribusi Binomial)}\label{thm
+9.1.1}\index{Teorema Limit Pusat!untuk Distribusi Binomial}
+Untuk distribusi binomial $b(n,p,j)$ kita memiliki
+$$
+\lim_{n \to \infty} \sqrt{npq}\,b(n,p,\langle np + x\sqrt{npq} \rangle) = \phi(x)\ ,
+$$
+dengan $\phi(x)$ adalah densitas normal baku.
+\par
+Bukti teorema ini dapat diperoleh dengan menggunakan aproksimasi Stirling dari
+Bagian~\ref{sec 3.1}.  Kita mengilustrasikan metode pembuktian ini dengan mempertimbangkan
+kasus $x = 0$.  Dalam kasus ini, teorema tersebut menyatakan bahwa
+$$
+\lim_{n \to \infty} \sqrt{npq}\,b(n,p,\langle np \rangle) = \frac 1{\sqrt{2\pi}}
+= .3989\ldots\ .
+$$
+Untuk menyederhanakan perhitungan, kita asumsikan bahwa $np$ merupakan bilangan bulat, sehingga
+$\langle np \rangle = np$.  Maka
+$$
+\sqrt{npq}\,b(n,p,np) = \sqrt{npq}\,p^{np}q^{nq} \frac {n!}{(np)!\,(nq)!}\ .
+$$
+Ingat bahwa rumus Stirling (lihat Teorema~\ref{thm 3.3}) menyatakan bahwa
+$$
+n! \sim \sqrt{2\pi n}\,n^n e^{-n} \qquad \mbox {ketika \,\,\,} n \to \infty\ .
+$$
+Dengan menggunakan hasil ini, kita memperoleh
+$$
+\sqrt{npq}\,b(n,p,np) \sim \frac {\sqrt{npq}\,p^{np}q^{nq} \sqrt{2\pi n}\,n^n
+e^{-n}}{\sqrt{2\pi np} \sqrt{2\pi nq}\,(np)^{np} (nq)^{nq} e^{-np} e^{-nq}}\ ,
+$$
+yang menyederhana menjadi $1/\sqrt{2\pi}$.
+\end{theorem}
+\subsection*{Mengaproksimasi Distribusi Binomial}\index{distribusi binomial!aproksimasi}
+Kita dapat menggunakan Teorema~\ref{thm 9.1.1} untuk mencari aproksimasi nilai fungsi
+distribusi binomial.  Jika kita ingin mencari aproksimasi untuk $b(n, p, j)$, kita tetapkan
+$$j = np + x\sqrt{npq}$$
+dan menyelesaikannya untuk $x$, sehingga diperoleh
+$$x = {{j-np}\over{\sqrt{npq}}}\ .$$
+Teorema~\ref{thm 9.1.1} kemudian menyatakan bahwa 
+$$\sqrt{npq}\,b(n,p,j)$$
+kira-kira sama dengan $\phi(x)$, sehingga
+\begin{eqnarray*}
+b(n,p,j) &\approx& {{\phi(x)}\over{\sqrt{npq}}}\\
+&=& {1\over{\sqrt{npq}}} \phi\biggl({{j-np}\over{\sqrt{npq}}}\biggr)\ .\\
+\end{eqnarray*}
+
+
+\begin{example}\label{exam 9.1}
+Mari kita perkirakan peluang muncul tepat 55 sisi kepala dalam 100 lemparan koin. 
+Untuk kasus ini $np = 100 \cdot 1/2 = 50$ dan $\sqrt{npq} = \sqrt{100 \cdot 1/2
+\cdot 1/2} = 5$.  Jadi, $x_{55} = (55 - 50)/5 = 1$ dan
+
+\begin{eqnarray*}
+P(S_{100} = 55) \sim \frac {\phi(1)}5 &=& \frac 15 \left( \frac 1{\sqrt{2\pi}}e^{-1/2} \right) \\
+                                   &=& .0484\ . \\
+\end{eqnarray*}
+
+Hingga empat tempat desimal, nilai sebenarnya adalah .0485, sehingga
+aproksimasi tersebut sangat baik.
+\end{example}
+
+Program {\bf CLTBernoulliLocal}\index{CLTBernoulliLocal (program)} mengilustrasikan
+aproksimasi ini untuk setiap pilihan $n$,~$p$, dan~$j$.  Kita telah menjalankan program ini untuk dua
+contoh.  Yang pertama adalah peluang muncul tepat 50~sisi kepala dalam 100~lemparan koin;
+perkiraannya .0798, sedangkan nilai sebenarnya hingga empat tempat desimal ialah .0796.  Contoh
+kedua adalah peluang muncul mata dadu enam tepat delapan kali dalam 36~lemparan dadu; di sini perkiraannya
+.1093, sedangkan nilai sebenarnya hingga empat tempat desimal ialah .1196.
+\par
+Setiap peluang binomial menuju~0 ketika $n$ menuju tak hingga.  Dalam
+kebanyakan penerapan, kita tidak tertarik pada peluang terjadinya suatu hasil
+tertentu, melainkan pada peluang bahwa hasil tersebut berada dalam suatu
+interval, misalnya interval $[a, b]$.  Untuk mencari peluang ini, kita menjumlahkan
+tinggi grafik paku untuk nilai~$j$ antara $a$~dan~$b$.  Ini sama dengan
+menanyakan peluang bahwa jumlah terstandardisasi $S_n^*$ berada antara $a^*$ dan 
+$b^*$, dengan $a^*$ dan $b^*$ adalah nilai terstandardisasi dari $a$ dan $b$.  Namun, ketika $n$
+menuju tak hingga, jumlah luas ini dapat diharapkan mendekati luas
+di bawah densitas normal baku antara $a^*$~dan~$b^*$.  \emx {Teorema Limit Pusat}
+menyatakan bahwa hal ini memang terjadi.
+
+\begin{theorem}{\bf (Teorema Limit Pusat untuk Percobaan Bernoulli)}\index{Teorema Limit
+Pusat!untuk Percobaan Bernoulli} 
+Misalkan $S_n$ banyaknya keberhasilan dalam $n$ percobaan Bernoulli dengan peluang keberhasilan $p$, dan misalkan
+$a$ dan $b$ dua bilangan real tetap.  Maka
+$$\lim_{n \rightarrow \infty} P\biggl(a \le \frac{S_n - np}{\sqrt{npq}} \le b\biggr) = \int_a^b \phi(x)\,dx\ .$$
+\end{theorem}
+
+Teorema ini dapat dibuktikan dengan menjumlahkan aproksimasi terhadap $b(n,p,k)$ yang diberikan dalam 
+Teorema~\ref{thm 9.1.1}.\choice{\footnote{Teorema ini juga merupakan kasus khusus dari Teorema Limit Pusat yang lebih
+umum. Lihat Bagian 10.3 dalam buku Grinstead--Snell lengkap.}}{Teorema ini juga merupakan kasus khusus dari Teorema Limit Pusat yang lebih
+umum (lihat Bagian~\ref{sec 10.3}).}
+\par
+Kita tahu dari kalkulus bahwa integral di ruas kanan persamaan ini
+sama dengan luas di bawah grafik densitas normal baku $\phi(x)$ antara
+$a$~dan~$b$.  Luas ini kita lambangkan dengan $\NA(a^*, b^*)$.  Sayangnya, tidak ada cara sederhana untuk
+mengintegralkan fungsi
+$e^{-x^2/2}$, sehingga kita harus menggunakan tabel nilai atau program
+integrasi numerik.  (Lihat Gambar~\ref{tabl 9.1} untuk nilai $\NA(0, z)$.  Tabel yang lebih lengkap 
+diberikan dalam Lampiran~A.)
+\putfig{4.5truein}{PSfig9-2-5}
+{Tabel nilai $\NA(0,z)$, yaitu luas normal dari 0~hingga~$z$.}{tabl 9.1}
+\par
+Dari simetri densitas normal baku, jelas bahwa luas seperti luas
+antara $-2$~dan~3 dapat dicari dari tabel ini dengan menjumlahkan luas dari 0~hingga~2
+(sama dengan luas dari $-2$~hingga~0) dan luas dari 0~hingga~3.
+\par
+
+\subsection*{Aproksimasi Peluang Binomial}
+
+Misalkan $S_n$ berdistribusi binomial dengan parameter $n$ dan $p$.  Kita telah melihat bahwa
+teorema di atas menunjukkan cara memperkirakan peluang berbentuk 
+\begin{equation}
+P(i \le S_n \le j)\ ,
+\label{eq 9.2}
+\end{equation}
+dengan $i$ dan $j$ bilangan bulat antara 0 dan $n$.  Seperti telah kita lihat, distribusi binomial dapat
+direpresentasikan sebagai grafik paku, dengan paku pada bilangan bulat antara 0 dan $n$, serta
+tinggi paku ke-$k$ diberikan oleh $b(n, p, k)$.  Untuk nilai $n$ berukuran sedang, jika kita
+menstandardisasi grafik paku ini dan mengubah tinggi paku-pakunya dengan cara yang
+dijelaskan di atas, jumlah tinggi paku diaproksimasi oleh luas di bawah
+densitas normal baku antara $i^*$ dan $j^*$.  Ternyata, aproksimasi yang sedikit lebih akurat
+diberikan oleh luas di bawah densitas normal baku antara nilai-nilai terstandardisasi
+yang bersesuaian dengan $(i - 1/2)$ dan $(j + 1/2)$; nilai-nilai ini adalah
+$$i^* = \frac{i - 1/2 - np}{\sqrt {npq}}$$
+dan
+$$j^* = \frac{j + 1/2 - np}{\sqrt {npq}}\ .$$
+Dengan demikian,
+$$P(i \le S_n \le j) \approx \NA\Biggl({{i - {1\over 2} - np}\over{\sqrt {npq}}} ,
+{{j + {1\over 2} - np}\over{\sqrt {npq}}}\Biggr)\ .$$
+Perlu ditekankan bahwa hasil yang diperoleh dengan menggunakan Teorema Limit Pusat hanyalah
+aproksimasi dan terkadang tidak terlalu dekat dengan nilai sebenarnya (lihat Latihan~\ref{exer 9.2.111}). 
+\par
+Sekarang kita ilustrasikan gagasan ini dengan beberapa contoh.
+
+\begin{example}\label{exam 9.2}
+Sebuah koin dilempar 100 kali.  Perkirakan peluang bahwa banyaknya kemunculan sisi kepala
+berada antara 40~dan~60 (dalam matematika, kata ``antara" mencakup kedua titik ujung).  Banyaknya
+kemunculan sisi kepala yang diharapkan adalah
+$100
+\cdot 1/2 = 50$, dan simpangan baku banyaknya kemunculan sisi kepala adalah $\sqrt{100 \cdot 1/2
+\cdot 1/2} = 5$.  Jadi, karena $n = 100$ cukup besar, kita memperoleh
+\begin{eqnarray*}
+P(40 \le S_n \le 60) &\approx& 
+P\left( \frac {39.5 - 50}5 \le S_n^* \le \frac {60.5 - 50}5 \right) \\
+                     &=& P(-2.1 \le S_n^* \le 2.1) \\
+                     &\approx& \NA(-2.1,2.1) \\ 
+                     &=& 2\NA(0,2.1) \\
+                     &\approx& .9642\ .  
+\end{eqnarray*}
+Nilai sebenarnya hingga lima tempat desimal adalah .96480.
+\par
+Perhatikan bahwa dalam kasus ini kita menanyakan peluang bahwa hasilnya
+tidak menyimpang lebih dari dua simpangan baku dari nilai harapan.  Seandainya
+kita menanyakan peluang bahwa banyaknya keberhasilan berada antara 35~dan~65,
+rentang ini akan mewakili tiga simpangan baku dari rata-rata dan, dengan menggunakan koreksi 1/2,
+perkiraan kita adalah luas di bawah kurva normal baku antara $-3.1$~dan~3.1, 
+atau $2\NA(0,3.1) = .9980$.  Jawaban sebenarnya dalam kasus ini, hingga lima tempat, adalah .99821.  
+\end{example}
+
+
+Penting untuk mengerjakan beberapa soal secara manual agar memahami pengubahan
+dari suatu pertidaksamaan ke pertidaksamaan yang berkaitan dengan peubah
+terstandardisasi.  Setelah itu, kita dapat menggunakan program komputer yang melakukan
+pengubahan ini, termasuk koreksi 1/2.  Program {\bf
+CLTBernoulliGlobal}\index{CLTBernoulliGlobal} merupakan program semacam itu untuk memperkirakan peluang
+berbentuk
+$P(a \leq S_n \leq b)$.
+
+\begin{example}\label{exam 9.3}
+Dartmouth College ingin memiliki 1050 mahasiswa tahun pertama.  Perguruan tinggi ini tidak dapat
+menampung lebih dari 1060.  Asumsikan bahwa setiap pelamar menerima tawaran dengan
+peluang~.6 dan penerimaan tawaran dapat dimodelkan dengan percobaan Bernoulli. 
+Jika perguruan tinggi tersebut menawarkan tempat kepada 1700 pelamar, berapa peluang bahwa terlalu
+banyak dari mereka akan menerima tawaran tersebut?
+\par
+Jika menawarkan tempat kepada 1700 pelamar, banyaknya mahasiswa yang diharapkan mendaftar ulang adalah
+$.6 \cdot 1700 = 1020$.  Simpangan baku banyaknya pelamar yang menerima tawaran adalah
+$\sqrt{1700 \cdot .6 \cdot .4} \approx 20$.  Jadi, kita ingin memperkirakan
+peluang
+\begin{eqnarray*}
+P(S_{1700} > 1060) &=& P(S_{1700} \ge 1061) \\
+&=& P\left( S_{1700}^* \ge \frac {1060.5 - 1020}{20} \right) \\
+                   &=& P(S_{1700}^* \ge 2.025)\ .
+\end{eqnarray*}
+
+Dari Tabel~\ref{tabl 9.1}, jika kita melakukan interpolasi, peluang ini diperkirakan
+sebesar $.5 - .4784 = .0216$.  Jadi, perguruan tinggi tersebut cukup aman menggunakan
+kebijakan penerimaan ini.
+\end{example}
+
+
+\subsection*{Penerapan pada Statistika}\index{statistika!penerapan Teorema Limit
+Pusat}
+Ada banyak pertanyaan penting dalam bidang statistika yang dapat dijawab dengan menggunakan
+Teorema Limit Pusat untuk proses percobaan yang saling bebas.  Contoh berikut cukup
+sering dijumpai dalam berita.  Contoh lain penerapan Teorema
+Limit Pusat pada statistika diberikan dalam Bagian~\ref{sec 9.3}.
+
+\begin{example}\label{exam 9.4.1}
+Kita sering membaca bahwa suatu jajak pendapat\index{jajak pendapat} dilakukan untuk memperkirakan proporsi orang
+dalam populasi tertentu yang lebih menyukai satu calon daripada calon lain dalam pemilihan dengan dua calon. 
+(Model ini juga berlaku pada pemilihan dengan lebih dari dua calon ketika kita membandingkan calon $A$ dan $B$, serta pada dua pilihan
+dalam suatu pemungutan suara.)  Tentu saja, penyelenggara jajak pendapat tidak mungkin menanyakan pilihan setiap orang. 
+Sebagai gantinya, dipilih suatu subhimpunan populasi yang disebut sampel\index{sampel}, lalu
+setiap orang dalam sampel ditanya tentang pilihannya.  Misalkan $p$ proporsi sebenarnya dari orang dalam
+populasi yang mendukung calon $A$, dan misalkan $q = 1-p$.  Jika kita memilih sampel berukuran $n$
+dari populasi, pilihan orang-orang dalam sampel dapat direpresentasikan oleh peubah acak
+$X_1,\ X_2,\ \ldots,\ X_n$, dengan $X_i = 1$ jika orang ke-$i$ mendukung calon $A$,
+dan $X_i = 0$ jika orang ke-$i$ mendukung calon $B$.  Misalkan $S_n = X_1 + X_2 + \cdots + X_n$. 
+Jika setiap subhimpunan berukuran $n$ dipilih dengan peluang yang sama, maka $S_n$ berdistribusi
+hipergeometrik.  Jika $n$ kecil dibandingkan ukuran populasi (seperti yang biasanya terjadi dalam
+praktik), maka $S_n$ kira-kira berdistribusi binomial dengan parameter $n$ dan $p$.
+\par
+Penyelenggara jajak pendapat ingin memperkirakan nilai $p$.  Perkiraan untuk $p$ diberikan oleh nilai
+$\bar p = S_n/n$, yaitu proporsi orang dalam sampel yang mendukung calon $B$.
+Teorema Limit Pusat menyatakan bahwa peubah acak $\bar p$ kira-kira berdistribusi
+normal.  (Sesungguhnya, versi Teorema Limit Pusat kita menyatakan bahwa fungsi
+distribusi peubah acak
+$$S_n^* = \frac{S_n - np}{\sqrt{npq}}$$
+diaproksimasi oleh densitas normal baku.)  Namun, kita memiliki
+$$\bar p = \frac{S_n - np}{\sqrt {npq}}\sqrt{\frac{pq}{n}}+p\ ,$$
+yaitu, $\bar p$ hanyalah fungsi linear dari $S_n^*$.  Karena distribusi $S_n^*$
+diaproksimasi oleh densitas normal baku, distribusi peubah acak $\bar p$
+juga harus berbentuk lonceng.  Kita juga tahu cara menyatakan rata-rata dan simpangan baku $\bar p$
+dalam
+$p$ dan
+$n$.  Rata-rata $\bar p$ adalah $p$, dan simpangan bakunya ialah
+$$\sqrt{\frac{pq}{n}}\ .$$
+Jadi, mudah untuk menuliskan versi terstandardisasi dari $\bar p$, yaitu
+$$\bar p^* = \frac{\bar p - p}{\sqrt{pq/n}}\ .$$
+\par
+Karena distribusi versi terstandardisasi dari $\bar p$ diaproksimasi oleh densitas
+normal baku, kita tahu, misalnya, bahwa 95\% nilainya akan berada dalam jarak dua simpangan baku
+dari rata-ratanya, dan hal yang sama berlaku untuk $\bar p$.  Jadi, kita memiliki
+$$P\left(p - 2\sqrt{\frac{pq}{n}} < \bar p < p + 2\sqrt{\frac{pq}{n}}\right) \approx .954\
+.$$
+Penyelenggara jajak pendapat tidak mengetahui $p$ atau $q$, tetapi dapat menggantikannya dengan $\bar p$ dan $\bar q = 1 -
+\bar p$ tanpa risiko yang berarti.  Dengan gagasan ini, pernyataan di atas
+setara dengan pernyataan
+$$P\left(\bar p - 2\sqrt{\frac{\bar p \bar q}{n}} < p <
+\bar p + 2\sqrt{\frac{\bar p \bar q}{n}}\right) \approx .954\ .$$
+Interval yang dihasilkan,
+$$
+\left( \bar p - \frac {2\sqrt{\bar p \bar q}}{\sqrt n},\ 
+\bar p + \frac {2\sqrt{\bar p \bar q}}{\sqrt n} \right)
+$$
+disebut \emx {interval kepercayaan 95 persen}\index{interval kepercayaan} untuk nilai
+$p$ yang tidak diketahui.  Nama ini berasal dari kenyataan bahwa jika kita menggunakan metode ini untuk
+memperkirakan $p$ pada sejumlah besar sampel, kita dapat mengharapkan bahwa pada sekitar
+95~persen sampel, nilai sebenarnya dari~$p$ termuat dalam interval kepercayaan
+yang diperoleh dari sampel.  Dalam Latihan~\ref{exer 9.1.11}, Anda diminta
+menulis program untuk mengilustrasikan bahwa hal ini memang terjadi.
+\par
+Penyelenggara jajak pendapat dapat menentukan nilai $n$.  Jadi, jika ingin membuat interval
+kepercayaan 95\% dengan panjang 6\%, nilai $n$ harus dipilih sedemikian sehingga
+$$\frac {2\sqrt{\bar p \bar q}}{\sqrt n} \le .03\ .$$
+Dengan menggunakan fakta bahwa $\bar p \bar q \le 1/4$ berapa pun nilai $\bar p$,
+mudah ditunjukkan bahwa jika nilai $n$ dipilih sedemikian sehingga
+$$\frac{1}{\sqrt n} \le .03\ ,$$
+batas tersebut akan terpenuhi.  Ini setara dengan memilih
+$$n \ge 1111\ .$$
+Jadi, jika penyelenggara jajak pendapat memilih, misalnya, $n$ sebesar 1200 dan menghitung $\bar p$ menggunakan
+sampel berukuran 1200, maka 19 dari 20 kali (yaitu 95\% dari seluruh percobaan), interval kepercayaannya,
+yang panjangnya 6\%, akan memuat nilai sebenarnya dari $p$.  Jenis interval kepercayaan ini
+biasanya dilaporkan dalam berita sebagai berikut: survei ini memiliki margin galat 3\%.\index{margin
+galat}  Sesungguhnya, sebagian besar survei yang diberitakan di surat kabar memiliki ukuran sampel
+sekitar 1000.  Fakta yang agak mengejutkan ialah bahwa ukuran populasi tampaknya
+tidak memengaruhi ukuran sampel yang diperlukan untuk memperoleh interval kepercayaan 95\% bagi $p$ dengan
+margin galat tertentu.  Untuk melihatnya, perhatikan bahwa nilai $n$ yang diperlukan hanya bergantung pada
+bilangan .03, yaitu margin galat.  Dengan kata lain, baik ukuran populasi
+100{,}000 maupun 100{,}000{,}000, penyelenggara jajak pendapat hanya perlu memilih sampel berukuran sekitar 1200 untuk
+memperoleh ketelitian perkiraan $p$ yang sama.  (Kita memang menggunakan fakta bahwa ukuran sampel kecil
+dibandingkan ukuran populasi ketika menyatakan bahwa $S_n$ kira-kira berdistribusi
+binomial.)
+\par
+Dalam Gambar~\ref{fig 9.2.1}, kita menampilkan hasil simulasi proses jajak pendapat.  Ukuran populasi
+adalah 100{,}000, dan untuk populasi tersebut, $p = .54$.  Ukuran sampel dipilih sebesar
+1200.  Grafik paku menunjukkan distribusi $\bar p$ untuk 10{,}000 sampel yang dipilih secara
+acak.   Dalam simulasi ini, program mencatat banyaknya sampel dengan
+$\bar p$ berada dalam jarak 3\% dari .54.  Jumlahnya 9648, yang mendekati
+95\% dari banyaknya sampel yang digunakan.
+\putfig{4truein}{PSfig9-2-1}{Simulasi jajak pendapat.}{fig 9.2.1} 
+\par                        
+Cara lain untuk memahami makna interval kepercayaan ditunjukkan dalam Gambar~\ref{fig
+9.2.2}.  Dalam gambar ini, kita menampilkan 100 interval kepercayaan yang diperoleh dengan menghitung $\bar p$
+untuk 100 sampel berbeda berukuran 1200 dari populasi yang sama seperti sebelumnya.  Pembaca dapat melihat
+bahwa sebagian besar interval kepercayaan ini (tepatnya 96) memuat nilai sebenarnya dari $p$.
+\putfig{4.5truein}{PSfig9-2-2}{Simulasi interval kepercayaan.}{fig 9.2.2} 
+\par
+Jajak Pendapat Gallup\index{Jajak Pendapat Gallup} telah menggunakan teknik jajak pendapat ini dalam setiap
+pemilihan Presiden\index{pemilihan Presiden} sejak 1936 (serta dalam tak terhitung banyaknya
+pemilihan lain).  Tabel~\ref{table 9.1}\footnote{The Gallup Poll Monthly, November 1992, 
+No.\ 326, p.\ 33.  Dilengkapi dengan bantuan Lydia K. Saab, The Gallup Organization.} menunjukkan
+hasil upaya tersebut.  Pembaca akan melihat bahwa sebagian besar aproksimasi terhadap $p$ berada
+dalam jarak 3\% dari nilai sebenarnya dari $p$.  Ukuran sampel untuk jajak pendapat ini biasanya sekitar
+1500.  (Dalam tabel, persentase prediksi maupun persentase sebenarnya untuk calon pemenang mengacu
+pada persentase suara di antara partai politik ``utama". Dalam kebanyakan pemilihan terdapat
+dua partai utama, tetapi dalam beberapa pemilihan terdapat tiga.) 
+\begin{table}
+\centering
+\begin{tabular}{clccc} Tahun &$\,$ Calon &Survei Akhir &Hasil 
+&Deviasi \\
+&Pemenang&Gallup&Pemilu&\\
+\hline
+1936 & Roosevelt  & 55.7\% & 62.5\% & 6.8\%\\
+1940 & Roosevelt  & 52.0\% & 55.0\% & 3.0\%\\
+1944 & Roosevelt  & 51.5\% & 53.3\% & 1.8\%\\
+1948 & Truman     & 44.5\% & 49.9\% & 5.4\%\\
+1952 & Eisenhower & 51.0\% & 55.4\% & 4.4\%\\
+1956 & Eisenhower & 59.5\% & 57.8\% & 1.7\%\\
+1960 & Kennedy    & 51.0\% & 50.1\% & 0.9\%\\
+1964 & Johnson    & 64.0\% & 61.3\% & 2.7\%\\
+1968 & Nixon      & 43.0\% & 43.5\% & 0.5\%\\
+1972 & Nixon      & 62.0\% & 61.8\% & 0.2\%\\
+1976 & Carter     & 48.0\% & 50.0\% & 2.0\%\\
+1980 & Reagan     & 47.0\% & 50.8\% & 3.8\%\\
+1984 & Reagan     & 59.0\% & 59.1\% & 0.1\%\\
+1988 & Bush       & 56.0\% & 53.9\% & 2.1\%\\
+1992 & Clinton    & 49.0\% & 43.2\% & 5.8\%\\
+1996 & Clinton    & 52.0\% & 50.1\% & 1.9\%\\
+\end{tabular}
+\caption{Catatan akurasi Jajak Pendapat Gallup.}
+\label{table 9.1}
+\end{table}
+\par
+Teknik ini juga berperan penting dalam mengevaluasi efektivitas obat dalam
+bidang kedokteran.  Sebagai contoh, terkadang kita ingin mengetahui berapa proporsi pasien
+yang akan terbantu oleh obat baru.  Proporsi ini dapat diperkirakan dengan memberikan obat kepada suatu subhimpunan
+pasien, lalu menentukan proporsi anggota sampel yang terbantu oleh obat tersebut.
+\end{example}
+
+
+
+\subsection*{Catatan Sejarah}
+Teorema Limit Pusat untuk percobaan Bernoulli pertama kali dibuktikan oleh Abraham\linebreak[4]
+de~Moivre\index{de MOIVRE, A.} dan dimuat dalam bukunya, \emx {The Doctrine of Chances,} yang pertama kali
+diterbitkan pada 1718.\footnote{A. de Moivre, \emx {The Doctrine of Chances,} edisi~ke-3.\ (London: Millar,
+1756).}
+
+De Moivre menjalani usia 18~hingga~21 tahun di penjara di Prancis karena latar
+belakang Protestannya.  Setelah dibebaskan, ia meninggalkan Prancis menuju Inggris, tempat
+ia bekerja sebagai guru privat bagi putra-putra bangsawan.  Newton pernah memberikan satu eksemplar
+\emx {Principia Mathematica} karyanya kepada Earl of Devonshire.  Menurut kisah yang beredar,
+ketika de~Moivre mengajar di kediaman sang Earl, ia menemukan karya Newton
+dan merasa bahwa karya itu melampaui pemahamannya.  Konon, ia kemudian membeli eksemplarnya
+sendiri dan merobeknya menjadi halaman-halaman terpisah, mempelajarinya halaman demi halaman sambil berjalan
+mengelilingi London menuju tempat ia mengajar.  De~Moivre sering mengunjungi kedai-kedai kopi di
+London, tempat ia memulai karyanya dalam probabilitas dengan menghitung peluang bagi para
+penjudi.  Ia juga bertemu Newton di salah satu kedai kopi tersebut dan keduanya menjadi
+sahabat dekat.  De~Moivre mendedikasikan bukunya kepada Newton.
+
+\emx {The Doctrine of Chances} menyajikan teknik untuk menyelesaikan beragam
+masalah perjudian.  Di tengah pembahasan masalah-masalah perjudian ini,
+de~Moivre dengan cukup rendah hati memperkenalkan buktinya atas Teorema Limit Pusat,
+dengan menulis
+\begin{quote}
+Suatu Metode untuk mengaproksimasi Jumlah Suku-suku Binomial $(a + b)^n$
+yang dikembangkan menjadi Deret, yang darinya diturunkan beberapa Kaidah praktis untuk
+memperkirakan Derajat Keyakinan yang patut diberikan kepada
+Percobaan.\footnote{ibid., p.~243.}
+\end{quote}
+Bukti de Moivre menggunakan aproksimasi faktorial yang sekarang kita sebut
+rumus Stirling.  De~Moivre menyatakan bahwa ia telah memperoleh rumus ini sebelum
+Stirling, tetapi tanpa menentukan nilai tepat konstanta
+$\sqrt{2\pi}$.  Meskipun mengatakan bahwa nilai tepat ini sebenarnya tidak perlu
+diketahui, ia mengakui bahwa pengetahuan tentangnya ``memberikan Keanggunan yang istimewa pada
+Penyelesaian."
+\par
+Bukti lengkap dan pembahasan menarik tentang kehidupan 
+de~Moivre dapat ditemukan dalam buku \emx {Games, Gods and Gambling} karya F.~N.
+David.\index{DAVID, F. N.}\footnote{F. N. David, \emx {Games, Gods and Gambling} (London:
+Griffin, 1962).}
+
+\pagebreak[4]
+
+\exercises
+\begin{LJSItem}
+
+\i\label{exer 9.1.1}  Misalkan $S_{100}$ menyatakan banyaknya kemunculan sisi kepala dalam 100 lemparan
+koin seimbang.  Gunakan Teorema Limit Pusat untuk memperkirakan
+\begin{enumerate}
+
+\item  $P(S_{100} \leq 45)$.
+
+\item  $P(45 < S_{100} < 55)$.
+
+\item  $P(S_{100} > 63)$.
+
+\item $P(S_{100} < 57)$.
+\end{enumerate}
+
+\i\label{exer 9.1.2}  Misalkan $S_{200}$ menyatakan banyaknya kemunculan sisi kepala dalam 200 lemparan
+koin seimbang.  Perkirakan
+\begin{enumerate}
+
+\item  $P(S_{200} = 100)$. 
+
+\item  $P(S_{200} = 90)$. 
+
+\item  $P(S_{200} = 80)$. 
+\end{enumerate}
+
+\i\label{exer 9.1.3}  Suatu ujian benar-salah memiliki 48 soal.  June memiliki peluang~3/4 untuk
+menjawab suatu soal dengan benar.  April hanya menebak pada setiap soal.  Nilai
+lulus diperoleh dengan 30~jawaban benar atau lebih.  Bandingkan peluang June
+lulus ujian dengan peluang April lulus.
+
+\i\label{exer 9.1.4}  Misalkan $S$ menyatakan banyaknya kemunculan sisi kepala dalam 1{,}000{,}000 lemparan
+koin seimbang.  Gunakan (a)~ketaksamaan Chebyshev dan (b)~Teorema Limit Pusat untuk
+memperkirakan peluang bahwa $S$ berada antara 499{,}500 dan 500{,}500.  Gunakan
+dua metode yang sama untuk memperkirakan peluang bahwa $S$ berada antara
+499{,}000 dan 501{,}000, serta peluang bahwa $S$ berada antara 498{,}500
+dan 501{,}500.
+
+\i\label{exer 9.1.5}  Seorang pemain pemula direkrut oleh klub bisbol dengan asumsi bahwa ia akan
+memiliki rata-rata pukulan .300.  (Rata-rata pukulan adalah rasio banyaknya
+pukulan berhasil terhadap banyaknya kesempatan memukul.)  Pada tahun pertama, ia mendapat 300
+kesempatan memukul dan rata-rata pukulannya .267.  Asumsikan bahwa setiap kesempatan memukul dapat dianggap sebagai
+percobaan Bernoulli dengan peluang keberhasilan .3.  Apakah rata-rata serendah itu dapat
+dianggap sekadar nasib buruk, atau haruskah ia dikembalikan ke liga minor? 
+Berikan komentar tentang asumsi percobaan Bernoulli dalam situasi ini.
+
+\i\label{exer 9.1.6}  Pada suatu masa, dua kereta api bersaing untuk mengangkut
+1000 penumpang yang berangkat dari Chicago pada jam yang sama menuju
+Los Angeles.  Asumsikan bahwa setiap penumpang memiliki peluang yang sama untuk memilih salah satu dari kedua
+kereta.  Berapa banyak kursi yang harus dimiliki sebuah kereta agar peluang tersedianya kursi
+bagi setiap penumpang setidaknya .99?
+
+\i\label{exer 9.1.7}  Asumsikan bahwa, seperti dalam Contoh~\ref{exam 9.3}, Dartmouth menawarkan tempat kepada 1750
+calon mahasiswa.  Berapa peluang bahwa terlalu banyak di antara mereka menerima tawaran tersebut?
+
+\i\label{exer 9.1.8}  Sebuah klub hanya menyajikan makan malam kepada anggotanya.  Mereka duduk di meja berkapasitas
+12 orang.  Dari pengamatan jangka panjang, manajer mendapati bahwa selama 95~persen
+waktu terdapat antara enam dan sembilan meja penuh anggota, sedangkan pada waktu selebihnya
+banyaknya meja penuh berpeluang sama untuk berada di atas atau di bawah rentang ini. 
+Asumsikan bahwa setiap anggota memutuskan untuk datang dengan peluang tertentu~$p$, dan bahwa
+keputusan mereka saling bebas.  Berapa banyak anggota klub tersebut?  Berapakah $p$?
+
+\i\label{exer 9.1.9}  Misalkan $S_n$ banyaknya keberhasilan dalam $n$ percobaan Bernoulli dengan
+peluang keberhasilan~.8 pada setiap percobaan.  Misalkan $A_n = S_n/n$ rata-rata keberhasilan. 
+Untuk setiap kasus, berikan nilai limit dan alasan bagi jawaban Anda.
+\begin{enumerate}
+\item  $\lim_{n \to \infty} P(A_n = .8)$.
+
+\item  $\lim_{n \to \infty} P(.7n < S_n < .9n)$.
+
+\item  $\lim_{n \to \infty} P(S_n < .8n + .8\sqrt n)$.
+
+\item  $\lim_{n \to \infty} P(.79 < A_n < .81)$.
+\end{enumerate}
+
+\i\label{exer 9.1.10}  Tentukan peluang bahwa di antara 10{,}000 digit acak, digit~3
+muncul tidak lebih dari 931 kali.
+
+\i\label{exer 9.1.11} Tulis program komputer untuk menyimulasikan 10{,}000
+percobaan Bernoulli dengan peluang keberhasilan~.3 pada setiap percobaan.  Minta
+program menghitung interval kepercayaan 95~persen untuk peluang
+keberhasilan berdasarkan proporsi keberhasilan.  Ulangi percobaan 100 kali
+dan amati berapa kali nilai sebenarnya,~.3, termuat dalam batas-batas
+kepercayaan.
+
+\i\label{exer 9.1.12}  Sebuah koin seimbang dilempar 400 kali.  Tentukan bilangan~$x$ sedemikian sehingga
+peluang bahwa banyaknya kemunculan sisi kepala berada antara $200 - x$ dan $200 + x$
+kira-kira .80.
+
+\i\label{exer 9.1.13}  Mesin pembuat mi di pabrik spageti milik Spumoni menghasilkan sekitar 5~persen
+mi cacat bahkan ketika disetel dengan benar.  Mi tersebut kemudian dikemas dalam
+peti yang masing-masing berisi 1900 mi.  Sebuah peti diperiksa dan ternyata berisi
+115 mi cacat.  Berapa perkiraan peluang menemukan setidaknya
+sebanyak ini mi cacat jika mesin disetel dengan benar?
+
+\i\label{exer 9.1.14}  Sebuah restoran melayani 400 pelanggan per hari.  Rata-rata, 20~persen
+pelanggan memesan pai apel.
+\begin{enumerate}
+\item  Berikan rentang (yang disebut interval kepercayaan 95~persen) untuk banyaknya
+potong pai apel yang dipesan pada suatu hari sehingga Anda dapat yakin 95~persen
+bahwa jumlah sebenarnya akan berada dalam rentang tersebut.
+
+\item  Berapa rata-rata banyaknya pelanggan yang harus dilayani restoran agar
+setidaknya yakin 95~persen bahwa persentase pelanggan yang memesan pai pada hari itu
+berada dalam rentang 19~hingga~21 persen?
+\end{enumerate}
+
+\i\label{exer 9.1.15}  Ingat bahwa jika $X$ peubah acak, \emx {fungsi distribusi
+kumulatif} dari~$X$ adalah fungsi $F(x)$ yang didefinisikan oleh
+$$
+F(x) = P(X \leq x)\ .
+$$
+\begin{enumerate}
+\item  Misalkan $S_n$ banyaknya keberhasilan dalam $n$ percobaan Bernoulli dengan
+peluang keberhasilan~$p$.  Tulis program untuk menggambar distribusi kumulatif
+untuk~$S_n$.
+
+\item  Ubah program Anda dalam (a) untuk menggambar
+distribusi kumulatif $F_n^*(x)$ dari peubah acak terstandardisasi
+$$
+S_n^* = \frac {S_n - np}{\sqrt{npq}}\ .
+$$
+
+\item  Definisikan \emx {distribusi normal} $N(x)$ sebagai luas di bawah
+kurva normal hingga nilai~$x$.  Ubah program Anda dalam
+(b) agar turut menggambar distribusi normal, lalu bandingkan
+dengan distribusi kumulatif~$S_n^*$.  Lakukan ini untuk $n = 10, 50$, dan $100$.
+\end{enumerate}
+
+\i\label{exer 9.1.16}  Dalam Contoh~\ref{exam 3.12}, kita ingin menguji
+hipotesis bahwa suatu bentuk aspirin baru efektif dalam 80~persen kasus,
+bukan 60~persen seperti yang dilaporkan untuk aspirin standar.  Aspirin
+baru diberikan kepada $n$ orang.  Jika efektif dalam $m$ kasus atau lebih,
+kita menerima klaim bahwa obat baru tersebut efektif dalam 80~persen kasus;
+jika tidak, kita menolak klaim itu.  Dengan menggunakan Teorema Limit Pusat, tunjukkan bahwa Anda dapat
+memilih banyaknya percobaan~$n$ dan nilai kritis~$m$ sedemikian sehingga
+peluang kita menolak hipotesis ketika hipotesis itu benar kurang dari .01 dan
+peluang kita menerimanya ketika hipotesis itu salah juga kurang dari .01.  Tentukan
+nilai terkecil~$n$ yang mencukupi untuk ini.
+
+\i\label{exer 9.1.17}  Dalam suatu jajak pendapat, diasumsikan bahwa proporsi yang tidak diketahui, $p$,
+dari masyarakat mendukung usulan undang-undang baru dan proporsi $1-p$ menentangnya.
+Sampel beranggotakan $n$ orang diambil untuk memperoleh pendapat mereka.  Proporsi ${\bar
+p}$ yang mendukung dalam sampel digunakan sebagai perkiraan $p$.  Dengan menggunakan Teorema Limit
+Pusat, tentukan ukuran sampel yang menjamin bahwa perkiraan tersebut, dengan
+peluang .95, menyimpang tidak lebih dari .01 dari nilai sebenarnya.
+
+\i\label{exer 9.1.18} 
+Sebuah uraian tentang jajak pendapat dalam suatu surat kabar menyatakan bahwa seseorang dapat 
+yakin 95\% bahwa galat akibat pengambilan sampel tidak akan lebih besar 
+dari plus atau minus 3 poin persentase.  Uraian sebuah jajak pendapat
+\emx{New York Times}\index{New York Times} di Iowa dapat diringkas sebagai berikut:
+dalam 19 dari 20 sampel semacam itu, hasil sampel diperkirakan berada dalam jarak
+3 poin persentase dari hasil sensus seluruh penduduk dewasa Iowa. Ringkasan ini tidak
+menerjemahkan atau mereproduksi ungkapan surat kabar. Keduanya merupakan upaya 
+untuk menjelaskan konsep interval kepercayaan.  Apakah kedua pernyataan tersebut
+mengatakan hal yang sama?  Jika tidak, uraian mana yang menurut Anda 
+lebih akurat? 
+
+\end{LJSItem}
+
+\section[Percobaan Independen Diskret]{\bf Teorema Limit Pusat untuk Percobaan Independen Diskret}\label{sec 9.3}
+Kita telah mengilustrasikan Teorema Limit Pusat untuk kasus percobaan Bernoulli, tetapi
+teorema ini berlaku bagi kelas proses acak yang jauh lebih umum.  Secara khusus,
+teorema ini berlaku bagi setiap proses percobaan independen yang setiap percobaannya
+memiliki varians berhingga.  Untuk proses semacam itu, aproksimasi normal bagi suku-suku
+individual maupun Teorema Limit Pusat berlaku.
+
+Misalkan $S_n = X_1 + X_2 +\cdots+ X_n$ adalah jumlah $n$ peubah acak diskret
+independen dari suatu proses percobaan independen, dengan fungsi distribusi yang sama $m(x)$ yang
+didefinisikan pada bilangan bulat, rataan~$\mu$, dan varians~$\sigma^2$. \choice{Sebagaimana
+telah kita lihat untuk jumlah-jumlah percobaan Bernoulli, distribusi untuk jumlah independen yang
+lebih umum memiliki bentuk yang menyerupai kurva normal, tetapi nilai maksimumnya bergeser ke
+kanan dan semakin mendatar.} {Dalam Bagian~\ref{sec 7.2}, kita telah melihat bahwa distribusi
+untuk jumlah independen semacam itu memiliki bentuk yang menyerupai kurva normal, tetapi nilai
+maksimumnya bergeser ke kanan dan kurvanya semakin mendatar (lihat Gambar~\ref{fig 7.9}).}
+Kita dapat mencegah hal ini sebagaimana yang kita lakukan untuk percobaan Bernoulli.
+
+\subsection*{Jumlah Terstandardisasi}
+Perhatikan peubah acak terstandardisasi
+$$
+S_n^* = \frac {S_n - n\mu}{\sqrt{n\sigma^2}}\ .
+$$
+
+Standardisasi ini membuat $S_n$ memiliki nilai harapan~0 dan varians~1.  Jika $S_n
+= j$, maka $S_n^*$ bernilai $x_j$, dengan
+$$
+x_j = \frac {j - n\mu}{\sqrt{n\sigma^2}}\ .
+$$
+Kita dapat membuat grafik paku sebagaimana yang kita lakukan untuk percobaan Bernoulli.  Setiap
+paku berpusat di suatu~$x_j$.  Jarak antara dua paku berturutan adalah
+$$
+b = \frac 1{\sqrt{n\sigma^2}}\ ,
+$$
+dan tinggi paku tersebut adalah
+$$
+h = \sqrt{n\sigma^2} P(S_n = j)\ .
+$$
+
+Kasus percobaan Bernoulli merupakan kasus khusus dengan $X_j = 1$ jika hasil ke-$j$
+merupakan keberhasilan dan 0 jika tidak; dalam hal ini $\mu = p$ dan $\sigma^2 = \sqrt {pq}$.
+\par 
+Sekarang kita mengilustrasikan proses ini untuk dua distribusi diskret yang berbeda.  Distribusi
+pertama adalah $m$, yang diberikan oleh
+$$
+m = \pmatrix{
+1 & 2 & 3 & 4 & 5 \cr
+.2 & .2 & .2 & .2 & .2\cr}\ .
+$$
+
+Dalam Gambar~\ref{fig 9.5}, kita menampilkan jumlah terstandardisasi untuk distribusi ini dalam
+kasus $n = 2$ dan $n = 10$.  Bahkan untuk $n = 2$, aproksimasinya ternyata sangat baik.
+
+\putfig{5truein}{PSfig9-5}{Distribusi jumlah terstandardisasi.}{fig 9.5} 
+
+\par
+Untuk distribusi diskret kedua, kita memilih
+$$
+m = \pmatrix{
+1 & 2 & 3 & 4 & 5 \cr
+.4 & .3 & .1 & .1 & .1\cr}\ .
+$$
+\par
+Distribusi ini cukup asimetris dan aproksimasinya tidak terlalu baik untuk $n
+= 3$, tetapi pada $n = 10$ kita kembali memperoleh aproksimasi yang sangat baik (lihat
+Gambar~\ref{fig 9.5.5}). Gambar~\ref{fig 9.5} dan \ref{fig 9.5.5} dibuat dengan program
+{\bf CLTIndTrialsPlot}.
+\index{CLTIndTrialsPlot (program)}
+
+\putfig{5truein}{PSfig9-5-5}{Distribusi jumlah terstandardisasi.}{fig 9.5.5} 
+
+\subsection*{Teorema Aproksimasi}
+Seperti pada kasus percobaan Bernoulli, grafik-grafik ini menyarankan teorema aproksimasi
+berikut untuk peluang-peluang individual.
+
+\begin{theorem}\label{thm 9.3.5}
+Misalkan $X_1$,~$X_2$, \dots,~$X_n$ merupakan proses percobaan independen dan misalkan $S_n =
+X_1 + X_2 +\cdots+ X_n$.  Andaikan pembagi persekutuan terbesar dari selisih semua nilai yang
+dapat diambil oleh $X_j$ adalah~1.  Misalkan $E(X_j) = \mu$ dan $V(X_j) = \sigma^2$.  Maka untuk
+$n$ yang besar,
+$$
+P(S_n = j) \sim \frac {\phi(x_j)}{\sqrt{n\sigma^2}}\ ,
+$$
+dengan $x_j = (j - n\mu)/\sqrt{n\sigma^2}$, dan $\phi(x)$ adalah densitas normal baku.
+\end{theorem}
+
+Program {\bf CLTIndTrialsLocal}\index{CLTIndTrialsLocal (program)} menerapkan aproksimasi ini.
+Ketika kita menjalankan program ini untuk 6 kali pelemparan sebuah dadu dan meminta peluang bahwa
+jumlah hasil lemparannya sama dengan 21, kita memperoleh nilai sebenarnya .09285 dan nilai
+aproksimasi normal .09537.  Jika kita menjalankan program ini untuk 24 kali pelemparan sebuah dadu
+dan meminta peluang bahwa jumlah hasil lemparannya sama dengan 72, kita memperoleh nilai sebenarnya
+.01724 dan nilai aproksimasi normal .01705.  Hasil-hasil ini menunjukkan bahwa aproksimasi normal
+tersebut cukup baik.
+
+\subsection*{Teorema Limit Pusat untuk Proses Percobaan Independen Diskret}
+Teorema Limit Pusat untuk proses percobaan independen diskret adalah sebagai berikut.
+
+\begin{theorem}{\bf (Teorema Limit Pusat)}\label{thm 9.3.6}\index{Teorema Limit Pusat!untuk
+proses percobaan independen diskret} 
+Misalkan $S_n = X_1 + X_2 +\cdots+ X_n$ adalah jumlah $n$ peubah acak diskret independen
+dengan distribusi yang sama dan memiliki nilai harapan~$\mu$ serta varians~$\sigma^2$.  Maka, untuk
+$a < b$,
+$$
+\lim_{n \to \infty} P\left( a < \frac {S_n - n\mu}{\sqrt{n\sigma^2}} < b\right)
+= \frac 1{\sqrt{2\pi}} \int_a^b e^{-x^2/2}\, dx\ .
+$$
+\end{theorem}
+\par
+\choice{\footnote {Bukti Teorema \ref{thm 9.3.5}~dan Teorema~\ref{thm
+9.3.6} diberikan dalam Bagian 10.3 pada buku Grinstead--Snell edisi lengkap.}}{Kita akan
+memberikan bukti Teorema \ref{thm 9.3.5}~dan Teorema~\ref{thm 9.3.6} dalam
+Bagian~\ref{sec 10.3}.}  Di sini kita membahas beberapa contoh.
+
+\subsection*{Contoh}
+\begin{example}
+Sebuah dadu dilempar 420 kali.  Berapakah peluang bahwa jumlah hasil lemparannya
+berada di antara 1400~dan~1550?
+
+Jumlah tersebut adalah peubah acak
+$$
+S_{420} = X_1 + X_2 +\cdots+ X_{420}\ ,
+$$
+dengan setiap $X_j$ memiliki distribusi
+$$
+m_X = \pmatrix{
+1 & 2 & 3 & 4 & 5 & 6 \cr
+1/6 & 1/6 & 1/6 & 1/6 & 1/6 & 1/6 \cr}
+$$
+Kita telah melihat bahwa $\mu = E(X) = 7/2$ dan $\sigma^2 = V(X) = 35/12$.  Jadi,
+$E(S_{420}) = 420 \cdot 7/2 = 1470$, $\sigma^2(S_{420}) = 420 \cdot 35/12 =
+1225$, dan $\sigma(S_{420}) = 35$.  Oleh karena itu,
+\begin{eqnarray*}
+P(1400 \leq S_{420} \leq 1550) &\approx& P\left(\frac {1399.5 - 1470}{35} \leq
+S_{420}^* \leq \frac {1550.5 - 1470}{35} \right) \\
+     &=& P(-2.01 \leq S_{420}^* \leq 2.30) \\
+&\approx&  \NA(-2.01, 2.30) = .9670\ . 
+\end{eqnarray*}
+Perhatikan bahwa program {\bf CLTIndTrialsGlobal} dapat digunakan untuk menghitung
+peluang-peluang ini.
+\end{example}
+
+\begin{example}\label{exam 9.9}
+Rata-rata nilai\index{rata-rata nilai} seorang mahasiswa adalah rata-rata nilainya dalam 30
+mata kuliah.  Nilai-nilai tersebut didasarkan pada kemungkinan 100 poin dan dicatat sebagai
+bilangan bulat.  Andaikan bahwa, dalam setiap mata kuliah, pengajar membuat galat penilaian sebesar
+$k$ dengan peluang $|p/k|$, dengan $k = \pm1$,~$\pm2$, $\pm3$, $\pm4$,~$\pm5$.  Dengan demikian,
+peluang tidak terjadi galat adalah $1 - (137/30)p$.  (Parameter~$p$ menyatakan tingkat
+ketidakakuratan penilaian pengajar.)  Jadi, dalam setiap mata kuliah, terdapat dua nilai bagi
+mahasiswa tersebut, yaitu nilai yang ``benar" dan nilai yang tercatat.  Karena itu, mahasiswa
+tersebut memiliki dua rata-rata nilai, yaitu rata-rata nilai yang benar dan rata-rata nilai yang
+tercatat.
+\par
+Kita ingin memperkirakan peluang bahwa kedua rata-rata nilai ini berbeda kurang dari .05 untuk
+seorang mahasiswa tertentu.  Sekarang kita andaikan bahwa $p = 1/20$.  Kita juga mengandaikan bahwa
+galat total merupakan jumlah $S_{30}$ dari 30 peubah acak independen yang masing-masing berdistribusi
+$$
+m_X: \left\{ 
+\begin{array}{ccccccccccc}
+-5 & -4 & -3 & -2 & -1 & 0 & 1 & 2 & 3 & 4 & 5 \\
+\frac1{100} & \frac1{80} & \frac1{60} & \frac1{40} & \frac1{20} & 
+\frac{463}{600} & \frac1{20} & \frac1{40} & \frac1{60} & \frac1{80} &
+\frac1{100}
+\end{array} 
+\right \}\ .
+$$
+Dapat dihitung dengan mudah bahwa $E(X) = 0$ dan $\sigma^2(X) = 1.5$.  Dengan demikian,
+$$\begin{array}{ll}
+P\left(-.05 \leq \frac {S_{30}}{30} \leq .05 \right) &= P(-1.5 \leq S_{30} \leq1.5) \\
+     & \\
+     &= P\left(\frac {-1.5}{\sqrt{30\cdot1.5}} \leq S_{30}^* \leq \frac {1.5}{\sqrt{30\cdot1.5}} \right) \\
+     & \\
+     &= P(-.224 \leq S_{30}^* \leq .224) \\
+     & \\
+     &\approx   \NA(-.224, .224) = .1772\ .  
+\end{array}$$
+Ini berarti bahwa peluang rata-rata nilai seorang mahasiswa tertentu akurat hingga .05
+hanya sebesar 17.7\%.  (Jadi, misalnya, jika dua calon lulusan terbaik memiliki rata-rata tercatat
+97.1 dan 97.2, terdapat peluang yang tidak dapat diabaikan bahwa urutan rata-rata mereka yang benar
+justru terbalik.)  Untuk pembahasan lebih lanjut mengenai contoh ini, lihat artikel karya R.~M.
+Kozelka.\index{KOZELKA, R. M.}\footnote{R. M. Kozelka, ``Grade-Point Averages and the Central Limit
+Theorem," \emx {American Math.\ Monthly,} vol.~86 (Nov 1979), pp.~773-777.}
+\end{example}
+
+
+
+\subsection*{Teorema Limit Pusat yang Lebih Umum}
+Dalam Teorema~\ref{thm 9.3.6}, peubah-peubah acak diskret yang dijumlahkan diasumsikan independen
+dan berdistribusi identik.  Ternyata, asumsi distribusi identik dapat diperlemah secara berarti.
+Banyak penelitian telah dilakukan dalam bidang ini, dengan salah satu sumbangan penting diberikan
+oleh J. W. Lindeberg\index{LINDEBERG, J. W.}.  Lindeberg menemukan suatu syarat bagi barisan
+$\{X_n\}$ yang menjamin bahwa distribusi jumlah $S_n$ berdistribusi normal secara asimtotik.
+Feller menunjukkan bahwa syarat Lindeberg juga diperlukan, dalam arti bahwa jika syarat tersebut
+tidak dipenuhi, maka jumlah $S_n$ tidak berdistribusi normal secara asimtotik.  Untuk pernyataan
+Teorema Lindeberg yang tepat, pembaca kami rujuk kepada Feller.\index{FELLER, W.}\footnote{W.~Feller,
+\emx {Introduction to Probability Theory and its Applications,} vol.~1, 3rd~ed. (New York: John
+Wiley \& Sons, 1968), p.~254.}  Syarat cukup yang lebih kuat (tetapi lebih mudah dinyatakan)
+daripada syarat Lindeberg, dan lebih lemah daripada syarat dalam Teorema~\ref{thm 9.3.6}, diberikan
+dalam teorema berikut.
+\pagebreak[4]
+\begin{theorem}{\bf (Teorema Limit Pusat)}\label{thm 9.3.7}\index{Teorema Limit Pusat!untuk
+peubah diskret independen} 
+Misalkan $X_1,\ X_2,\ \ldots,\ X_n\ ,\ \ldots$ adalah barisan peubah acak diskret independen,
+dan misalkan $S_n = X_1 + X_2 +\cdots+ X_n$.  Untuk setiap $n$, nyatakan rataan dan varians $X_n$
+berturut-turut dengan $\mu_n$ dan $\sigma^2_n$.  Definisikan rataan dan varians $S_n$
+berturut-turut sebagai $m_n$ dan $s_n^2$, dan andaikan bahwa $s_n \rightarrow \infty$.  Jika
+terdapat suatu konstanta $A$ sedemikian sehingga $|X_n| \le A$ untuk semua $n$, maka untuk $a < b$,
+$$
+\lim_{n \to \infty} P\left( a < \frac {S_n - m_n}{s_n} < b\right)
+= \frac 1{\sqrt{2\pi}} \int_a^b e^{-x^2/2}\, dx\ .
+$$
+\end{theorem}
+Syarat bahwa $|X_n| \le A$ untuk semua $n$ kadang-kadang dinyatakan dengan mengatakan bahwa
+barisan $\{X_n\}$ terbatas seragam.  Syarat bahwa $s_n \rightarrow \infty$ diperlukan (lihat
+Latihan~\ref{exer 9.2.114}).
+\par
+Kita mengilustrasikan teorema ini dengan membangkitkan barisan $n$ distribusi acak pada
+interval $[a, b]$.  Kemudian kita mengonvolusikan distribusi-distribusi ini untuk mencari distribusi
+jumlah dari $n$ percobaan independen yang diatur oleh distribusi tersebut.  Terakhir, kita
+menstandardisasi distribusi jumlah itu agar memiliki rataan~0 dan simpangan baku~1, lalu
+membandingkannya dengan densitas normal.  Program {\bf CLTGeneral}\index{CLTGeneral (program)}
+menjalankan prosedur ini.
+
+\putfig{3.5truein}{PSfig9-6}{Jumlah peubah acak yang dipilih secara acak.}{fig 9.6} 
+
+Dalam Gambar~\ref{fig 9.6}, kita menampilkan hasil menjalankan program ini untuk
+$[a, b] = [-2, 4]$, dan $n = 1,\ 4,$ dan 10.  Terlihat bahwa distribusi acak pertama kita cukup
+asimetris.  Ketika kita memilih jumlah sepuluh percobaan semacam itu, kecocokannya dengan kurva
+normal sudah sangat baik.
+\par
+Pada dasarnya, teorema di atas mengatakan bahwa apa pun yang dapat dipandang tersusun sebagai
+jumlah banyak bagian kecil yang independen berdistribusi mendekati normal.  Hal ini membawa kita
+kepada salah satu pertanyaan terpenting yang diajukan mengenai genetika pada tahun 1800-an.
+
+
+\subsection*{Distribusi Normal dan Genetika}\index{genetika}
+Jika kita mengamati distribusi tinggi badan\index{tinggi badan!distribusi} orang dewasa dari satu
+jenis kelamin dalam suatu populasi, sulit untuk tidak memperhatikan bahwa distribusi ini tampak
+seperti distribusi normal.  Contohnya ditampilkan dalam Gambar~\ref{fig 9.61}.  Gambar ini
+menampilkan distribusi tinggi badan 9593 perempuan berusia antara 21 dan 74 tahun.  Data ini
+berasal dari Health and Nutrition Examination Survey I (HANES I).\index{data HANES}
+Untuk survei ini, dipilih suatu sampel dari penduduk sipil Amerika Serikat.  Survei tersebut
+dilaksanakan antara tahun 1971 dan 1974.
+\par
+Pertanyaan yang wajar diajukan ialah ``Bagaimana hal ini dapat terjadi?".  Francis
+Galton,\index{GALTON, F.} ilmuwan Inggris pada abad ke-19, mempelajari pertanyaan ini dan berbagai
+pertanyaan terkait, serta menyusun model-model peluang yang sangat penting untuk menjelaskan
+pengaruh genetis pada atribut seperti tinggi badan.  Bahkan, salah satu gagasan terpenting dalam
+statistika, yaitu regresi menuju rataan\index{regresi menuju rataan}, ditemukan oleh Galton dalam
+upayanya memahami pengaruh genetis tersebut.
+ 
+\putfig{3.5truein}{PSfig9-61}{Distribusi tinggi badan perempuan dewasa.}{fig 9.61} 
+\par
+Galton menghadapi sebuah kontradiksi yang tampak nyata.  Di satu sisi, ia mengetahui bahwa
+distribusi normal muncul dalam situasi ketika banyak pengaruh kecil yang independen dijumlahkan.
+Di sisi lain, ia juga mengetahui bahwa banyak atribut kuantitatif, seperti tinggi badan, sangat
+dipengaruhi oleh faktor genetis: orang tua yang tinggi cenderung memiliki keturunan yang tinggi.
+Jadi, dalam kasus ini tampaknya terdapat dua pengaruh besar, yaitu kedua orang tua.  Galton tentu
+menyadari bahwa faktor non-genetis ikut berperan dalam menentukan tinggi badan seseorang.  Namun,
+kecuali jika faktor non-genetis ini mengalahkan faktor genetis---yang berarti membantah hipotesis
+bahwa keturunan penting dalam menentukan tinggi badan---tampaknya mustahil bagi pasangan orang tua
+dengan tinggi badan tertentu untuk memiliki keturunan yang tinggi badannya berdistribusi normal.
+\par
+Masalah di atas dapat dinyatakan secara simbolis sebagai berikut.  Andaikan kita memilih dua
+bilangan riil positif tertentu $x$ dan $y$, lalu mencari semua pasangan orang tua dengan salah
+satunya memiliki tinggi $x$ satuan dan yang lainnya $y$ satuan.  Kemudian kita mengamati seluruh
+keturunan pasangan-pasangan tersebut.  Kita dapat mempostulatkan adanya fungsi $f(x, y)$ yang
+menyatakan pengaruh genetis tinggi badan orang tua terhadap tinggi badan keturunan.  Selanjutnya,
+kita dapat membiarkan $W$ menyatakan pengaruh faktor non-genetis terhadap tinggi badan keturunan.
+Maka, untuk pasangan tinggi badan tertentu $\{x, y\}$, peubah acak yang menyatakan tinggi badan
+keturunan diberikan oleh
+$$H = f(x, y) + W\ ,$$
+dengan $f$ merupakan fungsi deterministik, yaitu fungsi yang memberikan satu keluaran untuk
+pasangan masukan $\{x, y\}$.  Jika kita mengandaikan bahwa pengaruh $f$ besar dibandingkan dengan
+pengaruh $W$, maka varians $W$ kecil.  Namun, karena f deterministik, varians $H$ sama dengan
+varians $W$, sehingga varians $H$ kecil.  Akan tetapi, dari datanya Galton mengamati bahwa varians
+tinggi badan keturunan dari pasangan tinggi badan orang tua tertentu tidaklah kecil.  Hal ini
+tampaknya menyiratkan bahwa pewarisan hanya berperan kecil dalam menentukan tinggi badan seseorang.
+Nanti dalam seksi ini, kita akan menguraikan cara Galton mengatasi masalah tersebut.
+\par
+Sekarang kita akan membahas penjelasan modern mengenai mengapa sifat-sifat tertentu, seperti tinggi
+badan, berdistribusi mendekati normal.  Untuk itu, kita perlu memperkenalkan beberapa istilah dari
+bidang genetika.  Sel-sel\index{sel} dalam organisme hidup yang tidak terlibat langsung dalam
+pewarisan materi genetis kepada keturunan disebut sel somatik, sedangkan sel-sel lainnya disebut
+sel germinal.  Informasi genetis organisme dari suatu spesies dikodekan dalam kumpulan entitas
+fisik yang disebut kromosom\index{kromosom}.  Kromosom-kromosom berpasangan dalam setiap sel
+somatik.  Sebagai contoh, manusia memiliki 23 pasang kromosom dalam setiap sel somatik.  Sel
+kelamin memuat satu kromosom dari setiap pasangan.  Dalam reproduksi seksual, dua sel kelamin,
+masing-masing dari satu orang tua, menyumbangkan kromosomnya untuk membentuk kumpulan kromosom
+keturunan.
+\par
+Kromosom memuat banyak subunit yang disebut gen\index{gen}.  Gen tersusun dari molekul
+DNA\index{DNA}, dan DNA suatu gen mengodekan informasi yang mengatur protein.  Dalam konteks ini,
+kita akan membahas gen-gen yang memuat informasi yang memengaruhi suatu sifat fisik organisme,
+seperti tinggi badan.  Kromosom yang berpasangan membuat gen-gen pada kromosom itu turut berpasangan.
+\par
+Dalam suatu spesies, setiap gen dapat memiliki salah satu dari beberapa bentuk.  Berbagai bentuk
+ini disebut alel\index{alel}.  Alel-alel yang berbeda dapat dipandang berpotensi menimbulkan
+pengaruh yang berbeda pada sifat fisik yang dibahas.  Dari dua alel yang terdapat dalam suatu
+pasangan gen pada sebuah organisme, satu alel berasal dari salah satu orang tua dan alel lainnya
+berasal dari orang tua yang lain.  Jenis-jenis pasangan alel yang mungkin (tanpa memperhatikan
+urutan) disebut genotipe\index{genotipe}.
+\par
+Jika kita mengandaikan bahwa tinggi badan manusia sebagian besar dikendalikan oleh sebuah gen
+tertentu, kita menghadapi kesulitan yang sama seperti Galton.  Kita mengandaikan bahwa setiap orang
+tua memiliki sepasang alel yang sebagian besar mengendalikan tinggi badannya.  Karena setiap orang
+tua menyumbangkan satu alel dari pasangan gen ini kepada setiap keturunannya, terdapat empat
+pasangan alel yang mungkin bagi keturunan pada lokasi gen ini.  Asumsinya ialah bahwa pasangan alel
+tersebut sebagian besar mengendalikan tinggi badan keturunan, dan kita juga mengandaikan bahwa
+faktor genetis lebih berpengaruh daripada faktor non-genetis.  Akibatnya, pada keturunan seharusnya
+terlihat beberapa modus dalam distribusi tinggi badan, satu modus untuk setiap pasangan alel yang
+mungkin.  Distribusi ini tidak sesuai dengan distribusi tinggi badan yang diamati.
+\par
+Hipotesis alternatif yang dapat menjelaskan pengamatan bahwa tinggi badan keturunan dengan jenis
+kelamin tertentu berdistribusi normal ialah hipotesis banyak-gen\index{hipotesis banyak-gen}.
+Menurut hipotesis ini, kita mengandaikan bahwa banyak gen memengaruhi tinggi badan seseorang.
+Besarnya pengaruh gen-gen tersebut dapat berbeda-beda.  Karena itu, kita dapat merepresentasikan
+setiap pasangan gen dengan peubah acak $X_i$, dengan nilai peubah acak tersebut merupakan pengaruh
+pasangan alel terhadap tinggi badan orang itu.  Sebagai contoh, jika setiap orang tua memiliki dua
+alel berbeda dalam pasangan gen yang sedang dibahas, maka keturunannya memiliki salah satu dari
+empat pasangan alel yang mungkin pada lokasi gen ini.  Sekarang tinggi badan keturunan merupakan
+peubah acak yang dapat dinyatakan sebagai
+$$H = X_1 + X_2 + \cdots + X_n + W\ ,$$
+jika terdapat $n$ gen yang memengaruhi tinggi badan.  (Di sini, seperti sebelumnya, peubah acak
+$W$ menyatakan pengaruh non-genetis.)  Meskipun $n$ tetap, jika nilainya cukup besar, maka
+Teorema~\ref{thm 9.3.7} menyiratkan bahwa jumlah $X_1 + X_2 + \cdots + X_n$ berdistribusi mendekati
+normal.  Selanjutnya, jika kita mengandaikan bahwa pengaruh kumulatif $X_i$ jauh lebih besar
+daripada pengaruh $W$, maka $H$ berdistribusi mendekati normal.
+\par
+Ciri lain yang diamati dari distribusi tinggi badan orang dewasa dengan satu jenis kelamin dalam
+suatu populasi ialah bahwa variansnya tampak tidak bertambah atau berkurang dari satu generasi ke
+generasi berikutnya.  Hal ini telah diketahui pada masa Galton, dan upayanya untuk menjelaskannya
+membawanya kepada gagasan regresi menuju rataan.  Gagasan ini akan dibahas lebih lanjut dalam
+catatan sejarah di akhir seksi.  (Alasan kita hanya membahas satu jenis kelamin ialah bahwa tinggi
+badan manusia jelas terkait dengan jenis kelamin; secara umum, jika kita memiliki dua populasi
+yang masing-masing berdistribusi normal, gabungan keduanya belum tentu berdistribusi normal.)
+\par
+Dengan hipotesis banyak-gen, mudah untuk menjelaskan mengapa varians seharusnya tetap dari satu
+generasi ke generasi berikutnya.  Kita mulai dengan mengandaikan bahwa pada suatu lokasi gen
+tertentu terdapat $k$ alel, yang akan kita nyatakan dengan $A_1,\ A_2,\ \ldots,\ A_k$.  Kita
+mengandaikan bahwa keturunan dihasilkan melalui perkawinan acak.  Maksudnya, setiap keturunan
+memiliki peluang yang sama untuk berasal dari pasangan orang tua mana pun dalam generasi
+sebelumnya.  Ada cara lain memandang perkawinan acak yang mempermudah perhitungan.  Perhatikan
+himpunan $S$ yang memuat seluruh alel (pada lokasi gen yang ditentukan) dalam semua sel germinal
+seluruh individu pada generasi orang tua.  Dalam konteks himpunan $S$, perkawinan acak berarti
+setiap pasangan alel dalam $S$ berpeluang sama untuk berada dalam keturunan tertentu.  (Pembaca
+mungkin berkeberatan terhadap cara memandang perkawinan acak ini karena memungkinkan dua alel dari
+orang tua yang sama berakhir pada satu keturunan; tetapi jika banyak individu dalam populasi orang
+tua cukup besar, diizinkan atau tidaknya peristiwa ini tidak banyak memengaruhi peluang.)
+\par
+Untuk $1 \le i \le k$, misalkan $p_i$ menyatakan proporsi alel dalam populasi orang tua yang
+bertipe $A_i$.  Jelas bahwa proporsi ini sama dengan proporsi alel dalam sel germinal populasi
+orang tua, dengan mengandaikan bahwa setiap orang tua menghasilkan sel germinal dalam jumlah yang
+kurang lebih sama.  Perhatikan distribusi alel pada keturunan.  Karena setiap sel germinal berpeluang sama
+untuk dipilih bagi keturunan tertentu, distribusi alel pada keturunan sama dengan distribusi pada
+orang tua.
+\par
+Selanjutnya, kita membahas distribusi genotipe dalam kedua generasi.  Kita akan membuktikan fakta
+berikut: distribusi genotipe dalam generasi keturunan hanya bergantung pada distribusi alel dalam
+generasi orang tua (khususnya, tidak bergantung pada distribusi genotipe dalam generasi orang tua).
+Perhatikan genotipe-genotipe yang mungkin; terdapat $k(k+1)/2$ genotipe.  Berdasarkan asumsi kita,
+genotipe $A_iA_i$ akan muncul dengan frekuensi $p_i^2$, dan genotipe $A_iA_j$, dengan $i \ne j$,
+akan muncul dengan frekuensi $2p_ip_j$.  Jadi, seperti yang dinyatakan, frekuensi genotipe hanya
+bergantung pada frekuensi alel dalam generasi orang tua.
+\par
+Ini berarti bahwa jika kita mulai dari generasi tertentu dan distribusi alel tertentu, maka dalam
+semua generasi sesudah generasi awal tersebut, baik distribusi alel maupun distribusi genotipe akan
+tetap.  Pernyataan terakhir ini dikenal sebagai Hukum Hardy--Weinberg.\index{Hukum Hardy--Weinberg}
+\par
+Kita dapat menguraikan akibat hukum ini bagi distribusi tinggi badan orang dewasa dari satu jenis
+kelamin dalam suatu populasi.  Ingat bahwa tinggi badan keturunan diberikan oleh peubah acak $H$,
+dengan
+$$H = X_1 + X_2 + \cdots + X_n + W\ ,$$
+dengan $X_i$ bersesuaian dengan gen-gen yang memengaruhi tinggi badan, dan peubah acak $W$
+menyatakan pengaruh non-genetis.  Hukum Hardy--Weinberg menyatakan bahwa untuk setiap $X_i$,
+distribusi pada generasi keturunan sama dengan distribusi pada generasi orang tua.  Jadi, jika kita
+mengandaikan bahwa distribusi $W$ kurang lebih sama dari satu generasi ke generasi berikutnya (atau
+jika kita mengandaikan bahwa pengaruhnya kecil), maka distribusi $H$ sama dari satu generasi ke
+generasi berikutnya.  (Sesungguhnya, pengaruh pola makan merupakan bagian dari $W$, dan jelas bahwa
+dalam banyak populasi manusia, pola makan telah cukup banyak berubah antargenerasi pada masa
+belakangan ini.  Perubahan ini dianggap sebagai salah satu alasan mengapa manusia rata-rata semakin
+tinggi.  Pengaruh $W$ juga dianggap kecil dibandingkan dengan pengaruh genetis orang tua.)
+
+\subsection*{Pembahasan}
+Secara umum, Teorema Limit Pusat memuat lebih banyak informasi daripada Hukum Bilangan Besar,
+karena teorema tersebut memberikan informasi terperinci mengenai \emx {bentuk} distribusi $S_n^*$;
+untuk~$n$ yang besar, bentuknya kurang lebih sama dengan bentuk densitas normal baku.  Secara lebih
+khusus, Teorema Limit Pusat menyatakan bahwa jika kita menstandardisasi distribusi $S_n$ dan
+mengoreksi tingginya, maka fungsi densitas normal merupakan aproksimasi yang sangat baik bagi
+distribusi ini ketika $n$ besar.  Dengan demikian, kita memiliki aproksimasi yang dapat dihitung
+untuk distribusi~$S_n$.  Aproksimasi ini memberi kita teknik yang ampuh untuk menghasilkan jawaban
+atas berbagai macam pertanyaan mengenai jumlah peubah acak independen, sekalipun setiap peubah acak
+memiliki distribusi yang berbeda.
+
+\subsection*{Catatan Sejarah}
+Pada pertengahan tahun 1800-an, matematikawan Belgia Quetelet\index{QUETELET,
+A.}\footnote{S. Stigler, \emx {The History of Statistics,} (Cambridge: Harvard University Press,
+1986), p. 203.} telah menunjukkan secara empiris bahwa distribusi normal muncul dalam data nyata,
+dan juga telah memberikan metode untuk mencocokkan kurva normal dengan suatu kumpulan data.
+Jauh sebelumnya, Laplace\index{LAPLACE, P. S.}\footnote{ibid., p. 136} telah menunjukkan bahwa
+jumlah banyak peubah acak independen yang berdistribusi identik mendekati normal.
+Galton\index{GALTON, F.} mengetahui bahwa sifat fisik tertentu dalam suatu populasi tampak
+berdistribusi mendekati normal, tetapi ia tidak menganggap hasil Laplace sebagai penjelasan yang
+baik mengenai bagaimana distribusi ini muncul.  Berikut ini kita kutip pernyataan Galton dari
+sumber primer ranah publik.\footnote{Francis Galton, ``Typical Laws of Heredity,''
+\emx{Nature}, vol.~15 (1877), pp.~512--514, doi:10.1038/015512b0. Terjemahan editorial
+atas sumber primer ranah publik.}
+\begin{quote}
+Pertama-tama, izinkan saya menunjukkan suatu fakta yang entah mengapa luput dari perhatian
+Quetelet dan semua penulis yang mengikuti jejaknya, dan yang berkaitan erat dengan pekerjaan kita
+malam ini.  Faktanya ialah bahwa, meskipun ciri-ciri tumbuhan dan hewan mengikuti hukum tersebut,
+alasan mengapa demikian masih sama sekali belum dijelaskan.  Inti hukum itu adalah bahwa
+perbedaan-perbedaan harus sepenuhnya disebabkan oleh tindakan bersama sejumlah besar pengaruh
+\emx{kecil} yang independen dalam berbagai kombinasi...Namun proses pewarisan...bukanlah pengaruh
+kecil, melainkan pengaruh yang sangat penting...Kesimpulannya ialah...bahwa proses pewarisan harus
+bekerja selaras dengan hukum penyimpangan, dan dalam pengertian tertentu juga harus mematuhinya.
+\end{quote}
+\par
+Galton menciptakan alat yang dikenal sebagai quincunx\index{quincunx} (sekarang lazim disebut
+papan Galton)\index{papan Galton}, yang kita gunakan dalam Contoh~\ref{exam 3.2.1} untuk
+menunjukkan cara memperoleh distribusi binomial secara fisik.  Tentu saja, Teorema Limit Pusat
+menyatakan bahwa untuk nilai parameter $n$ yang besar, distribusi binomial mendekati normal.
+Galton menggunakan quincunx untuk menjelaskan bagaimana pewarisan memengaruhi distribusi suatu
+sifat pada keturunan.
+\par
+Seperti Galton, kita membahas apa yang terjadi jika, pada suatu ketinggian di tengah, kita menghentikan
+sementara gerak butiran yang jatuh di dalam quincunx.  Pembaca dapat melihat
+skema konseptual pada Gambar~\ref{fig 9.62}.
+\begin{figure}[ht]
+\centering
+\fbox{\begin{minipage}{4truein}
+\centering
+\small
+Distribusi butiran pada garis $AB$: $N(\mu,\sigma_1^2)$\\[.15in]
+$\downarrow$ setiap kompartemen dilepas dan butirannya kembali menyebar\\[.15in]
+Distribusi jatuh dari satu kompartemen: $N(0,\sigma_2^2)$\\[.15in]
+$\downarrow$ campuran semua kompartemen\\[.15in]
+Distribusi akhir: $N(\mu,\sigma_1^2+\sigma_2^2)$
+\end{minipage}}
+\caption{Skema konseptual quincunx dua tahap, digambar ulang secara mandiri.}
+\label{fig 9.62}
+\end{figure}
+Skema ini dirumuskan ulang berdasarkan uraian Karl Pearson,\index{PEARSON,
+K.}\footnote{Rujukan historis: Karl Pearson, \emx {The Life, Letters and
+Labours of Francis Galton,} vol. IIIB (Cambridge at the University Press,
+1930), p.~466. Gambar historis tidak direproduksi.} yang bertumpu pada catatan
+Galton.  Dalam skema ini, butiran untuk sementara
+dipisahkan ke dalam kompartemen-kompartemen pada garis AB.  (Garis
+A$^{\prime}$B$^{\prime}$ membentuk landasan tempat butiran dapat berhenti.)  Jika garis AB tidak
+terlalu dekat dengan bagian atas quincunx, maka butiran akan berdistribusi mendekati normal pada
+garis ini.  Sekarang andaikan satu kompartemen dibuka, seperti ditunjukkan dalam gambar.  Butiran
+dari kompartemen tersebut akan jatuh dan membentuk distribusi normal di bagian bawah quincunx.
+Jika kemudian semua kompartemen dibuka, seluruh butiran akan jatuh dan menghasilkan distribusi
+yang sama seperti jika butiran itu tidak dihentikan sementara pada garis AB.  Namun, tindakan
+menghentikan butiran pada garis AB lalu melepaskan kompartemen satu per satu sama saja dengan
+mengonvolusikan dua distribusi normal.  Distribusi-distribusi normal di bagian bawah, yang
+bersesuaian dengan setiap kompartemen pada garis AB, sedang dicampur, dengan bobot berupa banyaknya
+butiran dalam setiap kompartemen.  Di sisi lain, telah diketahui bahwa jika butiran tidak
+terhalang, distribusi akhirnya mendekati normal.  Jadi, alat ini menunjukkan bahwa konvolusi dua
+distribusi normal kembali merupakan distribusi normal.
+\par
+Galton juga meninjau quincunx dari sudut pandang lain.  Ia memilah sekumpulan 490 biji ercis manis
+berdasarkan beratnya ke dalam tujuh kelompok.  Kepada masing-masing dari tujuh temannya, ia
+memberikan 10 biji dari setiap kelompok; teman-temannya kemudian menanam biji-biji itu.  Galton
+menemukan bahwa setiap kelompok menghasilkan biji yang beratnya berdistribusi normal.  (Ercis
+manis bereproduksi melalui penyerbukan sendiri, sehingga ia tidak perlu mempertimbangkan
+kemungkinan interaksi antara kelompok yang berbeda.)  Selain itu, ia menemukan bahwa varians berat
+keturunan sama untuk setiap kelompok.  Pemilahan ke dalam kelompok ini bersesuaian dengan
+kompartemen pada garis AB dalam quincunx.  Jadi, ercis manis tersebut seolah-olah diatur oleh
+konvolusi distribusi normal.
+\par
+Kini ia menghadapi suatu masalah.  Kita telah menunjukkan dalam Bab~\ref{chp 7}, dan Galton pun
+mengetahuinya, bahwa konvolusi dua distribusi normal menghasilkan distribusi normal dengan varians
+yang lebih besar daripada salah satu distribusi asal.  Namun, data biji ercis manisnya menunjukkan
+bahwa varians populasi keturunan sama dengan varians populasi orang tua.  Jawabannya terhadap
+masalah ini ialah mempostulatkan mekanisme yang ia sebut \emx{reversi}\index{reversi}, dan yang
+sekarang disebut \emx{regresi menuju rataan}\index{regresi menuju rataan}.  Menurut ringkasan
+Stigler,\index{STIGLER, S.}\footnote{S. Stigler, \emx{The History of Statistics}
+(Cambridge: Harvard University Press, 1986), p.~282. Ringkasan editorial; ungkapan sumber
+tidak diterjemahkan atau direproduksi.} rataan setiap kelompok keturunan bergeser menuju
+rataan populasi; simpangannya tetap searah dengan simpangan kelompok induk, tetapi hanya sekitar
+sepertiganya. Penyusutan linear ini, bersama variasi dalam setiap kelompok, mempertahankan
+keragaman populasi.
+\par
+Mekanisme reversi Galton diringkas oleh skema konseptual pada
+Gambar~\ref{fig 9.63}.\footnote{Rujukan historis: Karl Pearson, \emx {The Life,
+Letters and Labours of Francis Galton,} vol. IIIA (Cambridge at the University
+Press, 1930), p.~9. Gambar historis tidak direproduksi.}
+\begin{figure}[ht]
+\centering
+\fbox{\begin{minipage}{4truein}
+\centering
+\small
+Rataan kelompok orang tua: $\mu+d$\\[.15in]
+$\downarrow\quad$ reversi linear $d\longmapsto d/3$\\[.15in]
+Rataan kelompok keturunan: $\mu+d/3$\\[.15in]
+Variasi di sekitar rataan kelompok menghasilkan kembali sebaran populasi.
+\end{minipage}}
+\caption{Skema mandiri penjelasan Galton mengenai reversi menuju rataan.}
+\label{fig 9.63}
+\end{figure}
+
+%Should we put some exercises about genetics or Hardy-Weinberg?
+
+\exercises
+\begin{LJSItem}
+
+\i\label{exer 9.2.100}  Sebuah dadu dilempar 24 kali.  Gunakan Teorema Limit Pusat untuk
+memperkirakan peluang bahwa
+\begin{enumerate}
+\item  jumlah hasil lemparannya lebih besar dari 84.
+
+\item  jumlah hasil lemparannya sama dengan 84.
+\end{enumerate}
+
+\i\label{exer 9.2.101}  Seorang pejalan acak mulai dari~0 pada sumbu~$x$ dan pada setiap satuan
+waktu bergerak 1 langkah ke kanan atau 1 langkah ke kiri dengan peluang 1/2.  Perkirakan peluang
+bahwa, setelah 100 langkah, pejalan tersebut berada lebih dari 10 langkah dari posisi awal.
+
+\i\label{exer 9.2.102}  Seutas tali tersusun dari 100 serat.  Andaikan bahwa kekuatan putus tali
+tersebut merupakan jumlah kekuatan putus setiap serat.  Andaikan pula bahwa jumlah ini dapat
+dipandang sebagai jumlah suatu proses percobaan independen dengan 100 percobaan yang masing-masing
+memiliki nilai harapan 10 pon dan simpangan baku~1.  Tentukan peluang hampiran bahwa tali tersebut
+dapat menahan beban
+\begin{enumerate}
+\item  1000 pon.
+
+\item  970 pon.
+\end{enumerate}
+
+\i\label{exer 9.2.103}  Tulislah sebuah program untuk mencari rata-rata 1000 digit acak
+0,~1, 2, 3, 4, 5, 6, 7, 8, atau~9.  Buatlah program tersebut menguji apakah rata-ratanya berada
+dalam jarak tiga simpangan baku dari nilai harapan~4.5.  Ubahlah program agar mengulangi simulasi
+ini 1000 kali dan mencatat berapa kali pengujian berhasil.  Apakah hasil Anda sesuai dengan
+Teorema Limit Pusat?
+
+\i\label{exer 9.2.104}  Sebuah dadu dilempar hingga untuk pertama kalinya jumlah seluruh nilai sisi
+yang muncul mencapai 700 atau lebih.  Perkirakan peluang bahwa untuk mencapai jumlah tersebut diperlukan
+\begin{enumerate}
+\item  lebih dari 210 lemparan.
+
+\item  kurang dari 190 lemparan.
+
+\item  antara 180 dan 210 lemparan, termasuk kedua batasnya.
+\end{enumerate}
+
+\i\label{exer 9.2.105}  Sebuah bank menerima gulungan koin satu sen dan mengkreditkan 50~sen kepada
+nasabah tanpa menghitung isinya.  Andaikan bahwa sebuah gulungan berisi 49 koin dalam
+30~persen kasus, 50 koin dalam 60~persen kasus, dan 51 koin dalam 10~persen kasus.
+\begin{enumerate}
+\item  Tentukan nilai harapan dan varians besar kerugian bank pada sebuah gulungan biasa.
+
+\item  Perkirakan peluang bahwa bank akan kehilangan lebih dari 25~sen dalam 100 gulungan.
+
+\item  Perkirakan peluang bahwa bank akan kehilangan tepat 25~sen dalam 100 gulungan.
+
+\item  Perkirakan peluang bahwa bank akan mengalami kerugian berapa pun dalam 100 gulungan.
+
+\item  Berapa banyak gulungan yang perlu dikumpulkan bank agar bank memiliki peluang 99 persen
+mengalami kerugian bersih?
+\end{enumerate}
+
+\i\label{exer 9.2.106}  Ketika mengukur tinggi sebuah menara setinggi 200 kaki, suatu alat ukur
+survei menghasilkan galat $-2$,~$-1$, 0, 1, atau~2 kaki dengan peluang yang sama.
+\begin{enumerate}
+\item  Tentukan nilai harapan dan varians tinggi yang diperoleh dari satu kali penggunaan alat ini.
+
+\item  Perkirakan peluang bahwa dalam 18 pengukuran independen terhadap menara ini, rata-rata hasil
+pengukuran berada di antara 199~dan~201, termasuk kedua batasnya.
+\end{enumerate}
+
+\i\label{exer 9.2.107}  Untuk Contoh~\ref{exam 9.9}, perkirakan $P(S_{30} = 0)$.  Artinya,
+perkirakan peluang bahwa galat-galatnya saling meniadakan dan rata-rata nilai mahasiswa tersebut
+benar.
+
+\i\label{exer 9.2.108}  Buktikan Hukum Bilangan Besar dengan menggunakan Teorema Limit Pusat.
+
+\i\label{exer 9.2.109}  Peter dan Paul memainkan permainan cocok koin 10{,}000 kali.  Uraikan
+secara singkat apa yang dinyatakan oleh setiap teorema berikut mengenai kekayaan Peter.
+\begin{enumerate}
+\item  Hukum Bilangan Besar.
+
+\item  Teorema Limit Pusat.
+\end{enumerate}
+
+\i\label{exer 9.2.110}  Seorang wisatawan di Las Vegas tertarik pada suatu permainan judi yang
+meminta pemain mempertaruhkan 1~dolar pada setiap permainan; kemenangan membayar pemain 2~dolar
+ditambah pengembalian taruhannya, sedangkan kekalahan hanya membuatnya kehilangan taruhan.
+Orang dalam Las Vegas dan pelajar teori peluang yang jeli mengetahui bahwa peluang menang dalam
+permainan ini adalah~1/4.  Ketika rasa lapar memaksanya meninggalkan meja, wisatawan tersebut telah
+memainkan permainan ini 240 kali.  Dengan mengandaikan bahwa tidak terjadi sesuatu yang nyaris
+mustahil, kira-kira berapa banyak uang yang hilang ketika wisatawan itu meninggalkan kasino?
+Berapakah peluang bahwa ia tidak kehilangan uang?
+
+\i\label{exer 9.2.111}  Kita telah melihat bahwa, ketika bermain rolet di Monte Carlo
+(Contoh~\ref {exam 6.7}), bertaruh 1~dolar pada merah atau 1~dolar pada~17 berarti memilih di antara
+distribusi-distribusi
+$$
+m_X = \pmatrix{
+-1 & -1/2 & 1 \cr
+18/37 & 1/37 & 18/37\cr }
+$$
+atau
+$$
+m_X = \pmatrix{
+-1 & 35 \cr
+36/37 & 1/37 \cr }
+$$
+Anda berencana memilih salah satu metode ini dan menggunakannya untuk memasang 100 taruhan
+masing-masing sebesar 1 dolar.  Dengan menggunakan Teorema Limit Pusat, perkirakan peluang memperoleh
+keuntungan dalam masing-masing permainan.  Bandingkan perkiraan Anda dengan peluang sebenarnya,
+yang melalui perhitungan eksak dapat ditunjukkan bernilai .437 dan .509 hingga tiga tempat desimal.
+
+\i\label{exer 9.2.112}  Dalam Contoh~\ref{exam 9.9}, tentukan nilai terbesar~$p$ yang memberikan
+peluang .954 bahwa angka pada tempat desimal pertama benar.
+
+\i\label{exer 9.2.113}  Contoh~\ref{exam 9.9} dianggap tidak realistis karena peluang galatnya
+terlalu rendah.  Buatlah sendiri perkiraan yang masuk akal untuk distribusi $m(x)$, lalu tentukan
+peluang bahwa rata-rata nilai seorang mahasiswa akurat hingga .05.  Tentukan juga peluang bahwa
+rata-rata tersebut akurat hingga .5.
+
+\i\label{exer 9.2.114}  Carilah barisan peubah acak diskret independen terbatas seragam $\{X_n\}$
+sedemikian sehingga varians jumlahnya tidak menuju $\infty$ ketika $n \rightarrow \infty$, dan
+jumlahnya tidak berdistribusi normal secara asimtotik.
+
+\end{LJSItem}
+
+% As a precaution, I commented this choice command out.
+%\choice{}{\section[Continuous Independent Trials]{Central Limit Theorem for 
+\section[Percobaan Independen Kontinu]{Teorema Limit Pusat untuk
+Percobaan Independen Kontinu}
+\label{sec 9.4}
+Dalam Bagian~\ref{sec 9.3}, kita telah melihat bahwa fungsi distribusi bagi jumlah dari banyak
+peubah acak diskret independen, yang banyaknya dinyatakan oleh $n$, dengan rataan~$\mu$ dan
+varians~$\sigma^2$ cenderung menyerupai densitas normal dengan rataan~$n\mu$ dan
+varians~$n\sigma^2$.  Hal yang luar biasa ialah bahwa hasil ini berlaku bagi {\em setiap}
+distribusi dengan rataan dan varians berhingga.  Dalam bagian ini, kita akan melihat bahwa hasil
+yang sama juga berlaku bagi peubah acak
+kontinu yang memiliki fungsi densitas yang sama.
+\par
+Mari kita mulai dengan mengamati beberapa contoh untuk melihat apakah hasil semacam itu masuk akal.
+
+\subsection*{Jumlah Terstandardisasi}
+\begin{example}
+Andaikan kita memilih $n$ bilangan acak dari interval $[0,1]$ dengan densitas seragam.  Misalkan
+$X_1$,~$X_2$, \dots,~$X_n$ menyatakan pilihan-pilihan tersebut, dan $S_n = X_1 + X_2 +\cdots+ X_n$
+menyatakan jumlahnya.
+
+Dalam Contoh~\ref{exam 7.12}, kita melihat bahwa fungsi densitas~$S_n$ cenderung berbentuk normal,
+tetapi berpusat di~$n/2$ dan semakin mendatar.  Untuk membandingkan bentuk fungsi-fungsi densitas
+ini bagi nilai~$n$ yang berbeda, kita mengikuti cara dalam seksi sebelumnya: kita
+\emx {menstandardisasi} $S_n$ dengan mendefinisikan
+$$
+S_n^* = \frac {S_n - n\mu}{\sqrt n \sigma}\ .
+$$
+Dengan demikian, untuk semua~$n$ kita memperoleh
+\begin{eqnarray*}
+E(S_n^*) & = & 0\ , \\
+V(S_n^*) & = & 1\ .
+\end{eqnarray*}
+Fungsi densitas~$S_n^*$ hanyalah versi terstandardisasi dari fungsi densitas~$S_n$ (lihat
+Gambar~\ref{fig 9.7}).
+\end{example}
+
+\putfig{4truein}{PSfig9-7}
+{Fungsi densitas $S^*_n$ (kasus seragam, $n = 2, 3, 4, 10$).}{fig 9.7} 
+
+\begin{example}
+Mari kita melakukan hal yang sama, tetapi sekarang kita memilih bilangan dari interval
+$[0,+\infty)$ dengan densitas eksponensial berparameter~$\lambda$.  Maka (lihat
+Contoh~\ref{exam 6.21})
+\par
+\begin{eqnarray*}
+\mu & = & E(X_i)  =  \frac 1\lambda\ , \\
+\sigma^2 & = & V(X_j) = \frac 1{\lambda^2}\ .
+\end{eqnarray*}
+\par
+Di sini kita mengetahui fungsi densitas~$S_n$ secara eksplisit (lihat
+Bagian~\ref{sec 7.2}).  Kita dapat menggunakan Akibat~\ref{cor 5.1} untuk menghitung fungsi
+densitas $S_n^*$.  Kita memperoleh
+\par
+\begin{eqnarray*}
+  f_{S_n}(x) & = & \frac {\lambda e^{-\lambda x}(\lambda x)^{n - 1}}{(n - 1)!}\ , \\
+f_{S_n^*}(x) & = & \frac {\sqrt n}\lambda f_{S_n} \left( \frac {\sqrt n x +
+n}\lambda \right)\ .
+\end{eqnarray*}
+Grafik fungsi densitas~$S_n^*$ ditampilkan dalam Gambar~\ref{fig 9.9}.
+\end{example}
+
+\putfig{4truein}{PSfig9-9}
+{Fungsi densitas $S^*_n$ (kasus eksponensial,
+$n = 2, 3, 10, 30$, $\lambda = 1$).}{fig 9.9} 
+
+Contoh-contoh ini membuat masuk akal dugaan bahwa fungsi densitas peubah acak yang dinormalisasi
+$S_n^*$, untuk~$n$ yang besar, akan sangat menyerupai densitas normal dengan rataan~0 dan varians~1, baik
+dalam kasus kontinu maupun kasus diskret.  Teorema Limit Pusat menyatakan dugaan ini secara tepat.
+
+\subsection*{Teorema Limit Pusat}
+\begin{theorem}\label{thm 9.4.7}{\bf (Teorema Limit Pusat)}\index{Teorema Limit Pusat!untuk
+proses percobaan independen kontinu} 
+Misalkan $S_n = X_1 + X_2 +\cdots+ X_n$ adalah jumlah $n$ peubah acak kontinu independen dengan
+fungsi densitas yang sama~$p$, nilai harapan~$\mu$, dan varians~$\sigma^2$.  Misalkan
+$S_n^* = (S_n - n\mu)/\sqrt n \sigma$.  Maka, untuk semua $a < b$, kita mempunyai
+$$
+\lim_{n \to \infty} P(a < S_n^* < b) = \frac 1{\sqrt{2\pi}} \int_a^b
+e^{-x^2/2}\, dx\ .
+$$
+\end{theorem}
+%********Some applications of the CLT to statistics should be given 
+%at the end of Section 9.2.  We should also change the structure of
+%the examples here relative to the subsections. 
+\par
+Kita akan memberikan bukti teorema ini dalam Bagian~\ref{sec 10.3}.  Sekarang kita akan membahas
+beberapa contoh.
+
+\begin{example}\label{exam 9.10}
+Andaikan seorang juru ukur ingin mengukur jarak yang telah diketahui, misalnya 1~mil, dengan
+menggunakan alat transit dan suatu metode triangulasi.  Ia mengetahui bahwa akibat kemungkinan
+pergeseran alat transit, distorsi atmosfer, dan kesalahan manusia, setiap pengukuran cenderung
+sedikit meleset.  Ia berencana melakukan beberapa pengukuran dan mengambil rata-ratanya.  Ia
+mengandaikan bahwa pengukuran-pengukurannya merupakan peubah acak independen dengan distribusi yang
+sama, rataan $\mu = 1$, dan simpangan baku $\sigma = .0002$ (jadi, jika galat berdistribusi
+mendekati normal, pengukurannya berada dalam jarak 1 kaki dari jarak yang benar sekitar 65\% dari
+seluruh percobaan).  Apa yang dapat ia katakan mengenai rata-ratanya?
+\par
+Ia dapat mengatakan bahwa jika $n$ besar, rata-rata $S_n/n$ memiliki fungsi densitas yang mendekati
+normal, dengan rataan $\mu = 1$ mil dan simpangan baku $\sigma = .0002/\sqrt n$ mil.
+
+Berapa banyak pengukuran yang perlu ia lakukan agar cukup yakin bahwa rata-ratanya berada dalam
+jarak .0001 dari nilai sebenarnya?  Ketaksamaan Chebyshev menyatakan
+$$
+P\left(\left| \frac {S_n}n - \mu \right| \geq .0001 \right) \leq \frac
+{(.0002)^2}{n(10^{-8})} = \frac 4n\ ,
+$$
+sehingga kita harus memiliki $n \ge 80$ agar peluang bahwa galatnya kurang dari .0001 melampaui
+.95.
+\par
+Kita telah memperhatikan bahwa perkiraan dari ketaksamaan Chebyshev tidak selalu baik, dan inilah
+salah satu contohnya.  Jika kita mengandaikan bahwa $n$ cukup besar sehingga densitas~$S_n$
+mendekati normal, maka kita mempunyai
+\par
+\begin{eqnarray*}
+P\left(\left| \frac {S_n}n - \mu \right| < .0001 \right) &=& P\bigl(-.5\sqrt{n} < S_n^*
+< +.5\sqrt{n}\bigr) \\
+     &\approx& \frac 1{\sqrt{2\pi}} \int_{-.5\sqrt{n}}^{+.5\sqrt{n}} e^{-x^2/2}\, dx\ ,
+\end{eqnarray*}
+dan pernyataan terakhir ini lebih besar dari .95 jika $.5\sqrt{n} \ge 2.$  Artinya, cukup mengambil
+$n = 16$ pengukuran untuk memperoleh hasil yang sama.  Perhitungan kedua ini lebih tajam, tetapi
+bergantung pada asumsi bahwa $n = 16$ cukup besar agar densitas normal menjadi aproksimasi yang baik
+bagi~$S_n^*$, dan dengan demikian bagi~$S_n$.  Di sini Teorema Limit Pusat tidak mengatakan seberapa
+besar $n$ harus dipilih.  Dalam kebanyakan kasus yang melibatkan jumlah peubah acak independen,
+pedoman praktis yang baik ialah bahwa aproksimasi sudah baik untuk $n \ge 30$.  Dalam kasus ini,
+jika kita mengandaikan bahwa galat berdistribusi mendekati normal, aproksimasinya mungkin cukup baik
+bahkan untuk $n = 16$.
+\end{example}
+
+\subsection*{Memperkirakan Rataan}
+
+\begin{example}(Lanjutan Contoh~\ref{exam 9.10})
+Sekarang andaikan juru ukur kita mengukur jarak yang belum diketahui dengan peralatan yang sama
+dalam kondisi yang sama.  Ia melakukan 36 pengukuran dan menghitung rata-ratanya.  Seberapa yakin
+ia dapat menyatakan bahwa hasil pengukurannya berada dalam jarak .0002 dari nilai sebenarnya?
+
+Dengan kembali menggunakan aproksimasi normal, kita memperoleh
+\begin{eqnarray*}
+P\left(\left|\frac {S_n}n - \mu\right| < .0002 \right) &=& P\bigl(|S_n^*| < .5\sqrt n\bigr) \\
+     &\approx& \frac 2{\sqrt{2\pi}} \int_{-3}^3 e^{-x^2/2}\, dx \\
+     &\approx& .997\ .
+\end{eqnarray*}
+
+
+Ini berarti bahwa juru ukur tersebut dapat memiliki keyakinan sebesar 99.7~persen bahwa rata-ratanya berada
+dalam jarak .0002 dari nilai sebenarnya.  Untuk meningkatkan tingkat keyakinannya, ia dapat
+melakukan lebih banyak pengukuran, menuntut ketelitian yang lebih rendah, atau meningkatkan mutu
+pengukurannya (yaitu mengurangi varians~$\sigma^2$).  Dalam setiap kasus, Teorema Limit Pusat
+memberikan informasi kuantitatif mengenai tingkat keyakinan suatu proses pengukuran, dengan tetap
+mengandaikan bahwa aproksimasi normal berlaku.
+\par
+Sekarang andaikan juru ukur tersebut tidak mengetahui rataan ataupun simpangan baku
+pengukuran-pengukurannya, tetapi mengandaikan bahwa pengukuran itu independen.  Apa yang harus ia
+lakukan?
+\par
+Sekali lagi, ia melakukan beberapa pengukuran terhadap jarak yang telah diketahui dan menghitung
+rata-ratanya.  Seperti sebelumnya, rata-rata galat berdistribusi mendekati normal, tetapi sekarang
+dengan rataan dan varians yang tidak diketahui.
+\end{example}
+\subsection*{Rataan Sampel}
+Jika ia mengetahui bahwa varians~$\sigma^2$ distribusi galat adalah .0002, ia dapat memperkirakan
+rataan~$\mu$ dengan mengambil \emx {rata-rata,} atau \emx {rataan sampel} dari, misalnya, 36
+pengukuran:
+$$
+\bar \mu = \frac {x_1 + x_2 +\cdots+ x_n}n\ ,
+$$
+dengan $n = 36$.  Kemudian, seperti sebelumnya, $E(\bar \mu) = \mu$.  Selain itu, argumen di atas
+menunjukkan bahwa
+$$
+P(|\bar \mu - \mu| < .0002) \approx .997\ .
+$$
+Interval $(\bar \mu - .0002, \bar \mu + .0002)$ disebut \emx {interval kepercayaan
+99.7\%}\index{interval kepercayaan} untuk~$\mu$ (lihat Contoh~\ref{exam 9.4.1}).
+
+\subsection*{Varians Sampel}
+Jika ia tidak mengetahui varians~$\sigma^2$ distribusi galat, ia dapat memperkirakan $\sigma^2$
+dengan \emx {varians sampel}:
+$$
+\bar \sigma^2 = \frac {(x_1 - \bar \mu)^2 + (x_2 - \bar \mu)^2
++\cdots+ (x_n - \bar \mu)^2}n\ ,
+$$
+dengan $n = 36$.  Hukum Bilangan Besar, ketika diterapkan pada peubah-peubah acak
+$(X_i - \bar \mu)^2$, menyatakan bahwa untuk~$n$ yang besar, varians sampel~$\bar \sigma^2$
+mendekati varians~$\sigma^2$, sehingga juru ukur dapat menggunakan $\bar \sigma^2$ sebagai
+pengganti~$\sigma^2$ dalam argumen di atas.
+\par
+Pengalaman menunjukkan bahwa, dalam sebagian besar masalah praktis jenis ini, varians sampel
+merupakan perkiraan yang baik bagi varians dan dapat digunakan sebagai pengganti varians untuk
+menentukan tingkat kepercayaan rataan sampel.  Artinya, kita dapat mengandalkan Hukum Bilangan Besar
+untuk memperkirakan varians dan Teorema Limit Pusat untuk memperkirakan rataan.
+\par
+Kita dapat memeriksa hal ini dalam beberapa kasus khusus.  Andaikan kita mengetahui bahwa distribusi
+galat adalah \emx {normal,} dengan rataan dan varians yang tidak diketahui.  Kita dapat mengambil
+sampel yang terdiri dari $n$ pengukuran, mencari rataan sampel~$\bar \mu$ dan varians
+sampel~$\bar \sigma^2$, lalu membentuk
+$$
+T_n^* = \frac {S_n - n\bar\mu}{\sqrt{n}\bar\sigma}\ ,
+$$
+dengan $n = 36$.  Kita mengharapkan $T_n^*$ menjadi aproksimasi yang baik bagi~$S_n^*$ untuk~$n$
+yang besar.
+
+\subsection*{Densitas-$t$}
+Statistikawan W.~S. Gosset\index{GOSSET, W. S.}\footnote{W. S. Gosset menemukan distribusi yang
+sekarang kita sebut distribusi-$t$ ketika bekerja untuk Guinness Brewery di Dublin.  Ia menulis
+dengan nama samaran ``Student."  Hasil yang dibahas di sini pertama kali terbit dalam Student,
+``The Probable Error of a Mean," \emx {Biometrika,} vol.~6 (1908), pp.~1-24.} menunjukkan bahwa
+dalam kasus ini $T_n^*$ memiliki fungsi densitas yang bukan normal, melainkan
+\emx {densitas-$t$}\index{fungsi densitas!t-}\index{densitas-t} dengan $n$ derajat kebebasan.
+(Jumlah derajat kebebasan, yaitu $n$, hanyalah parameter yang memberi tahu kita densitas-$t$ mana yang
+harus digunakan.)  Dalam kasus ini, kita dapat menggunakan densitas-$t$ sebagai pengganti densitas
+normal untuk menentukan tingkat kepercayaan bagi~$\mu$.  Ketika $n$ bertambah, densitas-$t$
+mendekati densitas normal.  Bahkan, untuk $n = 8$, densitas-$t$ dan densitas normal praktis sama
+(lihat Gambar~\ref{fig 9.12}).
+
+\putfig{4.5truein}{PSfig9-12}
+{Grafik $t-$densitas untuk $n= 1, 3, 8$ dan densitas normal dengan $\mu = 0,
+\sigma = 1$.}{fig 9.12} 
+
+\exercises
+\indent \emx {Catatan untuk soal komputer}:
+\begin{description}
+\item[(a)] $\ $Simulasi: Ingat (lihat Akibat~\ref{cor 5.2}) bahwa
+$$
+X = F^{-1}(rnd)   
+$$
+akan menyimulasikan peubah acak dengan densitas $f(x)$ dan distribusi
+$$
+F(X) = \int_{-\infty}^x f(t)\, dt\ .
+$$
+Jika $f(x)$ merupakan fungsi densitas normal dengan rataan $\mu$ dan
+simpangan baku $\sigma$, sedangkan baik
+$F$ maupun $F^{-1}$ tidak dapat
+dinyatakan dalam bentuk tertutup, gunakan sebagai gantinya
+$$
+X = \sigma\sqrt {-2\log(rnd)} \cos 2\pi(rnd) + \mu\ .
+$$
+\item[(b)] $\ $Grafik batang: upayakan agar grafik Anda memuat sekitar 20~hingga~30 batang
+(dengan lebar yang sama).  Hal ini dapat dicapai dengan memilih rentang $[x{\rm min}, x{\rm min}]$
+dan banyaknya batang secara tepat (misalnya, $[\mu - 3\sigma, \mu + 3\sigma]$ dengan 30 batang
+akan cocok dalam banyak kasus).  Bereksperimenlah!
+\end{description}
+\vskip .1in
+
+\begin{LJSItem}
+
+\i\label{exer 9.4.1}  Misalkan $X$ adalah peubah acak kontinu dengan rataan $\mu(X)$ dan varians
+$\sigma^2(X)$, dan misalkan $X^* = (X - \mu)/\sigma$ adalah versi terstandardisasinya.
+Verifikasikan secara langsung bahwa $\mu(X^*) = 0$ dan $\sigma^2(X^*) = 1$.
+
+\i\label{exer 9.4.2}  Misalkan $\{X_k\}$, $1 \leq k \leq n$, adalah barisan peubah acak
+independen, semuanya dengan rataan~0 dan varians~1, dan misalkan $S_n$,~$S_n^*$, dan~$A_n$
+berturut-turut adalah jumlah, jumlah terstandardisasi, dan rata-ratanya.  Verifikasikan secara
+langsung bahwa
+$S_n^* = S_n/\sqrt{n} = \sqrt{n} A_n$.
+
+\i\label{exer 9.4.3}  Misalkan $\{X_k\}$, $1 \leq k \leq n$, adalah barisan peubah acak yang
+semuanya memiliki rataan~$\mu$ dan varians~$\sigma^2$, dan misalkan $Y_k = X_k^*$ adalah versi
+terstandardisasi dari peubah-peubah tersebut.  Misalkan $S_n$ dan $T_n$ masing-masing adalah jumlah
+peubah-peubah $X_k$ dan $Y_k$, sedangkan $S_n^*$ dan $T_n^*$ adalah versi terstandardisasi dari
+jumlah-jumlah itu.  Tunjukkan bahwa $S_n^* = T_n^* =
+T_n/\sqrt{n}$.
+
+\i\label{exer 9.4.4} Andaikan kita memilih secara independen 25 bilangan acak
+(dengan densitas seragam) dari interval $[0,20]$.  Tuliskan densitas-densitas normal yang
+mengaproksimasi densitas jumlahnya $S_{25}$, jumlah terstandardisasinya
+$S_{25}^*$, dan rata-ratanya $A_{25}$.
+
+\i\label{exer 9.4.5} Tulislah program untuk memilih secara independen 25 bilangan acak dari
+$[0,20]$, menghitung jumlahnya $S_{25}$, dan mengulangi percobaan ini 1000 kali.  Buatlah grafik
+batang untuk densitas~$S_{25}$ dan bandingkan dengan aproksimasi normal dalam
+Latihan~\ref{exer 9.4.4}.  Seberapa baik kecocokannya?  Sekarang lakukan hal yang sama untuk jumlah
+terstandardisasi $S_{25}^*$ dan rata-rata $A_{25}$.
+
+\i\label{exer 9.4.6}  Secara umum, Teorema Limit Pusat memberikan perkiraan yang lebih baik daripada
+ketaksamaan Chebyshev untuk rata-rata suatu jumlah.  Untuk melihatnya, misalkan $A_{25}$ adalah
+rata-rata yang dihitung dalam Latihan~\ref{exer 9.4.5}, dan misalkan $N$ adalah aproksimasi normal
+bagi~$A_{25}$.  Ubah program Anda dalam Latihan~\ref{exer 9.4.5} agar menghasilkan tabel fungsi
+$F(x) = P(|A_{25} - 10| \geq x) = {}$ proporsi dari keseluruhan 1000 percobaan yang memenuhi
+$|A_{25} - 10| \geq x$.  Lakukan hal yang sama untuk fungsi $f(x) = P(|N - 10| \geq x)$.
+(Untuk ini, Anda dapat menggunakan tabel normal, Tabel~\ref{tabl 9.1}, atau prosedur
+{\bf NormalArea}.)  Sekarang gambarkan pada sumbu yang sama grafik $F(x)$,~$f(x)$, dan fungsi
+Chebyshev $g(x) = 4/(3x^2)$.  Bagaimana perbandingan $f(x)$ dan $g(x)$ sebagai perkiraan bagi
+$F(x)$?
+
+\i\label{exer 9.4.7} Teorema Limit Pusat menyatakan bahwa jumlah peubah-peubah acak independen
+cenderung tampak normal, betapa pun tidak lazimnya distribusi setiap peubah itu.  Mari kita mengujinya
+dengan simulasi komputer.  Pilihlah secara independen 25 bilangan dari interval $[0,1]$ dengan
+densitas peluang $f(x)$ yang diberikan di bawah, lalu hitung jumlahnya $S_{25}$.  Ulangi percobaan ini
+1000 kali dan buatlah grafik batang dari hasilnya.  Sekarang gambarkan pada grafik yang sama densitas
+$\phi(x) = \mbox {normal \,\,\,}(x,\mu(S_{25}),\sigma(S_{25}))$.  Seberapa baik densitas normal
+cocok dengan grafik batang Anda dalam setiap kasus?
+\begin{enumerate}
+\item  $f(x) = 1$.
+
+\item  $f(x) = 2x$.
+
+\item  $f(x) = 3x^2$.
+
+\item  $f(x) = 4|x - 1/2|$.
+
+\item  $f(x) = 2 - 4|x - 1/2|$.
+\end{enumerate}
+
+\i\label{exer 9.4.8}  Ulangi percobaan yang dijelaskan dalam Latihan~\ref{exer 9.4.7}, tetapi
+sekarang pilihlah 25 bilangan dari $[0,\infty)$ dengan menggunakan $f(x) = e^{-x}$.
+
+\i\label{exer 9.4.9}  Seberapa besar $n$ harus dipilih sebelum
+$S_n = X_1 + X_2 +\cdots+ X_n$ mendekati distribusi normal?  Bilangan ini sering kali ternyata
+sangat kecil.  Mari kita selidiki pertanyaan ini dengan simulasi komputer.  Pilihlah $n$ bilangan
+dari $[0,1]$ dengan densitas peluang $f(x)$, dengan $n = 3$,~6, 12,~20, dan ambil $f(x)$ secara
+bergiliran sebagai setiap densitas dalam Latihan~\ref{exer 9.4.7}.  Hitung jumlahnya $S_n$, ulangi
+percobaan ini 1000 kali, dan buatlah grafik batang hasilnya yang terdiri dari 20 batang.  Seberapa
+besar $n$ harus dipilih sebelum diperoleh kecocokan yang baik?
+
+\i\label{exer 9.4.10}  Seorang juru ukur sedang mengukur tinggi tebing yang diketahui sekitar
+1000 kaki.  Ia mengandaikan bahwa alatnya telah dikalibrasi dengan benar dan galat-galat pengukurannya
+independen, dengan rataan $\mu = 0$ dan varians $\sigma^2 = 10$.  Ia berencana melakukan $n$
+pengukuran lalu menghitung rata-ratanya.  Dengan menggunakan (a)~ketaksamaan Chebyshev dan
+(b)~aproksimasi normal, perkirakan seberapa besar $n$ harus dipilih jika ia ingin 95~persen yakin
+bahwa rata-ratanya berada dalam jarak 1~kaki dari nilai sebenarnya.  Sekarang, dengan menggunakan
+(a) dan (b), perkirakan berapa nilai $\sigma^2$ yang diperlukan jika ia hanya ingin melakukan
+10 pengukuran dengan tingkat kepercayaan yang sama.
+
+\i\label{exer 9.4.11} Harga satu lembar saham Pilsdorff Beer Company (lihat
+Latihan~\ref{sec 8.2}.\ref{exer 8.2.12}) dinyatakan oleh $Y_n$ pada hari ke-$n$ dalam setahun.
+Finn mengamati bahwa selisih $X_n = Y_{n + 1} - Y_n$ tampaknya merupakan peubah acak independen
+dengan distribusi yang sama, yang memiliki rataan $\mu = 0$ dan varians $\sigma^2 = 1/4$.
+Jika $Y_1 = 100$, perkirakan peluang bahwa $Y_{365}$
+\begin{enumerate}
+\item  ${} \geq 100$.
+
+\item  ${} \geq 110$.
+
+\item  ${} \geq 120$.
+\end{enumerate}
+
+\i\label{exer 9.4.12}  Ujilah kesimpulan Anda dalam Latihan~\ref{exer 9.4.11} dengan simulasi
+komputer.  Pertama-tama, pilihlah 364 bilangan $X_i$ dengan densitas
+$f(x) = \mbox {normal}(x,0,1/4)$.  Kemudian bentuk jumlah
+$Y_{365} = 100 + X_1 + X_2 +\cdots+ X_{364}$ dan ulangi percobaan ini 200 kali.  Buatlah grafik
+batang hasilnya pada $[50,150]$, dengan menumpangkan grafik densitas normal yang menjadi
+aproksimasinya.  Apa yang ditunjukkan grafik ini mengenai jawaban Anda dalam
+Latihan~\ref{exer 9.4.11}?
+
+\i\label{exer 9.4.12.5}  Fisikawan menyatakan bahwa partikel-partikel dalam tabung panjang terus
+bergerak bolak-balik sepanjang tabung, masing-masing dengan kecepatan $V_k$ (dalam cm/detik) yang
+pada setiap saat tertentu berdistribusi normal, dengan rataan $\mu = 0$ dan varians
+$\sigma^2 = 1$.  Andaikan terdapat $10^{20}$ partikel dalam tabung tersebut.
+\begin{enumerate}
+\item  Carilah rataan dan varians kecepatan rata-rata partikel-partikel itu.
+
+\item  Berapa peluang bahwa kecepatan rata-ratanya ${} \geq
+10^{-9}$~cm/detik?
+\end{enumerate}
+
+\i\label{exer 9.4.13}  Seorang astronom melakukan $n$ pengukuran jarak antara Jupiter dan salah
+satu satelitnya.  Pengalaman menggunakan alat-alat tersebut membuatnya yakin bahwa, dengan satuan
+yang sesuai, pengukuran-pengukuran itu akan berdistribusi normal dengan rataan~$d$, yaitu jarak
+sebenarnya, dan varians~16.  Ia melakukan serangkaian $n$ pengukuran.  Misalkan
+$$
+A_n = \frac {X_1 + X_2 +\cdots+ X_n}n
+$$
+adalah rata-rata pengukuran-pengukuran tersebut.
+\begin{enumerate}
+\item  Tunjukkan bahwa
+\[
+P\left(A_n - \frac 8{\sqrt n} \leq d \leq A_n + \frac 8{\sqrt n}\right) \approx
+.95.
+\]
+
+\item  Ketika sembilan pengukuran dilakukan, rata-rata jaraknya ternyata 23.2~satuan.
+Memasukkan nilai yang diamati ke dalam (a) memberikan \emx {interval kepercayaan 95~persen}
+bagi jarak~$d$ yang belum diketahui.  Hitunglah interval ini.
+
+\item  Mengapa dalam (b) kita tidak menyatakan secara lebih sederhana bahwa peluang nilai~$d$
+terletak dalam interval kepercayaan yang dihitung adalah .95?
+
+\item  Perubahan apa yang akan Anda buat dalam prosedur di atas jika Anda ingin menghitung
+interval kepercayaan 99~persen?
+\end{enumerate}
+
+\i\label{exer 9.4.14}  Gambarkan grafik batang yang serupa dengan grafik dalam
+Gambar~\ref{fig 9.61} untuk tinggi rerata orang tua dalam data Galton sebagaimana diberikan dalam
+Lampiran~B, lalu bandingkan grafik batang ini dengan kurva normal yang sesuai.
+
+\end{LJSItem}
+%\end{LJSItem}}
+%\end{document}

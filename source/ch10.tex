@@ -1,0 +1,1952 @@
+%This chapter was modified on 6-4-05.
+\setcounter{chapter}{9}
+
+\chapter{Fungsi Pembangkit}\label{chp 10}  
+
+\section[Distribusi Diskret]{Fungsi Pembangkit untuk Distribusi Diskret}\label{sec
+10.1} 
+\par
+Sejauh ini kita hanya membahas secara terperinci dua atribut terpenting dari suatu
+peubah acak, yaitu rataan dan varians.  Kita telah melihat bagaimana kedua
+atribut ini berperan dalam teorema-teorema limit mendasar dalam probabilitas, serta
+dalam berbagai macam perhitungan praktis.  Kita telah melihat bahwa rataan dan
+varians suatu peubah acak memuat informasi penting tentang peubah acak
+tersebut, atau, lebih tepatnya, tentang fungsi distribusinya.
+Sekarang kita akan melihat bahwa rataan dan varians \emx {tidak} memuat \emx {semua}
+informasi yang tersedia tentang fungsi densitas suatu peubah acak.  Sebagai
+permulaan, mudah untuk memberikan contoh fungsi distribusi berbeda yang
+memiliki rataan dan varians yang sama.  Misalnya, andaikan $X$~dan~$Y$
+adalah peubah acak dengan distribusi
+
+$$p_X = \pmatrix{
+1 & 2 & 3 & 4 & 5 & 6\cr
+0 & 1/4 & 1/2 & 0 & 0 & 1/4\cr},$$ 
+$$p_Y = \pmatrix{
+1 & 2 & 3 & 4 & 5 & 6\cr
+1/4 & 0 & 0 & 1/2 & 1/4 & 0\cr}.$$
+
+Dengan pilihan ini, kita memperoleh $E(X) = E(Y) = 7/2$ dan $V(X) = V(Y) = 9/4$,
+namun jelas bahwa $p_X$~dan~$p_Y$ merupakan fungsi densitas yang sangat berbeda.
+
+Hal ini menimbulkan pertanyaan: Jika $X$ adalah peubah acak dengan rentang
+$\{x_1, x_2, \ldots\}$ yang paling banyak terhitung dan fungsi distribusi $p = p_X$, 
+serta jika kita mengetahui rataan $\mu = E(X)$ dan variansnya $\sigma^2 = V(X)$, lalu
+apa lagi yang perlu kita ketahui untuk menentukan $p$ sepenuhnya?
+
+\subsection*{Momen}
+Jawaban yang bagus untuk pertanyaan ini, setidaknya ketika $X$ memiliki rentang berhingga,
+dapat diberikan dengan menggunakan
+\emx {momen}\index{momen} dari~$X$, yaitu bilangan-bilangan yang didefinisikan sebagai berikut:
+\pagebreak[4]
+\begin{eqnarray*}
+\mu_k &=& \mbox{momen ke-}k\,\,\mbox{dari}\,\, X\\
+      &=& E(X^k) \\
+      &=& \sum_{j = 1}^\infty (x_j)^k p(x_j)\ ,
+\end{eqnarray*}
+dengan syarat jumlah tersebut konvergen.  Di sini $p(x_j) = P(X = x_j)$.
+\par
+Dalam momen-momen ini, rataan~$\mu$ dan varians~$\sigma^2$ dari~$X$ diberikan secara
+sederhana oleh
+
+\begin{eqnarray*}
+     \mu &=& \mu_1, \\
+\sigma^2 &=& \mu_2 - \mu_1^2\ ,
+\end{eqnarray*}
+sehingga dengan mengetahui dua momen pertama dari~$X$, kita memperoleh rataan dan
+variansnya.  Namun, dengan mengetahui \emx {semua} momen dari~$X$, kita dapat menentukan
+fungsi distribusi $p$ sepenuhnya.
+
+\subsection*{Fungsi Pembangkit Momen}
+Untuk melihat bagaimana hal ini terjadi, kita memperkenalkan peubah baru $t$ dan mendefinisikan
+fungsi $g(t)$ sebagai berikut:
+
+\begin{eqnarray*}
+g(t) &=& E(e^{tX}) \\
+     &=& \sum_{k = 0}^\infty \frac {\mu_k t^k}{k!} \\
+     &=& E\left(\sum_{k = 0}^\infty \frac {X^k t^k}{k!} \right) \\
+     &=& \sum_{j = 1}^\infty e^{tx_j} p(x_j)\ .
+\end{eqnarray*}
+Kita menyebut $g(t)$ sebagai \emx {fungsi pembangkit momen}\index{fungsi
+pembangkit!momen}\index{fungsi pembangkit momen} untuk~$X$, dan memandangnya sebagai alat
+pencatatan yang praktis untuk menggambarkan momen-momen~$X$.  Memang, jika kita menurunkan $g(t)$ sebanyak $n$
+kali lalu menetapkan
+$t = 0$, kita memperoleh $\mu_n$:
+
+\begin{eqnarray*}
+\left. \frac {d^n}{dt^n} g(t) \right|_{t = 0} &=& g^{(n)}(0) \\
+     &=& \left. \sum_{k = n}^\infty \frac {k!\, \mu_k t^{k - n}} {(k - n)!\, k!}
+\right|_{t = 0} \\
+     &=& \mu_n\ .
+\end{eqnarray*}
+Fungsi pembangkit momen mudah dihitung untuk contoh-contoh sederhana.
+
+\subsection*{Contoh}
+\begin{example}\label{exam 10.1}
+Andaikan $X$ memiliki rentang $\{1,2,3,\ldots,n\}$ dan $p_X(j) = 1/n$ untuk $1 \leq j
+\leq n$ (distribusi seragam).  Maka
+
+\begin{eqnarray*}
+g(t) &=& \sum_{j = 1}^n \frac 1n e^{tj} \\
+     &=& \frac 1n (e^t + e^{2t} +\cdots+ e^{nt}) \\
+     &=& \frac {e^t (e^{nt} - 1)} {n (e^t - 1)}\ .
+\end{eqnarray*}
+Jika kita menggunakan ekspresi di ruas kanan baris kedua di atas, mudah dilihat bahwa
+
+\begin{eqnarray*}
+\mu_1 &=& g'(0) = \frac 1n (1 + 2 + 3 + \cdots + n) = \frac {n + 1}2, \\
+\mu_2 &=& g''(0) = \frac 1n (1 + 4 + 9+ \cdots + n^2) = \frac {(n + 1)(2n + 1)}6\ ,
+\end{eqnarray*}
+dan bahwa $\mu = \mu_1 = (n + 1)/2$ serta $\sigma^2 = \mu_2 - \mu_1^2 = (n^2 -
+1)/12$.
+\end{example}
+
+\begin{example}\label{exam 10.2}
+Sekarang andaikan $X$ memiliki rentang $\{0,1,2,3,\ldots,n\}$ dan $p_X(j) = {n \choose j} p^j
+q^{n - j}$ untuk $0 \leq j \leq n$ (distribusi binomial).  Maka
+\begin{eqnarray*}
+g(t) &=& \sum_{j = 0}^n e^{tj} {n \choose j} p^j q^{n - j} \\
+     &=& \sum_{j = 0}^n {n \choose j} (pe^t)^j q^{n - j} \\
+     &=& (pe^t + q)^n\ .
+\end{eqnarray*}
+Perhatikan bahwa
+\begin{eqnarray*}
+\mu_1 = g'(0) &=& \left. n(pe^t + q)^{n - 1}pe^t \right|_{t = 0} = np\ , \\
+\mu_2 = g''(0) &=& n(n - 1)p^2 + np\ ,
+\end{eqnarray*}
+sehingga $\mu = \mu_1 = np$, dan $\sigma^2 = \mu_2 - \mu_1^2 = np(1 - p)$, seperti
+yang diharapkan.
+\end{example}
+
+\begin{example}\label{exam 10.3}
+Andaikan $X$ memiliki rentang $\{1,2,3,\ldots\}$ dan $p_X(j) = q^{j - 1}p$ untuk setiap~$j$
+(distribusi geometrik).  Maka
+\begin{eqnarray*}
+g(t) &=& \sum_{j = 1}^\infty e^{tj} q^{j - 1}p \\
+     &=& \frac {pe^t}{1 - qe^t}\ .
+\end{eqnarray*}
+Di sini
+\begin{eqnarray*}
+\mu_1 &=& g'(0) = \left. \frac {pe^t}{(1 - qe^t)^2} \right|_{t = 0} = \frac 1p\ , \\
+\mu_2 &=& g''(0) = \left. \frac {pe^t + pqe^{2t}}{(1 - qe^t)^3} \right|_{t = 0} = \frac
+{1 + q}{p^2}\ ,
+\end{eqnarray*}
+$\mu = \mu_1 = 1/p$, dan $\sigma^2 = \mu_2 - \mu_1^2 = q/p^2$, seperti yang dihitung dalam
+Contoh~\ref{exam 6.21}.
+\end{example}
+
+\begin{example}\label{exam 10.4}
+Misalkan $X$ memiliki rentang $\{0,1,2,3,\ldots\}$ dan $p_X(j) =
+e^{-\lambda}\lambda^j/j!$ untuk setiap~$j$ (distribusi Poisson dengan rataan~$\lambda$). 
+Maka
+\begin{eqnarray*}
+g(t) &=& \sum_{j = 0}^\infty e^{tj} \frac {e^{-\lambda}\lambda^j}{j!} \\
+     &=& e^{-\lambda} \sum_{j = 0}^\infty \frac {(\lambda e^t)^j}{j!} \\
+     &=& e^{-\lambda} e^{\lambda e^t} = e^{\lambda(e^t - 1)}\ .
+\end{eqnarray*}
+Selanjutnya,
+\begin{eqnarray*}
+\mu_1 &=& g'(0) = \left. e^{\lambda(e^t - 1)}\lambda e^t \right|_{t = 0} = \lambda\ ,\\
+\mu_2 &=& g''(0) = \left. e^{\lambda(e^t - 1)} (\lambda^2 e^{2t} + \lambda e^t)
+\right|_{t = 0} = \lambda^2 + \lambda\ ,
+\end{eqnarray*} 
+$\mu = \mu_1 = \lambda$, dan $\sigma^2 = \mu_2 - \mu_1^2 = \lambda$.
+\par
+Varians distribusi Poisson lebih mudah diperoleh dengan cara ini daripada secara langsung
+dari definisi (seperti yang dilakukan dalam Latihan~\ref{sec 6.2}.\ref{exer 6.2.100}).
+\end{example}
+
+\subsection*{Masalah Momen}\index{masalah momen}
+Dengan menggunakan fungsi pembangkit momen, sekarang kita dapat menunjukkan, setidaknya untuk
+peubah acak diskret dengan rentang berhingga, bahwa fungsi distribusinya
+sepenuhnya ditentukan oleh momen-momennya.
+\begin{theorem}\label{thm 10.2}
+Misalkan $X$ adalah peubah acak diskret dengan rentang berhingga 
+$\{x_1,x_2,\ldots,\linebreak x_n\}$, fungsi distribusi~$p$, dan fungsi pembangkit
+momen~$g$.  Maka $g$ ditentukan secara unik oleh~$p$, dan sebaliknya.
+\proof
+Kita tahu bahwa $p$ menentukan $g$, sebab
+$$
+g(t) = \sum_{j = 1}^n e^{tx_j} p(x_j)\ .
+$$
+Sebaliknya, andaikan $g(t)$ diketahui.  Kita ingin menentukan nilai $x_j$ dan $p(x_j)$, untuk $1 \le j \le n$.  Tanpa mengurangi keumuman, kita andaikan bahwa $p(x_j) > 0$ untuk $1 \le j \le n$, dan bahwa 
+$$x_1 < x_2 < \ldots < x_n\ .$$
+Perhatikan bahwa $g(t)$ terdiferensialkan untuk setiap $t$, sebab fungsi ini merupakan kombinasi linear berhingga dari fungsi-fungsi eksponensial.  Jika kita menghitung $g'(t)/g(t)$, kita memperoleh
+$${{x_1 p(x_1) e^{tx_1} + \ldots + x_n p(x_n) e^{t x_n}}\over{p(x_1) e^{tx_1} + \ldots + p(x_n)e^{tx_n}}}\ .$$
+Dengan membagi pembilang dan penyebut dengan $e^{tx_n}$, kita memperoleh ekspresi
+$${{x_1 p(x_1) e^{t(x_1-x_n)} + \ldots + x_n p(x_n)}\over{p(x_1) e^{t(x_1 - x_n)} + \ldots + p(x_n)}}\ .$$
+Karena $x_n$ adalah yang terbesar di antara semua $x_j$, ekspresi ini mendekati $x_n$ ketika $t$ menuju $\infty$. Jadi, kita telah menunjukkan bahwa
+$$x_n = \lim_{t \rightarrow \infty} {{g'(t)}\over{g(t)}}\ .$$
+Untuk mencari $p(x_n)$, kita cukup membagi $g(t)$ dengan $e^{tx_n}$ dan membiarkan $t$ menuju $\infty$.
+Setelah $x_n$ dan $p(x_n)$ ditentukan, kita dapat mengurangkan $p(x_n) e^{tx_n}$ dari $g(t)$, lalu mengulangi prosedur di atas pada fungsi yang dihasilkan sehingga secara berturut-turut diperoleh $x_{n-1}, \ldots, x_1$ dan $p(x_{n-1}), \ldots, p(x_1)$.
+\end{theorem}
+
+Jika hipotesis bahwa $X$ memiliki rentang berhingga dihapus dari teorema di atas,
+kesimpulannya tidak lagi selalu benar.
+
+\subsection*{Fungsi Pembangkit Biasa}
+Dalam kasus khusus tetapi penting ketika semua $x_j$ merupakan bilangan bulat taknegatif,
+$x_j = j$, kita dapat membuktikan teorema ini dengan cara yang lebih sederhana.
+
+Dalam kasus ini, kita memiliki
+$$
+g(t) = \sum_{j = 0}^n e^{tj} p(j)\ ,
+$$
+dan kita melihat bahwa $g(t)$ merupakan \emx {polinomial} dalam $e^t$.  Jika kita menuliskan $z =
+e^t$ dan mendefinisikan fungsi $h$ dengan
+$$
+h(z) = \sum_{j = 0}^n z^j p(j)\ ,
+$$
+maka $h(z)$ merupakan polinomial dalam~$z$ yang memuat informasi yang sama dengan $g(t)$,
+dan sebenarnya
+\begin{eqnarray*}
+h(z) &=& g(\log z)\ , \\
+g(t) &=& h(e^t)\ .
+\end{eqnarray*}
+Fungsi $h(z)$ sering disebut \emx {fungsi pembangkit biasa}\index{fungsi pembangkit
+biasa}\index{fungsi pembangkit!biasa} untuk~$X$.  Perhatikan bahwa $h(1) = g(0) =
+1$,
+$h'(1) = g'(0) =
+\mu_1$, dan
+$h''(1) = g''(0) - g'(0) = \mu_2 - \mu_1$.  Dari semua ini, jika kita mengetahui
+$g(t)$, kita mengetahui $h(z)$, dan jika kita mengetahui $h(z)$, kita dapat mencari $p(j)$
+dengan rumus Taylor:
+\begin{eqnarray*}
+p(j) &=& \mbox{koefisien}\,\, z^j \,\, \mbox{dalam}\,\, h(z) \\
+     &=& \frac{h^{(j)}(0)}{j!}\ .
+\end{eqnarray*}
+
+Sebagai contoh, andaikan kita mengetahui bahwa momen-momen suatu peubah acak
+diskret $X$ diberikan oleh
+\begin{eqnarray*}
+\mu_0 &=& 1\ , \\
+\mu_k &=& \frac12 + \frac{2^k}4\ , \qquad \mbox{untuk}\,\, k \geq 1\ .
+\end{eqnarray*}
+Maka fungsi pembangkit momen $g$ dari~$X$ adalah
+\begin{eqnarray*}
+g(t) &=& \sum_{k = 0}^\infty \frac{\mu_k t^k}{k!} \\
+     &=& 1 + \frac12 \sum_{k = 1}^\infty \frac{t^k}{k!} + \frac14 \sum_{k =
+1}^\infty \frac{(2t)^k}{k!} \\
+     &=& \frac14 + \frac12 e^t + \frac14 e^{2t}\ .
+\end{eqnarray*}
+Ini merupakan polinomial dalam $z = e^t$, dan
+$$
+h(z) = \frac14 + \frac12 z + \frac14 z^2\ .
+$$
+Jadi, $X$ harus memiliki rentang $\{0,1,2\}$, dan $p$ harus memiliki nilai
+$\{1/4,1/2,1/4\}$.
+
+\subsection*{Sifat-sifat}
+Baik fungsi pembangkit momen $g$ maupun fungsi pembangkit biasa
+$h$ memiliki banyak sifat yang berguna dalam mempelajari peubah acak; di sini kita
+hanya dapat membahas beberapa di antaranya.  Secara khusus, jika $X$ adalah sebarang peubah acak 
+diskret dan $Y = X + a$, maka
+\begin{eqnarray*}
+g_Y(t) &=& E(e^{tY}) \\
+       &=& E(e^{t(X + a)}) \\
+       &=& e^{ta} E(e^{tX}) \\
+       &=& e^{ta} g_X(t)\ ,
+\end{eqnarray*}
+sedangkan jika $Y = bX$, maka
+\begin{eqnarray*}
+g_Y(t) &=& E(e^{tY}) \\
+       &=& E(e^{tbX}) \\
+       &=& g_X(bt)\ .
+\end{eqnarray*}
+Secara khusus, jika
+$$
+X^* = \frac{X - \mu}\sigma\ ,
+$$
+maka (lihat Latihan~\ref{exer 10.1.14})
+$$
+g_{x^*}(t) = e^{-\mu t/\sigma} g_X\left( \frac t\sigma \right)\ .
+$$
+
+Jika $X$ dan $Y$ merupakan peubah acak yang \emx {saling bebas} dan $Z = X + Y$ adalah
+jumlah keduanya, dengan $p_X$,~$p_Y$, dan~$p_Z$ sebagai fungsi distribusi terkait, kita
+telah melihat dalam Bab~\ref{chp 7} bahwa $p_Z$ adalah \emx {konvolusi} dari
+$p_X$~dan~$p_Y$, dan kita tahu bahwa konvolusi melibatkan perhitungan yang cukup
+rumit.  Namun, untuk fungsi pembangkit, kita memperoleh hubungan sederhana
+\begin{eqnarray*}
+g_Z(t) &=& g_X(t) g_Y(t)\ , \\
+h_Z(z) &=& h_X(z) h_Y(z)\ ,
+\end{eqnarray*}
+artinya, $g_Z$ hanyalah \emx {hasil kali} dari $g_X$~dan~$g_Y$, dan hal yang sama
+berlaku untuk~$h_Z$.
+
+Untuk melihatnya, pertama-tama perhatikan bahwa jika $X$~dan~$Y$ saling bebas, maka $e^{tX}$ dan
+$e^{tY}$ saling bebas (lihat Latihan~\ref{sec 5.2}.\ref{exer 5.2.38}), sehingga
+$$
+E(e^{tX} e^{tY}) = E(e^{tX}) E(e^{tY})\ .
+$$
+Akibatnya,
+\begin{eqnarray*}
+g_Z(t) &=& E(e^{tZ}) = E(e^{t(X + Y)}) \\
+       &=& E(e^{tX}) E(e^{tY}) \\
+       &=& g_X(t) g_Y(t)\ ,
+\end{eqnarray*}
+dan, dengan mengganti $t$ dengan $\log z$, kita juga memperoleh
+$$
+h_Z(z) = h_X(z) h_Y(z)\ .
+$$
+
+\begin{example}\label{exam 10.5}
+Jika $X$~dan~$Y$ merupakan peubah acak diskret yang saling bebas dengan rentang
+$\{0,1,2,\ldots,n\}$ dan distribusi binomial
+$$
+p_X(j) = p_Y(j) = {n \choose j} p^j q^{n - j}\ ,
+$$
+dan jika $Z = X + Y$, kita tahu (bdk. Bagian~\ref{sec 7.1}) bahwa rentang $X$ adalah
+$$\{0,1,2,\ldots,2n\}$$ 
+dan $X$ memiliki distribusi binomial
+$$
+p_Z(j) = (p_X * p_Y)(j) =
+{2n \choose j} p^j q^{2n - j}\ .
+$$
+Di sini kita dapat dengan mudah memverifikasi hasil ini menggunakan fungsi pembangkit.  Kita tahu
+bahwa
+\begin{eqnarray*}
+g_X(t) = g_Y(t) &=& \sum_{j = 0}^n e^{tj} {n \choose j} p^j q^{n - j} \\
+       &=& (pe^t + q)^n\ ,
+\end{eqnarray*}
+dan
+$$
+h_X(z) = h_Y(z) = (pz + q)^n\ .
+$$
+Jadi, kita memperoleh
+$$
+g_Z(t) = g_X(t) g_Y(t) = (pe^t + q)^{2n}\ ,
+$$
+atau, secara ekuivalen,
+\begin{eqnarray*}
+h_Z(z) &=& h_X(z) h_Y(z) = (pz + q)^{2n} \\
+       &=& \sum_{j = 0}^{2n} {2n \choose j} (pz)^j q^{2n - j}\ ,
+\end{eqnarray*}
+dan dari sini kita dapat melihat bahwa koefisien~$z^j$ tepat sama dengan $p_Z(j) =
+{2n \choose j} p^j q^{2n - j}$.
+\end{example}
+
+\begin{example}\label{exam 10.6}
+Jika $X$~dan~$Y$ merupakan peubah acak diskret yang saling bebas dengan bilangan bulat 
+taknegatif $\{0,1,2,3,\ldots\}$ sebagai rentangnya dan dengan fungsi distribusi geometrik 
+$$p_X(j) = p_Y(j) = q^j p\ ,$$ 
+maka
+$$
+g_X(t) = g_Y(t) = \frac p{1 - qe^t}\ ,
+$$
+dan jika $Z = X + Y$, maka
+\begin{eqnarray*}
+g_Z(t) &=& g_X(t) g_Y(t) \\
+       &=& \frac{p^2}{1 - 2qe^t + q^2 e^{2t}}\ .
+\end{eqnarray*}
+Jika kita mengganti $e^t$ dengan~$z$, kita memperoleh
+\begin{eqnarray*}
+h_Z(z) &=& \frac{p^2}{(1 - qz)^2} \\
+       &=& p^2 \sum_{k = 0}^\infty (k + 1) q^k z^k\ ,
+\end{eqnarray*}
+dan kita dapat membaca nilai~$p_Z(j)$ sebagai koefisien~$z^j$ dalam
+pengembangan $h(z)$ ini, meskipun dalam kasus ini $h(z)$ bukan polinomial.  Distribusi
+$p_Z$ adalah distribusi binomial negatif (lihat 
+Bagian~\ref{sec 5.1}).
+\end{example}
+
+Berikut adalah contoh yang lebih menarik tentang kekuatan dan jangkauan metode
+fungsi pembangkit.
+
+\subsection*{Kepala atau Ekor}
+\begin{example}\label{exam 10.1.7}
+Dalam permainan lempar koin yang dibahas pada Contoh~\ref{exam 1.3}, sekarang kita mempertimbangkan
+pertanyaan ``Kapan Peter pertama kali unggul?"
+\par
+Misalkan $X_k$ menggambarkan hasil percobaan ke-$k$ dalam permainan tersebut
+$$
+X_k = \left \{ \matrix{ 
+               +1,  &\mbox{jika lemparan}\,\, {\rm ke-}k\,\, \mbox{menghasilkan kepala}, \cr
+               -1,  &\mbox{jika lemparan}\,\, {\rm ke-}k\,\, \mbox{menghasilkan ekor.}\cr}\right. 
+$$
+Maka $X_k$ merupakan peubah-peubah acak yang saling bebas dan menggambarkan suatu proses
+Bernoulli.  Misalkan $S_0 = 0$, dan, untuk $n \geq 1$, misalkan
+$$S_n = X_1 + X_2 + \cdots + X_n\ .$$
+Maka $S_n$ menggambarkan modal Peter setelah $n$ percobaan, dan Peter pertama kali
+unggul setelah $n$ percobaan jika $S_k \leq 0$ untuk $1 \leq k < n$ dan $S_n = 1$.
+\par
+Hal ini dapat terjadi ketika $n = 1$, dalam hal ini $S_1 = X_1 = 1$, atau ketika $n >
+1$, dalam hal ini $S_1 = X_1 = -1$.  Dalam kasus kedua, $S_k = 0$ untuk $k = n -
+1$, dan mungkin juga untuk nilai $k$ lain di antara 1~dan~$n$.  Misalkan $m$ adalah nilai
+$k$ \emx {terkecil} yang demikian; maka $S_m = 0$ dan $S_k < 0$ untuk $1 \leq k < m$.  Dalam
+kasus ini Peter kalah pada percobaan pertama, kembali ke posisi awalnya dalam
+$m - 1$ percobaan berikutnya, lalu menjadi unggul dalam $n - m$ percobaan sesudahnya.
+\par
+Misalkan $p$ adalah peluang koin menghasilkan kepala, dan misalkan $q = 1-p$.
+Misalkan $r_n$ adalah peluang Peter pertama kali unggul setelah $n$ percobaan. 
+Dari pembahasan di atas, kita melihat bahwa
+\begin{eqnarray*}
+r_n &=& 0\ , \qquad \mbox{jika}\,\, n\,\, \mbox{genap}, \\
+r_1 &=& p \qquad  (= \mbox{peluang kepala dalam satu lemparan}), \\
+r_n &=& q(r_1r_{n-2} + r_3r_{n-4} +\cdots+ r_{n-2}r_1)\ , \qquad \mbox{jika}
+\ n > 1,\ n\ \mbox{ganjil}.
+\end{eqnarray*}
+Sekarang misalkan $T$ menggambarkan waktu (yaitu banyaknya percobaan) yang diperlukan
+Peter untuk menjadi unggul.  Maka $T$ merupakan peubah acak, dan karena $P(T = n) =
+r_n$, $r$ adalah fungsi distribusi untuk~$T$.
+
+Kita memperkenalkan fungsi pembangkit $h_T(z)$ untuk~$T$:
+$$
+h_T(z) = \sum_{n = 0}^\infty r_n z^n\ .
+$$
+Dengan menggunakan hubungan di atas, kita dapat memverifikasi hubungan
+$$
+h_T(z) = pz + qz(h_T(z))^2\ .
+$$
+Jika kita menyelesaikan persamaan kuadrat ini untuk~$h_T(z)$, kita memperoleh
+$$
+h_T(z) = \frac{1 \pm \sqrt{1 - 4pqz^2}}{2qz} = \frac{2pz}{1 \mp \sqrt{1 -
+4pqz^2}}\ .
+$$
+Dari kedua penyelesaian ini, kita menginginkan penyelesaian yang memiliki deret pangkat konvergen
+dalam~$z$ (yaitu, yang berhingga untuk $z = 0$).  Oleh karena itu, kita memilih
+$$
+h_T(z) = \frac{1 - \sqrt{1 - 4pqz^2}}{2qz} = \frac{2pz}{1 + \sqrt{1 - 4pqz^2}}\ .
+$$
+Sekarang kita dapat bertanya: Berapa peluang Peter \emx {pernah} menjadi
+unggul?  Peluang ini diberikan oleh (lihat Latihan~\ref{exer 10.1.10})
+\begin{eqnarray*}
+\sum_{n = 0}^\infty r_n &=& h_T(1) = \frac{1 - \sqrt{\mathstrut1 - 4pq}}{2q} \\
+                        &=& \frac{1 - |p - q|}{2q} \\
+                        &=& \left \{ \begin{array}{ll} 
+                                   p/q, & \mbox{jika $p < q$},     \\
+                                     1, & \mbox{jika $p \geq q$}, \end{array}\right.  
+\end{eqnarray*} 
+sehingga Peter pasti pada akhirnya akan unggul jika $p \geq q$.
+\par
+Berapa lama waktu yang diperlukan?  Dengan kata lain, berapa nilai harapan~$T$?  Nilai ini
+diberikan oleh
+$$
+E(T) = h_T'(1) = \left \{ \matrix {
+                          1/(p - q),  & \mbox{jika}\,\, p > q, \cr
+                          \infty,     & \mbox{jika}\,\, p = q.\cr}\right. 
+$$
+Ini menyatakan bahwa jika $p > q$, Peter dapat berharap sudah unggul setelah sekitar
+$1/(p - q)$ percobaan, tetapi jika $p = q$, ia dapat memperkirakan akan menunggu sangat lama.
+\par
+Masalah terkait, yang dikenal sebagai masalah Kebangkrutan Penjudi, dipelajari dalam Latihan~\ref{exer
+11.2.22} dan Bagian~\ref{sec 12.2}.
+\end{example}
+
+\exercises
+\begin{LJSItem}
+
+
+\i\label{exer 10.1.1} Carilah fungsi pembangkit, baik fungsi pembangkit biasa $h(z)$
+maupun fungsi pembangkit momen $g(t)$, untuk distribusi probabilitas diskret berikut.
+\begin{enumerate}
+\item Distribusi yang menggambarkan sebuah koin seimbang.
+
+\item Distribusi yang menggambarkan sebuah dadu seimbang.
+
+\item Distribusi yang menggambarkan sebuah dadu yang selalu menghasilkan angka 3.
+
+\item Distribusi seragam pada himpunan $\{n,n+1,n+2,\ldots,n+k\}$.
+
+\item Distribusi binomial pada $\{n,n+1,n+2,\ldots,n+k\}$.
+
+\item Distribusi geometrik pada $\{0,1,2,\ldots,\}$ dengan $p(j) = 2/3^{j + 1}$.
+\end{enumerate}
+
+\i\label{exer 10.1.2} Untuk setiap distribusi (a) sampai (d) dalam Latihan~\ref{exer
+10.1.1}, hitunglah momen pertama dan kedua, $\mu_1$~dan~$\mu_2$, langsung dari
+definisinya, lalu verifikasi bahwa $h(1) = 1$, $h'(1) = \mu_1$, dan $h''(1) = \mu_2 -
+\mu_1$.
+
+\i\label{exer 10.1.3} Misalkan $p$ adalah distribusi probabilitas pada $\{0,1,2\}$ dengan
+momen $\mu_1 = 1$, $\mu_2 = 3/2$.
+\begin{enumerate}
+\item Carilah fungsi pembangkit biasanya $h(z)$.
+
+\item Dengan menggunakan (a), carilah fungsi pembangkit momennya.
+
+\item Dengan menggunakan (b), carilah enam momen pertamanya.
+
+\item Dengan menggunakan (a), carilah $p_0$, $p_1$, dan $p_2$.
+\end{enumerate}
+
+\i\label{exer 10.1.4} Dalam Latihan~\ref{exer 10.1.3}, distribusi probabilitas tersebut 
+sepenuhnya ditentukan oleh dua momen pertamanya.  Tunjukkan bahwa hal ini selalu benar untuk setiap
+distribusi probabilitas pada $\{0,1,2\}$.  \emx {Petunjuk}: Jika $\mu_1$~dan~$\mu_2$ diberikan,
+carilah $h(z)$ seperti dalam Latihan~\ref{exer 10.1.3}, lalu gunakan $h(z)$ untuk menentukan $p$.
+
+\i\label{exer 10.1.5} Misalkan $p$ dan $p'$ adalah kedua distribusi
+
+$$ 
+p = \pmatrix{
+1 & 2 & 3 & 4 & 5 \cr
+1/3 & 0 & 0 & 2/3 & 0 \cr}\ ,
+$$
+ 
+$$p' = \pmatrix{
+1 & 2 & 3 & 4 & 5 \cr
+0 & 2/3 & 0 & 0 & 1/3 \cr}\ . 
+$$
+\begin{enumerate}
+\item Tunjukkan bahwa $p$ dan $p'$ memiliki momen pertama dan kedua yang sama, tetapi
+momen ketiga dan keempatnya tidak sama.
+
+\item Carilah fungsi pembangkit biasa dan fungsi pembangkit momen untuk $p$~dan~$p'$.
+\end{enumerate}
+
+\i\label{exer 10.1.6} Misalkan $p$ adalah distribusi probabilitas
+
+$$
+p = \pmatrix{
+0 & 1 & 2 \cr
+0 & 1/3 & 2/3 \cr}\ ,
+$$
+dan misalkan $p_n = p * p * \cdots * p$ adalah konvolusi lipat-$n$ dari~$p$ dengan
+dirinya sendiri.
+\begin{enumerate}
+\item Carilah $p_2$ melalui perhitungan langsung (lihat Definisi~\ref{defn 7.1}).
+
+\item Carilah fungsi pembangkit biasa $h(z)$ dan $h_2(z)$ untuk
+$p$~dan~$p_2$, lalu verifikasi bahwa $h_2(z) = (h(z))^2$.
+
+\item Carilah $h_n(z)$ dari $h(z)$.
+
+\item Carilah dua momen pertama, dan dengan demikian rataan serta varians, dari $p_n$
+berdasarkan~$h_n(z)$.  Verifikasi bahwa rataan~$p_n$ adalah $n$ kali rataan~$p$.
+
+\item Carilah bilangan bulat~$j$ yang memenuhi $p_n(j) > 0$ berdasarkan $h_n(z)$.
+\end{enumerate}
+
+\i\label{exer 10.1.7} Misalkan $X$ adalah peubah acak diskret yang bernilai dalam 
+$\{0,1,2,\ldots,n\}$ dan memiliki fungsi pembangkit momen $g(t)$.  Dalam bentuk 
+$g(t)$, carilah fungsi pembangkit untuk
+\begin{enumerate}
+\item $-X$.
+
+\item $X + 1$.
+
+\item $3X$.
+
+\item $aX + b$.
+\end{enumerate}
+
+\i\label{exer 10.1.8} Misalkan $X_1$,~$X_2$, \ldots,~$X_n$ membentuk proses percobaan 
+saling bebas, bernilai dalam $\{0,1\}$, dan memiliki rataan $\mu = 1/3$.  Carilah fungsi pembangkit biasa dan 
+fungsi pembangkit momen untuk distribusi dari
+\begin{enumerate}
+\item $S_1 = X_1$. \emx {Petunjuk}: Pertama-tama, tentukan $X_1$ secara eksplisit.
+
+\item $S_2 = X_1 + X_2$.
+
+\item $S_n = X_1 + X_2 +\cdots+ X_n$.
+\end{enumerate}
+
+\i\label{exer 10.1.9} Misalkan $X$ dan $Y$ adalah peubah acak yang bernilai dalam 
+$\{1,2,3,4,5,6\}$ dengan fungsi distribusi $p_X$~dan~$p_Y$ yang diberikan oleh
+\begin{eqnarray*}
+p_X(j) &=& a_j\ , \\
+p_Y(j) &=& b_j\ .
+\end{eqnarray*} 
+\begin{enumerate}
+\item Carilah fungsi pembangkit biasa $h_X(z)$ dan $h_Y(z)$ untuk kedua
+distribusi ini.
+
+\item Carilah fungsi pembangkit biasa $h_Z(z)$ untuk distribusi $Z = X
++ Y$.
+
+\item Tunjukkan bahwa $h_Z(z)$ tidak mungkin berbentuk
+$$
+h_Z(z) = \frac{z^2 + z^3 +\cdots+ z^{12}}{11}\ .
+$$
+\end{enumerate}
+\noindent \emx {Petunjuk}: $h_X$ dan $h_Y$ harus memiliki setidaknya satu akar taknol, tetapi 
+$h_Z(z)$ dalam bentuk yang diberikan tidak memiliki akar real taknol.
+
+Dari pengamatan ini, diperoleh bahwa tidak ada cara untuk memberi bobot pada dua dadu sehingga
+peluang munculnya suatu jumlah tertentu ketika keduanya dilempar sama
+untuk setiap jumlah (yaitu, semua hasil memiliki peluang yang sama).
+
+\i\label{exer 10.1.10} Tunjukkan bahwa jika
+$$
+h(z) = \frac{1 - \sqrt{1 - 4pqz^2}}{2qz}\ ,
+$$
+maka
+$$
+ h(1) = \left \{ \begin{array}{ll}
+               p/q, &  \mbox{jika $p \leq q,$}  \\
+                 1, &  \mbox{jika $p \geq q,$} \end{array}\right.
+$$
+dan
+$$
+ h'(1) = \left \{ \begin{array}{ll}
+                1/(p - q), &  \mbox{jika $p > q,$}\\
+                   \infty, &  \mbox{jika $p = q.$} \end{array}\right.
+$$
+
+\i\label{exer 10.1.14} Tunjukkan bahwa jika $X$ adalah peubah acak dengan rataan~$\mu$
+dan varians~$\sigma^2$, serta jika $X^* = (X - \mu)/\sigma$ adalah versi
+terstandardisasi dari~$X$, maka
+$$
+g_{X^*}(t) = e^{-\mu t/\sigma} g_X\left( \frac t\sigma \right)\ .
+$$
+\end{LJSItem}
+
+\section{Proses Percabangan}\label{sec 10.2}\index{proses percabangan}
+\subsection*{Latar Belakang Sejarah}
+Dalam bagian ini kita menerapkan teori fungsi pembangkit untuk mempelajari suatu
+proses acak penting yang disebut \emx {proses percabangan.}
+
+Hingga belum lama ini, teori proses percabangan dianggap bermula
+dari masalah berikut yang diajukan Francis Galton\index{GALTON, F.} dalam \emx {Educational
+Times} pada tahun 1873.\footnote{D.~G. Kendall, ``Branching Processes Since
+1873," \emx {Journal of London Mathematics Society,} vol.~41 (1966), p.~386.}
+\begin{quote}
+Masalah 4001: Sebuah bangsa besar, yang hanya akan kita tinjau penduduk
+pria dewasanya, berjumlah $N$, dan masing-masing memiliki nama keluarga berbeda, menjajah suatu
+wilayah.  Hukum populasi mereka sedemikian rupa sehingga, pada setiap generasi, $a_0$ 
+persen pria dewasa tidak memiliki anak laki-laki yang mencapai usia dewasa;
+$a_1$ memiliki satu anak laki-laki demikian; $a_2$ memiliki dua; dan seterusnya hingga
+$a_5$ yang memiliki lima.
+
+Carilah (1)~berapa proporsi nama keluarga yang akan punah setelah $r$
+generasi; dan (2)~berapa banyak kejadian ketika nama keluarga yang sama
+dimiliki oleh $m$ orang.
+\end{quote}
+
+Upaya pertama untuk memberikan penyelesaian dilakukan oleh Pendeta H.~W. Watson.\index{WATSON, H. W.} 
+Karena suatu kesalahan aljabar, ia secara keliru menyimpulkan bahwa sebuah nama keluarga akan selalu
+punah dengan peluang~1.  Namun, metode yang digunakannya untuk menyelesaikan
+masalah tersebut dahulu, dan hingga kini, menjadi dasar untuk memperoleh penyelesaian yang benar.
+\par
+Heyde\index{HEYDE, C.} dan Seneta\index{SENETA, E.} menemukan tulisan terdahulu oleh
+Bienaym\'e\index{BIENAYM\'E, I.} (1845) yang mendahului Galton dan Watson selama 28~tahun. 
+Sesungguhnya, Bienaym\'e menunjukkan bahwa ia mengetahui penyelesaian yang benar untuk masalah Galton. 
+Dalam buku mereka, \emx {I.~J. Bienaym\'e: Statistical Theory
+Anticipated,}\footnote{C.~C. Heyde and E. Seneta, \emx {I.~J. Bienaym\'e:
+Statistical Theory Anticipated} (New York: Springer Verlag, 1977).} Heyde dan Seneta memberikan
+ringkasan hasil dari makalah Bienaym\'e. Jika rataan jumlah anak laki-laki yang menggantikan
+setiap pria pada generasi sebelumnya kurang dari satu, garis keluarga akan punah. Jika rataan itu
+sama dengan satu, kepunahan masih terjadi, tetapi lebih lambat. Jika rataan lebih besar dari satu,
+kepunahan tidak lagi pasti; peluangnya mendekati suatu limit berhingga yang dapat dihitung sebagai
+akar persamaan terkait.\footnote{ibid., pp.~117--118. Ringkasan editorial; ungkapan terjemahan
+modern tidak diterjemahkan atau direproduksi.}
+
+Meskipun Bienaym\'e tidak memberikan penalarannya untuk hasil-hasil ini, ia
+menyatakan bahwa ia bermaksud menerbitkan sebuah makalah khusus tentang masalah tersebut.  Makalah itu
+tidak pernah ditulis, atau setidaknya tidak pernah ditemukan.  Dalam tulisannya,
+Bienaym\'e menyatakan bahwa ia didorong oleh masalah yang sama dengan yang terpikir oleh
+Galton.  Dalam pembukaan makalahnya, Bienaym\'e mengaitkan kajian ini dengan perdebatan
+tentang pertumbuhan jumlah manusia serta dugaan bahwa garis keluarga tertutup
+(\emx{families ferm\'ees}) di kalangan aristokrat, kelas menengah, dan tokoh terkenal akhirnya
+akan lenyap.\footnote{ibid., p.~118. Ringkasan editorial; ungkapan terjemahan modern tidak
+diterjemahkan atau direproduksi.}
+
+
+Pembahasan yang jauh lebih luas tentang sejarah proses percabangan dapat
+ditemukan dalam dua makalah karya David G. Kendall.\index{KENDALL, D. G.}\footnote{D.~G.~Kendall, 
+``Branching Processes Since 1873," pp.~385--406; and ``The Genealogy of Genealogy:
+Branching Processes Before (and After) 1873," \emx {Bulletin London Mathematics
+Society,} vol.~7 (1975), pp.~225--253.} 
+
+Proses percabangan tidak hanya digunakan sebagai model kasar pertumbuhan populasi,
+tetapi juga sebagai model bagi proses fisika tertentu, seperti reaksi berantai
+kimia dan nuklir.
+
+\subsection*{Masalah Kepunahan}\index{kepunahan, masalah}
+Sekarang kita beralih ke masalah pertama yang diajukan Galton (yaitu, masalah mencari
+peluang kepunahan suatu proses percabangan).  Kita mulai pada
+generasi ke-0 dengan 1 induk jantan.  Pada generasi pertama akan terdapat 0,~1,
+2, 3,~\ldots\ keturunan jantan dengan peluang $p_0$,~$p_1$, $p_2$,
+$p_3$,~\ldots.  Jika pada generasi pertama terdapat $k$ keturunan, maka pada
+generasi kedua akan terdapat $X_1 + X_2 +\cdots+ X_k$ keturunan, dengan
+$X_1$,~$X_2$, \ldots,~$X_k$ sebagai peubah acak yang saling bebas dan masing-masing memiliki
+distribusi yang sama $p_0$,~$p_1$, $p_2$,~\ldots.  Deskripsi ini memungkinkan kita
+membangun sebuah pohon dan ukuran pohon untuk sebarang banyak generasi.
+
+\subsection*{Contoh}
+
+\begin{example}\label{exam 10.2.1}
+Andaikan $p_0 = 1/2$, $p_1 = 1/4$, dan $p_2 = 1/4$.  Maka ukuran pohon
+untuk dua generasi pertama ditunjukkan dalam Gambar~\ref{fig 10.1}.
+
+\putfig{3truein}{PSfig10-1}
+{Diagram pohon untuk Contoh~\protect\ref{exam 10.2.1}\protect.}{fig 10.1}
+
+Perhatikan bahwa kita menggunakan teori jumlah peubah acak yang saling bebas untuk menetapkan
+peluang cabang.  Sebagai contoh, jika terdapat dua keturunan pada generasi pertama,
+peluang terdapat dua keturunan pada generasi kedua adalah
+\begin{eqnarray*}
+P(X_1 + X_2 = 2) &=& p_0p_2 + p_1p_1 + p_2p_0 \\
+                 &=& \frac12\cdot\frac14 + \frac14\cdot\frac14 +
+\frac14\cdot\frac12 = \frac 5{16}\ .
+\end{eqnarray*}
+\par
+Sekarang kita mempelajari peluang bahwa proses kita punah (yaitu, pada suatu
+generasi tidak ada keturunan).
+\par
+Misalkan $d_m$ adalah peluang bahwa proses tersebut telah punah paling lambat pada generasi
+ke-$m$.  Tentu saja, $d_0 = 0$.  Dalam contoh kita, $d_1 = 1/2$ dan $d_2 = 1/2
++ 1/8 + 1/16 = 11/16$ (lihat Gambar~\ref{fig 10.1}).  Perhatikan bahwa kita harus menjumlahkan 
+peluang semua lintasan yang mencapai~0 paling lambat pada generasi ke-$m$.  Dari definisi, 
+jelas bahwa
+$$
+0 = d_0 \leq d_1 \leq d_2 \leq\cdots\leq 1\ .
+$$
+Jadi, $d_m$ konvergen ke suatu limit $d$, $0 \leq d \leq 1$, dan $d$ adalah
+peluang bahwa proses tersebut pada akhirnya akan punah.  Nilai inilah yang ingin
+kita tentukan.  Kita mulai dengan menyatakan nilai $d_m$ berdasarkan semua
+hasil yang mungkin pada generasi pertama.  Jika terdapat $j$ keturunan pada
+generasi pertama, agar proses punah paling lambat pada generasi ke-$m$, setiap garis keturunan ini
+harus punah dalam $m - 1$ generasi.  Karena semuanya berlangsung secara bebas,
+peluang ini adalah $(d_{m - 1})^j$.  Oleh karena itu,
+ 
+\begin{equation}
+d_m = p_0 + p_1d_{m - 1} + p_2(d_{m - 1})^2 + p_3(d_{m - 1})^3 +\cdots\ .
+\label{eq 10.2.1} 
+\end{equation} 
+Misalkan $h(z)$ adalah fungsi pembangkit biasa untuk $p_i$:
+$$
+h(z) = p_0 + p_1z + p_2z^2 +\cdots\ .
+$$
+Dengan menggunakan fungsi pembangkit ini, kita dapat menulis ulang Persamaan~\ref{eq 10.2.1} dalam bentuk
+
+\begin{equation}
+d_m = h(d_{m - 1})\ . 
+\label{eq 10.2.2}
+\end{equation}
+ 
+Karena $d_m \to d$, dari Persamaan~\ref{eq 10.2.2} kita melihat bahwa nilai~$d$ yang
+kita cari memenuhi persamaan
+
+\begin{equation}
+d = h(d)\ . 
+\label{eq 10.2.3}
+\end{equation}
+ 
+Salah satu penyelesaian persamaan ini selalu $d = 1$, sebab
+$$
+1 = p_0 + p_1 + p_2 +\cdots\ .
+$$
+Di sinilah Watson melakukan kesalahan.  Ia menganggap bahwa 1 adalah satu-satunya penyelesaian
+Persamaan~\ref{eq 10.2.3}.  Untuk menelaah persoalan ini dengan lebih saksama, pertama-tama perhatikan
+bahwa penyelesaian Persamaan~\ref{eq 10.2.3} menyatakan titik potong grafik
+$$
+y = z
+$$
+dan
+$$
+y = h(z) = p_0 + p_1z + p_2z^2 +\cdots\ .
+$$
+Jadi, kita perlu mempelajari grafik $y = h(z)$.
+Perhatikan bahwa $h(0) = p_0$.  Selain itu,
+\begin{equation}
+h'(z) = p_1 + 2p_2z + 3p_3z^2 +\cdots\ ,  \label{eq 10.2.4}
+\end{equation}
+dan
+$$
+h''(z) = 2p_2 + 3 \cdot 2p_3z + 4 \cdot 3p_4z^2 + \cdots\ .
+$$
+Dari sini kita melihat bahwa untuk~$z \geq 0$, $h'(z) \geq 0$ dan $h''(z) \geq 0$.  Jadi,
+untuk $z$ taknegatif, $h(z)$ merupakan fungsi naik dan cekung ke atas. 
+Oleh karena itu, grafik $y = h(z)$ dapat memotong garis $y = z$ di paling banyak dua
+titik.  Karena kita tahu bahwa grafik tersebut harus memotong garis $y = z$ di $(1,1)$, kita tahu
+bahwa hanya ada tiga kemungkinan, seperti ditunjukkan dalam Gambar~\ref{fig 10.2}.
+\putfig{4.5truein}{PSfig10-2}{Grafik $y = z$ dan $y = h(z)$.}{fig 10.2}
+\par
+Dalam kasus (a), persamaan $d = h(d)$ memiliki akar $\{d,1\}$ dengan $0 \leq d <
+1$.  Dalam kasus kedua, (b), persamaan itu hanya memiliki satu akar $d = 1$.  Dalam kasus (c), persamaan itu
+memiliki dua akar $\{1,d\}$ dengan $1 < d$.  Karena kita mencari penyelesaian $0
+\leq d \leq 1$, dalam kasus (b)~dan~(c) kita melihat bahwa satu-satunya penyelesaian adalah~1.  Dalam
+kedua kasus ini kita dapat menyimpulkan bahwa proses tersebut akan punah dengan peluang~1. 
+Namun, dalam kasus~(a) kita belum dapat memastikan.  Kita harus mempelajari kasus ini dengan lebih saksama.
+\par
+Dari Persamaan~\ref{eq 10.2.4} kita melihat bahwa
+$$
+h'(1) = p_1 + 2p_2 + 3p_3 +\cdots= m\ ,
+$$
+dengan $m$ sebagai banyaknya keturunan yang diharapkan dari satu induk.  Dalam
+kasus~(a) kita memiliki $h'(1) > 1$, dalam~(b) $h'(1) = 1$, dan dalam~(c) $h'(1) < 1$.  Jadi,
+ketiga kasus tersebut berturut-turut berkaitan dengan $m > 1$, $m = 1$, dan $m < 1$.  Sekarang kita andaikan
+bahwa $m > 1$.  Ingat bahwa $d_0 = 0$, $d_1 = h(d_0) = p_0$, $d_2 = h(d_1)$,
+\ldots, dan $d_n = h(d_{n - 1})$.  Kita dapat mengonstruksi nilai-nilai ini secara geometris,
+seperti ditunjukkan dalam Gambar~\ref{fig 10.3}.
+\putfig{4truein}{PSfig10-3}{Penentuan $d$ secara geometris.}{fig 10.3}
+\par
+Secara geometris, seperti ditunjukkan untuk $d_0$,~$d_1$, $d_2$, dan~$d_3$ dalam
+Gambar~\ref{fig 10.3}, kita dapat melihat bahwa titik-titik $(d_i,h(d_i))$ akan selalu terletak di atas garis $y =
+z$.  Oleh karena itu, titik-titik tersebut harus konvergen ke titik potong pertama kurva $y = z$
+dan $y = h(z)$ (yaitu, ke akar $d < 1$).  Hal ini membawa kita pada
+teorema berikut.
+\end{example}
+\begin{theorem}\label{thm 10.3}
+Perhatikan suatu proses percabangan dengan fungsi pembangkit $h(z)$ untuk banyaknya
+keturunan dari suatu induk.  Misalkan $d$ adalah akar terkecil persamaan $z =
+h(z)$.  Jika rataan banyaknya keturunan $m$ yang dihasilkan satu induk adalah
+${} \leq 1$, maka $d = 1$ dan proses tersebut punah dengan peluang~1.  Jika $m > 1$,
+maka $d < 1$ dan proses tersebut punah dengan peluang~$d$.
+\end{theorem}
+
+Kita akan sering ingin mengetahui peluang bahwa suatu proses percabangan telah punah
+paling lambat pada generasi tertentu, serta limit peluang-peluang tersebut.  Misalkan
+$d_n$ adalah peluang kepunahan paling lambat pada generasi ke-$n$.  Kita tahu
+bahwa $d_1 = p_0$.  Kita juga tahu bahwa $d_n = h(d_{n - 1})$, dengan $h(z)$ sebagai
+fungsi pembangkit banyaknya keturunan yang dihasilkan satu induk. 
+Hal ini memudahkan perhitungan peluang-peluang tersebut.  
+\par
+Program {\bf Branch}\index{Branch (program)} menghitung nilai~$d_n$.  Kita telah menjalankan
+program ini selama 12 generasi untuk kasus ketika satu induk dapat menghasilkan paling banyak dua keturunan
+dan peluang banyaknya keturunan yang dihasilkan adalah $p_0 = .2$, $p_1 = .5$, dan $p_2 = .3$.  Hasilnya
+diberikan dalam Tabel~\ref{table 10.1}.
+\begin{table}
+\centering
+\begin{tabular}{crccclc}
+\multicolumn{3}{c} {Generasi} & \multicolumn{4}{c}{Peluang kepunahan}\\
+\hline
+&1  &&&& .2      \\
+&2  &&&& .312    \\
+&3  &&&& .385203 \\
+&4  &&&& .437116 \\
+&5  &&&& .475879 \\
+&6  &&&& .505878 \\
+&7  &&&& .529713 \\
+&8  &&&& .549035 \\
+&9  &&&& .564949 \\
+&10 &&&& .578225 \\
+&11 &&&& .589416 \\
+&12 &&&& .598931  
+\end{tabular}
+\caption{Peluang kepunahan.}
+\label{table 10.1}
+\end{table}
+\par
+Kita melihat bahwa peluang kepunahan paling lambat dalam 12 generasi adalah sekitar~.6.  Dalam
+contoh berikutnya akan kita lihat bahwa peluang untuk akhirnya punah
+adalah~2/3, sehingga 12 generasi pun belum cukup untuk memberikan taksiran yang akurat
+bagi peluang ini.
+\par
+Sekarang kita andaikan bahwa paling banyak dua keturunan dapat dihasilkan.  Maka
+$$
+h(z) = p_0 + p_1z + p_2z^2\ .
+$$
+Dalam kasus sederhana ini, syarat $z = h(z)$ menghasilkan persamaan
+$$
+d = p_0 + p_1d + p_2d^2\ ,
+$$
+yang dipenuhi oleh $d = 1$ dan $d = p_0/p_2$.  Jadi, selain akar
+$d = 1$, kita memiliki akar kedua $d = p_0/p_2$.  Rataan banyaknya keturunan~$m$
+yang dihasilkan satu induk adalah
+$$
+m = p_1 + 2p_2 = 1 - p_0 - p_2 + 2p_2 = 1 - p_0 + p_2\ .
+$$
+Jadi, jika $p_0 > p_2$, $m < 1$ dan akar kedua adalah ${} > 1$.  Jika $p_0 = p_2$,
+kita memiliki akar ganda $d = 1$.  Jika $p_0 < p_2$, $m > 1$ dan akar kedua~$d$
+kurang dari~1 serta menyatakan peluang bahwa proses tersebut akan punah.
+
+\begin{example}\label{exam 10.2.3}
+Keyfitz\index{KEYFITZ, N.}\footnote{N. Keyfitz, \emx {Introduction to the Mathematics of
+Population,} rev.~ed.\ (Reading, PA: Addison Wesley, 1977).} mengumpulkan dan
+menganalisis data tentang kelangsungan garis keluarga perempuan di antara perempuan
+Jepang.  Taksirannya mengenai distribusi probabilitas dasar untuk banyaknya
+anak perempuan yang dilahirkan oleh perempuan Jepang berusia 45--49 tahun pada 1960 diberikan dalam Tabel~\ref{table 10.2}.
+\begin{table}
+\centering
+$$\begin{array}{rl}
+p_0 &= .2092 \\
+p_1 &= .2584 \\
+p_2 &= .2360 \\
+p_3 &= .1593 \\
+p_4 &= .0828 \\
+p_5 &= .0357 \\
+p_6 &= .0133 \\
+p_7 &= .0042 \\
+p_8 &= .0011 \\
+p_9 &= .0002 \\
+p_{10} &= .0000\  
+\end{array}
+$$
+\caption{Distribusi banyaknya anak perempuan.}
+\label{table 10.2}
+\end{table}
+
+Banyaknya anak perempuan yang diharapkan dalam sebuah keluarga adalah 1.837, sehingga peluang
+kepunahan~$d$ kurang dari~1.  Jika kita menjalankan program {\bf Branch}, kita dapat menaksir
+bahwa sesungguhnya $d$ hanya sekitar .324.
+\end{example}
+
+\subsection*{Distribusi Keturunan}
+Sejauh ini kita hanya membahas masalah pertama dari dua masalah yang diajukan Galton,
+yaitu peluang kepunahan.  Sekarang kita membahas masalah kedua,
+yakni distribusi banyaknya keturunan $Z_n$ pada generasi ke-$n$. 
+Bentuk eksak distribusi tersebut tidak diketahui kecuali dalam kasus-kasus yang sangat khusus. 
+Namun, kita akan melihat bahwa kita dapat menggambarkan perilaku limit~$Z_n$ ketika
+$n \to \infty$.
+\par
+Pertama-tama kita menunjukkan bahwa fungsi pembangkit $h_n(z)$ dari distribusi
+$Z_n$ dapat diperoleh dari~$h(z)$ untuk sebarang proses percabangan.
+\par
+Ingat bahwa nilai fungsi pembangkit pada nilai~$z$ untuk sebarang
+peubah acak~$X$ dapat ditulis sebagai
+$$
+h(z) = E(z^X) = p_0 + p_1z + p_2z^2 +\cdots\ .
+$$
+Artinya, $h(z)$ adalah nilai harapan suatu percobaan yang memberikan hasil~$z^j$
+dengan peluang~$p_j$.
+\par
+Misalkan $S_n = X_1 + X_2 +\cdots+ X_n$, dengan setiap
+$X_j$ memiliki distribusi bernilai bulat yang sama $(p_j)$ dengan fungsi pembangkit
+$k(z) = p_0 + p_1z + p_2z^2 +\cdots.$  Misalkan $k_n(z)$ adalah fungsi pembangkit
+$S_n$.  Dengan menggunakan salah satu sifat fungsi pembangkit biasa yang 
+dibahas dalam Bagian~\ref{sec 10.1}, kita memperoleh
+$$k_n(z) = (k(z))^n\ ,$$
+sebab semua $X_j$ saling bebas dan memiliki distribusi yang sama.
+\par
+Sekarang perhatikan proses percabangan $Z_n$.  Misalkan $h_n(z)$ adalah fungsi pembangkit
+$Z_n$.  Maka
+\begin{eqnarray*}
+h_{n + 1}(z) &=& E(z^{Z_{n + 1}}) \\
+             &=& \sum_k E(z^{Z_{n + 1}} | Z_n = k) P(Z_n = k)\ .
+\end{eqnarray*}
+Jika $Z_n = k$, maka $Z_{n + 1} = X_1 + X_2 +\cdots+ X_k$, dengan $X_1$,~$X_2$,
+\ldots,~$X_k$ sebagai peubah acak yang saling bebas dengan fungsi pembangkit bersama
+$h(z)$.  Jadi,
+$$
+E(z^{Z_{n + 1}} | Z_n = k) = E(z^{X_1 + X_2 +\cdots+ X_k}) = (h(z))^k\ ,
+$$
+dan
+$$
+h_{n + 1}(z) = \sum_k (h(z))^k P(Z_n = k)\ .
+$$
+Namun,
+$$
+h_n(z) = \sum_k P(Z_n = k) z^k\ .
+$$
+Jadi,
+\begin{equation}
+h_{n + 1}(z) = h_n(h(z))\ . 
+\label{eq 10.2.5}
+\end{equation}
+Jika kita menurunkan Persamaan~\ref{eq 10.2.5} dan menggunakan aturan rantai, kita memperoleh
+$$
+h'_{n+1}(z) = h'_n(h(z)) h'(z) .
+$$
+Dengan menetapkan $z = 1$ dan menggunakan fakta bahwa $h(1) = 1$, $h'(1) = m$, dan $h_n'(1) = m_n =
+{}$rataan banyaknya keturunan pada generasi ke-$n$, kita memperoleh
+$$
+m_{n + 1} = m_n \cdot m\ .
+$$
+Jadi, $m_2 = m \cdot m = m^2$, $m_3 = m^2 \cdot m = m^3$, dan secara umum
+$$
+m_n = m^n\ .
+$$
+Jadi, untuk proses percabangan dengan $m > 1$, rataan banyaknya keturunan tumbuh
+secara eksponensial dengan laju~$m$.
+
+\subsection*{Contoh}
+
+\begin{example}\label{exam 10.2.3.5}
+Untuk proses percabangan dalam Contoh~\ref{exam 10.2.1}, kita memiliki
+\begin{eqnarray*}
+  h(z) &=& 1/2 + (1/4)z + (1/4)z^2\ , \\
+h_2(z) &=& h(h(z)) = 1/2 + (1/4)[1/2 + (1/4)z + (1/4)z^2] \\
+       &=& + (1/4)[1/2 + (1/4)z + (1/4)z^2]^2 \\
+       &=& 11/16 + (1/8)z + (9/64)z^2 + (1/32)z^3 + (1/64)z^4\ .
+\end{eqnarray*}
+Peluang banyaknya keturunan pada generasi kedua sesuai
+dengan peluang yang diperoleh langsung dari ukuran pohon (lihat Gambar~1).
+\end{example}
+
+Jelas bahwa bahkan dalam kasus sederhana dengan paling banyak dua keturunan, kita tidak dapat
+dengan mudah menghitung~$h_n(z)$ menggunakan metode ini.  Namun, terdapat
+satu kasus khusus yang memungkinkan perhitungan tersebut.
+
+\begin{example}\label{exam 10.2.4}
+Andaikan peluang $p_1$,~$p_2$,~\ldots\ membentuk suatu deret geometrik:
+$p_k = bc^{k - 1}$, $k = 1$,~2,~\ldots, dengan $0 < b \leq 1 - c$ dan $0 < c < 1$. Maka kita memiliki
+\begin{eqnarray*}
+p_0 &=& 1 - p_1 - p_2 -\cdots \\
+    &=& 1 - b - bc - bc^2 -\cdots \\
+    &=& 1 - \frac b{1 - c}\ .
+\end{eqnarray*}
+Fungsi pembangkit $h(z)$ untuk distribusi ini adalah
+\begin{eqnarray*}
+h(z) &=& p_0 + p_1z + p_2z^2 +\cdots \\
+     &=& 1 - \frac b{1 - c} + bz + bcz^2 + bc^2z^3 +\cdots \\
+     &=& 1 - \frac b{1 - c} + \frac{bz}{1 - cz}\ .
+\end{eqnarray*}
+Dari sini kita memperoleh
+$$
+h'(z) = \frac{bcz}{(1 - cz)^2} + \frac b{1 - cz} = \frac b{(1 - cz)^2}
+$$
+dan
+$$
+m = h'(1) = \frac b{(1 - c)^2}\ .
+$$
+Kita tahu bahwa jika $m \leq 1$, proses tersebut pasti akan punah dan $d = 1$.  Untuk
+mencari peluang~$d$ ketika $m > 1$, kita harus mencari akar $d < 1$ dari persamaan
+$$
+z = h(z)\ ,
+$$
+atau
+$$
+z = 1 - \frac b{1 - c} + \frac{bz}{1 - cz}.
+$$
+Hal ini menghasilkan suatu persamaan kuadrat.  Kita tahu bahwa $z = 1$ adalah salah satu penyelesaian. 
+Penyelesaian lainnya adalah
+$$
+d = \frac{1 - b - c}{c(1 - c)}.
+$$
+Mudah diverifikasi bahwa $d < 1$ tepat ketika $m > 1$.
+
+Dalam kasus ini, distribusi~$Z_n$ dapat dicari.  Hal ini dilakukan dengan
+terlebih dahulu mencari fungsi pembangkit $h_n(z)$.\footnote{T.~E. Harris, {\it
+The Theory of Branching Processes} (Berlin: Springer, 1963), p.~9.}  Hasil
+untuk $m \ne 1$ adalah:
+$$
+h_n(z) = 1 - m^n \left[\frac{1 - d}{m^n - d}\right] + 
+\frac{m^n \left[\frac{1 - d}{m^n - d}\right]^2 z}
+{1 - \left[\frac{m^n - 1}{m^n - d}\right]z}\ .
+$$
+Koefisien pangkat-pangkat~$z$ memberikan distribusi~$Z_n$:
+ 
+$$P(Z_n = 0) = 1 - m^n\frac{1 - d}{m^n - d} = \frac{d(m^n - 1)}{m^n - d}$$
+\noindent dan 
+$$P(Z_n = j) = m^n \Bigl(\frac{1 - d}{m^n - d}\Bigr)^2 \cdot 
+\Bigl(\frac{m^n - 1}{ m^n - d}\Bigr)^{j - 1},$$
+
+\noindent untuk $j \geq 1$.
+\end{example}
+
+\begin{example}\label{exam 10.2.4.5}
+Mari kita periksa kembali data Keyfitz untuk melihat apakah distribusi dengan jenis yang
+dibahas dalam Contoh~\ref{exam 10.2.4} dapat digunakan secara wajar sebagai model bagi
+populasi ini.  Kita perlu menaksir parameter $b$~dan~$c$ dari data
+untuk rumus $p_k = bc^{k - 1}$.  Ingat bahwa
+\begin{equation}
+m = \frac b{(1 - c)^2}  
+\label{eq 10.2.7}
+\end{equation}
+dan peluang~$d$ bahwa proses tersebut punah adalah
+\begin{equation}
+d = \frac{1 - b - c}{c(1 - c)}\ .  \label{eq 10.2.8}
+\end{equation}
+Dengan menyelesaikan Persamaan~\ref{eq 10.2.7} dan \ref{eq 10.2.8} untuk $b$~dan~$c$, kita memperoleh
+$$
+c = \frac{m - 1}{m - d}
+$$
+\noindent dan
+$$
+b = m\Bigl(\frac{1 - d}{m - d}\Bigr)^2\ .
+$$
+
+Kita akan menggunakan nilai 1.837 untuk~$m$ dan .324 untuk~$d$ yang diperoleh dalam
+contoh Keyfitz.  Dengan menggunakan nilai-nilai ini, kita memperoleh $b = .3666$ dan $c = .5533$. 
+Perhatikan bahwa $(1 - c)^2 < b < 1 - c$, sebagaimana disyaratkan.  Dalam Tabel~\ref{table 10.3}
+kita menyajikan, untuk
+perbandingan, peluang $p_0$ sampai $p_8$ yang dihitung menggunakan distribusi geometrik
+beserta nilai empirisnya.
+\begin{table}
+\centering                                   
+\begin{tabular}{rrc}  \hline
+    &           & Geometrik\\
+$p_j$ &Data & Model   \\ \hline
+0 & .2092 & .1816 \\
+1 & .2584 & .3666 \\
+2 & .2360 & .2028 \\
+3 & .1593 & .1122 \\
+4 & .0828 & .0621 \\
+5 & .0357 & .0344 \\
+6 & .0133 & .0190 \\
+7 & .0042 & .0105 \\
+8 & .0011 & .0058 \\
+9 & .0002 & .0032 \\
+10 & .0000 & .0018 \\\hline
+\end{tabular}
+\caption{Perbandingan frekuensi teramati dan frekuensi harapan.}
+\label{table 10.3}
+\end{table}
+\par
+Model geometrik cenderung memberikan peluang lebih besar kepada jumlah keturunan yang lebih banyak, tetapi
+cukup serupa untuk menunjukkan bahwa distribusi geometrik termodifikasi ini mungkin
+sesuai digunakan dalam penelitian semacam ini.
+
+Ingat bahwa jika $S_n = X_1 + X_2 +\cdots+ X_n$ adalah jumlah peubah acak yang saling
+bebas dengan distribusi yang sama, Hukum Bilangan Besar menyatakan bahwa
+$S_n/n$ konvergen ke suatu konstanta, yaitu $E(X_1)$.  Wajar untuk bertanya apakah
+terdapat teorema limit serupa untuk proses percabangan.
+
+Perhatikan suatu proses percabangan dengan~$Z_n$ menyatakan banyaknya keturunan
+setelah $n$ generasi.  Kita telah melihat bahwa nilai harapan~$Z_n$
+adalah~$m^n$.  Jadi, kita dapat menskalakan peubah acak $Z_n$ agar memiliki nilai harapan~1
+dengan mempertimbangkan peubah acak
+$$
+W_n = \frac{Z_n}{m^n}\ .
+$$
+
+Dalam teori proses percabangan, dibuktikan bahwa peubah acak
+$W_n$ ini akan menuju suatu limit ketika $n$ menuju takhingga.  Namun, berbeda dengan
+Hukum Bilangan Besar, ketika limitnya berupa konstanta, pada proses percabangan
+nilai limit peubah acak $W_n$ itu sendiri merupakan suatu peubah
+acak.
+
+Meskipun kita tidak dapat membuktikan teorema ini di sini, kita dapat mengilustrasikannya melalui simulasi. 
+Hal ini memerlukan sedikit kehati-hatian.  Ketika suatu proses percabangan bertahan, banyaknya
+keturunan cenderung menjadi sangat besar.  Jika pada suatu generasi terdapat 1000
+keturunan, keturunan pada generasi berikutnya merupakan hasil 1000 peristiwa
+acak, dan menyimulasikan 1000 percobaan ini akan memerlukan waktu.  Namun,
+karena hasil akhirnya merupakan jumlah 1000 percobaan yang saling bebas, kita dapat menggunakan
+Teorema Limit Pusat untuk mengganti 1000 percobaan ini dengan satu
+percobaan berdensitas normal yang memiliki rataan dan varians yang sesuai.  Program
+{\bf BranchingSimulation}\index{BranchingSimulation (program)} menjalankan proses ini.
+\par
+Kita telah menjalankan program ini untuk contoh Keyfitz dengan melakukan 10 simulasi
+dan menggambar hasilnya dalam Gambar~\ref{fig 10.4}.
+
+\putfig{4.5truein}{PSfig10-4}{Simulasi $Z_n/m^n$ untuk contoh Keyfitz.}{fig 10.4}
+
+
+Banyaknya keturunan perempuan yang diharapkan per perempuan adalah 1.837, sehingga kita
+menggambar hasil peubah acak $W_n = Z_n/(1.837)^n$.  Dalam tiga
+simulasi, proses tersebut punah, yang sesuai dengan nilai $d
+= .3$ yang kita peroleh untuk contoh ini.  Dalam tujuh simulasi lainnya,
+nilai~$W_n$ menuju nilai limit yang berbeda untuk setiap simulasi.
+\end{example}
+
+\begin{example}\label{exam 10.2.4.6}
+Sekarang kita menelaah peubah acak $Z_n$ dengan lebih saksama untuk kasus $m < 1$ (lihat
+Contoh~\ref{exam 10.2.4}).  Tetapkan suatu nilai $t > 0$; misalkan $[tm^n]$ adalah bagian bulat dari
+$tm^n$.  Maka
+\begin{eqnarray*}
+P(Z_n = [tm^n]) &=& m^n (\frac{1 - d}{m^n - d})^2 (\frac{m^n - 1}{m^n - d})
+^{[tm^n] - 1} \\
+                &=& \frac1{m^n}(\frac{1 - d}{1 - d/m^n})^2 (\frac{1 - 1/m^n} {1 -
+d/m^n})^{tm^n + a}\ ,
+\end{eqnarray*}
+dengan $|a| \leq 2$.  Jadi, ketika $n \to \infty$,
+$$
+m^n P(Z_n = [tm^n]) \to (1 - d)^2 \frac{e^{-t}}{e^{-td}} = (1 - d)^2 e^{-t(1 - d)}\ .
+$$
+Untuk $t = 0$,
+$$
+P(Z_n = 0) \to d\ .
+$$
+Kita dapat membandingkan hasil ini dengan Teorema Limit Pusat untuk jumlah~$S_n$ dari
+peubah acak bernilai bulat yang saling bebas (lihat Teorema~\ref{thm 9.3.5}), yang
+menyatakan bahwa jika $t$ adalah bilangan bulat dan $u = (t - n\mu)/\sqrt{\sigma^2 n}$, maka
+ketika $n \to \infty$,
+$$
+\sqrt{\sigma^2 n}\, P(S_n = u\sqrt{\sigma^2 n} + \mu n) \to \frac1{\sqrt{2\pi}}
+e^{-u^2/2}\ .
+$$
+Kita melihat bahwa bentuk pernyataan-pernyataan ini cukup serupa.  Suatu teorema limit
+dapat dibuktikan untuk kelas umum proses percabangan; teorema itu menyatakan
+bahwa di bawah hipotesis yang sesuai, ketika $n \to \infty$,
+$$
+m^n P(Z_n = [tm^n]) \to k(t)\ ,
+$$
+untuk $t > 0$, dan
+$$
+P(Z_n = 0) \to d\ .
+$$
+Namun, berbeda dengan Teorema Limit Pusat untuk jumlah peubah acak yang saling
+bebas, fungsi $k(t)$ akan bergantung pada distribusi dasar yang
+menentukan proses tersebut.  Bentuknya hanya diketahui untuk sangat sedikit contoh yang serupa
+dengan contoh yang telah kita bahas di sini.
+\end{example}
+
+\subsection*{Masalah Surat Berantai}
+\begin{example}\label{exam 10.2.5}
+Sebuah contoh menarik tentang proses percabangan dikemukakan oleh Free
+Huizinga.\index{HUIZINGA, F.}\footnote{Komunikasi pribadi.}  Pada tahun 1978, sebuah surat
+berantai\index{surat berantai} bernama ``Circle of Gold,"\index{Circle of Gold} yang diyakini
+bermula di California, menyebar melintasi negeri hingga kawasan teater New
+York.  Rantai itu mengharuskan peserta membeli sebuah surat berisi daftar 12~nama dengan harga
+100~dolar.  Pembeli memberikan 50~dolar kepada orang yang menjual surat tersebut kepadanya, lalu
+mengirimkan 50~dolar kepada orang yang namanya berada di urutan teratas daftar.  Setelah itu,
+pembeli mencoret nama teratas dan menambahkan namanya sendiri di urutan
+terbawah pada setiap surat sebelum surat itu dijual kembali.
+
+Mula-mula andaikan bahwa pembeli hanya boleh menjual surat tersebut kepada satu
+orang.  Jika Anda membeli surat itu, Anda tentu ingin menghitung nilai harapan
+keuntungan Anda.  (Di sini kita mengabaikan fakta bahwa meneruskan surat berantai
+melalui pos merupakan pelanggaran federal yang jelas memiliki
+sanksi tertentu.)  Andaikan setiap orang yang terlibat memiliki peluang~$p$ untuk menjual
+surat tersebut.  Maka Anda akan menerima 50~dolar dengan peluang~$p$, dan menerima tambahan
+50~dolar jika surat itu telah dijual kepada 12~orang, sebab pada saat itu nama Anda telah
+naik ke urutan teratas daftar.  Hal ini terjadi dengan peluang~$p^{12}$, sehingga
+nilai harapan keuntungan Anda adalah $-100 + 50p + 50p^{12}$.  Jadi, rantai dalam
+situasi ini merupakan permainan yang sangat tidak menguntungkan.
+
+Akan lebih masuk akal jika setiap orang yang terlibat diperbolehkan membuat salinan
+daftar tersebut dan mencoba menjual surat itu kepada sedikitnya 2 orang lain.  Dengan demikian,
+Anda berpeluang memperoleh kembali 100~dolar melalui penjualan ini, dan jika salah satu
+surat terjual 12 kali, Anda akan menerima bonus 50~dolar untuk setiap
+kejadian semacam itu.  Kita dapat memandangnya sebagai proses percabangan dengan 12 generasi.
+Anggota generasi pertama adalah surat-surat yang Anda jual.  Generasi kedua
+terdiri atas surat-surat yang dijual oleh anggota generasi pertama, dan
+seterusnya.
+
+Andaikan peluang bahwa setiap orang menjual surat kepada
+0,~1, atau~2 orang lain berturut-turut adalah $p_0$,~$p_1$, dan~$p_2$.  Misalkan $Z_1$,~$Z_2$,
+\ldots,~$Z_{12}$ menyatakan banyaknya surat dalam 12 generasi pertama dari
+proses percabangan ini.  Maka nilai harapan keuntungan Anda adalah
+$$
+50(E(Z_1) + E(Z_{12})) = 50m + 50m^{12}\ ,
+$$
+dengan $m = p_1 + 2p_2$ sebagai nilai harapan banyaknya surat yang Anda jual.  Agar
+menguntungkan, kita cukup memiliki
+$$
+50m + 50m^{12} > 100\ ,
+$$
+atau
+$$
+m + m^{12} > 2\ .
+$$
+Namun, hal ini benar jika dan hanya jika $m > 1$.  Kita telah melihat bahwa dalam
+kasus kuadratik, hal ini terjadi jika dan hanya jika $p_2 > p_0$.  Sebagai contoh,
+andaikan $p_0 = .2$, $p_1 = .5$, dan $p_2 = .3$.  Maka $m = 1.1$ dan rantai
+tersebut merupakan permainan yang menguntungkan.  Nilai harapan laba Anda adalah
+$$
+50(1.1 + 1.1^{12}) - 100 \approx 112\ .
+$$
+
+Peluang bahwa Anda menerima sedikitnya satu pembayaran dari generasi ke-12
+adalah $1 - d_{12}$.  Dari program {\bf Branch}, kita memperoleh $d_{12} =
+.599$.  Jadi, $1 - d_{12} = .401$ adalah peluang bahwa Anda menerima suatu
+bonus.  Jumlah maksimum yang dapat Anda terima dari rantai tersebut adalah $50(2 +
+2^{12}) = 204{,}900$ jika setiap orang berhasil menjual dua surat.  Tentu
+saja, Anda tidak selalu dapat berharap seberuntung itu.  (Berapakah peluang
+hal ini terjadi?)
+
+Untuk menyimulasikan permainan ini, kita cukup menyimulasikan proses percabangan selama 12
+generasi.  Dengan menggunakan versi program {\bf BranchingSimulation} yang sedikit
+dimodifikasi, kita menjalankan dua puluh simulasi semacam itu dan memperoleh
+hasil yang ditunjukkan dalam Tabel~\ref{table 10.4}.
+
+Perhatikan bahwa kita cukup beruntung dalam beberapa simulasi, tetapi kita memperoleh keuntungan hanya
+dalam sedikit kurang dari separuh simulasi.  Proses tersebut sudah punah paling lambat pada generasi kedua belas
+dalam 12 dari 20 percobaan, sesuai dengan baik dengan peluang $d_{12}
+= .599$ yang kita hitung menggunakan program {\bf Branch}.
+
+%\vfill
+%\newpage
+%\begin{progout}
+%\begin{verbatim}
+%Finite density (0) or Poisson (1): 0
+%Enter density p1, p2,..., pn: .2,.5,.3
+%Mean: 1.1
+\begin{table}
+\centering
+$$
+\begin{tabular}{rrrrrrrrrrrrr}
+$Z_{1}$&$Z_{2}$&$ Z_{3}$& $Z_{4}$& $Z_{5}$& $Z_{6}$& $Z_{7}$& $Z_{8}$& $Z_{9}$&$ Z_{10}$&$ Z_{11}$& $Z_{12}$& Laba\\\hline
+1   &0   &0   &0   &0  & 0  & 0   &0   &0   &0   &0   &0   &-50\\ 
+1   &1   &2   &3   &2  & 3  & 2   &1   &2   &3   &3   &6   &250\\ 
+0   &0   &0   &0   &0  & 0  & 0   &0   &0   &0   &0   &0  &-100\\ 
+2   &4   &4   &2   &3  & 4  & 4   &3   &2   &2   &1   &1  & 50\\ 
+1   &2   &3   &5  & 4  & 3  & 3   &3   &5   &8   &6   &6  & 250\\ 
+0   &0   &0   &0  & 0  & 0  & 0   &0   &0   &0   &0   &0  &-100\\ 
+2   &3   &2   &2  & 2  & 1  & 2   &3   &3   &3   &4   &6  & 300\\ 
+1   &2   &1   &1  & 1  & 1  & 2   &1   &0   &0   &0   &0  & -50\\ 
+0   &0   &0   &0  & 0  & 0  & 0   &0   &0   &0   &0   &0  &-100\\ 
+1   &0   &0   &0  & 0  & 0  & 0   &0   &0   &0   &0   &0  & -50\\ 
+2   &3   &2   &3  & 3  & 3  & 5   &9  &12   &12  &13  &15 & 750\\ 
+1   &1   &1   &0  & 0  & 0  & 0   &0   &0   &0   &0   &0  & -50\\ 
+1   &2   &2   &3  & 3  & 0  & 0   &0   &0   &0   &0   &0  & -50\\ 
+1   &1   &1   &1  & 2  & 2  & 3   &4   &4   &6   &4   &5  & 200\\ 
+1   &1   &0   &0  & 0  & 0  & 0   &0   &0   &0   &0   &0  & -50\\ 
+1   &0   &0   &0  & 0  & 0  & 0   &0   &0   &0   &0   &0  & -50\\ 
+1   &0   &0   &0  & 0  & 0  & 0   &0   &0   &0   &0   &0  & -50\\ 
+1   &1   &2   &3  & 3  & 4  & 2   &3   &3   &3   &3   &2  &  50\\ 
+1   &2   &4   &6  & 6  & 9  &10   &13  &16  &17  &15  &18 &  850\\ 
+1   &0   &0   &0  & 0  & 0  & 0   &0   &0   &0   &0   &0  & -50\\ 
+\end{tabular}
+$$
+\caption{Simulasi surat berantai (kasus distribusi berhingga).}
+\label{table 10.4}
+\end{table}
+
+Sekarang mari kita ubah asumsi tentang surat berantai itu dengan memperbolehkan pembeli menjual
+surat tersebut kepada sebanyak mungkin orang, alih-alih kepada paling banyak dua orang.  Kita
+andaikan bahwa seseorang memiliki banyak kenalan, yaitu sebanyak~$N$, dan
+peluang kecil~$p$ untuk membujuk salah seorang dari mereka agar membeli surat tersebut.  Maka
+distribusi banyaknya surat yang dijualnya merupakan distribusi binomial
+dengan rataan $m = Np$.  Karena $N$ besar dan $p$ kecil, kita dapat
+mengandaikan bahwa peluang~$p_j$ seseorang menjual surat kepada
+$j$~orang diberikan oleh distribusi Poisson
+$$
+p_j = \frac{e^{-m} m^j}{j!}\ .
+$$
+\newpage
+\noindent
+Fungsi pembangkit untuk distribusi Poisson adalah
+\begin{eqnarray*}
+h(z) &=& \sum_{j = 0}^\infty \frac{e^{-m} m^j z^j}{j!} \\
+     &=& e^{-m} \sum_{j = 0}^\infty \frac{m^j z^j}{j!} \\
+     &=& e^{-m} e^{mz} = e^{m(z - 1)}\ .
+\end{eqnarray*}
+
+Nilai harapan banyaknya surat yang diteruskan seseorang adalah $m$, dan agar
+menguntungkan kita kembali harus memiliki $m > 1$.  Andaikan lagi bahwa $m = 1.1$.
+Dengan program {\bf Branch}, kita kembali dapat mencari peluang $1 - d_{12}$ untuk memperoleh
+bonus.  Hasilnya adalah .232.  Walaupun nilai harapan keuntungannya sama, varians
+dalam kasus ini lebih besar, dan pembeli memiliki peluang lebih besar untuk memperoleh
+laba yang cukup besar.  Kita kembali menjalankan 20 simulasi menggunakan distribusi Poisson
+dengan rataan 1.1.  Hasilnya ditunjukkan dalam Tabel~\ref{table 10.5}.
+\begin{table}
+\centering
+$$
+\begin{tabular}{rrrrrrrrrrrrr}
+$Z_{1}$&$Z_{2}$&$ Z_{3}$& $Z_{4}$& $Z_{5}$& $Z_{6}$& $Z_{7}$& $Z_{8}$& $Z_{9}$&$ Z_{10}$&$ Z_{11}$& $Z_{12}$& Laba\\\hline
+1   &2   &6   &7   &7  & 8  & 11  &9   &7   &6   &6   &5   & 200\\ 
+1   &0   &0   &0   &0  & 0  & 0   &0   &0   &0   &0   &0   & -50\\ 
+1   &0   &0   &0   &0  & 0  & 0   &0   &0   &0   &0   &0   & -50\\ 
+1   &1   &1   &0   &0  & 0  & 0   &0   &0   &0   &0   &0   & -50\\ 
+0   &0   &0   &0  & 0  & 0  & 0   &0   &0   &0   &0   &0   & -100\\ 
+1   &1   &1   &1  & 1  & 1  & 2   &4   &9   &7   &9   &7   & 300\\ 
+2   &3   &3   &4  & 2  & 0  & 0   &0   &0   &0   &0   &0   & 0\\ 
+1   &0   &0   &0  & 0  & 0  & 0   &0   &0   &0   &0   &0   & -50\\ 
+2   &1   &0   &0  & 0  & 0  & 0   &0   &0   &0   &0   &0   & 0\\ 
+3   &3   &4   &7  & 11 & 17 & 14  &11  &11  &10  &16  &25  & 1300\\ 
+0   &0   &0   &0  & 0  & 0  & 0   &0   &0   &0   &0   &0   & -100\\ 
+1   &2   &2   &1  & 1  & 3  & 1   &0   &0   &0   &0   &0   & -50\\ 
+0   &0   &0   &0  & 0  & 0  & 0   &0   &0   &0   &0   &0   & -100\\ 
+2   &3   &1   &0  & 0  & 0  & 0   &0   &0   &0   &0   &0   & 0\\ 
+3   &1   &0   &0  & 0  & 0  & 0   &0   &0   &0   &0   &0   & 50\\ 
+1   &0   &0   &0  & 0  & 0  & 0   &0   &0   &0   &0   &0   & -50\\ 
+3   &4   &4   &7  &10  &11  & 9   &11  &12  &14  &13  &10  & 550\\ 
+1   &3   &3   &4  & 9  & 5  & 7   &9   &8   &8   &6   &3   & 100\\ 
+1   &0   &4   &6  & 6  & 9  &10   &13  &0   &0   &0   &0   & -50\\ 
+1   &0   &0   &0  & 0  & 0  & 0   &0   &0   &0   &0   &0   & -50\\ 
+\end{tabular}
+$$
+\caption{Simulasi surat berantai (kasus Poisson).}
+\label{table 10.5}
+\end{table}
+\par
+Perhatikan bahwa, seperti sebelumnya, kita memperoleh keuntungan dalam kurang dari separuh simulasi, tetapi
+kita juga memperoleh satu laba yang besar.  Hanya dalam 6 dari 20 kasus kita memperoleh laba.
+Hal ini kembali cukup sesuai dengan perhitungan kita bahwa peluang terjadinya
+peristiwa tersebut adalah .232.
+\end{example}
+
+\exercises
+\begin{LJSItem}
+
+\i\label{exer 10.2.1} Misalkan $Z_1$,~$Z_2$, \ldots,~$Z_N$ menggambarkan suatu proses percabangan dengan 
+setiap induk memiliki $j$~keturunan dengan peluang~$p_j$.  Tentukan peluang~$d$ 
+bahwa proses itu akhirnya punah jika
+\begin{enumerate}
+\item $p_0 = 1/2$, $p_1 = 1/4$, dan $p_2 = 1/4$.
+
+\item $p_0 = 1/3$, $p_1 = 1/3$, dan $p_2 = 1/3$.
+
+\item $p_0 = 1/3$, $p_1 = 0$, dan $p_2 = 2/3$.
+
+\item $p_j = 1/2^{j + 1}$, untuk $j = 0$,~1, 2,~\ldots.
+
+\item $p_j = (1/3)(2/3)^j$, untuk $j = 0$,~1, 2,~\ldots.
+
+\item $p_j = e^{-2} 2^j/j!$, untuk $j = 0$,~1, 2,~\ldots\ (taksir $d$
+secara numerik).
+\end{enumerate}
+
+\i\label{exer 10.2.2} Misalkan $Z_1$,~$Z_2$, \ldots,~$Z_N$ menggambarkan suatu proses percabangan dengan 
+setiap induk memiliki $j$~keturunan dengan peluang~$p_j$.  Tentukan peluang~$d$ bahwa
+proses itu punah jika
+\begin{enumerate}
+\item $p_0 = 1/2$, $p_1 = p_2 = 0$, dan $p_3 = 1/2$.
+
+\item $p_0 = p_1 = p_2 = p_3 = 1/4$.
+
+\item $p_0 = t$, $p_1 = 1 - 2t$, $p_2 = 0$, dan $p_3 = t$, dengan $t \leq
+1/2$.
+\end{enumerate}
+
+\i\label{exer 10.2.3} Dalam masalah surat berantai (lihat Contoh~\ref{exam 10.2.5}), tentukan 
+keuntungan yang Anda harapkan jika
+\begin{enumerate}
+\item $p_0 = 1/2$, $p_1 = 0$, dan $p_2 = 1/2$.
+
+\item $p_0 = 1/6$, $p_1 = 1/2$, dan $p_2 = 1/3$.
+\end{enumerate}
+Buktikan bahwa jika $p_0 > 1/2$, Anda tidak dapat mengharapkan keuntungan.
+
+\i\label{exer 10.2.4} Misalkan $S_N = X_1 + X_2 +\cdots+ X_N$, dengan $X_i$ merupakan peubah-peubah acak saling bebas
+yang berdistribusi sama dan memiliki fungsi pembangkit $f(z)$.  Asumsikan bahwa $N$ adalah peubah acak bernilai
+bulat yang bebas dari semua $X_j$ dan mempunyai fungsi pembangkit $g(z)$. 
+Buktikan bahwa fungsi pembangkit untuk $S_N$ adalah $h(z) = g(f(z))$.  \emx {Petunjuk}:
+Gunakan fakta bahwa
+$$
+h(z) = E(z^{S_N}) = \sum_k E(z^{S_N} | N = k) P(N = k)\ .
+$$
+
+\i\label{exer 10.2.5} Kita telah melihat bahwa jika fungsi pembangkit untuk keturunan dari satu
+induk adalah $f(z)$, maka fungsi pembangkit untuk banyaknya
+keturunan setelah dua generasi diberikan oleh $h(z) = f(f(z))$.  Jelaskan bagaimana hal ini
+mengikuti hasil Latihan~\ref{exer 10.2.4}.
+
+\i\label{exer 10.2.6} Tinjau suatu proses antrean sedemikian sehingga pada setiap menit terdapat 1~atau~0 pelanggan yang datang, masing-masing dengan peluang $p$ atau 
+$q = 1 - p$.  (Bilangan $p$ disebut \emx {laju kedatangan}.)  
+Ketika seorang pelanggan mulai dilayani, pelayanannya selesai pada menit berikutnya
+dengan peluang~$r$.  Bilangan $r$ disebut \emx {laju pelayanan}.)  
+Jadi, ketika seorang pelanggan mulai dilayani, pelayanannya akan selesai
+dalam $j$~menit dengan peluang $(1 - r)^{j -1}r$, untuk $j = 1$,~2,
+3,~\ldots.
+\begin{enumerate}
+\item Tentukan fungsi pembangkit $f(z)$ untuk banyaknya pelanggan yang
+datang dalam satu menit dan fungsi pembangkit $g(z)$ untuk lamanya waktu
+yang dihabiskan seseorang dalam pelayanan sejak pelayanannya dimulai.
+
+\i\label{exer 10.2.7} Tinjau suatu \emx {proses percabangan pelanggan}\index{proses
+percabangan!pelanggan}\index{proses percabangan pelanggan} dengan menganggap keturunan seorang pelanggan
+sebagai para pelanggan yang datang selama pelanggan itu dilayani.  Dengan menggunakan Latihan~\ref{exer 10.2.4},
+buktikan bahwa fungsi pembangkit untuk proses percabangan pelanggan kita adalah $h(z) = g(f(z))$.
+
+\i\label{exer 10.2.8} Jika proses percabangan dimulai dengan kedatangan pelanggan pertama,
+maka lamanya waktu hingga proses percabangan itu punah akan menjadi
+\emx {masa sibuk} bagi pelayan.  Tentukan suatu syarat yang melibatkan laju
+kedatangan dan laju pelayanan yang menjamin bahwa pada akhirnya
+akan ada saat ketika pelayan itu tidak sibuk.
+\end{enumerate}
+
+\i\label{exer 10.2.9} Misalkan $N$ menyatakan nilai harapan jumlah total keturunan dalam suatu proses
+percabangan.  Misalkan $m$ adalah rataan banyaknya keturunan dari satu induk.  Buktikan bahwa
+$$
+N = 1 + \left(\sum p_k \cdot k\right) N = 1 + mN
+$$
+dan karena itu $N$ berhingga jika dan hanya jika $m < 1$, dan dalam hal tersebut $N = 1/(1
+- m)$.
+
+\i\label{exer 10.2.10} Tinjau suatu proses percabangan sedemikian sehingga banyaknya keturunan dari satu
+induk adalah $j$ dengan peluang $1/2^{j + 1}$ untuk $j = 0$,~1, 2,~\ldots.
+\begin{enumerate}
+\item Dengan menggunakan hasil Contoh~\ref{exam 10.2.4}, buktikan bahwa peluang terdapat
+$j$~keturunan pada generasi ke-$n$ adalah
+$$
+p_j^{(n)} = \left \{ \begin{array}{ll}
+                \frac{1}{n(n + 1)} (\frac {n}{n + 1})^j, & \mbox{jika $ j \geq 1$}, \\
+                                      \frac {n}{n + 1},  & \mbox{jika $ j = 0$}.\end{array}\right.
+$$
+
+\item Buktikan bahwa peluang proses itu punah tepat pada
+generasi ke-$n$ adalah $1/n(n + 1)$.
+
+\item Buktikan bahwa nilai harapan masa hidupnya tak berhingga meskipun $d = 1$.
+\end{enumerate}
+\end{LJSItem}
+
+\section[Densitas Kontinu]{Fungsi Pembangkit untuk Densitas Kontinu}\label{sec
+10.3}\index{fungsi pembangkit!untuk densitas kontinu} Pada bagian sebelumnya, kita memperkenalkan
+konsep momen dan fungsi pembangkit momen untuk peubah acak diskret.  Konsep-konsep
+ini memiliki padanan yang alami untuk peubah acak kontinu, asalkan kita berhati-hati
+dalam argumen yang melibatkan konvergensi.
+
+\subsection*{Momen}
+Jika $X$ adalah peubah acak kontinu yang didefinisikan pada ruang
+peluang~$\Omega$, dengan fungsi densitas~$f_X$, maka kita mendefinisikan momen\index{momen}
+ke-$n$ dari~$X$ dengan rumus
+$$
+\mu_n = E(X^n) = \int_{-\infty}^{+\infty} x^n f_X(x)\, dx\ ,
+$$
+asalkan integral 
+$$
+\mu_n = E(X^n) = \int_{-\infty}^{+\infty} |x|^n f_X(x)\, dx\ ,
+$$
+berhingga.  Maka, seperti dalam kasus diskret, kita melihat
+bahwa $\mu_0 = 1$, $\mu_1 = \mu$, dan $\mu_2 - \mu_1^2 = \sigma^2$.
+
+\subsection*{Fungsi Pembangkit Momen}\index{fungsi pembangkit momen}\index{fungsi
+pembangkit!momen} Sekarang kita mendefinisikan \emx {fungsi pembangkit momen} $g(t)$ untuk~$X$ dengan
+rumus
+\begin{eqnarray*}
+g(t) &=& \sum_{k = 0}^\infty \frac{\mu_k t^k}{k!} = \sum_{k = 0}^\infty
+\frac{E(X^k) t^k}{k!} \\
+     &=& E(e^{tX}) = \int_{-\infty}^{+\infty} e^{tx} f_X(x)\, dx\ ,
+\end{eqnarray*}
+asalkan deret ini konvergen.  Maka, seperti sebelumnya, kita memperoleh
+$$
+\mu_n = g^{(n)}(0)\ .
+$$
+
+\subsection*{Contoh}
+\begin{example}\label{exam 10.3.1}
+Misalkan $X$ adalah peubah acak kontinu dengan rentang $[0,1]$ dan fungsi
+densitas $f_X(x) = 1$ untuk $0 \leq x \leq 1$ (densitas seragam).  Maka
+$$
+\mu_n = \int_0^1 x^n\, dx = \frac1{n + 1}\ ,
+$$
+dan
+\begin{eqnarray*}
+g(t) &=& \sum_{k = 0}^\infty \frac{t^k}{(k+1)!}\\
+     &=& \frac{e^t - 1}t\ .
+\end{eqnarray*}
+Di sini deret tersebut konvergen untuk semua~$t$.  Sebagai cara lain, kita memperoleh
+\begin{eqnarray*}
+g(t) &=& \int_{-\infty}^{+\infty} e^{tx} f_X(x)\, dx \\
+     &=& \int_0^1 e^{tx}\, dx = \frac{e^t - 1}t\ .
+\end{eqnarray*}
+Maka (menurut aturan L'H\^opital)
+\begin{eqnarray*}
+\mu_0 &=& g(0) = \lim_{t \to 0} \frac{e^t - 1}t = 1\ , \\
+\mu_1 &=& g'(0) = \lim_{t \to 0} \frac{te^t - e^t + 1}{t^2} = \frac12\ , \\
+\mu_2 &=& g''(0) = \lim_{t \to 0} \frac{t^3e^t - 2t^2e^t + 2te^t - 2t}{t^4} =
+\frac13\ .
+\end{eqnarray*}
+Secara khusus, kita memverifikasi bahwa $\mu = g'(0) = 1/2$ dan
+$$
+\sigma^2 = g''(0) - (g'(0))^2 = \frac13 - \frac14 = \frac1{12}
+$$
+seperti sebelumnya (lihat Contoh~\ref{exam 6.18.5}).
+\end{example}
+
+\begin{example}\label{exam 10.3.2}
+Misalkan $X$ memiliki rentang $[\,0,\infty)$ dan fungsi densitas $f_X(x) = \lambda
+e^{-\lambda x}$ (densitas eksponensial dengan parameter~$\lambda$).  Dalam kasus ini
+\begin{eqnarray*}
+\mu_n &=& \int_0^\infty x^n \lambda e^{-\lambda x}\, dx = \lambda(-1)^n
+\frac{d^n}{d\lambda^n} \int_0^\infty e^{-\lambda x}\, dx \\
+      &=& \lambda(-1)^n \frac{d^n}{d\lambda^n} [\frac1\lambda] = \frac{n!}
+{\lambda^n}\ ,
+\end{eqnarray*}
+dan
+\begin{eqnarray*}
+g(t) &=& \sum_{k = 0}^\infty \frac{\mu_k t^k}{k!} \\
+     &=& \sum_{k = 0}^\infty [\frac t\lambda]^k = \frac\lambda{\lambda - t}\ .
+\end{eqnarray*}
+Di sini deret tersebut konvergen hanya untuk $|t| < \lambda$.  Sebagai cara lain, kita memperoleh
+\begin{eqnarray*}
+g(t) &=& \int_0^\infty e^{tx} \lambda e^{-\lambda x}\, dx \\
+     &=& \left.\frac{\lambda e^{(t - \lambda)x}}{t - \lambda}\right|_0^\infty =
+\frac\lambda{\lambda - t}\ .
+\end{eqnarray*}
+
+Sekarang kita dapat memverifikasi secara langsung bahwa
+$$
+\mu_n = g^{(n)}(0) = \left.\frac{\lambda n!}{(\lambda - t)^{n + 1}}\right|_{t =
+0} = \frac{n!}{\lambda^n}\ .
+$$
+\end{example}
+
+\begin{example}\label{exam 10.3.3}
+Misalkan $X$ memiliki rentang $(-\infty,+\infty)$ dan fungsi densitas
+$$
+f_X(x) = \frac1{\sqrt{2\pi}} e^{-x^2/2}
+$$
+(densitas normal).  Dalam kasus ini kita memperoleh
+\begin{eqnarray*}
+\mu_n &=& \frac1{\sqrt{2\pi}} \int_{-\infty}^{+\infty} x^n e^{-x^2/2}\, dx \\
+      &=& \left \{ \begin{array}{ll}
+                        \frac{(2m)!}{2^{m} m!}, & \mbox{jika $ n = 2m$,}\cr
+                        0,                      & \mbox{jika $ n = 2m+1$.}\end{array}\right.
+\end{eqnarray*}
+(Momen-momen ini dihitung dengan melakukan integrasi parsial sekali untuk menunjukkan bahwa $\mu_n
+= (n - 1)\mu_{n - 2}$, dan dengan memperhatikan bahwa $\mu_0 = 1$ dan $\mu_1 = 0$.)  Dengan demikian,
+\begin{eqnarray*}
+g(t) &=& \sum_{n = 0}^\infty \frac{\mu_n t^n}{n!} \\
+     &=& \sum_{m = 0}^\infty \frac{t^{2m}}{2^{m} m!} = e^{t^2/2}\ .
+\end{eqnarray*}
+Deret ini konvergen untuk semua nilai~$t$.  Sekali lagi kita dapat memverifikasi bahwa
+$g^{(n)}(0) = \mu_n$.
+\par
+Misalkan $X$ adalah peubah acak normal dengan parameter $\mu$ dan $\sigma$.  Mudah
+ditunjukkan bahwa fungsi pembangkit momen $X$ diberikan oleh
+$$e^{t\mu + (\sigma^2/2)t^2}\ .$$
+Sekarang andaikan $X$ dan $Y$ adalah dua peubah acak normal yang saling bebas, masing-masing dengan
+parameter $\mu_1$, $\sigma_1$, dan $\mu_2$, $\sigma_2$.  Maka,
+hasil kali fungsi pembangkit momen $X$ dan $Y$ adalah
+$$e^{t(\mu_1 + \mu_2) + ((\sigma_1^2 + \sigma_2^2)/2)t^2}\ .$$
+Ini adalah fungsi pembangkit momen untuk peubah acak normal dengan rata-rata
+$\mu_1 + \mu_2$ dan varians $\sigma_1^2 + \sigma_2^2$.  Jadi, jumlah
+dua peubah acak normal yang saling bebas juga bersifat normal.  (Hal ini telah dibuktikan
+untuk kasus khusus ketika kedua suku berdistribusi normal standar dalam Contoh~\ref{exam 
+7.8}.)
+\end{example}
+
+Secara umum, deret yang mendefinisikan $g(t)$ tidak akan konvergen untuk semua~$t$.  Namun, dalam
+kasus khusus yang penting ketika $X$ terbatas (yakni, ketika rentang~$X$
+termuat dalam suatu interval berhingga), kita dapat menunjukkan bahwa deret itu memang konvergen
+untuk semua~$t$.
+
+\begin{theorem}\label{thm 10.4}
+Andaikan $X$ adalah peubah acak kontinu dengan rentang yang termuat dalam
+interval $[-M,M]$.  Maka deret
+$$
+g(t) = \sum_{k = 0}^\infty \frac{\mu_k t^k}{k!}
+$$
+konvergen untuk semua~$t$ menuju suatu fungsi~$g(t)$ yang dapat didiferensialkan tak berhingga kali, dan
+$g^{(n)}(0) = \mu_n$.
+\proof
+Kita mempunyai
+$$
+\mu_k = \int_{-M}^{+M} x^k f_X(x)\, dx\ ,
+$$
+sehingga
+\begin{eqnarray*}
+|\mu_k| &\leq& \int_{-M}^{+M} |x|^k f_X(x)\, dx \\
+        &\leq& M^k \int_{-M}^{+M} f_X(x)\, dx = M^k\ .
+\end{eqnarray*}
+Dengan demikian, untuk semua~$N$ kita mempunyai
+$$
+\sum_{k = 0}^N \left|\frac{\mu_k t^k}{k!}\right| \leq \sum_{k = 0}^N
+\frac{(M|t|)^k}{k!} \leq e^{M|t|}\ ,
+$$
+yang menunjukkan bahwa deret pangkat tersebut konvergen untuk semua~$t$.  Kita tahu bahwa jumlah
+suatu deret pangkat yang konvergen selalu dapat didiferensialkan.
+\end{theorem}
+
+\subsection*{Masalah Momen}\index{masalah momen}
+
+\begin{theorem}\label{thm 10.5}
+Jika $X$ adalah peubah acak terbatas, maka fungsi pembangkit momen
+$g_X(t)$ dari~$x$ menentukan fungsi densitas $f_X(x)$ secara unik.
+\vspace{.385in} 
+
+\noindent \emx {Sketsa Bukti.}~                                             
+Kita tahu bahwa
+\begin{eqnarray*}
+g_X(t) &=& \sum_{k = 0}^\infty \frac{\mu_k t^k}{k!} \\
+       &=& \int_{-\infty}^{+\infty} e^{tx} f(x)\, dx\ .
+\end{eqnarray*}
+
+%\subsection{Characteristic Functions}     
+
+\noindent Jika kita mengganti $t$ dengan~$i\tau$, dengan $\tau$ real dan $i = \sqrt{-1}$, maka
+deret tersebut konvergen untuk semua~$\tau$, dan kita dapat mendefinisikan fungsi
+$$
+k_X(\tau) = g_X(i\tau) = \int_{-\infty}^{+\infty} e^{i\tau x} f_X(x)\, dx\ .
+$$
+
+Fungsi $k_X(\tau)$ disebut \emx {fungsi karakteristik}\index{fungsi
+karakteristik} dari~$X$, dan didefinisikan oleh persamaan di atas bahkan ketika deret untuk~$g_X$ tidak
+konvergen.  Persamaan ini menyatakan bahwa $k_X$ merupakan \emx {transformasi Fourier}\index{transformasi
+Fourier} dari~$f_X$.  Diketahui bahwa transformasi Fourier memiliki invers, yang diberikan oleh
+rumus
+$$
+f_X(x) = \frac1{2\pi} \int_{-\infty}^{+\infty} e^{-i\tau x} k_X(\tau)\, d\tau\ ,
+$$
+dengan penafsiran yang sesuai.\footnote{H. Dym and H.~P. McKean, \emx {Fourier Series and
+Integrals} (New York: Academic Press, 1972).}  Di sini kita melihat bahwa
+fungsi karakteristik~$k_X$, dan karenanya fungsi pembangkit momen~$g_X$,
+menentukan fungsi densitas~$f_X$ secara unik di bawah hipotesis kita.
+\end{theorem} 
+
+\subsection*{Sketsa Bukti Teorema Limit Pusat}
+\index{Teorema Limit Pusat!bukti}
+Dengan mengingat hasil di atas, sekarang kita dapat membuat sketsa bukti Teorema Limit Pusat
+untuk peubah acak kontinu terbatas (lihat Teorema~\ref{thm 9.4.7}).  Untuk itu,
+misalkan $X$ adalah peubah acak kontinu dengan fungsi densitas~$f_X$, rata-rata $\mu
+= 0$, varians $\sigma^2 = 1$, dan fungsi pembangkit momen~$g(t)$ yang didefinisikan
+oleh deretnya untuk semua~$t$.  Misalkan $X_1$,~$X_2$, \ldots,~$X_n$ membentuk suatu proses
+percobaan independen dengan setiap $X_i$ memiliki densitas $f_X$, dan misalkan $S_n = X_1 + X_2
++\cdots+ X_n$, serta $S_n^* = (S_n - n\mu)/\sqrt{n\sigma^2} = S_n/\sqrt n$.  Maka
+setiap $X_i$ memiliki fungsi pembangkit momen~$g(t)$, dan karena $X_i$ saling
+bebas, jumlah~$S_n$, seperti dalam kasus diskret (lihat Bagian~\ref{sec 10.1}),
+memiliki fungsi pembangkit momen
+$$
+g_n(t) = (g(t))^n\ ,
+$$
+dan jumlah yang dibakukan~$S_n^*$ memiliki fungsi pembangkit momen
+$$
+g_n^*(t) = \left(g\left(\frac t{\sqrt n}\right)\right)^n\ .
+$$
+
+Sekarang kita menunjukkan bahwa, ketika $n \to \infty$, $g_n^*(t) \to e^{t^2/2}$, dengan
+$e^{t^2/2}$ merupakan fungsi pembangkit momen dari densitas normal $n(x) =
+(1/\sqrt{2\pi}) e^{-x^2/2}$ (lihat Contoh~\ref{exam 10.3.3}).
+
+Untuk menunjukkan hal ini, kita menetapkan $u(t) = \log g(t)$, dan
+\begin{eqnarray*}
+u_n^*(t) &=& \log g_n^*(t) \\
+         &=& n\log g\left(\frac t{\sqrt n}\right) = nu\left(\frac t{\sqrt n}\right)\ ,
+\end{eqnarray*}
+serta menunjukkan bahwa $u_n^*(t) \to t^2/2$ ketika $n \to \infty$.  Pertama-tama kita perhatikan bahwa
+\begin{eqnarray*} 
+  u(0) &=& \log g_n(0) = 0\ , \\
+ u'(0) &=& \frac{g'(0)}{g(0)} = \frac{\mu_1}1 = 0\ , \\
+u''(0) &=& \frac{g''(0)g(0) - (g'(0))^2}{(g(0))^2} \\
+       &=& \frac{\mu_2 - \mu_1^2}1 = \sigma^2 = 1\ .
+\end{eqnarray*}
+Sekarang, dengan menggunakan aturan L'H\^opital dua kali, kita memperoleh
+\begin{eqnarray*}
+\lim_{n \to \infty} u_n^*(t) &=& \lim_{s \to \infty} \frac{u(t/\sqrt s)}{s^{-1}}\\
+     &=& \lim_{s \to \infty} \frac{u'(t/\sqrt s) t}{2s^{-1/2}} \\
+     &=& \lim_{s \to \infty} u''\left(\frac t{\sqrt s}\right) \frac{t^2}2 = \sigma^2
+\frac{t^2}2 = \frac{t^2}2\ .
+\end{eqnarray*}
+Dengan demikian, $g_n^*(t) \to e^{t^2/2}$ ketika $n \to \infty$.  Sekarang, untuk melengkapi bukti
+Teorema Limit Pusat, kita harus menunjukkan bahwa jika $g_n^*(t) \to e^{t^2/2}$,
+maka di bawah hipotesis kita fungsi distribusi $F_n^*(x)$ dari $S_n^*$
+harus konvergen menuju fungsi distribusi $F_N^*(x)$ dari peubah
+normal~$N$; yaitu,
+$$
+F_n^*(a) = P(S_n^* \leq a) \to \frac1{\sqrt{2\pi}} \int_{-\infty}^a
+e^{-x^2/2}\, dx\ ,
+$$
+dan, lebih lanjut, bahwa fungsi densitas $f_n^*(x)$ dari $S_n^*$ harus
+konvergen menuju fungsi densitas untuk~$N$; yaitu,
+$$
+f_n^*(x) \to \frac1{\sqrt{2\pi}} e^{-x^2/2}\ ,
+$$
+ketika $n \rightarrow \infty$.
+\par
+Karena densitas, dan karenanya distribusi, dari $S_n^*$ ditentukan secara unik 
+oleh fungsi pembangkit momennya di bawah hipotesis kita, kesimpulan-kesimpulan ini
+tentu masuk akal, tetapi pembuktiannya melibatkan pemeriksaan terperinci terhadap
+fungsi karakteristik dan transformasi Fourier, dan kita tidak akan mencoba
+membuktikannya di sini.
+\par
+Dengan cara yang sama, kita dapat membuktikan Teorema Limit Pusat untuk peubah acak
+diskret terbatas yang bernilai bulat (lihat Teorema~\ref{thm 9.3.6}).  Misalkan $X$ adalah
+peubah acak diskret dengan fungsi densitas~$p(j)$, rata-rata $\mu = 0$, varians
+$\sigma^2 = 1$, dan fungsi pembangkit momen $g(t)$, serta misalkan $X_1$,~$X_2$,
+\ldots,~$X_n$ membentuk suatu proses percobaan independen dengan densitas yang sama~$p$.  Misalkan
+$S_n = X_1 + X_2 +\cdots+ X_n$ dan $S_n^* = S_n/\sqrt n$, dengan densitas
+$p_n$~dan~$p_n^*$, serta fungsi pembangkit momen $g_n(t)$ dan
+$g_n^*(t) = \left(g(\frac t{\sqrt n})\right)^n.$
+Maka kita memperoleh
+$$
+g_n^*(t) \to e^{t^2/2}\ ,
+$$
+seperti dalam kasus kontinu, dan dengan cara yang sama hal ini menyiratkan bahwa
+fungsi distribusi $F_n^*(x)$ konvergen menuju distribusi normal; yaitu,
+$$
+F_n^*(a) = P(S_n^* \leq a) \to \frac1{\sqrt{2\pi}} \int_{-\infty}^a
+e^{-x^2/2}\, dx\ ,
+$$ 
+ketika $n \rightarrow \infty$.
+\par
+Namun, pernyataan yang bersesuaian tentang fungsi distribusi $p_n^*$
+memerlukan sedikit kehati-hatian tambahan (lihat Teorema~\ref{thm 9.3.5}).  Kesulitan muncul
+karena distribusi $p(x)$ tidak didefinisikan untuk semua~$x$, tetapi hanya untuk
+$x$ bilangan bulat.  Akibatnya, distribusi $p_n^*(x)$ hanya didefinisikan untuk~$x$ yang
+berbentuk $j/\sqrt n$, dan nilai-nilai ini berubah ketika $n$ berubah.
+
+Namun, kita dapat mengatasi hal ini dengan memperkenalkan fungsi $\bar p(x)$, yang didefinisikan
+oleh rumus
+
+$$
+\bar p(x) =  \left \{ \begin{array}{ll}
+                        p(j), & \mbox{jika $j - 1/2 \leq x < j + 1/2$,} \cr
+                         0\ , & \mbox{selainnya}.\end{array}\right.
+$$
+Maka $\bar p(x)$ didefinisikan untuk semua~$x$, $\bar p(j) = p(j)$, dan
+grafik $\bar p(x)$ merupakan fungsi tangga untuk distribusi $p(j)$ (lihat Gambar~3
+dari Bagian~\ref{sec 9.1}).
+
+Dengan cara yang sama, kita memperkenalkan fungsi tangga $\bar p_n(x)$ dan
+$\bar p_n^*(x)$ yang berkaitan dengan distribusi $p_n$~dan~$p_n^*$, beserta
+fungsi pembangkit momen masing-masing, $\bar g_n(t)$ dan $\bar g_n^*(t)$.  Jika kita
+dapat menunjukkan bahwa $\bar g_n^*(t) \to e^{t^2/2}$, maka kita dapat menyimpulkan bahwa
+$$
+\bar p_n^*(x) \to \frac1{\sqrt{2\pi}} e^{t^2/2}\ ,
+$$
+ketika $n \rightarrow \infty$, untuk semua~$x$, suatu kesimpulan yang sangat didukung oleh 
+Gambar~\ref{fig 9.2}.
+\par
+Sekarang $\bar g(t)$ diberikan oleh
+\begin{eqnarray*}
+\bar g(t) &=& \int_{-\infty}^{+\infty} e^{tx} \bar p(x)\, dx \\
+               &=& \sum_{j = -N}^{+N} \int_{j - 1/2}^{j + 1/2} e^{tx} p(j)\, dx\\
+               &=& \sum_{j = -N}^{+N} p(j) e^{tj} \frac{e^{t/2} - e^{-t/2}}
+{2t/2} \\
+               &=& g(t) \frac{\sinh(t/2)}{t/2}\ ,
+\end{eqnarray*}
+di sini kita menetapkan
+$$
+\sinh(t/2) = \frac{e^{t/2} - e^{-t/2}}2\ .
+$$
+\par
+Dengan cara yang sama, kita mendapati bahwa
+\begin{eqnarray*}
+\bar g_n(t)   &=& g_n(t) \frac{\sinh(t/2)}{t/2}\ , \\
+\bar g_n^*(t) &=& g_n^*(t) \frac{\sinh(t/2\sqrt n)}{t/2\sqrt n}\ .
+\end{eqnarray*}
+Sekarang, ketika $n \to \infty$, kita tahu bahwa $g_n^*(t) \to e^{t^2/2}$, dan, menurut
+aturan L'H\^opital,
+$$
+\lim_{n \to \infty} \frac{\sinh(t/2\sqrt n)}{t/2\sqrt n} = 1\ .
+$$
+Akibatnya,
+$$
+\bar g_n^*(t) \to e^{t^2/2}\ ,
+$$
+dan karenanya
+$$
+\bar p_n^*(x) \to \frac1{\sqrt{2\pi}} e^{-x^2/2}\ ,
+$$
+ketika $n \rightarrow \infty$.
+Pembaca yang jeli akan memperhatikan bahwa dalam sketsa bukti Teorema~\ref{thm 9.3.5} ini,
+kita tidak pernah menggunakan hipotesis bahwa faktor persekutuan terbesar dari
+selisih semua nilai yang dapat diambil oleh $X_i$ adalah~1.  Ini merupakan masalah
+teknis yang kita pilih untuk diabaikan.  Bukti lengkap dapat ditemukan dalam Gnedenko dan
+Kolmogorov.\footnote{B.~V. Gnedenko and A.~N. Kolomogorov, \emx {Limit Distributions 
+for Sums of Independent Random Variables} (Reading: Addison-Wesley, 1968), p.~233.}
+
+\subsection*{Densitas Cauchy}\index{densitas Cauchy}\index{fungsi densitas!Cauchy}
+Fungsi karakteristik suatu densitas kontinu merupakan alat yang berguna bahkan dalam
+kasus ketika deret momennya tidak konvergen, atau bahkan ketika
+momen-momennya sendiri tidak berhingga.  Sebagai contoh, pandang densitas Cauchy
+dengan parameter $a = 1$ (lihat Contoh~\ref{exam 5.20})
+$$
+f(x) = \frac1{\pi(1 + x^2)}\ .
+$$
+Jika $X$ dan $Y$ adalah peubah acak yang saling bebas dengan densitas Cauchy~$f(x)$,
+maka rata-rata $Z = (X + Y)/2$ juga memiliki densitas Cauchy~$f(x)$; yaitu,
+$$
+f_Z(x) = f(x)\ .
+$$
+Hal ini sulit diperiksa secara langsung, tetapi mudah diperiksa dengan menggunakan fungsi
+karakteristik.  Pertama-tama perhatikan bahwa
+$$
+\mu_2 = E(X^2) = \int_{-\infty}^{+\infty} \frac{x^2}{\pi(1 + x^2)}\, dx = \infty
+$$
+sehingga $\mu_2$ tak berhingga.  Meskipun demikian, kita dapat mendefinisikan fungsi
+karakteristik $k_X(\tau)$ dari~$x$ dengan rumus
+$$
+k_X(\tau) = \int_{-\infty}^{+\infty} e^{i\tau x}\frac1{\pi(1 + x^2)}\, dx\ .
+$$
+Integral ini mudah dihitung dengan metode kontur, dan menghasilkan
+$$
+k_X(\tau) = k_Y(\tau) = e^{-|\tau|}\ .
+$$
+Dengan demikian,
+$$
+k_{X + Y}(\tau) = (e^{-|\tau|})^2 = e^{-2|\tau|}\ ,
+$$
+dan karena
+$$
+k_Z(\tau) = k_{X + Y}(\tau/2)\ ,
+$$
+kita memperoleh
+$$
+k_Z(\tau) = e^{-2|\tau/2|} = e^{-|\tau|}\ .
+$$
+Hal ini menunjukkan bahwa $k_Z = k_X = k_Y$, dan menghasilkan kesimpulan bahwa $f_Z = f_X
+= f_Y$.
+
+Dari sini diperoleh bahwa jika $X_1$,~$X_2$, \ldots,~$X_n$ merupakan suatu proses
+percobaan independen dengan densitas Cauchy yang sama, dan jika
+$$
+A_n = \frac{X_1 + X_2 + \cdots+ X_n}n
+$$
+adalah rata-rata peubah-peubah $X_i$, maka $A_n$ memiliki densitas yang sama dengan $X_i$. 
+Ini berarti bahwa Hukum Bilangan Besar gagal untuk proses ini; distribusi
+rata-rata $A_n$ persis sama dengan distribusi setiap suku.
+Bukti kita untuk Hukum Bilangan Besar gagal dalam kasus ini karena varians~$X_i$
+tidak berhingga.
+
+\exercises
+\begin{LJSItem}
+
+
+\i\label{exer 10.3.1} Misalkan $X$ adalah peubah acak kontinu yang bernilai dalam
+$[\,0,2]$ dan memiliki densitas~$f_X$.  Tentukan fungsi pembangkit momen~$g(t)$ untuk~$X$
+jika
+\begin{enumerate}
+\item $f_X(x) = 1/2$.
+
+\item $f_X(x) = (1/2)x$.
+
+\item $f_X(x) = 1 - (1/2)x$.
+
+\item $f_X(x) = |1 - x|$.
+
+\item $f_X(x) = (3/8)x^2$.
+\end{enumerate}
+\noindent \emx {Petunjuk}: Gunakan definisi integral, seperti dalam Contoh~\ref{exam
+10.3.1}~dan~\ref{exam 10.3.2}.
+
+\i\label{exer 10.3.2} Untuk setiap densitas dalam Latihan~\ref{exer 10.3.1}, hitung 
+momen pertama dan kedua, $\mu_1$~dan~$\mu_2$, secara langsung dari definisinya, dan 
+buktikan bahwa $g(0) = 1$, $g'(0) = \mu_1$, dan $g''(0) = \mu_2$.
+
+\i\label{exer 10.3.3} Misalkan $X$ adalah peubah acak kontinu yang bernilai dalam
+$[\,0,\infty)$ dan memiliki densitas~$f_X$.  Tentukan fungsi pembangkit momen untuk~$X$
+jika
+\begin{enumerate}
+\item $f_X(x) = 2e^{-2x}$.
+
+\item $f_X(x) = e^{-2x} + (1/2)e^{-x}$.
+
+\item $f_X(x) = 4xe^{-2x}$.
+
+\item $f_X(x) = \lambda(\lambda x)^{n - 1} e^{-\lambda x}/(n - 1)!$.
+\end{enumerate}
+
+\i\label{exer 10.3.4} Untuk setiap densitas dalam Latihan~\ref{exer 10.3.3}, hitung 
+momen pertama dan kedua, $\mu_1$~dan~$\mu_2$, secara langsung dari definisinya, dan buktikan
+bahwa $g(0) = 1$, $g'(0) = \mu_1$, dan $g''(0) = \mu_2$.
+
+\i\label{exer 10.3.5} Tentukan fungsi karakteristik $k_X(\tau)$ untuk setiap peubah
+acak~$X$ dalam Latihan~\ref{exer 10.3.1}.
+
+\i\label{exer 10.3.6} Misalkan $X$ adalah peubah acak kontinu yang fungsi karakteristiknya
+$k_X(\tau)$ adalah
+$$
+k_X(\tau) = e^{-|\tau|}, \qquad -\infty < \tau < +\infty\ .
+$$
+Buktikan secara langsung bahwa densitas~$f_X$ dari~$X$ adalah
+$$
+f_X(x) = \frac1{\pi(1 + x^2)}\ .
+$$
+
+\i\label{exer 10.3.7} Misalkan $X$ adalah peubah acak kontinu yang bernilai dalam $[\,0,1]$, 
+memiliki fungsi densitas seragam $f_X(x) \equiv 1$ dan fungsi pembangkit momen $g(t) = (e^t
+- 1)/t$.  Nyatakan fungsi pembangkit momen untuk peubah-peubah berikut dalam bentuk~$g(t)$:
+\begin{enumerate}
+\item $-X$.
+
+\item $1 + X$.
+
+\item $3X$.
+
+\item $aX + b$.
+\end{enumerate}
+
+\i\label{exer 10.3.8} Misalkan $X_1$,~$X_2$, \ldots,~$X_n$ merupakan proses percobaan independen dengan
+densitas seragam.  Tentukan fungsi pembangkit momen untuk
+\begin{enumerate}
+\item $X_1$.
+
+\item $S_2 = X_1 + X_2$.
+
+\item $S_n = X_1 + X_2 +\cdots+ X_n$.
+
+\item $A_n = S_n/n$.
+
+\item $S_n^* = (S_n - n\mu)/\sqrt{n\sigma^2}$.
+\end{enumerate}
+
+\i\label{exer 10.3.9} Misalkan $X_1$,~$X_2$, \ldots,~$X_n$ merupakan proses percobaan independen dengan
+densitas normal yang memiliki nilai harapan~1 dan varians~2.  Tentukan fungsi pembangkit momen
+untuk
+\begin{enumerate}
+\item $X_1$.
+
+\item $S_2 = X_1 + X_2$.
+
+\item $S_n = X_1 + X_2 +\cdots+ X_n$.
+
+\item $A_n = S_n/n$.
+
+\item $S_n^* = (S_n - n\mu)/\sqrt{n\sigma^2}$.
+\end{enumerate}
+
+\i\label{exer 10.3.10} Misalkan $X_1$,~$X_2$, \ldots,~$X_n$ merupakan proses percobaan independen dengan
+densitas
+$$
+f(x) = \frac12 e^{-|x|}, \qquad -\infty < x < +\infty\ .
+$$
+\begin{enumerate}
+\item Tentukan nilai harapan dan varians dari $f(x)$.
+
+\item Tentukan fungsi pembangkit momen untuk $X_1$,~$S_n$, $A_n$,
+dan~$S_n^*$.
+
+\item Apa yang dapat Anda simpulkan tentang fungsi pembangkit momen dari~$S_n^*$ ketika $n
+\to \infty$?
+
+\item Apa yang dapat Anda simpulkan tentang fungsi pembangkit momen dari~$A_n$ ketika $n
+\to \infty$?
+\end{enumerate}
+ 
+\end{LJSItem}

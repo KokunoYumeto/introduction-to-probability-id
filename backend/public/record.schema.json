@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:interlanguage:r010:schema:record:0.1.0",
+  "title": "R010 modular backend exchange record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "schema_version",
+    "id",
+    "record_type",
+    "source_local_id",
+    "parent_id",
+    "order",
+    "path",
+    "resource_id",
+    "edition_id",
+    "source_locator",
+    "content_sha256",
+    "language",
+    "locale",
+    "translation_state",
+    "provenance",
+    "concept_ids",
+    "prerequisite_ids",
+    "rights_id",
+    "status",
+    "timestamp",
+    "workflow",
+    "supersedes_id",
+    "qa_event_ids",
+    "artifact_ids",
+    "data"
+  ],
+  "properties": {
+    "schema": {"const": "r010.modular-backend-record"},
+    "schema_version": {"const": "0.1.0"},
+    "id": {"type": "string", "pattern": "^urn:interlanguage:r010:[a-z0-9][a-z0-9:._-]*$"},
+    "record_type": {
+      "enum": [
+        "program", "course", "resource", "edition", "unit", "concept",
+        "relation", "segment", "term", "exercise_answer", "asset",
+        "rights", "correction", "qa_event", "artifact"
+      ]
+    },
+    "source_local_id": {"type": ["string", "null"]},
+    "parent_id": {"type": ["string", "null"]},
+    "order": {"type": ["integer", "null"], "minimum": 0},
+    "path": {"type": ["string", "null"]},
+    "resource_id": {"type": ["string", "null"]},
+    "edition_id": {"type": ["string", "null"]},
+    "source_locator": {"type": ["string", "null"]},
+    "content_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+    "language": {"type": ["string", "null"]},
+    "locale": {"type": ["string", "null"]},
+    "translation_state": {
+      "type": ["string", "null"],
+      "enum": [
+        null, "source_frozen", "queued", "draft", "translated",
+        "structurally_verified", "mathematically_reviewed", "language_reviewed",
+        "built", "visually_checked", "published", "superseded", "blocked"
+      ]
+    },
+    "provenance": {"type": "object"},
+    "concept_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "prerequisite_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "rights_id": {"type": ["string", "null"]},
+    "status": {"type": "string", "minLength": 1},
+    "timestamp": {"type": "string", "format": "date-time"},
+    "workflow": {"type": "string", "minLength": 1},
+    "supersedes_id": {"type": ["string", "null"]},
+    "qa_event_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "artifact_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "data": {"type": "object"}
+  }
+}

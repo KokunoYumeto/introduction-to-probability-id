@@ -1,0 +1,1128 @@
+% Modified on 6-4-05.
+
+%\setcounter{chapter}{11}
+
+\chapter{Jalan Acak}\label{chp 12}  
+
+\section{Jalan Acak dalam Ruang Euklides}\label{sec 12.1}
+
+\par
+Dalam beberapa bab terakhir, kita telah mempelajari jumlah peubah acak dengan tujuan
+mendeskripsikan fungsi distribusi dan fungsi kepadatan dari jumlah tersebut.  Dalam bab ini, kita akan melihat
+jumlah peubah acak diskret dari sudut pandang yang berbeda.  Kita akan menelaah
+sifat-sifat yang dapat dikaitkan dengan barisan jumlah parsial, seperti banyaknya
+perubahan tanda pada barisan ini, banyaknya suku dalam barisan yang sama dengan 0, dan
+nilai harapan suku maksimum dalam barisan tersebut.
+\par
+Kita mulai dengan definisi berikut.
+\begin{definition} 
+ Misalkan $\{X_k\}_{k = 1}^\infty$ adalah barisan peubah acak diskret yang saling bebas dan
+berdistribusi identik.  Untuk setiap bilangan bulat positif $n$, kita gunakan $S_n$ untuk menyatakan jumlah $X_1 + X_2 +
+\cdots + X_n$.  Barisan $\{S_n\}_{n = 1}^\infty$ disebut \emx {jalan
+acak.\index{jalan acak}}  Jika daerah nilai bersama dari $X_k$ adalah ${\mathbf R}^m$, maka kita mengatakan bahwa
+$\{S_n\}$ adalah jalan acak dalam ${\mathbf R}^m$.
+\end{definition} 
+\par
+Kita memandang barisan $X_k$ sebagai hasil-hasil percobaan yang saling bebas.  Karena
+$X_k$ saling bebas, probabilitas suatu barisan hasil tertentu (yang berhingga) dapat
+diperoleh dengan mengalikan probabilitas bahwa setiap $X_k$ mengambil nilai yang ditentukan dalam
+barisan tersebut.  Tentu saja, probabilitas individual ini diberikan oleh distribusi bersama
+$X_k$.  Biasanya kita akan tertarik mencari probabilitas kejadian yang melibatkan
+barisan $S_n$ yang terkait.  Kejadian semacam itu dapat dideskripsikan dalam $X_k$, sehingga
+probabilitasnya dapat dihitung menggunakan gagasan di atas.
+\par
+Ada beberapa cara untuk memvisualisasikan jalan acak.  Kita dapat membayangkan sebuah partikel
+ditempatkan di titik asal dalam ${\mathbf R}^m$ pada waktu $n = 0$.  Jumlah $S_n$ menyatakan posisi
+partikel pada akhir detik ke-$n$.  Jadi, dalam selang waktu $[n-1, n]$, partikel
+bergerak (atau melompat) dari posisi $S_{n-1}$ ke $S_{n}$.  Vektor yang menyatakan gerakan ini adalah
+$S_n - S_{n-1}$, yang sama dengan $X_n$.  Artinya, dalam suatu jalan acak, lompatan-lompatannya
+saling bebas dan berdistribusi identik.  Sebagai contoh, jika $m = 1$, kita dapat membayangkan sebuah 
+partikel pada garis real yang mulai dari titik asal dan, pada akhir setiap detik, melompat satu
+satuan ke kanan atau ke kiri, dengan probabilitas yang diberikan oleh distribusi $X_k$.  Jika
+$m = 2$, prosesnya dapat divisualisasikan berlangsung di sebuah kota yang jalan-jalannya membentuk blok-blok
+persegi.  Seseorang mulai dari satu sudut (yaitu, di persimpangan dua jalan) dan berjalan ke
+salah satu dari empat arah yang mungkin menurut distribusi $X_k$.  Jika $m = 3$,
+kita dapat membayangkan berada di sebuah kerangka panjat, tempat kita bebas bergerak ke salah satu dari enam arah
+(kiri, kanan, maju, mundur, atas, dan bawah).  Sekali lagi, probabilitas gerakan-gerakan ini
+diberikan oleh distribusi $X_k$.
+\par
+Model lain dari jalan acak (terutama digunakan ketika daerah nilainya adalah ${\mathbf R}^1$) ialah sebuah
+permainan yang melibatkan dua orang dan terdiri atas barisan langkah yang saling bebas dan
+berdistribusi identik.  Jumlah $S_n$, misalnya, menyatakan skor orang pertama
+setelah $n$ langkah, dengan asumsi bahwa skor orang kedua adalah $-S_n$.  Sebagai
+contoh, dua orang dapat melambungkan koin, dengan kecocokan atau ketidakcocokan
+masing-masing menyatakan $+1$ atau $-1$
+bagi pemain pertama.  Atau, mungkin satu koin dilambungkan, dengan sisi kepala atau ekor
+masing-masing menyatakan $+1$ atau $-1$ bagi pemain pertama.
+\subsection*{Jalan Acak pada Garis Real}
+Pertama-tama kita akan meninjau kasus taktrivial yang paling sederhana
+dari jalan acak dalam ${\mathbf R}^1$, yaitu kasus ketika peubah acak $X_n$
+memiliki fungsi distribusi yang sama, yang diberikan oleh
+$$
+f_X(x) = \left \{ \begin{array}{ll}
+                        1/2, & \mbox{jika $x = \pm 1,$} \\
+                          0, & \mbox{selain itu.} 
+                  \end{array}
+         \right.  
+$$
+Situasi ini bersesuaian dengan pelambungan sebuah koin seimbang, dengan $S_n$ menyatakan banyaknya
+sisi kepala dikurangi banyaknya sisi ekor yang muncul dalam $n$ pelambungan pertama.  Perhatikan bahwa dalam
+situasi ini, semua lintasan dengan panjang $n$ memiliki probabilitas yang sama, yaitu $2^{-n}$.
+\par
+Kadang-kadang akan membantu jika jalan acak digambarkan sebagai garis poligonal, atau lintasan, pada
+bidang, dengan sumbu mendatar menyatakan waktu dan sumbu tegak menyatakan nilai
+$S_n$.  Dengan diberikan barisan jumlah parsial $\{S_n\}$, mula-mula kita gambarkan titik-titik $(n, S_n)$, lalu
+untuk setiap $k < n$, kita hubungkan $(k, S_k)$ dan $(k+1, S_{k+1})$ dengan ruas garis lurus.
+\emx {Panjang} suatu lintasan hanyalah selisih nilai waktu antara titik awal
+dan titik akhir lintasan.  Lihat Gambar \ref{fig 12.1}.  Gambar ini
+dan proses yang diperagakannya identik dengan contoh pada Bab
+1 tentang dua orang yang bermain kepala atau ekor.
+\putfig{3.5truein}{PSfig1-3}{Jalan acak dengan panjang 40.}{fig 12.1}
+\subsection*{Kembalinya dan Kembalinya yang Pertama}
+Kita mengatakan bahwa suatu \emx {penyamaan}\index{penyamaan} telah terjadi, atau terdapat \emx {kembali
+ke titik asal}\index{kembali ke titik asal} pada waktu $n$, jika $S_n = 0$.  Perhatikan bahwa hal ini hanya dapat
+terjadi jika $n$ adalah bilangan bulat genap.  Untuk menghitung probabilitas penyamaan pada waktu $2m$,
+kita hanya perlu menghitung banyaknya lintasan dengan panjang
+$2m$ yang berawal dan berakhir di titik asal.  Banyaknya lintasan tersebut jelas
+$${2m \choose m}\ .$$
+Karena setiap lintasan memiliki probabilitas $2^{-2m}$, kita memperoleh teorema berikut.
+\begin{theorem}\label{thm 12.1.1} 
+Probabilitas kembali ke
+titik asal pada waktu $2m$ diberikan oleh 
+$$u_{2m} = {2m \choose m}2^{-2m}\ .$$
+Probabilitas kembali ke titik asal pada waktu ganjil adalah 0.
+\end{theorem}%\endthm
+Suatu jalan acak dikatakan mengalami \emx {kembali pertama} ke titik asal\index{kembali pertama ke
+titik asal} \index{kembali ke titik asal!pertama} pada waktu
+$2m$ jika
+$m > 0$, dan
+$S_{2k} \ne 0$ untuk semua $k < m$.  Pada Gambar~\ref{fig 12.1}, kembali pertama terjadi pada waktu 2. 
+Kita definisikan $f_{2m}$ sebagai probabilitas kejadian ini.  (Kita juga mendefinisikan $f_0 = 0$.)  Ungkapan
+$f_{2m}2^{2m}$ dapat dipandang sebagai banyaknya lintasan dengan panjang
+$2m$ antara titik $(0, 0)$ dan $(2m, 0)$ yang tidak menyentuh sumbu mendatar kecuali pada
+kedua titik ujungnya.  Dengan menggunakan gagasan ini, teorema berikut mudah dibuktikan.
+\begin{theorem}\label{thm 12.1.2} 
+Untuk $n \ge 1$, probabilitas $\{u_{2k}\}$ dan $\{f_{2k}\}$ dihubungkan oleh persamaan
+$$u_{2n} = f_0 u_{2n} + f_2 u_{2n-2} + \cdots + f_{2n}u_0\ .$$
+\proof
+Terdapat $u_{2n}2^{2n}$ lintasan dengan panjang $2n$ yang memiliki titik ujung $(0, 0)$ dan $(2n, 0)$.  Kumpulan
+lintasan tersebut dapat dipartisi menjadi $n$ himpunan, bergantung pada waktu
+kembali pertama ke titik asal.  Sebuah lintasan dalam kumpulan ini yang kembali untuk pertama kalinya ke titik asal
+pada waktu $2k$ terdiri atas ruas awal dari $(0, 0)$ ke $(2k, 0)$, yang tidak memiliki titik dalam
+pada sumbu mendatar, dan ruas akhir dari $(2k, 0)$ ke $(2n, 0)$, tanpa
+batasan lebih lanjut pada ruas ini.  Jadi, banyaknya lintasan dalam kumpulan yang
+kembali untuk pertama kalinya ke titik asal pada waktu $2k$ diberikan oleh
+$$f_{2k}2^{2k}u_{2n-2k}2^{2n-2k} = f_{2k}u_{2n-2k}2^{2n}\ .$$
+Jika kita menjumlahkan atas $k$, kita memperoleh persamaan
+$$u_{2n}2^{2n} = f_0u_{2n} 2^{2n} + f_2u_{2n-2}2^{2n} + \cdots + f_{2n}u_0 2^{2n}\ .$$
+Membagi kedua ruas persamaan ini dengan $2^{2n}$ menyelesaikan pembuktian.
+\end{theorem}
+Ungkapan pada ruas kanan teorema di atas seharusnya mengingatkan pembaca pada suatu jumlah
+yang muncul dalam Definisi~\ref{defn 7.1} tentang konvolusi dua distribusi.  Konvolusi
+dua barisan didefinisikan dengan cara serupa.  Teorema di atas menyatakan bahwa
+barisan $\{u_{2n}\}$ adalah konvolusi dirinya sendiri dengan barisan
+$\{f_{2n}\}$.  Jadi, jika setiap barisan ini kita nyatakan dengan fungsi pembangkit
+biasa, kita dapat menggunakan hubungan di atas untuk menentukan nilai $f_{2n}$.
+\begin{theorem}\label{thm 12.1.3}
+Untuk $m \ge 1$, probabilitas kembali pertama ke titik asal pada waktu $2m$ diberikan oleh
+$$f_{2m} = {{u_{2m}}\over{2m-1}} = {{2m \choose m}\over{(2m-1)2^{2m}}}\ .$$
+\proof
+Kita mulai dengan mendefinisikan fungsi pembangkit
+$$U(x) = \sum_{m = 0}^\infty u_{2m}x^m$$
+dan
+$$F(x) = \sum_{m = 0}^\infty f_{2m}x^m\ .$$
+Teorema~\ref{thm 12.1.2} menyatakan bahwa
+\begin{equation} 
+U(x) = 1 + U(x)F(x)\ .
+\label{eq 12.1.1}  
+\end{equation} 
+(Adanya 1 pada ruas kanan disebabkan oleh fakta bahwa $u_0$ didefinisikan sama dengan 1,
+tetapi Teorema~\ref{thm 12.1.2} hanya berlaku untuk $m \ge 1$.)  Perhatikan bahwa kedua fungsi pembangkit
+tentu konvergen pada selang $(-1, 1)$ karena nilai mutlak semua koefisiennya paling besar 1.
+Jadi, kita dapat menyelesaikan persamaan di atas untuk $F(x)$ dan memperoleh
+$$F(x) = {{U(x) - 1}\over{U(x)}}\ .$$
+Sekarang, jika kita dapat menemukan ungkapan bentuk tertutup untuk fungsi $U(x)$, kita juga akan memiliki
+ungkapan bentuk tertutup untuk $F(x)$.  Dari Teorema~\ref{thm 12.1.1}, kita memperoleh
+$$U(x) = \sum_{m = 0}^\infty {2m \choose m}2^{-2m}x^m\ .$$
+Dalam Wilf,\footnote{H.~S.~Wilf, \emx {Generatingfunctionology,}\index{WILF, H. S.}
+(Boston: Academic Press, 1990), hlm. 50.} kita mendapati bahwa
+$${1\over{\sqrt {1 - 4x}}} = \sum_{m = 0}^\infty {2m \choose m} x^m\ .$$
+Pembaca diminta membuktikan pernyataan ini dalam Latihan~\ref{exer 12.1.1}.  Jika $x$ kita ganti dengan $x/4$
+dalam persamaan terakhir, kita melihat bahwa
+$$U(x) = {1\over{\sqrt {1-x}}}\ .$$
+Oleh karena itu, kita memperoleh
+\begin{eqnarray*}
+F(x) &=& {{U(x) - 1}\over{U(x)}}\\
+     &=& {{(1-x)^{-1/2} - 1}\over{(1-x)^{-1/2}}}\\
+     &=& 1 - (1-x)^{1/2}\ . 
+\end{eqnarray*}
+
+Meskipun nilai $f_{2m}$ dapat dihitung menggunakan Teorema Binomial, lebih
+mudah untuk memperhatikan bahwa $F'(x) = U(x)/2$, sehingga koefisien $f_{2m}$ dapat ditemukan dengan
+mengintegralkan deret untuk $U(x)$.  Untuk $m \ge 1$, kita memperoleh
+
+\begin{eqnarray*}
+f_{2m} &=& {u_{2m-2}\over{2m}}\\
+       &=& {2m-2 \choose m-1}\over{m2^{2m-1}}\\
+       &=& {2m \choose m}\over{(2m-1)2^{2m}}\\
+       &=& {u_{2m}\over{2m-1}}\ ,
+\end{eqnarray*}
+
+karena
+$${2m-2 \choose m-1} = {m\over{2(2m-1)}}{2m\choose m}\ .$$
+Ini menyelesaikan pembuktian teorema.
+\end{theorem}
+\subsection*{Probabilitas Akhirnya Kembali}\index{kembali ke titik asal!probabilitas akhirnya}
+Dalam proses jalan acak simetris di ${\mathbf R}^m$, berapakah probabilitas bahwa partikel
+pada akhirnya kembali ke titik asal?  Pertama-tama kita telaah pertanyaan ini untuk kasus $m = 1$, lalu
+kita tinjau kasus umumnya.  Hasil-hasil dalam dua contoh berikut berasal dari
+P\'olya.\footnote{G.~P\'olya, ``\"Uber eine Aufgabe der Wahrscheinlichkeitsrechnung betreffend
+die Irrfahrt im Strassennetz,'' Math. Ann., vol.~84 (1921), pp. 149-160.}\index{P\'OLYA, G.}
+\begin{example}\label{exam 12.1.0.5}(Akhirnya Kembali dalam ${\mathbf R}^1$)
+Gagasan tentang akhirnya kembali harus didekati dengan hati-hati karena
+ruang sampelnya tampak berupa himpunan semua jalan dengan panjang takhingga, dan himpunan ini
+tak terhitung.  Untuk menghindari kesulitan, kita definisikan $w_n$ sebagai probabilitas bahwa kembali
+pertama telah terjadi selambat-lambatnya pada waktu $n$.  Jadi, $w_n$ berkaitan dengan ruang sampel semua jalan
+dengan panjang $n$, yang merupakan himpunan berhingga.  Dengan memakai $w_n$, wajar untuk mendefinisikan
+probabilitas bahwa partikel pada akhirnya kembali ke titik asal sebagai 
+$$w_* = \lim_{n \rightarrow \infty} w_n\ .$$
+Limit ini jelas ada dan paling besar satu karena barisan $\{w_n\}_{n = 1}^\infty$ adalah
+barisan naik, dan semua sukunya paling besar satu.  
+\par
+Dengan menggunakan probabilitas $f_n$, kita melihat bahwa
+$$w_{2n} = \sum_{i = 1}^n f_{2i}\ .$$
+Jadi, 
+$$w_* = \sum_{i = 1}^\infty f_{2i}\ .$$
+Dalam pembuktian Teorema~\ref{thm 12.1.3}, fungsi pembangkit 
+$$F(x) = \sum_{m = 0}^\infty f_{2m}x^m$$ 
+diperkenalkan.  Di sana dinyatakan bahwa deret ini konvergen untuk $x \in (-1, 1)$.  Bahkan,
+dapat ditunjukkan bahwa deret ini juga konvergen untuk $x = \pm 1$ dengan menggunakan Latihan~\ref{exer
+12.1.4}, bersama dengan fakta bahwa
+$$f_{2m} = {{u_{2m}}\over{2m-1}}\ .$$
+(Fakta ini dibuktikan dalam pembuktian Teorema~\ref{thm 12.1.3}.)  Karena kita juga mengetahui bahwa 
+$$F(x) = 1 - (1-x)^{1/2}\ ,$$
+kita melihat bahwa 
+$$w_* = F(1) = 1\ .$$
+Jadi, partikel kembali ke titik asal dengan probabilitas satu.
+\par
+Bukti alternatif untuk fakta bahwa $w_* = 1$ dapat diperoleh dengan menggunakan
+hasil-hasil dalam Latihan~\ref{exer 12.1.2}.
+\end{example}
+\par
+\begin{example}\label{exam 12.1.0.6}(Akhirnya Kembali dalam ${\mathbf R}^m$)
+Sekarang kita beralih ke kasus ketika jalan acak berlangsung dalam lebih dari satu dimensi.
+Kita definisikan $f^{(m)}_{2n}$ sebagai probabilitas bahwa kembali pertama ke titik asal dalam ${\mathbf
+R}^m$ terjadi pada waktu $2n$.  Besaran $u^{(m)}_{2n}$ didefinisikan dengan cara serupa.  Jadi,
+$f^{(1)}_{2n}$ dan $u^{(1)}_{2n}$ masing-masing sama dengan $f_{2n}$ dan $u_{2n}$ yang telah didefinisikan sebelumnya.  Jika,
+selain itu, kita mendefinisikan $u^{(m)}_0 = 1$ dan $f^{(m)}_0 = 0$, kita dapat meniru pembuktian
+Teorema~\ref{thm 12.1.2} dan menunjukkan bahwa untuk semua $m \ge 1$,
+\begin{equation}
+u^{(m)}_{2n} = f^{(m)}_0 u^{(m)}_{2n} + f^{(m)}_2 u^{(m)}_{2n-2} + \cdots +
+f^{(m)}_{2n}u^{(m)}_0\ .
+\label{eq 12.1.1.5}
+\end{equation}
+\par
+Kita melanjutkan generalisasi hasil sebelumnya dengan mendefinisikan
+$$U^{(m)}(x) = \sum_{n = 0}^\infty u^{(m)}_{2n} x^n$$
+dan
+$$F^{(m)}(x) = \sum_{n = 0}^\infty f^{(m)}_{2n} x^n\ .$$
+Kemudian, dengan menggunakan Persamaan~\ref{eq 12.1.1.5}, kita melihat bahwa
+$$U^{(m)}(x) = 1 + U^{(m)}(x) F^{(m)}(x)\ ,$$
+seperti sebelumnya.  Fungsi-fungsi ini selalu konvergen pada selang $(-1, 1)$ karena besar
+semua koefisiennya paling besar satu.  Bahkan, karena 
+$$w^{(m)}_* = \sum_{n = 0}^\infty f^{(m)}_{2n} \le 1$$
+untuk semua $m$, deret untuk $F^{(m)}(x)$ juga konvergen pada $x = 1$, dan $F^{(m)}(x)$
+kontinu dari kiri pada $x = 1$, yaitu 
+$$\lim_{x \uparrow 1} F^{(m)}(x) = F^{(m)}(1)\ .$$
+Jadi, kita memperoleh
+\begin{equation}
+w^{(m)}_* = \lim_{x \uparrow 1} F^{(m)}(x) = \lim_{x \uparrow 1} 
+\frac{U^{(m)}(x) - 1}{U^{(m)}(x)}\ ,
+\label{eq 12.1.1.6}
+\end{equation}
+sehingga untuk menentukan $w^{(m)}_*$, cukup dengan menentukan 
+$$\lim_{x \uparrow 1} U^{(m)}(x)\ .$$
+Kita nyatakan limit ini dengan $u^{(m)}$.
+\par
+Kita mengklaim bahwa 
+$$u^{(m)} = \sum_{n = 0}^\infty u^{(m)}_{2n}\ .$$
+(Klaim ini masuk akal; klaim ini menyatakan bahwa untuk mengetahui apa yang terjadi pada fungsi $U^{(m)}(x)$ di
+$x = 1$, cukup tetapkan $x = 1$ dalam deret pangkat untuk $U^{(m)}(x)$.)  Untuk membuktikan klaim ini, perhatikan
+bahwa koefisien $u^{(m)}_{2n}$ taknegatif, sehingga $U^{(m)}(x)$ naik secara monoton pada
+selang $[0, 1)$.  Jadi, untuk setiap $K$, kita memperoleh
+$$\sum_{n = 0}^K u^{(m)}_{2n} \le \lim_{x \uparrow 1} U^{(m)}(x) = u^{(m)} \le \sum_{n = 0}^\infty
+u^{(m)}_{2n}\ .$$
+Dengan mengambil $K \rightarrow \infty$, kita melihat bahwa
+$$u^{(m)} = \sum_{2n}^\infty u^{(m)}_{2n}\ .$$
+Ini membuktikan klaim tersebut.
+\par
+Dari Persamaan~\ref{eq 12.1.1.6}, kita melihat bahwa jika $u^{(m)} < \infty$, maka probabilitas
+akhirnya kembali adalah
+$$\frac {u^{(m)} - 1}{u^{(m)}}\ ,$$
+sedangkan jika $u^{(m)} = \infty$, maka probabilitas akhirnya kembali adalah 1.
+\par
+Untuk menyelesaikan contoh ini, kita harus menaksir jumlah
+$$\sum_{n = 0}^\infty u^{(m)}_{2n}\ .$$  
+Dalam Latihan~\ref{exer 12.1.12}, pembaca diminta menunjukkan bahwa
+$$u^{(2)}_{2n} = \frac 1 {4^{2n}} {{2n}\choose n}^2\ .$$
+Dengan menggunakan Rumus Stirling, mudah ditunjukkan bahwa (lihat Latihan~\ref{exer 12.1.13})
+$${{2n}\choose n} \sim \frac {2^{2n}}{\sqrt {\pi n}}\ ,$$
+sehingga
+$$u^{(2)}_{2n} \sim \frac 1{\pi n}\ .$$
+Dari sini mudah disimpulkan bahwa
+$$\sum_{n = 0}^\infty u^{(2)}_{2n}$$
+divergen, sehingga $w^{(2)}_* = 1$; yaitu, dalam ${\mathbf R}^2$, probabilitas akhirnya kembali adalah
+1.
+\par
+Ketika $m = 3$, Latihan~\ref{exer 12.1.12} menunjukkan bahwa
+$$u^{(3)}_{2n} = \frac 1{2^{2n}}{{2n}\choose n} \sum_{j,k} 
+\biggl(\frac 1{3^n}\frac{n!}{j!k!(n-j-k)!}\biggr)^2\ .$$
+Misalkan $M$ menyatakan nilai terbesar dari 
+$$\frac 1{3^n}\frac {n!}{j!k!(n - j - k)!}\ ,$$
+di antara semua nilai taknegatif $j$ dan $k$ dengan $j + k \le n$.  Dengan menggunakan Rumus
+Stirling, mudah ditunjukkan bahwa 
+$$M \sim \frac cn\ ,$$
+untuk suatu konstanta $c$.  Jadi, kita memperoleh
+$$u^{(3)}_{2n} \le \frac 1{2^{2n}}{{2n}\choose n} \sum_{j,k} 
+\biggl(\frac M{3^n}\frac{n!}{j!k!(n-j-k)!}\biggr)\ .$$
+Dengan menggunakan Latihan~\ref{exer 12.1.14}, dapat ditunjukkan bahwa ungkapan pada ruas kanan paling besar
+$$\frac {c'}{n^{3/2}}\ ,$$
+dengan $c'$ suatu konstanta.  Jadi,
+$$\sum_{n = 0}^\infty u^{(3)}_{2n}$$
+konvergen, sehingga $w^{(3)}_*$ lebih kecil secara ketat dari satu.  Artinya, dalam ${\mathbf R}^3$,
+probabilitas akhirnya kembali ke titik asal lebih kecil secara ketat dari satu (bahkan nilainya
+sekitar .34).
+\par
+Hasil-hasil ini dapat dirangkum dengan menyatakan bahwa seseorang sebaiknya tidak mabuk dalam lebih dari dua
+dimensi.
+\end{example}
+
+\subsection*{Nilai Harapan Banyaknya Penyamaan}
+Sekarang kita berikan contoh lain penggunaan fungsi pembangkit untuk menemukan rumus umum bagi
+suku-suku suatu barisan, ketika barisan tersebut dihubungkan dengan barisan lain melalui relasi rekurensi.
+Latihan~\ref{exer 12.1.9} memberikan satu contoh lagi.
+\begin{example}(Nilai Harapan Banyaknya Penyamaan)\label{exam
+12.1.1}\index{penyamaan!nilai harapan banyaknya} 
+Dalam contoh ini, kita akan menurunkan rumus untuk nilai harapan banyaknya penyamaan dalam jalan
+acak dengan panjang $2m$.  Seperti dalam pembuktian Teorema~\ref{thm 12.1.3}, metode ini memiliki empat bagian utama. 
+Pertama, ditemukan rekurensi yang menghubungkan suku ke-$m$ dalam barisan yang belum diketahui dengan
+suku-suku sebelumnya dalam barisan yang sama serta suku-suku dalam barisan lain (yang diketahui).  Contoh
+rekurensi semacam itu diberikan dalam Teorema~\ref{thm 12.1.2}.  Kedua, rekurensi tersebut digunakan untuk menurunkan
+persamaan fungsional yang melibatkan fungsi pembangkit dari barisan yang belum diketahui dan satu atau lebih
+barisan yang diketahui.  Persamaan~\ref{eq 12.1.1} merupakan contoh persamaan fungsional semacam itu.  Ketiga,
+persamaan fungsional tersebut diselesaikan untuk fungsi pembangkit yang belum diketahui.  Terakhir, dengan menggunakan
+cara seperti
+Teorema Binomial, integrasi, atau diferensiasi, ditemukan rumus untuk koefisien ke-$m$
+dari fungsi pembangkit yang belum diketahui.
+\par
+Kita mulai dengan mendefinisikan $g_{2m}$ sebagai banyaknya seluruh penyamaan di antara semua jalan acak
+dengan panjang $2m$.  (Untuk setiap jalan acak, penyamaan pada waktu 0 kita abaikan.)  Kita
+mendefinisikan $g_0 = 0$.  Karena banyaknya jalan dengan panjang $2m$ sama dengan $2^{2m}$, nilai harapan
+banyaknya penyamaan di antara semua jalan acak tersebut adalah $g_{2m}/2^{2m}$.  Selanjutnya, kita mendefinisikan
+fungsi pembangkit
+$G(x)$:
+$$G(x) = \sum_{k = 0}^\infty g_{2k}x^k\ .$$
+Sekarang kita perlu menemukan rekurensi yang menghubungkan barisan $\{g_{2k}\}$ dengan salah satu atau kedua
+barisan yang diketahui, $\{f_{2k}\}$ dan $\{u_{2k}\}$.  Kita anggap $m$ sebagai bilangan bulat positif yang tetap,
+dan memandang himpunan semua lintasan dengan panjang $2m$ sebagai gabungan saling lepas
+$$ E_2 \cup E_4 \cup \cdots \cup E_{2m} \cup H\ ,$$
+dengan $E_{2k}$ adalah himpunan semua lintasan dengan panjang $2m$ yang mengalami penyamaan pertama pada waktu $2k$,
+dan $H$ adalah himpunan semua lintasan dengan panjang $2m$ tanpa penyamaan.  Mudah ditunjukkan (lihat
+Latihan~\ref{exer 12.1.3}) bahwa
+$$|E_{2k}| = f_{2k} 2^{2m}\ .$$
+Kita mengklaim bahwa banyaknya seluruh penyamaan pada semua lintasan yang termasuk dalam himpunan $E_{2k}$ sama
+dengan 
+\begin{equation}
+|E_{2k}| + 2^{2k} f_{2k} g_{2m - 2k}\ .
+\label{eq 12.1.2}  
+\end{equation}
+Setiap lintasan dalam $E_{2k}$ mengalami satu penyamaan pada waktu $2k$, sehingga jumlah seluruh
+penyamaan tersebut tepat $|E_{2k}|$.  Ini adalah suku pertama dalam ungkapan Persamaan~\ref{eq 12.1.2}. 
+Terdapat $2^{2k} f_{2k}$ ruas awal berbeda dengan panjang $2k$ di antara lintasan-lintasan dalam
+$E_{2k}$.  Setiap ruas awal ini dapat diperpanjang menjadi lintasan dengan panjang $2m$ melalui
+$2^{2m-2k}$ cara, dengan menyambungkan semua lintasan yang mungkin dengan panjang $2m - 2k$.  Berdasarkan
+definisi, banyaknya penyamaan yang diperoleh dengan menyambungkan semua lintasan ini ke salah satu ruas awal adalah
+$g_{2m - 2k}$.  Ini menghasilkan suku kedua dalam Persamaan~\ref{eq 12.1.2}.  Karena $k$
+dapat berkisar dari 1 sampai $m$, kita memperoleh rekurensi
+\begin{equation}  
+g_{2m} = \sum_{k = 1}^m \Bigl(|E_{2k}| + 2^{2k}f_{2k}g_{2m - 2k}\Bigr)\ .
+\label{eq 12.1.3}  
+\end{equation}                                                                        
+\par
+Suku kedua dalam suku umum di atas seharusnya mengingatkan pembaca pada konvolusi.  Bahkan,
+jika fungsi pembangkit $G(x)$ kita kalikan dengan fungsi pembangkit 
+$$F(4x) = \sum_{k = 0}^\infty 2^{2k}f_{2k} x^k\ ,$$
+koefisien $x^m$ sama dengan
+$$\sum_{k = 0}^m 2^{2k}f_{2k}g_{2m-2k}\ .$$
+Jadi, hasil kali $G(x)F(4x)$ merupakan bagian dari persamaan fungsional yang kita cari.  Suku
+pertama dalam suku umum pada Persamaan~\ref{eq 12.1.3} menghasilkan jumlah
+$$2^{2m}\sum_{k = 1}^m f_{2k}\ .$$
+Dari Latihan~\ref{exer 12.1.2}, kita melihat bahwa jumlah ini tepat $(1 - u_{2m})2^{2m}$.    Jadi, kita perlu
+membentuk fungsi pembangkit yang koefisien ke-$m$-nya adalah suku ini; fungsi pembangkit tersebut adalah
+$$\sum_{m = 0}^\infty (1- u_{2m})2^{2m} x^m\ ,$$
+atau
+$$\sum_{m = 0}^\infty 2^{2m} x^m - \sum_{m = 0}^\infty u_{2m}2^{2m} x^m\ .$$
+Jumlah pertama tepat $(1-4x)^{-1}$, dan jumlah kedua adalah $U(4x)$.  Jadi, persamaan
+fungsional yang kita cari adalah
+$$G(x) = F(4x)G(x) + {1\over{1-4x}} - U(4x)\ .$$
+Jika rekurensi ini kita selesaikan untuk $G(x)$ lalu disederhanakan, kita memperoleh
+\begin{equation}  
+G(x) = {1\over{(1-4x)^{3/2}}} - {1\over{(1-4x)}}\ .
+\label{eq 12.1.4}  
+\end{equation}                                                                        
+\par
+Sekarang kita perlu menemukan rumus untuk koefisien $x^m$.  Suku pertama dalam 
+Persamaan~\ref{eq 12.1.4} adalah $(1/2)U'(4x)$, sehingga koefisien $x^m$ dalam fungsi ini adalah
+$$u_{2m+2} 2^{2m+1}(m+1)\ .$$
+Suku kedua dalam Persamaan~\ref{eq 12.1.4} adalah jumlah deret geometri dengan rasio 
+$4x$, sehingga koefisien $x^m$ adalah $2^{2m}$.  Jadi, kita memperoleh
+
+\begin{eqnarray*}
+g_{2m} &=& u_{2m+2}2^{2m+1}(m+1) - 2^{2m}\\
+       &=& {1\over 2}{{2m+2} \choose {m+1}} (m+1)  - 2^{2m}\ .
+\end{eqnarray*}
+
+Ingat bahwa hasil bagi $g_{2m}/2^{2m}$ adalah nilai harapan banyaknya penyamaan pada semua
+lintasan dengan panjang $2m$.  Dengan menggunakan Latihan~\ref{exer 12.1.4}, mudah ditunjukkan bahwa
+$${{g_{2m}}\over{2^{2m}}} \sim \sqrt{2\over \pi}\sqrt {2m}\ .$$
+Secara khusus, ini berarti bahwa rata-rata banyaknya penyamaan pada semua lintasan dengan panjang
+$4m$ bukanlah dua kali rata-rata banyaknya penyamaan pada semua lintasan dengan panjang $2m$.  Agar
+rata-rata banyaknya penyamaan menjadi dua kali lipat, panjang jalan acak harus dibuat empat kali lipat.
+\end{example}
+Menarik untuk diperhatikan bahwa jika kita mendefinisikan
+$$M_n = \max_{0 \le k \le n} S_k\ ,$$
+maka kita memperoleh
+$$E(M_n) \sim \sqrt{2\over \pi}\sqrt n\ .$$
+Artinya, nilai harapan banyaknya penyamaan dan nilai harapan dari nilai maksimum bagi jalan
+acak dengan panjang $n$ sama secara asimtotik ketika $n \rightarrow \infty$.  (Bahkan, dapat
+ditunjukkan bahwa kedua nilai harapan itu berbeda paling banyak $1/2$ untuk semua bilangan bulat positif $n$.  Lihat
+Latihan~\ref{exer 12.1.9}.)
+
+\exercises
+\begin{LJSItem}
+ 
+\i\label{exer 12.1.1} Dengan menggunakan Teorema Binomial, tunjukkan bahwa
+$${1\over{\sqrt {1 - 4x}}} = \sum_{m = 0}^\infty {2m \choose m} x^m\ .$$
+Berapakah interval konvergensi deret pangkat ini?
+
+\i\label{exer 12.1.2}
+\begin{enumerate}
+
+\item Tunjukkan bahwa untuk $m \ge 1$, 
+$$f_{2m} = u_{2m-2} - u_{2m}\ .$$
+
+\item Dengan menggunakan bagian (a), carilah ekspresi bentuk tertutup untuk jumlah
+$$f_2 + f_4 + \cdots + f_{2m}\ .$$
+
+\item Dengan menggunakan bagian (b), tunjukkan bahwa
+$$\sum_{m = 1}^\infty f_{2m} = 1\ .$$
+(Pernyataan ini juga dapat diperoleh dari kenyataan bahwa 
+$$F(x) = 1 - (1-x)^{1/2}\ .)$$
+
+\item Dengan menggunakan bagian (a) dan (b), tunjukkan bahwa peluang tidak
+terjadi penyamaan dalam $2m$ hasil pertama sama dengan peluang terjadinya
+penyamaan pada waktu $2m$.
+\end{enumerate}
+
+\i\label{exer 12.1.3} Dengan menggunakan notasi Contoh~\ref{exam 12.1.1},
+tunjukkan bahwa
+$$|E_{2k}| = f_{2k} 2^{2m}\ .$$
+
+\i\label{exer 12.1.4} Dengan menggunakan Rumus Stirling, tunjukkan bahwa 
+$$u_{2m} \sim {1\over{\sqrt {\pi m}}}\ .$$
+
+\i\label{exer 12.1.5} Suatu \emx {pergantian keunggulan}\index{pergantian
+keunggulan} dalam perjalanan acak terjadi pada waktu $2k$ jika $S_{2k-1}$ dan
+$S_{2k+1}$ mempunyai tanda berlawanan.  
+\begin{enumerate}
+\item Berikan argumen ketat yang membuktikan bahwa di antara semua perjalanan
+sepanjang $2m$ yang mengalami penyamaan pada waktu $2k$, tepat setengahnya
+mengalami pergantian keunggulan pada waktu $2k$.
+
+\item Simpulkan bahwa jumlah seluruh pergantian keunggulan di antara semua
+perjalanan sepanjang $2m$ sama dengan
+$${1\over 2}(g_{2m} - u_{2m})\ .$$
+
+\item Carilah ekspresi asimtotik untuk banyaknya rata-rata pergantian keunggulan
+dalam perjalanan acak sepanjang $2m$. 
+\end{enumerate}
+
+\i\label{exer 12.1.6} 
+\begin{enumerate}
+\item 
+Tunjukkan bahwa peluang perjalanan acak sepanjang $2m$ kembali ke titik asal
+untuk terakhir kalinya\index{kembali terakhir ke titik asal}\index{kembali ke
+titik asal!terakhir} pada waktu $2k$, dengan $0 \le k \le m$, sama dengan
+$$
+{{{2k}\choose k}{{2m-2k}\choose {m-k}}\over{2^{2m}}} = u_{2k}u_{2m - 2k}\ .
+$$  
+(Kasus $k = 0$ terdiri atas semua lintasan yang tidak kembali ke titik asal pada
+waktu positif mana pun.) \emx {Petunjuk}: Lintasan yang terakhir kembali ke
+titik asal pada waktu $2k$ terdiri atas dua lintasan yang disambungkan: satu
+lintasan sepanjang $2k$ yang berawal dan berakhir di titik asal, dan lintasan
+lain sepanjang $2m - 2k$ yang berawal di titik asal tetapi tidak pernah kembali
+ke titik asal. Kedua jenis lintasan dapat dihitung menggunakan besaran yang
+muncul dalam bagian ini.  
+\item
+Dengan menggunakan bagian (a), tunjukkan bahwa jika $m$ ganjil, peluang bahwa
+perjalanan sepanjang $2m$ tidak mengalami penyamaan dalam $m$ hasil terakhir
+sama dengan $1/2$, berapa pun nilai $m$. \emx {Petunjuk}: Jawaban bagian a)
+simetris dalam $k$ dan $m-k$.
+\end{enumerate}
+
+\i\label{exer 12.1.7} Tunjukkan bahwa peluang tidak terjadi penyamaan dalam
+perjalanan sepanjang $2m$ sama dengan $u_{2m}$.
+
+\istar\label{exer 12.1.8} Tunjukkan bahwa
+$$P(S_1 \ge 0,\ S_2 \ge 0,\ \ldots,\ S_{2m} \ge 0) = u_{2m}\ .$$
+\emx {Petunjuk}: Pertama, jelaskan mengapa
+\begin{eqnarray*}
+&&P(S_1 > 0,\ S_2 > 0,\ \ldots,\ S_{2m} > 0) \\
+&& \;\;\;\;\;\;\;\;\;\;\;\;\; = {1\over 2}P(S_1 \ne 0,\ S_2 \ne 0,\ \ldots,\ S_{2m} \ne 0)  \ .
+\end{eqnarray*}
+Kemudian gunakan Latihan~\ref{exer 12.1.7}, bersama pengamatan bahwa jika tidak
+terjadi penyamaan dalam $2m$ hasil pertama, maka lintasan melewati titik $(1,1)$
+dan tetap berada pada atau di atas garis horizontal $x = 1$.
+
+\istar\label{exer 12.1.9} Dalam Feller,\footnote{W.~Feller, \emx {Introduction to Probability
+Theory and its Applications,} vol.~I, 3rd~ed. (New York: John Wiley \& Sons, 1968).}
+terdapat teorema berikut: misalkan $M_n$ adalah peubah acak yang memberikan
+nilai maksimum $S_k$, untuk $1 \le k \le n$. Definisikan
+$$p_{n, r} = {n\choose {{n+r}\over{2}}}2^{-n}\ .$$
+Jika $r \ge 0$, maka
+$$P(M_n = r) = \left \{ \begin{array}{ll}
+                    p_{n, r}\,,&\mbox{jika $r \equiv n\,    (\mbox{mod}\ 2)$}, \\   
+                  p_{n, r+1}\,,&\mbox{jika $r \not\equiv n\,(\mbox{mod}\ 2)$}.
+                      \end{array}
+             \right.   
+$$
+
+\begin{enumerate}
+
+\item Dengan menggunakan teorema ini, tunjukkan bahwa
+$$E(M_{2m}) = {1\over{2^{2m}}}\sum_{k = 1}^m (4k-1){2m \choose m+k}\ ,$$
+dan jika $n = 2m+1$, maka
+$$E(M_{2m+1}) = {1\over {2^{2m+1}}} \sum_{k = 0}^m (4k+1){2m+1\choose m+k+1}\ .$$
+
+\item
+Untuk $m \ge 1$, definisikan 
+$$r_m = \sum_{k = 1}^m k {2m\choose m+k}$$
+dan
+$$s_m = \sum_{k = 1}^m k {2m+1\choose m+k+1}\ .$$
+Dengan menggunakan identitas
+$${n\choose k} = {n-1\choose k-1} + {n-1\choose k}\ ,$$
+tunjukkan bahwa
+$$s_m = 2r_m - {1\over 2}\biggl(2^{2m} - {2m \choose m}\biggr)$$
+dan
+$$r_m = 2s_{m-1} + {1\over 2}2^{2m-1}\ ,$$
+jika $m \ge 2$.
+
+\item
+Definisikan fungsi-fungsi pembangkit
+$$R(x) = \sum_{k = 1}^\infty r_k x^k$$
+dan
+$$S(x) = \sum_{k = 1}^\infty s_k x^k\ .$$
+Tunjukkan bahwa
+$$S(x) = 2 R(x) - {1\over 2}\biggl({1\over{1- 4x}}\biggr) + {1\over 2}\biggl(\sqrt{1-4x}\biggr)$$
+dan
+$$R(x) = 2xS(x) + x\biggl({1\over{1-4x}}\biggr)\ .$$
+
+\item
+Tunjukkan bahwa
+$$R(x) = {x\over{(1-4x)^{3/2}}}\ ,$$
+dan
+$$S(x) = {1\over 2}\biggl({1\over{(1- 4x)^{3/2}}}\biggr) - 
+{1\over 2}\biggl({1\over{1- 4x}}\biggr)\ .$$
+
+\item
+Tunjukkan bahwa
+$$r_m = m{2m-1\choose m-1}\ ,$$
+dan
+$$s_m = {1\over 2}(m+1){2m+1\choose m} - {1\over 2}(2^{2m})\ .$$
+
+\item
+Tunjukkan bahwa
+$$E(M_{2m}) = {m\over{2^{2m-1}}}{2m\choose m} + {1\over{2^{2m+1}}}{2m\choose m} - {1\over 2}\ ,$$
+dan
+$$E(M_{2m+1}) = {{m+1}\over{2^{2m+1}}}{2m+2\choose m+1} - {1\over 2}\ .$$
+Pembaca hendaknya membandingkan rumus-rumus ini dengan ekspresi untuk
+\linebreak $g_{2m}/2^{(2m)}$ dalam Contoh~\ref{exam 12.1.1}.
+\end{enumerate}
+
+\istar\label{exer 12.1.10}
+(dari K. Levasseur\footnote{K. Levasseur, ``How to Beat Your Kids at Their
+Own Game," \emx {Mathematics Magazine} vol.~61, no. 5 (December, 1988),
+pp.~301-305.})\index{LEVASSEUR, K.} Salah satu orang tua dan anaknya memainkan
+permainan berikut. Satu tumpukan berisi $2n$ kartu, $n$ merah dan $n$ hitam,
+dikocok. Kartu dibuka satu per satu. Sebelum setiap kartu dibuka, orang tua dan
+anak menebak apakah kartu itu merah atau hitam. Siapa yang membuat lebih banyak
+tebakan benar memenangkan permainan. Anak diasumsikan menebak masing-masing
+warna dengan peluang yang sama, sehingga rata-rata skornya adalah $n$. Orang
+tua mencatat berapa banyak kartu setiap warna yang telah dibuka. Jika kartu
+hitam yang tersisa dalam tumpukan lebih banyak daripada kartu merah, misalnya,
+orang tua menebak hitam; sedangkan jika jumlah kartu yang tersisa untuk setiap
+warna sama, orang tua menebak masing-masing warna dengan peluang 1/2. Berapakah
+banyaknya tebakan benar yang diharapkan dari orang tua? \emx {Petunjuk}: Setiap
+dari ${{2n}\choose n}$ urutan kartu merah dan hitam yang mungkin bersesuaian
+dengan perjalanan acak sepanjang $2n$ yang kembali ke titik asal pada waktu
+$2n$. Tunjukkan bahwa di antara setiap pasangan penyamaan berturut-turut, orang
+tua akan benar tepat satu kali lebih banyak daripada salah. Jelaskan mengapa
+ini berarti banyaknya rata-rata tebakan benar oleh orang tua melebihi $n$
+sebesar tepat setengah banyaknya rata-rata penyamaan. Sekarang definisikan
+peubah acak $X_i$ bernilai 1 jika terjadi penyamaan pada waktu $2i$, dan 0 jika
+tidak. Maka, di antara semua lintasan yang relevan, kita mempunyai
+$$E(X_i) = P(X_i = 1) = \frac{{{2n-2i}\choose{n-i}}{{2i}\choose{i}}}{{{2n}\choose{n}}}\ .$$
+Jadi, banyaknya penyamaan yang diharapkan sama dengan
+$$E\biggl(\sum_{i = 1}^n X_i\biggr) = \frac 1{{{2n}\choose{n}}}\sum_{i = 1}^n 
+{{2n-2i}\choose{n-i}}{{2i}\choose{i}}\ .$$
+Sekarang fungsi pembangkit dapat digunakan untuk menemukan nilai jumlah tersebut.
+\par
+Perlu diperhatikan bahwa dalam permainan seperti ini, pertanyaan yang lebih
+menarik daripada pertanyaan di atas adalah: berapakah peluang orang tua
+memenangkan permainan? Untuk permainan ini, pertanyaan tersebut dijawab oleh
+D. Zagier.\footnote{D. Zagier, ``How Often Should You Beat Your Kids?"
+\emx{Mathematics Magazine} vol.~63, no.\ 2 (April 1990), pp. 89-92.}
+\index{ZAGIER, D.} Ia menunjukkan bahwa peluang menang secara asimtotik (untuk
+$n$ besar) sama dengan besaran
+$$\frac 12 + \frac 1{2\sqrt 2}\ .$$
+
+\item\label{exer 12.1.11}
+Buktikan bahwa
+$$u^{(2)}_{2n} = \frac 1{4^{2n}} \sum_{k = 0}^n \frac {(2n)!}{k!k!(n-k)!(n-k)!}\ ,$$
+dan
+$$u^{(3)}_{2n} = \frac 1{6^{2n}} \sum_{j,k} \frac {(2n)!}{j!j!k!k!(n-j-k)!(n-j-k)!}\ ,$$
+di mana jumlah terakhir mencakup semua $j$ dan $k$ tak negatif dengan
+$j+k \le n$. Tunjukkan pula bahwa ekspresi terakhir ini dapat ditulis ulang sebagai
+$$\frac 1{2^{2n}}{{2n}\choose n} \sum_{j,k} 
+\biggl(\frac 1{3^n}\frac{n!}{j!k!(n-j-k)!}\biggr)^2\ .$$
+
+\item\label{exer 12.1.12}
+Buktikan bahwa jika $n \ge 0$, maka
+$$\sum_{k = 0}^n {n \choose k}^2 = {{2n} \choose n}\ .$$
+\emx {Petunjuk}: Tuliskan jumlah itu sebagai 
+$$\sum_{k = 0}^n {n \choose k}{n \choose {n-k}}$$
+dan jelaskan mengapa ini merupakan koefisien dalam hasil kali
+$$(1 + x)^n (1 + x)^n\ .$$
+Gunakan hasil ini bersama Latihan~\ref{exer 12.1.11} untuk menunjukkan bahwa
+$$u^{(2)}_{2n} = \frac 1{4^{2n}}{{2n}\choose n}\sum_{k = 0}^n {n \choose k}^2 = 
+\frac 1 {4^{2n}} {{2n}\choose n}^2\ .$$
+
+\item\label{exer 12.1.13}
+Dengan menggunakan Rumus Stirling, buktikan bahwa
+$${{2n}\choose n} \sim \frac {2^{2n}}{\sqrt {\pi n}}\ .$$
+
+\item\label{exer 12.1.14}
+Buktikan bahwa
+$$\sum_{j,k} 
+\biggl(\frac 1{3^n}\frac{n!}{j!k!(n-j-k)!}\biggr) = 1\ ,$$
+di mana jumlah mencakup semua $j$ dan $k$ tak negatif sedemikian rupa sehingga
+$j + k \le n$. \emx {Petunjuk}: Hitunglah banyaknya cara menempatkan $n$ bola
+berlabel ke dalam 3 guci berlabel.
+
+\item\label{exer 12.1.15}
+Dengan menggunakan hasil yang dibuktikan untuk perjalanan acak dalam
+${\mathbf R}^3$ pada Contoh~\ref{exam 12.1.0.6}, jelaskan mengapa peluang pada
+akhirnya kembali dalam ${\mathbf R}^n$ benar-benar kurang dari satu untuk
+semua $n \ge 3$. \emx {Petunjuk}: Perhatikan perjalanan acak dalam
+${\mathbf R}^n$ dan abaikan semua kecuali tiga koordinat pertama posisi partikel.
+
+\end{LJSItem}
+
+\section{Kebangkrutan Penjudi\label{sec 12.2}}\index{kebangkrutan penjudi}
+\par
+Pada bagian sebelumnya, kita mempelajari jenis perjalanan acak simetris paling
+sederhana dalam ${\mathbf R}^1$. Dalam bagian ini, kita menghapus asumsi bahwa
+perjalanan acak itu simetris. Sebagai gantinya, kita mengandaikan bahwa $p$ dan
+$q$ adalah bilangan real tak negatif dengan $p+q = 1$, dan bahwa fungsi
+distribusi bersama lompatan-lompatan perjalanan acak adalah
+$$f_X(x) = \left \{ \begin{array}{ll}
+               p, & \mbox{jika $x = 1$},\\ 
+               q, & \mbox{jika $x = -1$}.
+                      \end{array}
+             \right.   
+$$ 
+Perjalanan acak dapat dibayangkan sebagai representasi urutan lemparan koin
+berbobot, dengan sisi kepala muncul dengan peluang $p$ dan sisi ekor muncul
+dengan peluang $q$. Perumusan alternatif untuk situasi ini adalah seorang
+penjudi yang memainkan serangkaian permainan melawan lawan (kadang-kadang
+dianggap sebagai orang lain, kadang-kadang disebut ``bandar"), dengan peluang
+$p$ bagi penjudi untuk menang dalam setiap permainan.
+
+\subsection*{Masalah Kebangkrutan Penjudi}
+
+Perumusan jenis perjalanan acak di atas menghasilkan masalah yang dikenal
+sebagai masalah Kebangkrutan Penjudi.\index{kebangkrutan penjudi} Masalah ini
+diperkenalkan dalam Latihan~\ref{exer 11.2.22}, tetapi kita akan menjelaskannya
+kembali. Seorang penjudi memulai dengan ``modal" sebesar~$s$. Penjudi bermain
+sampai modalnya mencapai nilai $M$ atau nilai 0. Dalam bahasa rantai Markov,
+kedua nilai ini bersesuaian dengan keadaan penyerap. Kita tertarik mempelajari
+peluang terjadinya masing-masing dari kedua hasil ini.  
+\par
+Kita juga dapat mengandaikan bahwa penjudi bermain melawan lawan yang ``kaya
+tanpa batas.'' Dalam kasus ini, kita mengatakan bahwa hanya ada satu keadaan
+penyerap, yaitu ketika modal penjudi bernilai 0. Dengan asumsi ini, kita dapat
+menanyakan peluang bahwa penjudi pada akhirnya bangkrut. 
+\par
+Kita mulai dengan mendefinisikan $q_k$ sebagai peluang bahwa modal penjudi
+mencapai 0, yakni ia bangkrut, sebelum mencapai $M$, dengan syarat modal awalnya
+adalah $k$. Perhatikan bahwa $q_0 = 1$ dan $q_M = 0$. Relasi fundamental di
+antara $q_k$ adalah sebagai berikut:
+$$q_k = pq_{k+1} + qq_{k-1}\ ,$$
+di mana $1 \le k \le M-1$. Relasi ini berlaku karena jika modalnya sama dengan
+$k$ dan ia memainkan satu permainan, modalnya menjadi $k+1$ dengan peluang $p$
+dan $k-1$ dengan peluang $q$. Dalam kasus pertama, peluang kebangkrutan pada
+akhirnya adalah $q_{k+1}$ dan dalam kasus kedua adalah $q_{k-1}$. Karena
+$p + q = 1$, persamaan di atas dapat kita tulis sebagai
+$$p(q_{k+1} - q_k) = q(q_k - q_{k-1})\ ,$$
+atau
+$$q_{k+1} - q_k = {q\over p}(q_k - q_{k-1})\ .$$
+Dari persamaan ini, mudah dilihat bahwa
+\begin{equation}
+q_{k+1} - q_k = \biggl({q\over p}\biggr)^k(q_1 - q_0)\ .
+\label{eq 12.2.2}
+\end{equation}
+Sekarang kita menggunakan jumlah teleskopik untuk memperoleh persamaan yang
+satu-satunya peubah tak dikenalnya adalah $q_1$:
+\begin{eqnarray*}
+-1 &=& q_M - q_0 \\
+   &=& \sum_{k = 0}^{M-1} (q_{k+1} - q_k)\ ,
+\end{eqnarray*}
+sehingga
+\begin{eqnarray*}
+-1 &=& \sum_{k = 0}^{M-1} \biggl({q\over p}\biggr)^k(q_1 - q_0)\\
+   &=& (q_1 - q_0) \sum_{k = 0}^{M-1} \biggl({q\over p}\biggr)^k\ .
+\end{eqnarray*}
+Jika $p \ne q$, maka ekspresi di atas sama dengan
+$$(q_1 - q_0) {{(q/p)^M - 1}\over{(q/p) - 1}}\ ,$$
+sedangkan jika $p = q = 1/2$, kita memperoleh persamaan
+$$-1 = (q_1 - q_0) M\ .$$
+Untuk sementara kita andaikan bahwa $p \ne q$. Maka kita mempunyai
+$$q_1 - q_0 = -{{(q/p) - 1}\over{(q/p)^M - 1}}\ .$$
+Sekarang, untuk setiap $z$ dengan $1 \le z \le M$, kita mempunyai
+\begin{eqnarray*}
+q_z - q_0 &=& \sum_{k = 0}^{z-1} (q_{k+1} - q_k)\\
+          &=& (q_1 - q_0)\sum_{k = 0}^{z-1} \biggl({q\over p}\biggr)^k\\
+          &=& -(q_1 - q_0){{(q/p)^z - 1}\over{(q/p) - 1}}\\
+          &=& -{{(q/p)^z - 1}\over{(q/p)^M - 1}}\ .
+\end{eqnarray*}
+Oleh karena itu,
+\begin{eqnarray*}
+q_z &=& 1 - {{(q/p)^z - 1}\over{(q/p)^M - 1}}\\
+    &=& {{(q/p)^M - (q/p)^z}\over{(q/p)^M - 1}}\ .
+\label{eq 12.2.3}
+\end{eqnarray*}
+Akhirnya, jika $p = q = 1/2$, mudah ditunjukkan bahwa (lihat
+Latihan~\ref{exer 12.2.11})
+$$q_z = {{M - z}\over M}\ .$$
+Perhatikan bahwa kedua rumus ini berlaku jika $z = 0$.
+\par
+Untuk $0 \le z \le M$, kita definisikan besaran $p_z$ sebagai peluang bahwa
+modal penjudi mencapai $M$ tanpa pernah mencapai 0. Karena permainan mungkin
+berlanjut tanpa batas, tidak jelas bahwa $p_z + q_z = 1$ untuk setiap $z$.
+Namun, metode yang sama seperti di atas dapat digunakan untuk menunjukkan bahwa
+jika $p \ne q$, maka
+$$q_z = {{(q/p)^z - 1}\over{(q/p)^M - 1}}\ ,$$
+dan jika $p = q = 1/2$, maka
+$$q_z = {z\over M}\ .$$
+Jadi, untuk setiap $z$, berlaku $p_z + q_z = 1$, sehingga permainan berakhir
+dengan peluang 1.
+
+\subsection*{Lawan yang Kaya Tanpa Batas}
+
+Sekarang kita beralih ke masalah mencari peluang kebangkrutan pada akhirnya
+jika penjudi bermain melawan lawan yang kaya tanpa batas. Peluang ini dapat
+diperoleh dengan membiarkan $M$ menuju $\infty$ dalam ekspresi untuk $q_z$ yang
+dihitung di atas. Jika $q < p$, ekspresi tersebut mendekati $(q/p)^z$, dan jika
+$q > p$, ekspresi itu mendekati 1. Dalam kasus $p = q = 1/2$, ingat bahwa
+$q_z = 1 - z/M$. Jadi, jika $M \rightarrow \infty$, kita melihat bahwa peluang
+kebangkrutan pada akhirnya menuju 1.  
+
+\subsection*{Catatan Historis}
+
+Pada 1711, De Moivre\index{de MOIVRE, A.}, dalam bukunya \emx{De Mensura Sortis},
+memberikan penurunan yang cerdik untuk peluang kebangkrutan. Ringkasan argumennya
+berikut ini didasarkan pada uraian David.\footnote{F.~N. David,
+\emx {Games, Gods and Gambling} (London: Griffin, 1962). Ringkasan editorial;
+ungkapan sumber tidak diterjemahkan atau direproduksi.}\index{DAVID, F. N.}
+Notasi yang digunakan adalah sebagai berikut: kita bayangkan terdapat dua
+pemain, A dan B, dan peluang mereka memenangkan suatu permainan masing-masing
+adalah $p$ dan $q$. Para pemain memulai dengan masing-masing $a$ dan $b$ keping.
+Berikan nilai nominal $q/p$ pada keping terbawah A, $(q/p)^2$ pada keping di
+atasnya, dan seterusnya hingga $(q/p)^a$ pada keping teratas A. Pada tumpukan B,
+nilai keping teratas ialah $(q/p)^{a+1}$ dan nilai berikutnya berturut-turut
+hingga $(q/p)^{a+b}$ pada keping terbawah. Sesudah setiap permainan, keping
+teratas pihak yang kalah dipindahkan ke atas tumpukan pemenang; keping teratas
+selalu menjadi taruhan permainan berikutnya. Dalam nilai nominal, taruhan B
+selalu $q/p$ kali taruhan A, sehingga harapan nominal setiap pemain pada setiap
+permainan adalah nol. Karena sifat ini berlaku sepanjang permainan, peluang A
+memenangkan seluruh keping B dikalikan keuntungan nominal A harus sama dengan
+peluang B dikalikan keuntungan nominal B. Maka
+\begin{equation}
+P_a\biggl(\Bigl({q\over p}\Bigr)^{a+1} + \cdots +
+\Bigl({q\over p}\Bigr)^{a+b}\biggr) =  
+P_b\biggl(\Bigl({q\over p}\Bigr) + \cdots +
+\Bigl({q\over p}\Bigr)^a\biggr)\ .
+\label{eq 12.2.1}
+\end{equation}
+\par
+Dengan menggunakan persamaan ini bersama kenyataan bahwa
+$$P_a + P_b = 1\ ,$$
+dapat dengan mudah ditunjukkan bahwa
+$$P_a = {{(q/p)^a - 1}\over{(q/p)^{a+b} - 1}}\ ,$$
+jika $p \ne q$, dan
+$$P_a = {a\over{a+b}}\ ,$$
+jika $p = q = 1/2$.
+\par
+Dalam teori peluang modern, de Moivre mengubah nilai keping-keping untuk
+mengubah permainan tak adil menjadi permainan adil, yang disebut martingal.
+Dengan nilai baru itu, kekayaan harapan pemain A (yakni, jumlah nilai nominal
+keping-kepingnya) setelah setiap permainan sama dengan kekayaannya sebelum
+permainan (dan demikian pula untuk pemain B). (Untuk argumen martingal yang lebih
+sederhana, lihat Latihan~\ref{exer 12.2.10}.) De Moivre kemudian menggunakan
+kenyataan bahwa ketika permainan berakhir, permainan tetap adil, sehingga
+Persamaan~\ref{eq 12.2.1} harus benar. Kenyataan ini memerlukan bukti dan
+merupakan salah satu teorema sentral dalam teori martingal.  
+
+\exercises
+\begin{LJSItem}
+ 
+\i\label{exer 12.2.2} Dalam masalah kebangkrutan penjudi, andaikan modal awal
+penjudi adalah 1 dolar, dan andaikan peluangnya untuk menang dalam setiap
+permainan adalah $p$. Misalkan $T$ adalah banyaknya permainan hingga modal 0
+tercapai (penjudi bangkrut). Tunjukkan bahwa fungsi pembangkit untuk~$T$ adalah
+$$
+h(z) = \frac{1 - \sqrt{1 - 4pqz^2}}{2pz}\ ,
+$$
+dan bahwa
+$$
+h(1) = \left \{ \begin{array}{ll}
+              q/p, & \mbox{jika $q \leq p$}, \\
+                1, & \mbox{jika $q \geq p,$} 
+         \end{array}
+         \right.    
+$$
+dan
+$$
+h'(1) = \left \{ \begin{array}{ll}
+               1/(q - p), & \mbox{jika $q > p$}, \\
+                  \infty, & \mbox{jika $q = p.$}
+         \end{array}
+         \right. 
+$$
+Tafsirkan hasil Anda dalam kaitannya dengan waktu $T$ untuk mencapai 0. (Lihat
+juga Contoh~\ref{exam 10.1.7}.)
+
+\i\label{exer 12.2.3} Tunjukkan bahwa ekspansi deret Taylor untuk $\sqrt{1 - x}$
+adalah
+$$
+ \sqrt{1 - x} = \sum_{n = 0}^\infty  {{1/2} \choose n} x^n\ ,
+$$
+di mana koefisien binomial ${1/2} \choose n$ adalah
+$$
+{{1/2} \choose n} = \frac{(1/2)(1/2 - 1) \cdots (1/2 - n + 1)}{n!}\ .  
+$$
+Dengan menggunakan hasil ini dan hasil Latihan~\ref{exer 12.2.2}, tunjukkan
+bahwa peluang penjudi bangkrut pada langkah ke-$n$ adalah
+$$
+p_T(n) = \left \{ \begin{array}{ll}
+ \frac{(-1)^{k - 1}}{2p} {{1/2} \choose k} (4pq)^k, & \mbox{jika $n = 2k - 1$,} \\
+                                                 0, & \mbox{jika $n = 2k$.}
+                  \end{array}
+         \right.   
+$$
+
+\i\label{exer 12.2.4} Untuk masalah kebangkrutan penjudi, andaikan penjudi
+memulai dengan $k$ dolar. Misalkan $T_k$ adalah waktu untuk mencapai 0 untuk
+pertama kalinya.
+
+\begin{enumerate}
+\item Tunjukkan bahwa fungsi pembangkit $h_k(t)$ untuk~$T_k$ adalah pangkat
+ke-$k$ dari fungsi pembangkit untuk waktu $T$ menuju kebangkrutan ketika
+dimulai dari~1. \emx{Petunjuk}: Misalkan $T_k = U_1 + U_2 +\cdots+ U_k$, di
+mana $U_j$ adalah waktu yang diperlukan perjalanan yang dimulai dari~$j$
+untuk mencapai $j - 1$ untuk pertama kalinya.
+
+\item Tentukan $h_k(1)$ dan $h_k'(1)$, lalu tafsirkan hasil Anda.
+\end{enumerate} 
+
+\i\label{exer 12.2.5} (Tiga soal berikut berasal dari Feller.\footnote{W.~Feller,
+op.\ cit., pg. 367.}) Seperti dalam teks, andaikan $M$ adalah bilangan bulat
+positif yang tetap. 
+
+\begin{enumerate}
+\item Tunjukkan bahwa jika seorang penjudi memulai dengan modal 0 (dan
+diizinkan memiliki jumlah uang negatif), maka peluang modalnya mencapai nilai
+$M$ sebelum kembali ke 0 sama dengan $p(1 - q_1)$.
+\item Tunjukkan bahwa jika penjudi memulai dengan modal $M$, maka peluang
+modalnya mencapai 0 sebelum kembali ke $M$ sama dengan $qq_{M-1}$.
+\end{enumerate}
+
+\i\label{exer 12.2.6} Misalkan seorang penjudi memulai dengan modal 0 dolar.
+\begin{enumerate} 
+\item Tunjukkan bahwa peluang modalnya tidak pernah mencapai $M$ sebelum
+kembali ke 0 sama dengan $1 - p(1 - q_1)$.
+
+\item Tunjukkan bahwa peluang modalnya mencapai nilai $M$ tepat $k$ kali
+sebelum kembali ke 0 sama dengan
+$p(1-q_1)(1 - qq_{M-1})^{k-1}(qq_{M-1})$. \emx {Petunjuk}: Gunakan
+Latihan~\ref{exer 12.2.5}.
+\end{enumerate} 
+
+\i\label{exer 12.2.7} Dalam teks telah ditunjukkan bahwa jika $q < p$, terdapat
+peluang positif bahwa penjudi yang memulai dengan modal 0 dolar tidak akan
+pernah kembali ke titik asal. Karena itu, sekarang kita andaikan $q \ge p$.
+Dengan menggunakan Latihan~\ref{exer 12.2.6}, tunjukkan bahwa jika seorang
+penjudi memulai dengan modal 0 dolar, maka nilai harapan banyaknya kali
+modalnya sama dengan $M$ sebelum kembali ke 0 adalah $(p/q)^M$ jika $q > p$,
+dan 1 jika $q = p$. Feller memberikan tafsiran berikut: lempar koin seimbang
+hingga banyak kumulatif sisi kepala dan sisi ekor pertama kali kembali sama, lalu
+bayarkan satu sen setiap kali keunggulan kumulatif sisi kepala tepat $m$. Nilai
+harapan pembayaran---dan karenanya biaya masuk yang adil---ialah satu sen untuk
+setiap $m$.\footnote{W.~Feller, op.\ cit., p.~367. Ringkasan editorial; ungkapan
+sumber tidak diterjemahkan atau direproduksi.}
+
+\i\label{exer 12.2.8} Dalam permainan pada Latihan~\ref{exer 12.2.7}, ambil
+$p = q = 1/2$ dan $M = 10$. Berapakah peluang bahwa modal penjudi sama dengan
+$M$ setidaknya 20 kali sebelum kembali ke 0?
+
+\i\label{exer 12.2.9} Tulis program komputer yang menyimulasikan permainan pada
+Latihan~\ref{exer 12.2.7} untuk kasus $p = q = 1/2$ dan $M = 10$.  
+
+\i\label{exer 12.2.10} Dalam uraian permainan oleh de Moivre, kita dapat
+mengubah definisi kekayaan pemain A sedemikian rupa sehingga permainan tetap
+merupakan martingal (dan perhitungannya menjadi lebih sederhana). Caranya ialah
+memberikan nilai nominal kepada keping-keping seperti yang dilakukan de Moivre,
+tetapi kekayaan setiap pemain saat ini didefinisikan hanya sebagai nilai keping
+yang akan dipertaruhkan pada permainan berikutnya. Jadi, jika pemain A memiliki
+$a$ keping, kekayaannya saat ini adalah $(q/p)^a$ (kita menetapkan bahwa ini
+berlaku bahkan jika $a = 0$). Tunjukkan bahwa menurut definisi ini, jika
+$p \ne q$, nilai harapan kekayaan pemain A setelah satu permainan sama dengan
+kekayaannya sebelum permainan. Kemudian, seperti de Moivre, tuliskan persamaan
+yang menyatakan bahwa nilai harapan kekayaan akhir pemain A sama dengan
+kekayaan awalnya. Gunakan persamaan ini untuk menentukan peluang pemain A
+bangkrut.
+
+\i\label{exer 12.2.11} Dalam masalah kebangkrutan penjudi, andaikan
+$p = q = 1/2$.
+\begin{enumerate}
+\item Dengan menggunakan Persamaan~\ref{eq 12.2.2}, bersama fakta bahwa
+$q_0 = 1$ dan $q_M = 0$, tunjukkan bahwa untuk $0 \le z \le M$,
+$$q_z = {{M - z}\over M}\ .$$
+\item Dalam Persamaan~\ref{eq 12.2.3}, biarkan $p \rightarrow 1/2$ (dan karena
+$q = 1 - p$, maka $q \rightarrow 1/2$ pula). Tunjukkan bahwa pada limitnya,
+$$q_z = {{M - z}\over M}\ .$$  \emx {Petunjuk}: Ganti $q$ dengan $1-p$, dan
+gunakan aturan L'Hopital.
+\end{enumerate}
+
+%We may want to move the next exercise to an earlier chapter.
+\i\label{exer 12.2.12} Di kasino Amerika, roda rolet memuat bilangan bulat dari
+1 sampai 36, bersama 0 dan 00. Separuh bilangan tak nol berwarna merah, separuh
+lainnya hitam, sedangkan 0 dan 00 berwarna hijau. Taruhan yang lazim dalam
+permainan ini adalah memasang satu dolar pada merah. Jika angka merah muncul,
+petaruh menerima kembali dolarnya dan juga memperoleh satu dolar lagi. Jika
+angka hitam atau hijau muncul, ia kehilangan dolarnya.
+\begin{enumerate}
+\item Misalkan seseorang memulai dengan 40 dolar dan terus bertaruh pada merah
+hingga kekayaannya mencapai 50 atau 0. Tentukan peluang kekayaannya mencapai
+50 dolar.
+\item Berapa banyak uang yang harus ia miliki sebagai modal awal agar
+peluangnya memenangkan 10 dolar sebelum bangkrut adalah 95\%?
+\item Seorang pemilik kasino pernah berpendapat bahwa kasino tanpa 0 dan 00
+tetap dapat memperoleh laba karena sebagian pelanggan akan terus bermain hingga
+kehilangan seluruh uang mereka. Menurut Anda, apakah kasino seperti itu akan tetap
+bertahan? Pernyataan ini dirumuskan ulang secara mandiri; ungkapan narasumber tidak
+diterjemahkan atau direproduksi.
+\end{enumerate}
+
+\end{LJSItem}
+
+
+
+
+
+ 
+\section{Hukum Arksinus}\label{sec 12.3}\index{hukum arksinus}
+\par
+Dalam Latihan~\ref{sec 12.1}.\ref{exer 12.1.6}, distribusi waktu keseimbangan
+terakhir dalam perjalanan acak simetris telah ditentukan. Jika kita gunakan
+$\alpha_{2k, 2m}$ untuk menyatakan peluang bahwa perjalanan acak sepanjang
+$2m$ mencapai keseimbangan terakhirnya pada waktu $2k$, maka
+$$\alpha_{2k, 2m} = u_{2k}u_{2m-2k}\ .$$
+Sekarang kita akan menunjukkan cara menghampiri distribusi nilai-nilai $\alpha$
+dengan sebuah fungsi sederhana. Ingat bahwa
+$$u_{2k} \sim {1\over{\sqrt {\pi k}}}\ .$$
+Karena itu, ketika $k$ dan $m$ keduanya menuju $\infty$, kita mempunyai
+$$\alpha_{2k, 2m} \sim {1\over{\pi \sqrt{k(m-k)}}}\ .$$
+Ekspresi terakhir ini dapat ditulis sebagai
+$${1\over{\pi m \sqrt{(k/m)(1 - k/m)}}}\ .$$
+Jadi, jika kita definisikan
+$$f(x) = {1\over{\pi \sqrt{x(1-x)}}}\ ,$$
+untuk $0 < x < 1$, maka
+$$\alpha_{2k, 2m} \approx {1\over m}f\biggl({k\over m}\biggr)\ .$$
+Tanda $\approx$ digunakan karena kita tidak lagi mensyaratkan $k$ menjadi
+besar. Artinya, kita dapat mengganti distribusi diskret $\alpha_{2k, 2m}$
+dengan densitas kontinu $f(x)$ pada interval $[0, 1]$ dan memperoleh hampiran
+yang baik. Secara khusus, jika $x$ adalah bilangan real tetap di antara 0 dan
+1, maka
+$$\sum_{k < xm}\alpha_{2k, 2m} \approx \int_0^x f(t)\,dt\ .$$
+Ternyata $f(x)$ mempunyai antiturunan yang sederhana, sehingga kita dapat
+menulis
+$$\sum_{k < xm}\alpha_{2k, 2m} \approx {2\over \pi}\arcsin \sqrt x\ .$$  
+\index{hukum arksinus}
+Dari grafik fungsi terakhir ini dapat dilihat bahwa fungsi tersebut mempunyai
+minimum pada $x = 1/2$ dan simetris terhadap titik itu. Seperti dicatat dalam
+latihan, hal ini menyiratkan bahwa separuh perjalanan sepanjang $2m$ tidak
+mencapai keseimbangan lagi setelah waktu $m$, suatu fakta yang mungkin tidak
+akan terduga.
+\par
+Ternyata densitas arksinus muncul dalam jawaban bagi banyak pertanyaan lain
+tentang perjalanan acak pada garis. Ingat bahwa dalam Bagian~\ref{sec 12.1},
+perjalanan acak dapat dipandang sebagai garis poligonal yang menghubungkan
+$(0,0)$ dengan $(m, S_m)$. Berdasarkan penafsiran ini, kita definisikan
+$b_{2k, 2m}$ sebagai peluang bahwa suatu perjalanan acak sepanjang $2m$
+mempunyai tepat $2k$ dari $2m$ ruas garis poligonalnya di atas sumbu-$t$.
+\par
+Peluang $b_{2k, 2m}$ sering ditafsirkan melalui permainan dua pemain. (Pembaca
+tentu ingat permainan Heads or Tails dalam Contoh~\ref{exam 1.3}.) Pemain A
+dikatakan unggul pada waktu $n$ jika perjalanan acak berada di atas sumbu-$t$
+pada waktu tersebut, atau jika perjalanan acak berada pada sumbu-$t$ pada
+waktu $n$ tetapi berada di atas sumbu-$t$ pada waktu $n-1$. (Pada waktu 0,
+tidak ada pemain yang unggul.) Kita dapat menanyakan berapa banyak waktu unggul
+bagi pemain A yang paling mungkin dalam permainan sepanjang $2m$. Kebanyakan
+orang akan menjawab $m$. Namun, teorema berikut menyatakan bahwa $m$ justru
+merupakan banyaknya waktu unggul bagi pemain A yang paling kecil kemungkinannya,
+sedangkan banyaknya waktu unggul yang paling mungkin adalah 0 atau $2m$.
+\begin{theorem}\label{thm 12.3.1}
+Jika Peter dan Paul memainkan permainan Heads or Tails sepanjang $2m$, peluang
+Peter unggul tepat $2k$ kali sama dengan
+$$
+\alpha_{2k, 2m}\ .
+$$
+%\end{theorem}
+\proof
+Untuk membuktikan teorema ini, kita perlu menunjukkan bahwa
+\begin{equation}  
+b_{2k, 2m} = \alpha_{2k, 2m}\ .
+\label{eq 12.3.1}  
+\end{equation}
+Latihan~\ref{sec 12.1}.\ref{exer 12.1.7} menunjukkan bahwa
+$b_{2m, 2m} = u_{2m}$ dan $b_{0, 2m} = u_{2m}$, sehingga kita hanya perlu
+membuktikan bahwa Persamaan~\ref{eq 12.3.1} berlaku untuk
+$1 \le k \le m-1$. Kita dapat memperoleh rekursi yang melibatkan nilai-nilai
+$b$ dan $f$ (yang didefinisikan dalam Bagian~\ref{sec 12.1}) dengan menghitung
+banyaknya lintasan sepanjang $2m$ yang mempunyai tepat $2k$ ruas di atas
+sumbu-$t$, dengan $1 \le k \le m-1$. Untuk menghitung kumpulan lintasan ini,
+kita andaikan bahwa pengembalian pertama terjadi pada waktu $2j$, dengan
+$1 \le j \le m-1$. Ada dua kasus yang perlu dipertimbangkan. Selama $2j$ hasil
+pertama, lintasan berada di atas sumbu-$t$ atau di bawah sumbu-$t$. Dalam kasus pertama,
+lintasan harus mempunyai tepat $(2k - 2j)$ ruas garis di atas sumbu-$t$ di
+antara $t = 2j$ dan $t = 2m$. Dalam kasus kedua, lintasan harus mempunyai tepat
+$2k$ ruas garis di atas sumbu-$t$ di antara $t = 2j$ dan $t = 2m$.
+\par Sekarang kita hitung banyaknya lintasan dari berbagai jenis yang dijelaskan
+di atas. Banyaknya lintasan sepanjang $2j$ yang semua ruas garisnya berada di
+atas sumbu-$t$ dan kembali ke titik asal untuk pertama kalinya pada waktu $2j$
+adalah $(1/2)2^{2j}f_{2j}$. Nilai ini juga sama dengan banyaknya lintasan
+sepanjang $2j$ yang semua ruas garisnya berada di bawah sumbu-$t$ dan kembali
+ke titik asal untuk pertama kalinya pada waktu $2j$. Banyaknya lintasan
+sepanjang $(2m - 2j)$ yang mempunyai tepat $(2k - 2j)$ ruas garis di atas
+sumbu-$t$ adalah $b_{2k-2j, 2m-2j}$. Terakhir, banyaknya lintasan sepanjang
+$(2m-2j)$ yang mempunyai tepat $2k$ ruas garis di atas sumbu-$t$ adalah
+$b_{2k,2m-2j}$. Karena itu,
+$$b_{2k,2m} = {1\over 2} \sum_{j = 1}^k f_{2j}b_{2k-2j, 2m-2j} + 
+{1\over 2}\sum_{j = 1}^{m-k} f_{2j}b_{2k, 2m-2j}\ .$$
+\par
+Sekarang kita andaikan bahwa Persamaan~\ref{eq 12.3.1} benar untuk $m < n$.
+Maka
+
+\begin{eqnarray*}
+b_{2k, 2n} &=& {1\over 2} \sum_{j = 1}^k f_{2j}\alpha_{2k-2j, 2m-2j} + 
+{1\over 2}\sum_{j = 1}^{m-k} f_{2j}\alpha_{2k, 2m - 2j}\\
+&=& {1\over 2}\sum_{j = 1}^k f_{2j}u_{2k-2j}u_{2m-2k} + 
+{1\over 2}\sum_{j = 1}^{m-k} f_{2j}u_{2k}u_{2m - 2j - 2k}\\
+&=& {1\over 2}u_{2m-2k}\sum_{j = 1}^k f_{2j}u_{2k - 2j} +
+{1\over 2}u_{2k}\sum_{j = 1}^{m-k} f_{2j}u_{2m - 2j - 2k}\\
+&=& {1\over 2}u_{2m - 2k}u_{2k} + {1\over 2}u_{2k}u_{2m - 2k}\ ,
+\end{eqnarray*}
+
+di mana kesamaan terakhir mengikuti Teorema~\ref{thm 12.1.2}. Jadi,
+$$b_{2k, 2n} = \alpha_{2k, 2n}\ ,$$
+yang menyelesaikan pembuktian.
+\end{theorem}
+%\putfig{4.5truein}{PSfig12-2}{The arc sine density and times in the lead.}{fig 12.2}
+Kita ilustrasikan teorema di atas dengan menyimulasikan 10{,}000 permainan
+Heads or Tails, yang masing-masing terdiri atas 40 lemparan. Distribusi
+banyaknya waktu Peter unggul diberikan dalam Gambar~\ref{fig 12.2}, bersama
+densitas arksinus.
+
+\putfig{3.5truein}{PSfig12-2}{Waktu dalam posisi unggul.}{fig 12.2}
+
+Kita akhiri bagian ini dengan menyatakan dua hasil lain yang memuat densitas
+arksinus. Bukti hasil-hasil ini dapat ditemukan dalam Feller.\footnote{W.~Feller,
+op.\ cit., pp. 93--94.}
+\begin{theorem}\label{thm 12.3.2}
+Misalkan $J$ adalah peubah acak yang, untuk suatu perjalanan acak sepanjang
+$2m$, memberikan subskrip terkecil $j$ sedemikian sehingga
+$S_{j} = S_{2m}$. (Berdasarkan pertimbangan paritas, subskrip $j$ tersebut
+harus genap.) Misalkan $\gamma_{2k, 2m}$ adalah peluang bahwa $J = 2k$. Maka
+$$\gamma_{2k, 2m} = \alpha_{2k, 2m}\ .$$
+\end{theorem}
+Teorema berikut menyatakan bahwa densitas arksinus dapat diterapkan pada
+berbagai macam situasi. Fungsi distribusi kontinu $F(x)$ disebut
+\emx {simetris} jika $F(x) = 1 - F(-x)$. (Jika $X$ adalah peubah acak kontinu
+dengan fungsi distribusi simetris, maka untuk setiap bilangan real $x$ kita
+mempunyai $P(X \le x) = P(X \ge -x)$.) Bayangkan suatu perjalanan acak
+sepanjang $n$ yang setiap sukunya mempunyai distribusi $F(x)$, dengan $F$
+kontinu dan simetris. Subskrip \emx {maksimum pertama}\index{maksimum pertama
+dari perjalanan acak} perjalanan tersebut adalah subskrip tunggal $k$
+sedemikian sehingga
+$$S_k > S_0,\ \ldots,\ S_k > S_{k-1},\ S_k \ge S_{k+1},\ \ldots,\ S_k \ge S_n\ .$$
+Kita definisikan peubah acak $K_n$ sebagai subskrip maksimum pertama. Sekarang
+kita dapat menyatakan teorema berikut mengenai peubah acak $K_n$.
+\begin{theorem}\label{thm 12.3.3}
+Misalkan $F$ adalah fungsi distribusi kontinu yang simetris, dan misalkan
+$\alpha$ adalah bilangan real tetap yang terletak secara ketat di antara 0 dan
+1. Ketika $n \rightarrow \infty$, kita mempunyai
+$$P(K_n < n\alpha) \rightarrow {2\over \pi} \arcsin\sqrt \alpha\ .$$
+\end{theorem}
+\par
+Versi teorema ini yang berlaku untuk perjalanan acak simetris juga dapat
+ditemukan dalam Feller.
+
+\exercises
+\begin{LJSItem}
+
+\i\label{exer 12.3.1} Untuk perjalanan acak sepanjang $2m$, definisikan
+$\epsilon_k$ sama dengan 1 jika $S_k > 0$, atau jika $S_{k-1} = 1$ dan
+$S_k = 0$. Definisikan $\epsilon_k$ sama dengan -1 dalam semua kasus lainnya.
+Jadi, $\epsilon_k$ menunjukkan sisi sumbu-$t$ tempat perjalanan acak berada
+selama interval waktu $[k-1, k]$. Suatu ``hukum bilangan besar" untuk barisan
+$\{\epsilon_k\}$ akan menyatakan bahwa untuk setiap $\delta > 0$ berlaku
+$$P\biggl(-\delta < {{\epsilon_1 + \epsilon_2 + \cdots + \epsilon_n}\over{n}} < \delta \biggr)
+\rightarrow 1$$
+ketika $n \rightarrow \infty$. Meskipun nilai-nilai $\epsilon$ tidak saling
+independen, pernyataan di atas tentu tampak masuk akal. Dengan menggunakan
+Teorema~\ref{thm 12.3.1}, tunjukkan bahwa jika $-1 \le x \le 1$, maka
+$$\lim_{n \rightarrow \infty} P\biggl({{\epsilon_1 + \epsilon_2 + \cdots + \epsilon_n}\over{n}}
+< x\biggr) = {2\over{\pi}} \arcsin\sqrt{{{1 + x}\over{2}}}\ .$$
+ 
+\i\label{exer 12.3.2} Diberikan perjalanan acak $W$ sepanjang $m$, dengan
+suku-suku
+\[ \{X_1, X_2, \ldots,X_m\}\ , \]  
+\noindent definisikan perjalanan acak \emx {terbalik} sebagai perjalanan $W^*$
+dengan suku-suku
+\[ \{X_m, X_{m-1}, \ldots, X_1\}\ . \]  
+\begin{enumerate}
+\item Tunjukkan bahwa jumlah parsial ke-$k$, yaitu $S^*_k$, memenuhi persamaan
+$$S^*_k = S_m - S_{n-k}\ ,$$
+di mana $S_k$ adalah jumlah parsial ke-$k$ untuk perjalanan acak $W$.
+\item Jelaskan hubungan geometris antara grafik suatu perjalanan acak dan
+grafik perjalanan terbaliknya. (Secara umum, tidak benar bahwa salah satu
+grafik diperoleh dari grafik lainnya dengan pencerminan terhadap garis
+vertikal.)
+\item Gunakan bagian (a) dan (b) untuk membuktikan
+Teorema~\ref{thm 12.3.2}.
+\end{enumerate}
+
+\end{LJSItem}
+
+ 

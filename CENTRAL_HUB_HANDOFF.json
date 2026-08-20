@@ -1,0 +1,76 @@
+{
+  "schema_version": "mathematics-curriculum-handoff/1.0",
+  "resource_id": "R010",
+  "curriculum_role": "B90",
+  "locale": "id-ID",
+  "title": "Pengantar Peluang Grinstead dan Snell — Edisi Bahasa Indonesia",
+  "original_title": "Grinstead and Snell's Introduction to Probability",
+  "original_authors": [
+    "Charles M. Grinstead",
+    "J. Laurie Snell"
+  ],
+  "gnu_version_credit": "Peter G. Doyle / The CHANCE Project",
+  "indonesian_modifier": "KokunoYumeto",
+  "translation_assistance": "Codex, atas permintaan KokunoYumeto",
+  "publisher": "KokunoYumeto",
+  "license": {
+    "identifier": "GFDL-1.3-or-later",
+    "invariant_sections": [],
+    "front_cover_texts": [],
+    "back_cover_texts": []
+  },
+  "reader_path": "release/PENGANTAR_PELUANG_GRINSTEAD_SNELL_ID.pdf",
+  "transparent_source_path": "source",
+  "public_backend_path": "backend/public",
+  "publication_state": "public_release_target",
+  "publication_target": {
+    "expected_repository_url": "https://github.com/KokunoYumeto/introduction-to-probability-id",
+    "expected_tag": "v2026.08.21.1",
+    "expected_release_url": "https://github.com/KokunoYumeto/introduction-to-probability-id/releases/tag/v2026.08.21.1"
+  },
+  "coverage": {
+    "chapters": 12,
+    "pages": 554,
+    "build_inputs": 140,
+    "build_input_bytes": 9500177,
+    "exercises": 711,
+    "backend_records": 4713,
+    "figure_assets": 120,
+    "figure_assets_used": 118,
+    "figure_assets_preserved_unused": 2,
+    "unit_asset_relations": 119
+  },
+  "content_boundaries": {
+    "main_book": "included",
+    "official_2008_odd_answers": "withheld_no_express_derivative_license",
+    "english_source_expression_text": "omitted_from_public_backend",
+    "indonesian_target_expression_text": "retained"
+  },
+  "public_backend": {
+    "record_count": 4713,
+    "english_source_expression_text_omissions": 786,
+    "id_id_text_segments_retained": 788,
+    "jsonl_sha256": "ea892f4aa89e561b782d1e09d95541d530a841795657bd12f78bfb1f6d58ac8f",
+    "csv_sha256": "bd09763ab781c0042ed63366e2f2f5990ea58100aa36402f606ff25fbf0f2f31",
+    "manifest_sha256": "151458f6e69170c2f66021f16304560e420609c9785164de34549a740f52eb56",
+    "validation_sha256": "4a6ddd2374c4be48f20ade7672b59649ae840940d2cbccdd48096fb6dc1486ca"
+  },
+  "qa": {
+    "pdf_sha256": "531fd89180fe759056c4484020f855f9e393317566ba62147a5a378b5b7cae2f",
+    "input_manifest_sha256": "afe4a1e93bf9777519efdbf4f4e61657ea697f2d26680733338f05dc630d7560",
+    "main_qa_sha256": "c45ff58f8eea181e07966a70ccf1b5dbc468e6f73a6f860261b0b45316336960",
+    "gfdl_receipt_sha256": "826d2ea141eb3e2e79c094e75012b6ca448a69c481260aafd44848e495d008df",
+    "component_rights_disposition_sha256": "28fe8007f2414382159c0f66ad57f3413700b60aa969a868f0768e0c4562062d",
+    "figure_manifest_sha256": "9da14e508f5caac0577d1fedb20850701da2f8f703e26fe07606ade8f4580fd7",
+    "all_fonts_embedded": true,
+    "undefined_references": 0,
+    "missing_characters": 0,
+    "bounded_visual_qa": "pass",
+    "backend_replay_count": 2,
+    "backend_replays_byte_identical": true
+  },
+  "upstream": {
+    "source_url": "https://math.dartmouth.edu/~prob/prob/prob.tar.gz",
+    "source_archive_sha256": "d1adaae8f205ac53113b902267ca3415422500b6ff92b1137fa11c7c8fbb26e9"
+  }
+}

@@ -1,0 +1,1867 @@
+% This chapter has been modified on 6-4-05.
+%\setcounter{chapter}{4}
+\choice{\chapter{Distribusi Penting}} 
+{\chapter[Distribusi dan Densitas]{Distribusi dan Densitas Penting}}\label{chp 5} 
+
+\section{Distribusi Penting}\label{sec 5.1} 
+
+Dalam bab ini, kita menguraikan distribusi peluang diskret dan densitas peluang kontinu
+yang paling sering muncul dalam analisis percobaan. Kita juga akan menunjukkan cara
+menyimulasikan distribusi dan densitas tersebut pada komputer.
+
+\subsection*{Distribusi Seragam Diskret}\index{distribusi seragam}\index{fungsi
+distribusi!seragam}
+
+Dalam Bab~\ref{chp 1}, kita telah melihat bahwa dalam banyak kasus kita menganggap semua
+hasil suatu percobaan berpeluang sama. Jika $X$ adalah peubah acak yang menyatakan hasil
+percobaan semacam ini, kita mengatakan bahwa $X$ terdistribusi secara seragam. Jika ruang
+sampel $S$ berukuran $n$, dengan $0 < n < \infty$, fungsi distribusi $m(\omega)$
+didefinisikan sebagai $1/n$ untuk setiap $\omega \in S$. Seperti semua distribusi peluang
+diskret yang dibahas dalam bab ini, percobaan tersebut dapat disimulasikan pada komputer
+dengan program {\bf GeneralSimulation}. Namun, dalam kasus ini kita dapat menggunakan
+algoritma yang lebih cepat. (Algoritma ini telah diuraikan dalam Bab~\ref{chp 1}; uraian
+tersebut kita ulang di sini demi kelengkapan.) Ekspresi
+$$1 + \lfloor n\,(rnd)\rfloor$$ 
+bernilai setiap bilangan bulat antara 1 dan $n$ dengan peluang $1/n$ (notasi
+$\lfloor x \rfloor$ menyatakan bilangan bulat terbesar yang tidak melebihi $x$). Jadi,
+jika hasil-hasil yang mungkin dari percobaan diberi label
+$\omega_1\ \omega_2,\ \ldots,\ \omega_n$, kita menggunakan ekspresi di atas untuk
+menyatakan subskrip hasil percobaan.
+\par Jika ruang sampelnya merupakan himpunan tak hingga terhitung, seperti himpunan
+bilangan bulat positif, tidak mungkin ada percobaan yang seragam pada himpunan tersebut
+(lihat Latihan~\ref{exer 5.1.102}). Jika ruang sampelnya merupakan himpunan tak terhitung
+dengan panjang positif dan terhingga, seperti interval $[0, 1]$, kita menggunakan fungsi
+densitas kontinu (lihat Bagian~\ref{sec 5.2}).
+
+\subsection*{Distribusi Binomial}\index{fungsi distribusi!binomial}\index{distribusi
+binomial}
+
+Distribusi binomial dengan parameter $n$, $p$, dan $k$ telah didefinisikan dalam
+Bab~\ref{chp 3}. Distribusi ini merupakan distribusi peubah acak yang mencacah banyaknya
+kepala yang muncul ketika sebuah koin dilempar $n$ kali, dengan anggapan bahwa pada setiap
+lemparan peluang munculnya kepala adalah $p$. Fungsi distribusinya diberikan oleh rumus
+$$b(n, p, k) = {n \choose k}p^k q^{n-k}\ ,$$ dengan $q = 1 - p$.
+\par Salah satu cara langsung untuk menyimulasikan peubah acak binomial $X$ adalah
+menghitung jumlah $n$ peubah acak $0-1$ yang saling bebas, yang masing-masing bernilai 1
+dengan peluang $p$. \choice{}{ Cara ini memerlukan $n$ pemanggilan generator bilangan acak
+untuk memperoleh satu nilai peubah acak. Ketika $n$ relatif besar (misalnya sedikitnya
+30), Teorema Limit Pusat (lihat Bab~\ref{chp 9}) menyatakan bahwa distribusi binomial
+didekati dengan baik oleh fungsi densitas normal yang bersesuaian (yang didefinisikan
+dalam Bagian~\ref{sec 5.2}) dengan parameter $\mu = np$ dan
+$\sigma = \sqrt{npq}$. Jadi, dalam kasus ini kita dapat menghitung suatu nilai $Y$ dari
+peubah acak normal dengan parameter tersebut, dan jika $-1/2 \le Y < n+1/2$, kita dapat
+menggunakan nilai
+$$\lfloor Y + 1/2 \rfloor$$ untuk menyatakan peubah acak $X$. Jika $Y < -1/2$ atau $Y
+> n + 1/2$, kita menolak $Y$ dan menghitung nilai lain. Dalam bagian berikutnya kita akan
+melihat cara menyimulasikan peubah acak normal dengan cepat.}
+
+
+\subsection*{Distribusi Geometrik}\index{distribusi geometrik}\index{fungsi
+distribusi!geometrik}
+
+Tinjaulah suatu proses percobaan Bernoulli yang dilanjutkan hingga tak hingga banyaknya
+percobaan; sebagai contoh, sebuah koin yang dilempar dalam barisan tak hingga.
+\choice{Ukuran peluang untuk suatu proses yang memerlukan tak hingga banyaknya percobaan
+ditentukan berdasarkan peluang yang hanya memerlukan sejumlah terhingga
+percobaan\footnote{Lihat Bagian 2.2 dalam buku lengkap Grinstead--Snell}}{Dalam
+Bagian~\ref{sec 2.2} telah kita tunjukkan cara menetapkan distribusi peluang pada pohon
+tak hingga.} Dengan demikian, kita dapat menentukan distribusi sebarang peubah acak $X$
+yang berkaitan dengan percobaan tersebut, asalkan $P(X = a)$ dapat dihitung berdasarkan
+sejumlah terhingga percobaan. Sebagai contoh, misalkan $T$ adalah banyaknya percobaan
+sampai dengan dan termasuk keberhasilan pertama. Maka
+\begin{eqnarray*} P(T = 1) & = & p\ , \\ P(T = 2) & = & qp\ , \\ P(T = 3) & = & q^2p\ , \\
+\end{eqnarray*}
+dan secara umum,
+$$P(T = n) = q^{n-1}p\ .$$ 
+Untuk menunjukkan bahwa ini merupakan suatu distribusi, kita harus menunjukkan bahwa
+$$ p + qp + q^2p + \cdots = 1\ .
+$$ 
+Ekspresi di ruas kiri hanyalah deret geometrik dengan suku pertama $p$ dan rasio tetap
+$q$, sehingga jumlahnya adalah
+$${p\over{1-q}}$$ yang sama dengan 1.
+\par Dalam Gambar~\ref{fig 5.4} kita telah menggambar distribusi ini menggunakan program
+{\bf GeometricPlot} untuk kasus $p = .5$ dan $p = .2$. Terlihat bahwa ketika $p$
+mengecil, kita semakin mungkin memperoleh nilai $T$ yang besar, sebagaimana dapat diduga.
+Dalam kedua kasus, nilai $T$ yang paling mungkin adalah 1. Hal ini selalu berlaku karena
+$$
+\frac {P(T = j + 1)}{P(T = j)} = q < 1\ .
+$$
+\putfig{4.75truein}{PSfig5-4}{Distribusi geometrik.}{fig 5.4} 
+\par
+Secara umum, jika $0 < p < 1$ dan $q = 1 - p$, kita mengatakan bahwa peubah acak $T$
+memiliki \emx {distribusi geometrik} jika
+$$P(T = j) = q^{j - 1}p\ ,$$ untuk $j = 1,\ 2,\ 3,\ \ldots$ .
+
+\par Untuk menyimulasikan distribusi geometrik dengan parameter $p$, kita cukup
+menghasilkan suatu barisan bilangan acak dalam $[0, 1)$ dan berhenti ketika salah satu
+nilainya tidak melebihi $p$. Namun, untuk nilai $p$ yang kecil, cara ini memakan waktu
+(rata-rata memerlukan $1/p$ langkah). Sekarang kita uraikan suatu metode yang waktu
+jalannya tidak bergantung pada besar $p$. Definisikan $Y$ sebagai bilangan bulat terkecil
+yang memenuhi pertidaksamaan
+\begin{equation}
+1 - q^Y \ge rnd\ .\label{eq 5.3}
+\end{equation} 
+Maka kita memiliki
+\begin{eqnarray*} P(Y = j) & = & P\Bigl(1 - q^j \ge rnd > 1 - q^{j-1}\Bigr) \\ & = &
+q^{j-1} - q^j \\ & = & q^{j-1}(1-q) \\ & = & q^{j-1}p\ . \\
+\end{eqnarray*} Jadi, $Y$ berdistribusi geometrik dengan parameter $p$. Untuk
+menghasilkan $Y$, kita hanya perlu menyelesaikan Persamaan~\ref{eq 5.3} terhadap $Y$.
+Kita memperoleh
+$$Y = \Biggl\lceil {{\log(1-rnd)}\over{\log\ q}}\Biggr\rceil\ ,$$
+dengan notasi $\lceil x \rceil$ yang menyatakan bilangan bulat terkecil yang lebih besar
+dari atau sama dengan $x$. Karena $\log(1-rnd)$ dan $\log(rnd)$ berdistribusi identik,
+$Y$ juga dapat dihasilkan menggunakan persamaan
+$$Y = \Biggl\lceil {{\log\ rnd}\over{\log\ q}}\Biggr\rceil\ .$$
+
+\begin{example}\label{exam 5.1}
+Distribusi geometrik berperan penting dalam teori antrean\index{antrean}. Sebagai contoh,
+misalkan sebaris pelanggan menunggu layanan di sebuah loket. Sering kali dianggap bahwa
+dalam setiap satuan waktu yang singkat, terdapat 0 atau 1 pelanggan baru yang tiba di
+loket. Peluang bahwa seorang pelanggan tiba adalah $p$, sedangkan peluang bahwa tidak ada
+pelanggan yang tiba adalah $q = 1 - p$. Dengan demikian, waktu $T$ hingga kedatangan
+berikutnya memiliki distribusi geometrik. Wajar jika kita menanyakan peluang bahwa tidak
+ada pelanggan yang tiba dalam $k$ satuan waktu berikutnya, yakni $P(T > k)$. Peluang ini
+diberikan oleh
+\begin{eqnarray*} P(T > k) = \sum_{j = k+1}^\infty q^{j-1}p & = & q^k(p + qp + q^2p + \cdots)
+\\
+                                    & = & q^k\ .
+\end{eqnarray*} Peluang ini juga dapat ditemukan dengan memperhatikan bahwa kita meminta
+tidak adanya keberhasilan (yakni, kedatangan) dalam suatu barisan $k$ satuan waktu
+berturut-turut, dengan peluang keberhasilan pada setiap satuan waktu sebesar $p$. Jadi,
+peluangnya tepat $q^k$, karena kedatangan pada dua satuan waktu mana pun merupakan
+kejadian yang saling bebas.
+\par
+Sering kali dianggap bahwa lama waktu yang diperlukan untuk melayani seorang pelanggan
+juga memiliki distribusi geometrik, tetapi dengan nilai $p$ yang berbeda. Hal ini
+menyiratkan suatu sifat waktu layanan yang cukup khusus. Untuk melihatnya, mari kita
+hitung peluang bersyarat
+$$ P(T > r + s\,|\,T > r) = \frac{P(T > r + s)}{P(T > r)} = \frac {q^{r + s}}{q^r} =
+q^s\ .
+$$ 
+Jadi, peluang bahwa layanan pelanggan tersebut memerlukan tambahan $s$ satuan waktu tidak
+bergantung pada lama waktu $r$ selama pelanggan itu telah dilayani. Karena penafsiran ini,
+sifat tersebut disebut ``sifat tanpa ingatan," dan distribusi eksponensial juga
+memilikinya. (Untungnya, tidak banyak tempat pelayanan yang memiliki sifat ini.)
+\end{example}
+
+\subsection*{Distribusi Binomial Negatif}\index{distribusi binomial
+negatif}\index{fungsi distribusi!binomial negatif}
+
+Misalkan kita mempunyai sebuah koin yang ketika dilempar menghasilkan kepala dengan
+peluang $p$. Kita tetapkan suatu bilangan bulat positif $k$, lalu melempar koin hingga
+kepala ke-$k$ muncul. Misalkan $X$ menyatakan banyaknya lemparan. Ketika $k = 1$, $X$
+berdistribusi geometrik. Untuk $k$ umum, kita mengatakan bahwa $X$ memiliki distribusi
+binomial negatif. Sekarang kita hitung distribusi peluang $X$. Jika $X = x$, tepat
+$k-1$ kepala harus muncul dalam $x-1$ lemparan pertama, dan kepala harus muncul pada
+lemparan ke-$x$. Terdapat
+$${{x-1}\choose{k-1}}$$ 
+barisan sepanjang $x$ dengan sifat-sifat ini, dan setiap barisan tersebut diberi peluang
+yang sama, yakni
+$$p^{k-1}q^{x-k}\ .$$ Oleh karena itu, jika kita definisikan
+$$u(x, k, p) = P(X = x)\ ,$$
+maka
+$$u(x, k, p) = {{x-1}\choose{k-1}}p^kq^{x-k}\ .$$
+\par Kita dapat menyimulasikannya pada komputer dengan menyimulasikan pelemparan koin.
+Namun, algoritma berikut umumnya jauh lebih cepat. Perhatikan bahwa $X$ dapat dipahami
+sebagai jumlah $k$ hasil percobaan yang masing-masing berdistribusi geometrik dengan
+parameter $p$. Jadi, kita dapat menggunakan jumlah berikut untuk menghasilkan $X$:
+$$\sum_{j = 1}^k \Biggl\lceil {{\log\ rnd_j}\over{\log\ q}}\Biggr\rceil\ .$$
+
+\begin{example} Sebuah koin adil dilempar hingga kepala muncul untuk kedua kalinya.
+Distribusi banyaknya lemparan adalah $u(x, 2, p)$. Jadi, peluang bahwa diperlukan $x$
+lemparan untuk memperoleh dua kepala ditemukan dengan menetapkan $k = 2$ dalam rumus di
+atas. Kita memperoleh
+$$  u(x, 2, 1/2) =  {{x-1} \choose 1} \frac 1{2^x}\ ,$$ 
+untuk $x = 2, 3, \ldots\ $.
+\par
+Dalam Gambar~\ref{fig 7.2} ditampilkan grafik distribusi untuk~$k = 2$ dan~$p = .25$.
+Perhatikan bahwa distribusi tersebut cukup asimetris, dengan ekor panjang yang
+mencerminkan kemungkinan munculnya nilai~$x$ yang besar.
+\end{example}
+
+\putfig{4.5truein}{PSfig7-2-1}{Distribusi binomial negatif dengan $k = 2$ dan $p = .25$.}{fig 7.2} 
+
+
+\subsection*{Distribusi Poisson}\index{distribusi Poisson}\index{fungsi
+distribusi!Poisson}
+
+Distribusi Poisson muncul dalam banyak keadaan. Dapat dikatakan bahwa distribusi ini
+merupakan salah satu dari tiga distribusi peluang diskret terpenting (dua lainnya adalah
+distribusi seragam dan binomial). Distribusi Poisson dapat dipandang sebagai distribusi
+yang timbul dari distribusi binomial atau dari densitas eksponensial. Sekarang kita akan
+menjelaskan hubungannya dengan yang pertama; hubungannya dengan yang kedua akan dijelaskan
+dalam bagian berikutnya.
+\par Misalkan kita menghadapi suatu keadaan ketika jenis kejadian tertentu berlangsung
+secara acak selama suatu selang waktu. Sebagai contoh, kejadian yang kita minati mungkin
+berupa panggilan telepon yang masuk ke kantor polisi di sebuah kota besar. Kita ingin
+memodelkan keadaan ini agar dapat meninjau peluang kejadian seperti munculnya lebih dari
+10 panggilan telepon dalam selang 5 menit. Dalam contoh kita, agaknya terdapat lebih
+banyak panggilan masuk antara pukul 6:00 dan 7:00~{\footnotesize malam} daripada antara
+pukul 4:00 dan 5:00~{\footnotesize pagi}, dan fakta ini tentu memengaruhi peluang di atas.
+Jadi, agar peluang semacam itu dapat dihitung, kita harus menganggap bahwa laju rata-rata,
+yakni rata-rata banyaknya kejadian per menit, merupakan suatu konstanta. Laju ini kita
+nyatakan dengan $\lambda$. (Jadi, dalam suatu selang waktu 5 menit, kita mengharapkan
+sekitar $5\lambda$ kejadian.) Artinya, jika model kita diterapkan pada kedua rentang waktu
+di atas, kita cukup menggunakan laju yang berbeda untuk masing-masing rentang sehingga
+memperoleh dua peluang yang berbeda bagi kejadian tersebut.
+\par Anggapan kita berikutnya adalah bahwa banyaknya kejadian dalam dua selang waktu yang
+tidak tumpang tindih saling bebas. Dalam contoh kita, ini berarti bahwa kejadian terdapat
+$j$ panggilan antara pukul 5:00 dan 5:15~{\footnotesize malam} serta kejadian terdapat $k$
+panggilan antara pukul 6:00 dan 6:15~{\footnotesize malam} pada hari yang sama saling
+bebas.
+\par Kita dapat menggunakan distribusi binomial untuk memodelkan keadaan ini. Bayangkan
+suatu selang waktu tertentu dibagi menjadi $n$ subselang yang sama panjang. Jika
+subselang tersebut cukup singkat, kita dapat menganggap bahwa peluang terjadinya dua atau
+lebih kejadian dalam satu subselang dapat diabaikan dibandingkan dengan peluang terjadinya
+paling banyak satu kejadian. Jadi, pada setiap subselang kita menganggap terdapat 0 atau 1
+kejadian. Dengan demikian, barisan subselang dapat dipandang sebagai barisan percobaan
+Bernoulli, dengan keberhasilan bersesuaian dengan suatu kejadian dalam subselang tersebut.
+\par Untuk menentukan nilai $p$ yang tepat, yakni peluang suatu kejadian dalam satu
+subselang, kita bernalar sebagai berikut. Rata-rata terdapat $\lambda t$ kejadian dalam
+selang waktu sepanjang $t$. Jika selang waktu ini dibagi menjadi $n$ subselang, berdasarkan
+penafsiran percobaan Bernoulli kita mengharapkan terdapat $np$ kejadian. Jadi, kita ingin
+$$\lambda t = n p\ ,$$ sehingga
+$$p = {{\lambda t}\over{n}}\ .$$
+\par Sekarang kita hendak meninjau peubah acak $X$ yang mencacah banyaknya kejadian dalam
+suatu selang waktu tertentu. Kita ingin menghitung distribusi $X$. Untuk memudahkan
+perhitungan, kita anggap selang waktunya memiliki panjang 1; untuk selang waktu dengan
+panjang sembarang $t$, lihat Latihan~\ref{exer 5.1.26}. Kita mengetahui bahwa
+$$P(X = 0) = b(n, p, 0) = (1 - p)^n = \Bigl(1 - {\lambda \over n}\Bigr)^n\ .$$ Untuk
+nilai $n$ yang besar, nilai ini kira-kira $e^{-\lambda}$. Mudah dihitung bahwa untuk
+setiap $k$ tetap, kita memiliki
+$${{b(n, p, k)}\over{b(n, p, k-1)}} = {{\lambda - (k-1)p}\over{kq}}$$ yang, untuk $n$
+besar (dan dengan demikian $p$ kecil), kira-kira sama dengan $\lambda/k$. Jadi, kita
+memiliki
+$$P(X = 1) \approx \lambda e^{-\lambda}\ ,$$ dan secara umum,
+\begin{equation} P(X = k) \approx {{\lambda^k}\over{k!}} e^{-\lambda}\ .\label{eq 5.1}
+\end{equation} Distribusi di atas adalah distribusi Poisson. Perlu diperiksa bahwa
+distribusi yang diberikan dalam Persamaan~\ref{eq 5.1} benar-benar \emx {merupakan}
+suatu distribusi, yakni bahwa nilai-nilainya non-negatif dan berjumlah 1. (Lihat
+Latihan~\ref{exer 5.1.27}.)
+\par Distribusi Poisson digunakan sebagai aproksimasi distribusi binomial ketika
+parameter $n$ dan $p$ masing-masing besar dan kecil (lihat Contoh~\ref{exam 5.3} dan
+\ref{exam 5.5}). Namun, distribusi Poisson juga muncul dalam keadaan ketika parameter
+$n$ dan $p$ mungkin tidak mudah ditafsirkan atau diukur (lihat Contoh~\ref{exam 5.5.5}).
+
+\begin{example}\label{exam 5.3} Seorang penata huruf\index{penata huruf} rata-rata membuat
+satu kesalahan per 1000 kata. Anggaplah ia sedang menata sebuah buku dengan 100 kata per
+halaman. Misalkan $S_{100}$ adalah banyaknya kesalahan yang dibuatnya pada satu halaman.
+Distribusi peluang eksak bagi~$S_{100}$ kemudian diperoleh dengan memandang $S_{100}$
+sebagai hasil 100 percobaan Bernoulli dengan $p = 1/1000$. Nilai harapan~$S_{100}$ adalah
+$\lambda = 100(1/1000) = .1$. Peluang eksak bahwa $S_{100} = j$ adalah
+$b(100,1/1000,j)$, dan aproksimasi Poisson\index{aproksimasi Poisson terhadap distribusi\\
+binomial} adalah
+$$
+\frac {e^{-.1}(.1)^j}{j!}.
+$$ Dalam Tabel~\ref{table 5.1}, untuk berbagai nilai $n$ dan $p$, diberikan nilai eksak
+yang dihitung menggunakan distribusi binomial dan aproksimasi Poisson.
+\begin{table}
+\centering
+\begin{tabular}{|l|c|c|c|c|c|c|}
+\hline
+&Poisson&Binomial&Poisson&Binomial&Poisson&Binomial \\
+&&$n = 100$&&$n = 100$&&$n = 1000$\\
+$j$&$\lambda = .1$&$p = .001$&$\lambda = 1$&$p = .01$&$\lambda = 10$&$p = .01$\\
+\hline
+0&.9048&.9048&.3679&.3660&.0000&.0000\\
+1&.0905&.0905&.3679&.3697&.0005&.0004\\
+2&.0045&.0045&.1839&.1849&.0023&.0022\\
+3&.0002&.0002&.0613&.0610&.0076&.0074\\
+4&.0000&.0000&.0153&.0149&.0189&.0186\\
+5&&&.0031&.0029&.0378&.0374\\
+6&&&.0005&.0005&.0631&.0627\\
+7&&&.0001&.0001&.0901&.0900\\
+8&&&.0000&.0000&.1126&.1128\\
+9&&&&&.1251&.1256\\
+10&&&&&.1251&.1257\\
+11&&&&&.1137&.1143\\
+12&&&&&.0948&.0952\\
+13&&&&&.0729&.0731\\
+14&&&&&.0521&.0520\\
+15&&&&&.0347&.0345\\
+16&&&&&.0217&.0215\\
+17&&&&&.0128&.0126\\
+18&&&&&.0071&.0069\\
+19&&&&&.0037&.0036\\
+20&&&&&.0019&.0018\\
+21&&&&&.0009&.0009\\
+22&&&&&.0004&.0004\\
+23&&&&&.0002&.0002\\
+24&&&&&.0001&.0001\\
+25&&&&&.0000&.0000\\
+\hline
+\end{tabular}
+\caption{Aproksimasi Poisson terhadap distribusi binomial.}
+\label{table 5.1}
+\end{table}
+\end{example}
+
+\begin{example}\label{exam 5.5} Dalam bukunya,\footnote{ibid., p.~161.}
+Feller\index{FELLER, W.} membahas statistik jatuhnya bom terbang\index{bom terbang} di
+London bagian selatan selama Perang Dunia Kedua.
+\par
+Anggaplah Anda tinggal di sebuah kawasan berukuran 10~blok kali 10~blok sehingga seluruh
+kawasan terbagi menjadi 100 persegi kecil. Berapakah peluang bahwa persegi tempat Anda
+tinggal tidak terkena bom jika seluruh kawasan dihantam 400 bom?
+\par
+Kita menganggap bahwa sebuah bom tertentu akan menghantam persegi Anda dengan
+peluang~1/100. Karena terdapat 400 bom, banyaknya hantaman yang diterima persegi Anda
+dapat dipandang sebagai banyaknya \emx {keberhasilan} dalam suatu proses percobaan
+Bernoulli dengan $n = 400$ dan $p = 1/100$. Jadi, kita dapat menggunakan distribusi
+Poisson dengan $\lambda = 400 \cdot 1/100 = 4$ untuk mengaproksimasi peluang bahwa
+persegi Anda menerima $j$~hantaman. Peluang ini adalah $p(j) = e^{-4} 4^j/j!$.
+Banyaknya persegi yang diharapkan menerima tepat $j$~hantaman kemudian adalah
+$100 \cdot p(j)$. Mudah untuk menulis program {\bf LondonBombs} yang menyimulasikan
+keadaan ini dan membandingkan banyaknya persegi dengan $j$~hantaman yang diharapkan
+dengan banyaknya yang diamati. Dalam Latihan~\ref{exer 9.2.15}, Anda diminta
+membandingkan data yang benar-benar diamati dengan data yang diprediksi oleh distribusi
+Poisson.
+\par
+Dalam Gambar~\ref{fig 5.1.5}, ditampilkan hantaman hasil simulasi beserta grafik batang
+runcing yang memperlihatkan frekuensi teramati dan terprediksi. Frekuensi teramati
+ditampilkan sebagai persegi, sedangkan frekuensi terprediksi ditampilkan sebagai titik.
+\putfig{3.5truein}{PSfig5-1-5}{Jatuhnya bom terbang.}{fig 5.1.5} 
+\end{example} 
+Jika pembaca tidak ingin meninjau bom terbang, sebagai gantinya dapat dipertimbangkan
+keadaan serupa yang melibatkan kue kering dan kismis. Anggaplah kita telah membuat adonan
+yang cukup untuk 500 kue. Kita memasukkan 600 kismis ke dalam adonan dan mengaduknya
+hingga rata. Salah satu cara memandang keadaan ini adalah bahwa kita mempunyai 500 kue,
+lalu setelah menata kue-kue tersebut dalam kisi di atas meja, kita melemparkan 600
+kismis ke arah kue-kue itu. (Lihat Latihan~\ref{exer 5.1.29}.)
+\begin{example}\label{exam 5.5.5} Misalkan dalam suatu volume darah tetap $A$, rata-rata
+orang memiliki 40 sel darah putih. Misalkan $X$ adalah peubah acak yang memberikan
+banyaknya sel darah putih dalam sampel acak berukuran $A$ dari seseorang yang dipilih
+secara acak. Kita dapat memandang $X$ sebagai peubah berdistribusi binomial, dengan setiap
+sel darah putih dalam tubuh menyatakan satu percobaan. Jika suatu sel darah putih muncul
+dalam sampel, percobaan yang bersesuaian dengan sel darah tersebut merupakan suatu
+keberhasilan. Nilai $p$ kemudian harus diambil sebagai rasio $A$ terhadap volume darah
+total orang tersebut, dan $n$ adalah banyaknya sel darah putih dalam tubuhnya. Tentu saja,
+dalam praktiknya kedua parameter ini tidak mudah diukur secara akurat, tetapi bilangan 40
+kiranya mudah diukur. Untuk rata-rata orang, kita kemudian memiliki $40 = np$, sehingga
+$X$ dapat dipandang berdistribusi Poisson dengan parameter $\lambda = 40$. Dalam kasus
+ini, keadaan tersebut lebih mudah dimodelkan menggunakan distribusi Poisson daripada
+distribusi binomial.
+\end{example}
+\par Cara yang baik untuk menyimulasikan peubah acak Poisson pada komputer adalah
+memanfaatkan hubungan antara distribusi Poisson dan densitas eksponensial. Hubungan ini
+beserta algoritma simulasi yang dihasilkannya akan diuraikan dalam bagian berikutnya.
+
+\subsection*{Distribusi Hipergeometrik}\index{distribusi hipergeometrik}
+\index{fungsi distribusi!hipergeometrik}
+
+Misalkan kita mempunyai sekumpulan $N$ bola, dengan $k$ bola merah dan $N-k$ bola
+biru. Kita memilih $n$ bola tanpa pengembalian, lalu mendefinisikan $X$ sebagai
+banyaknya bola merah dalam sampel. Distribusi $X$ disebut distribusi hipergeometrik.
+Distribusi ini bergantung pada tiga parameter, yaitu $N$, $k$, dan $n$. Tampaknya
+tidak ada notasi baku untuk distribusi ini; kita akan memakai notasi $h(N, k, n, x)$
+untuk menyatakan $P(X = x)$. Peluang ini dapat dicari dengan memperhatikan bahwa
+terdapat
+$${N \choose n}$$ sampel berbeda yang berukuran $n$. Banyaknya sampel yang memuat
+tepat $x$ bola merah diperoleh dengan mengalikan banyaknya cara memilih $x$ bola
+merah dari $k$ bola merah dengan banyaknya cara memilih $n-x$ bola biru dari $N-k$
+bola biru. Jadi,
+$$h(N, k, n, x) = {{{{k}\choose{x}}{{N-k}\choose{n-x}}}\over{{{N}\choose{n}}}}\ .$$ 
+Distribusi ini dapat diperumum untuk keadaan dengan lebih dari dua jenis objek.
+(Lihat Latihan~\ref{exer 5.1.24}.)
+\par 
+Jika $N$ dan $k$ menuju $\infty$ sedemikian rupa sehingga rasio $k/N$ tetap, maka
+distribusi hipergeometrik menuju distribusi binomial dengan parameter $n$ dan
+$p = k/N$. Hal ini masuk akal karena, jika $N$ dan $k$ jauh lebih besar daripada
+$n$, pemilihan sampel dengan atau tanpa pengembalian seharusnya tidak banyak
+memengaruhi peluangnya, sedangkan percobaan pemilihan dengan pengembalian menghasilkan
+peubah acak berdistribusi binomial (lihat Latihan~\ref{exer 5.1.124}).
+\par Contoh penggunaan distribusi ini diberikan dalam Latihan~\ref{exer
+5.1.21} dan \ref{exer 5.1.22}. Berikut ini kita berikan contoh lain yang melibatkan distribusi
+hipergeometrik. Contoh tersebut menggambarkan suatu uji statistika yang disebut uji
+eksak Fisher\index{uji eksak Fisher}.
+\begin{example}\label{exam 5.6} Sering kali kita ingin meninjau dua ciri, misalnya
+warna mata dan warna rambut, lalu menanyakan apakah terdapat hubungan di antara
+keduanya. Dua ciri berhubungan jika pengetahuan tentang nilai salah satu ciri pada
+seseorang memungkinkan kita memprediksi nilai ciri lainnya pada orang tersebut.
+Semakin kuat hubungannya, semakin akurat prediksinya. Jika tidak terdapat hubungan
+di antara kedua ciri, kita mengatakan bahwa keduanya saling bebas. Dalam contoh ini,
+kita akan memakai ciri jenis kelamin dan partai politik. Kita akan mengasumsikan bahwa
+hanya ada dua kemungkinan jenis kelamin, perempuan dan laki-laki, serta hanya dua
+kemungkinan partai politik, Demokrat dan Republikan.
+\par Misalkan kita telah mengumpulkan data mengenai ciri-ciri ini. Untuk menguji
+apakah terdapat hubungan di antara keduanya, mula-mula kita mengasumsikan bahwa
+keduanya tidak berhubungan. Asumsi ini menghasilkan suatu himpunan data ``harapan'',
+yang pengetahuan tentang nilai salah satu cirinya tidak membantu memprediksi nilai
+ciri lainnya. Himpunan data yang kita kumpulkan biasanya berbeda dari himpunan data
+harapan ini. Jika perbedaannya cukup besar, kita cenderung menolak asumsi bahwa kedua
+ciri itu saling bebas. Untuk memperjelas makna ``cukup besar'', kita menentukan
+himpunan-himpunan data yang berbeda dari himpunan data harapan sekurang-kurangnya
+sebesar perbedaan data kita, lalu menghitung peluang bahwa salah satu himpunan data
+tersebut terjadi di bawah asumsi bahwa kedua ciri saling bebas. Jika peluang ini
+kecil, kecil pula kemungkinannya bahwa perbedaan antara himpunan data yang kita
+kumpulkan dan himpunan data harapan sepenuhnya disebabkan oleh kebetulan.
+\par Misalkan kita telah mengumpulkan data yang ditampilkan pada Tabel~\ref{table 5.2}.
+\begin{table}
+\centering
+\begin{tabular}{|l|c|c|c|}
+\hline
+       & \hspace{.15in}Demokrat\hspace{.15in} & \hspace{.1in}Republikan\hspace{.1in} & \\ \hline 
+\hspace{.1in}Perempuan & 24                  &\hspace{.02in} 4 & \hspace{.2in} 28  \\ \hline 
+\hspace{.1in}Laki-laki   &\hspace{.075in}8     & 14               & \hspace{.2in} 22  \\ \hline
+       & 32                  & 18               & \hspace{.2in} 50  \\ \hline
+\end{tabular}
+\caption{Data teramati.}
+\label{table 5.2}
+\end{table}
+Jumlah pada setiap baris dan kolom disebut total marginal, atau marjinal. Selanjutnya,
+kita akan menyatakan jumlah baris dengan $t_{11}$ dan $t_{12}$, serta jumlah kolom
+dengan $t_{21}$ dan $t_{22}$. Entri ke-$ij$ pada tabel akan dinyatakan dengan
+$s_{ij}$. Terakhir, ukuran himpunan data akan dinyatakan dengan $n$. Jadi, tabel data
+umum berbentuk seperti yang ditampilkan pada Tabel~\ref{table 5.3}.
+\begin{table}
+\centering
+\begin{tabular}{|l|c|c|c|}
+\hline
+ & \hspace{.15in}Demokrat\hspace{.15in} & \hspace{.1in}Republikan\hspace{.1in} & \\ \hline 
+\hspace{.1in}Perempuan & $s_{11}$ & $s_{12}$ & \hspace{.2in}$t_{11}$\hspace{.2in}\\ \hline
+\hspace{.1in}Laki-laki   & $s_{21}$ & $s_{22}$ & \hspace{.2in}$t_{12}$\\ \hline
+                    & $t_{21}$ & $t_{22}$ & \hspace{.2in}$n$\\ \hline
+\end{tabular}
+\caption{Tabel data umum.}
+\label{table 5.3}
+\end{table}
+Sekarang kita jelaskan model yang akan digunakan untuk membangun himpunan data
+``harapan''. Dalam model ini, kita mengasumsikan bahwa kedua ciri saling bebas. Kita
+kemudian memasukkan $t_{21}$ bola kuning dan $t_{22}$ bola hijau, yang masing-masing
+bersesuaian dengan marjinal Demokrat dan Republikan, ke dalam sebuah guci. Kita menarik
+$t_{11}$ bola tanpa pengembalian dari guci dan menyebut bola-bola ini perempuan.
+Sebanyak $t_{12}$ bola yang tersisa di dalam guci disebut laki-laki. Dalam kasus
+khusus yang sedang ditinjau, peluang memperoleh data aktual menurut model ini
+diberikan oleh
+$${{{{32}\choose{24}}{{18}\choose{4}}}\over{{{50}\choose{28}}}}\ ,$$
+yakni suatu nilai distribusi hipergeometrik.
+\par
+Sekarang kita siap membangun himpunan data harapan. Jika kita memilih 28 dari 50
+bola, secara rata-rata kita mengharapkan persentase bola kuning dalam sampel sama
+dengan persentasenya dalam guci. Jadi, secara rata-rata kita mengharapkan
+$28(32/50) = 17.92 \approx 18$ bola kuning dalam sampel. (Lihat
+Latihan~\ref{exer 6.1.37}.) Nilai-nilai harapan lainnya dihitung dengan cara yang
+persis sama. Dengan demikian, himpunan data harapan ditampilkan pada
+Tabel~\ref{table 5.4}.
+\begin{table}
+\centering
+\begin{tabular}{|l|c|c|c|}
+\hline
+ & \hspace{.15in}Demokrat\hspace{.15in} & \hspace{.1in}Republikan \hspace{.1in} & \\ \hline 
+\hspace{.1in}Perempuan & 18 & 10           & \hspace{.2in}28\hspace{.2in}\\ \hline 
+\hspace{.1in}Laki-laki   & 14 & \hspace{.075in}8  & \hspace{.2in}22 \\ \hline
+ & 32 & 18 & \hspace{.2in}50\\ \hline
+\end{tabular}
+\caption{Data harapan.}
+\label{table 5.4}
+\end{table}
+Perhatikan bahwa nilai $s_{11}$ menentukan tiga nilai lainnya dalam tabel karena
+semua marjinal tetap. Jadi, ketika meninjau himpunan-himpunan data yang mungkin muncul
+dalam model ini, kita cukup meninjau berbagai kemungkinan nilai $s_{11}$. Dalam kasus
+khusus ini, berapakah peluang menarik tepat $a$ bola kuning, yaitu berapakah peluang
+bahwa $s_{11} = a$? Peluangnya adalah
+\begin{equation}{{{{32}\choose{a}}{{18}\choose{28-a}}}\over{{{50}\choose{28}}}}\ .
+\label{eq 5.65}
+\end{equation}
+\par Sekarang kita siap memutuskan apakah data aktual kita berbeda dari himpunan data
+harapan dengan selisih yang lebih besar daripada yang secara wajar dapat dikaitkan
+dengan kebetulan semata. Banyaknya perempuan Demokrat yang diharapkan adalah 18,
+sedangkan banyaknya dalam data aktual adalah 24. Himpunan data lain yang menyimpang
+lebih jauh dari himpunan data harapan bersesuaian dengan keadaan ketika
+banyaknya perempuan Demokrat adalah 25, 26, 27, atau 28. Jadi, untuk memperoleh
+peluang yang diperlukan, kita menjumlahkan bentuk dalam (\ref{eq 5.65}) dari
+$a = 24$ sampai $a = 28$. Kita memperoleh nilai $.000395$. Dengan demikian, kita
+harus menolak hipotesis bahwa kedua ciri saling bebas.
+\end{example}
+\par
+Terakhir, kita beralih ke cara menyimulasikan peubah acak hipergeometrik $X$.
+Misalkan parameter $X$ adalah $N$, $k$, dan $n$. Bayangkan kita mempunyai sekumpulan
+$N$ bola yang diberi label 1 sampai $N$. Kita menetapkan $k$ bola pertama berwarna
+merah dan sisanya berwarna biru. Misalkan kita telah memilih $m$ bola dan $j$ di
+antaranya berwarna merah. Berarti tersisa $k-j$ bola merah dari total $N-m$ bola.
+Dengan demikian, pilihan berikutnya berwarna merah dengan peluang
+$${{k-j}\over{N-m}}\ .$$ Pada tahap ini, kita memilih suatu bilangan acak dalam
+$[0, 1]$ dan melaporkan bahwa bola merah telah dipilih jika dan hanya jika bilangan
+acak itu tidak melebihi bentuk di atas. Kemudian kita memperbarui nilai $m$ dan $j$
+dan melanjutkan sampai $n$ bola telah dipilih.
+
+\subsection*{Distribusi Benford}\index{distribusi Benford}\index{fungsi distribusi!Benford}
+Contoh distribusi berikutnya berasal dari kajian tentang digit pertama dalam himpunan data.
+Ternyata banyak himpunan data yang muncul ``di dunia nyata" mempunyai sifat bahwa digit
+pertama datanya tidak terdistribusi secara seragam pada himpunan $\{1, 2, \ldots, 9\}$.
+Sebaliknya, digit 1 tampaknya paling mungkin muncul, dan distribusinya menurun secara
+monoton pada himpunan digit yang mungkin. Dalam banyak kasus, distribusi Benford tampaknya
+cocok dengan data semacam itu. Berbagai penjelasan telah diberikan mengenai munculnya
+distribusi ini. Penjelasan yang mungkin paling meyakinkan adalah bahwa distribusi ini
+merupakan satu-satunya distribusi yang invarian terhadap perubahan skala. Jika kita
+menganggap himpunan data tertentu muncul secara ``alami'', distribusinya seharusnya tidak
+dipengaruhi oleh satuan yang dipilih untuk menyatakan data tersebut; dengan kata lain,
+distribusinya seharusnya invarian terhadap perubahan skala.
+\par
+Theodore Hill\index{HILL, T.}\footnote{T. P. Hill, ``The Significant Digit Phenomenon," \emx
+{American Mathematical Monthly,} vol.\ 102, no.\ 4 (April 1995), pgs. 322-327.} memberikan
+deskripsi umum distribusi Benford ketika kita meninjau $d$ digit pertama dari
+bilangan-bilangan bulat dalam suatu himpunan data. Kita akan membatasi perhatian pada
+digit pertama. Dalam hal ini, distribusi Benford mempunyai fungsi distribusi
+$$f(k) = \log_{10}(k+1) - \log_{10}(k)\ ,$$
+untuk $1 \le k \le 9$.
+\par
+Mark Nigrini\index{NIGRINI, M.}\footnote{M. Nigrini, ``Detecting Biases and Irregularities in
+Tabulated Data," working paper} menganjurkan penggunaan distribusi Benford sebagai cara
+untuk menguji catatan keuangan yang mencurigakan\index{catatan keuangan!mencurigakan},
+misalnya entri pembukuan, cek, dan laporan pajak\index{laporan pajak}. Gagasannya adalah
+bahwa, jika seseorang ``mengarang" bilangan-bilangan dalam kasus ini, orang tersebut
+mungkin menghasilkan bilangan yang terdistribusi cukup seragam. Sebaliknya, jika bilangan
+aktual digunakan, digit pertamanya akan kurang lebih mengikuti distribusi Benford. Sebagai
+contoh, Nigrini menganalisis laporan pajak Presiden Clinton\index{Clinton, Bill} selama
+13 tahun. Pada Gambar~\ref{fig 5.1.6}, nilai distribusi Benford ditampilkan sebagai
+persegi, sedangkan data laporan pajak Presiden ditampilkan sebagai lingkaran. Dalam contoh
+ini, terlihat bahwa distribusi Benford sangat cocok dengan data tersebut.
+\putfig{4.5truein}{PSfig5-1-6}{Digit pertama dalam laporan pajak Presiden Clinton.}{fig 5.1.6} 
+\par
+Distribusi ini ditemukan oleh astronom Simon Newcomb\index{NEWCOMB, S.}, yang menulis
+pernyataan berikut dalam makalahnya tentang topik tersebut: ``Bahwa kesepuluh digit tidak
+muncul dengan frekuensi yang sama pasti jelas bagi siapa pun yang menggunakan tabel
+logaritma dan memperhatikan bahwa halaman-halaman awal jauh lebih cepat usang daripada
+halaman-halaman akhir. Angka signifikan pertama lebih sering berupa 1 daripada digit lain,
+dan frekuensinya menurun hingga 9."\footnote{S. Newcomb, ``Note on the frequency of use of the different
+digits in natural numbers," \emx {American Journal of Mathematics,} vol.\ 4 (1881), pgs.\ 39-40.}
+\exercises
+\begin{LJSItem}
+
+\i\label{exer 5.1.100} Untuk peubah acak manakah di bawah ini distribusi seragam
+layak ditetapkan?
+\begin{enumerate}
+\item Misalkan $X$ menyatakan hasil pelemparan satu dadu.
+\item Misalkan $X$ menyatakan banyaknya sisi gambar yang diperoleh dalam tiga lemparan koin.
+\item Sebuah roda rolet mempunyai 38 hasil yang mungkin: 0, 00, dan 1 sampai 36.
+Misalkan $X$ menyatakan hasil ketika roda rolet diputar.
+\item Misalkan $X$ menyatakan tanggal lahir seseorang yang dipilih secara acak.
+\item Misalkan $X$ menyatakan banyaknya lemparan koin yang diperlukan untuk memperoleh
+sisi gambar untuk pertama kalinya. 
+\end{enumerate}
+
+\i\label{exer 5.1.101} Misalkan $n$ bilangan bulat positif. Misalkan $S$ adalah
+himpunan bilangan bulat dari 1 sampai $n$. Tinjau proses berikut: kita mengambil
+sebuah bilangan dari $S$ secara acak dan menuliskannya. Proses ini diulangi sampai
+$S$ kosong. Hasilnya adalah suatu permutasi bilangan bulat dari 1 sampai $n$.
+Misalkan $X$ menyatakan permutasi ini. Apakah $X$ terdistribusi seragam?
+
+\i\label{exer 5.1.102} Misalkan $X$ adalah peubah acak yang dapat mengambil
+terhitung banyak nilai. Tunjukkan bahwa $X$ tidak mungkin terdistribusi seragam.
+
+\i\label{exer 5.1.103} Misalkan kita berkuliah di perguruan tinggi yang mempunyai
+3000 mahasiswa. Kita ingin memilih subhimpunan berukuran 100 dari seluruh mahasiswa.
+Misalkan $X$ menyatakan subhimpunan yang dipilih dengan salah satu strategi berikut.
+Untuk strategi manakah distribusi seragam layak ditetapkan pada $X$? Jika layak,
+berapa peluang yang harus ditetapkan pada setiap hasil?
+\begin{enumerate}
+\item Ambil 100 mahasiswa pertama yang memasuki kafetaria untuk makan siang.
+\item Minta Biro Registrasi mengurutkan mahasiswa berdasarkan nomor Jaminan Sosial,
+lalu ambil 100 mahasiswa pertama pada daftar yang dihasilkan.
+\item Minta Biro Registrasi menyediakan sekumpulan kartu, dengan setiap kartu memuat
+nama tepat satu mahasiswa dan setiap mahasiswa muncul pada tepat satu kartu. Lemparkan
+kartu-kartu itu dari jendela lantai tiga, lalu berjalanlah ke luar dan ambil 100 kartu
+pertama yang ditemukan.
+\end{enumerate}
+
+\i\label{exer 5.1.104} Dengan kondisi yang sama seperti pada latihan sebelumnya,
+dapatkah Anda menjelaskan suatu prosedur yang menghasilkan setiap kemungkinan hasil
+dengan peluang yang sama? Dapatkah Anda menjelaskan prosedur semacam itu yang tidak
+bergantung pada komputer atau kalkulator?
+
+\i\label{exer 5.1.105} Misalkan $X_1,\ X_2,\ \ldots,\ X_n$ adalah $n$ peubah acak
+yang saling bebas dan masing-masing terdistribusi seragam pada bilangan bulat dari 1
+sampai $k$. Misalkan $Y$ menyatakan nilai minimum di antara semua $X_i$. Tentukan
+distribusi $Y$.
+
+\i\label{exer 5.1.16} Sebuah dadu dilempar sampai angka enam muncul untuk pertama
+kalinya pada waktu $T$.
+\begin{enumerate}
+
+\item Apa distribusi peluang $T$?
+
+\item Tentukan $P(T > 3)$.
+
+\item Tentukan $P(T > 6 | T > 3)$.
+\end{enumerate}
+
+\i\label{5.1.18} Jika sebuah koin dilempar berulang kali, berapakah peluang bahwa
+sisi gambar pertama muncul setelah lemparan kelima, dengan diketahui bahwa sisi itu
+belum muncul dalam dua lemparan pertama?
+
+\i\label{exer 5.1.106} Seorang petugas Dinas Perikanan dan Satwa Liar ditugaskan
+memperkirakan jumlah ikan trout\index{ikan trout} di sebuah danau berukuran sedang.
+Ia melakukan langkah berikut: ia menangkap 100 ikan trout, memberi tanda pada
+masing-masing ikan, lalu mengembalikannya ke danau. Satu bulan kemudian, ia menangkap
+100 ikan trout lagi dan mendapati bahwa 10 di antaranya bertanda.  
+\begin{enumerate}
+\item Tanpa melakukan perhitungan yang rumit, berikan perkiraan kasar jumlah ikan
+trout di danau tersebut.
+\item Misalkan $N$ adalah jumlah ikan trout di danau. Tentukan bentuk dalam $N$ untuk
+peluang bahwa petugas tersebut menangkap 10 ikan trout bertanda di antara 100 ikan
+trout yang ditangkapnya pada kesempatan kedua.
+\item Tentukan nilai $N$ yang memaksimumkan bentuk pada bagian (b). Nilai ini disebut
+\emx {estimasi kemungkinan maksimum}\index{estimasi kemungkinan maksimum} untuk besaran
+yang tidak diketahui, yaitu $N$. \emx {Petunjuk}: Tinjau rasio bentuk untuk nilai-nilai
+$N$ yang berurutan.
+\end{enumerate}
+
+\i\label{exercise 5.1.107} Sensus di Amerika Serikat merupakan upaya menghitung
+setiap orang di negara tersebut. Tidak terelakkan bahwa banyak orang tidak terhitung.
+Biro Sensus Amerika Serikat mengusulkan cara untuk memperkirakan jumlah orang yang
+tidak terhitung dalam sensus terakhir. Usulannya sebagai berikut: di suatu wilayah,
+misalkan $N$ menyatakan jumlah sebenarnya orang yang tinggal di sana. Anggap bahwa
+sensus menghitung $n_1$ orang yang tinggal di wilayah ini. Kemudian sensus lain
+dilakukan di wilayah tersebut dan menghitung $n_2$ orang. Selain itu, $n_{12}$ orang
+terhitung pada kedua sensus.  
+\begin{enumerate}
+\item Dengan diketahui $N$, $n_1$, dan $n_2$, misalkan $X$ menyatakan jumlah orang
+yang terhitung pada kedua sensus. Tentukan peluang bahwa $X = k$, dengan $k$ bilangan
+bulat positif tetap antara 0 dan $n_2$.
+\item Sekarang anggap bahwa $X = n_{12}$. Tentukan nilai $N$ yang memaksimumkan bentuk
+pada bagian (a). \emx {Petunjuk}: Tinjau rasio bentuk untuk nilai-nilai $N$ yang
+berurutan.
+\end{enumerate}
+
+\i\label{exer 5.1.26} Misalkan $X$ adalah peubah acak yang menyatakan banyaknya
+panggilan masuk ke kantor polisi dalam selang satu menit. Dalam teks, kita telah
+menunjukkan bahwa $X$ dapat dimodelkan dengan distribusi Poisson berparameter
+$\lambda$, dengan parameter ini menyatakan rata-rata banyaknya panggilan masuk per
+menit. Sekarang misalkan $Y$ adalah peubah acak yang menyatakan banyaknya panggilan
+masuk dalam selang sepanjang $t$. Tunjukkan bahwa distribusi $Y$ diberikan oleh
+$$P(Y = k) = e^{-\lambda t}{{(\lambda t)^k}\over{k!}}\ ,$$  yakni $Y$ berdistribusi
+Poisson dengan parameter $\lambda t$. \emx {Petunjuk}: Misalkan seorang pengamat dari Mars
+mengamati kantor polisi tersebut. Anggap pula bahwa selang waktu dasar yang digunakan
+di Mars tepat sama dengan $t$ menit Bumi. Terakhir, kita akan menganggap bahwa
+pengamat itu memahami penurunan distribusi Poisson dalam teks. Apa yang akan ia
+tuliskan sebagai distribusi $Y$?
+
+\i\label{exer 5.1.27} Tunjukkan bahwa nilai-nilai distribusi Poisson yang diberikan
+dalam Persamaan~\ref{eq 5.1} berjumlah 1.
+
+\i\label{exer 5.1.108} Distribusi Poisson dengan parameter $\lambda = .3$ telah
+ditetapkan pada hasil suatu percobaan. Misalkan $X$ adalah fungsi hasil. Tentukan
+$P(X = 0)$, $P(X = 1)$, dan $P(X > 1)$.
+
+\i\label{exer 5.1.109} Secara rata-rata, hanya 1 dari 1000 orang yang mempunyai
+golongan darah langka tertentu.
+
+\begin{enumerate}
+\item Tentukan peluang bahwa, di sebuah kota berpenduduk 10{,}000 orang, tidak ada
+seorang pun yang mempunyai golongan darah ini.
+
+\item Berapa orang harus diuji agar peluang menemukan sekurang-kurangnya satu orang
+dengan golongan darah ini lebih besar daripada~1/2?
+\end{enumerate}
+
+\i\label{exer 5.1.110} Tulislah program yang memungkinkan pengguna memasukkan
+$n$,~$p$,~$j$, lalu mencetak nilai eksak $b(n, p, k)$ dan aproksimasi Poisson untuk
+nilai tersebut.
+
+\i\label{exer 5.1.111} Anggap bahwa, selama setiap detik, sentral telepon Dartmouth
+menerima satu panggilan dengan peluang~.01 dan tidak menerima panggilan dengan
+peluang~.99. Gunakan aproksimasi Poisson untuk memperkirakan peluang bahwa operator
+melewatkan paling banyak satu panggilan jika ia beristirahat minum kopi selama 5 menit.
+
+\i\label{exer 5.1.112} Peluang memperoleh royal flush dalam satu tangan poker adalah
+$p = 1/649{,}740$. Seberapa besar $n$ agar peluang tidak memperoleh royal flush dalam
+$n$ tangan lebih kecil daripada $1/e$?
+
+\i\label{exer 5.1.113} Seorang pembuat roti mencampurkan 600 kismis dan 400 keping
+cokelat ke dalam adonan, lalu membuat 500 kue kering dari adonan tersebut.
+\begin{enumerate}
+\item Tentukan peluang bahwa kue kering yang dipilih secara acak tidak mengandung
+kismis.
+
+\item Tentukan peluang bahwa kue kering yang dipilih secara acak mengandung tepat dua
+keping cokelat.
+
+\item Tentukan peluang bahwa kue kering yang dipilih secara acak mengandung
+sekurang-kurangnya dua butir (kismis atau keping cokelat).
+\end{enumerate}
+
+\i\label{exer 5.1.114} Peluang bahwa, dalam satu pembagian kartu bridge\index{bridge},
+salah satu dari empat tangan seluruhnya terdiri atas kartu hati kira-kira
+$6.3 \times 10^{-12}$. Di sebuah kota dengan sekitar 50{,}000 pemain bridge, pakar
+peluang setempat rata-rata ditelepon sekali setahun (biasanya larut malam) dan diberi
+tahu bahwa penelepon baru saja memperoleh satu tangan yang seluruhnya kartu hati.
+Haruskah ia mencurigai bahwa sebagian penelepon ini menjadi korban lelucon?
+
+\i\label{exer 5.1.115} Seorang pengiklan menjatuhkan 10{,}000 selebaran di sebuah
+kota yang mempunyai 2000 blok. Anggap bahwa setiap selebaran mempunyai peluang yang
+sama untuk mendarat pada setiap blok. Berapakah peluang bahwa suatu blok tertentu
+tidak menerima selebaran?
+
+\i\label{exer 5.1.116} Dalam kelas yang terdiri atas 80 mahasiswa, dosen memanggil
+1~mahasiswa yang dipilih secara acak untuk menjawab pada setiap pertemuan. Terdapat
+32 pertemuan dalam satu semester.
+\begin{enumerate}
+\item Tulislah rumus peluang eksak bahwa seorang mahasiswa tertentu dipanggil
+$j$ kali selama semester tersebut.
+
+\item Tulislah rumus aproksimasi Poisson untuk peluang ini. Dengan memakai rumus
+tersebut, perkirakan peluang bahwa seorang mahasiswa tertentu dipanggil lebih dari dua kali.
+\end{enumerate}
+
+\i\label{exer 5.1.29} Anggap kita membuat kue kering kismis. Kita memasukkan sekotak
+600 kismis ke dalam adonan, mencampurnya, lalu membuat 500 kue kering. Kita ingin
+mengetahui peluang bahwa kue kering yang dipilih secara acak mengandung
+0,~1, 2,~\dots\ kismis. Pandang kue-kue tersebut sebagai percobaan, dan misalkan $X$
+adalah peubah acak yang memberikan jumlah kismis dalam suatu kue. Kita dapat
+memandang jumlah kismis dalam sebuah kue sebagai hasil dari $n = 600$ percobaan saling
+bebas dengan peluang keberhasilan $p = 1/500$ pada setiap percobaan. Karena $n$ besar
+dan $p$ kecil, kita dapat memakai aproksimasi Poisson dengan
+$\lambda = 600(1/500) = 1.2$. Tentukan peluang bahwa suatu kue mengandung
+sekurang-kurangnya lima kismis.  
+
+\i\label{exer 5.1.117} Pada suatu percobaan, distribusi Poisson dengan parameter
+$\lambda = m$ telah ditetapkan. Tunjukkan bahwa salah satu hasil yang paling mungkin
+adalah nilai bilangan bulat~$k$ sedemikian sehingga $m - 1 \leq k \leq m$. Dalam
+kondisi apa terdapat dua nilai yang paling mungkin? \emx {Petunjuk}: Tinjau rasio
+peluang-peluang yang berurutan.
+
+\i\label{exer 5.1.118} Ketika John Kemeny\index{KEMENY, J. G.} menjabat ketua Jurusan
+Matematika di Dartmouth College, ia menerima rata-rata sepuluh surat setiap hari.
+Pada suatu hari kerja ia tidak menerima surat dan bertanya-tanya apakah hari itu hari
+libur. Untuk memutuskannya, ia menghitung peluang bahwa dalam sepuluh tahun terdapat
+sekurang-kurangnya 1~hari tanpa surat. Ia menganggap banyaknya surat yang diterima
+pada suatu hari berdistribusi Poisson. Peluang berapakah yang ia peroleh?
+\emx {Petunjuk}: Terapkan distribusi Poisson dua kali. Pertama, tentukan peluang bahwa
+dalam 3000 hari terdapat sekurang-kurangnya 1~hari tanpa surat, dengan menganggap
+setiap tahun mempunyai sekitar 300 hari pengantaran surat.
+ 
+\i\label{exer 5.1.119} Reese Prosser\index{PROSSER, R.} tidak pernah memasukkan uang
+ke meteran parkir 10 sen di Hanover. Ia menganggap peluang tertangkap adalah~.05.
+Pelanggaran pertama tidak dikenai biaya, pelanggaran kedua dikenai 2~dolar, dan setiap
+pelanggaran berikutnya dikenai 5~dolar. Berdasarkan anggapannya, bagaimana perbandingan
+biaya harapan untuk parkir 100 kali tanpa membayar meteran dengan biaya membayar
+meteran setiap kali?
+
+\i\label{exer 9.2.15} Feller\index{FELLER, W.}\footnote{ibid., p.~161.} membahas
+statistika hantaman bom terbang\index{bom terbang} di suatu wilayah di London selatan
+selama Perang Dunia Kedua. Wilayah tersebut dibagi menjadi
+$24 \times 24 = 576$ daerah kecil. Jumlah seluruh hantaman adalah 537. Terdapat 229
+petak dengan 0~hantaman, 211 dengan 1~hantaman, 93 dengan 2~hantaman, 35 dengan
+3~hantaman, 7 dengan 4~hantaman, dan 1 dengan~5 hantaman atau lebih. Dengan
+menganggap hantaman-hantaman itu sepenuhnya acak, gunakan aproksimasi Poisson untuk
+menentukan peluang bahwa suatu petak tertentu menerima tepat $k$~hantaman. Hitung
+jumlah harapan petak yang menerima 0,~1, 2, 3, 4, dan~5 hantaman atau lebih, lalu
+bandingkan dengan hasil teramati.
+
+\i\label{exer 5.1.120} Anggap peluang terjadinya kecelakaan besar di sebuah pembangkit
+listrik tenaga nuklir dalam satu tahun adalah~.001. Jika suatu negara mempunyai 100
+pembangkit nuklir, perkirakan peluang terjadinya sekurang-kurangnya satu kecelakaan
+semacam itu dalam suatu tahun.
+
+\i\label{exer 5.1.121} Sebuah maskapai mendapati bahwa 4~persen penumpang yang membuat
+reservasi pada penerbangan tertentu tidak akan datang. Oleh karena itu, kebijakannya
+adalah menjual 100 reservasi kursi untuk pesawat yang hanya mempunyai 98~kursi.
+Tentukan peluang bahwa setiap orang yang datang untuk penerbangan tersebut memperoleh
+kursi.
+
+\i\label{exer 5.1.122} Pengelola uang logam raja mengemas uang logam, 500 keping per
+kotak, dan menaruh 1 uang logam palsu dalam setiap kotak. Raja curiga, tetapi alih-alih
+menguji semua uang logam dalam 1~kotak, ia menguji 1~keping yang dipilih secara acak
+dari masing-masing 500~kotak. Berapakah peluang ia menemukan sekurang-kurangnya satu
+uang palsu? Berapakah peluangnya jika raja menguji 2~keping dari masing-masing
+250 kotak?
+
+\i\label{exer 5.1.123} (Dari Kemeny\footnote{Komunikasi pribadi.}) Tunjukkan bahwa,
+jika Anda memasang 100 taruhan pada angka~17 dalam permainan rolet di Monte Carlo
+(lihat Contoh~\ref{exam 6.7}), peluang Anda memperoleh keuntungan lebih besar
+daripada~1/2. Berapa keuntungan harapan Anda?
+
+\i\label{exer 9.2.20} Dalam salah satu kajian awal tentang distribusi Poisson, von
+Bortkiewicz\index{von BORTKIEWICZ, L.}\footnote{L. von Bortkiewicz,  \emx {Das Gesetz der Kleinen
+Zahlen} (Leipzig: Teubner, 1898), p.\ 24.} meninjau frekuensi kematian akibat
+tendangan bagal\index{tendangan bagal} dalam korps tentara Prusia. Dari kajian atas
+14 korps selama 20 tahun, ia memperoleh data pada Tabel~\ref{table 5.5}.
+\begin{table}
+\centering
+\begin{tabular}{|c|c|}
+\hline Jumlah kematian & Jumlah korps dengan $x$ kematian pada suatu tahun \\ \hline 
+0 & 144 \\
+1 & \hspace{.1in}91 \\ 
+2 & \hspace{.1in}32 \\ 
+3 & \hspace{.12in}11 \\ 
+4 & \hspace{.18in}2 \\ \hline
+\end{tabular}
+\caption{Tendangan bagal.}
+\label{table 5.5}
+\end{table}
+Sesuaikan distribusi Poisson pada data ini dan tentukan apakah menurut Anda distribusi
+Poisson tersebut sesuai.
+
+\i\label{exer 9.2.21} Sering diasumsikan bahwa lalu lintas kendaraan yang tiba di
+suatu persimpangan dalam satu satuan waktu berdistribusi Poisson dengan nilai harapan
+$m$. Anggap banyaknya mobil $X$ yang tiba di persimpangan dari utara dalam satuan
+waktu berdistribusi Poisson dengan parameter $\lambda = m$, sedangkan banyaknya mobil
+$Y$ yang tiba dari barat dalam satuan waktu berdistribusi Poisson dengan parameter
+$\lambda = \bar m$. Jika $X$~dan~$Y$ saling bebas, tunjukkan bahwa jumlah seluruh
+mobil $X + Y$ yang tiba di persimpangan dalam satuan waktu berdistribusi Poisson
+dengan parameter $\lambda =  m + \bar m$.
+
+\i\label{exer 9.2.22} Mobil yang melaju di Magnolia Street tiba di percabangan jalan
+dan harus memilih Willow Street atau Main Street untuk melanjutkan perjalanan.
+Anggap banyaknya mobil yang tiba di percabangan dalam satuan waktu berdistribusi
+Poisson dengan parameter $\lambda = 4$. Sebuah mobil yang tiba di percabangan memilih
+Main Street dengan peluang~3/4 dan Willow Street dengan peluang~1/4. Misalkan $X$
+adalah peubah acak yang menghitung banyaknya mobil yang, dalam suatu satuan waktu,
+melewati Joe's Barber Shop di Main Street. Apa distribusi $X$?
+
+\i\label{exer 9.2.23} Dalam banding perkara \emx {People v.\ Collins}\index{Collins, People
+v.}\index{People v. Collins} (lihat Latihan~\ref{sec 4.1}.\ref{exer 4.1.26}),
+kuasa hukum pembela berargumen sebagai berikut: misalkan, sebagai contoh, terdapat
+5{,}000{,}000 pasangan di wilayah Los Angeles dan peluang bahwa pasangan yang dipilih
+secara acak sesuai dengan deskripsi para saksi adalah 1/12{,}000{,}000. Maka peluang
+terdapat dua pasangan semacam itu, dengan diketahui terdapat sekurang-kurangnya satu,
+sama sekali tidak kecil. Tentukan peluang ini. (Mahkamah Agung California membatalkan
+putusan bersalah semula.)
+
+
+\i\label{exer 5.1.20} Suatu lot produksi baut penegang kuningan berisi $S$ barang,
+dengan $D$ di antaranya cacat. Sampel sebanyak $s$ barang diambil tanpa pengembalian.
+Misalkan $X$ adalah peubah acak yang memberikan banyaknya barang cacat dalam sampel.
+Misalkan $p(d) = P(X = d)$.
+
+\begin{enumerate}
+\item Tunjukkan bahwa
+$$ p(d) = \frac{{D \choose d} {{S - D} \choose {s - d}}}{{S \choose s}}\ .
+$$ Dengan demikian, X berdistribusi hipergeometrik.
+
+\item Buktikan identitas berikut, yang dikenal sebagai \emx {rumus Euler}\index{rumus Euler}:
+$$
+\sum_{d = 0}^{\min(D,s)}{ D \choose d}   {{S - D} \choose {s - d}} =  {S \choose s}\ .
+$$
+\end{enumerate}
+
+\i\label{exer 5.1.21} Sebuah wadah berisi 1000 baut penegang dengan jumlah barang
+cacat $D$ yang tidak diketahui. Dalam sampel 100 baut penegang terdapat 2 barang
+cacat. \emx {Estimasi kemungkinan maksimum}\index{estimasi kemungkinan maksimum}
+untuk $D$ adalah jumlah barang cacat yang memberikan peluang tertinggi untuk memperoleh
+jumlah barang cacat yang teramati dalam sampel. Tebaklah nilai $D$, lalu tulislah
+program komputer untuk memverifikasi tebakan Anda.
+
+\i\label{exer 5.1.22} Terdapat rusa besar\index{rusa besar} dalam jumlah yang tidak
+diketahui di Isle Royale\index{Isle Royale} (sebuah taman nasional di Danau Superior).
+Untuk memperkirakan jumlah rusa besar, 50 ekor ditangkap dan diberi tanda. Enam bulan
+kemudian, 200 ekor ditangkap dan ternyata 8 di antaranya bertanda. Perkirakan jumlah
+rusa besar di Isle Royale dari data ini, lalu verifikasi tebakan Anda dengan program
+komputer (lihat Latihan~\ref{exer 5.1.21}).
+
+\i\label{exer 5.1.23} Suatu lot produksi cambuk kereta kuda berisi 20 barang, dengan
+5 di antaranya cacat. Sampel acak sebanyak~5 barang dipilih untuk diperiksa. Tentukan
+peluang bahwa sampel tersebut memuat tepat satu barang cacat
+\begin{enumerate}
+\item jika pengambilan sampel dilakukan dengan pengembalian.
+
+\item jika pengambilan sampel dilakukan tanpa pengembalian.
+\end{enumerate}
+
+\i\label{exer 5.1.28} Misalkan $N$ dan $k$ menuju $\infty$ sedemikian rupa sehingga
+$k/N$ tetap. Tunjukkan bahwa
+$$h(N, k, n, x) \rightarrow b(n, k/N, x)\ .$$
+
+\i\label{exer 5.1.24} Satu dek bridge\index{bridge} berisi 52 kartu, dengan 13 kartu
+dalam masing-masing dari empat jenis: sekop, hati, wajik, dan keriting. Satu tangan
+berisi 13 kartu dibagikan dari dek yang telah dikocok. Tentukan peluang bahwa tangan
+tersebut mempunyai
+\begin{enumerate}
+
+\item distribusi jenis kartu 4, 4, 3, 2 (misalnya empat sekop, empat hati, tiga wajik,
+dan dua keriting).
+
+\item distribusi jenis kartu 5, 3, 3, 2.
+\end{enumerate}
+
+\i\label{exer 5.1.125} Tulislah algoritma komputer yang menyimulasikan peubah acak
+hipergeometrik dengan parameter $N$,  $k$, dan $n$.
+
+\i\label{exer 7.1.9} Anda diberi empat dadu yang berbeda. Dadu pertama mempunyai dua
+sisi bertanda~0 dan empat sisi bertanda~4. Dadu kedua bertanda 3 pada setiap sisinya.
+Dadu ketiga bertanda 2 pada empat sisi dan 6 pada dua sisi, sedangkan dadu keempat
+bertanda 1 pada tiga sisi dan 5 pada tiga sisi. Anda mempersilakan teman memilih salah
+satu dari keempat dadu tersebut. Kemudian Anda memilih salah satu dari tiga dadu yang
+tersisa, dan masing-masing melempar dadu pilihan. Orang yang memperoleh angka terbesar
+memenangkan satu dolar. Tunjukkan bahwa Anda dapat memilih dadu sehingga peluang Anda
+menang adalah 2/3, apa pun dadu yang dipilih teman. (Lihat Tenney dan
+Foster.\footnote{R.~L.~Tenney and C.~C.~Foster,  \emx 
+{Non-transitive Dominance}, Math. Mag. 49 (1976) no. 3, pgs. 115-120.})
+
+\i\label{exer 5.1.25} Mahasiswa dalam suatu kelas dikelompokkan berdasarkan warna
+rambut dan warna mata. Konvensi yang digunakan adalah: rambut cokelat dan hitam
+dianggap gelap, sedangkan rambut merah dan pirang dianggap terang; mata hitam dan
+cokelat dianggap gelap, sedangkan mata biru dan hijau dianggap terang. Mereka
+mengumpulkan data yang ditampilkan pada Tabel~\ref{table 5.6}.  
+\begin{table}[t]
+\centering
+\begin{tabular}{|l|c|c|c|}
+\hline
+ & Mata Gelap & Mata Terang & \\ \hline 
+Rambut Gelap  & 28              & 15 & \hspace{.25in} 43 \hspace{.25in}   \\ \hline 
+Rambut Terang & \hspace{.1in}9  & 23 & \hspace{.25in} 32 \hspace{.25in}   \\ \hline
+           & 37              & 38 & \hspace{.25in} 75 \hspace{.25in}   \\ \hline
+\end{tabular}
+\caption{Data teramati.}
+\label{table 5.6}
+\end{table}
+Apakah kedua ciri ini saling bebas? (Lihat Contoh~\ref{exam 5.6}.)
+
+\i\label{exer 5.1.124} Misalkan dalam distribusi hipergeometrik, $N$ dan $k$ menuju
+$\infty$ sedemikian rupa sehingga rasio $k/N$ mendekati bilangan real $p$ antara
+0 dan 1. Tunjukkan bahwa distribusi hipergeometrik menuju distribusi binomial dengan
+parameter $n$ dan $p$.  
+
+\i\label{exer 5.1.126}  
+\begin{enumerate}
+\item Hitung digit pertama dari 100 pangkat pertama bilangan 2, lalu tentukan seberapa
+baik data ini sesuai dengan distribusi Benford.
+\item Kalikan setiap bilangan dalam himpunan data pada bagian (a) dengan 3, lalu
+bandingkan distribusi digit pertamanya dengan distribusi Benford.
+\end{enumerate}
+
+\i\label{exer 5.1.127} Dalam lotre Powerball\index{lotre Powerball}\index{lotre!Powerball},
+peserta memilih 5 bilangan bulat berbeda antara 1 dan 45, lalu memilih satu bilangan bonus dari
+rentang yang sama (bilangan bonus boleh sama dengan salah satu dari lima bilangan pertama).
+Sebagian peserta memilih sendiri bilangannya, sedangkan yang lain membiarkan komputer
+memilih. Data pada Tabel~\ref{table 5.10} adalah bilangan-bilangan yang dipilih peserta
+di suatu negara bagian pada 3 Mei 1996. Grafik pancang data tersebut ditampilkan pada
+Gambar~\ref{fig 5.2.1}.  
+\putfig{4truein}{PSfig5-2-1}{Distribusi pilihan dalam lotre Powerball.}{fig 5.2.1}
+\par
+\choice{Menurut Anda, apakah orang-orang memilih bilangan secara acak? Jelaskan jawaban Anda.}{Tujuan
+soal ini adalah menguji hipotesis bahwa bilangan yang dipilih terdistribusi seragam. Untuk itu,
+hitung nilai $v$ dari peubah acak $\chi^2$ yang diberikan dalam
+Contoh~\ref{exam 5.6}. Dalam kasus ini, peubah acak tersebut mempunyai 44 derajat
+kebebasan. Dari tabel $\chi^2$, kita dapat menemukan nilai $v_0 = 59.43$, yaitu bilangan
+dengan sifat bahwa peubah acak berdistribusi $\chi^2$ mengambil nilai yang melebihi $v_0$
+hanya 5\% dari waktu. Apakah nilai $v$ yang Anda hitung melebihi $v_0$? Jika demikian,
+Anda harus menolak hipotesis bahwa pilihan peserta terdistribusi seragam.}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{llllll} Bilangan & Banyaknya & Bilangan & Banyaknya & Bilangan & Banyaknya\\
+&Dipilih && Dipilih &&Dipilih\\
+\hline
+1&2646&
+2&2934&
+3&3352\\
+4&3000&
+5&3357&
+6&2892\\
+7&3657&
+8&3025&
+9&3362\\
+10&2985&
+11&3138&
+12&3043\\
+13&2690&
+14&2423&
+15&2556\\
+16&2456&
+17&2479&
+18&2276\\
+19&2304&
+20&1971&
+21&2543\\
+22&2678&
+23&2729&
+24&2414\\
+25&2616&
+26&2426&
+27&2381\\
+28&2059&
+29&2039&
+30&2298\\
+31&2081&
+32&1508&
+33&1887\\
+34&1463&
+35&1594&
+36&1354\\
+37&1049&
+38&1165&
+39&1248\\
+40&1493&
+41&1322&
+42&1423\\
+43&1207&
+44&1259&
+45&1224\\
+\end{tabular}
+\caption{Bilangan yang dipilih peserta lotre Powerball.}
+\label{table 5.10}
+\end{table}
+
+
+\end{LJSItem}
+
+%Again, the choice function seems to be screwing up.
+%\choice{}{\section{Important Densities}\label{sec 5.2}
+\section{Densitas Penting}\label{sec 5.2}
+Dalam bagian ini, kita akan memperkenalkan beberapa fungsi densitas peluang yang
+penting dan memberikan beberapa contoh penggunaannya.  Kita juga akan membahas
+cara menyimulasikan suatu densitas dengan komputer.
+
+\subsection*{Densitas Seragam Kontinu}\index{fungsi densitas!seragam}\index{densitas seragam}
+
+Fungsi densitas yang paling sederhana berkaitan dengan peubah acak $U$ yang nilainya
+menyatakan hasil percobaan memilih sebuah bilangan real secara acak dari interval
+$[a, b]$.  
+$$ f(\omega) = \left \{ \matrix{ 
+                       1/(b - a), &\,\,\, \mbox{jika}\,\,\, a \leq \omega \leq b, \cr
+                       0,         &\,\,\, \mbox{selainnya.}\cr}\right. 
+$$
+
+Kita dapat menyimulasikan densitas ini dengan mudah pada komputer.  Kita cukup
+menghitung ekspresi
+$$ (b - a) rnd + a\ .
+$$
+
+\subsection*{Densitas Eksponensial dan Gamma}\index{densitas eksponensial}\index{fungsi
+densitas!eksponensial}  Fungsi densitas eksponensial didefinisikan oleh
+$$ f(x) = \left \{ \matrix{
+                   \lambda e^{-\lambda x}, &\,\,\, \mbox{jika}\,\,\, 0 \leq x < \infty, \cr
+                   0,                      &\,\,\, \mbox{selainnya}. \cr} \right.
+$$ Di sini $\lambda$ adalah sebarang konstanta positif yang bergantung pada
+percobaannya.  Pembaca telah menjumpai densitas ini dalam Contoh~\ref{exam 2.2.7.5}.
+Dalam Gambar~\ref{fig 2.20}, kita menampilkan grafik beberapa densitas eksponensial
+untuk berbagai pilihan
+$\lambda$.  
+\putfig{4.5truein}{PSfig2-20}{Densitas eksponensial.}{fig 2.20} 
+Densitas eksponensial sering digunakan untuk menjelaskan percobaan yang melibatkan
+pertanyaan: Berapa lama sampai sesuatu terjadi?  Sebagai contoh, densitas eksponensial
+sering digunakan untuk mempelajari waktu di antara emisi partikel dari sumber
+radioaktif.
+\par Fungsi distribusi kumulatif densitas eksponensial mudah dihitung.  Misalkan $T$
+adalah peubah acak berdistribusi eksponensial dengan parameter $\lambda$.  Jika
+$x \ge 0$, maka
+\begin{eqnarray*} F(x) & = & P(T \le x) \\ & = & \int_0^x \lambda e^{-\lambda t}\,dt
+\\ & = & 1 - e^{-\lambda x}\ .\\
+\end{eqnarray*}
+\par
+Baik densitas eksponensial maupun distribusi geometrik memiliki sifat yang dikenal
+sebagai sifat ``tanpa memori"\index{sifat tanpa memori}.  Sifat ini diperkenalkan
+dalam Contoh~\ref{exam 5.1}; sifat tersebut menyatakan bahwa
+$$P(T > r + s\,|\,T > r) = P(T > s)\ .$$ 
+Kita dapat menunjukkan bahwa sifat ini berlaku bagi densitas eksponensial dengan
+menghitung kedua ruas persamaan tersebut.  Ruas kanan hanyalah
+$$1 - F(s) = e^{-\lambda s}\ ,$$ sedangkan ruas kiri adalah
+\begin{eqnarray*} {{P(T > r + s)}\over{P(T > r)}} & = & {{1 - F(r + s)}\over{1 -
+F(r)}} \\ & = & {{e^{-\lambda (r+s)}}\over{e^{-\lambda r}}} \\ & = & e^{-\lambda s}\
+.\\
+\end{eqnarray*}
+\par
+Terdapat hubungan yang sangat penting antara densitas eksponensial dan distribusi
+Poisson.  Mula-mula kita definisikan $X_1,\ X_2,\ \ldots$ sebagai barisan peubah acak
+independen yang masing-masing berdistribusi eksponensial dengan parameter $\lambda$.
+Kita dapat memandang $X_i$ sebagai lamanya waktu antara emisi partikel ke-$i$ dan
+ke-$(i+1)$ dari sebuah sumber radioaktif.  (Seperti yang akan kita lihat dalam
+Bab~\ref{chp
+6}, parameter $\lambda$ dapat dipandang sebagai kebalikan dari rata-rata
+lamanya waktu di antara emisi.  Parameter ini merupakan besaran yang dapat diukur
+dalam percobaan nyata semacam itu.)  
+\par Sekarang kita tinjau interval waktu sepanjang $t$, dan kita misalkan $Y$ sebagai
+peubah acak yang menghitung banyaknya emisi yang terjadi dalam interval tersebut.
+Kita ingin menghitung fungsi distribusi $Y$ (jelas bahwa $Y$ adalah peubah acak
+diskret).  Jika $S_n$ menyatakan jumlah
+$X_1 + X_2 + 
+\cdots + X_n$, mudah dilihat bahwa
+$$P(Y = n) = P(S_n \le t\ \mbox{dan}\ S_{n+1} > t)\ .$$ 
+Karena kejadian $S_{n+1} \le t$ merupakan himpunan bagian dari kejadian $S_n \le t$,
+peluang di atas sama dengan
+\begin{equation} P(S_n \le t) - P(S_{n+1} \le t)\ .\label{eq 5.8}
+\end{equation} Dalam Bab~\ref{chp 7}, kita akan menunjukkan bahwa densitas $S_n$
+diberikan oleh rumus berikut:
+$$ g_n(x) = \left \{ \begin{array}{ll}
+                       \lambda{{(\lambda x)^{n-1}}\over{(n-1)!}}e^{-\lambda x}, 
+                                          & \mbox{jika $x > 0$,} \\
+                               0,         & \mbox{selainnya.}
+                  \end{array}
+         \right. 
+$$ Densitas ini merupakan contoh densitas gamma\index{densitas gamma}\index{fungsi densitas!gamma}
+dengan parameter
+$\lambda$ dan
+$n$.  Densitas gamma umum memperbolehkan $n$ berupa sebarang bilangan real positif.
+Kita tidak akan membahas densitas umum ini.
+\par
+Dengan induksi pada $n$, mudah ditunjukkan bahwa fungsi distribusi kumulatif $S_n$
+diberikan oleh
+$$ G_n(x) = \left \{ \begin{array}{ll}
+                         1 - e^{-\lambda x}\biggl(1 + {{\lambda x}\over {1!}} + \cdots
++
+                         {{(\lambda x)^{n-1}}\over{(n-1)!}}\biggr), & \mbox{jika $x >
+0$}, \\
+                         0,         & \mbox{selainnya.}
+                   \end{array}
+          \right. 
+$$ Dengan menggunakan ekspresi ini, besaran dalam (\ref{eq 5.8}) mudah dihitung; kita
+memperoleh
+$$ e^{-\lambda t}{{(\lambda t)^n}\over{n!}}\ ,$$ yang akan dikenali pembaca sebagai
+peluang bahwa peubah acak berdistribusi Poisson dengan parameter $\lambda t$
+bernilai $n$.
+\par Hubungan di atas memungkinkan kita menyimulasikan distribusi Poisson setelah
+kita menemukan cara menyimulasikan densitas eksponensial.  Peubah acak berikut
+melakukannya:
+\begin{equation} Y = -{1\over\lambda} \log(rnd)\ .\label{eq 5.9}
+\end{equation} Dengan Korolari~\ref{cor 5.2} (di bawah), kita dapat menurunkan
+ekspresi di atas (lihat Latihan~\ref{exer 5.2.2.5}).  Untuk saat ini, kita cukup
+memberikan perhitungan singkat yang menunjukkan bahwa peubah acak $Y$ memiliki sifat
+yang diperlukan.  Kita memperoleh
+\begin{eqnarray*} P(Y \le y) & = & P\Bigl(-{1\over\lambda} \log(rnd) \le y\Bigr) \\ &
+= & P(\log(rnd)
+\ge -\lambda y) \\ & = & P(rnd \ge e^{-\lambda y}) \\ & = & 1 - e^{-\lambda y}\ . \\
+\end{eqnarray*} Ekspresi terakhir ini merupakan fungsi distribusi kumulatif peubah
+acak berdistribusi eksponensial dengan parameter $\lambda$.
+\par Untuk menyimulasikan peubah acak Poisson $W$ dengan parameter $\lambda$, kita
+cukup menghasilkan barisan nilai peubah acak berdistribusi eksponensial dengan
+parameter yang sama dan mencatat subtotal $S_k$ dari nilai-nilai tersebut.  Kita
+berhenti menghasilkan barisan ketika subtotal untuk pertama kalinya melebihi
+$\lambda$.  Misalkan kita mendapati bahwa
+$$S_n \le \lambda < S_{n+1}\ .$$ Maka nilai $n$ dikembalikan sebagai nilai simulasi
+untuk $W$.
+
+
+\begin{example}(Antrean)\index{antrean}\label{exam 5.21} Misalkan pelanggan tiba pada waktu
+acak di sebuah tempat pelayanan dengan satu pelayan.  Setiap pelanggan langsung dilayani jika
+tidak ada orang di depannya, tetapi jika ada, ia harus menunggu gilirannya dalam antrean.  Berapa
+lama waktu tunggu yang dapat diharapkan setiap pelanggan?  (Kita definisikan waktu tunggu seorang
+pelanggan sebagai lamanya waktu antara kedatangan dan awal pelayanannya.)
+\par
+Kita asumsikan bahwa waktu antar-kedatangan pelanggan yang berturut-turut diberikan oleh peubah
+acak $X_1$,~$X_2$, \dots,~$X_n$ yang saling independen dan berdistribusi identik dengan fungsi
+distribusi kumulatif eksponensial
+$$ F_X(t) = 1 - e^{-\lambda t}.
+$$ 
+Kita juga asumsikan bahwa waktu pelayanan pelanggan yang berturut-turut diberikan oleh peubah acak
+$Y_1$,~$Y_2$, \dots,~$Y_n$ yang juga saling independen dan berdistribusi identik dengan fungsi
+distribusi kumulatif eksponensial lain,
+$$ F_Y(t) = 1 - e^{-\mu t}.
+$$ 
+\par
+Parameter $\lambda$ dan $\mu$ masing-masing menyatakan kebalikan dari rata-rata waktu antar-
+kedatangan\index{waktu antar-kedatangan, rata-rata} pelanggan dan rata-rata waktu
+pelayanan\index{waktu pelayanan, rata-rata} pelanggan.  Jadi, misalnya, makin besar nilai
+$\lambda$, makin kecil rata-rata waktu antar-kedatangan pelanggan.  Kita dapat menduga bahwa lama
+waktu yang dihabiskan seorang pelanggan dalam antrean bergantung pada perbandingan antara rata-rata
+waktu antar-kedatangan dan rata-rata waktu pelayanan.
+\par
+Kita dapat memeriksa dugaan ini dengan mudah melalui simulasi.  Program {\bf Queue}\index{Queue
+(program)} menyimulasikan proses antrean ini.  Misalkan $N(t)$ adalah banyaknya pelanggan dalam
+antrean pada waktu $t$.  Kemudian kita plot $N(t)$ sebagai fungsi $t$ untuk berbagai pilihan parameter
+$\lambda$ dan
+$\mu$ (lihat Gambar~\ref{fig 5.17}).
+
+\putfig{4.9truein}{PSfig5-17}{Panjang antrean.}{fig 5.17}
+
+Kita perhatikan bahwa ketika $\lambda < \mu$, berlaku $1/\lambda > 1/\mu$, sehingga rata-rata waktu
+antar-kedatangan lebih besar daripada rata-rata waktu pelayanan; artinya, secara rata-rata pelanggan
+dilayani lebih cepat daripada kedatangan pelanggan baru.  Jadi, dalam hal ini wajar untuk mengharapkan
+bahwa $N(t)$ tetap kecil.  Namun, jika $\lambda > \mu$, pelanggan tiba lebih cepat daripada mereka
+dilayani dan, sesuai dugaan, $N(t)$ tampak bertambah tanpa batas.
+\par
+Sekarang kita dapat bertanya: Berapa lama seorang pelanggan harus menunggu pelayanan dalam antrean?
+Untuk menyelidiki pertanyaan ini, misalkan $W_i$ adalah lamanya waktu pelanggan ke-$i$ berada dalam
+sistem (menunggu dalam antrean dan dilayani).  Dengan program {\bf Queue}, kita dapat menyajikan data
+ini dalam grafik batang untuk memperoleh gambaran tentang distribusi $W_i$ (lihat
+Gambar~\ref{fig 5.18}). (Di sini $\lambda = 1$ dan $\mu = 1.1$.)
+\putfig{4truein}{PSfig5-18}{Waktu tunggu.}{fig 5.18}
+\par
+Kita melihat bahwa waktu tunggu ini tampak berdistribusi eksponensial.  Hal ini selalu berlaku
+ketika $\lambda < \mu$.  Pembuktian fakta ini terlalu rumit untuk diberikan di sini, tetapi kita
+dapat memeriksanya melalui simulasi untuk berbagai pilihan $\lambda$ dan $\mu$, seperti di atas.
+\end{example}
+
+\subsection*{Fungsi dari Peubah Acak}\index{peubah acak!fungsi dari} 
+Sebelum melanjutkan daftar densitas penting, kita berhenti sejenak untuk meninjau peubah acak yang
+merupakan fungsi dari peubah acak lain.  Kita akan membuktikan teorema umum yang memungkinkan kita
+menurunkan ekspresi seperti Persamaan~\ref{eq 5.9}.
+\par
+\begin{theorem}\label{thm 5.1} Misalkan $X$ adalah peubah acak kontinu dan $\phi(x)$
+merupakan fungsi yang naik tegas pada daerah nilai $X$.  Definisikan $Y = \phi(X)$.
+Misalkan $X$ dan $Y$ masing-masing memiliki fungsi distribusi kumulatif $F_X$ dan
+$F_Y$.  Kedua fungsi ini berhubungan melalui
+$$ F_Y(y) = F_X(\phi^{-1}(y)).
+$$ Jika $\phi(x)$ turun tegas pada daerah nilai $X$, maka
+$$F_Y(y) = 1 - F_X(\phi^{-1}(y))\ .$$
+\proof Karena $\phi$ naik tegas pada daerah nilai $X$, kejadian
+$(X \le \phi^{-1}(y))$ dan $(\phi(X) \le y)$ sama.  Oleh karena itu,
+\begin{eqnarray*} F_Y(y) & = & P(Y \le y) \\ & = & P(\phi(X) \le y) \\ & = & P(X \le
+\phi^{-1}(y)) \\ & = & F_X(\phi^{-1}(y))\ . \\
+\end{eqnarray*}
+\par Jika $\phi(x)$ turun tegas pada daerah nilai $X$, maka
+\begin{eqnarray*} F_Y(y) & = & P(Y \leq y) \\
+       & = & P(\phi(X) \leq y) \\
+       & = & P(X \geq \phi^{-1}(y)) \\
+       & = & 1 - P(X < \phi^{-1}(y)) \\
+       & = & 1 - F_X(\phi^{-1}(y))\ . \\
+\end{eqnarray*} Ini menyelesaikan pembuktian.
+\end{theorem}
+\begin{corollary}\label{cor 5.1} Misalkan $X$ adalah peubah acak kontinu dan $\phi(x)$
+merupakan fungsi yang naik tegas pada daerah nilai $X$.  Definisikan $Y = \phi(X)$.
+Misalkan fungsi densitas $X$ dan $Y$ masing-masing adalah $f_X$ dan $f_Y$.  Kedua
+fungsi ini berhubungan melalui
+$$f_Y(y) = f_X(\phi^{-1}(y)){{d\ }\over{dy}}\phi^{-1}(y)\ .$$  Jika $\phi(x)$
+turun tegas pada daerah nilai $X$, maka
+$$f_Y(y) = -f_X(\phi^{-1}(y)){{d\ }\over{dy}}\phi^{-1}(y)\ .$$
+\proof Hasil ini mengikuti dari Teorema~\ref{thm 5.1} dengan menggunakan Aturan
+Rantai.
+\end{corollary} 
+\par Jika fungsi $\phi$ tidak naik tegas maupun turun tegas, situasinya agak lebih
+rumit, tetapi dapat ditangani dengan metode yang sama. Sebagai contoh, misalkan
+$Y = X^2$. Maka $\phi(x) = x^2$, dan
+\begin{eqnarray*} F_Y(y) & = & P(Y \leq y) \\
+       & = & P(-\sqrt y \leq X \leq +\sqrt y) \\
+       & = & P(X \leq +\sqrt y) - P(X \leq -\sqrt y) \\
+       & = & F_X(\sqrt y) - F_X(-\sqrt y)\ .\\
+\end{eqnarray*} Moreover,
+\begin{eqnarray*} f_Y(y) & = & \frac d{dy} F_Y(y) \\
+       & = & \frac d{dy} (F_X(\sqrt y) - F_X(-\sqrt y)) \\
+       & = & \Bigl(f_X(\sqrt y) + f_X(-\sqrt y)\Bigr) \frac 1{2\sqrt y}\ . \\
+\end{eqnarray*}
+\par 
+Kita melihat bahwa untuk menyatakan $F_Y$ dalam $F_X$ ketika $Y = \phi(X)$, kita
+harus menyatakan $P(Y \leq y)$ dalam $P(X \leq x)$, dan secara umum proses ini
+bergantung pada struktur $\phi$.
+\subsection*{Simulasi}\index{menyimulasikan peubah acak}
+Teorema~\ref{thm 5.1}, antara lain, memberi tahu kita cara menyimulasikan pada
+komputer sebuah peubah acak $Y$ dengan fungsi distribusi kumulatif $F$ yang telah
+ditentukan.  Kita asumsikan bahwa $F(y)$ naik tegas untuk nilai-nilai $y$ yang
+memenuhi $0 < F(y) < 1$.  Untuk keperluan ini, misalkan $U$ adalah peubah acak yang
+berdistribusi seragam pada $[0, 1]$. Maka $U$ memiliki fungsi distribusi kumulatif
+$F_U(u) = u$.  Sekarang, jika $F$ adalah fungsi distribusi kumulatif yang ditentukan
+untuk $Y$, untuk menuliskan $Y$ dalam $U$ mula-mula kita selesaikan persamaan
+$$ 
+F(y) = u
+$$ 
+untuk $y$ dalam $u$.  Kita memperoleh $y = F^{-1}(u)$.  Perhatikan bahwa karena $F$
+merupakan fungsi naik, persamaan ini selalu memiliki solusi tunggal (lihat
+Gambar~\ref{fig
+5.13}).  Selanjutnya kita tetapkan $Z = F^{-1}(U)$ dan, berdasarkan
+Teorema~\ref{thm 5.1}, memperoleh
+$$ 
+F_Z(y) = F_U(F(y)) = F(y)\ ,
+$$ 
+karena $F_U(u) = u$.  Jadi, $Z$ dan $Y$ memiliki fungsi distribusi kumulatif yang
+sama.  Ringkasnya, kita memperoleh hasil berikut.
+
+\putfig{3truein}{PSfig5-13}
+{Mengubah distribusi seragam $F_{U}$ menjadi distribusi $F_{Y}$ yang ditentukan.}{fig
+5.13}%%4.5truein 
+
+\begin{corollary}\label{cor 5.2}  Jika $F(y)$ adalah fungsi distribusi kumulatif yang
+diberikan dan naik tegas ketika $0 < F(y) < 1$, serta jika $U$ adalah peubah acak
+yang berdistribusi seragam pada $[0,1]$, maka
+$$ 
+Y = F^{-1}(U)
+$$ 
+memiliki distribusi kumulatif $F(y)$.
+\end{corollary}
+
+Jadi, untuk menyimulasikan peubah acak dengan distribusi kumulatif $F$ yang diberikan,
+kita cukup menetapkan $Y = F^{-1}(\mbox{rnd})$.
+
+\subsection*{Densitas Normal}\index{densitas normal}\index{fungsi densitas!normal} 
+Sekarang kita sampai pada fungsi densitas yang paling penting, yaitu fungsi densitas
+normal.  Kita telah melihat dalam Bab~\ref{chp 3} bahwa fungsi distribusi binomial
+berbentuk lonceng, bahkan untuk nilai $n$ berukuran sedang.  Kita ingat bahwa peubah
+acak berdistribusi binomial dengan parameter $n$ dan $p$ dapat dipandang sebagai
+jumlah dari $n$ peubah acak 0-1 yang saling independen.  Sebuah teorema yang sangat
+penting dalam teori peluang, yang disebut Teorema Limit Pusat, menyatakan bahwa dalam
+kondisi yang sangat umum, jika kita menjumlahkan banyak peubah acak yang saling
+independen, distribusi jumlahnya dapat dihampiri dengan baik oleh suatu densitas
+kontinu tertentu yang disebut densitas normal.  Teorema ini akan dibahas dalam
+Bab~\ref{chp 9}.
+\par
+Fungsi densitas normal dengan parameter $\mu$ dan $\sigma$ didefinisikan sebagai berikut:
+$$
+f_X(x) = \frac 1{\sqrt{2\pi}\sigma} e^{-(x - \mu)^2/2\sigma^2}\ .
+$$
+Parameter $\mu$ menyatakan ``pusat" densitas (dan dalam Bab~\ref{chp 6}, kita akan
+menunjukkan bahwa parameter ini merupakan nilai rata-rata, atau nilai harapan,
+densitas tersebut).  Parameter $\sigma$ mengukur ``sebaran" densitas, sehingga
+nilainya diasumsikan positif.  (Dalam Bab~\ref{chp 6}, kita akan menunjukkan bahwa
+$\sigma$ merupakan simpangan baku densitas.)  Sama sekali tidak jelas secara langsung
+bahwa fungsi di atas adalah suatu densitas, yakni bahwa integralnya pada seluruh garis
+real sama dengan 1.  Fungsi distribusi kumulatif diberikan oleh rumus
+$$ F_X(x) = \int_{-\infty}^x \frac 1{\sqrt{2\pi}\sigma} e^{-(u -
+\mu)^2/2\sigma^2}\,du\ .
+$$
+
+Dalam Gambar~\ref{fig 5.12}, sebagai perbandingan kita sertakan plot densitas normal
+untuk kasus $\mu = 0$ dan $\sigma = 1$, serta $\mu = 0$ dan $\sigma = 2$.
+
+\putfig{3truein}{PSfig5-12}{Densitas normal untuk dua himpunan nilai parameter.}{fig 5.12}%%4.5truein 
+
+\par 
+Kita tidak dapat menuliskan $F_X$ dalam fungsi-fungsi sederhana.  Hal ini menimbulkan
+beberapa persoalan.  Pertama, nilai $F_X$ harus dihitung menggunakan integrasi
+numerik.  Tersedia tabel-tabel lengkap yang memuat nilai fungsi ini (lihat Lampiran A).
+Kedua, kita tidak dapat menuliskan $F^{-1}_X$ dalam bentuk tertutup, sehingga kita
+tidak dapat menggunakan Korolari~\ref{cor 5.2} untuk membantu menyimulasikan peubah
+acak normal.  Karena itu, telah dikembangkan metode-metode khusus untuk menyimulasikan
+distribusi normal.  Salah satu metode tersebut bertumpu pada fakta bahwa jika $U$ dan
+$V$ adalah peubah acak independen dengan densitas seragam pada $[0,1]$, maka peubah acak
+$$  X = \sqrt{-2\log U} \cos 2\pi V
+$$ dan
+$$ Y = \sqrt{-2\log U} \sin 2\pi V
+$$ saling independen dan memiliki fungsi densitas normal dengan parameter $\mu = 0$
+dan $\sigma = 1$.  (Hal ini tidak langsung terlihat, dan kita juga tidak akan
+membuktikannya di sini.  Lihat Box dan
+Muller.\index{BOX, G. E. P.}\index{MULLER, M. E.}\footnote{G. E. P. Box and M. E. Muller,  \emx
+{A Note on the Generation of Random Normal Deviates}, Ann. of Math. Stat. 29 (1958), pgs.
+610-611.})
+\par Misalkan $Z$ adalah peubah acak normal dengan parameter $\mu = 0$ dan
+$\sigma = 1$. Peubah acak normal dengan parameter ini disebut peubah acak normal
+\emx {baku}\index{peubah acak normal\\ baku}.  Fakta penting dan berguna menyatakan
+bahwa jika kita menuliskan
+$$X = \sigma Z + \mu\ ,$$
+peubah $X$ merupakan peubah acak normal dengan parameter $\mu$ dan $\sigma$.  Untuk
+menunjukkannya, kita akan menggunakan Teorema~\ref{thm 5.1}.  Kita mempunyai
+$\phi(z) = \sigma z + \mu$,
+$\phi^{-1}(x) = (x - \mu)/\sigma$, dan
+\begin{eqnarray*} F_X(x) & = & F_Z\left(\frac {x - \mu}\sigma \right), \\ f_X(x) & = &
+f_Z\left(\frac {x - \mu}\sigma \right) \cdot \frac 1\sigma \\
+       & = & \frac 1{\sqrt{2\pi}\sigma} e^{-(x - \mu)^2/2\sigma^2}\ . \\
+\end{eqnarray*}
+Pembaca akan melihat bahwa ekspresi terakhir ini adalah fungsi densitas dengan
+parameter $\mu$ dan $\sigma$, seperti yang dinyatakan.
+\par
+Kita telah melihat di atas bahwa peubah acak normal baku $Z$ dapat disimulasikan.
+Jika kita ingin menyimulasikan peubah acak normal $X$ dengan parameter $\mu$ dan
+$\sigma$, kita cukup mentransformasi nilai simulasi $Z$ dengan persamaan
+$X = \sigma Z + \mu$.
+\par
+Misalkan kita ingin menghitung nilai fungsi distribusi kumulatif peubah acak normal
+$X$ dengan parameter $\mu$ dan $\sigma$.  Perhitungan ini dapat kita reduksi menjadi
+perhitungan tentang peubah acak normal baku $Z$ sebagai berikut:
+\begin{eqnarray*} F_X(x) & = & P(X \leq x) \\
+       & = & P\left(Z \leq \frac {x - \mu}\sigma \right) \\
+       & = & F_Z\left(\frac {x - \mu}\sigma \right)\ . \\
+\end{eqnarray*}
+Ekspresi terakhir ini dapat ditemukan dalam tabel nilai fungsi distribusi kumulatif
+peubah acak normal baku.  Jadi, kita melihat bahwa tidak perlu membuat tabel fungsi
+distribusi normal untuk sebarang $\mu$ dan $\sigma$.
+\par
+Proses mengubah peubah acak normal menjadi peubah acak normal baku dikenal sebagai
+pembakuan.  Jika $X$ berdistribusi normal dengan parameter $\mu$ dan $\sigma$, serta
+jika
+$$ Z = \frac{X - \mu}\sigma\ ,$$
+maka $Z$ disebut versi baku dari $X$.
+\par
+Contoh berikut menunjukkan cara menggunakan versi baku dari peubah acak normal $X$
+untuk menghitung peluang tertentu yang berkaitan dengan $X$.
+
+\begin{example}\label{exam 5.16}
+Misalkan $X$ adalah peubah acak berdistribusi normal dengan parameter $\mu = 10$ dan
+$\sigma = 3$.  Carilah peluang bahwa $X$ berada di antara 4 dan 16.
+\par
+Untuk menyelesaikan soal ini, perhatikan bahwa $Z = (X-10)/3$ adalah versi baku dari
+$X$.  Jadi,
+\begin{eqnarray*}
+P(4 \le X \le 16) & = & P(X \le 16) - P(X \le 4) \\
+                  & = & F_X(16) - F_X(4) \\
+                  & = & F_Z\left(\frac {16 - 10}3 \right) - F_Z\left(\frac {4-10}3 \right) \\
+                  & = & F_Z(2) - F_Z(-2)\ . \\
+\end{eqnarray*} 
+Ekspresi terakhir ini dapat dihitung menggunakan nilai fungsi distribusi normal baku
+dalam tabel (lihat~\ref{app_a}); dengan menggunakan tabel tersebut, kita memperoleh
+$F_Z(2) = .9772$ dan $F_Z(-2) = .0228$.  Jadi, jawabannya adalah .9544.
+\par
+Dalam Bab~\ref{chp 6}, kita akan melihat bahwa parameter $\mu$ adalah rataan, atau
+nilai rata-rata, dari peubah acak $X$.  Parameter $\sigma$ mengukur sebaran
+peubah acak dan disebut simpangan baku.  Jadi, pertanyaan dalam contoh ini merupakan
+pertanyaan khas: berapakah peluang bahwa nilai peubah acak berada dalam jarak dua
+simpangan baku dari nilai rata-ratanya?
+\end{example}
+
+\subsection*{Densitas Maxwell dan Rayleigh}\index{fungsi densitas!Maxwell}\index{densitas Maxwell}
+\index{fungsi densitas!Rayleigh}\index{densitas Rayleigh}
+
+\begin{example}\label{exam 5.19} Misalkan kita menjatuhkan sebuah anak panah pada
+permukaan meja yang luas, yang kita anggap sebagai bidang $x$$y$, dan misalkan
+koordinat $x$ dan $y$ dari ujung anak panah tersebut saling independen dan
+berdistribusi normal dengan parameter $\mu = 0$ dan $\sigma = 1$.  Bagaimanakah
+distribusi jarak titik itu dari titik asal?
+\par
+Persoalan ini muncul dalam fisika ketika diasumsikan bahwa partikel yang bergerak di
+$R^n$ memiliki komponen-komponen kecepatan yang saling independen dan berdistribusi
+normal, lalu kita ingin mencari densitas laju partikel tersebut.  Densitas untuk kasus
+$n = 3$ disebut densitas Maxwell.
+\par
+Densitas untuk kasus $n = 2$ (yakni percobaan papan sasaran anak panah yang dijelaskan
+di atas) disebut densitas Rayleigh.  Kita dapat menyimulasikan kasus ini dengan memilih
+secara independen sepasang koordinat $(x,y)$, masing-masing dari distribusi normal
+dengan $\mu = 0$ dan $\sigma = 1$ pada $(-\infty,\infty)$, menghitung jarak
+$r = \sqrt{x^2 + y^2}$ dari titik $(x,y)$ ke titik asal, mengulangi proses ini
+berkali-kali, lalu menyajikan hasilnya dalam grafik batang.  Hasilnya ditampilkan
+dalam Gambar~\ref{fig 5.14}.
+
+\putfig{4.5truein}{PSfig5-14}{Distribusi jarak anak panah dalam 1000 jatuhan.}{fig 5.14} 
+
+Kita juga telah memplot densitas teoretis
+$$ f(r) = re^{-r^2/2}\ .
+$$
+Rumus ini akan diturunkan dalam Bab~\ref{chp 7}; lihat Contoh~\ref{exam 7.10}.
+\end{example}
+
+\subsection*{Densitas Kai-Kuadrat}\index{densitas kai-kuadrat}\index{fungsi
+densitas!kai-kuadrat}
+
+Kita kembali ke persoalan independensi sifat\index{sifat, independensi} yang dibahas
+dalam Contoh~\ref{exam 5.6}.  Sering kali kita memiliki dua sifat yang masing-masing
+mempunyai beberapa nilai berbeda.  Seperti terlihat dalam contoh tersebut, cukup
+banyak perhitungan diperlukan bahkan ketika setiap sifat hanya memiliki dua nilai.
+Sekarang kita berikan metode lain untuk menguji independensi sifat yang memerlukan
+jauh lebih sedikit perhitungan.
+\begin{example}\label{exam 5.20}
+Misalkan kita memiliki data dalam Tabel~\ref{table 5.7} mengenai nilai dan gender
+mahasiswa dalam sebuah kelas Kalkulus.
+\begin{table}
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+       &Perempuan\hspace{.15in}&\hspace{.15in}Laki-laki\hspace{.15in}& \\ \hline 
+A      & \hspace{.15in}37  & \hspace{.15in}56                &\hspace{.15in}93  \\ \hline 
+B      & \hspace{.15in}63  & \hspace{.15in}60                &\hspace{.075in}123\\ \hline 
+C      & \hspace{.15in}47  & \hspace{.15in}43                &\hspace{.15in}90  \\ \hline 
+Di bawah C& \hspace{.25in}5   & \hspace{.25in}8                 &\hspace{.15in}13  \\ \hline 
+       &\hspace{.1in}152   &\hspace{.1in}167                 &\hspace{.075in}319\\ \hline
+\end{tabular}
+\caption{Data kelas Kalkulus.}
+\label{table 5.7}
+\end{table}
+Dalam situasi ini, kita dapat menggunakan model sejenis dengan yang digunakan dalam
+Contoh~\ref{exam 5.6}.  Bayangkan sebuah guci berisi 319 bola dengan dua warna,
+misalnya biru dan merah, yang masing-masing mewakili perempuan dan laki-laki.  Kita
+ambil 93 bola dari guci tanpa pengembalian.  Bola-bola ini berkaitan dengan nilai A.
+Kita lanjutkan dengan mengambil 123 bola yang berkaitan dengan nilai B.  Setelah
+selesai, kita mempunyai empat himpunan bola, dengan setiap bola menjadi anggota tepat
+satu himpunan.  (Kita juga dapat menetapkan bahwa bola memiliki empat warna yang
+berkaitan dengan empat kemungkinan nilai.  Dalam hal ini, kita mengambil himpunan
+bagian berukuran 152 yang berkaitan dengan perempuan.  Bola yang tersisa dalam guci
+berkaitan dengan laki-laki.  Pilihan ini tidak memengaruhi keputusan akhir apakah
+kita harus menolak hipotesis independensi sifat.)
+\par
+Himpunan data harapan dapat ditentukan dengan cara yang sama persis seperti dalam
+Contoh~\ref{exam 5.6}.  Dengan cara ini, kita memperoleh nilai harapan yang
+ditampilkan dalam Tabel~\ref{table 5.8}.
+\begin{table}
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+       & Perempuan \hspace{.15in}&\hspace{.15in}Laki-laki\hspace{.15in}&         \\ \hline 
+A      & \hspace{.15in}44.3     & \hspace{.15in}48.7  &\hspace{.15in}93  \\ \hline 
+B      & \hspace{.15in}58.6     & \hspace{.15in}64.4  &\hspace{.075in}123\\ \hline 
+C      & \hspace{.15in}42.9     & \hspace{.15in}47.1  &\hspace{.15in}90  \\ \hline 
+Di bawah C& \hspace{.15in}6.2     & \hspace{.2in}6.8    &\hspace{.15in}13  \\ \hline 
+       &  152                   &  167                &\hspace{.075in}319\\ 
+\hline
+\end{tabular}
+\caption{Data harapan.}
+\label{table 5.8}
+\end{table}
+Bahkan jika kedua sifat independen, kita tetap mengharapkan adanya perbedaan di antara
+bilangan-bilangan dalam kotak yang bersesuaian pada kedua tabel.  Namun, jika
+perbedaannya besar, kita mungkin mencurigai bahwa kedua sifat tersebut tidak
+independen.  Dalam Contoh~\ref{exam 5.6}, kita menggunakan distribusi peluang dari
+berbagai himpunan data yang mungkin untuk menghitung peluang memperoleh himpunan data
+yang menyimpang dari himpunan data harapan sekurang-kurangnya sebesar penyimpangan
+data aktual.  Kita dapat melakukan hal yang sama dalam kasus ini, tetapi jumlah
+perhitungannya sangat besar.
+\par
+Sebagai gantinya, kita akan menjelaskan satu bilangan yang dapat mengukur dengan baik
+seberapa jauh suatu himpunan data dari himpunan data harapan.  Untuk mengukur jarak
+antara kedua himpunan bilangan itu, kita dapat menjumlahkan kuadrat selisih bilangan
+yang bersesuaian.  (Kita juga dapat menjumlahkan nilai mutlak selisih, tetapi kita
+tidak ingin menjumlahkan selisihnya sendiri.)  Misalkan kita memiliki data yang
+memiliki 10 objek harapan dari suatu jenis, tetapi yang kita amati justru 18,
+sedangkan dalam kasus lain kita mengharapkan 50 objek dari suatu jenis, tetapi yang
+kita amati justru 58.  Meskipun kedua selisih hampir sama, selisih pertama lebih
+mengejutkan daripada yang kedua karena banyaknya hasil yang diharapkan dalam kasus
+kedua jauh lebih besar daripada dalam kasus pertama.  Salah satu cara mengoreksinya
+adalah membagi masing-masing kuadrat selisih dengan bilangan harapan bagi kotak
+tersebut.  Jadi, jika nilai dalam delapan kotak pada tabel pertama kita beri label
+$O_i$ (untuk nilai teramati) dan nilai dalam delapan kotak pada tabel kedua kita beri
+label $E_i$ (untuk nilai harapan), ekspresi berikut cukup masuk akal untuk mengukur
+seberapa jauh data teramati dari data harapan:
+$$\sum_{i = 1}^8 \frac{(O_i - E_i)^2}{E_i}\ .$$
+Ekspresi ini merupakan peubah acak yang biasanya dilambangkan dengan simbol $\chi^2$,
+dibaca ``kai-kuadrat."  Nama tersebut digunakan karena, dengan asumsi bahwa kedua
+sifat independen, densitas peubah acak ini dapat dihitung dan kira-kira sama dengan
+suatu densitas yang disebut densitas kai-kuadrat.  Kita tidak memberikan ekspresi
+eksplisit bagi densitas ini karena ekspresi tersebut melibatkan fungsi gamma, yang
+belum kita bahas.  Densitas kai-kuadrat sebenarnya merupakan kasus khusus dari
+densitas gamma umum.
+\par
+Dalam penerapan densitas kai-kuadrat, digunakan tabel nilai densitas ini, seperti pada
+densitas normal.  Densitas kai-kuadrat memiliki satu parameter $n$, yang disebut
+banyaknya derajat kebebasan\index{derajat kebebasan}.  Bilangan $n$ biasanya mudah
+ditentukan dari persoalan yang dihadapi.  Sebagai contoh, jika kita menguji
+independensi dua sifat, dan kedua sifat masing-masing mempunyai $a$ dan $b$ nilai,
+banyaknya derajat kebebasan peubah acak $\chi^2$ adalah $(a-1)(b-1)$.  Jadi, dalam
+contoh ini, banyaknya derajat kebebasan adalah 3.
+\par
+Ingat bahwa dalam contoh ini kita berusaha menguji independensi dua sifat, yaitu
+gender dan nilai.  Jika kita mengasumsikan kedua sifat ini independen, model bola dan
+guci di atas memberi kita cara untuk menyimulasikan percobaan.  Dengan komputer, kita
+telah melakukan 1000 percobaan dan menghitung nilai peubah acak $\chi^2$ untuk setiap
+percobaan.  Hasilnya ditampilkan dalam Gambar~\ref{fig 5.14.5}, bersama dengan fungsi
+densitas kai-kuadrat dengan tiga derajat kebebasan.
+\par
+Seperti dinyatakan di atas, jika nilai peubah acak $\chi^2$ besar, kita cenderung
+tidak percaya bahwa kedua sifat independen.  Namun, seberapa besar yang disebut
+besar?  Nilai aktual peubah acak ini untuk data di atas adalah 4.13.  Dalam
+Gambar~\ref{fig 5.14.5}, kita menampilkan densitas kai-kuadrat dengan 3 derajat
+kebebasan.  Terlihat bahwa nilai 4.13 lebih besar daripada kebanyakan nilai yang
+diambil peubah acak ini.
+\putfig{3truein}{PSfig5-14-5}{Densitas kai-kuadrat dengan tiga derajat kebebasan.}{fig 5.14.5}%%4.5truein 
+
+\par
+Biasanya, seorang statistikawan menghitung nilai $v$ dari peubah acak $\chi^2$ seperti
+yang telah kita lakukan.  Kemudian, dengan melihat tabel nilai densitas kai-kuadrat,
+ditentukan suatu nilai $v_0$ yang hanya dilampaui sebanyak 5\% dari seluruh kejadian.
+Jika $v \ge v_0$, statistikawan menolak hipotesis bahwa kedua sifat independen.  Dalam
+kasus ini, $v_0 = 7.815$, sehingga kita tidak menolak hipotesis bahwa kedua sifat
+independen.
+\end{example}
+
+\subsection*{Densitas Cauchy}\index{densitas Cauchy}\index{fungsi densitas!Cauchy}
+ 
+Contoh berikut berasal dari Feller.\index{FELLER, W.}\footnote{W. Feller,  \emx {An Introduction
+to Probability Theory and Its Applications,}, vol. 2, (New York: Wiley, 1966)}
+\begin{example}\label{exam 5.20.5}
+Misalkan sebuah cermin dipasang pada sumbu vertikal dan dapat berputar bebas
+mengelilingi sumbu tersebut.  Sumbu cermin berjarak 1 kaki dari dinding lurus yang
+panjangnya tak berhingga.  Seberkas cahaya dipancarkan ke cermin, lalu sinar
+pantulannya mengenai dinding.  Misalkan $\phi$ adalah sudut antara sinar pantulan dan
+garis yang tegak lurus terhadap dinding serta melalui sumbu cermin.  Kita asumsikan
+bahwa $\phi$ berdistribusi seragam di antara $-\pi/2$ dan $\pi/2$.  Misalkan $X$
+menyatakan jarak antara titik pada dinding yang terkena sinar pantulan dan titik pada
+dinding yang paling dekat dengan sumbu cermin.  Sekarang kita tentukan densitas $X$.
+\par
+Misalkan $B$ adalah besaran positif tetap.  Maka $X \ge B$ jika dan hanya jika
+$\tan(\phi) \ge B$, yang terjadi jika dan hanya jika $\phi \ge \arctan(B)$.  Hal ini
+terjadi dengan peluang
+$$\frac{\pi/2 - \arctan(B)}{\pi}\ .$$
+Jadi, untuk $B$ positif, fungsi distribusi kumulatif $X$ adalah
+$$F(B) = 1 - \frac{\pi/2 - \arctan(B)}{\pi}\ .$$
+Dengan demikian, fungsi densitas untuk $B$ positif adalah
+$$f(B) = \frac{1}{\pi (1 + B^2)}\ .$$
+Karena situasi fisiknya simetris terhadap $\phi = 0$, mudah dilihat bahwa ekspresi
+densitas di atas juga benar untuk nilai $B$ negatif.
+\par
+Hukum Bilangan Besar, yang akan kita bahas dalam Bab~\ref{chp 8}, menyatakan bahwa
+dalam banyak kasus, jika kita mengambil rata-rata nilai independen dari suatu peubah
+acak, rata-rata itu mendekati bilangan tertentu ketika banyaknya nilai bertambah.
+Ternyata, jika hal ini dilakukan pada peubah acak berdistribusi Cauchy, rata-ratanya
+tidak mendekati bilangan tertentu mana pun.
+\end{example}
+
+\exercises
+\begin{LJSItem}
+
+\i\label{exer 5.2.1} Pilih bilangan $U$ dari interval satuan $[0,1]$ dengan
+distribusi seragam.  Carilah distribusi kumulatif dan densitas peubah acak
+\begin{enumerate}
+\item $Y = U + 2$.
+
+\item $Y = U^3$.
+\end{enumerate}
+
+\i\label{exer 5.2.2} Pilih bilangan $U$ dari interval $[0,1]$ dengan distribusi
+seragam.  Carilah distribusi kumulatif dan densitas peubah acak
+\begin{enumerate}
+\item $Y = 1/(U + 1)$.
+
+\item $Y = \log(U + 1)$.
+\end{enumerate}
+
+\i\label{exer 5.2.2.5} Gunakan Korolari~\ref{cor 5.2} untuk menurunkan ekspresi
+peubah acak yang diberikan dalam Persamaan~\ref{eq 5.9}.   \emx {Petunjuk}: Peubah
+acak $1 - rnd$ dan $rnd$ berdistribusi identik.
+
+
+\i\label{exer 5.2.3} Misalkan kita mengetahui peubah acak $Y$ sebagai fungsi dari
+peubah acak seragam $U$: $Y = \phi(U)$, dan misalkan kita telah menghitung fungsi
+distribusi kumulatif $F_Y(y)$ serta densitas $f_Y(y)$.  Bagaimana kita dapat memeriksa
+apakah jawaban kita benar?  Simulasi sederhana memberikan jawabannya: Buatlah grafik
+batang $Y = \phi(\mbox{$rnd$})$ dan bandingkan hasilnya dengan grafik $f_Y(y)$.
+Kedua grafik seharusnya tampak serupa.  Periksalah jawaban Anda untuk
+Latihan~\ref{exer 5.2.1}~dan~\ref{exer 5.2.2} dengan metode ini.
+
+\i\label{exer 5.2.4} Pilih bilangan $U$ dari interval $[0,1]$ dengan distribusi
+seragam.  Carilah distribusi kumulatif dan densitas peubah acak
+\begin{enumerate}
+\item $Y = |U - 1/2|$.
+
+\item $Y = (U - 1/2)^2$.
+\end{enumerate}
+
+\i\label{exer 5.2.5} Periksalah hasil Anda untuk Latihan~\ref{exer 5.2.4} melalui
+simulasi seperti dijelaskan dalam Latihan~\ref{exer 5.2.3}.
+
+\i\label{exer 5.2.6} Jelaskan cara menghasilkan peubah acak yang fungsi distribusi
+kumulatifnya adalah
+$$ F(x) =  \left \{ \begin{array}{ll}
+              0, & \mbox{jika $x < 0$}, \\
+            x^2, & \mbox{jika $0 \leq x \leq 1$}, \\
+              1, & \mbox{jika $x > 1.$}
+                 \end{array}
+        \right.
+$$
+
+\i\label{5.2.7} Tulislah program untuk menghasilkan sampel berisi 1000 hasil acak
+yang masing-masing dipilih dari distribusi dalam Latihan~\ref{exer 5.2.6}.  Plotlah
+grafik batang hasil Anda dan bandingkan densitas empiris ini dengan densitas dari
+distribusi kumulatif dalam Latihan~\ref{exer 5.2.6}.
+
+\i\label{exer 5.2.8} Misalkan $U$, $V$ adalah bilangan acak yang dipilih secara
+independen dari interval $[0,1]$ dengan distribusi seragam.  Carilah distribusi
+kumulatif dan densitas masing-masing peubah
+\begin{enumerate}
+\item $Y = U + V$.
+
+\item $Y = |U - V|$.
+\end{enumerate}
+
+\i\label{exer 5.2.9} Misalkan $U$, $V$ adalah bilangan acak yang dipilih secara
+independen dari interval $[0,1]$.  Carilah distribusi kumulatif dan densitas peubah acak
+\begin{enumerate}
+\item $Y = \max(U,V)$.
+
+\item $Y = \min(U,V)$.
+\end{enumerate}
+
+\i\label{exer 5.2.10} Tulislah program untuk menyimulasikan peubah acak dalam
+Latihan \ref{exer 5.2.8} dan \ref{exer 5.2.9}, lalu plotlah grafik batang hasilnya.
+Bandingkan densitas empiris yang dihasilkan dengan densitas yang ditemukan dalam
+Latihan~\ref{exer 5.2.8}~dan~\ref{exer 5.2.9}.
+
+\i\label{exer 5.2.11} Sebuah bilangan $U$ dipilih secara acak dari interval
+$[0,1]$.  Carilah peluang bahwa
+\begin{enumerate}
+\item $R = U^2 < 1/4$.
+
+\item $S = U(1 - U) < 1/4$.
+
+\item $T = U/(1 - U) < 1/4$.
+\end{enumerate}
+
+\i\label{exer 5.2.12} Carilah fungsi distribusi kumulatif $F$ dan fungsi densitas $f$
+untuk masing-masing peubah acak $R$,~$S$, dan~$T$ dalam Latihan~\ref{exer 5.2.11}.
+
+\i\label{exer 5.2.13} Sebuah titik $P$ dalam persegi satuan memiliki koordinat $X$
+dan $Y$ yang dipilih secara acak dari interval $[0,1]$.  Misalkan $D$ adalah jarak
+dari $P$ ke sisi persegi terdekat, dan $E$ adalah jarak ke sudut terdekat.  Berapakah
+peluang bahwa
+\begin{enumerate}
+\item $D < 1/4$?
+
+\item $E < 1/4$?
+\end{enumerate}
+
+\i\label{exer 5.2.14} Dalam Latihan~\ref{exer 5.2.13}, carilah distribusi kumulatif
+$F$ dan densitas $f$ untuk peubah acak $D$.
+
+\i\label{5.2.15} Misalkan $X$ adalah peubah acak dengan fungsi densitas
+$$ f_X(x) = \left \{ \begin{array}{ll}
+                cx(1 - x), & \mbox{jika $0 < x < 1$}, \\
+                        0, & \mbox{selainnya.}
+                  \end{array}
+         \right.
+$$
+\begin{enumerate}
+\item Berapakah nilai $c$?
+
+\item Apakah fungsi distribusi kumulatif $F_X$ bagi $X$?
+
+\item Berapakah peluang bahwa $X < 1/4$?
+\end{enumerate}
+
+\i\label{5.2.16} Misalkan $X$ adalah peubah acak dengan fungsi distribusi kumulatif
+$$ F(x) =  \left \{ \begin{array}{ll}
+                            0, & \mbox{jika $x < 0$}, \\
+              \sin^2(\pi x/2), & \mbox{jika $0 \leq x \leq 1$},  \\
+                            1, & \mbox{jika $1 < x$}.
+                 \end{array}
+        \right.
+$$
+\begin{enumerate}
+\item Apakah fungsi densitas $f_X$ bagi $X$?
+
+\item Berapakah peluang bahwa $X < 1/4$?
+\end{enumerate}
+
+\i\label{exer 5.2.17} Misalkan $X$ adalah peubah acak dengan fungsi distribusi
+kumulatif $F_X$, serta misalkan $Y = X + b$, $Z = aX$, dan $W = aX + b$, dengan $a$
+dan $b$ sebarang konstanta.  Carilah fungsi distribusi kumulatif $F_Y$,~$F_Z$, dan
+$F_W$.   \emx {Petunjuk}: Kasus $a > 0$, $a = 0$, dan $a < 0$ memerlukan argumen yang
+berbeda.
+
+\i\label{exer 5.2.18} Misalkan $X$ adalah peubah acak dengan fungsi densitas $f_X$,
+serta misalkan $Y = X + b$, $Z = aX$, dan $W = aX + b$, dengan $a \ne 0$.  Carilah
+fungsi densitas $f_Y$,~$f_Z$, dan~$f_W$.  (Lihat Latihan~\ref{exer 5.2.17}.)
+
+\i\label{exer 5.2.19} Misalkan $X$ adalah peubah acak yang berdistribusi seragam pada
+$[c,d]$, dan misalkan $Y = aX + b$.  Untuk pilihan $a$ dan $b$ manakah $Y$
+berdistribusi seragam pada $[0,1]$?
+
+\i\label{exer 5.2.20} Misalkan $X$ adalah peubah acak dengan fungsi distribusi
+kumulatif $F$ yang naik tegas pada daerah nilai $X$.  Misalkan $Y = F(X)$.  Tunjukkan
+bahwa $Y$ berdistribusi seragam pada interval $[0,1]$.  (Rumus $X = F^{-1}(Y)$ lalu
+memberi tahu kita cara membentuk $X$ dari peubah acak seragam $Y$.)
+
+\i\label{exer 5.2.21} Misalkan $X$ adalah peubah acak dengan fungsi distribusi
+kumulatif $F$.  \emx {Median} $X$ adalah nilai $m$ yang memenuhi $F(m) = 1/2$.  Maka
+$X < m$ dengan peluang 1/2 dan $X > m$ dengan peluang 1/2.  Carilah $m$ jika $X$
+\begin{enumerate}
+\item berdistribusi seragam pada interval $[a,b]$.
+
+\item berdistribusi normal dengan parameter $\mu$ dan $\sigma$.
+
+\item berdistribusi eksponensial dengan parameter $\lambda$.
+\end{enumerate}
+
+\i\label{exer 5.2.22} Misalkan $X$ adalah peubah acak dengan fungsi densitas $f_X$.
+\emx {Rataan} $X$ adalah nilai $\mu = \int xf_x(x)\,dx$.  Maka $\mu$ memberikan
+nilai rata-rata bagi $X$ (lihat Bagian~\ref{sec 6.3}).  Carilah $\mu$ jika $X$
+berdistribusi seragam, normal, atau eksponensial, seperti dalam
+Latihan~\ref{exer 5.2.21}.
+
+\i\label{exer 5.2.23} Misalkan $X$ adalah peubah acak dengan fungsi densitas $f_X$.
+\emx {Modus} $X$ adalah nilai $M$ yang membuat $f(M)$ maksimum.  Maka nilai $X$ di
+dekat $M$ paling mungkin terjadi.  Carilah $M$ jika $X$ berdistribusi normal atau
+eksponensial, seperti dalam Latihan~\ref{exer 5.2.21}.  Apa yang terjadi jika $X$
+berdistribusi seragam?
+
+\i\label{exer 5.2.24} Misalkan $X$ adalah peubah acak berdistribusi normal dengan
+parameter $\mu = 70$, $\sigma = 10$.  Estimasikan
+\begin{enumerate}
+\item $P(X > 50)$.
+
+\item $P(X < 60)$.
+
+\item $P(X > 90)$.
+
+\item $P(60 < X < 80)$.
+\end{enumerate}
+
+\i\label{5.2.25} Bridies' Bearing Works memproduksi poros bantalan yang diameternya
+berdistribusi normal dengan parameter $\mu = 1$, $\sigma = .002$.  Spesifikasi pembeli
+mensyaratkan diameter $1.000 \pm .003$ cm.  Berapa bagian dari poros buatan perusahaan
+yang kemungkinan akan ditolak?  Jika produsen memperbaiki kendali mutunya, ia dapat
+memperkecil nilai $\sigma$.  Berapakah nilai $\sigma$ yang menjamin bahwa tidak lebih
+dari 1~persen porosnya kemungkinan ditolak?
+
+\i\label{exer 5.2.26} Ujian akhir di Podunk University disusun sedemikian rupa
+sehingga nilainya kira-kira berdistribusi normal dengan parameter $\mu$ dan $\sigma$.
+Pengajar memberikan nilai huruf berdasarkan nilai ujian seperti ditampilkan dalam
+Tabel~\ref{table 5.9} (proses ini disebut ``penilaian berdasarkan kurva").
+\begin{table}
+\centering
+\begin{tabular}{lc} Nilai ujian     & Nilai huruf           \\
+\hline
+$\mu + \sigma < x$                 & A                      \\
+$\mu < x < \mu + \sigma$           & B                      \\
+$\mu - \sigma < x < \mu $          & C                      \\
+$\mu - 2\sigma < x < \mu - \sigma$ & D                      \\
+$x < \mu - 2\sigma$                & F                      \\
+\end{tabular}
+\caption{Penilaian berdasarkan kurva.}
+\label{table 5.9}
+\end{table}
+
+\noindent Berapa bagian dari kelas yang memperoleh A,~B, C, D,~F?
+
+\i\label{exer 5.2.27} (Ross\footnote{S.~Ross, \emx {A First Course in Probability
+Theory,} 2d~ed. (New York: Macmillan, 1984).}) Seorang saksi ahli dalam perkara
+paternitas\index{perkara paternitas} bersaksi bahwa lamanya kehamilan (dalam hari),
+dari pembuahan hingga persalinan, kira-kira berdistribusi normal dengan parameter
+$\mu = 270$, $\sigma = 10$.  Tergugat dalam perkara tersebut dapat membuktikan bahwa
+ia berada di luar negeri selama periode dari~290 hingga~240 hari sebelum kelahiran
+anak.  Berapakah peluang bahwa tergugat berada di dalam negeri ketika anak itu
+dikandung?
+
+\i\label{5.2.28} Misalkan waktu (dalam jam) yang diperlukan untuk memperbaiki mobil
+merupakan peubah acak berdistribusi eksponensial dengan parameter $\lambda = 1/2$.
+Berapakah peluang bahwa waktu perbaikan melebihi 4 jam?  Jika waktu tersebut melebihi
+4 jam, berapakah peluang bahwa waktu itu melebihi 8 jam?
+
+\i\label{5.2.29} Misalkan banyaknya tahun sebuah mobil dapat beroperasi berdistribusi
+eksponensial dengan parameter $\mu = 1/4$.  Jika Prosser membeli mobil bekas hari ini,
+berapakah peluang bahwa mobil itu masih beroperasi setelah 4 tahun?
+
+\i\label{5.2.30} Misalkan $U$ adalah peubah acak yang berdistribusi seragam pada
+$[0,1]$.  Berapakah peluang bahwa persamaan
+$$ x^2 + 4Ux + 1 = 0
+$$ memiliki dua akar real berbeda $x_1$ dan $x_2$?
+
+\i\label{exer 5.2.31} Tulislah program untuk menyimulasikan peubah acak dengan
+densitas berikut, buatlah grafik batang yang sesuai untuk masing-masing densitas, lalu
+bandingkan densitas eksaknya dengan grafik batang.
+
+\begin{enumerate}
+\item $f_X(x) = e^{-x}\ \  \mbox{pada}\,\, [0,\infty)\,\, 
+(\mbox{tetapi\,\,cukup\,\,kerjakan\,\,pada\,\,} [0,10]).$
+
+\item $f_X(x) = 2x\ \ \mbox{pada}\,\, [0,1].$
+
+\item $f_X(x) = 3x^2\ \ \mbox{pada}\,\, [0,1].$
+
+\item $f_X(x) = 4|x - 1/2|\ \ \mbox{pada}\,\, [0,1].$
+\end{enumerate}
+
+\i\label{exer 5.2.32} Misalkan kita mengamati suatu proses dengan waktu antar-
+kejadian berdistribusi eksponensial dengan $\lambda = 1/30$ (yakni, rata-rata waktu
+antar-kejadian adalah 30 menit).  Misalkan proses dimulai pada suatu waktu dan kita
+mulai mengamatinya 3 jam kemudian.  Tulislah program untuk menyimulasikan proses ini.
+Misalkan $T$ menyatakan lamanya waktu yang harus kita tunggu, setelah mulai mengamati,
+sampai sebuah kejadian terjadi.  Buatlah program Anda mencatat $T$.  Berapakah
+estimasi nilai rata-rata $T$?
+
+\i\label{exer 5.2.33} Jones memasang dua bohlam baru: bohlam 60~watt dan bohlam
+100~watt.  Diklaim bahwa umur bohlam 60~watt memiliki densitas eksponensial dengan
+rata-rata umur 200 jam ($\lambda = 1/200$).  Bohlam 100~watt juga memiliki densitas
+eksponensial, tetapi rata-rata umurnya hanya 100 jam ($\lambda = 1/100$).  Jones ingin
+mengetahui peluang bahwa bohlam 100~watt akan bertahan lebih lama daripada bohlam
+60~watt.
+\par
+Jika $X$ dan $Y$ adalah dua peubah acak independen dengan densitas eksponensial
+masing-masing $f(x) = \lambda e^{-\lambda x}$ dan $g(x) = \mu e^{-\mu x}$, maka
+peluang bahwa $X$ lebih kecil daripada $Y$ diberikan oleh
+$$ P(X < Y) = \int_0^\infty f(x)(1 - G(x))\,dx,
+$$ dengan $G(x)$ sebagai fungsi distribusi kumulatif untuk $g(x)$.  Jelaskan mengapa
+hal ini berlaku.  Gunakan hasil ini untuk menunjukkan bahwa
+$$ P(X < Y) = \frac \lambda{\lambda + \mu}
+$$ dan menjawab pertanyaan Jones.
+
+\i\label{exer 5.2.34} Tinjau proses antrean sederhana dalam Contoh~\ref{exam
+5.21}.  Misalkan Anda mengamati panjang antrean.  Jika terdapat $j$ orang dalam
+antrean, pada perubahan berikutnya panjang antrean akan berkurang menjadi $j - 1$
+atau bertambah menjadi $j + 1$.  Gunakan hasil Latihan~\ref{exer 5.2.33} untuk
+menunjukkan bahwa peluang panjang antrean berkurang menjadi $j - 1$ adalah
+$\mu/(\mu + \lambda)$, sedangkan peluangnya bertambah menjadi $j + 1$ adalah
+$\lambda/(\mu + \lambda)$.  Ketika panjang antrean adalah 0, antrean hanya dapat
+bertambah menjadi~1.  Tulislah program untuk menyimulasikan panjang antrean.  Gunakan
+simulasi ini untuk membantu merumuskan dugaan berupa kondisi pada $\mu$~dan~$\lambda$
+yang menjamin bahwa antrean kadang-kadang kosong.
+
+\i\label{exer 5.2.36} Misalkan $X$ adalah peubah acak yang memiliki densitas
+eksponensial dengan parameter $\lambda$.  Carilah densitas peubah acak $Y = rX$,
+dengan $r$ bilangan real positif.
+
+\i\label{exer 5.2.37} Misalkan $X$ adalah peubah acak yang memiliki densitas normal,
+dan tinjau peubah acak $Y = e^X$.  Maka $Y$ memiliki densitas \emx {log-normal}
+\index{fungsi densitas!log-normal}\index{densitas log-normal}.  Carilah densitas $Y$ ini.
+
+\i\label{exer 5.2.38} Misalkan $X_1$ dan $X_2$ adalah peubah acak independen, dan
+untuk $i = 1, 2$, misalkan $Y_i = \phi_i(X_i)$, dengan $\phi_i$ naik tegas pada
+daerah nilai $X_i$.  Tunjukkan bahwa $Y_1$ dan $Y_2$ independen.  Perhatikan bahwa
+hasil yang sama berlaku tanpa asumsi bahwa $\phi_i$ naik tegas, tetapi pembuktiannya
+lebih sulit.
+
+\end{LJSItem}
+%\end{LJSItem}}
+%\end{document}

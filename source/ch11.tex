@@ -1,0 +1,3837 @@
+% Modified on 1/13/05.
+\newdimen\snellbaselineskip
+\newdimen\snellskip
+\snellskip=1.5ex
+\snellbaselineskip=\baselineskip
+\def\srule{\omit\kern.5em\vrule\kern-.5em}
+\newbox\bigstrutbox
+\setbox\bigstrutbox=\hbox{\vrule height14.5pt depth9.5pt width0pt}
+\def\bigstrut{\relax\ifmmode\copy\bigstrutbox\else\unhcopy\bigstrutbox\fi}
+\def\middlehrule#1#2{\noalign{\kern-\snellbaselineskip\kern\snellskip}
+&\multispan#1\strut\hrulefill
+&\omit\hbox to.5em{\hrulefill}\vrule 
+height \snellskip\kern-.5em&\multispan#2\hrulefill\cr}
+
+\makeatletter
+\def\bordermatrix#1{\begingroup \m@th
+  \@tempdima 8.75\p@
+  \setbox\z@\vbox{%
+    \def\cr{\crcr\noalign{\kern2\p@\global\let\cr\endline}}%
+    \ialign{$##$\hfil\kern2\p@\kern\@tempdima&\thinspace\hfil$##$\hfil
+      &&\quad\hfil$##$\hfil\crcr
+      \omit\strut\hfil\crcr\noalign{\kern-\snellbaselineskip}%
+      #1\crcr\omit\strut\cr}}%
+  \setbox\tw@\vbox{\unvcopy\z@\global\setbox\@ne\lastbox}%
+  \setbox\tw@\hbox{\unhbox\@ne\unskip\global\setbox\@ne\lastbox}%
+  \setbox\tw@\hbox{$\kern\wd\@ne\kern-\@tempdima\left(\kern-\wd\@ne
+    \global\setbox\@ne\vbox{\box\@ne\kern2\p@}%
+    \vcenter{\kern-\ht\@ne\unvbox\z@\kern-\snellbaselineskip}\,\right)$}%
+  \null\;\vbox{\kern\ht\@ne\box\tw@}\endgroup}
+
+\makeatother
+
+
+
+%\setcounter{chapter}{9}
+
+\chapter{Rantai Markov}\label{chp 11}
+
+\section{Pendahuluan}\label{sec 11.1}
+
+\par
+Sebagian besar kajian kita tentang peluang telah membahas proses percobaan
+independen. Proses-proses ini merupakan dasar teori peluang klasik dan banyak
+bagian statistika. Kita telah membahas dua teorema utama bagi proses-proses
+tersebut: Hukum Bilangan Besar dan Teorema Limit Pusat.
+\par
+Kita telah melihat bahwa ketika suatu barisan percobaan acak membentuk proses
+percobaan independen, hasil-hasil yang mungkin dari setiap percobaan adalah sama
+dan terjadi dengan peluang yang sama. Selain itu, pengetahuan tentang hasil
+percobaan sebelumnya tidak memengaruhi prediksi kita mengenai hasil percobaan
+berikutnya. Distribusi hasil satu percobaan cukup untuk membangun pohon dan
+ukuran pohon bagi barisan $n$ percobaan, dan kita dapat menjawab sebarang
+pertanyaan peluang tentang percobaan-percobaan ini menggunakan ukuran pohon tersebut.
+\par
+Teori peluang modern mempelajari proses acak ketika pengetahuan tentang hasil
+sebelumnya memengaruhi prediksi bagi percobaan mendatang. Pada prinsipnya, ketika
+kita mengamati barisan percobaan acak, semua hasil masa lalu dapat memengaruhi
+prediksi kita bagi percobaan berikutnya. Sebagai contoh, hal ini seharusnya
+berlaku ketika memprediksi nilai seorang siswa dalam serangkaian ujian suatu
+mata kuliah. Namun, membolehkan keumuman sebesar ini akan sangat menyulitkan
+pembuktian hasil-hasil umum.
+\par
+Pada 1907, A.~A. Markov mulai mempelajari jenis baru proses acak yang penting.
+Dalam proses ini, hasil suatu percobaan dapat memengaruhi hasil percobaan
+berikutnya. Jenis proses ini disebut rantai Markov.
+\subsection*{Menentukan Rantai Markov}\index{rantai Markov}
+Rantai Markov dideskripsikan sebagai berikut. Kita memiliki himpunan \emx
+{keadaan,} $S = \{s_1,s_2,\ldots,s_r\}$.\index{keadaan!dari rantai Markov}
+Proses dimulai pada salah satu keadaan ini dan berpindah secara berturut-turut
+dari satu keadaan ke keadaan lain. Setiap perpindahan disebut \emx {langkah.}
+Jika rantai saat ini berada dalam keadaan $s_i$, pada langkah berikutnya rantai
+berpindah ke keadaan $s_j$ dengan peluang yang dinyatakan oleh $p_{ij}$, dan
+peluang ini tidak bergantung pada keadaan mana saja yang ditempati rantai
+sebelum keadaan saat ini.
+\par
+Peluang~$p_{ij}$ disebut \emx {peluang transisi.}\index{peluang transisi}
+\index{peluang!transisi} Proses dapat tetap berada dalam keadaannya saat ini,
+dan hal ini terjadi dengan peluang~$p_{ii}$. Distribusi peluang awal yang
+didefinisikan pada~$S$ menentukan keadaan awal. Biasanya hal ini dilakukan
+dengan menetapkan suatu keadaan tertentu sebagai keadaan awal.
+
+R.~A. Howard\footnote{R.~A. Howard, \emx {Dynamic Probabilistic Systems,}
+vol.~1
+(New York: John Wiley and Sons, 1971).}\index{HOWARD, R. A.} memberikan
+gambaran menarik tentang rantai Markov sebagai seekor katak yang melompat di
+atas sekumpulan daun teratai. Katak tersebut mulai pada salah satu daun, lalu
+melompat dari satu daun teratai ke daun lain dengan peluang transisi yang sesuai.
+
+
+
+\begin{example}\label{exam 11.1.1}
+Menurut Kemeny, Snell, dan Thompson,\footnote{J.~G. Kemeny, J.~L. Snell,
+G.~L. Thompson, \emx {Introduction to Finite Mathematics,} 3rd ed.\ (Englewood
+Cliffs, NJ: Prentice-Hall, 1974).}\index{KEMENY, J. G.}\index{SNELL, J.
+L.}\index{THOMPSON, G. L.} Negeri Oz\index{Oz, Negeri} dianugerahi banyak hal,
+tetapi bukan cuaca yang baik. Di sana tidak pernah terjadi dua hari cerah
+berturut-turut. Jika suatu hari cerah, keesokan harinya salju dan hujan sama
+mungkin terjadi. Jika turun salju atau hujan, peluang cuaca yang sama terjadi
+keesokan harinya adalah setengah. Jika cuaca berubah dari salju atau hujan,
+hanya separuh perubahan itu yang menghasilkan hari cerah. Dengan informasi ini
+kita membentuk rantai Markov sebagai berikut. Jenis cuaca R, N, dan S kita ambil
+sebagai keadaan. Dari informasi di atas kita menentukan peluang transisinya.
+Peluang-peluang tersebut paling mudah dinyatakan dalam larik persegi sebagai
+$$
+\mat {P} = \bordermatrix{
+        & \mbox {R} & \mbox {N} & \mbox {S} \cr
+\mbox {R} &     1/2 &     1/4 &     1/4 \cr
+\mbox {N} &     1/2 &       0 &     1/2 \cr
+\mbox {S} &     1/4 &     1/4 &     1/2}\ .
+$$
+\end{example}
+
+\subsection*{Matriks Transisi}
+Entri-entri pada baris pertama matriks $\mat {P}$ dalam Contoh~\ref{exam
+11.1.1} menyatakan peluang berbagai jenis cuaca setelah hari hujan. Demikian
+pula, entri-entri pada baris kedua dan ketiga masing-masing menyatakan peluang
+berbagai jenis cuaca setelah hari cerah dan hari bersalju. Larik persegi semacam
+ini disebut \emx {matriks peluang transisi}, atau \emx {matriks
+transisi}.\index{matriks transisi}
+\par
+Kita meninjau masalah menentukan peluang bahwa, jika rantai berada dalam
+keadaan $i$ hari ini, rantai akan berada dalam keadaan $j$ dua hari lagi.
+Peluang ini kita nyatakan dengan $p_{ij}^{(2)}$. Dalam
+Contoh~\ref{exam 11.1.1}, kita melihat bahwa jika hari ini hujan, kejadian bahwa
+dua hari lagi turun salju merupakan gabungan saling lepas dari tiga kejadian
+berikut: 1) besok hujan dan dua hari lagi turun salju, 2) besok cerah dan dua
+hari lagi turun salju, dan 3) besok turun salju dan dua hari lagi juga turun
+salju. Peluang kejadian pertama adalah hasil kali peluang bersyarat bahwa besok
+hujan jika hari ini hujan, dan peluang bersyarat bahwa dua hari lagi turun
+salju jika besok hujan. Dengan menggunakan matriks transisi $\mat{P}$, hasil
+kali ini dapat ditulis sebagai $p_{11}p_{13}$. Kedua kejadian lain juga
+memiliki peluang yang dapat ditulis sebagai hasil kali entri-entri $\mat{P}$.
+Jadi, kita mempunyai
+$$p_{13}^{(2)} = p_{11}p_{13} + p_{12}p_{23} + p_{13}p_{33}\ .$$
+Persamaan ini mengingatkan kita pada hasil kali titik dua vektor; kita mengambil
+hasil kali titik baris pertama $ \mat {P}$ dengan kolom ketiga $ \mat {P}$.
+Tepat inilah yang dilakukan untuk memperoleh entri-$1,3$ dari hasil kali $ \mat
+{P}$ dengan dirinya sendiri. Secara umum, jika rantai Markov memiliki $r$
+keadaan, maka
+$$p_{ij}^{(2)} = \sum_{k = 1}^r p_{ik}p_{kj}\ .$$
+Teorema umum berikut mudah dibuktikan menggunakan pengamatan di atas dan induksi.
+\begin{theorem}\label{thm 11.1.1}
+Misalkan $ \mat {P}$ adalah matriks transisi suatu rantai Markov. Entri
+ke-$ij$, yaitu~$p_{ij}^{(n)}$, dari matriks~$ \mat {P}^n$ memberikan peluang
+bahwa rantai Markov yang bermula dalam keadaan~$s_i$ akan berada dalam
+keadaan~$s_j$ setelah $n$ langkah.
+\proof
+Bukti teorema ini diserahkan sebagai latihan (Latihan~\ref{exer 11.1.18}).
+\end{theorem}
+
+\begin{example}\label{exam 11.1.1.5} (lanjutan Contoh~\ref{exam 11.1.1})
+Tinjau kembali cuaca di Negeri Oz. Kita mengetahui bahwa pangkat-pangkat matriks
+transisi memberi kita informasi menarik tentang perkembangan proses tersebut.
+Kita terutama akan tertarik pada keadaan rantai setelah banyak langkah. Program
+{\bf MatrixPowers}\index{MatrixPowers (program)} menghitung pangkat-pangkat~$\mat{P}$.
+\par
+Kita telah menjalankan program {\bf MatrixPowers} bagi contoh Negeri Oz untuk
+menghitung pangkat-pangkat berturut-turut~$\mat{P}$ dari 1~sampai~6. Hasilnya
+ditampilkan dalam Tabel~\ref{table 11.1}. Perhatikan bahwa setelah enam hari,
+hingga ketelitian tiga tempat desimal, prediksi cuaca kita tidak bergantung pada
+cuaca hari ini. Peluang ketiga jenis cuaca R, N, dan S adalah .4, .2, dan .4
+tanpa memandang keadaan awal rantai. Ini merupakan contoh jenis rantai Markov
+yang disebut rantai Markov \emx {reguler}. Untuk jenis rantai ini, prediksi
+jangka panjang tidak bergantung pada keadaan awal. Tidak semua rantai bersifat
+reguler, tetapi ini merupakan kelas rantai penting yang akan kita pelajari
+secara terperinci nanti.
+\begin{table}
+\centering
+$$
+\mat{P}^1  = \bordermatrix{
+            &\mbox{Hujan}&\mbox{Cerah}&\mbox{Salju} \cr
+\mbox{Hujan} & .500      & .250      & .250 \cr
+\mbox{Cerah} & .500      & .000      & .500 \cr
+\mbox{Salju} & .250      & .250      & .500 \cr}
+$$
+$$  
+\mat {P}^2  = \bordermatrix{
+            &\mbox{Hujan}&\mbox{Cerah}&\mbox{Salju} \cr
+\mbox{Hujan} & .438     & .188       & .375 \cr
+\mbox{Cerah} & .375     & .250       & .375 \cr
+\mbox{Salju} & .375     & .188       & .438 \cr}
+$$
+$$
+\mat {P}^3  = \bordermatrix{
+            &\mbox{ Hujan}&\mbox{Cerah} &\mbox{Salju} \cr
+\mbox{Hujan} & .406       & .203       & .391 \cr
+\mbox{Cerah} & .406       & .188       & .406 \cr
+\mbox{Salju} & .391       & .203       & .406 \cr}
+$$
+$$  
+\mat {P}^4  = \bordermatrix{
+            &\mbox{Hujan}&\mbox{Cerah}&\mbox{Salju} \cr
+\mbox{Hujan} & .402      & .199      & .398 \cr
+\mbox{Cerah} & .398      & .203      & .398 \cr
+\mbox{Salju} & .398      & .199      & .402 \cr}
+$$
+$$
+\mat {P}^5  = \bordermatrix{
+           &\mbox{Hujan}&\mbox{Cerah}&\mbox{Salju} \cr
+\mbox{Hujan} & .400     & .200     & .399 \cr
+\mbox{Cerah} & .400     & .199     & .400 \cr
+\mbox{Salju} & .399     & .200     & .400 \cr}
+$$
+$$  
+\mat {P}^6  = \bordermatrix{
+           &\mbox{Hujan}&\mbox{Cerah}&\mbox{Salju} \cr
+\mbox{Hujan} & .400     & .200     & .400 \cr
+\mbox{Cerah} & .400     & .200     & .400 \cr
+\mbox{Salju} & .400     & .200     & .400 \cr}
+$$
+\caption{Pangkat-pangkat matriks transisi Negeri Oz.}
+\label{table 11.1}
+\end{table}
+\end{example}
+
+Sekarang kita meninjau perilaku jangka panjang suatu rantai Markov ketika
+rantai bermula dalam keadaan yang dipilih menurut distribusi peluang pada
+himpunan keadaan; distribusi ini akan kita sebut \emx {vektor
+peluang}.\index{peluang!vektor} Vektor peluang dengan $r$ komponen adalah vektor
+baris yang entri-entrinya non-negatif dan berjumlah 1. Jika $\mat {u}$ adalah
+vektor peluang yang menyatakan keadaan awal suatu rantai Markov, komponen
+ke-$i$ dari $\mat {u}$ kita tafsirkan sebagai peluang bahwa rantai bermula dalam
+keadaan $s_i$.
+\par
+Dengan penafsiran keadaan awal acak ini, teorema berikut mudah dibuktikan.
+\begin{theorem}\label{thm 11.1.2}
+Misalkan $\mat{P}$ adalah matriks transisi suatu rantai Markov dan $\mat {u}$
+adalah vektor peluang yang menyatakan distribusi awal. Maka peluang bahwa
+rantai berada dalam keadaan $s_i$ setelah $n$ langkah adalah entri ke-$i$ pada
+vektor
+$$ \mat{u}^{(n)} = \mat{u}{\mat{P}^n}\ .$$
+\proof
+Bukti teorema ini diserahkan sebagai latihan (Latihan~\ref{exer 11.1.19}).
+\end{theorem}
+
+Perhatikan bahwa jika kita ingin memeriksa perilaku rantai dengan asumsi bahwa
+rantai bermula dalam keadaan tertentu $s_i$, kita cukup memilih $\mat {u}$
+sebagai vektor peluang yang entri ke-$i$-nya sama dengan 1 dan semua entri lain
+sama dengan 0.
+
+\begin{example}\label{exam 11.1.1.6} Dalam contoh Negeri Oz
+(Contoh~\ref{exam 11.1.1}), misalkan vektor peluang awal $\mat {u}$ sama dengan
+$(1/3, 1/3, 1/3)$. Kita dapat menghitung distribusi keadaan setelah tiga hari
+dengan menggunakan Teorema~\ref{thm 11.1.2} dan perhitungan kita sebelumnya
+atas ${\mat {P}^3}$. Kita memperoleh
+\begin{eqnarray*}
+{\mat {u}}^{(3)} = {\mat {u}}{\mat {P}^3} &=& \pmatrix{ 1/3,& 1/3,& 1/3}
+\pmatrix{ .406 & .203 &
+.391 \cr   .406 & .188 & .406 \cr .391 & .203 & .406 } \cr
+&& \cr
+&=& \pmatrix{ .401,& .198,& .401} \ .
+\end{eqnarray*}
+\end{example}
+
+\subsection*{Contoh}
+Contoh-contoh rantai Markov berikut akan digunakan dalam latihan di seluruh bab.
+
+\begin{example}\label{exam 11.1.2}
+Presiden Amerika Serikat memberi tahu orang~A tentang niatnya untuk maju atau
+tidak maju dalam pemilihan berikutnya. Kemudian A meneruskan kabar itu kepada~B,
+yang kemudian meneruskan pesan tersebut kepada~C, dan seterusnya, selalu kepada
+orang baru. Kita menganggap terdapat peluang~$a$ bahwa seseorang akan mengubah
+jawaban dari ya menjadi tidak ketika menyampaikannya kepada orang berikutnya,
+dan peluang~$b$ bahwa ia akan mengubahnya dari tidak menjadi ya. Pesan, yaitu
+ya atau tidak, kita pilih sebagai keadaan. Matriks transisinya adalah
+$$
+\mat{P} = \bordermatrix{
+           & \mbox{ya} & \mbox{tidak} \cr
+\mbox{ya} &      1 - a &         a \cr
+\mbox{tidak}  &          b &     1 - b}\ .
+$$
+Keadaan awal menyatakan pilihan Presiden.
+\end{example}
+
+\begin{example}\label{exam 11.1.3}
+Setiap kali seekor kuda tertentu berlomba dalam pacuan tiga kuda, peluangnya
+untuk menang adalah~1/2, untuk menempati urutan kedua 1/4, dan untuk menempati
+urutan ketiga 1/4, terlepas dari hasil pacuan sebelumnya. Kita memiliki proses
+percobaan independen, tetapi proses ini juga dapat ditinjau dari sudut pandang
+teori rantai Markov. Matriks transisinya adalah
+$$
+\mat{P} = \bordermatrix{
+        & \mbox{W} & \mbox{P} & \mbox{S} \cr
+\mbox{W} &      .5 &      .25 &      .25 \cr
+\mbox{P} &      .5 &      .25 &      .25 \cr
+\mbox{S} &      .5 &      .25 &      .25}\ .
+$$
+\end{example}
+\vskip -3pt
+\begin{example}\label{exam 11.1.4}
+Pada Zaman Kegelapan, Harvard, Dartmouth, dan Yale hanya menerima mahasiswa
+laki-laki. Anggaplah bahwa pada masa itu 80~persen anak laki-laki alumni
+Harvard kuliah di Harvard dan sisanya di Yale; 40~persen anak laki-laki alumni
+Yale kuliah di Yale dan sisanya terbagi rata antara Harvard dan Dartmouth;
+sedangkan dari anak laki-laki alumni Dartmouth, 70~persen kuliah di Dartmouth,
+20~persen di Harvard, dan 10~persen di Yale. Kita membentuk rantai Markov dengan
+matriks transisi
+$$
+\mat{P} = \bordermatrix{
+        & \mbox{H} & \mbox{Y} & \mbox{D} \cr
+\mbox{H} &      .8 &      .2 &       0 \cr
+\mbox{Y} &      .3 &      .4 &      .3 \cr 
+\mbox{D} &      .2 &      .1 &      .7}\ .
+$$
+\end{example}
+\vskip -3pt
+\begin{example}\label{exam 11.1.5}
+Ubahlah Contoh~\ref{exam 11.1.4} dengan menganggap bahwa anak laki-laki seorang
+alumni Harvard selalu kuliah di Harvard. Matriks transisinya sekarang adalah
+$$
+\mat{P} = \bordermatrix{
+        & \mbox{H} & \mbox{Y} & \mbox{D} \cr
+\mbox{H} &       1 &       0 &       0 \cr
+\mbox{Y} &      .3 &      .4 &      .3 \cr
+\mbox{D} &      .2 &      .1 &      .7}\ .
+$$
+\end{example}
+\vskip -3pt
+\begin{example}\label{exam 11.1.6}\index{model Ehrenfest}
+\index{difusi gas!model Ehrenfest}
+(Model Ehrenfest) Berikut ini merupakan kasus khusus suatu model yang disebut
+model Ehrenfest,\footnote{P. and T. Ehrenfest, ``\"{U}ber zwei bekannte Einw\"{a}nde
+gegen das
+Boltzmannsche  H-Theorem," \emx {Physikalishce Zeitschrift,} vol.~8 (1907),
+pp.~311-314.}\index{EHRENFEST, P.}
+\index{EHRENFEST, T}
+yang telah digunakan untuk menjelaskan difusi gas. Model umumnya akan dibahas
+secara terperinci dalam Bagian~\ref{sec 11.5}. Kita memiliki dua guci yang
+bersama-sama memuat empat bola. Pada setiap langkah, salah satu dari keempat
+bola dipilih secara acak dan dipindahkan dari guci tempatnya berada ke guci
+lain. Banyaknya bola dalam guci pertama kita pilih sebagai keadaan. Matriks
+transisinya adalah
+$$
+ \mat {P} = \bordermatrix{
+  &  0  &  1  &  2  &  3  &  4  \cr
+0 &  0  &  1  &  0  &  0  &  0  \cr
+1 & 1/4 &  0  & 3/4 &  0  &  0  \cr
+2 &  0  & 1/2 &  0  & 1/2 &  0  \cr
+3 &  0  &  0  & 3/4 &  0  & 1/4 \cr
+4 &  0  &  0  &  0  &  1  &  0 \cr}\ . 
+$$
+\end{example}
+
+\begin{example}\label{exam 11.1.7}\index{gen}
+(Model Gen) Jenis pewarisan sifat paling sederhana pada hewan terjadi ketika
+suatu sifat dikendalikan oleh sepasang gen yang masing-masing dapat terdiri
+atas dua jenis, misalnya G~dan~g. Seorang individu dapat memiliki kombinasi GG,
+Gg (yang secara genetik sama dengan gG), atau gg. Sangat sering tipe GG dan Gg
+tidak dapat dibedakan dari penampilannya; dalam hal ini kita mengatakan bahwa
+gen G~mendominasi gen g. Individu disebut \emx {dominan} jika memiliki gen~GG,
+\emx {resesif} jika memiliki gg, dan \emx {hibrida} jika memiliki campuran Gg.
+\par
+Dalam perkawinan dua hewan, keturunannya mewarisi satu gen dari pasangan gen
+tersebut dari setiap induk, dan asumsi dasar genetika adalah bahwa gen-gen ini
+dipilih secara acak dan saling independen. Asumsi ini menentukan peluang
+munculnya setiap jenis keturunan. Keturunan dari dua induk dominan murni harus
+dominan, keturunan dari dua induk resesif harus resesif, dan keturunan dari satu
+induk dominan dan satu induk resesif harus hibrida.
+\par
+Dalam perkawinan hewan dominan dan hibrida, setiap keturunan harus memperoleh
+gen G~dari hewan pertama dan memiliki peluang yang sama untuk memperoleh G~atau
+g dari hewan kedua. Jadi, peluang memperoleh keturunan dominan sama dengan
+peluang memperoleh keturunan hibrida. Demikian pula, dalam perkawinan hewan
+resesif dan hibrida, peluang memperoleh keturunan resesif sama dengan peluang
+memperoleh keturunan hibrida. Dalam perkawinan dua hibrida, keturunannya
+memiliki peluang yang sama untuk memperoleh G~atau g dari setiap induk. Jadi,
+peluangnya adalah 1/4 untuk GG, 1/2 untuk Gg, dan 1/4 untuk gg.
+\par
+Tinjaulah proses perkawinan berkelanjutan. Kita mulai dengan individu yang
+karakter genetiknya diketahui dan mengawinkannya dengan hibrida. Kita
+menganggap terdapat sedikitnya satu keturunan. Satu keturunan dipilih secara
+acak dan dikawinkan dengan hibrida, lalu proses ini diulangi selama beberapa
+generasi. Jenis genetik keturunan terpilih dalam generasi-generasi berturut-turut
+dapat dinyatakan oleh rantai Markov. Keadaannya adalah dominan, hibrida, dan
+resesif, yang masing-masing ditunjukkan oleh GG, Gg, dan gg.
+\par
+Peluang transisinya adalah
+$$
+\mat{P} = \bordermatrix{
+          &\mbox{GG} & \mbox{Gg} & \mbox{gg} \cr
+\mbox{GG} &  .5      & .5        &   0       \cr
+\mbox{Gg} & .25      & .5        & .25       \cr
+\mbox{gg} &   0      & .5        &  .5       }\ . 
+$$
+\end{example}
+
+\begin{example}\label{exam 11.1.8}
+Ubahlah Contoh~\ref{exam 11.1.7} sebagai berikut: Alih-alih mengawinkan
+keturunan tertua dengan hibrida, kita mengawinkannya dengan individu dominan.
+Matriks transisinya adalah
+$$
+\mat{P} = \bordermatrix{
+   & \mbox{GG} & \mbox{Gg} &\mbox{gg} \cr
+\mbox{GG} &  1 &  0 &  0 \cr
+\mbox{Gg} & .5 & .5 &  0 \cr
+\mbox{gg} &  0 &  1 &  0}\ .
+$$
+\end{example}
+
+\begin{example}\label{exam 11.1.9}
+Kita mulai dengan dua hewan berjenis kelamin berbeda, mengawinkan keduanya,
+memilih dua keturunan mereka yang berjenis kelamin berbeda, lalu mengawinkan
+keduanya, dan seterusnya. Untuk menyederhanakan contoh, kita akan menganggap
+bahwa sifat yang ditinjau tidak bergantung pada jenis kelamin.
+\par
+Di sini suatu keadaan ditentukan oleh sepasang hewan. Jadi, keadaan-keadaan
+proses kita adalah: $s_1 = (\mbox{GG},\mbox{GG})$, $s_2 =
+(\mbox{GG},\mbox{Gg})$, $s_3 = (\mbox{GG},\mbox{gg})$, $s_4 =
+(\mbox{Gg},\mbox{Gg})$, $s_5 = (\mbox{Gg},\mbox{gg})$, dan $s_6 =
+(\mbox{gg},\mbox{gg})$.
+\par
+Kita mengilustrasikan perhitungan peluang transisi melalui keadaan~$s_2$.
+Ketika proses berada dalam keadaan ini, satu induk memiliki gen~GG dan induk
+lainnya Gg. Jadi, peluang memperoleh keturunan dominan adalah~1/2. Kemudian
+peluang transisi ke~$s_1$ (memilih dua individu dominan) adalah~1/4, peluang
+transisi ke~$s_2$ adalah~1/2, dan peluang transisi ke~$s_4$ adalah~1/4.
+Keadaan-keadaan lain diperlakukan dengan cara yang sama. Matriks transisi
+rantai ini adalah:
+\par
+
+$$
+{\mat{P}^1} = \bordermatrix{            
+&\mbox{GG,GG}&\mbox{GG,Gg}&\mbox{GG,gg}&\mbox{Gg,Gg}&\mbox{Gg,gg}&\mbox{gg,gg}\cr
+\mbox{GG,GG} & 1.000 & .000 &  .000 &  .000 &  .000 &  .000\cr
+\mbox{GG,Gg} &  .250 & .500 &  .000 &  .250 &  .000 &  .000\cr
+\mbox{GG,gg} &  .000 & .000 &  .000 & 1.000 &  .000 &  .000\cr
+\mbox{Gg,Gg} &  .062 & .250 &  .125 &  .250 &  .250 &  .062\cr
+\mbox{Gg,gg} &  .000 & .000 &  .000 &  .250 &  .500 &  .250\cr
+\mbox{gg,gg} &  .000 & .000 &  .000 &  .000 &  .000 &  1.000}\ .
+$$
+ 
+\end{example}
+
+\begin{example} \label{exam 11.1.10}\index{batu loncatan}
+(Model Batu Loncatan) Contoh terakhir kita merupakan contoh lain yang telah
+digunakan dalam kajian genetika. Contoh ini disebut model \emx {batu
+loncatan}.\footnote{S.
+Sawyer, ``Results for The Stepping Stone Model for Migration in Population
+Genetics," \emx {Annals of Probability,} vol.~4 (1979),
+pp.~699--728.}\index{SAWYER, S.} Dalam model ini kita memiliki larik persegi
+$n$-kali-$n$, dan setiap persegi pada awalnya memiliki salah satu dari $k$
+warna berbeda. Pada setiap langkah, sebuah persegi dipilih secara acak. Persegi
+ini kemudian memilih salah satu dari delapan tetangganya secara acak dan
+mengambil warna tetangga tersebut. Untuk menghindari masalah batas, kita
+menganggap bahwa jika suatu persegi $S$ berada pada batas kiri, misalnya, tetapi
+tidak di sudut, persegi itu bertetangga dengan persegi $T$ pada batas kanan di
+baris yang sama dengan $S$, dan $S$ juga bertetangga dengan persegi tepat di
+atas dan di bawah $T$. Asumsi serupa dibuat untuk persegi pada batas atas dan
+bawah. Persegi sudut kiri atas bertetangga dengan tiga tetangga yang jelas,
+yaitu persegi di bawahnya, di kanannya, dan secara diagonal di kanan bawahnya.
+Persegi ini memiliki lima tetangga lain, yaitu: tiga persegi sudut lainnya,
+persegi di bawah sudut kanan atas, dan persegi di kanan sudut kiri bawah.
+Ketiga sudut lainnya, dengan cara serupa, juga memiliki delapan tetangga.
+(Ketetanggaan ini jauh lebih mudah dipahami jika kita membayangkan larik
+dibentuk menjadi silinder dengan merekatkan sisi atas dan bawah, lalu membentuk
+silinder itu menjadi donat dengan merekatkan kedua batas lingkarannya.) Dengan
+ketetanggaan ini, setiap persegi dalam larik bertetangga dengan tepat delapan
+persegi lain.
+\par
+Suatu keadaan dalam rantai Markov ini merupakan deskripsi warna setiap persegi.
+Untuk rantai Markov ini, banyaknya keadaan adalah~$k^{n^2}$, yang bahkan untuk
+larik persegi kecil pun sangat besar. Ini merupakan contoh rantai Markov yang
+mudah disimulasikan, tetapi sulit dianalisis melalui matriks transisinya. Program
+{\bf SteppingStone}\index{SteppingStone (program)} menyimulasikan rantai ini.
+Kita memulai dengan konfigurasi awal acak dari dua warna dengan $n = 20$ dan
+menampilkan hasil setelah proses berjalan selama beberapa waktu dalam
+Gambar~\ref{fig 11.2}.
+\noindent
+\par
+Ini merupakan contoh rantai Markov \emx {menyerap}. Jenis rantai ini akan
+dipelajari dalam Bagian~\ref{sec 11.2}. Salah satu teorema yang dibuktikan dalam
+bagian tersebut, ketika diterapkan pada contoh ini, mengakibatkan bahwa dengan
+peluang 1, semua batu pada akhirnya akan memiliki warna yang sama. Dengan
+mengamati program berjalan, Anda dapat melihat wilayah-wilayah terbentuk dan
+pertempuran berkembang untuk menentukan warna mana yang bertahan. Pada sebarang
+saat, peluang bahwa suatu warna tertentu akan menang sama dengan proporsi larik
+yang memiliki warna tersebut. Anda diminta membuktikan hal ini dalam
+Latihan~\ref{sec 11.2}.\ref{exer 11.2.31}.
+\end{example}
+
+\putfig{2truein}{PSfig11-1}{Keadaan awal model batu loncatan.}{fig 11.1}
+
+%\begin{figure}
+%\centerline{\epsfxsize=2truein 
+%\epsffile{PSfig11-1}}
+%\caption{Initial state of the stepping stone model.}\label{fig 11.1}
+%\end{figure}
+\nopagebreak[4]
+\putfig{2truein}{PSfig11-2}{Keadaan model batu loncatan setelah 10,000 langkah.}{fig 11.2}
+
+%\begin{figure}
+%\centerline{\epsfxsize=2truein 
+%\epsffile{PSfig11-2}}
+%\caption{State of the stepping stone model after 10,000 steps.}\label{fig 11.2}
+%\end{figure}
+
+\exercises
+\begin{LJSItem}
+
+\i\label{exer 11.1.1} Di Negeri Oz sedang hujan. Tentukan pohon dan ukuran
+pohon untuk cuaca tiga hari berikutnya. Carilah $\mat {w}^{(1)},  \mat
+{w}^{(2)},$ dan $ \mat {w}^{(3)}$, lalu bandingkan dengan hasil yang diperoleh
+dari $ \mat {P},~\mat {P}^2,$ dan~$ \mat {P}^3$.
+
+\i\label{exer 11.1.2} Dalam Contoh~\ref{exam 11.1.2}, misalkan $a = 0$ dan $b =
+1/2$. Carilah $ \mat {P},~ \mat {P}^2,$ dan $ \mat {P}^3.$ Bagaimanakah bentuk $
+\mat {P}^n$? Apa yang terjadi pada~$ \mat {P}^n$ ketika $n$ menuju tak
+hingga? Tafsirkan hasil ini.
+
+\i\label{exer 11.1.3} Dalam Contoh~\ref{exam 11.1.3}, carilah $\mat{P}$,~$
+\mat {P}^2,$ dan~$ \mat {P}^3.$ Tentukan $ \mat {P}^n$.
+
+\i\label{exer 11.1.4} Untuk Contoh~\ref{exam 11.1.4}, carilah peluang bahwa
+cucu laki-laki seorang alumni Harvard kuliah di Harvard.
+
+\i\label{exer 11.1.5} Dalam Contoh~\ref{exam 11.1.5}, carilah peluang bahwa
+cucu laki-laki seorang alumni Harvard kuliah di Harvard.
+
+\i\label{exer 11.1.6} Dalam Contoh~\ref{exam 11.1.7}, anggaplah kita mulai
+dengan hibrida yang dikawinkan dengan hibrida. Carilah $ \mat {u}^{(1)},$~$
+\mat {u}^{(2)},$ dan~$ \mat {u}^{(3)}.$ Apakah bentuk $ \mat {u}^{(n)}$?
+
+\i\label{exer 11.1.7} Carilah matriks $\mat{ P}^2,~\mat {P}^3,~\mat {P}^4,$
+dan~$ \mat {P}^n$ bagi rantai Markov yang ditentukan oleh matriks transisi $
+\mat {P} = \pmatrix{ 1 & 0 \cr 0 & 1 \cr}$. Lakukan hal yang sama bagi matriks
+transisi $ \mat {P} = \pmatrix{ 0 & 1 \cr 1 & 0 \cr}$. Tafsirkan apa yang
+terjadi dalam setiap proses ini.
+
+\i\label{exer 11.1.8} Sebuah mesin hitung tertentu hanya menggunakan angka
+0~dan~1. Mesin tersebut dimaksudkan untuk meneruskan salah satu angka ini
+melalui beberapa tahap. Namun, pada setiap tahap terdapat peluang~$p$ bahwa
+angka yang memasuki tahap tersebut akan berubah ketika keluar, dan peluang $q
+= 1 - p$ bahwa angka itu tidak berubah. Bentuklah rantai Markov untuk
+menyatakan proses transmisi dengan mengambil angka 0~dan~1 sebagai keadaan.
+Apakah matriks peluang transisinya?
+
+\i\label{exer 11.1.9} Untuk rantai Markov dalam Latihan~\ref{exer 11.1.8},
+gambarlah pohon dan tetapkan ukuran pohon dengan menganggap bahwa proses bermula
+dalam keadaan~0 dan melewati dua tahap transmisi. Berapakah peluang bahwa
+setelah dua tahap mesin menghasilkan angka~0 (yakni, angka yang benar)?
+Berapakah peluang bahwa mesin tidak pernah mengubah angka~0? Sekarang misalkan
+$p = .1$. Dengan menggunakan program {\bf MatrixPowers}, hitunglah pangkat
+ke-100 matriks transisi. Tafsirkan entri-entri matriks ini. Ulangi dengan $p =
+.2$. Mengapa pangkat ke-100 tersebut tampak sama?
+
+\i\label{exer 11.1.10} Ubahlah program {\bf MatrixPowers} agar mencetak rataan
+$ \mat {A}_n$ dari pangkat-pangkat $\mat {P}^n$, untuk $n = 1$ sampai $N$.
+Cobalah program Anda pada contoh Negeri Oz dan bandingkan $\mat {A}_n$~dengan
+$\mat {P}^n.$
+
+\i\label{exer 11.1.11} Anggaplah profesi seorang pria dapat diklasifikasikan
+sebagai tenaga profesional, pekerja terampil, atau pekerja tidak terampil.
+Anggaplah bahwa dari anak laki-laki tenaga profesional, 80~persen menjadi
+tenaga profesional, 10~persen menjadi pekerja terampil, dan 10~persen menjadi
+pekerja tidak terampil. Dari anak laki-laki pekerja terampil, 60~persen menjadi
+pekerja terampil, 20~persen menjadi tenaga profesional, dan 20~persen menjadi
+pekerja tidak terampil. Terakhir, dari anak laki-laki pekerja tidak terampil,
+50~persen menjadi pekerja tidak terampil dan masing-masing 25~persen berada
+dalam dua kategori lainnya. Anggaplah setiap pria memiliki sedikitnya satu
+anak laki-laki, lalu bentuklah rantai Markov dengan mengikuti profesi seorang
+anak laki-laki yang dipilih secara acak dari suatu keluarga selama beberapa
+generasi. Susunlah matriks peluang transisinya. Carilah peluang bahwa cucu
+laki-laki yang dipilih secara acak dari seorang pekerja tidak terampil menjadi
+tenaga profesional.
+
+\i\label{exer 11.1.12} Dalam Latihan~\ref{exer 11.1.11}, kita menganggap setiap
+pria memiliki seorang anak laki-laki. Sebagai gantinya, anggaplah peluang bahwa
+seorang pria memiliki sedikitnya satu anak laki-laki adalah~.8. Bentuklah
+rantai Markov dengan empat keadaan. Jika seorang pria memiliki anak laki-laki,
+peluang bahwa anak tersebut berada dalam profesi tertentu sama seperti dalam
+Latihan~\ref{exer 11.1.11}. Jika tidak ada anak laki-laki, proses berpindah ke
+keadaan keempat yang menyatakan keluarga yang garis keturunan laki-lakinya
+telah berakhir. Carilah matriks peluang transisi dan peluang bahwa cucu
+laki-laki yang dipilih secara acak dari seorang pekerja tidak terampil menjadi
+tenaga profesional.
+
+\i\label{exer 11.1.14} Tulislah program untuk menghitung $\mat {u}^{(n)}$ jika
+$\mat {u}$ dan $\mat{P}$ diberikan. Gunakan program ini untuk menghitung $\mat
+{u}^{(10)}$ bagi contoh Negeri Oz, dengan $\mat {u} = (0, 1, 0)$, dan dengan
+$\mat {u} = (1/3, 1/3, 1/3)$.
+
+\i\label{exer 11.1.15} Dengan menggunakan program {\bf  MatrixPowers}, carilah
+$\mat {P}^1$ sampai $\mat {P}^6$ untuk Contoh~\ref{exam 11.1.7} dan
+\ref{exam 11.1.8}. Periksalah apakah Anda dapat memprediksi peluang jangka
+panjang menemukan proses dalam setiap keadaan bagi contoh-contoh ini.
+
+\i\label{exer 11.1.16} Tulislah program untuk menyimulasikan hasil rantai Markov
+setelah $n$~langkah jika keadaan awal dan matriks transisi $\mat{P}$ diberikan
+sebagai data (lihat Contoh~\ref{exam 11.1.10}). Simpanlah program ini untuk
+digunakan dalam soal-soal berikutnya.
+
+\i\label{exer 11.1.17} Ubahlah program dalam Latihan~\ref{exer 11.1.16} agar
+mencatat proporsi waktu yang dihabiskan dalam setiap keadaan selama $n$~langkah.
+Jalankan program yang telah diubah untuk keadaan awal yang berbeda pada
+Contoh~\ref{exam 11.1.1} dan Contoh~\ref{exam 11.1.6}. Jika $n$ besar, apakah
+keadaan awal memengaruhi proporsi waktu yang dihabiskan dalam setiap keadaan?
+
+\i\label{exer 11.1.18} Buktikan Teorema~\ref{thm 11.1.1}.
+
+\i\label{exer 11.1.19} Buktikan Teorema~\ref{thm 11.1.2}.
+
+\i\label{exer 11.1.20} Tinjaulah proses berikut. Kita memiliki dua koin; satu
+koin adil, sedangkan koin lainnya memiliki sisi kepala pada kedua sisinya.
+Kedua koin ini kita berikan kepada seorang teman, yang memilih salah satunya
+secara acak (masing-masing dengan peluang 1/2). Selama sisa proses, ia hanya
+menggunakan koin pilihannya. Kemudian ia melempar koin itu berkali-kali dan
+melaporkan hasilnya. Kita memandang proses ini semata-mata terdiri atas apa
+yang ia laporkan kepada kita.
+\begin{enumerate}
+\item Jika ia melaporkan kepala pada lemparan ke-$n$, berapakah peluang kepala
+muncul pada lemparan ke-$(n+1)$?
+
+\item Pandanglah proses ini memiliki dua keadaan, kepala dan ekor. Dengan
+menghitung tiga peluang transisi lain yang serupa dengan peluang pada bagian
+(a), tuliskan sebuah ``matriks transisi" untuk proses ini.
+
+\item Sekarang anggaplah proses berada dalam keadaan ``kepala" pada lemparan
+ke-$(n-1)$ maupun ke-$n$. Carilah peluang bahwa kepala muncul pada lemparan
+ke-$(n+1)$.
+
+\item Apakah proses ini merupakan rantai Markov?
+\end{enumerate}
+
+\end{LJSItem}
+
+\section{Rantai Markov Penyerap}\label{sec 11.2}
+Rantai Markov paling baik dipelajari dengan meninjau jenis-jenis khusus rantai
+Markov. Jenis pertama yang akan kita pelajari disebut \emx {rantai Markov
+penyerap.}\index{rantai Markov!penyerap}\index{rantai Markov penyerap}
+\begin{definition}
+Suatu keadaan~$s_i$ dalam rantai Markov disebut \emx
+{penyerap}\index{keadaan!penyerap}\index{keadaan penyerap} jika keadaan tersebut
+tidak mungkin ditinggalkan (yakni,
+$p_{ii} = 1$). Suatu rantai Markov disebut \emx {penyerap} jika memiliki
+sedikitnya satu keadaan penyerap dan, dari setiap keadaan, terdapat kemungkinan
+untuk mencapai suatu keadaan penyerap (tidak harus dalam satu langkah).
+\end{definition}
+\begin{definition}
+Dalam rantai Markov penyerap, keadaan yang bukan penyerap disebut
+\emx{transien.}\index{keadaan!transien}\index{keadaan transien}
+\end{definition}
+
+\subsection*{Perjalanan Acak Seorang Pemabuk}\index{contoh perjalanan acak pemabuk}
+\begin{example}\label{exam 11.2.1}
+Seorang pria berjalan sepanjang ruas empat blok di Park Avenue (lihat
+Gambar~\ref{fig 11.3}). Jika ia berada di persimpangan 1, 2, atau 3, ia berjalan
+ke kiri atau ke kanan dengan peluang yang sama. Ia melanjutkan perjalanan
+hingga mencapai persimpangan~4, tempat sebuah bar berada, atau persimpangan~0,
+tempat rumahnya berada. Setelah mencapai rumah ataupun bar, ia tetap di sana.
+
+\par
+Kita membentuk rantai Markov dengan keadaan 0,~1, 2, 3, dan~4. Keadaan 0~dan~4
+merupakan keadaan penyerap. Matriks transisinya adalah
+
+$$
+\mat{P} =\bordermatrix{
+  &  0  &  1  &  2  &  3  &  4  \cr
+0 &  1  &  0  &  0  &  0  &  0  \cr
+1 & 1/2 &  0  & 1/2 &  0  &  0  \cr
+2 &  0  & 1/2 &  0  & 1/2 &  0  \cr
+3 &  0  &  0  & 1/2 &  0  & 1/2 \cr
+4 &  0  &  0  &  0  &  0  &  1 \cr}\ .
+$$
+Keadaan 1,~2, dan~3 merupakan keadaan transien, dan dari masing-masing keadaan
+ini terdapat kemungkinan untuk mencapai keadaan penyerap 0~dan~4. Dengan
+demikian, rantai tersebut merupakan rantai penyerap. Ketika suatu proses
+mencapai keadaan penyerap, kita akan mengatakan bahwa proses itu
+\emx{terserap}.
+\end{example}
+
+Pertanyaan paling jelas mengenai rantai seperti ini adalah: berapakah peluang
+bahwa proses tersebut pada akhirnya mencapai suatu keadaan penyerap?
+Pertanyaan menarik lainnya meliputi: (a)~Berapakah peluang bahwa proses berakhir
+pada suatu keadaan penyerap tertentu? (b)~Secara rata-rata, berapa lama waktu
+yang diperlukan hingga proses terserap? (c)~Secara rata-rata, berapa kali proses
+berada dalam setiap keadaan transien? Secara umum, jawaban semua pertanyaan ini
+bergantung pada keadaan awal proses maupun peluang transisinya.
+
+\putfig{4.5truein}{PSfig11-3}{Perjalanan acak seorang pemabuk.}{fig 11.3}
+
+%\begin{figure}
+%\centerline{\epsfxsize=4.5truein 
+%\epsffile{PSfig11-3}}
+%\caption{Drunkard's walk.}\label{fig 11.3}
+%\end{figure}
+
+\subsection*{Bentuk Kanonik}\index{bentuk kanonik rantai Markov\\ penyerap}
+Tinjaulah sebarang rantai Markov penyerap. Nomori ulang keadaan-keadaannya agar
+keadaan transien ditempatkan terlebih dahulu. Jika terdapat $r$ keadaan
+penyerap dan $t$ keadaan transien, matriks transisinya mempunyai \emx{bentuk
+kanonik} berikut
+
+\[
+\offinterlineskip
+\mat{P}\;= \bordermatrix{      
+                               &\hbox{TR.}&\omit\hfil&\hbox{ABS.}\cr
+           \hbox{TR.}\bigstrut &\mat{Q}   &\srule    &\mat{R}    \cr
+\middlehrule{1}{1}
+           \hbox{ABS.}\bigstrut&\mat{0}   &\srule    &\mat{I}}
+\] 
+
+Di sini $\mat{I}$ adalah matriks identitas berukuran $r$-kali-$r$, $\mat{0}$
+adalah matriks nol berukuran $r$-kali-$t$, $\mat{R}$ adalah matriks tak nol
+berukuran $t$-kali-$r$, dan $\mat{Q}$ adalah matriks berukuran $t$-kali-$t$.
+Sebanyak $t$ keadaan pertama bersifat transien dan $r$ keadaan terakhir
+bersifat menyerap.
+\par
+Dalam Bagian~\ref{sec 11.1}, kita melihat bahwa entri~$p_{ij}^{(n)}$ dari matriks
+$\mat{P}^n$ adalah peluang berada dalam keadaan~$s_j$ setelah $n$ langkah jika
+rantai dimulai dalam keadaan~$s_i$. Suatu argumen aljabar matriks standar
+menunjukkan bahwa $\mat{P}^n$ berbentuk
+ \[
+\offinterlineskip
+\mat{P}^n\;= \bordermatrix{      
+                      &\hbox{TR.}&\omit\hfil&\hbox{ABS.}\cr
+  \hbox{TR.}\bigstrut &\mat{Q}^n &\srule    &\ast       \cr
+\middlehrule{1}{1}
+  \hbox{ABS.}\bigstrut&\mat{0}   &\srule    &\mat{I}}
+\] 
+di mana tanda bintang $*$ menyatakan matriks berukuran $t$-kali-$r$ di sudut
+kanan atas~$\mat{P}^n.$ (Submatriks ini dapat dituliskan dalam $\mat{Q}$ dan
+$\mat{R}$, tetapi ungkapannya rumit dan belum diperlukan.) Bentuk~$\mat{P}^n$
+menunjukkan bahwa entri-entri $\mat{Q}^n$ memberikan peluang berada dalam setiap
+keadaan transien setelah $n$ langkah untuk setiap kemungkinan keadaan awal
+transien. Dalam teorema pertama, kita membuktikan bahwa peluang berada dalam
+keadaan transien setelah $n$ langkah mendekati nol. Dengan demikian, setiap
+entri~$\mat{ Q}^n$ harus mendekati nol ketika $n$ menuju tak hingga (yakni,
+$\mat{Q}^n \to \mat{ 0}$).
+
+\subsection*{Peluang Penyerapan}
+\begin{theorem}\label{thm 11.2.1}
+Dalam rantai Markov penyerap, peluang bahwa proses akan terserap adalah~1
+(yakni, $\mat{Q}^n \to \mat{0}$ ketika $n \to \infty$).
+
+\proof
+Dari setiap keadaan tak menyerap $s_j$, terdapat kemungkinan untuk mencapai
+suatu keadaan penyerap. Misalkan $m_j$ adalah jumlah langkah minimum yang
+diperlukan untuk mencapai keadaan penyerap jika dimulai dari $s_j$. Misalkan
+$p_j$ adalah peluang bahwa, jika dimulai dari $s_j$, proses tidak mencapai
+keadaan penyerap dalam $m_j$ langkah. Maka $p_j <1$. Misalkan $m$ adalah yang
+terbesar di antara semua $m_j$, dan $p$ yang terbesar di antara semua $p_j$.
+Peluang tidak terserap dalam $m$ langkah paling besar $p$, dalam $2m$ langkah
+paling besar $p^2$, dan seterusnya. Karena $p<1$, peluang-peluang ini menuju 0.
+Karena peluang tidak terserap dalam $n$ langkah menurun secara monoton,
+peluang-peluang tersebut juga menuju 0; oleh karena itu
+$\lim_{n \rightarrow \infty } \mat{Q}^n = 0.$
+\end{theorem}
+
+\subsection*{Matriks Fundamental}
+\begin{theorem}\label{thm 11.2.2}
+Untuk suatu rantai Markov penyerap, matriks $\mat{I} - \mat{Q}$ memiliki invers
+$\mat{N}$ dan
+$\mat{N} =\mat{I} + \mat{Q} + \mat{Q}^{2} + \cdots\ $. Entri ke-$ij$, yaitu
+$n_{ij}$, dari matriks $\mat{N}$ adalah nilai harapan banyaknya rantai berada
+dalam keadaan $s_j$ jika rantai dimulai dalam keadaan $s_i$. Keadaan awal turut
+dihitung jika $i = j$.
+
+\proof  
+Misalkan $(\mat{I} - \mat{Q})\mat{x}~=~0;$ yakni
+$\mat{x}~=~\mat{Q}\mat{x}.$ Dengan mengiterasikan persamaan ini, kita memperoleh
+$\mat{x}~=~\mat{Q}^{n}\mat x.$ Karena $\mat{Q}^{n} \rightarrow \mat{0}$, kita
+memiliki $\mat{Q}^n\mat{x} \rightarrow \mat{0}$, sehingga
+$\mat{x}~=~\mat{0}$. Jadi, $(\mat{I} - \mat{Q})^{-1}~=~\mat{N}$ ada. Selanjutnya,
+perhatikan bahwa
+$$
+(\mat{I} - \mat{Q}) (\mat{I} + \mat{Q} + \mat{Q}^2 + \cdots + \mat{Q}^n) =
+\mat{I} -
+\mat{Q}^{n + 1}\ .
+$$
+Dengan demikian, mengalikan kedua ruas dengan $\mat{N}$ memberikan
+$$
+\mat{I} + \mat{Q} + \mat{Q}^2 + \cdots + \mat{Q}^n = \mat{N} (\mat{I} -
+\mat{Q}^{n + 1})\ .
+$$
+Dengan membiarkan $n$ menuju tak hingga, kita memperoleh
+$$
+\mat{N} = \mat{I} + \mat{Q} + \mat{Q}^2 + \cdots\ .
+$$
+
+Misalkan $s_i$ dan $s_j$ adalah dua keadaan transien, dan untuk seluruh sisa
+bukti anggaplah $i$ dan $j$ tetap. Misalkan $X^{(k)}$ adalah peubah acak yang
+bernilai 1 jika rantai berada dalam keadaan $s_j$ setelah $k$ langkah, dan
+bernilai 0 selainnya. Untuk setiap $k$, peubah acak ini bergantung pada $i$
+maupun $j$; demi kejelasan, kita memilih untuk tidak menampilkan ketergantungan
+tersebut secara eksplisit. Kita memiliki
+$$
+P(X^{(k)} = 1) = q_{ij}^{(k)}\ ,
+$$
+dan
+$$
+P(X^{(k)} = 0) = 1 - q_{ij}^{(k)}\ ,
+$$
+di mana $q_{ij}^{(k)}$ adalah entri ke-$ij$ dari $\mat{Q}^k$. Persamaan-persamaan
+ini juga berlaku untuk $k = 0$ karena $\mat{Q}^0 = \mat{I}$. Oleh karena itu,
+karena $X^{(k)}$ adalah peubah acak 0-1, $E(X^{(k)}) = q_{ij}^{(k)}$.
+\par
+Nilai harapan banyaknya rantai berada dalam keadaan $s_j$ selama $n$ langkah
+pertama, jika rantai dimulai dalam keadaan $s_i$, jelas sama dengan
+$$E\Bigl(X^{(0)} + X^{(1)} + \cdots + X^{(n)} \Bigr) = q_{ij}^{(0)} +
+q_{ij}^{(1)} +
+\cdots + q_{ij}^{(n)}\ .$$
+Dengan membiarkan $n$ menuju tak hingga, kita memperoleh
+$$
+E\Bigl(X^{(0)} + X^{(1)} + \cdots \Bigr) = q_{ij}^{(0)} +
+q_{ij}^{(1)} + \cdots  = n_{ij} \ .
+$$
+\end{theorem}
+
+\begin{definition}
+Untuk rantai Markov penyerap~$\mat{P}$, matriks $\mat{N} = (\mat{I} -
+\mat{Q})^{-1}$ disebut \emx {matriks fundamental} bagi~$\mat{P}$.
+\index{matriks fundamental}\index{matriks!fundamental} Entri~$n_{ij}$ dari
+$\mat{N}$ memberikan nilai harapan banyaknya proses berada dalam keadaan
+transien~$s_j$ jika proses dimulai dalam keadaan transien~$s_i$.
+\end{definition}
+
+\begin{example}\label{exam 11.2.2}
+\index{contoh perjalanan acak pemabuk}(Lanjutan Contoh~\ref{exam 11.2.1})
+Dalam contoh perjalanan acak seorang pemabuk, matriks transisi dalam bentuk
+kanonik adalah
+\[
+\offinterlineskip
+\mat{P}\;= \bordermatrix{&
+               \hbox{1} &\hbox{2}&\hbox{3}&\omit\hfil&\hbox{0}&\hbox{4}\cr
+\hbox{1}\strut  &  0    &1/2 &  0     &  \srule  & 1/2    &  0     \cr
+\hbox{2}\strut  &1/2    &  0 &1/2     &  \srule  & 0      &  0     \cr
+\hbox{3}\strut  &  0    &1/2 &  0     &  \srule  & 0      & 1/2\cr
+\middlehrule{3}{2}
+\hbox{0}\strut  &  0    &  0     &  0     &  \srule  & 1      &  0     \cr
+\hbox{4}\strut  &  0    &  0     &  0     &  \srule  & 0      &  1}\ .
+\]
+Dari sini kita melihat bahwa matriks $\mat{Q}$ adalah
+$$
+\mat{Q} = \pmatrix{
+0 & 1/2 & 0 \cr
+1/2 & 0 & 1/2 \cr
+0 & 1/2 & 0 \cr}\ ,
+$$
+dan
+$$
+\mat{I} - \mat{Q} = \pmatrix{
+1 & -1/2 & 0 \cr
+-1/2 & 1 & -1/2 \cr
+0 & -1/2 & 1 \cr}\ .
+$$
+Dengan menghitung $(\mat{I} - \mat{Q})^{-1}$, kita memperoleh
+$$
+\vspace{7pt}\hbox{$\mat{N} = (\mat{I} - \mat{Q})^{-1} = {}$} \bordermatrix{
+  & 1 & 2 & 3 \cr
+1 & 3/2 & 1 & 1/2 \cr
+2 & 1 & 2 & 1 \cr
+3 & 1/2 & 1 & 3/2 \cr}\ .
+$$
+Dari baris tengah~$\mat{N}$, kita melihat bahwa jika proses dimulai dalam
+keadaan 2, nilai harapan banyaknya proses berada dalam keadaan 1, 2, dan 3
+sebelum terserap berturut-turut adalah 1, 2, dan 1.
+\end{example}
+ 
+\subsection*{Waktu hingga Penyerapan}\index{waktu hingga penyerapan}
+Sekarang kita meninjau pertanyaan berikut: jika rantai dimulai dalam keadaan
+$s_i$, berapakah nilai harapan jumlah langkah sebelum rantai terserap? Jawabannya
+diberikan oleh teorema berikut.
+
+\begin{theorem}\label{thm 11.2.2.5} Misalkan $t_i$ adalah nilai harapan jumlah
+langkah sebelum rantai terserap jika rantai dimulai dalam keadaan $s_i$, dan
+misalkan $\mat{t}$ adalah vektor kolom yang entri ke-$i$-nya adalah $t_i$. Maka
+$$\mat{t} = \mat{N}\mat{c}\ ,$$
+di mana $\mat{c}$ adalah vektor kolom yang semua entrinya bernilai 1.
+
+\proof
+Jika semua entri pada baris ke-$i$ dari~$\mat{N}$ dijumlahkan, kita memperoleh
+nilai harapan banyaknya proses berada dalam keadaan transien mana pun untuk
+keadaan awal~$s_i$, yakni nilai harapan waktu yang diperlukan sebelum terserap.
+Jadi, $t_i$ adalah jumlah entri pada baris ke-$i$ dari $\mat{N}$. Jika pernyataan
+ini dituliskan dalam bentuk matriks, kita memperoleh teorema tersebut.
+\end{theorem}
+
+\subsection*{Peluang Penyerapan}\index{peluang penyerapan}
+\begin{theorem}\label{thm 11.2.3}
+Misalkan $b_{ij}$ adalah peluang bahwa suatu rantai penyerap akan terserap dalam
+keadaan penyerap~$s_j$ jika dimulai dalam keadaan transien~$s_i$. Misalkan
+$\mat{B}$ adalah matriks dengan entri $b_{ij}$. Maka $\mat{B}$ adalah matriks
+berukuran $t$-kali-$r$, dan
+$$
+\mat{B} = \mat{N} \mat{R}\ ,
+$$
+di mana $\mat{N}$ adalah matriks fundamental dan $\mat{R}$ adalah matriks yang
+muncul dalam bentuk kanonik.
+\proof
+Kita memiliki
+\begin{eqnarray*}
+\mat{B}_{ij} &=& \sum_n\sum_k q_{ik}^{(n)} r_{kj} \\
+&=& \sum_k \sum_n q_{ik}^{(n)} r_{kj} \\
+&=& \sum_k n_{ik}r_{kj} \\
+&=& (\mat{N}\mat{R})_{ij}\ .
+\end{eqnarray*}
+Ini menyelesaikan bukti.
+\end{theorem}
+\par
+Bukti lain diberikan dalam Latihan~\ref{exer 11.2.33}.
+
+\begin{example}\label{exam 11.2.3}\index{contoh perjalanan acak
+pemabuk}(Lanjutan Contoh~\ref{exam 11.2.2})
+Dalam contoh perjalanan acak seorang pemabuk, kita memperoleh
+$$
+\vspace{7pt}\hbox{$\mat{N} = {}$} \bordermatrix{
+  & 1   & 2 & 3   \cr
+1 & 3/2 & 1 & 1/2 \cr
+2 & 1   & 2 & 1   \cr
+3 & 1/2 & 1 & 3/2 \cr}\ .
+$$
+Dengan demikian,
+\vspace{7pt}
+\begin{eqnarray*}
+\mat{t} = \mat{N}\mat{c} &=& \pmatrix{
+3/2 & 1 & 1/2 \cr
+  1 & 2 & 1   \cr
+1/2 & 1 & 3/2 \cr
+} \pmatrix{
+1 \cr
+1 \cr
+1 \cr
+}
+\\
+&=& \pmatrix{
+3 \cr
+4 \cr
+3 \cr
+}\ .
+\end{eqnarray*}
+Jadi, jika proses dimulai dalam keadaan 1, 2, dan 3, nilai harapan waktu hingga
+penyerapan berturut-turut adalah 3, 4, dan 3.
+\par
+Dari bentuk kanonik,
+$$
+\vspace{7pt}\hbox{$\mat{ R} = {}$} \bordermatrix{
+  & 0   & 4   \cr
+1 & 1/2 & 0   \cr
+2 & 0   & 0   \cr
+3 & 0   & 1/2 \cr}\ .
+$$
+Dengan demikian,
+\begin{eqnarray*}
+\mat{B} = \mat{N} \mat{R} &=& \pmatrix{
+3/2 & 1 & 1/2 \cr
+  1 & 2 & 1   \cr
+1/2 & 1 & 3/2 \cr} \cdot \pmatrix{
+1/2 & 0   \cr
+  0 & 0   \cr
+  0 & 1/2 \cr} \cr
+\cr
+\cr
+&=& \bordermatrix{
+  & 0 & 4 \cr
+1 & 3/4 & 1/4 \cr
+2 & 1/2 & 1/2 \cr
+3 & 1/4 & 3/4 \cr}\ .
+\end{eqnarray*}
+
+
+\noindent Di sini baris pertama memberi tahu kita bahwa, jika dimulai dalam
+keadaan $1$, peluang terserap dalam keadaan $0$ adalah~3/4 dan peluang terserap
+dalam keadaan $4$ adalah 1/4.
+\end{example}
+
+\subsection*{Komputasi}
+Karena kita dapat memperoleh ketiga besaran deskriptif ini dalam bentuk
+matriks, sangat mudah untuk menulis program komputer yang menentukan
+besaran-besaran tersebut bagi suatu matriks rantai penyerap tertentu.
+
+Program {\bf AbsorbingChain}\index{AbsorbingChain (program)} menghitung
+besaran-besaran deskriptif dasar suatu rantai Markov penyerap.
+
+Kita telah menjalankan program {\bf AbsorbingChain} untuk contoh perjalanan acak
+seorang pemabuk\index{contoh perjalanan acak pemabuk}
+(Contoh~\ref{exam 11.2.1}) dengan 5~blok. Hasilnya adalah sebagai berikut:
+
+$$
+\mat{Q}  = \bordermatrix{
+  & 1     & 2     & 3     & 4  \cr
+1 & .00   & .50   & .00   & .00\cr
+2 & .50   & .00   & .50   & .00\cr
+3 & .00   & .50   & .00   & .50\cr 
+4 & .00   & .00   & .50   & .00}\ ;
+$$
+
+$$
+\mat{R}  = \bordermatrix{
+  & 0     & 5     \cr
+1 & .50   & .00   \cr
+2 & .00   & .00   \cr
+3 & .00   & .00   \cr 
+4 & .00   & .50   }\ ;
+$$
+
+$$
+\mat{N}  = \bordermatrix{
+  & 1      & 2      & 3      &  4  \cr
+1 & 1.60   & 1.20   & .80    & .40 \cr
+2 & 1.20   & 2.40   & 1.60   & .80 \cr
+3 & .80    & 1.60   & 2.40   & 1.20\cr 
+4 & .40    & .80    & 1.20   & 1.60}\ ;
+$$
+
+$$
+\mat{t}  = \bordermatrix{
+ &  \cr
+1  & 4.00 \cr
+2  & 6.00 \cr
+3  & 6.00 \cr
+4  & 4.00}\ ;
+$$
+
+$$
+\mat{B}  = \bordermatrix{
+  & 0     & 5     \cr
+1 & .80   & .20   \cr
+2 & .60   & .40   \cr
+3 & .40   & .60   \cr 
+4 & .20   & .80   }\ .
+$$
+ 
+Perhatikan bahwa peluang mencapai bar sebelum mencapai rumah jika dimulai
+di~$x$ adalah~$x/5$ (yakni, sebanding dengan jarak rumah dari titik awal).
+(Lihat Latihan~\ref{exer 11.2.23}.)
+
+\exercises
+\begin{LJSItem}
+
+\i\label{exer 11.2.1} Dalam Contoh~\ref{exam 11.1.2}, untuk nilai $a$~dan~$b$
+manakah kita memperoleh rantai Markov penyerap?
+
+\i\label{exer 11.2.2} Tunjukkan bahwa Contoh~\ref{exam 11.1.5} merupakan rantai
+Markov penyerap.
+
+\i\label{exer 11.2.3} Manakah di antara contoh-contoh genetika
+(Contoh~\ref{exam
+11.1.7},
+~\ref{exam 11.1.8}, dan~\ref{exam 11.1.9}) yang bersifat menyerap?
+
+\i\label{exer 11.2.4} Carilah matriks fundamental $\mat{N}$ untuk Contoh~\ref
+{exam 11.1.8}.
+
+\i\label{exer 11.2.5} Untuk Contoh~\ref{exam 11.1.9}, periksalah bahwa matriks
+berikut adalah invers dari $\mat{I} - \mat{Q}$ sehingga merupakan matriks
+fundamental~$\mat{N}$.
+$$
+\mat{N} = \pmatrix{
+8/3 & 1/6 & 4/3 & 2/3 \cr
+4/3 & 4/3 & 8/3 & 4/3 \cr
+4/3 & 1/3 & 8/3 & 4/3 \cr
+2/3 & 1/6 & 4/3 & 8/3 \cr}\ .
+$$
+Carilah $\mat{N} \mat{c}$ dan $\mat{N} \mat{R}$. Tafsirkan hasilnya.
+
+\i\label{exer 11.2.6} Dalam contoh Negeri Oz (Contoh~\ref{exam 11.1.1}), ubahlah
+matriks transisi dengan menjadikan R sebagai keadaan penyerap. Hasilnya adalah
+$$\mat{P} = 
+\bordermatrix{
+  & \mbox{R} & \mbox{N} & \mbox{S} \cr
+\mbox{R} & 1 & 0 & 0 \cr
+\mbox{N} & 1/2 & 0 & 1/2 \cr
+\mbox{S} & 1/4 & 1/4 & 1/2}\ .
+$$
+Carilah matriks fundamental~$\mat{N}$, serta $\mat{Nc}$ dan $\mat{NR}$.
+Tafsirkan hasilnya.
+
+\i\label{exer 11.2.7} Dalam Contoh~\ref{exam 11.1.6}, jadikan keadaan 0~dan~4
+sebagai keadaan penyerap. Carilah matriks fundamental~$\mat{N}$, serta
+$\mat{Nc}$ dan $\mat{NR}$, untuk rantai penyerap yang dihasilkan. Tafsirkan
+hasilnya.
+
+\i\label{exer 11.2.8} Dalam Contoh~\ref{exam 11.2.1} (perjalanan acak seorang
+pemabuk)\index{contoh perjalanan acak pemabuk} pada bagian ini, anggaplah
+peluang melangkah ke kanan adalah~2/3 dan peluang melangkah ke kiri adalah~1/3.
+Carilah $\mat{N},~\mat{N}\mat{c}$, dan~$\mat{N}\mat{R}$. Bandingkan dengan hasil
+Contoh~\ref{exam 11.2.3}.
+
+\i\label{exer 11.2.9} Suatu proses bergerak pada bilangan bulat 1,~2, 3, 4,
+dan~5. Proses dimulai di~1 dan, pada setiap langkah berikutnya, bergerak ke suatu
+bilangan bulat yang lebih besar daripada posisinya saat itu, dengan peluang yang
+sama untuk setiap bilangan bulat lebih besar yang tersisa. Keadaan lima adalah
+keadaan penyerap. Carilah nilai harapan jumlah langkah untuk mencapai keadaan
+lima.
+
+\i\label{exer 11.2.10} Dengan menggunakan hasil Latihan~\ref{exer 11.2.9},
+buatlah dugaan tentang bentuk matriks fundamental jika proses bergerak seperti
+dalam latihan tersebut, kecuali bahwa sekarang proses bergerak pada bilangan
+bulat dari 1~hingga~$n$. Ujilah dugaan Anda untuk beberapa nilai $n$ yang
+berbeda. Dapatkah Anda menduga suatu taksiran bagi nilai harapan jumlah langkah
+untuk mencapai keadaan $n$ ketika $n$ besar? (Lihat
+Latihan~\ref{exer 11.2.10.5} untuk metode menentukan nilai harapan jumlah langkah
+ini.)
+
+\istar\label{exer 11.2.10.5} Misalkan $b_k$ menyatakan nilai harapan jumlah
+langkah untuk mencapai $n$ dari $n-k$ dalam proses yang dijelaskan dalam
+Latihan~\ref{exer 11.2.9}.
+\begin{enumerate}
+\item
+Definisikan $b_0 = 0$. Tunjukkan bahwa untuk $k > 0$, kita memiliki
+$$b_k = 1 + \frac 1k \bigl(b_{k-1} + b_{k-2} + \cdots + b_0\bigr)\ .$$
+\item
+Misalkan
+$$f(x) = b_0 + b_1 x + b_2 x^2 + \cdots\ .$$
+Dengan menggunakan rekurensi pada bagian (a), tunjukkan bahwa $f(x)$ memenuhi
+persamaan diferensial
+$$(1-x)^2 y' - (1-x) y - 1 = 0\ .$$
+\item
+Tunjukkan bahwa solusi umum persamaan diferensial pada bagian (b) adalah
+$$y = \frac{-\log(1-x)}{1-x} + \frac c{1-x}\ ,$$
+di mana $c$ adalah suatu konstanta.
+\item
+Gunakan bagian (c) untuk menunjukkan bahwa
+$$b_k = 1 + \frac 12 + \frac 13 + \cdots + \frac 1k\ .$$
+\end{enumerate}
+
+\i\label{exer 11.2.11} Tiga tank berduel satu sama lain. Tank A memiliki
+peluang~1/2 untuk menghancurkan tank yang ditembaknya, tank B memiliki
+peluang~1/3, dan tank C memiliki peluang~1/6. Ketiga tank menembak secara
+bersamaan, dan setiap tank menembak lawan terkuat yang belum dihancurkan.
+Bentuklah rantai Markov dengan mengambil himpunan bagian dari himpunan tank
+sebagai keadaan. Carilah $\mat{N},~\mat{N}\mat{c}$, dan~$\mat{N}\mat{R}$, lalu
+tafsirkan hasil Anda. \emx {Petunjuk}: Ambillah ABC, AC, BC, A, B, C, dan tidak
+ada sebagai keadaan, yang menunjukkan tank-tank yang dapat bertahan jika
+dimulai dalam keadaan ABC. Anda dapat mengabaikan AB karena keadaan ini tidak
+dapat dicapai dari ABC.
+
+\i\label{exer 11.2.12} Smith berada di penjara dan memiliki 3~dolar; ia dapat
+keluar dengan jaminan jika memiliki 8~dolar. Seorang penjaga bersedia membuat
+serangkaian taruhan dengannya. Jika Smith mempertaruhkan $A$~dolar, ia
+memenangkan $A$~dolar dengan peluang~.4 dan kehilangan $A$~dolar dengan
+peluang~.6. Carilah peluang bahwa ia memperoleh 8~dolar sebelum kehilangan
+seluruh uangnya jika
+\begin{enumerate}
+\item ia mempertaruhkan 1~dolar setiap kali (strategi hati-hati).
+
+\item setiap kali ia mempertaruhkan sebanyak mungkin, tetapi tidak lebih dari
+yang diperlukan agar kekayaannya mencapai 8~dolar (strategi berani).
+
+\item Strategi manakah yang memberi Smith peluang lebih baik untuk keluar dari
+penjara?
+\end{enumerate}
+
+\i\label{exer 11.2.13} Dalam situasi Latihan~\ref{exer 11.2.12}, tinjaulah
+strategi yang, untuk $i < 4$, membuat Smith mempertaruhkan $\min(i,4 - i)$, dan
+untuk $i \geq 4$ membuatnya bertaruh menurut strategi berani, dengan $i$ sebagai
+kekayaannya saat itu. Carilah peluang bahwa ia keluar dari penjara dengan
+strategi ini. Bagaimanakah peluang ini dibandingkan dengan peluang pada strategi
+berani?
+
+\i\label{exer 11.2.14} Tinjaulah permainan tenis\index{tenis} ketika keadaan
+\emx {deuce} tercapai. Jika seorang pemain memenangkan poin berikutnya, ia
+memiliki \emx {keuntungan.} Pada poin setelahnya, ia memenangkan gim atau gim
+kembali ke keadaan \emx {deuce.} Anggaplah bahwa pada setiap poin pemain A
+memiliki peluang .6 untuk memenangkan poin tersebut dan pemain B memiliki
+peluang .4.
+\begin{enumerate}
+\item Bentuklah rantai Markov dengan keadaan~1: A menang; 2: B menang; 3:
+keuntungan A; 4: deuce; 5: keuntungan B.
+
+\item Carilah peluang-peluang penyerapannya.
+
+\item Pada keadaan deuce, carilah nilai harapan durasi gim dan peluang bahwa B
+akan menang.
+\end{enumerate}
+
+\medbreak
+Latihan \ref{exer 11.2.15}~dan~\ref{exer 11.2.16} membahas pewarisan buta
+warna,\index{buta warna} yaitu sifat yang terpaut kelamin. Terdapat sepasang gen,
+g~dan~G; gen pertama cenderung menghasilkan buta warna, sedangkan gen kedua
+menghasilkan penglihatan normal. Gen G bersifat dominan. Namun, seorang pria
+hanya memiliki satu gen, dan jika gen tersebut adalah~g, ia buta warna. Seorang
+pria mewarisi salah satu dari dua gen ibunya, sedangkan seorang wanita mewarisi
+satu gen dari setiap orang tua. Jadi, seorang pria dapat bertipe G~atau~g,
+sedangkan seorang wanita dapat bertipe GG, Gg, atau gg. Kita akan mempelajari
+proses perkawinan sekerabat yang serupa dengan proses pada
+Contoh~\ref{exam 11.1.9} dengan membentuk rantai Markov.
+
+\i\label{exer 11.2.15} Daftarkan keadaan-keadaan rantai tersebut. \emx
+{Petunjuk}: Terdapat enam keadaan. Hitunglah peluang-peluang transisinya. Carilah
+matriks fundamental $\mat{N}$, $\mat{N}\mat{c}$, dan $\mat{N}\mat{R}$.
+
+\i\label{exer 11.2.16} Tunjukkan bahwa baik dalam Contoh~\ref{exam 11.1.9}
+maupun dalam contoh yang baru diberikan, peluang terserap dalam keadaan yang
+memiliki gen bertipe tertentu sama dengan proporsi gen bertipe tersebut dalam
+keadaan awal. Tunjukkan bahwa hal ini dapat dijelaskan oleh fakta bahwa permainan
+yang kekayaan Anda di dalamnya sama dengan jumlah gen bertipe tertentu dalam
+keadaan rantai Markov merupakan permainan adil.\footnote{H. Gonshor, ``An Application of
+Random Walk to a Problem in Population Genetics," \emx {American Math Monthly,}
+vol.~94 (1987), pp.~668--671}\index{GONSHOR, H.}
+
+\i\label{exer 11.2.17} Anggaplah seorang mahasiswa yang berkuliah di suatu
+sekolah kedokteran empat tahun di New England bagian utara setiap tahun memiliki
+peluang~$q$ untuk gagal dan dikeluarkan, peluang~$r$ untuk harus mengulang tahun
+tersebut, serta peluang~$p$ untuk melanjutkan ke tahun berikutnya (pada tahun
+keempat, melanjutkan berarti lulus).
+\begin{enumerate}
+\item Bentuklah matriks transisi bagi proses ini dengan mengambil F,~1, 2, 3,
+4, dan~G sebagai keadaan, dengan F menyatakan gagal dan dikeluarkan, G menyatakan
+lulus, serta keadaan lainnya menyatakan tahun studi.
+
+\item Untuk kasus $q = .1$, $r = .2$, dan $p = .7$, carilah nilai harapan waktu
+seorang mahasiswa baru berada pada tahun kedua. Berapa lama nilai harapan
+mahasiswa tersebut berada di sekolah kedokteran?
+
+\item Carilah peluang bahwa mahasiswa baru tersebut akan lulus.
+\end{enumerate}
+
+\i\label{exer 11.2.18} (E. Brown\footnote{Komunikasi pribadi.})\index{BROWN,
+E.} 
+Mary dan John memainkan permainan berikut: mereka memiliki satu set berisi tiga
+kartu yang ditandai dengan angka 1,~2, dan~3, serta sebuah pemutar dengan angka
+1,~2, dan~3. Permainan dimulai dengan membagikan kartu sehingga pembagi mendapat
+satu kartu dan pemain lain mendapat dua kartu. Satu langkah permainan terdiri
+atas satu putaran pemutar. Orang yang memegang kartu dengan angka yang muncul
+pada pemutar menyerahkan kartu itu kepada orang lain. Permainan berakhir ketika
+seseorang memiliki semua kartu.
+\begin{enumerate}
+
+\item Susunlah matriks transisi bagi rantai Markov penyerap ini, dengan keadaan
+yang bersesuaian dengan jumlah kartu yang dimiliki Mary.
+
+\item Carilah matriks fundamentalnya.
+
+\item Secara rata-rata, berapa langkah permainan berlangsung?
+
+\item Jika Mary membagikan kartu, berapakah peluang John memenangkan permainan?
+\end{enumerate}
+
+\i\label{exer 11.2.19} Anggaplah suatu percobaan memiliki $m$ hasil yang sama
+mungkin. Tunjukkan bahwa nilai harapan jumlah percobaan saling bebas sebelum
+kemunculan pertama $k$ hasil sejenis berturut-turut adalah
+$(m^k - 1)/(m - 1)$. \emx {Petunjuk}: Bentuklah rantai Markov penyerap dengan
+keadaan 1,~2, \ldots,~$k$, dengan keadaan~$i$ menyatakan panjang rentetan saat
+ini. Nilai harapan waktu hingga rentetan sepanjang~$k$ adalah 1~lebih besar
+daripada nilai harapan waktu hingga penyerapan bagi rantai yang dimulai dalam
+keadaan~1. Telah ditemukan bahwa, dalam perluasan desimal pi, mulai dari digit
+ke-24{,}658{,}601 terdapat rentetan sembilan angka 7. Menurut hasil Anda,
+berapakah nilai harapan jumlah digit yang diperlukan untuk menemukan rentetan
+seperti itu jika digit dihasilkan secara acak?
+
+\i\label{exer 11.2.20} (Roberts\footnote{F. Roberts, \emx {Discrete
+Mathematical 
+Models} (Englewood Cliffs, NJ: Prentice Hall, 1976).})\index{ROBERTS, F.} A
+kota dibagi menjadi 3 wilayah, yaitu 1,~2, dan~3. Diperkirakan bahwa setiap hari
+ketiga wilayah ini masing-masing mengeluarkan polusi sebanyak $u_1$,~$u_2$,
+dan~$u_3$. Sebagian $q_{ij}$ dari polusi wilayah~$i$ berakhir di wilayah~$j$
+pada hari berikutnya. Sebagian $q_i = 1 - \sum_j q_{ij} > 0$ masuk ke atmosfer
+dan lolos. Misalkan $w_i^{(n)}$ adalah jumlah polusi di wilayah~$i$ setelah
+$n$~hari.
+\begin{enumerate}
+
+\item Tunjukkan bahwa $\mat{w}^{(n)} = \mat{u} + \mat{u} \mat{Q} +\cdots +
+\mat{u}\mat{Q}^{n - 1}$.
+
+\item Tunjukkan bahwa $\mat{w}^{(n)} \to \mat{w}$, dan tunjukkan cara menghitung
+\mat{w}~dari~\mat{u}.
+ 
+\item Pemerintah ingin membatasi tingkat polusi pada suatu tingkat yang
+ditetapkan dengan menentukan~$\mat{w}.$ Tunjukkan cara menentukan tingkat polusi
+$\mat{u}$ yang akan menghasilkan nilai limit~$\mat{w}$ yang ditetapkan.
+\end{enumerate}
+
+\i\label{exer 11.2.21} Dalam model ekonomi Leontief,\index{LEONTIEF, W.
+W.}\footnote{W.~W. Leontief, 
+\emx {Input-Output Economics} (Oxford: Oxford University Press, 1966).} terdapat
+$n$ industri, yaitu 1,~2, \ldots,~$n$. Industri ke-$i$ memerlukan barang senilai
+$0 \leq q_{ij} \leq 1$ dolar dari perusahaan~$j$ untuk menghasilkan barang
+senilai 1~dolar. Permintaan eksternal terhadap industri-industri tersebut,
+dalam nilai dolar, diberikan oleh vektor $\mat{d} = (d_1,d_2,\ldots,d_n)$.
+Misalkan $\mat{Q}$ adalah matriks dengan entri~$q_{ij}$.
+\begin{enumerate}
+
+\item Tunjukkan bahwa jika industri-industri tersebut menghasilkan jumlah total
+yang diberikan oleh vektor $\mat{x} = (x_1,x_2,\ldots,x_n)$, jumlah barang dari
+setiap jenis yang diperlukan industri-industri tersebut sekadar untuk memenuhi
+permintaan internal diberikan oleh vektor~$\mat{x} \mat{Q}$.
+
+\item Tunjukkan bahwa untuk memenuhi permintaan eksternal~$\mat{d}$ maupun
+permintaan internal, industri-industri tersebut harus menghasilkan jumlah total
+yang diberikan oleh suatu vektor $\mat{x} = (x_1,x_2,\ldots,x_n)$ yang memenuhi
+persamaan $\mat{x} = \mat{x} \mat{Q} + \mat{d}$.
+
+\item Tunjukkan bahwa jika $\mat{Q}$ adalah matriks $\mat{Q}$ bagi suatu rantai
+Markov penyerap, setiap permintaan eksternal~$\mat{d}$ dapat dipenuhi.
+
+\item Anggaplah jumlah setiap baris~$\mat{Q}$ kurang dari atau sama dengan~1.
+Berikan tafsiran ekonomi bagi kondisi ini. Bentuklah rantai Markov dengan
+mengambil industri-industri sebagai keadaan dan~$q_{ij}$ sebagai peluang
+transisi. Tambahkan satu keadaan penyerap~0. Definisikan
+$$
+q_{i0} = 1 - \sum_j q_{ij}\ .
+$$
+Tunjukkan bahwa rantai ini bersifat menyerap jika setiap perusahaan menghasilkan
+laba atau pada akhirnya bergantung pada perusahaan yang menghasilkan laba.
+
+\item Definisikan $\mat{x} \mat{c}$ sebagai produk nasional bruto. Carilah
+ungkapan produk nasional bruto dalam vektor permintaan $\mat{d}$ dan vektor
+$\mat{t}$ yang memberikan nilai harapan waktu hingga penyerapan.
+\end{enumerate}
+
+\i\label{exer 11.2.22} Seorang penjudi memainkan permainan yang pada setiap
+putaran memberinya kemenangan satu dolar dengan peluang~$p$ dan kerugian satu
+dolar dengan peluang $q = 1 - p$. \index{kebangkrutan penjudi}\emx {Masalah
+Kebangkrutan Penjudi} adalah masalah mencari peluang~$w_x$ untuk memperoleh
+jumlah~$T$ sebelum kehilangan semuanya jika dimulai dengan keadaan~$x$.
+Tunjukkan bahwa masalah ini dapat dipandang sebagai rantai Markov penyerap
+dengan keadaan 0,~1, 2, \ldots,~$T$, dengan 0~dan~$T$ sebagai keadaan penyerap.
+Misalkan seorang penjudi memiliki peluang $p = .48$ untuk menang pada setiap
+putaran. Misalkan pula penjudi tersebut mulai dengan 50~dolar dan $T = 100$
+dolar. Simulasikan permainan ini 100 kali dan perhatikan seberapa sering penjudi
+tersebut bangkrut. Hasil ini menaksir $w_{50}$.
+
+\i\label{exer 11.2.23} Tunjukkan bahwa $w_x$ pada
+Latihan~\ref{exer 11.2.22} memenuhi kondisi-kondisi berikut:
+\begin{enumerate}
+
+\item $w_x = pw_{x + 1} + qw_{x - 1}$ untuk $x = 1$,~2, \ldots,\ $T - 1$.
+
+\item $w_0 = 0$.
+
+\item $w_T = 1$.
+\end{enumerate}
+
+\noindent Tunjukkan bahwa kondisi-kondisi ini menentukan $w_x$. Tunjukkan bahwa
+jika $p = q = 1/2$, maka
+$$
+w_x = \frac xT
+$$
+memenuhi (a), (b), dan (c), sehingga merupakan solusinya. Jika $p \ne q$,
+tunjukkan bahwa
+$$
+w_x = \frac{(q/p)^x - 1}{(q/p)^T - 1}
+$$
+memenuhi kondisi-kondisi tersebut, sehingga memberikan peluang penjudi menang.
+
+\i\label{exer 11.2.24} Tulislah program untuk menghitung peluang~$w_x$ pada
+Latihan~\ref{exer 11.2.23} bagi nilai $x$,~$p$, dan~$T$ yang diberikan. Pelajari
+peluang bahwa penjudi akan membangkrutkan bank dalam permainan yang hanya
+sedikit tidak menguntungkan baginya, misalnya $p = .49$, jika bank memiliki uang
+jauh lebih banyak daripada penjudi.
+
+\istar\label{exer 11.2.25} Kita meninjau dua contoh perjalanan acak seorang
+pemabuk\index{contoh perjalanan acak pemabuk} yang bersesuaian dengan kasus $n =
+4$ dan $n = 5$ blok (lihat Contoh~\ref{exam 11.2.1}). Periksalah bahwa dalam
+kedua contoh tersebut, nilai harapan waktu hingga penyerapan jika dimulai
+di~$x$ sama dengan $x(n - x)$. Cobalah membuktikan bahwa hal ini berlaku secara
+umum. \emx {Petunjuk}: Tunjukkan bahwa jika $f(x)$ adalah nilai harapan waktu
+hingga penyerapan, maka $f(0) = f(n) = 0$ dan
+$$f(x) = (1/2)f(x - 1) + (1/2)f(x + 1) + 1$$
+untuk $0 < x < n$. Tunjukkan bahwa jika $f_1(x)$ dan $f_2(x)$ adalah dua
+solusi, selisihnya $g(x)$ merupakan solusi persamaan
+$$g(x) = (1/2)g(x - 1) + (1/2)g(x + 1)\ .$$
+Selain itu, $g(0) = g(n) = 0$. Tunjukkan bahwa $g(x)$ tidak mungkin memiliki
+maksimum ketat ataupun minimum ketat di titik $i$, dengan $1 \le i \le n-1$.
+Gunakan hal ini untuk menunjukkan bahwa $g(i) = 0$ bagi semua i. Ini menunjukkan
+bahwa paling banyak ada satu solusi. Kemudian, periksalah bahwa fungsi
+$f(x) = x(n-x)$ merupakan suatu solusi.
+
+\i\label{exer 11.2.29} Tinjaulah suatu rantai Markov penyerap dengan ruang
+keadaan~$S$. Misalkan $f$ adalah fungsi yang didefinisikan pada~$S$ dengan sifat
+$$
+f(i) = \sum_{j \in S} p_{ij} f(j)\ ,
+$$
+atau, dalam bentuk vektor,
+$$
+\mat{f} = \mat{Pf}\ .
+$$
+Maka $f$ disebut \emx {fungsi harmonik} bagi $\mat{P}$.\index{fungsi harmonik}
+Jika Anda membayangkan suatu permainan yang kekayaan Anda di dalamnya adalah
+$f(i)$ ketika berada dalam keadaan~$i$, kondisi harmonik berarti bahwa permainan
+tersebut \emx {adil}, dalam arti bahwa nilai harapan kekayaan Anda setelah satu
+langkah sama dengan sebelum langkah tersebut.
+\begin{enumerate}
+
+\item Tunjukkan bahwa untuk $f$ yang harmonik,
+$$
+\mat{f} = \mat{P}^n{\mat{f}}
+$$
+untuk semua $n$.
+
+\item Dengan menggunakan (a), tunjukkan bahwa untuk $f$ yang harmonik,
+$$
+\mat{f} = \mat{P}^\infty \mat{f}\ ,
+$$
+di mana
+$$
+ \mat{P}^\infty = \lim_{n \to \infty} \mat{P}^n =
+\pmatrix{$$\begin{tabular}{l|r} \mat{0} & \mat{B} \\ \hline 
+                                \mat{0} & \mat{I} \\ \end{tabular}$$ \cr}\ .
+$$
+
+\item Dengan menggunakan (b), buktikan bahwa jika Anda mulai dalam keadaan
+transien~$i$, nilai harapan kekayaan akhir Anda
+$$
+\sum_k b_{ik} f(k)
+$$
+sama dengan kekayaan awal Anda~$f(i)$. Dengan kata lain, permainan adil pada
+ruang keadaan berhingga tetap adil hingga akhir. (Permainan adil secara umum
+disebut \emx {martingal.}\index{martingal} Permainan adil pada ruang keadaan tak
+berhingga tidak harus tetap adil jika jumlah putaran tak terbatas diizinkan.
+Sebagai contoh, tinjaulah permainan Kepala atau Ekor (lihat
+Contoh~\ref{exam 1.3}). Misalkan Peter mulai dengan 1~sen dan bermain hingga
+memiliki~2. Maka Peter pasti berakhir dengan keuntungan 1~sen.)
+\end{enumerate} 
+
+\i\label{exer 11.2.26} Sebuah koin dilempar berulang kali. Kita ingin mencari
+nilai harapan jumlah lemparan hingga suatu pola tertentu, misalnya B = HTH,
+muncul untuk pertama kalinya. Sebagai contoh, jika hasil lemparannya adalah
+HHTTHTH, kita mengatakan bahwa pola B muncul untuk pertama kalinya setelah
+7~lemparan. Misalkan $T^B$ adalah waktu untuk memperoleh pola B untuk pertama
+kalinya. Li\footnote{S-Y.~R. Li, ``A Martingale Approach to the Study of
+Occurrence of Sequence Patterns in Repeated Experiments,'' \emx {Annals of
+Probability,} vol.~8 (1980), pp.~1171--1176.} memberikan metode berikut untuk
+menentukan $E(T^B)$.
+
+Kita berada di sebuah kasino dan, sebelum setiap lemparan koin, seorang penjudi
+masuk, membayar 1~dolar untuk bermain, lalu bertaruh bahwa pola B = HTH akan
+muncul pada tiga lemparan berikutnya. Jika H muncul, ia memenangkan 2~dolar dan
+mempertaruhkan jumlah tersebut bahwa hasil berikutnya adalah~T. Jika menang, ia
+memenangkan 4~dolar dan mempertaruhkan jumlah tersebut bahwa H akan muncul
+berikutnya. Jika menang, ia memenangkan 8~dolar dan pola tersebut telah muncul.
+Jika kalah pada tahap mana pun, ia pergi tanpa membawa kemenangan.
+
+Misalkan A dan B adalah dua pola. Misalkan AB adalah jumlah yang dimenangkan
+para penjudi yang datang ketika pola A muncul dan bertaruh bahwa B akan muncul.
+Sebagai contoh, jika A = HT dan B = HTH, maka AB = 2 + 4 = 6 karena penjudi
+pertama bertaruh pada H dan memenangkan 2 dolar, kemudian bertaruh pada T dan
+memenangkan 4 dolar lagi. Penjudi kedua bertaruh pada H dan kalah. Jika A = HH
+dan B = HTH, maka AB = 2 karena penjudi pertama bertaruh pada H dan menang,
+tetapi kemudian bertaruh pada T dan kalah, sedangkan penjudi kedua bertaruh pada
+H dan menang. Jika A = B = HTH, maka AB = BB = 8 + 2 = 10.
+\par
+Untuk setiap penjudi yang masuk, kasino menerima 1~dolar. Jadi, kasino menerima
+$T^B$~dolar. Berapa banyak yang dibayarkannya? Para penjudi yang pulang membawa
+uang hanyalah mereka yang datang selama pola B muncul, dan mereka memenangkan
+jumlah BB. Namun, karena semua taruhan yang dibuat benar-benar adil, secara
+intuitif nilai harapan jumlah yang diterima kasino semestinya sama dengan nilai
+harapan jumlah yang dibayarkannya. Artinya, $E(T^B)$ = BB.
+\par
+Karena kita telah melihat bahwa untuk B = HTH berlaku BB = 10, nilai harapan
+waktu untuk mencapai pola HTH pertama kali adalah 10. Jika kita mencoba
+memperoleh pola B = HHH, maka BB $= 8 + 4 + 2 = 14$ karena dalam kasus ini tiga
+penjudi terakhir semuanya dibayar. Jadi, nilai harapan waktu untuk memperoleh
+pola HHH adalah 14. Untuk membenarkan argumen ini, Li menggunakan suatu teorema
+dari teori martingal (permainan adil).
+\par
+Kita dapat memperoleh nilai-nilai harapan ini dengan meninjau rantai Markov yang
+keadaannya merupakan ruas-ruas awal yang mungkin dari urutan HTH; keadaan
+tersebut adalah HTH, HT, H, dan $\emptyset$, dengan $\emptyset$ sebagai himpunan
+kosong. Untuk contoh ini, matriks transisinya adalah
+$$
+\bordermatrix{
+&\mbox{HTH} & \mbox{HT} & \mbox{H} & \emptyset \cr
+\mbox{HTH}  & 1 & 0 & 0 & 0 \cr
+\mbox{HT}   & .5 & 0 & 0 & .5 \cr
+\mbox{H}    & 0 & .5 & .5 & 0 \cr
+\emptyset   & 0 & 0 & .5 & .5 }\ ,
+$$
+dan jika B = HTH, $E(T^B)$ adalah nilai harapan waktu hingga penyerapan bagi
+rantai ini jika dimulai dalam keadaan~$\emptyset$.
+\par
+Dengan menggunakan rantai Markov yang terkait, tunjukkan bahwa nilai
+$E(T^B)$ = 10 dan $E(T^B)$ = 14 benar bagi nilai harapan waktu untuk mencapai
+pola HTH dan HHH, berturut-turut.
+
+\i\label{exer 11.2.27} Kita dapat menggunakan tafsiran perjudian yang diberikan
+dalam Latihan~\ref{exer 11.2.26} untuk mencari nilai harapan jumlah lemparan yang
+diperlukan untuk mencapai pola B jika kita mulai dengan pola A. Agar masalahnya
+bermakna, kita menganggap pola A tidak memuat pola B sebagai subpola. Misalkan
+$E_A(T^B)$ adalah nilai harapan waktu untuk mencapai pola B jika dimulai dengan
+pola A. Kita menggunakan skema perjudian kita dan menganggap bahwa k lemparan
+koin pertama menghasilkan pola A. Selama waktu ini, para penjudi memenangkan
+jumlah AB. Jumlah total yang akan dimenangkan para penjudi ketika pola B muncul
+adalah BB. Jadi, jumlah yang dimenangkan para penjudi setelah pola A muncul
+adalah BB - AB. Sekali lagi, menurut argumen permainan adil,
+$E_A(T^B)$ = BB-AB.
+\par
+Sebagai contoh, misalkan kita mulai dengan pola A = HT dan mencoba memperoleh
+pola B = HTH. Dalam Latihan~\ref{exer 11.2.26}, kita melihat bahwa AB = 4 dan
+BB = 10, sehingga $E_A(T
+^B)$ = BB-AB= 6.
+\par
+Periksalah bahwa tafsiran perjudian ini menghasilkan jawaban yang benar untuk
+semua keadaan awal dalam contoh-contoh yang Anda kerjakan pada
+Latihan~\ref{exer 11.2.26}.
+
+\i\label{exer 11.2.28} Berikut adalah metode elegan dari Guibas dan
+Odlyzko\footnote{L.~J.
+Guibas and A.~M. Odlyzko, ``String Overlaps, Pattern Matching, and
+Non-transitive Games,"
+\emx {Journal of Combinatorial Theory,} Series~A, vol.~30 (1981),
+pp.~183--208.} untuk memperoleh nilai harapan waktu hingga suatu pola, misalnya
+HTH, tercapai untuk pertama kalinya. Misalkan $f(n)$ adalah jumlah urutan
+sepanjang~$n$ yang tidak memuat pola HTH. Misalkan $f_p(n)$ adalah jumlah urutan
+yang memuat pola tersebut untuk pertama kalinya setelah $n$~lemparan. Pada
+setiap elemen dari~$f(n)$, tambahkan pola HTH. Kemudian, bagi urutan yang
+dihasilkan menjadi tiga himpunan bagian: himpunan tempat HTH muncul untuk pertama
+kalinya pada waktu $n + 1$ (untuk ini, urutan semula harus berakhir dengan HT);
+himpunan tempat HTH muncul untuk pertama kalinya pada waktu $n + 2$ (tidak dapat
+terjadi untuk pola ini); dan himpunan tempat urutan HTH muncul untuk pertama
+kalinya pada waktu $n + 3$ (urutan semula berakhir dengan apa pun selain HT).
+Dengan melakukan hal ini, kita memperoleh
+$$
+f(n) = f_p(n + 1) + f_p(n + 3)\ .
+$$
+Dengan demikian,
+$$
+\frac{f(n)}{2^n} = \frac{2f_p(n + 1)}{2^{n + 1}} + \frac{2^3f_p(n + 3)}{2^{n +
+3}}\ .
+$$
+Jika $T$ adalah waktu pola tersebut muncul untuk pertama kalinya, kesamaan ini
+menyatakan bahwa
+$$
+P(T > n) = 2P(T = n + 1) + 8P(T = n + 3)\ .
+$$
+Tunjukkan bahwa dengan menjumlahkan kesamaan ini atas semua~$n$, Anda memperoleh
+$$
+\sum_{n = 0}^\infty P(T > n) = 2 + 8 = 10\ .
+$$
+Tunjukkan bahwa untuk sebarang peubah acak bernilai bilangan bulat,
+$$
+E(T) = \sum_{n = 0}^\infty P(T > n)\ ,
+$$
+dan simpulkan bahwa $E(T) = 10$. Perhatikan bahwa metode bukti ini memperjelas
+bahwa secara umum $E(T)$ sama dengan nilai harapan jumlah yang dibayarkan kasino,
+dan metode ini menghindari teorema sistem martingal yang digunakan Li.
+
+\i\label{exer 11.2.30} Dalam Contoh~\ref{exam 11.1.9}, definisikan $f(i)$ sebagai
+proporsi gen G dalam keadaan~$i$. Tunjukkan bahwa $f$ adalah fungsi harmonik
+(lihat Latihan~\ref{exer 11.2.29}). Mengapa hal ini menunjukkan bahwa peluang
+terserap dalam keadaan $(\mbox{GG},\mbox{GG})$ sama dengan proporsi gen G dalam
+keadaan awal? (Lihat Latihan~\ref{exer 11.2.16}.)
+
+\i\label{exer 11.2.31} Tunjukkan bahwa model batu loncatan
+(Contoh~\ref{exam 11.1.10}) merupakan rantai Markov penyerap. Anggaplah Anda
+memainkan permainan dengan persegi merah dan hijau, dan kekayaan Anda setiap
+saat sama dengan proporsi persegi merah pada saat itu. Berikan argumen yang
+menunjukkan bahwa permainan ini adil, dalam arti bahwa nilai harapan kemenangan
+Anda setelah setiap langkah sama persis dengan sebelum langkah tersebut.\emx
+{Petunjuk}: Tunjukkan bahwa untuk setiap hasil yang mungkin yang membuat
+kekayaan Anda berkurang satu, terdapat hasil lain dengan peluang tepat sama yang
+membuatnya bertambah satu.
+\par
+Gunakan fakta ini dan hasil Latihan~\ref{exer 11.2.29} untuk menunjukkan bahwa
+peluang suatu warna tertentu akhirnya mendominasi sama dengan proporsi persegi
+yang pada awalnya berwarna tersebut.
+
+\i\label{exer 11.2.32} Tinjaulah pejalan acak yang bergerak pada bilangan bulat
+0,~1, \ldots,~$N$, dengan bergerak satu langkah ke kanan dengan peluang~$p$ dan
+satu langkah ke kiri dengan peluang $q = 1 - p$. Jika pejalan mencapai 0~atau~$N$,
+ia tetap di sana. (Ini adalah masalah Kebangkrutan Penjudi pada
+Latihan~\ref{exer 11.2.22}.) Jika $p = q$, tunjukkan bahwa fungsi
+$$
+f(i) = i
+$$
+merupakan fungsi harmonik (lihat Latihan~\ref{exer 11.2.29}), dan jika $p \ne q$,
+maka
+$$
+f(i) = \biggl(\frac  {q}{p}\biggr)^i
+$$
+merupakan fungsi harmonik. Gunakan hal ini dan hasil
+Latihan~\ref{exer 11.2.29} untuk menunjukkan bahwa peluang $b_{iN}$ untuk
+terserap dalam keadaan~$N$ jika dimulai dalam keadaan~$i$ adalah
+$$
+ b_{iN} = \left \{ \matrix{
+                                   \frac iN, &\mbox{jika}\,\, p = q, \cr
+          \frac{({q \over p})^i - 1}{({q \over p})^{N} - 1}, & 
+\mbox{jika}\,\,p \ne q.\cr}\right.
+$$
+Untuk penurunan alternatif hasil-hasil ini, lihat Latihan~\ref{exer 11.2.23}.
+
+\i\label{exer 11.2.33} Lengkapilah bukti alternatif berikut untuk
+Teorema~\ref{thm 11.2.3}. Misalkan $s_i$ adalah keadaan transien dan $s_j$
+adalah keadaan penyerap. Jika kita menghitung $b_{ij}$ berdasarkan kemungkinan
+hasil langkah pertama, kita memperoleh persamaan
+$$
+b_{ij} = p_{ij} + \sum_k p_{ik} b_{kj}\ ,
+$$
+di mana penjumlahan dilakukan atas semua keadaan transien~$s_k$. Tuliskan
+persamaan ini dalam bentuk matriks dan turunkan pernyataan berikut darinya:
+$$\mat{B} = \mat{N}\mat{R}\ .$$
+
+\i\label{exer 11.2.34} Dalam rolet Monte Carlo\index{rolet} (lihat
+Contoh~\ref{exam 6.1.5}), pada pilihan (c), terdapat enam keadaan ($S$, $W$,
+$L$, $E$, $P_1$, dan $P_2$). Lihat Gambar~\ref{fig 6.1.5}, yang memuat pohon
+untuk pilihan ini. Bentuklah rantai Markov bagi pilihan ini dan gunakan program
+{\bf AbsorbingChain} untuk mencari peluang bahwa Anda menang, kalah, atau impas
+pada taruhan 1 franc pada merah. Dengan menggunakan peluang-peluang ini, carilah
+nilai harapan kemenangan untuk taruhan tersebut. Untuk pembahasan yang lebih
+umum tentang penerapan rantai Markov pada rolet, lihat artikel H. Sagan yang
+dirujuk dalam Contoh~\ref{exam 6.7}.
+
+\i\label{exer 11.5.26} Selanjutnya, kita meninjau permainan yang disebut
+\emx {Penney-ante} oleh penciptanya, W. Penney.\footnote{W. Penney, ``Problem: Penney-Ante," \emx {Journal
+of
+Recreational Math,} vol.~2 (1969), p.~241.}\index{PENNEY, W.} Terdapat dua
+pemain; pemain pertama memilih pola A yang terdiri atas H dan T, lalu pemain
+kedua, setelah mengetahui pilihan pemain pertama, memilih pola B yang berbeda.
+Kita menganggap tidak satu pun pola merupakan subpola dari pola lainnya. Sebuah
+koin dilempar berulang kali, dan pemain yang polanya muncul lebih dahulu menjadi
+pemenang. Untuk menganalisis permainan ini, kita perlu mencari peluang $p_A$
+bahwa pola A muncul sebelum pola B dan peluang $p_B = 1- p_A$ bahwa pola B
+muncul sebelum pola A. Untuk menentukan peluang-peluang ini, kita menggunakan
+hasil Latihan~\ref{exer 11.2.26} dan \ref{exer 11.2.27}. Dalam latihan tersebut,
+Anda diminta menunjukkan bahwa nilai harapan waktu untuk pertama kali mencapai
+pola B adalah
+$$
+E(T^B) = BB\ ,
+$$
+dan, jika dimulai dengan pola A, nilai harapan waktu untuk mencapai pola B adalah
+$$
+E_A(T^B) = BB - AB\ .
+$$
+
+\begin{enumerate}
+\item Tunjukkan bahwa rasio peluang pemain pertama menang diberikan oleh rumus
+John Conway\footnote{M. Gardner, ``Mathematical Games," \emx {Scientific American,}
+ vol.~10 (1974), pp. 120--125.}\index{CONWAY, J.}:
+$$
+\frac{p_A}{1-p_A} = \frac{p_A}{p_B} = \frac{BB - BA}{AA - AB}\ .
+$$
+\emx {Petunjuk}: Jelaskan mengapa
+$$
+E(T^B) = E(T^{A\ {\rm atau}\ B}) + p_A E_A(T^B)
+$$
+
+dan dengan demikian
+$$
+BB = E(T^{A\ {\rm atau}\ B}) + p_A (BB - AB)\ .
+$$
+Pertukarkan A dan B untuk memperoleh persamaan serupa yang melibatkan $p_B$.
+Terakhir, perhatikan bahwa
+$$
+p_A + p_B = 1\ .$$
+Gunakan persamaan-persamaan ini untuk mencari $p_A$ dan $p_B$.
+
+\item Anggaplah kedua pemain memilih pola dengan panjang k yang sama. Tunjukkan
+bahwa jika $k = 2$, permainan ini adil, tetapi jika $k = 3$, pemain kedua
+memiliki keuntungan apa pun pilihan pemain pertama. (Telah ditunjukkan bahwa,
+untuk $k \geq 3$, jika pemain pertama memilih $a_1$,~$a_2$, \ldots,~$a_k$,
+strategi optimal pemain kedua berbentuk $b$,~$a_1$, \ldots,~$a_{k - 1}$, dengan
+$b$ sebagai pilihan yang lebih baik di antara H~atau~T.\footnote{Guibas and
+Odlyzko, op. cit.})
+\end{enumerate}
+
+\end{LJSItem}
+
+\section{Rantai Markov Ergodik}\label{sec 11.3}
+ 
+Jenis penting kedua dari rantai Markov yang akan kita pelajari secara terperinci
+adalah rantai Markov \emx{ergodik}, yang didefinisikan sebagai berikut.
+
+\begin{definition}\label{defn 11.3.6.5}
+Suatu rantai Markov disebut rantai \emx {ergodik} jika setiap keadaan dapat
+dicapai dari setiap keadaan lain (tidak harus dalam satu langkah).
+\index{rantai Markov ergodik}
+\index{rantai Markov!ergodik}
+\end{definition}
+\par
+Dalam banyak buku, rantai Markov ergodik disebut \emx {tak
+tereduksi}.\index{rantai Markov tak tereduksi}\index{rantai Markov!tak tereduksi}
+
+\begin{definition}\label{defn 11.3.7}
+Suatu rantai Markov disebut rantai \emx {reguler} jika semua elemen suatu
+pangkat matriks transisinya positif.\index{rantai Markov reguler}
+\index{rantai Markov!reguler}
+\end{definition}
+\par
+Dengan kata lain, terdapat suatu $n$ sedemikian rupa sehingga setiap keadaan
+dapat dicapai dari setiap keadaan lain dalam tepat $n$ langkah. Dari definisi ini
+jelas bahwa setiap rantai reguler bersifat ergodik. Sebaliknya, rantai ergodik
+tidak harus reguler, sebagaimana ditunjukkan oleh contoh-contoh berikut.
+
+\begin{example}
+Misalkan matriks transisi suatu rantai Markov didefinisikan oleh
+$$\mat{P} = \bordermatrix{
+   &  1  &  2  \cr
+1  &  0  &  1  \cr
+2  &  1  &  0}\ .
+$$
+Jelas bahwa setiap keadaan dapat dicapai dari setiap keadaan lain, sehingga
+rantai ini ergodik. Namun, jika $n$ ganjil, keadaan 0 tidak dapat dicapai dari
+keadaan 0 dalam $n$ langkah, dan jika $n$ genap, keadaan 1 tidak dapat dicapai
+dari keadaan 0 dalam $n$ langkah; jadi, rantai ini tidak reguler.
+\end{example}
+Contoh yang lebih menarik dari rantai Markov ergodik tak reguler diberikan oleh
+model guci Ehrenfest.
+
+\begin{example}
+Ingat kembali model guci Ehrenfest (Contoh~\ref{exam 11.1.6}).\index{model
+Ehrenfest}
+\index{difusi gas!model Ehrenfest} Matriks transisi untuk contoh ini adalah
+$$
+\mat{P} = \bordermatrix{
+  &  0  &  1  &  2  &  3  &  4  \cr
+0 &  0  &  1  &  0  &  0  &  0  \cr
+1 & 1/4 &  0  & 3/4 &  0  &  0  \cr
+2 &  0  & 1/2 &  0  & 1/2 &  0  \cr
+3 &  0  &  0  & 3/4 &  0  & 1/4 \cr
+4 &  0  &  0  &  0  &  1  &  0}\ .
+$$
+Dalam contoh ini, jika kita mulai dalam keadaan~0, setelah sebarang jumlah
+langkah genap kita akan berada dalam keadaan 0, 2, atau 4, dan setelah sebarang
+jumlah langkah ganjil kita akan berada dalam keadaan 1~atau~3. Jadi, rantai ini
+ergodik tetapi tidak reguler.
+\end{example}
+
+\subsection*{Rantai Markov Reguler}
+
+Setiap matriks transisi yang tidak memiliki entri nol menentukan rantai Markov
+reguler. Namun, suatu rantai Markov reguler mungkin memiliki matriks transisi
+yang memuat entri nol. Matriks transisi pada contoh Negeri Oz dalam
+Bagian~\ref{sec 11.1} memiliki $p_{NN} = 0$, tetapi pangkat keduanya
+$\mat{P}^2$ tidak memiliki entri nol, sehingga rantai ini merupakan rantai
+Markov reguler.
+\par
+Salah satu contoh rantai Markov tak reguler adalah rantai penyerap. Sebagai
+contoh, misalkan
+$$
+\mat{P} = \pmatrix{
+1 & 0 \cr
+1/2 & 1/2 \cr}
+$$
+merupakan matriks transisi suatu rantai Markov. Maka semua pangkat $\mat{P}$
+memiliki 0 di sudut kanan atas.
+\par
+Sekarang kita akan membahas dua teorema penting mengenai rantai reguler.
+
+\begin{theorem}\label{thm 11.3.6}
+Misalkan $\mat{P}$ adalah matriks transisi bagi suatu rantai reguler. Ketika
+$n \to \infty$, pangkat-pangkat $\mat{P}^n$ mendekati suatu matriks limit
+$\mat{W}$ yang semua barisnya merupakan vektor $\mat{w}$ yang sama. Vektor
+$\mat{w}$ adalah vektor peluang positif ketat (yakni, semua komponennya positif
+dan jumlahnya satu).
+\end{theorem}
+\par
+Dalam bagian berikutnya, kita memberikan dua bukti bagi teorema fundamental ini.
+Di sini kita memberikan gagasan dasar bukti pertama.
+\par
+Kita ingin menunjukkan bahwa pangkat-pangkat $\mat{P}^n$ dari suatu matriks
+transisi reguler menuju matriks yang semua barisnya sama. Hal ini setara dengan
+menunjukkan bahwa $\mat{P}^n$ konvergen ke matriks dengan kolom-kolom konstan.
+Kolom ke-$j$ dari $\mat{P}^n$ adalah $\mat{P}^{n} \mat{y}$, dengan $\mat{y}$
+sebagai vektor kolom yang memiliki $1$ pada entri ke-$j$ dan 0 pada entri
+lainnya. Jadi, kita hanya perlu membuktikan bahwa untuk sebarang vektor kolom
+$\mat{y},\mat{P}^{n} \mat{y}$ mendekati vektor konstan ketika $n$ menuju tak
+hingga.
+\par
+Karena setiap baris $\mat{P}$ merupakan vektor peluang, $\mat{Py}$ mengganti
+$\mat{y}$ dengan rata-rata komponennya. Berikut adalah contohnya:
+$$\pmatrix{1/2 & 1/4 & 1/4 \cr 1/3 & 1/3 & 1/3 \cr 1/2 & 1/2 & 0\cr} \pmatrix
+{1 \cr 2 \cr
+3 \cr} = 
+\pmatrix{1/2 \cdot 1+ 1/4 \cdot 2+ 1/4 \cdot 3\cr 
+         1/3 \cdot 1+ 1/3 \cdot 2+ 1/3 \cdot 3\cr 
+         1/2 \cdot 1+ 1/2 \cdot 2+ 0   \cdot 3\cr}
+=\pmatrix {7/4 \cr 2 \cr 3/2 \cr}\ .   
+$$
+Hasil proses perataan ini membuat komponen-komponen $\mat{Py}$ lebih serupa
+daripada komponen-komponen $\mat{y}$. Secara khusus, komponen maksimum menurun
+(dari 3 menjadi 2) dan komponen minimum meningkat (dari 1 menjadi 3/2). Bukti
+kita akan menunjukkan bahwa semakin sering perataan ini dilakukan untuk
+memperoleh $\mat{P}^{n} \mat{y}$, selisih antara komponen maksimum dan minimum
+akan menuju 0 ketika $n \rightarrow \infty$. Artinya, $\mat{P}^{n} \mat{y}$
+menuju vektor konstan. Entri ke-$ij$ dari $\mat{P}^n$, yaitu $p_{ij}^{(n)}$,
+adalah peluang bahwa proses berada dalam keadaan~$s_j$ setelah $n$ langkah jika
+dimulai dalam keadaan~$s_i$. Jika baris yang sama pada $\mat{W}$ dinyatakan dengan
+$\mat{w}$, Teorema~\ref{thm 11.3.6} menyatakan bahwa peluang jangka panjang
+berada dalam~$s_j$ kira-kira~$w_j$, yaitu entri ke-$j$ dari $\mat{w}$, dan tidak
+bergantung pada keadaan awal.
+
+\begin{example}\label{exam 11.3.1}
+Ingatlah bahwa untuk contoh Negeri Oz pada Bagian~\ref{sec 11.1}, pangkat keenam
+matriks transisi~$\mat{P}$, hingga tiga tempat desimal, adalah
+$$
+\mat{P}^6 = \bordermatrix{
+         & \mbox{R} & \mbox{N} & \mbox{S} \cr
+\mbox{R} & .4 & .2 & .4 \cr
+\mbox{N} & .4 & .2 & .4 \cr
+\mbox{S}  & .4 & .2 & .4}\ .
+$$
+Jadi, pada tingkat ketelitian ini, peluang hujan enam hari setelah hari hujan
+sama dengan peluang hujan enam hari setelah hari cerah ataupun enam hari setelah
+hari bersalju. Teorema~\ref{thm 11.3.6} memprediksi bahwa untuk $n$ besar,
+baris-baris~$\mat{P}$ mendekati suatu vektor bersama. Menarik bahwa hal ini
+terjadi begitu cepat dalam contoh kita.
+\end{example}
+
+\begin{theorem}\label{thm 11.3.8}
+Misalkan $\mat {P}$ adalah matriks transisi reguler, misalkan
+$$\mat{W} = \lim_{n \rightarrow \infty} \mat{P}^n\ ,$$
+misalkan $\mat{w}$ adalah baris yang sama pada $\mat{W}$, dan misalkan $\mat{c}$ adalah
+vektor kolom yang semua komponennya bernilai 1. Maka
+\begin{description}
+\item[(a)]
+$\mat{w}\mat{P} = \mat{w}$, dan setiap vektor baris~$\mat{v}$ sedemikian rupa
+sehingga $\mat{v}\mat{P} = \mat{v}$ merupakan kelipatan konstan dari~$\mat{w}$.
+\item[(b)]
+$\mat{P}\mat{c} = \mat{c}$, dan setiap vektor kolom~\mat{x} sedemikian rupa
+sehingga $\mat{P}\mat{x} = \mat{x}$ merupakan kelipatan dari~$\mat{c}$.
+\end{description}
+\proof
+Untuk membuktikan bagian (a), dari Teorema~\ref{thm 11.3.6} kita perhatikan bahwa
+$$
+\mat{P}^n \to \mat{W}\ .
+$$
+Jadi,
+$$
+\mat{P}^{n + 1} = \mat{P}^n \cdot \mat{P} \to \mat{W}\mat{P}\ .
+$$
+Namun $\mat{P}^{n + 1} \to \mat{W}$, sehingga $\mat{W} = \mat{W}\mat{P}$, dan
+$\mat{w} =
+\mat{w}\mat{P}$. 
+\par
+Misalkan $\mat{v}$ adalah sebarang vektor 
+dengan $\mat{v} \mat{P} = \mat{v}$. Maka $\mat{v} = \mat{v} \mat{P}^n$, dan
+dengan mengambil limit,
+$\mat{v} = \mat{v} \mat{W}$. Misalkan $r$ adalah jumlah komponen-komponen
+$\mat{v}$.
+Mudah diperiksa bahwa $\mat{v}\mat{W} = r\mat{w}$. Jadi, $\mat{v} =
+r\mat{w}$.
+\par
+Untuk membuktikan bagian (b), andaikan $\mat{x} = \mat{P} \mat{x}$. Maka $\mat{x} =
+\mat{P}^n
+\mat{x}$, dan sekali lagi dengan mengambil limit, $\mat{x} =  \mat{W}\mat{x}$.
+Karena semua baris
+$\mat{W}$ sama, komponen-komponen $\mat{W}\mat{x}$ semuanya sama, sehingga
+$\mat{x}$ merupakan
+kelipatan $\mat{c}$.
+\end{theorem}
+
+Perhatikan bahwa akibat langsung Teorema~\ref{thm 11.3.8} adalah hanya ada
+satu vektor peluang $\mat{v}$ sedemikian rupa sehingga
+$\mat{v}\mat{P} = \mat{v}$.
+
+\subsection*{Vektor Tetap}
+\begin{definition}\label{def 11.3.1}
+Vektor baris~$\mat{w}$ dengan sifat $\mat{w}\mat{P} = \mat{w}$ disebut
+\emx {vektor baris tetap} untuk~$\mat{P}$.\index{vektor baris tetap} Demikian pula,
+vektor kolom~$\mat{x}$ sedemikian rupa sehingga $\mat{P}\mat{x} = \mat{x}$
+disebut \emx {vektor kolom tetap} untuk~$\mat{P}$.\index{vektor kolom tetap}  
+\end{definition}
+
+Jadi, baris yang sama pada~$\mat{W}$ adalah satu-satunya vektor~$\mat{w}$ yang
+sekaligus merupakan vektor baris tetap untuk~$\mat{P}$ dan vektor peluang.
+Teorema~\ref{thm 11.3.8} menunjukkan bahwa setiap vektor baris tetap untuk
+$\mat{P}$ merupakan kelipatan~$\mat{w}$ dan setiap vektor kolom tetap untuk
+$\mat{P}$ merupakan vektor konstan.
+\par
+Definisi~\ref{def 11.3.1} juga dapat dinyatakan dalam bentuk nilai eigen dan
+vektor eigen. Vektor baris tetap adalah vektor eigen kiri dari matriks
+$\mat{P}$ yang bersesuaian dengan nilai eigen 1. Pernyataan serupa dapat dibuat
+untuk vektor kolom tetap.  
+\par
+Sekarang kita akan memberikan beberapa metode berbeda untuk menghitung vektor
+baris tetap \mat{w} bagi suatu rantai Markov reguler.
+
+\begin{example}\label{exam 11.3.2}
+Menurut Teorema~\ref{thm 11.3.6}, kita dapat menemukan vektor limit~$\mat{w}$
+untuk Negeri Oz dari kenyataan bahwa
+$$
+w_1 + w_2 + w_3 = 1
+$$
+dan
+$$
+ \pmatrix{ w_1 & w_2 & w_3 } \pmatrix{
+ 1/2 & 1/4 & 1/4 \cr
+ 1/2 & 0   & 1/2 \cr
+ 1/4 & 1/4 & 1/2 \cr} = \pmatrix{ w_1 & w_2 & w_3 }\ .
+$$
+
+Relasi-relasi ini menghasilkan empat persamaan berikut dalam tiga peubah tak dikenal:
+\begin{eqnarray*}
+                            w_1   + w_2 + w_3 &=& 1\ ,   \\
+             (1/2)w_1 + (1/2)w_2  + (1/4)w_3  &=& w_1\ , \\
+                        (1/4)w_1  + (1/4)w_3  &=& w_2\ , \\
+             (1/4)w_1 + (1/2)w_2  + (1/2)w_3  &=& w_3\ .
+\end{eqnarray*}
+
+Teorema kita menjamin bahwa persamaan-persamaan ini mempunyai solusi tunggal.
+Dengan menyelesaikannya, kita memperoleh solusi
+$$
+\mat{w} = \pmatrix{ .4 & .2 & .4 }\ ,
+$$
+yang sesuai dengan prediksi dari~$\mat{P}^6$ dalam Contoh~\ref{exam 11.1.1.5}.
+\end{example}
+
+Untuk menghitung vektor tetap, kita dapat mengandaikan bahwa nilai pada suatu
+keadaan tertentu, misalnya keadaan satu, adalah~1, lalu menggunakan semua
+persamaan linear dari $\mat{w}\mat{P} = \mat{w}$ kecuali satu. Sistem persamaan
+ini akan mempunyai solusi tunggal, dan kita dapat memperoleh $\mat{w}$ dari
+solusi itu dengan membagi setiap entrinya dengan jumlah semua entri sehingga
+menghasilkan vektor peluang~$\mat{w}$. Sekarang kita ilustrasikan gagasan ini
+untuk contoh di atas. 
+\begin{example}\label{exam 11.3.2.5}(Lanjutan Contoh~\ref{exam 11.3.2})
+Kita tetapkan $w_1 = 1$, lalu menyelesaikan persamaan linear pertama dan kedua dari
+$\mat{w}\mat{P} =
+\mat{w}$. Kita memperoleh
+\begin{eqnarray*}
+             (1/2) + (1/2)w_2  + (1/4)w_3  &=& 1\ , \\
+                        (1/4)  + (1/4)w_3  &=& w_2\ . \\
+\end{eqnarray*}
+Dengan menyelesaikannya, kita memperoleh 
+$$\pmatrix{w_1&w_2&w_3} = \pmatrix{1&1/2&1}\ .$$
+Sekarang kita bagi vektor ini dengan jumlah komponennya untuk memperoleh
+jawaban akhir:
+$$\mat{w} = \pmatrix{.4&.2&.4}\ .$$
+Metode ini dapat dengan mudah diprogram untuk dijalankan pada komputer.
+\end{example}
+\par
+Seperti disebutkan di atas, vektor baris tetap $\mat{w}$ juga dapat dipandang
+sebagai vektor eigen kiri dari matriks transisi $\mat{P}$. Jadi, jika
+$\mat{I}$ menyatakan matriks identitas, maka $\mat{w}$ memenuhi persamaan matriks
+$$\mat{w}\mat{P} = \mat{w}\mat{I}\ ,$$
+atau, secara ekuivalen,
+$$\mat{w}(\mat{P} - \mat{I}) = \mat{0}\ .$$
+Jadi, $\mat{w}$ berada dalam ruang nol kiri matriks $\mat{P} - \mat{I}$.
+Selain itu, Teorema~\ref{thm 11.3.8} menyatakan bahwa ruang nol kiri ini
+berdimensi 1. Bahasa pemrograman komputer tertentu dapat menemukan ruang nol
+suatu matriks. Dalam bahasa tersebut, vektor peluang baris tetap untuk matriks
+$\mat{P}$ dapat ditemukan dengan menghitung ruang nol kiri, lalu menormalkan
+sebuah vektor di dalam ruang nol itu agar jumlah komponennya sama dengan 1.
+\par
+Program {\bf FixedVector}\index{FixedVector (program)} menggunakan salah satu
+metode di atas (bergantung pada bahasa penulisannya) untuk menghitung vektor
+peluang baris tetap bagi rantai Markov reguler.
+\par
+Sejauh ini kita selalu mengandaikan bahwa proses dimulai dalam keadaan tertentu.
+Teorema berikut memperumum Teorema~\ref{thm 11.3.6} ke kasus ketika keadaan awal
+itu sendiri ditentukan oleh suatu vektor peluang.
+
+\begin{theorem}\label{thm 11.3.9}
+Misalkan $\mat{P}$ adalah matriks transisi untuk suatu rantai reguler dan
+$\mat{v}$ suatu vektor peluang sebarang. Maka
+$$
+\lim_{n \to \infty} \mat{v} \mat{P}^n = \mat{w}\ ,
+$$
+di mana $\mat{w}$ adalah vektor peluang tetap tunggal untuk $\mat{P}$.
+\proof
+Menurut Teorema~\ref{thm 11.3.6},
+$$
+\lim_{n \to \infty} \mat{P}^n = \mat {W}\ .
+$$
+Oleh karena itu,
+$$
+\lim_{n \to \infty} \mat {v} \mat {P}^n = \mat {v} \mat {W}\ .
+$$
+Namun jumlah entri-entri $\mat {v}$ sama dengan 1, dan setiap baris $\mat {W}$
+sama dengan $\mat {w}$. Dari pernyataan-pernyataan ini, mudah diperiksa bahwa
+$$
+\mat {v} \mat {W} = \mat {w}\ .
+$$
+\end{theorem}
+
+Jika kita memulai rantai Markov dengan peluang awal yang diberikan oleh
+~$\mat{v}$, maka vektor peluang $\mat{v} \mat{P}^n$ memberikan peluang berada
+dalam berbagai keadaan setelah $n$~langkah. Teorema~\ref{thm 11.3.9} dengan
+demikian menetapkan bahwa, bahkan dalam kelas proses yang lebih umum ini,
+peluang berada dalam~$s_j$ mendekati $w_j$.
+
+\subsection*{Kesetimbangan}
+Kita juga memperoleh penafsiran baru untuk~$\mat{w}$. Andaikan vektor awal kita
+memilih keadaan~$s_i$ sebagai keadaan awal dengan peluang~$w_i$, untuk setiap
+~$i$. Maka peluang berada dalam berbagai keadaan setelah $n$ langkah diberikan
+oleh $\mat {w} \mat {P}^n = \mat {w}$ dan sama pada setiap langkah. Cara memulai
+ini menghasilkan proses yang disebut ``stasioner.'' Kenyataan bahwa $\mat{w}$
+adalah satu-satunya vektor peluang yang memenuhi $\mat {w} \mat {P} =
+\mat {w}$ menunjukkan bahwa untuk memperoleh proses stasioner, kita harus
+mempunyai vektor peluang awal tepat seperti yang dijelaskan.
+\par
+Banyak hasil menarik mengenai rantai Markov reguler hanya bergantung pada
+kenyataan bahwa rantai itu mempunyai vektor peluang tetap positif yang tunggal.
+Sifat ini berlaku untuk semua rantai Markov ergodik.
+
+\begin{theorem}\label{thm 11.3.10}
+Untuk suatu rantai Markov ergodik, terdapat vektor peluang tunggal~$\mat{w}$
+sedemikian rupa sehingga $\mat {w} \mat {P} = \mat {w}$ dan $\mat{w}$ positif
+ketat. Setiap vektor baris sedemikian rupa sehingga
+$\mat {v} \mat {P} = \mat {v}$ merupakan kelipatan~$\mat{w}$. Setiap vektor
+kolom~$\mat{x}$ sedemikian rupa sehingga $\mat {P} \mat {x} = \mat {x}$
+merupakan vektor konstan.
+\proof
+Teorema ini menyatakan bahwa Teorema~\ref{thm 11.3.8} berlaku untuk rantai
+ergodik. Hasilnya mudah diperoleh dari kenyataan bahwa, jika $\mat{P}$ adalah
+matriks transisi ergodik, maka
+$\bar{\mat{P}} = (1/2)\mat {I} + (1/2)\mat {P}$ adalah matriks transisi reguler
+dengan vektor-vektor tetap yang sama (lihat Latihan~\ref{exer
+11.3.24}--\ref{exer 11.3.27}).
+\end{theorem}
+\par
+Untuk rantai ergodik, vektor peluang tetap mempunyai penafsiran yang agak
+berbeda. Dua teorema berikut, yang tidak akan kita buktikan di sini, memberikan
+penafsiran bagi vektor tetap ini.
+
+\begin{theorem}\label{thm 11.3.11}
+Misalkan $\mat{P}$ adalah matriks transisi untuk suatu rantai ergodik. Misalkan
+$\mat {A}_n$ adalah matriks yang didefinisikan oleh
+$$
+\mat {A}_n = \frac{\mat {I} + \mat {P} + \mat {P}^2 +\cdots + \mat {P}^n}{n +
+1}\ .
+$$
+Maka $\mat {A}_n \to \mat {W}$, di mana $\mat{W}$ adalah matriks yang semua
+barisnya sama dengan vektor peluang tetap tunggal $\mat{w}$ untuk $\mat{P}$.  
+\end{theorem}
+
+\par
+Jika $\mat{P}$ adalah matriks transisi suatu rantai ergodik, maka
+Teorema~\ref{thm 11.3.8} menyatakan bahwa hanya ada satu vektor peluang baris
+tetap untuk $\mat{P}$. Jadi, kita dapat menggunakan teknik yang sama seperti
+untuk rantai reguler guna mencari vektor tetap ini. Secara khusus, program
+{\bf FixedVector} dapat digunakan untuk rantai ergodik.
+\par
+Untuk menafsirkan Teorema~\ref{thm 11.3.11}, andaikan kita mempunyai rantai
+ergodik yang dimulai dalam keadaan~$s_i$. Misalkan $X^{(m)} = 1$ jika langkah
+ke-$m$ menuju keadaan~$s_j$ dan 0 jika tidak. Maka rata-rata banyaknya kali
+berada dalam keadaan~$s_j$ selama $n$ langkah pertama diberikan oleh
+$$
+H^{(n)} = \frac{X^{(0)} + X^{(1)} + X^{(2)} +\cdots+ X^{(n)}}{n + 1}\ .
+$$
+Namun $X^{(m)}$ bernilai~1 dengan peluang~$p_{ij}^{(m)}$ dan 0 jika tidak.
+Jadi $E(X^{(m)}) = p_{ij}^{(m)}$, dan entri ke-$ij$ dari~$\mat {A}_n$
+memberikan nilai harapan~$H^{(n)}$, yaitu proporsi waktu yang diharapkan dalam
+keadaan~$s_j$ selama $n$ langkah pertama jika rantai dimulai dalam keadaan~$s_i$.
+
+Jika berada dalam keadaan~$s_j$ kita sebut \emx{keberhasilan} dan berada dalam
+keadaan lain \emx{kegagalan,} kita dapat menanyakan apakah berlaku teorema yang
+analog dengan hukum bilangan besar untuk percobaan independen. Jawabannya ya,
+dan diberikan oleh teorema berikut.
+
+\begin{theorem}{\bf (Hukum Bilangan Besar untuk Rantai Markov Ergodik)}\label{thm
+11.3.12}
+\index{Hukum Bilangan Besar!untuk Rantai Markov Ergodik}
+Misalkan $H_j^{(n)}$ adalah proporsi waktu selama $n$ langkah ketika suatu
+rantai ergodik berada dalam keadaan~$s_j$. Maka, untuk setiap $\epsilon > 0$,
+$$
+P\Bigl(|H_j^{(n)} - w_j| > \epsilon\Bigr) \to 0\ ,
+$$
+terlepas dari keadaan awal~$s_i$.
+\end{theorem}
+
+Kita telah melihat bahwa setiap rantai Markov reguler juga merupakan rantai
+ergodik. Oleh karena itu, Teorema~\ref{thm 11.3.11}~dan~\ref{thm 11.3.12} juga
+berlaku untuk rantai reguler. Sebagai contoh, hal ini memberi kita penafsiran
+baru untuk vektor tetap $\mat {w} = (.4,.2,.4)$ dalam contoh Negeri Oz.
+Teorema~\ref{thm 11.3.11} memprediksi bahwa dalam jangka panjang, di Negeri Oz
+hujan akan turun 40~persen dari waktu, cuaca akan cerah 20~persen dari waktu,
+dan salju akan turun 40~persen dari waktu.
+
+\subsection*{Simulasi}
+Kita mengilustrasikan Teorema~\ref{thm 11.3.12} dengan menulis program untuk
+menyimulasikan perilaku rantai Markov. {\bf SimulateChain}\index{SimulateChain (program)}
+adalah program semacam itu.  
+
+\begin{example}\label{exam 11.3.2.6}
+Di Negeri Oz terdapat 525 hari dalam setahun.
+\index{Oz, Negeri} Dengan menggunakan program {\bf SimulateChain}, kita telah
+menyimulasikan cuaca selama satu tahun di Negeri Oz. Hasilnya ditunjukkan dalam
+Tabel~\ref{table 11.2}. 
+
+\begin{table}[h]
+\centering
+\begin{verbatim}
+     SSRNRNSSSSSSNRSNSSRNSRNSSSNSRRRNSSSNRRSSSSNRSSNSRRRRRRNSSS 
+     SSRRRSNSNRRRRSRSRNSNSRRNRRNRSSNSRNRNSSRRSRNSSSNRSRRSSNRSNR
+     RNSSSSNSSNSRSRRNSSNSSRNSSRRNRRRSRNRRRNSSSNRNSRNSNRNRSSSRSS
+     NRSSSNSSSSSSNSSSNSNSRRNRNRRRRSRRRSSSSNRRSSSSRSRRRNRRRSSSSR
+     RNRRRSRSSRRRRSSRNRRRRRRNSSRNRSSSNRNSNRRRRNRRRNRSNRRNSRRSNR
+     RRRSSSRNRRRNSNSSSSSRRRRSRNRSSRRRRSSSRRRNRNRRRSRSRNSNSSRRRR
+     RNSNRNSNRRNRRRRRRSSSNRSSRSNRSSSNSNRNSNSSSNRRSRRRNRRRRNRNRS
+     SSNSRSNRNRRSNRRNSRSSSRNSRRSSNSRRRNRRSNRRNSSSSSNRNSSSSSSSNR
+     NSRRRNSSRRRNSSSNRRSRNSSRRNRRNRSNRRRRRRRRRNSNRRRRRNSRRSSSSN
+     SNS
+\end{verbatim}
+\begin{tabular}{lcc}
+Keadaan  &   Frekuensi    &      Proporsi\\
+         &                &           \\
+R        &        217     &      .413 \\
+N        &        109     &      .208 \\
+S        &        199     &      .379 \\
+\end{tabular}
+\caption{Cuaca di Negeri Oz.}
+\label{table 11.2}
+\end{table}
+ 
+Kita perhatikan bahwa simulasi ini memberikan proporsi waktu dalam setiap
+keadaan yang tidak terlalu berbeda dari prediksi jangka panjang .4,~.2,
+dan~.4 yang dijamin oleh Teorema~\ref{thm 11.3.6}. Untuk memperoleh hasil yang
+lebih baik, kita harus menyimulasikan rantai selama waktu yang lebih panjang.
+Kita melakukannya selama 10{,}000 hari tanpa mencetak cuaca setiap hari.
+Hasilnya ditunjukkan dalam Tabel~\ref{table 11.3}. Kita melihat bahwa hasilnya
+sekarang cukup dekat dengan nilai teoretis .4,~.2, dan~.4.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lcc}
+Keadaan &   Frekuensi   &     Proporsi\\
+      &                &           \\
+R     &      4010      &      .401 \\
+N     &      1902      &      .19  \\
+S     &      4088      &      .409 \\
+\end{tabular}
+\caption{Perbandingan frekuensi teramati dan frekuensi prediksi untuk Negeri Oz.}
+\label{table 11.3}
+\end{table}
+\end{example}
+
+\subsection*{Contoh Rantai Ergodik}
+
+Perhitungan vektor tetap~$\mat{w}$ mungkin sulit jika matriks transisinya sangat
+besar. Kadang-kadang berguna untuk menduga vektor tetap semata-mata berdasarkan
+intuisi. Berikut contoh sederhana untuk mengilustrasikan situasi semacam ini.
+
+\begin{example}\label{exam 11.3.3}
+Seekor tikus putih ditempatkan dalam labirin pada Gambar~\ref{fig
+11.4}.\index{tikus}\index{labirin} Terdapat sembilan kompartemen dengan hubungan
+antar-kompartemen seperti yang ditunjukkan. Tikus bergerak secara acak melalui
+kompartemen-kompartemen itu. Artinya, jika terdapat $k$~jalan keluar dari suatu
+kompartemen, tikus memilih masing-masing dengan peluang yang sama. Perjalanan
+tikus dapat kita representasikan sebagai proses rantai Markov dengan matriks
+transisi
+$$
+\mat {P} = \bordermatrix{
+& 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \cr
+1 & 0 & 1/2 & 0 & 0 & 0 & 1/2 & 0 & 0 & 0 \cr
+2 & 1/3 & 0 & 1/3 & 0 & 1/3 & 0 & 0 & 0 & 0 \cr
+3 & 0 & 1/2 & 0 & 1/2 & 0 & 0 & 0 & 0 & 0 \cr
+4 & 0 & 0 & 1/3 & 0 & 1/3 & 0 & 0 & 0 & 1/3 \cr
+5 & 0 & 1/4 & 0 & 1/4 & 0 & 1/4 & 0 & 1/4 & 0 \cr
+6 & 1/3 & 0 & 0 & 0 & 1/3 & 0 & 1/3 & 0 & 0 \cr
+7 & 0 & 0 & 0 & 0 & 0 & 1/2 & 0 & 1/2 & 0 \cr
+8 & 0 & 0 & 0 & 0 & 1/3 & 0 & 1/3 & 0 & 1/3 \cr
+9 & 0 & 0 & 0 & 1/2 & 0 & 0 & 0 & 1/2 & 0}\ .
+$$
+
+\putfig{2truein}{PSfig11-4}{Masalah labirin.}{fig 11.4}
+ 
+%\begin{figure}
+%\centerline{\epsfxsize=2truein 
+%\epsffile{PSfig11-4}}
+%\caption{The maze problem.}\label{fig 11.4}
+%\end{figure}
+\par
+Bahwa rantai ini tidak reguler dapat dilihat sebagai berikut: dari keadaan
+bernomor ganjil, proses hanya dapat menuju keadaan bernomor genap, dan dari
+keadaan bernomor genap proses hanya dapat menuju keadaan bernomor ganjil.
+Karena itu, jika dimulai dalam keadaan $i$, proses akan bergantian berada dalam
+keadaan bernomor genap dan bernomor ganjil. Dengan demikian, pangkat ganjil
+dari~$\mat{P}$ akan mempunyai 0 pada entri bernomor ganjil di baris~1. Di sisi
+lain, sekilas melihat labirin menunjukkan bahwa setiap keadaan dapat dicapai
+dari setiap keadaan lain, sehingga rantai ini ergodik.
+\par
+Untuk menemukan vektor peluang tetap bagi matriks ini, kita harus menyelesaikan
+sepuluh persamaan dalam sembilan peubah tak dikenal. Namun, tampaknya masuk akal
+bahwa dalam jangka panjang, waktu yang dihabiskan dalam setiap kompartemen
+sebanding dengan banyaknya jalan masuk ke kompartemen tersebut. Karena itu,
+kita mencoba vektor yang komponen ke-$j$-nya adalah banyaknya jalan masuk ke
+kompartemen ke-$j$:
+$$
+\mat {x} = \pmatrix{ 2 & 3 & 2 & 3 & 4 & 3 & 2 & 3 & 2}\ .
+$$
+Mudah diperiksa bahwa vektor ini memang vektor tetap, sehingga vektor peluang
+tunggalnya adalah vektor ini yang dinormalkan agar berjumlah~1:
+$$
+\mat {w} = \pmatrix{ \frac1{12} & \frac18 & \frac1{12} & \frac18 & \frac16 &
+\frac18 & \frac 1{12} & \frac18 & \frac1{12} }\ .
+$$
+\end{example}
+
+\begin{example}\label{exam 11.3.4}(Lanjutan Contoh~\ref{exam 11.1.6})
+Ingat kembali model guci Ehrenfest pada Contoh~\ref{exam 11.1.6}.
+\index{model Ehrenfest}\index{difusi gas!model Ehrenfest untuk}
+Matriks transisi untuk rantai ini adalah sebagai berikut:
+
+$$
+\mat {P} = \bordermatrix{
+  & 0    & 1     &  2   & 3    & 4   \cr
+0 & .000 & 1.000 & .000 & .000 & .000\cr
+1 & .250 &  .000 & .750 & .000 & .000\cr
+2 & .000 &  .500 & .000 & .500 & .000\cr
+3 & .000 &  .000 & .750 & .000 & .250\cr
+4 & .000 &  .000 & .000 &1.000 & .000}\ .
+$$
+Jika kita menjalankan program {\bf FixedVector} untuk rantai ini, kita
+memperoleh vektor
+$$
+\mat {w} = \bordermatrix{ 
+  &     0  &    1  &    2  &    3  &    4\cr
+  & .0625  &.2500  &.3750  &.2500  &.0625}\ .
+$$
+
+Menurut Teorema~\ref{thm 11.3.12}, nilai-nilai~$w_i$ ini dapat kita tafsirkan
+sebagai proporsi waktu ketika proses berada dalam setiap keadaan dalam jangka
+panjang. Sebagai contoh, proporsi waktu dalam keadaan~0 adalah .0625 dan
+proporsi waktu dalam keadaan~1 adalah .375. Pembaca yang cermat akan melihat
+bahwa angka-angka ini membentuk distribusi binomial
+1/16,~4/16, 6/16, 4/16,~1/16. Jawaban ini dapat kita duga sebagai berikut: jika
+kita memperhatikan satu bola tertentu, bola itu hanya bergerak bolak-balik
+secara acak di antara kedua guci. Hal ini menunjukkan bahwa keadaan
+kesetimbangan seharusnya sama seperti jika keempat bola didistribusikan secara
+acak ke dalam kedua guci. Jika kita melakukannya, peluang terdapat tepat
+$j$~bola dalam salah satu guci diberikan oleh distribusi binomial $b(n,p,j)$
+dengan $n = 4$ dan $p = 1/2$.
+\end{example}
+
+\exercises
+\begin{LJSItem}
+
+\i\label{exer 11.3.1} Manakah di antara matriks-matriks berikut yang merupakan
+matriks transisi rantai Markov reguler?
+\begin{enumerate}
+\item $\mat {P} = \pmatrix{ .5 & .5 \cr .5 & .5 }$.
+\smallskip
+\item $\mat {P} = \pmatrix{ .5 & .5 \cr 1 & 0 }$.
+\smallskip
+\item $\mat {P} = \pmatrix{ 1/3 & 0 & 2/3 \cr 0 & 1 & 0 \cr 0 & 1/5 & 4/5}$.
+\smallskip
+\item $\mat {P} = \pmatrix{ 0 & 1 \cr 1 & 0}$.
+\smallskip
+\item $\mat {P} = \pmatrix{ 1/2 & 1/2 & 0 \cr 0 & 1/2 & 1/2 \cr 1/3 & 1/3 &
+1/3}$.
+\smallskip
+\end{enumerate}
+
+\i\label{exer 11.3.2} Perhatikan rantai Markov dengan matriks transisi
+$$
+\mat {P} = \pmatrix{ 1/2 & 1/3 & 1/6 \cr3/4 & 0 & 1/4 \cr 0 & 1 & 0}\ .
+$$
+\begin{enumerate}
+
+\item Tunjukkan bahwa ini adalah rantai Markov reguler.
+
+\item Proses dimulai dalam keadaan~1; carilah peluang bahwa proses berada dalam
+keadaan~3 setelah dua langkah.
+
+\item Carilah vektor peluang limit~$\mat{w}$.
+\end{enumerate}
+
+\i\label{exer 11.3.3} Perhatikan rantai Markov dengan matriks transisi umum
+$2 \times 2$
+$$
+\mat {P} = \pmatrix{ 1 - a & a \cr b & 1 - b}\ .
+$$
+\begin{enumerate}
+
+\item Dalam kondisi apa $\mat{P}$ bersifat menyerap?
+
+\item Dalam kondisi apa $\mat{P}$ bersifat ergodik tetapi tidak reguler?
+
+\item Dalam kondisi apa $\mat{P}$ bersifat reguler?
+\end{enumerate}
+
+\i\label{exer 11.3.4} Carilah vektor peluang tetap~$\mat{w}$ untuk
+matriks-matriks ergodik dalam Latihan~\ref{exer 11.3.3}.
+
+\i\label{exer 11.3.5} Carilah vektor peluang tetap~$\mat{w}$ untuk setiap
+matriks reguler berikut.
+\begin{enumerate}
+\item $\mat {P} = \pmatrix{ .75 & .25 \cr .5 & .5}$.
+\smallskip
+\item $\mat {P} = \pmatrix{ .9 & .1 \cr .1 & .9}$.
+\smallskip
+\item $\mat {P} = \pmatrix{ 3/4 & 1/4 & 0 \cr 0 & 2/3 & 1/3 \cr 1/4 & 1/4 &
+1/2}$.
+\smallskip
+\end{enumerate}
+
+\i\label{exer 11.3.6} Perhatikan rantai Markov dengan matriks transisi dalam
+Latihan~\ref{exer 11.3.3}, dengan $a = b = 1$. Tunjukkan bahwa rantai ini
+ergodik tetapi tidak reguler. Carilah vektor peluang tetapnya dan tafsirkan.
+Tunjukkan bahwa $\mat {P}^n$ tidak menuju suatu limit, tetapi
+$$
+\mat {A}_n = \frac{\mat {I} + \mat {P} + \mat {P}^2 +\cdots + \mat {P}^n}{n +
+1}
+$$
+menuju suatu limit.
+
+\i\label{exer 11.3.7} Perhatikan rantai Markov dengan matriks transisi dalam
+Latihan~\ref{exer 11.3.3}, dengan $a = 0$ dan $b = 1/2$. Hitunglah secara
+langsung vektor peluang tetap tunggalnya, lalu gunakan hasil Anda untuk
+membuktikan bahwa rantai itu tidak ergodik.
+
+\i\label{exer 11.3.8} Tunjukkan bahwa matriks
+$$
+\mat {P} = \pmatrix{ 1 & 0 & 0 \cr 1/4 & 1/2 & 1/4 \cr 0 & 0 & 1}
+$$
+mempunyai lebih dari satu vektor peluang tetap. Carilah matriks yang didekati
+oleh $\mat {P}^n$ ketika $n \to \infty$, dan verifikasikan bahwa matriks itu
+tidak mempunyai baris-baris yang semuanya sama.
+
+\i\label{exer 11.3.9} Buktikan bahwa jika suatu matriks transisi 3-kali-3
+mempunyai sifat bahwa jumlah setiap \emx {kolomnya} adalah~1, maka
+$(1/3, 1/3, 1/3)$ merupakan vektor peluang tetap. Nyatakan hasil serupa untuk
+matriks transisi $n$-kali-$n$. Tafsirkan hasil-hasil ini untuk rantai ergodik.
+
+\i\label{exer 11.3.10} Apakah rantai Markov dalam Contoh~\ref{exam 11.1.8}
+bersifat ergodik?
+
+\i\label{exer 11.3.10.5} Apakah rantai Markov dalam Contoh~\ref{exam 11.1.9}
+bersifat ergodik?
+
+\i\label{exer 11.3.11} Perhatikan Contoh~\ref{exam 11.2.1} (Perjalanan Si
+Pemabuk).\index{contoh Perjalanan Si Pemabuk} Andaikan bahwa jika pejalan
+mencapai keadaan~0, ia berbalik dan kembali ke keadaan~1 pada langkah
+berikutnya; demikian pula, jika ia mencapai 4, ia kembali ke keadaan~3 pada
+langkah berikutnya. Apakah rantai baru ini ergodik? Apakah rantai ini reguler?
+
+\i\label{exer 11.3.12} Untuk Contoh~\ref{exam 11.1.2}, ketika $\mat{P}$
+ergodik, berapakah proporsi orang yang diberi tahu bahwa Presiden akan mencalonkan
+diri? Tafsirkan kenyataan bahwa proporsi ini tidak bergantung pada keadaan awal.
+
+\i\label{exer 11.3.13} Pandanglah suatu proses percobaan independen sebagai
+rantai Markov yang keadaannya adalah hasil-hasil yang mungkin dari setiap
+percobaan. Apakah vektor peluang tetapnya? Apakah rantai itu selalu reguler?
+Ilustrasikan untuk Contoh~\ref{exam 11.1.3}.
+
+\i\label{exer 11.3.14} Tunjukkan bahwa Contoh~\ref{exam 11.1.6} adalah rantai
+ergodik, tetapi bukan rantai reguler. Tunjukkan bahwa vektor peluang tetapnya
+$\mat{w}$ merupakan distribusi binomial.
+
+\i\label{exer 11.3.15} Tunjukkan bahwa Contoh~\ref{exam 11.1.7} bersifat
+reguler dan carilah vektor limitnya.
+
+\i\label{exer 11.3.16} Lemparkan sebuah dadu adil berulang kali. Misalkan
+$S_n$ menyatakan jumlah hasil sampai lemparan ke-$n$. Tunjukkan bahwa terdapat
+nilai limit bagi proporsi di antara $n$ nilai pertama~$S_n$ yang habis dibagi
+~7, dan hitunglah nilai limit ini. \emx {Petunjuk}: Limit yang dicari adalah
+vektor peluang kesetimbangan untuk rantai Markov tujuh-keadaan yang sesuai.
+
+\i\label{exer 11.3.17} Misalkan $\mat{P}$ adalah matriks transisi suatu rantai
+Markov reguler. Andaikan terdapat $r$~keadaan dan misalkan $N(r)$ adalah
+bilangan bulat terkecil~$n$ sedemikian rupa sehingga $\mat{P}$ reguler jika dan
+hanya jika $\mat {P}^{N(r)}$ tidak mempunyai entri nol. Carilah batas atas
+hingga untuk~$N(r)$. Selidiki apakah Anda dapat menentukan $N(3)$ secara tepat.
+
+\istar\label{exer 11.3.18} Definisikan $f(r)$ sebagai bilangan bulat terkecil
+$n$ sedemikian rupa sehingga, untuk semua rantai Markov reguler dengan $r$
+keadaan, pangkat ke-$n$ dari matriks transisinya mempunyai semua entri positif.
+Telah dibuktikan,\footnote{E. Seneta, \emx
+{Non-Negative Matrices:  An Introduction to Theory and Applications,}
+Wiley, New York, 1973, pp.~52-54.\index{SENETA, E.}}
+bahwa $f(r) = r^2 - 2r + 2$.  
+\begin{enumerate}
+\item
+Definisikan matriks transisi suatu rantai Markov dengan $r$ keadaan sebagai
+berikut: untuk keadaan $s_i$, dengan $i = 1$,~2, \ldots,~$r - 2$, 
+$\mat {P}(i,i + 1) = 1$, $\mat {P}(r - 1,r) = \mat {P}(r - 1, 1) = 1/2$, dan 
+$\mat {P}(r,1) = 1$. Tunjukkan bahwa ini adalah rantai Markov reguler.
+
+\item Untuk $r = 3$, verifikasikan bahwa pangkat kelima adalah pangkat pertama
+yang tidak mempunyai nol.
+
+\item Tunjukkan bahwa, untuk $r$ umum, $n$ terkecil sedemikian rupa sehingga
+$\mat {P}^n$ mempunyai semua entri positif adalah $n = f(r)$.
+\end{enumerate}
+
+\i\label{exer 11.3.19} Suatu sistem antrean waktu diskret berkapasitas~$n$
+terdiri atas orang yang sedang dilayani dan mereka yang menunggu dilayani.
+Panjang antrean~$x$ diamati setiap detik. Jika $0 < x < n$, maka dengan
+peluang~$p$, ukuran antrean bertambah satu karena kedatangan dan, secara
+independen, dengan peluang~$r$, berkurang satu karena orang yang sedang
+dilayani selesai dilayani. Jika $x = 0$, hanya kedatangan (dengan peluang~$p$)
+yang mungkin. Jika $x = n$, orang yang datang akan pergi tanpa menunggu
+pelayanan, sehingga hanya keberangkatan (dengan peluang~$r$) orang yang sedang
+dilayani yang mungkin. Bentuklah rantai Markov dengan keadaan yang diberikan
+oleh banyaknya pelanggan dalam antrean. Ubahlah program {\bf FixedVector} agar
+Anda dapat memasukkan $n$,~$p$, dan~$r$, dan program akan menyusun matriks
+transisi serta menghitung vektor tetap. Besaran $s = p/r$ disebut
+\emx {intensitas lalu lintas.} Jelaskan perbedaan vektor-vektor tetap ketika
+$s < 1$, $s = 1$, atau $s > 1$.
+
+\i\label{exer 11.3.20} Tulislah program komputer untuk menyimulasikan antrean
+dalam Latihan~\ref{exer 11.3.19}. Minta program Anda melacak proporsi waktu
+ketika panjang antrean adalah $j$, untuk $j = 0$,~1, \ldots,~$n$, serta panjang
+antrean rata-rata. Tunjukkan bahwa perilaku panjang antrean sangat berbeda,
+bergantung pada apakah intensitas lalu lintas~$s$ memenuhi $s < 1$, $s = 1$,
+atau $s > 1$.
+
+\i\label{exer 11.3.21} Dalam masalah antrean pada Latihan~\ref{exer 11.3.19},
+misalkan $S$ adalah waktu pelayanan total yang diperlukan seorang pelanggan dan
+$T$ adalah waktu antara kedatangan pelanggan.
+\begin{enumerate}
+\item Tunjukkan bahwa $P(S = j) = (1 - r)^{j - 1}r$ dan $P(T = j) = (1 - p)^{j -
+1}p$, untuk $j > 0$.
+
+\item Tunjukkan bahwa $E(S) = 1/r$ dan $E(T) = 1/p$.
+
+\item Tafsirkan kondisi $s < 1$, $s = 1$, dan $s > 1$ dalam bentuk nilai-nilai
+harapan ini.
+\end{enumerate}
+
+\i\label{exer 11.3.22} Dalam Latihan~\ref{exer 11.3.19}, waktu pelayanan~$S$
+mempunyai distribusi geometrik dengan $E(S) = 1/r$. Sebagai gantinya, andaikan
+waktu pelayanan adalah waktu konstan $t$~detik. Ubahlah program komputer Anda
+dari Latihan~\ref{exer 11.3.20} agar menyimulasikan distribusi waktu pelayanan
+konstan. Bandingkan panjang antrean rata-rata untuk kedua jenis distribusi
+ketika keduanya mempunyai waktu pelayanan harapan yang sama (yakni, ambil
+$t = 1/r$). Distribusi mana yang rata-rata menghasilkan antrean lebih panjang?
+
+\i\label{exer 11.3.23} Suatu percobaan diyakini dapat dijelaskan oleh rantai
+Markov dua-keadaan dengan matriks transisi $\mat{P}$, di mana
+$$
+\mat {P} = \pmatrix{ .5 & .5 \cr p & 1 - p}
+$$
+dan parameter~$p$ tidak diketahui. Ketika percobaan dilakukan berkali-kali,
+rantai berakhir dalam keadaan satu sekitar 20~persen dari waktu dan dalam
+keadaan dua sekitar 80~persen dari waktu. Hitunglah taksiran yang masuk akal
+untuk parameter~$p$ yang tidak diketahui dan jelaskan cara Anda menemukannya.
+
+\i\label{exer 11.3.24} Buktikan bahwa dalam suatu rantai ergodik dengan $r$
+keadaan, setiap keadaan dapat dicapai dari setiap keadaan lain dalam paling
+banyak $r - 1$ langkah.
+
+\i\label{exer 11.3.25} Misalkan $\mat{P}$ adalah matriks transisi suatu rantai
+ergodik dengan $r$ keadaan. Buktikan bahwa jika entri diagonal $p_{ii}$ positif,
+maka rantai tersebut reguler.
+
+\i\label{exer 11.3.26} Buktikan bahwa jika $\mat{P}$ adalah matriks transisi
+suatu rantai ergodik, maka $(1/2)(\mat {I} + \mat {P})$ adalah matriks transisi
+suatu rantai reguler. \emx {Petunjuk}: Gunakan Latihan~\ref{exer 11.3.25}.
+
+\i\label{exer 11.3.27} Buktikan bahwa $\mat{P}$ dan
+$(1/2)(\mat {I} + \mat {P})$ mempunyai vektor-vektor tetap yang sama.
+
+\i\label{exer 11.3.28} Dalam bukunya, \emx {Wahrscheinlichkeitsrechnung und
+Statistik,}\footnote{A. Engle, \emx {Wahrscheinlichkeitsrechnung und
+Statistik,} vol.~2 
+(Stuttgart: Klett Verlag, 1976).}\index{ENGLE, A.} A.~Engle mengusulkan
+algoritma untuk menemukan vektor tetap suatu rantai Markov ergodik ketika
+peluang transisinya merupakan bilangan rasional. Berikut algoritmanya: untuk
+setiap keadaan~$i$, misalkan $a_i$ adalah kelipatan persekutuan terkecil dari
+penyebut entri-entri tak nol pada baris ke-$i$. Engle menjelaskan algoritmanya
+dalam bentuk pemindahan keping di antara keadaan-keadaan---bahkan, untuk contoh
+kecil, ia menyarankan agar algoritma diterapkan dengan cara ini. Mulailah dengan
+menempatkan $a_i$ keping pada keadaan~$i$ untuk setiap~$i$. Kemudian, pada
+setiap keadaan, distribusikan kembali $a_i$ keping itu dengan mengirimkan
+$a_i p_{ij}$ ke keadaan~$j$. Banyaknya keping pada keadaan~$i$ setelah
+redistribusi ini tidak harus merupakan kelipatan~$a_i$. Untuk setiap
+keadaan~$i$, tambahkan keping secukupnya agar banyaknya keping pada keadaan~$i$
+menjadi kelipatan~$a_i$. Kemudian distribusikan kembali keping-keping dengan
+cara yang sama. Proses ini pada akhirnya akan mencapai titik ketika banyaknya
+keping pada setiap keadaan setelah redistribusi sama seperti sebelum
+redistribusi. Pada titik ini, kita telah menemukan vektor tetap. Berikut sebuah
+contoh:
+$$
+\mat {P} = \bordermatrix{
+& 1 & 2 & 3 \cr
+1 & 1/2 & 1/4 & 1/4 \cr
+2 & 1/2 & 0 & 1/2 \cr
+3 & 1/2 & 1/4 & 1/4}\ .
+$$
+Kita mulai dengan $\mat {a} = (4,2,4)$. Keping-keping setelah redistribusi
+berturut-turut ditunjukkan dalam Tabel~\ref{table 11.4}.
+
+\begin{table}
+\centering
+$$\begin{array}{lll}
+(4 & 2\;\; & 4)\\
+(5 & 2 & 3)\\
+(8 & 2 & 4)\\
+(7 & 3 & 4)\\
+(8 & 4 & 4)\\
+(8 & 3 & 5)\\
+(8 & 4 & 8)\\
+(10 & 4 & 6)\\
+(12 & 4 & 8)\\
+(12 & 5 & 7)\\
+(12 & 6 & 8)\\
+(13 & 5 & 8)\\
+(16 & 6 & 8)\\
+(15 & 6 & 9)\\
+(16 & 6 & 12)\\
+(17 & 7 & 10)\\
+(20 & 8 & 12)\\
+(20 & 8 & 12)\ .
+\end{array}
+$$
+\caption{Distribusi keping.}
+\label{table 11.4}
+\end{table}
+Kita memperoleh bahwa $\mat {a} = (20,8,12)$ adalah vektor tetap.
+
+\begin{enumerate}
+\item Tulislah program komputer untuk menerapkan algoritma ini.
+
+\item Buktikan bahwa algoritma akan berhenti. \emx {Petunjuk}: Misalkan
+$\mat{b}$ adalah vektor berkomponen bilangan bulat yang merupakan vektor tetap
+untuk~$\mat{P}$ dan sedemikian rupa sehingga setiap koordinat vektor awal
+$\mat{a}$ kurang dari atau sama dengan komponen~$\mat{b}$ yang bersesuaian.
+Tunjukkan bahwa dalam iterasi, komponen-komponen vektor selalu bertambah dan
+selalu kurang dari atau sama dengan komponen~$\mat{b}$ yang bersesuaian.
+\end{enumerate}
+
+\i\label{exer 11.3.29} (Coffman, Kaduta, dan Shepp\footnote{E.~G. Coffman, 
+J.~T. Kaduta, dan L.~A. Shepp, ``On the Asymptotic Optimality of
+First-Storage
+Allocation," \emx {IEEE Trans.\ Software Engineering,} vol.~II (1985),
+pp.~235-239.}) Sebuah pusat komputasi menyimpan informasi pada pita dalam
+posisi-posisi sepanjang satu satuan. Selama setiap satuan waktu, terdapat satu
+permintaan untuk menempati satu satuan pita. Ketika permintaan ini tiba, satuan
+bebas pertama digunakan. Selain itu, selama setiap detik, setiap satuan yang
+terisi menjadi kosong dengan peluang~$p$. Simulasikan proses ini dengan memulai
+dari pita kosong. Taksirlah banyaknya posisi terisi yang diharapkan untuk suatu
+nilai~$p$. Jika $p$ kecil, dapatkah Anda memilih pita yang cukup panjang
+sehingga peluang pekerjaan baru harus ditolak (yakni, semua posisi terisi)
+kecil? Bentuklah rantai Markov dengan keadaan berupa banyaknya posisi terisi.
+Ubahlah program {\bf FixedVector} untuk menghitung vektor tetap. Gunakan ini
+untuk memeriksa dugaan Anda melalui simulasi.
+
+\istar\label{exer 11.3.30} (Bukti alternatif Teorema~\ref{thm 11.3.8})
+Misalkan $\mat{P}$ adalah matriks transisi suatu rantai Markov ergodik. Misalkan
+$\mat{x}$ adalah sebarang vektor kolom sedemikian rupa sehingga
+$\mat{P}
+\mat{x} =
+\mat{ x}$. Misalkan $M$ adalah nilai maksimum komponen-komponen $\mat{x}$.
+Andaikan $x_i = M$. Tunjukkan bahwa jika $p_{ij} > 0$, maka $x_j = M$.
+Gunakan ini untuk membuktikan bahwa $\mat{x}$ harus merupakan vektor konstan.
+
+\i\label{exer 11.3.31} Misalkan $\mat{P}$ adalah matriks transisi suatu rantai
+Markov ergodik. Misalkan $\mat{w}$ adalah vektor peluang tetap (yakni,
+$\mat{w}$ adalah vektor baris dengan $\mat {w}\mat {P} = \mat {w}$).
+Tunjukkan bahwa jika $w_i = 0$ dan $p_{ji} > 0$, maka $w_j = 0$. Gunakan ini
+untuk menunjukkan bahwa vektor peluang tetap suatu rantai ergodik tidak dapat
+mempunyai entri 0.
+
+\i\label{exer 11.3.32} Carilah rantai Markov yang tidak menyerap dan juga tidak
+ergodik.
+
+\end{LJSItem}
+
+\section[Teorema Limit Fundamental]{Teorema Limit Fundamental untuk Rantai
+\newline Reguler}\label{sec 11.4}
+
+Teorema limit fundamental untuk rantai Markov reguler menyatakan bahwa jika
+$\mat{P}$ adalah
+matriks transisi reguler, maka
+$$
+\lim_{n \to \infty} \mat {P}^n = \mat {W}\ ,
+$$
+di mana $\mat{W}$ adalah matriks yang setiap barisnya sama dengan vektor baris
+peluang tetap tunggal
+$\mat{w}$ bagi $\mat{P}$. Dalam bagian ini, kita akan memberikan dua
+pembuktian yang sangat berbeda bagi
+teorema tersebut.
+\par
+Pembuktian pertama dilakukan dengan menunjukkan bahwa, untuk setiap vektor kolom
+$\mat{y}$,
+$\mat{P}^n \mat {y}$ mendekati suatu vektor konstan. Sebagaimana ditunjukkan dalam
+Bagian~\ref{sec 11.3}, hal ini
+akan memperlihatkan bahwa $\mat{P}^n$ konvergen menuju matriks dengan
+kolom-kolom konstan atau, secara ekuivalen, menuju
+matriks yang semua barisnya sama.
+\par
+Lemma berikut menyatakan bahwa jika suatu matriks transisi berukuran $r$-kali-$r$
+tidak mempunyai entri nol,
+dan $\mat {y}$ adalah sembarang vektor kolom dengan $r$ entri, maka vektor $\mat
+{P}\mat{y}$ mempunyai
+entri-entri yang ``lebih dekat satu sama lain" daripada entri-entri dalam $\mat {y}$.
+
+\begin{lemma}
+Misalkan $\mat{P}$ adalah matriks transisi berukuran $r$-kali-$r$ tanpa entri nol.
+Misalkan $d$ adalah
+entri terkecil matriks tersebut. Misalkan $\mat{y}$ adalah vektor kolom dengan
+$r$ komponen, dengan komponen terbesar $M_0$ dan komponen terkecil $m_0$.
+Misalkan $M_1$~dan~$m_1$ masing-masing adalah komponen terbesar dan terkecil dari
+vektor $\mat {P} \mat {y}$. Maka
+$$
+M_1 - m_1 \leq (1 - 2d)(M_0 - m_0)\ .
+$$
+
+\proof
+Dalam pembahasan setelah Teorema~\ref{thm 11.3.6}, telah dicatat bahwa setiap
+entri dalam vektor
+$\mat {P}\mat{y}$ merupakan rata-rata berbobot dari entri-entri dalam $\mat {y}$.
+Rata-rata berbobot terbesar
+yang dapat diperoleh dalam kasus ini akan terjadi jika semua entri
+$\mat {y}$ kecuali satu
+bernilai $M_0$ dan satu entri bernilai $m_0$, serta entri kecil tersebut
+diberi bobot sekecil mungkin, yaitu $d$. Dalam kasus ini, rata-rata berbobot
+tersebut sama dengan
+$$dm_0 + (1-d)M_0\ .$$
+Demikian pula, rata-rata berbobot terkecil yang mungkin adalah
+$$dM_0 + (1-d)m_0\ .$$
+Dengan demikian,
+\begin{eqnarray*}
+M_1 - m_1 &\le& \Bigl(dm_0 + (1-d)M_0\Bigr) - \Bigl(dM_0 + (1-d)m_0\Bigr) \\
+          &=& (1 - 2d)(M_0 - m_0)\ .
+\end{eqnarray*}
+Hal ini menyelesaikan pembuktian lemma.
+\end{lemma}
+
+Sekarang kita beralih ke pembuktian teorema limit fundamental untuk rantai
+Markov reguler.
+
+\begin{theorem}{\bf (Teorema Limit Fundamental untuk Rantai Reguler)}
+\index{Teorema Limit Fundamental untuk Rantai Markov Reguler}\index{rantai
+Markov!Teorema Limit Fundamental untuk Rantai Reguler}
+Jika $\mat{P}$ adalah matriks transisi bagi suatu rantai Markov reguler, maka
+$$
+\lim_{n \to \infty} \mat {P}^n = \mat {W}\ ,
+$$
+di mana $\mat {W}$ adalah matriks yang semua barisnya sama. Lebih lanjut, semua
+entri dalam $\mat{W}$
+bernilai positif.
+
+\proof
+Kita membuktikan teorema ini untuk kasus khusus ketika $\mat{P}$ tidak mempunyai
+entri~0. Perluasannya
+ke kasus umum ditunjukkan dalam Latihan~\ref{exer 11.4.6}. Misalkan \mat {y}
+adalah sembarang
+vektor kolom dengan $r$ komponen, di mana $r$ adalah banyaknya keadaan dalam
+rantai tersebut. Kita mengasumsikan
+$r > 1$, sebab jika tidak, teorema ini sepele. Misalkan
+$M_n$ dan
+$m_n$ masing-masing adalah komponen maksimum dan minimum dari
+vektor~$\mat {P}^n \mat { y}$. Vektor~$\mat {P}^n \mat {y}$ diperoleh dari
+vektor~$\mat {P}^{n - 1}
+\mat {y}$ dengan mengalikannya dari kiri dengan matriks~$\mat{P}$. Oleh karena
+itu, setiap komponen
+$\mat {P}^n \mat {y}$ merupakan rata-rata dari komponen-komponen $\mat {P}^{n - 1}
+\mat {y}$. Dengan demikian,
+$$
+M_0 \geq M_1 \geq M_2 \geq\cdots
+$$
+dan
+$$
+m_0 \leq m_1 \leq m_2 \leq\cdots\ .
+$$
+Setiap barisan bersifat monoton dan terbatas:
+$$
+m_0 \leq m_n \leq M_n \leq M_0\ .
+$$
+Oleh karena itu, masing-masing barisan tersebut mempunyai limit ketika $n$
+menuju tak hingga.
+\par
+Misalkan $M$ adalah limit dari~$M_n$ dan $m$ adalah limit dari~$m_n$. Kita tahu
+bahwa $m \leq M$. Kita akan membuktikan bahwa $M - m = 0$. Hal ini akan terbukti jika
+$M_n - m_n$ menuju~0. Misalkan $d$ adalah elemen terkecil dari~$\mat{P}$.
+Karena semua entri $\mat{P}$ bernilai positif, kita mempunyai $d > 0$. Menurut
+lemma di atas,
+$$
+M_n - m_n \leq (1 - 2d)(M_{n - 1} - m_{n - 1})\ .
+$$
+Dari sini kita melihat bahwa
+$$
+M_n - m_n \leq (1 - 2d)^n(M_0 - m_0)\ .
+$$
+Karena $r \ge 2$, haruslah $d \leq 1/2$, sehingga $0 \leq 1 - 2d < 1$; dengan
+demikian, selisih $M_n - m_n$ menuju~0 ketika $n$ menuju tak hingga. Karena setiap
+komponen dari~$\mat {P}^n \mat {y}$ terletak di antara $m_n$~dan~$M_n$, setiap
+komponen harus
+mendekati bilangan yang sama, yaitu $u = M = m$.
+Hal ini menunjukkan bahwa
+$$
+\lim_{n \to \infty} \mat {P}^n \mat {y} = \mat{u}\ ,  \label{eq 11.4.4}
+$$
+di mana $\mat{u}$ adalah vektor kolom yang semua komponennya sama dengan $u$.
+\par
+Sekarang, misalkan $\mat{y}$ adalah vektor yang komponen ke-$j$-nya sama dengan~1
+dan semua komponen lainnya sama dengan~0. Maka $\mat {P}^n \mat {y}$ adalah
+kolom ke-$j$ dari~$\mat {P}^n$. Dengan melakukan ini untuk setiap~$j$, terbukti
+bahwa kolom-kolom dari~$\mat {P}^n$ mendekati vektor-vektor kolom konstan.
+Artinya, baris-baris dari~$\mat {P}^n$ mendekati suatu vektor baris yang sama,
+yaitu~$\mat{w}$, atau
+$$
+\lim_{n \to \infty} \mat {P}^n = \mat {W}\ .  \label{eq 11.4.5}
+$$
+\par
+Tinggal ditunjukkan bahwa semua entri dalam $\mat{W}$ bernilai positif. Seperti
+sebelumnya, misalkan
+$\mat{y}$ adalah vektor yang komponen ke-$j$-nya sama dengan~1 dan semua komponen
+lainnya sama dengan~0.
+Maka $\mat{P}\mat{y}$ adalah kolom ke-$j$ dari $\mat{P}$, dan semua entri kolom
+ini bernilai positif. Komponen minimum dari vektor $\mat{P}\mat{y}$ didefinisikan
+sebagai $m_1$, sehingga
+$m_1 > 0$. Karena $m_1 \le m$, kita mempunyai $m > 0$. Terakhir, perhatikan
+bahwa nilai $m$ ini tepat merupakan
+komponen ke-$j$ dari $\mat{w}$, sehingga semua komponen $\mat{w}$ bernilai
+positif.
+\end{theorem}
+
+\subsection*{Bukti Doeblin}
+Sekarang kita memberikan pembuktian yang sangat berbeda bagi bagian utama
+teorema limit fundamental untuk
+rantai Markov reguler. Pembuktian ini pertama kali diberikan oleh
+Doeblin,\index{DOEBLIN,
+W.}\footnote{W. Doeblin, ``Expos\'e de la Th\'eorie des Chaines Simple Constantes
+de Markov \`a un
+Nombre Fini d'Etats," \emx {Rev.\ Mach.\ de l'Union Interbalkanique,} vol.~2
+(1937), pp.~77--105.}, seorang matematikawan muda cemerlang yang tewas
+ketika masih berusia dua puluhan dalam Perang Dunia Kedua.
+
+\begin{theorem}\label{thm 11.4.1}
+Misalkan $\mat {P}$ adalah matriks transisi bagi suatu rantai Markov reguler
+dengan vektor tetap
+$\mat {w}$. Maka, untuk setiap vektor peluang awal $\mat {u}$,
+$\mat {uP}^n \rightarrow \mat {w}$ ketika $n \rightarrow \infty.$
+
+\proof Misalkan $ X_0,\ X_1,\ \ldots$ adalah rantai Markov
+dengan matriks transisi $\mat {P}$ yang dimulai pada keadaan $s_i$. Misalkan
+$Y_0,\ Y_1,\ \ldots$ adalah rantai Markov
+dengan matriks transisi $\mat {P}$ yang dimulai dengan peluang-peluang awal
+yang diberikan oleh
+$\mat {w}$. Proses $X$ dan $Y$ dijalankan secara saling bebas.
+\par
+Kita juga mempertimbangkan rantai Markov ketiga, $\mat{P}^*$, yang mengamati
+kedua proses
+$X$ dan $Y$. Keadaan-keadaan bagi $\mat{P}^*$
+adalah pasangan $(s_i, s_j)$. Peluang transisinya diberikan oleh
+$$\mat{P}^{*}[(i,j),(k,l)] = \mat{P}(i,k) \cdot  \mat{P}(j,l)\ .$$   
+Karena $\mat{P}$ reguler, terdapat $N$ sedemikian rupa sehingga
+$\mat{P}^{N}(i,j) > 0$ untuk semua $i$
+dan
+$j$. Dengan demikian, untuk rantai
+$\mat{P}^*$ juga dimungkinkan berpindah dari sembarang keadaan $(s_i, s_j)$ ke
+sembarang keadaan lain
+$(s_k,s_l)$ dalam paling banyak $N$ langkah. Artinya, $\mat{P}^*$ juga merupakan
+rantai Markov reguler.
+\par
+Kita tahu bahwa rantai Markov reguler akan mencapai sembarang keadaan dalam
+waktu hingga. Misalkan $T$ adalah
+saat pertama rantai $\mat{P}^*$ berada dalam keadaan berbentuk $(s_k,s_k)$.
+Dengan kata lain,
+$T$ adalah saat pertama proses $X$ dan $Y$ berada dalam keadaan yang sama.
+Dengan demikian, kita telah menunjukkan bahwa
+$$
+P[T > n] \rightarrow 0 \;\;\mbox{ketika}\;\; n \rightarrow \infty\ .
+$$
+Jika kita mengamati proses $X$ dan $Y$ setelah keduanya untuk pertama kali
+berada dalam keadaan yang sama, kita tidak akan memperkirakan adanya perbedaan
+dalam perilaku jangka panjang mereka. Karena hal ini akan
+terjadi bagaimanapun kedua proses tersebut dimulai, tampak jelas bahwa perilaku
+jangka panjang
+seharusnya tidak bergantung pada keadaan awal. Sekarang kita menunjukkan bahwa
+hal ini benar.
+\par
+Pertama, kita mencatat bahwa jika $n \ge T$, maka karena $X$ dan $Y$ keduanya
+berada dalam keadaan yang sama pada saat $T$,
+$$
+P(X_n = j\ |\ n \ge T) = P(Y_n = j\ |\ n \ge T)\ .
+$$
+Jika kedua ruas persamaan ini dikalikan dengan $P(n \ge T)$, kita memperoleh
+\begin{equation}
+P(X_n = j,\ n \ge T) = P(Y_n = j,\ n \ge T)\ .
+\label{eq 11.4.1}
+\end{equation}
+Kita tahu bahwa untuk semua $n$,
+$$P(Y_n = j) = w_j\ .$$
+Namun,
+$$P(Y_n = j) = P(Y_n = j,\ n \ge T) + P(Y_n = j,\ n < T)\ ,$$
+dan suku kedua pada ruas kanan persamaan ini menuju~0 ketika $n$ menuju
+$\infty$, sebab $P(n < T)$ menuju~0 ketika $n$ menuju $\infty$. Jadi,
+$$P(Y_n = j,\ n \ge T) \rightarrow w_j\ ,$$
+ketika $n$ menuju $\infty$. Dari Persamaan~\ref{eq 11.4.1}, kita melihat bahwa
+$$P(X_n = j,\ n \ge T) \rightarrow w_j\ ,$$
+ketika $n$ menuju $\infty$. Namun, dengan penalaran yang serupa dengan yang
+digunakan di atas, selisih
+antara pernyataan terakhir ini dan $P(X_n = j)$ menuju~0 ketika $n$ menuju
+$\infty$. Oleh karena itu,
+$$P(X_n = j) \rightarrow w_j\ ,$$
+ketika $n$ menuju $\infty$. Hal ini menyelesaikan pembuktian.
+\end{theorem}
+Dalam pembuktian di atas, kita belum mengatakan apa pun mengenai laju konvergensi
+distribusi $X_n$
+menuju distribusi tetap $\mat {w}$. Sebenarnya, dapat ditunjukkan
+bahwa\footnote{T. Lindvall, \emx {Lectures on the Coupling Method}   (New York:
+Wiley 1992).}
+$$
+\sum ^{r}_{j = 1} \mid P(X_{n} = j) - w_j \mid \leq 2 
+P(T > n)\ .
+$$
+Ruas kiri pertidaksamaan ini dapat dipandang sebagai jarak antara distribusi
+rantai Markov setelah $n$ langkah, yang dimulai pada keadaan $s_i$, dan distribusi
+limit $\mat {w}$.
+
+\exercises
+\begin{LJSItem}
+
+\i\label{exer 11.4.1} Definisikan $\mat{P}$ dan $\mat{y}$ dengan
+$$
+\mat {P} = \pmatrix{ .5 & .5 \cr.25 & .75 }, \qquad
+\mat {y} = \pmatrix{ 1 \cr 0 }\ .
+$$
+Hitunglah $\mat {P}\mat{y}$, $\mat {P}^2 \mat {y}$, dan $\mat {P}^4 \mat {y}$,
+lalu tunjukkan bahwa hasil-hasilnya mendekati suatu vektor konstan. Vektor apakah
+itu?
+
+\i\label{exer 11.4.2} Misalkan $\mat{P}$ adalah matriks transisi reguler berukuran
+$r \times r$ dan $\mat{y}$ adalah sebarang vektor kolom dengan $r$ komponen.
+Tunjukkan bahwa nilai vektor konstan yang menjadi limit bagi~$\mat {P}^n \mat {y}$
+adalah~$\mat{w}\mat{y}$.
+
+\i\label{exer 11.4.3} Misalkan
+$$
+\mat {P} = \pmatrix{ 1 & 0 & 0 \cr .25 & 0 & .75 \cr 0 & 0 & 1 }
+$$
+adalah matriks transisi suatu rantai Markov. Carilah dua vektor tetap dari
+$\mat {P}$ yang bebas linear. Apakah hal ini menunjukkan bahwa rantai Markov
+tersebut tidak reguler?
+
+\i\label{exer 11.4.4} Uraikan himpunan semua vektor kolom tetap bagi rantai yang
+diberikan dalam Latihan~\ref{exer 11.4.3}.
+
+\i\label{exer 11.4.6} Teorema bahwa $\mat {P}^n \to \mat {W}$ hanya dibuktikan
+untuk kasus ketika $\mat{P}$ tidak mempunyai entri nol. Lengkapilah perincian
+perluasan berikut untuk kasus ketika $\mat{P}$ reguler. Karena $\mat{P}$ reguler,
+untuk suatu $N, \mat {P}^N$ tidak mempunyai entri nol. Jadi, pembuktian yang
+diberikan menunjukkan bahwa $M_{nN} - m_{nN}$ mendekati 0 ketika $n$ menuju tak
+hingga. Akan tetapi, selisih $M_n - m_n$ tidak pernah dapat bertambah. (Mengapa?)
+Oleh karena itu, jika kita tahu bahwa selisih-selisih yang diperoleh dengan
+mengamati setiap kelipatan~$N$ menuju~0, maka seluruh barisan juga harus menuju~0.
+
+\i\label{exer 11.4.7} Misalkan $\mat{P}$ adalah matriks transisi reguler dan
+misalkan $\mat{w}$ adalah vektor tetap taknol tunggal dari $\mat{P}$. Tunjukkan
+bahwa tidak ada entri $\mat{w}$ yang bernilai 0.
+
+\i\label{exer 11.4.8} Berikut ini sebuah trik untuk dicoba pada teman-teman Anda.
+Kocok satu pak kartu dan keluarkan kartu-kartu itu satu per satu. Berilah setiap
+kartu bergambar nilai sepuluh. Mintalah teman Anda melihat salah satu dari
+sepuluh kartu pertama; jika kartu ini bernilai enam, ia harus melihat kartu yang
+muncul enam posisi kemudian; jika kartu ini bernilai tiga, ia harus melihat kartu
+yang muncul tiga posisi kemudian, dan seterusnya. Pada akhirnya ia akan mencapai
+suatu titik ketika ia harus melihat kartu yang muncul $x$~kartu kemudian, tetapi
+kartu yang tersisa kurang dari $x$. Anda lalu menyebutkan kartu terakhir yang ia
+lihat, meskipun Anda tidak mengetahui titik awalnya. Katakan kepadanya bahwa Anda
+melakukan hal ini dengan mengawasinya, dan ia tidak dapat menyembunyikan kapan ia
+melihat kartu-kartu itu. Sebenarnya, Anda hanya melakukan prosedur yang sama dan,
+meskipun Anda tidak memulai dari titik yang sama dengannya, kemungkinan besar
+Anda akan berakhir pada titik yang sama. Mengapa?
+
+\i\label{exer 11.4.9} Tulislah program untuk memainkan permainan dalam Latihan~\ref{exer
+11.4.8}.
+
+\i\label{exer 11.4.10} (Disarankan oleh Peter Doyle)\index{DOYLE, P. G.} Dalam
+pembuktian Teorema~\ref{thm 11.4.1}, kita mengasumsikan keberadaan suatu vektor
+tetap $\mat{w}$. Untuk menghindari asumsi ini, perkuatlah argumen penggandengan
+untuk menunjukkan (tanpa mengasumsikan keberadaan distribusi stasioner
+$\mat{w}$) bahwa, untuk konstanta-konstanta $C$ dan $r<1$ yang sesuai, jarak antara
+$\alpha P^n$ dan $\beta P^n$ tidak lebih dari $C r^n$ bagi sebarang distribusi awal
+$\alpha$ dan $\beta$. Terapkan hal ini pada kasus $\beta = \alpha P$ untuk
+menyimpulkan bahwa barisan $\alpha P^n$ adalah barisan Cauchy dan bahwa limitnya
+adalah matriks $W$ yang semua barisnya sama dengan suatu vektor peluang $w$
+dengan $wP=w$. Perhatikan bahwa jarak antara $\alpha P^n$ dan $w$ tidak lebih dari
+$C r^n$. Dengan demikian, dengan membebaskan diri dari asumsi mengenai keberadaan
+vektor tetap, kita telah membuktikan bahwa konvergensi menuju kesetimbangan
+berlangsung dengan laju eksponensial.
+\end{LJSItem}
+
+\section[Waktu Lintasan Pertama Rata-Rata]{Waktu Lintasan Pertama Rata-Rata
+untuk Rantai Ergodik}\label{sec 11.5}
+Dalam bagian ini kita meninjau dua besaran deskriptif yang berkaitan erat dan
+penting bagi rantai ergodik: waktu rata-rata untuk kembali ke suatu keadaan dan
+waktu rata-rata untuk berpindah dari satu keadaan ke keadaan lain.
+\par
+Misalkan $\mat{P}$ adalah matriks transisi suatu rantai ergodik dengan keadaan
+$s_1$,~$s_2$, \ldots,~$s_r$. Misalkan $\mat {w} = (w_1,w_2,\ldots,w_r)$ adalah
+vektor peluang tetap tunggal sedemikian rupa sehingga
+$\mat {w} \mat {P} = \mat {w}$.
+Menurut Hukum Bilangan Besar untuk rantai Markov, dalam jangka panjang proses
+tersebut akan menghabiskan fraksi waktu sebesar~$w_j$ dalam keadaan~$s_j$. Jadi,
+jika kita memulai dari keadaan mana pun, rantai itu pada akhirnya akan mencapai
+keadaan~$s_j$; bahkan, rantai akan berada dalam keadaan~$s_j$ tak berhingga kali.
+\par
+Cara lain untuk melihat hal ini adalah sebagai berikut. Bentuklah rantai Markov
+baru dengan menjadikan $s_j$ keadaan menyerap, yaitu tetapkan $p_{jj} = 1$. Jika
+kita memulai dari keadaan mana pun selain $s_j$, proses baru ini akan berperilaku
+persis seperti rantai semula sampai keadaan $s_j$ dicapai untuk pertama kalinya.
+Karena rantai semula ergodik, $s_j$ dapat dicapai dari setiap keadaan lain. Jadi,
+rantai baru tersebut merupakan rantai menyerap dengan satu keadaan menyerap
+$s_j$, yang pada akhirnya akan dicapai. Dengan demikian, jika kita memulai rantai
+semula dari keadaan $s_i$ dengan $i \ne j$, pada akhirnya kita akan mencapai
+keadaan $s_j$.
+\par
+Misalkan $\mat{N}$ adalah matriks fundamental bagi rantai baru. Entri-entri
+$\mat{N}$ memberikan banyaknya kunjungan yang diharapkan ke setiap keadaan
+sebelum penyerapan. Dalam rantai semula, besaran-besaran ini memberikan banyaknya
+kunjungan yang diharapkan ke setiap keadaan sebelum mencapai keadaan~$s_j$ untuk
+pertama kalinya. Komponen ke-$i$ dari vektor~$\mat {N} \mat {c}$ memberikan
+banyaknya langkah yang diharapkan sebelum penyerapan dalam rantai baru jika
+dimulai dari keadaan~$s_i$. Dalam rantai lama, ini adalah banyaknya langkah yang
+diharapkan untuk mencapai keadaan~$s_j$ untuk pertama kalinya jika dimulai dari
+keadaan~$s_i$.
+
+\subsection*{Waktu Lintasan Pertama Rata-Rata}
+\begin{definition}
+Jika suatu rantai Markov ergodik dimulai dalam keadaan~$s_i$, banyaknya langkah
+yang diharapkan untuk mencapai keadaan~$s_j$ untuk pertama kalinya disebut
+\emx {waktu lintasan pertama rata-rata}\index{waktu lintasan pertama rata-rata}
+dari~$s_i$ ke~$s_j$. Besaran ini dinotasikan dengan $m_{ij}$. Berdasarkan
+konvensi, $m_{ii} = 0$.
+\end{definition}
+\begin{example}\label{exam 11.5.1}
+Mari kembali ke contoh labirin (Contoh~\ref{exam
+11.3.3}).\index{tikus}\index{labirin} Rantai ergodik ini kita ubah menjadi rantai
+menyerap dengan menjadikan keadaan~5 sebagai keadaan menyerap. Sebagai contoh,
+kita dapat menganggap bahwa makanan diletakkan di tengah labirin dan, setelah
+tikus menemukan makanan itu, tikus tetap di sana untuk menikmatinya (lihat
+Gambar~\ref{fig 11.5}).
+\putfig{2truein}{PSfig11-5}{Masalah labirin.}{fig 11.5} 
+%\begin{figure}
+%\centerline{\epsfxsize=2truein 
+%\epsffile{PSfig11-5}}
+%\caption{Masalah labirin.}\label{fig 11.5}
+%\end{figure}
+\par
+Matriks transisi baru dalam bentuk kanonik adalah
+$$
+\mat {P}\;= \bordermatrix{&                 
+\hbox{1}&\hbox{2}&\hbox{3}&\hbox{4}&\hbox{6}&\hbox{7}&\hbox{8}
+&\hbox{9}&\omit\hfil&\hbox{5}\cr
+\hbox{1}\strut   &  0     &1/2     &  0     &   0    & 1/2    &  0     & 0      
+&    0   &\srule    & 0 \cr
+\hbox{2}\strut   &1/3     &  0     &1/3     &   0    &  0     &  0     & 0     
+&    0   &\srule    &1/3\cr
+\hbox{3}\strut   &  0     &1/2     &  0     & 1/2    &  0     &  0     & 0     
+&    0   &\srule    & 0 \cr
+\hbox{4}\strut   &  0     &  0     &1/3     &   0    &  0     &1/3     & 0     
+& 1/3    &\srule    &1/3\cr
+\hbox{6}\strut   &1/3     &  0     &  0     &   0    &  0     &  0     & 0     
+&   0    &\srule    &1/3\cr
+\hbox{7}\strut   &  0     &  0     &  0     &   0    &1/2     &  0     & 1/2   
+&   0    &\srule    &0  \cr
+\hbox{8}\strut   &  0     &  0     &  0     &   0    &  0     &1/3     & 0     
+& 1/3    &\srule    &1/3\cr
+\hbox{9}\strut   &  0     &  0     &  0     &1/2     &  0     &  0     & 1/2&  
+0        &\srule    & 0 \cr
+\middlehrule{8}{1}
+\hbox{5}\strut   &  0     &  0     &  0     &   0    & 0      & 0      & 0     
+& 0      &\srule   
+& 1}\ .
+$$
+Jika kita menghitung matriks fundamental~$\mat{N}$, kita memperoleh
+$$
+\mat {N} = \frac18 \pmatrix{
+14 & 9 & 4 & 3 & 9 & 4 & 3 & 2 \cr
+6 & 14 & 6 & 4 & 4 & 2 & 2 & 2 \cr
+4 & 9 & 14 & 9 & 3 & 2 & 3 & 4 \cr
+2 & 4 & 6 & 14 & 2 & 2 & 4 & 6 \cr
+6 & 4 & 2 & 2 & 14 & 6 & 4 & 2 \cr
+4 & 3 & 2 & 3 & 9 & 14 & 9 & 4 \cr
+2 & 2 & 2 & 4 & 4 & 6 & 14 & 6 \cr
+2 & 3 & 4 & 9 & 3 & 4 & 9 & 14 \cr}\ .
+$$
+Waktu penyerapan yang diharapkan untuk berbagai keadaan awal diberikan oleh
+vektor~$\mat {N} \mat {c}$, dengan
+$$
+\mat {N} \mat {c} = \pmatrix{ 6 \cr 5 \cr 6 \cr 5 \cr 5 \cr 6 \cr 5 \cr 6 \cr}\
+.
+$$
+Kita melihat bahwa, jika dimulai dari kompartemen~1, rata-rata diperlukan enam
+langkah untuk mencapai makanan. Berdasarkan simetri, jelas bahwa kita seharusnya
+memperoleh jawaban yang sama jika dimulai dari keadaan~3, 7, atau~9. Jelas pula
+bahwa, jika dimulai dari salah satu keadaan tersebut, diperlukan satu langkah
+lebih banyak daripada jika dimulai dari 2,~4, 6, atau~8. Sebagian hasil yang
+diperoleh dari~$\mat{N}$ tidak begitu jelas. Misalnya, perhatikan bahwa banyaknya
+kunjungan yang diharapkan ke keadaan awal adalah 14/8, terlepas dari keadaan
+tempat kita memulai.
+\end{example}
+
+\subsection*{Waktu Kembali Rata-Rata}
+Besaran yang berkaitan erat dengan waktu lintasan pertama rata-rata adalah
+\emx{waktu kembali rata-rata,} yang didefinisikan sebagai berikut. Andaikan kita
+memulai dalam keadaan~$s_i$; tinjaulah lamanya waktu sebelum kita kembali
+ke~$s_i$ untuk pertama kalinya. Jelas bahwa kita pasti kembali, sebab pada
+langkah pertama kita tetap di~$s_i$ atau berpindah ke suatu keadaan lain~$s_j$,
+dan dari setiap keadaan lain~$s_j$ pada akhirnya kita akan mencapai $s_i$ karena
+rantai tersebut ergodik.
+
+\begin{definition}
+Jika suatu rantai Markov ergodik dimulai dalam keadaan~$s_i$, banyaknya langkah
+yang diharapkan untuk kembali ke~$s_i$ untuk pertama kalinya disebut \emx {waktu
+kembali rata-rata}\index{waktu kembali rata-rata} bagi~$s_i$. Besaran ini
+dinotasikan dengan~$r_i$.
+\end{definition}
+
+Kita perlu mengembangkan beberapa sifat dasar waktu lintasan pertama rata-rata.
+Tinjaulah waktu lintasan pertama rata-rata dari $s_i$~ke~$s_j$ dan andaikan
+$i \ne j$. Besaran ini dapat dihitung sebagai berikut: ambil banyaknya langkah
+yang diharapkan dengan syarat hasil langkah pertama, kalikan dengan peluang
+terjadinya hasil tersebut, lalu jumlahkan. Jika langkah pertama menuju~$s_j$,
+banyaknya langkah yang diharapkan adalah~1; jika langkah itu menuju suatu
+keadaan lain~$s_k$, banyaknya langkah yang diharapkan adalah $m_{kj}$~ditambah~1
+untuk langkah yang telah diambil. Jadi,
+$$
+m_{ij} = p_{ij} + \sum_{k \ne j} p_{ik}(m_{kj} + 1)\ ,
+$$
+atau, karena $\sum_k p_{ik} = 1$,
+\begin{equation}
+m_{ij} = 1 + \sum_{k \ne j}p_{ik} m_{kj}\ .\label{eq 11.5.1}
+\end{equation}
+
+Demikian pula, jika dimulai dari~$s_i$, diperlukan setidaknya satu langkah untuk
+kembali. Dengan meninjau semua langkah pertama yang mungkin, kita memperoleh
+\begin{eqnarray}
+r_i &=& \sum_k p_{ik}(m_{ki} + 1) \\
+    &=& 1 + \sum_k p_{ik} m_{ki}\ .\label{eq 11.5.2}
+\end{eqnarray}
+
+\subsection*{Matriks Waktu Lintasan Pertama Rata-Rata dan Matriks Waktu Kembali
+Rata-Rata}
+Sekarang kita definisikan dua matriks $\mat{M}$~dan~$\mat{D}$. Entri
+ke-$ij$, yaitu~$m_{ij}$, dari~$\mat{M}$ adalah waktu lintasan pertama rata-rata
+untuk berpindah dari~$s_i$ ke~$s_j$ jika $i \ne j$; entri-entri diagonalnya
+adalah 0. Matriks $\mat{M}$ disebut \emx {matriks waktu lintasan pertama
+rata-rata.}\index{matriks waktu lintasan pertama rata-rata} Matriks $\mat{D}$
+adalah matriks yang semua entrinya 0 kecuali entri-entri diagonal $d_{ii} = r_i$.
+Matriks $\mat{D}$ disebut \emx {matriks waktu kembali rata-rata.}
+\index{matriks waktu kembali rata-rata}
+Misalkan $\mat {C}$ adalah matriks berukuran $r \times r$ yang semua entrinya~1.
+Dengan menggunakan Persamaan~\ref{eq 11.5.1} untuk kasus $i \ne j$ dan
+Persamaan~\ref{eq 11.5.2} untuk kasus $i = j$, kita memperoleh persamaan matriks
+\begin{equation}
+\mat{M} = \mat{P} \mat{M} + \mat{C} - \mat{D}\ ,  
+\label{eq 11.5.3}
+\end{equation}
+atau
+\begin{equation}
+(\mat{I} - \mat{P}) \mat{M} = \mat{C} - \mat{D}\ . 
+\label{eq 11.5.4}
+\end{equation}
+Persamaan~\ref{eq 11.5.4}, bersama $m_{ii} = 0$, mengimplikasikan
+Persamaan~\ref{eq 11.5.1} dan~\ref{eq 11.5.2}. Sekarang kita siap membuktikan
+teorema dasar pertama.
+
+\begin{theorem}
+Untuk suatu rantai Markov ergodik, waktu kembali rata-rata bagi keadaan $s_i$
+adalah $r_i = 1/w_i$, dengan $w_i$ merupakan komponen ke-$i$ dari vektor peluang
+tetap bagi matriks transisi.
+\proof
+Dengan mengalikan kedua ruas Persamaan~\ref{eq 11.5.4} dengan~$\mat{w}$ dan
+menggunakan kenyataan bahwa
+$$
+\mat {w}(\mat {I} - \mat {P}) = \mat {0}
+$$ 
+menghasilkan
+$$
+\mat {w} \mat {C} - \mat {w} \mat {D} = \mat {0}\ .
+$$
+Di sini $\mat {w} \mat {C}$ adalah vektor baris yang semua entrinya 1 dan
+$\mat {w} \mat {D}$ adalah vektor baris dengan entri ke-$i$ sebesar $w_i r_i$.
+Jadi,
+$$
+(1,1,\ldots,1) = (w_1r_1,w_2r_2,\ldots,w_nr_n)
+$$
+dan
+$$
+r_i = 1/w_i\ ,
+$$
+sebagaimana hendak dibuktikan.
+\end{theorem}
+
+\begin{corollary}\label{cor 11.5.17}
+Untuk suatu rantai Markov ergodik, komponen-komponen vektor peluang tetap~{\bf
+w} bernilai positif.
+\proof
+Kita tahu bahwa nilai-nilai~$r_i$ berhingga, sehingga $w_i = 1/r_i$ tidak mungkin
+bernilai 0.
+\end{corollary}
+
+\begin{example}
+Dalam Contoh~\ref{exam 11.3.3}, kita memperoleh vektor peluang tetap untuk contoh
+labirin sebagai
+$$
+\mat {w} = \pmatrix{ \frac1{12} & \frac18 & \frac1{12} & \frac18 & \frac16 &
+\frac18 & \frac1{12} & \frac18 & \frac1{12}}\ .
+$$
+Dengan demikian, waktu-waktu kembali rata-rata diberikan oleh kebalikan dari
+peluang-peluang ini. Artinya,
+$$
+\mat {r} = \pmatrix{ 12 & 8 & 12 & 8 & 6 & 8 & 12 & 8 & 12 }\ .
+$$
+\end{example}
+
+Kembali ke Negeri Oz, kita menemukan bahwa cuaca di Negeri Oz dapat
+direpresentasikan oleh rantai Markov dengan keadaan hujan, cerah, dan salju.
+Dalam Bagian~\ref{sec 11.3}, kita memperoleh vektor limit $\mat {w} = 
+(2/5,1/5,2/5)$. Dari sini kita melihat bahwa banyaknya hari rata-rata antara dua
+hari hujan adalah 5/2, antara dua hari cerah adalah 5, dan antara dua hari
+bersalju adalah 5/2.
+
+\subsection*{Matriks Fundamental}
+Sekarang kita akan mengembangkan matriks fundamental bagi rantai ergodik yang
+memainkan peran serupa dengan matriks fundamental $\mat {N} = (\mat {I} - \mat
+{Q})^{-1}$ bagi rantai menyerap. Seperti pada rantai menyerap, matriks fundamental
+dapat digunakan untuk menemukan sejumlah besaran menarik yang melibatkan rantai
+ergodik. Dengan matriks ini, kita akan memberikan metode untuk menghitung
+waktu-waktu lintasan pertama rata-rata bagi rantai ergodik yang lebih mudah
+digunakan daripada metode di atas. Selain itu, kita akan menyatakan (tetapi tidak
+membuktikan) Teorema Limit Pusat untuk Rantai Markov, yang pernyataannya
+menggunakan matriks fundamental.
+\par
+Kita mulai dengan meninjau kasus ketika \mat{P} adalah matriks transisi suatu
+rantai Markov reguler. Karena tidak ada keadaan menyerap, kita mungkin tergoda
+untuk mencoba $\mat {Z} = (\mat {I} - \mat {P})^{-1}$ sebagai matriks fundamental.
+Namun, $\mat {I} - \mat {P}$ tidak mempunyai invers. Untuk melihatnya, ingatlah
+bahwa suatu matriks~$\mat{R}$ mempunyai invers jika dan hanya jika
+$\mat {R} \mat {x} = \mat {0}$ mengimplikasikan $\mat {x} = \mat {0}$. Akan
+tetapi, karena $\mat {P} \mat {c} = \mat {c}$, kita mempunyai
+$(\mat {I} - \mat {P})\mat {c} = \mat {0}$, sehingga $\mat {I} - \mat {P}$ tidak
+mempunyai invers.
+\par
+Ingatlah bahwa jika kita mempunyai rantai Markov menyerap dan \mat{Q} adalah
+pembatasan matriks transisi pada himpunan keadaan sementara, maka matriks
+fundamental \mat {N} dapat ditulis sebagai
+$$\mat {N} = \mat {I} + \mat {Q} + \mat {Q}^2 + \cdots\ .$$
+Deret pangkat ini konvergen karena $\mat {Q}^n \rightarrow 0$, sehingga deret
+tersebut berperilaku seperti deret geometri konvergen.
+\par
+Gagasan ini mungkin mendorong kita mencari deret serupa bagi rantai reguler.
+Karena kita tahu bahwa $\mat {P}^n \rightarrow \mat {W}$, kita dapat meninjau
+deret
+\begin{equation}
+\mat {I} + (\mat {P} -\mat {W}) + (\mat {P}^2 - \mat{W}) + \cdots\ .\label{eq
+11.5.8}
+\end{equation}
+Sekarang kita menggunakan sifat-sifat khusus \mat {P} dan \mat {W} untuk menulis
+ulang deret ini. Sifat-sifat khusus tersebut adalah: 1)
+$\mat {P}\mat {W} = \mat {W}$ dan 2) $\mat {W}^k = \mat {W}$ untuk semua bilangan
+bulat positif $k$. Fakta-fakta ini mudah diperiksa dan diserahkan sebagai latihan
+(lihat Latihan~\ref{exer 11.5.28}). Dengan menggunakan fakta-fakta tersebut, kita
+melihat bahwa
+\begin{eqnarray*}
+(\mat {P} - \mat {W})^n &=& \sum_{i = 0}^n (-1)^i{n \choose i}\mat
+{P}^{n-i}\mat {W}^i \\
+&=& \mat {P}^n + \sum_{i = 1}^n (-1)^i{n \choose i} \mat {W}^i \\
+&=& \mat {P}^n + \sum_{i = 1}^n (-1)^i{n \choose i} \mat {W} \\
+&=& \mat {P}^n + \Biggl(\sum_{i = 1}^n (-1)^i{n \choose i}\Biggr) \mat {W}\ .
+\end{eqnarray*}
+Jika kita mengembangkan ekspresi $(1-1)^n$ dengan menggunakan Teorema Binomial,
+kita memperoleh ekspresi dalam tanda kurung di atas, kecuali bahwa kita memiliki
+satu suku tambahan (yang sama dengan 1). Karena $(1-1)^n = 0$, kita melihat bahwa
+ekspresi di atas sama dengan -1. Jadi, kita mempunyai
+$$(\mat {P} - \mat {W})^n = \mat {P}^n - \mat {W}\ ,$$
+bagi semua $n \ge 1$.
+\par
+Sekarang kita dapat menulis ulang deret dalam \ref{eq 11.5.8} sebagai
+$$\mat {I} + (\mat {P} - \mat {W}) + (\mat {P} - \mat {W})^2 + \cdots\ .$$
+Karena suku ke-$n$ dalam deret ini sama dengan $\mat {P}^n - \mat {W}$, suku
+ke-$n$ menuju 0 ketika $n$ menuju tak hingga. Hal ini cukup untuk menunjukkan
+bahwa deret tersebut konvergen dan jumlahnya merupakan invers dari matriks
+$\mat {I} - \mat {P} + \mat {W}$. Invers ini kita sebut \emx {matriks
+fundamental} yang berkaitan dengan rantai tersebut, dan kita notasikan dengan
+\mat {Z}.\index{matriks fundamental!untuk rantai Markov reguler}
+\par
+Dalam kasus ketika rantai ergodik tetapi tidak reguler, tidak benar bahwa
+$\mat {P}^n \rightarrow \mat {W}$ ketika $n \rightarrow \infty$. Meskipun
+demikian, matriks $\mat {I} - \mat {P} + \mat {W}$ tetap mempunyai invers,
+sebagaimana akan kita tunjukkan sekarang.
+
+\begin{proposition}
+Misalkan \mat {P} adalah matriks transisi suatu rantai ergodik dan \mat {W}
+adalah matriks yang semua barisnya merupakan vektor baris peluang tetap bagi
+\mat {P}. Maka matriks
+$$\mat {I} - \mat {P} + \mat {W}$$
+mempunyai invers.
+
+\proof
+Misalkan $\mat{x}$ adalah vektor kolom sedemikian rupa sehingga
+$$
+(\mat {I} - \mat {P} + \mat {W})\mat {x} = \mat {0}\ .
+$$
+Untuk membuktikan proposisi tersebut, cukup ditunjukkan bahwa \mat {x} harus
+merupakan vektor nol. Dengan mengalikan persamaan ini dengan~$\mat{w}$ dan
+menggunakan kenyataan bahwa $\mat{w}(\mat{I}
+- \mat{
+P}) = \mat{0}$ dan
+$\mat{w} \mat{W} = \mat {w}$, kita memperoleh
+$$
+\mat {w}(\mat {I} - \mat {P} + \mat {W})\mat {x} = \mat {w} \mat {x} = \mat
+{0}\ .
+$$
+Oleh karena itu,
+$$
+(\mat {I} - \mat {P})\mat {x} = \mat {0}\ .
+$$
+
+Namun, ini berarti bahwa $\mat {x} = \mat {P} \mat {x}$ adalah vektor kolom tetap
+bagi~$\mat{P}$. Menurut Teorema~\ref{thm 11.3.10}, hal ini hanya dapat terjadi
+jika $\mat{x}$ adalah vektor konstan. Karena $\mat {w}\mat {x} = 0$ dan
+\mat {w} mempunyai entri-entri yang positif secara ketat, kita melihat bahwa
+$\mat {x} = \mat {0}$. Hal ini menyelesaikan pembuktian.
+\end{proposition}
+\par
+Seperti dalam kasus reguler, kita menyebut invers dari matriks $\mat {I} - \mat
+{P} + \mat {W}$ sebagai \emx {matriks fundamental}\index{matriks
+fundamental!untuk rantai Markov ergodik} bagi rantai ergodik dengan matriks
+transisi \mat {P}, dan kita menggunakan \mat {Z} untuk menotasikan matriks
+fundamental ini.
+
+\begin{example}\label{exam 11.5.2} 
+Misalkan $\mat{P}$ adalah matriks transisi bagi cuaca di Negeri Oz. Maka
+\begin{eqnarray*}
+\mat{I} - \mat{P} + \mat{W} &=& \pmatrix{
+1 & 0 & 0\cr
+0 & 1 & 0\cr
+0 & 0 & 1\cr} - \pmatrix{
+1/2 & 1/4 & 1/4\cr
+1/2 & 0   & 1/2\cr
+1/4 & 1/4 & 1/2\cr} + \pmatrix{
+2/5 & 1/5 & 2/5\cr
+2/5 & 1/5 & 2/5\cr
+2/5 & 1/5 & 2/5\cr} \cr
+&=& \pmatrix{
+9/10 & -1/20 & 3/20\cr
+-1/10 & 6/5   & -1/10\cr
+3/20 & -1/20 & 9/10\cr}\ ,\cr
+\end{eqnarray*}
+sehingga
+$$
+\mat{Z} = (\mat{I} - \mat{P} + \mat{W})^{-1} =
+\pmatrix{                   
+86/75 & 1/25 & -14/75\cr
+2/25 & 21/25 & 2/25\cr
+-14/75 & 1/25 & 86/75\cr}\ .         
+$$
+\end{example}
+
+\subsection*{Menggunakan Matriks Fundamental untuk Menghitung Matriks Waktu
+Lintasan Pertama Rata-Rata}
+
+Kita akan menunjukkan cara memperoleh matriks waktu lintasan pertama rata-rata
+\mat{M} dari matriks fundamental \mat{Z} bagi suatu rantai Markov ergodik.
+Sebelum menyatakan teorema yang memberikan waktu-waktu lintasan pertama, kita
+memerlukan beberapa fakta mengenai \mat{Z}.
+
+\begin{lemma}\label{thm 11.5.18}
+Misalkan $\mat{Z} = (\mat{I} - \mat{P} + \mat{W})^{-1}$ dan misalkan $\mat{c}$
+adalah vektor kolom yang semua entrinya 1. Maka
+$$\mat{Z}\mat{c} = \mat{c}\ ,$$
+$$\mat{w}\mat{Z} = \mat{w}\ ,$$
+dan
+$$\mat{Z}(\mat{I} - \mat{P}) = \mat{I} - \mat{W}\ .$$
+\proof
+Karena $\mat{P}\mat{c} = \mat{c}$ dan $\mat{W}\mat{c} = \mat{c}$,
+$$\mat{c} = (\mat{I} - \mat{P} + \mat{W}) \mat{c}\ .$$
+Jika kita mengalikan kedua ruas persamaan ini dari kiri dengan $\mat{Z}$, kita
+memperoleh
+$$\mat{Z}\mat{c} = \mat{c}\ .$$
+\par
+Demikian pula, karena $\mat{w}\mat{P} = \mat{w}$ dan
+$\mat{w}\mat{W} = \mat{w}$,
+$$\mat{w} = \mat{w}(\mat{I} - \mat{P} + \mat{W})\ .$$
+Jika kita mengalikan kedua ruas persamaan ini dari kanan dengan $\mat{Z}$, kita
+memperoleh
+$$\mat{w}\mat{Z} = \mat{w}\ .$$
+\par
+Terakhir, kita mempunyai
+\begin{eqnarray*}
+(\mat{I} - \mat{P} + \mat{W})(\mat{I} - \mat{W}) &=& 
+\mat{I} - \mat{W} - \mat{P} + \mat{W} + \mat{W} - \mat{W}\\
+    &=& \mat{I} - \mat{P}\ .
+\end{eqnarray*}
+Dengan mengalikan dari kiri dengan \mat{Z}, kita memperoleh
+$$\mat{I} - \mat{W} = \mat{Z}(\mat{I} - \mat{P})\ .$$
+Hal ini menyelesaikan pembuktian.
+\end{lemma}
+
+Teorema berikut menunjukkan cara memperoleh waktu-waktu lintasan pertama
+rata-rata dari matriks fundamental.
+
+\begin{theorem}\label{thm 11.5.19}
+Matriks waktu lintasan pertama rata-rata~$\mat{M}$ bagi suatu rantai ergodik
+ditentukan dari matriks fundamental $\mat{Z}$ dan vektor baris peluang tetap
+$\mat{w}$ melalui
+$$
+m_{ij} = \frac{z_{jj} - z_{ij}}{w_j}\ .
+$$
+\proof
+Dalam Persamaan~\ref{eq 11.5.4}, kita telah menunjukkan bahwa
+$$
+(\mat {I} - \mat {P})\mat {M} = \mat {C} - \mat {D}\ .
+$$
+Jadi,
+$$
+\mat {Z}(\mat {I} - \mat {P})\mat {M} = \mat {Z} \mat {C} - \mat {Z} \mat {D}\
+,
+$$
+dan, menurut Lemma~\ref{thm 11.5.18},
+$$
+\mat {Z}(\mat {I} - \mat {P})\mat {M} = \mat {C} - \mat {Z} \mat {D}\ .
+$$
+Dengan kembali menggunakan Lemma~\ref{thm 11.5.18}, kita mempunyai
+$$
+\mat {M} - \mat{W}\mat {M} = \mat {C} - \mat {Z} \mat {D}
+$$
+atau
+$$
+\mat {M} = \mat {C} - \mat {Z} \mat {D} + \mat{W}\mat {M}\ .
+$$
+Dari persamaan ini, kita melihat bahwa
+\begin{equation}
+m_{ij} = 1 - z_{ij}r_j + (\mat{w} \mat{M})_j\ .  \label{eq 11.5.6}
+\end{equation}
+Namun, $m_{jj} = 0$, sehingga
+$$
+0 = 1 - z_{jj}r_j + (\mat {w} \mat {M})_j\ ,
+$$
+atau
+\begin{equation}
+(\mat{w} \mat{M})_j = z_{jj}r_j - 1\ .  \label{eq 11.5.7}
+\end{equation}
+Dari Persamaan~\ref{eq 11.5.6} dan \ref{eq 11.5.7}, kita memperoleh
+$$
+m_{ij} = (z_{jj} - z_{ij}) \cdot r_j\ .
+$$
+Karena $r_j = 1/w_j$,
+$$
+m_{ij} = \frac{z_{jj} - z_{ij}}{w_j}\ .
+$$
+\end{theorem}
+
+\begin{example}\label{exam 11.5.3} (Lanjutan Contoh~\ref{exam 11.5.2})
+Dalam contoh Negeri Oz, kita memperoleh
+$$
+\mat{Z} = (\mat{I} - \mat{P} + \mat{W})^{-1} =
+\pmatrix{                   
+86/75 & 1/25 & -14/75\cr
+2/25 & 21/25 & 2/25\cr
+-14/75 & 1/25 & 86/75\cr}\ .         
+$$
+Kita juga telah melihat bahwa $\mat {w} = (2/5,1/5, 2/5)$. Jadi, sebagai contoh,
+\begin{eqnarray*}
+m_{12} &=& \frac{z_{22} - z_{12}}{w_2} \\
+       &=& \frac{21/25 - 1/25}{1/5} \\
+       &=& 4\ ,\\
+\end{eqnarray*}
+menurut Teorema~\ref{thm 11.5.19}. Dengan melakukan perhitungan bagi entri-entri
+lain dari $\mat{M}$, kita memperoleh
+$$
+\mat {M} = \pmatrix{
+   0 & 4 & 10/3\cr
+ 8/3 & 0 & 8/3\cr
+10/3 & 4 & 0\cr}\ .
+$$
+\end{example}
+
+\subsection*{Perhitungan}
+Program {\bf ErgodicChain} menghitung matriks fundamental, vektor tetap, matriks
+waktu kembali rata-rata~$\mat{D}$, dan matriks waktu lintasan pertama
+rata-rata~$\mat{M}$. Kita telah menjalankan program tersebut untuk model guci
+Ehrenfest (Contoh~\ref{exam 11.1.6}).\index{model Ehrenfest} \index{difusi
+gas!model Ehrenfest}
+Kita memperoleh:
+$$
+\mat {P} = \bordermatrix{
+    &  0  & 1 & 2 & 3 & 4 \cr
+  0 &   .0000 & 1.0000 &  .0000 &  .0000 &  .0000\cr
+  1 &   .2500 & .0000  &  .7500 &  .0000 &  .0000\cr
+  2 &   .0000 & .5000  &  .0000 &  .5000 &  .0000\cr
+  3 &   .0000 & .0000  &  .7500 &  .0000 &  .2500\cr
+  4 &   .0000 & .0000  &  .0000 &  1.0000&  .0000}\ ;
+$$
+ 
+$$
+\mat {w} = \bordermatrix{
+  &     0  &   1   &   2   &   3   &    4\cr
+  & .0625  &.2500  &.3750  &.2500  &.0625}\ ;
+$$
+
+$$
+\mat {r} = \bordermatrix{
+  &       0  &      1  &      2 &       3 &       4\cr
+  & 16.0000  & 4.0000  & 2.6667 &  4.0000 & 16.0000}\ ;
+$$
+
+$$
+\mat {M} = \bordermatrix{
+  &        0 &      1 &      2 &       3 &       4\cr
+0 &    .0000 & 1.0000 & 2.6667 &  6.3333 & 21.3333\cr
+1 &  15.0000 &  .0000 & 1.6667 &  5.3333 & 20.3333\cr
+2 &  18.6667 & 3.6667 &  .0000 &  3.6667 & 18.6667\cr
+3 &  20.3333 & 5.3333 & 1.6667 &   .0000 & 15.0000\cr
+4 &  21.3333 & 6.3333 & 2.6667 &  1.0000 &   .0000}\ .
+$$ 
+\par
+Dari matriks waktu lintasan pertama rata-rata, kita melihat bahwa waktu rata-rata
+untuk beralih dari 0~bola dalam guci~1 ke 2~bola dalam guci~1 adalah 2.6667
+langkah, sedangkan waktu rata-rata untuk beralih dari 2~bola dalam guci~1 ke
+0~bola dalam guci~1 adalah 18.6667. Hal ini mencerminkan bahwa model tersebut
+menunjukkan kecenderungan ke pusat. Tentu saja, fisikawan tertarik pada kasus
+dengan sejumlah besar molekul, atau bola, sehingga kita seharusnya meninjau
+contoh ini untuk~$n$ yang sedemikian besar sehingga kita bahkan tidak dapat
+menghitungnya dengan komputer.
+
+\subsection*{Model Ehrenfest}
+\begin{example}(Lanjutan Contoh~\ref{exam 11.3.4})
+Mari meninjau model Ehrenfest (lihat Contoh \ref{exam
+11.1.6})\index{model Ehrenfest}
+\index{difusi gas!model Ehrenfest} untuk difusi gas dalam kasus umum dengan
+$2n$ bola. Setiap detik, salah satu dari $2n$ bola dipilih secara acak dan
+dipindahkan dari guci tempat bola itu berada ke guci lainnya. Jika terdapat
+$i$~bola dalam guci pertama, maka dengan peluang $i/2n$ kita mengambil salah
+satunya dan memasukkannya ke guci kedua, sedangkan dengan peluang $(2n - i)/2n$
+kita mengambil sebuah bola dari guci kedua dan memasukkannya ke guci pertama.
+Pada setiap detik, banyaknya bola~$i$ dalam guci pertama kita jadikan keadaan
+sistem. Maka, dari keadaan~$i$ kita hanya dapat berpindah ke keadaan $i - 1$ dan
+$i + 1$, dan peluang transisinya diberikan oleh
+$$
+p_{ij} = \left \{ \matrix{
+               \frac i{2n}\ , & \mbox{jika} \,\,j = i-1, \cr
+               1 - \frac i{2n}\ , & \mbox{jika} \,\,j = i+1, \cr
+               0\ , & \mbox{selain itu.}\cr}\right.
+$$
+\par
+Hal ini mendefinisikan matriks transisi suatu rantai Markov ergodik yang tidak
+reguler (lihat Latihan~\ref{exer 11.3.14}). Di sini fisikawan tertarik pada
+prediksi jangka panjang mengenai keadaan yang ditempati. Dalam
+Contoh~\ref{exam 11.3.4}, kita memberikan alasan intuitif untuk menduga bahwa
+vektor tetap $\mat{w}$ adalah distribusi binomial dengan parameter $2n$ dan
+$1/2$. Mudah diperiksa bahwa dugaan ini benar. Jadi,
+$$
+w_i = \frac{{2n \choose i}}{2^{2n}}\ .
+$$
+Dengan demikian, waktu kembali rata-rata bagi keadaan~$i$ adalah
+$$
+r_i = \frac{2^{2n}}{{2n \choose i}}\ .
+$$
+\par
+Secara khusus, tinjaulah suku tengah $i = n$. Kita telah melihat bahwa suku ini
+kira-kira sama dengan $1/\sqrt{\pi n}$. Jadi, kita dapat menghampiri $r_n$ dengan
+$\sqrt{\pi n}$.
+\par
+Model ini digunakan untuk menjelaskan konsep reversibilitas dalam sistem fisik.
+Andaikan kita membiarkan sistem berjalan sampai mencapai kesetimbangan. Pada
+saat itu dibuat sebuah film yang memperlihatkan perkembangan sistem. Film
+tersebut kemudian ditayangkan kepada Anda, dan Anda diminta menentukan apakah
+film diputar maju atau mundur. Tampaknya selalu ada kecenderungan untuk bergerak
+menuju proporsi bola yang sama, sehingga urutan waktu yang benar seharusnya
+merupakan urutan dengan transisi terbanyak dari~$i$ ke $i - 1$ jika $i > n$, dan
+dari $i$ ke $i + 1$ jika $i < n$.
+
+\putfig{4truein}{PSfig11-6}{Simulasi Ehrenfest.}{fig 11.6}
+
+%\begin{figure}
+%\centerline{\epsfxsize=4truein 
+%\epsffile{PSfig11-6}}
+%\caption{Simulasi Ehrenfest.}\label{fig 11.6}
+%\end{figure}
+\par
+Pada Gambar~\ref{fig 11.6}, kita memperlihatkan hasil simulasi model guci
+Ehrenfest untuk kasus $n = 50$ dan 1000 satuan waktu dengan menggunakan program
+{\bf EhrenfestUrn}.\index{EhrenfestUrn (program)} Grafik atas memperlihatkan
+hasil-hasil tersebut dalam urutan terjadinya, sedangkan grafik bawah
+memperlihatkan hasil yang sama dengan urutan waktu dibalik. Tidak tampak adanya
+perbedaan.
+\par
+Perhatikan bahwa jika kita tidak memulai dalam keadaan setimbang, kedua grafik
+itu biasanya akan tampak cukup berbeda.
+\end{example}
+
+\subsection*{Reversibilitas}
+Jika model Ehrenfest dimulai dalam keadaan setimbang, proses tersebut tidak
+memperlihatkan arah waktu. Hal ini terjadi karena proses tersebut mempunyai
+sifat yang disebut \emx {reversibilitas.}\index{reversibilitas} Definisikan
+$X_n$ sebagai banyaknya bola dalam guci kiri pada langkah $n$. Untuk suatu rantai
+ergodik umum, kita dapat menghitung peluang transisi balik:
+\begin{eqnarray*}
+P(X_{n - 1} = j | X_n = i) &=& \frac{P(X_{n - 1} = j,X_n = i)}{P(X_n = i)} \\
+     &=& \frac{P(X_{n - 1} = j) P(X_n = i | X_{n - 1} = j)}{P(X_n = i)} \\
+     &=& \frac{P(X_{n - 1} = j) p_{ji}}{P(X_n = i)}\ .\\
+\end{eqnarray*}
+\par
+Secara umum, nilai ini bergantung pada $n$, sebab $P(X_n = j)$ dan juga
+$P(X_{n - 1} = j)$ berubah bersama~$n$. Akan tetapi, jika kita memulai dengan
+vektor~$\mat{w}$ atau menunggu sampai kesetimbangan tercapai, hal ini tidak lagi
+berlaku. Kemudian kita dapat mendefinisikan
+$$
+p_{ij}^* = \frac{w_j p_{ji}}{w_i}
+$$
+sebagai matriks transisi bagi proses yang diamati dengan arah waktu dibalik.
+\par
+Mari menghitung suatu peluang transisi khas bagi rantai balik $\mat{
+P}^* = \{p_{ij}^*\}$ dalam model Ehrenfest. Sebagai contoh,
+\begin{eqnarray*}
+ p_{i,i - 1}^* &=& \frac{w_{i - 1} p_{i - 1,i}}{w_i} = 
+\frac{{2n \choose {i - 1}}}{2^{2n}}
+                  \times \frac{2n - i + 1}{2n} \times 
+\frac{2^{2n}}{{2n \choose i}}\\
+               &=& \frac{(2n)!}{(i - 1)!\,(2n - i + 1)!} \times 
+\frac{(2n - i + 1) i!\,
+                  (2n - i)!}{2n(2n)!} \\
+               &=& \frac{i}{2n} = p_{i,i - 1}\ .\\
+\end{eqnarray*}
+\par
+Perhitungan serupa untuk peluang-peluang transisi lainnya menunjukkan bahwa
+$\mat {P}^* = \mat {P}$. Jika hal ini terjadi, proses tersebut disebut \emx
+{reversibel.} Jelas bahwa suatu rantai ergodik reversibel jika dan hanya jika,
+untuk setiap pasangan keadaan $s_i$~dan~$s_j$,
+$w_i p_{ij} = w_j p_{ji}$. Secara khusus, bagi model Ehrenfest hal ini berarti
+bahwa $w_i p_{i,i - 1} = w_{i - 1} p_{i - 1,i}$. Jadi, dalam keadaan setimbang,
+pasangan $(i, i - 1)$ dan $(i - 1, i)$ seharusnya muncul dengan frekuensi yang
+sama. Walaupun banyak rantai Markov yang muncul dalam penerapan bersifat
+reversibel, syarat ini sangat kuat. Dalam Latihan~\ref{exer 11.5.12}, Anda
+diminta mencari contoh rantai Markov yang tidak reversibel.
+ 
+\subsection*{Teorema Limit Pusat untuk Rantai Markov}
+Andaikan kita mempunyai rantai Markov ergodik dengan keadaan $s_1, s_2, \ldots,
+s_k$. Wajar untuk meninjau distribusi peubah acak $S^{(n)}_j$, yang menyatakan
+berapa kali rantai berada dalam keadaan $s_j$ selama $n$ langkah pertama. Komponen
+ke-$j$, yaitu $w_j$, dari vektor baris peluang tetap $\mat{w}$ adalah proporsi
+waktu rantai berada dalam keadaan $s_j$ dalam jangka panjang. Oleh karena itu,
+masuk akal untuk menduga bahwa nilai harapan peubah acak $S^{(n)}_j$, ketika
+$n \rightarrow \infty$, setara secara asimtotik dengan $nw_j$, dan mudah ditunjukkan bahwa
+memang demikian (lihat Latihan~\ref{exer 11.5.29}).
+\par
+Wajar pula untuk menanyakan apakah peubah-peubah acak $S^{(n)}_j$ mempunyai
+distribusi limit. Jawabannya ya; bahkan, distribusi limit ini adalah distribusi
+normal. Seperti dalam kasus percobaan-percobaan bebas, peubah-peubah acak ini
+harus dinormalkan. Jadi, dari $S^{(n)}_j$ kita harus mengurangkan nilai harapannya,
+lalu membaginya dengan simpangan bakunya. Dalam kedua hal tersebut, kita akan
+menggunakan nilai asimtotik besaran-besaran ini, bukan nilainya sendiri. Jadi,
+dalam hal pertama kita akan menggunakan nilai $nw_j$. Tidak begitu jelas apa
+yang harus kita gunakan dalam hal kedua. Ternyata, besaran
+\begin{equation}
+\sigma_j^2 = 2w_jz_{jj} - w_j - w_j^2
+\label{eq 11.5.9}
+\end{equation}
+menyatakan varians asimtotik. Dengan gagasan-gagasan ini, kita dapat menyatakan
+teorema berikut.
+\begin{theorem}\label{thm 11.5.20}{\bf (Teorema Limit Pusat untuk Rantai
+Markov)}
+\index{Teorema Limit Pusat!untuk Rantai Markov}\index{rantai Markov!Teorema
+Limit Pusat untuk}
+Untuk suatu rantai ergodik dan sebarang bilangan real $r < s$, kita mempunyai
+$$P\Biggl(r < {{S^{(n)}_j - nw_j}\over{\sqrt{n\sigma_j^2}}}< s\Biggr)
+\rightarrow 
+{1\over{\sqrt {2\pi}}}\int_r^s e^{-x^2/2}\,dx\
+,$$ ketika $n \rightarrow \infty$, untuk sebarang pilihan keadaan awal, dengan
+$\sigma_j^2$ merupakan besaran yang didefinisikan dalam
+Persamaan~\ref{eq 11.5.9}.
+\end{theorem}
+
+
+\subsection*{Catatan Sejarah}
+
+Rantai Markov diperkenalkan oleh Andre\u i Andreevich Markov\index{MARKOV, A.
+A.} (1856--1922) dan dinamai untuk menghormatinya. Ia adalah mahasiswa berbakat
+yang menerima medali emas atas skripsinya di Universitas St.~Petersburg. Selain
+aktif sebagai matematikawan peneliti dan pengajar, ia juga aktif dalam politik
+dan ikut serta dalam gerakan liberal di Rusia pada awal abad kedua puluh. Pada
+1913, ketika pemerintah merayakan ulang tahun ke-300 Wangsa Romanov, Markov
+menyelenggarakan perayaan tandingan untuk ulang tahun ke-200 penemuan Hukum
+Bilangan Besar oleh Bernoulli.
+\par
+Markov terdorong mengembangkan rantai Markov sebagai perluasan alami dari
+barisan peubah acak bebas. Dalam makalah pertamanya pada 1906, ia membuktikan
+bahwa, bagi rantai Markov dengan peluang transisi positif dan keadaan numerik,
+rata-rata hasil konvergen menuju nilai harapan distribusi limit (vektor tetap).
+Dalam makalah berikutnya, ia membuktikan teorema limit pusat bagi rantai semacam
+itu. Menurut ringkasan A.~P. Youschkevitch, Markov memperoleh gagasan rantainya dari
+kebutuhan internal teori peluang dan tidak membahas penerapannya pada fisika. Contoh
+konkretnya ialah teks sastra dengan dua keadaan, yakni vokal dan konsonan.\footnote{Lihat
+\emx {Dictionary of Scientific Biography,} ed.~C.~C. Gillespie (New York: Scribner's
+Sons, 1970), pp.~124--130. Ringkasan editorial; ungkapan sumber tidak diterjemahkan
+atau direproduksi.}
+\par
+Dalam sebuah makalah yang ditulis pada 1913,\footnote{A.~A. Markov, ``An Example of Statistical
+Analysis of the Text of Eugene Onegin Illustrating the Association of Trials
+into a Chain," \emx {Bulletin de l'Acadamie Imperiale des Sciences de
+St.~Petersburg,} ser.~6, vol.~7 (1913), pp.~153--162.} Markov memilih barisan
+20{,}000 huruf dari \emx {Eugene Onegin} karya Pushkin untuk
+melihat apakah barisan ini secara hampiran dapat dianggap sebagai rantai
+sederhana. Ia memperoleh rantai Markov dengan matriks transisi
+$$
+\bordermatrix{
+& \mbox{vokal} & \mbox{konsonan} \cr
+\mbox{vokal} & .128 & .872 \cr
+\mbox{konsonan} & .663 & .337}\ .
+$$
+\par
+Vektor tetap bagi rantai ini adalah $(.432, .568)$, yang menunjukkan bahwa kita
+seharusnya mengharapkan sekitar 43.2~persen vokal dan 56.8~persen konsonan dalam
+novel tersebut; hal ini ditegaskan oleh penghitungan sebenarnya.
+\par
+Claude Shannon meninjau perluasan menarik dari gagasan ini dalam bukunya \emx {
+The Mathematical Theory of Communication,}\index{SHANNON, C. E.}\index{WEAVER,
+W.}\footnote{C.~E.
+Shannon and W. Weaver, \emx {The Mathematical Theory of Communication} (Urbana:
+Univ.\ of
+Illinois Press, 1964).} Dalam buku itu ia mengembangkan konsep entropi dalam
+teori informa\-si. Shannon meninjau serangkaian hampiran rantai Markov terhadap
+prosa bahasa Inggris. Mula-mula ia melakukannya dengan rantai yang
+keadaan-keadaannya berupa huruf, kemudian dengan rantai yang keadaan-keadaannya
+berupa kata. Sebagai contoh, untuk kasus kata, pertama-tama ia menyajikan
+simulasi dengan kata-kata yang dipilih secara independen, tetapi dengan frekuensi
+yang sesuai. Contoh ilustratif mandiri berikut menunjukkan jenis keluaran tersebut;
+deret Shannon tidak direproduksi.
+\par
+\begin{quote}
+THE IN FOR A WITH IS OF THAT TO AND BY IT FROM BE ON THIS AS WERE AT OR.
+\end{quote}
+\par
+Kemudian ia mencatat meningkatnya kemiripan dengan teks bahasa Inggris biasa
+ketika kata-kata dipilih sebagai rantai Markov. Contoh mandiri berikut menggambarkan
+keluaran yang lebih menyerupai bahasa Inggris biasa tanpa mereproduksi deret Shannon.
+
+\begin{quote}
+THE HOUSE OF THE OLD ROAD WAS IN THE PLACE WHERE THE STORY COULD BEGIN AGAIN.
+\end{quote}
+\par
+Simulasi seperti simulasi terakhir dilakukan dengan membuka sebuah buku dan
+memilih kata pertama, misalkan kata itu \emx {the.} Kemudian buku dibaca sampai
+kata \emx {the} muncul lagi, dan kata sesudahnya dipilih sebagai kata kedua;
+ternyata kata itu adalah \emx {head.} Buku lalu dibaca sampai kata \emx {head}
+muncul lagi, dan kata berikutnya, \emx {and,} dipilih, demikian seterusnya.
+\par
+Contoh awal lain penggunaan rantai Markov muncul dalam kajian Galton pada 1889
+mengenai masalah bertahannya nama keluarga dan dalam rantai Markov yang
+diperkenalkan oleh P. dan T. Ehrenfest pada 1907 untuk difusi. Pada 1912,
+Poincar\'{e} membahas pengocokan kartu dalam kerangka rantai Markov ergodik yang
+didefinisikan pada suatu grup permutasi. Gerak Brown, versi waktu kontinu dari
+jalan acak, diperkenalkan pada 1900--1901 oleh L. Bachelier dalam kajiannya
+mengenai pasar saham, dan pada 1905--1907 dalam karya A. Einstein dan M.
+Smoluchowsky mengenai proses fisik.
+\par
+Salah satu kajian sistematis pertama mengenai rantai Markov berhingga dilakukan
+oleh M. Frechet.\index{FRECHET, M.}\footnote{M. Frechet, ``Th\'eorie des
+\'ev\'enements en chaine dans
+le cas d'un nombre fini d'\'etats possible," in \emx {Recherches th\'eoriques
+Modernes sur le calcul des probabilit\'es,} vol.~2 (Paris, 1938).} Perlakuan
+rantai Markov dalam kerangka dua matriks fundamental yang telah kita gunakan
+dikembangkan oleh Kemeny dan Snell\index{KEMENY, J. G.}\index{SNELL,
+J. L.}
+\footnote{J. G. Kemeny and J. L. Snell, \emx {
+Finite Markov Chains.}} untuk menghindari penggunaan nilai eigen yang dianggap
+terlalu rumit oleh salah seorang penulis tersebut. Matriks fundamental~$\mat{N}$
+juga muncul dalam karya J.~L. Doob dan yang lainnya ketika mengkaji hubungan
+antara proses Markov dan teori potensial klasik. Matriks fundamental~$\mat{Z}$
+bagi rantai ergodik pertama kali muncul dalam karya Frechet, yang menggunakannya
+untuk menemukan varians limit bagi teorema limit pusat untuk rantai Markov.
+
+\exercises
+\begin{LJSItem}
+\i\label{exer 11.5.1} Tinjaulah rantai Markov dengan matriks transisi
+$$
+\mat {P} = \pmatrix{ 1/2 & 1/2 \cr 1/4 & 3/4}\ .
+$$
+Carilah matriks fundamental~$\mat{Z}$ bagi rantai ini. Hitunglah matriks waktu
+lintasan pertama rata-rata dengan menggunakan $\mat{Z}$.
+
+\i\label{exer 11.5.2} Suatu kajian tentang kekuatan tim sepak bola Amerika Ivy
+League menunjukkan bahwa, jika suatu perguruan tinggi mempunyai tim yang kuat
+pada suatu tahun, pada tahun berikutnya tim itu sama mungkin menjadi kuat atau
+sedang; jika timnya sedang, dalam separuh kasus tim tersebut tetap sedang pada tahun
+berikutnya dan, jika berubah, tim itu sama mungkin menjadi kuat atau lemah; jika
+timnya lemah, peluangnya untuk tetap lemah adalah 2/3 dan peluangnya untuk
+menjadi sedang adalah 1/3.
+\begin{enumerate}
+\item Suatu perguruan tinggi mempunyai tim yang kuat. Secara rata-rata, berapa
+lama waktu berlalu sebelum perguruan tinggi itu kembali mempunyai tim yang kuat?
+
+\item Suatu perguruan tinggi mempunyai tim yang lemah; berapa lama (secara
+rata-rata) para alumninya harus menunggu tim yang kuat?
+\end{enumerate}
+
+\i\label{exer 11.5.3} Tinjaulah Contoh~\ref{exam 11.1.2} dengan $a = .5$ dan
+$b = .75$. Andaikan Presiden menyatakan bahwa ia akan maju. Carilah lamanya waktu
+yang diharapkan sampai jawaban tersebut diteruskan secara keliru untuk pertama
+kalinya.
+
+\i\label{exer 11.5.4} Carilah waktu kembali rata-rata bagi setiap keadaan dalam
+Contoh~\ref{exam 11.1.2} untuk $a = .5$ dan $b = .75$. Lakukan hal yang sama
+untuk $a$~dan~$b$ umum.
+
+\i\label{exer 11.5.5} Sebuah dadu dilempar berulang kali. Dengan menggunakan
+hasil-hasil dalam bagian ini, tunjukkan bahwa waktu rata-rata antara dua
+kemunculan suatu angka tertentu adalah~6.
+
+\i\label{exer 11.5.6} Untuk contoh Negeri Oz (Contoh~\ref{exam 11.1.1}),
+jadikan hujan sebagai keadaan menyerap dan carilah matriks
+fundamental~$\mat{N}$. Tafsirkan hasil-hasil yang diperoleh dari rantai ini dalam
+kaitannya dengan rantai semula.
+
+\i\label{exer 11.5.7} Seekor tikus berlari melalui labirin yang ditunjukkan pada
+Gambar~\ref{fig 11.6.5}. Pada setiap langkah, tikus meninggalkan ruangan yang
+ditempatinya dengan memilih secara acak salah satu pintu keluar dari ruangan itu.
+\putfig{2truein}{PSfig11-6-5}{Labirin untuk Latihan \protect\ref{exer 11.5.7}\protect.}{fig 11.6.5}
+%\begin{figure}
+%\centerline{\epsfxsize=2truein 
+%\epsffile{PSfig11-6.5}}
+%\caption{Labirin untuk Latihan \protect\ref{exer 11.5.7}\protect.}\label{fig 11.6.5}
+%\end{figure}
+\begin{enumerate}
+
+\item Berikan matriks transisi $\mat{P}$ bagi rantai Markov ini.
+
+\item Tunjukkan bahwa rantai ini ergodik, tetapi tidak reguler.
+
+\item Carilah vektor tetapnya.
+
+\item Carilah banyaknya langkah yang diharapkan sebelum mencapai Ruangan~5 untuk
+pertama kalinya jika dimulai dari Ruangan~1.
+\end{enumerate}
+
+\i\label{exer 11.5.8} Ubahlah program {\bf  ErgodicChain} agar Anda dapat
+menghitung besaran-besaran dasar bagi contoh antrean dalam Latihan~\ref{sec
+11.3}.\ref{exer 11.3.19}. Tafsirkan waktu kembali rata-rata bagi keadaan~0.
+
+\i\label{exer 11.5.9} Tinjaulah jalan acak pada lingkaran dengan keliling $n$.
+Pejalan mengambil satu langkah satuan searah jarum jam dengan peluang~$p$ dan
+satu langkah satuan berlawanan arah jarum jam dengan peluang $q = 1 - p$.
+Ubahlah program {\bf  ErgodicChain} agar Anda dapat memasukkan $n$~dan~$p$ serta
+menghitung besaran-besaran dasar bagi rantai ini.
+\begin{enumerate}
+
+\item Untuk nilai $n$ manakah rantai ini reguler? Ergodik?
+
+\item Tentukan vektor limit $\mat{w}$.
+
+\item Carilah matriks waktu lintasan pertama rata-rata untuk $n = 5$ dan
+$p = .5$. Periksalah bahwa $m_{ij} = d(n - d)$, dengan $d$ merupakan jarak
+searah jarum jam dari $i$~ke~$j$.
+\end{enumerate}
+ 
+\i\label{exer 11.5.10} Dua pemain mencocokkan sisi uang logam dan secara
+keseluruhan memiliki 5~keping uang satu sen. Jika pada suatu saat salah seorang
+pemain memiliki semua keping tersebut, agar permainan terus berlangsung ia
+memberikan satu keping kembali kepada pemain lainnya, lalu permainan dilanjutkan.
+Tunjukkan bahwa permainan ini dapat dirumuskan sebagai rantai ergodik. Kajilah
+rantai ini dengan menggunakan program {\bf  ErgodicChain}.
+
+\i\label{exer 11.5.11} Hitunglah matriks transisi balik bagi contoh Negeri Oz
+(Contoh~\ref{exam 11.1.1}). Apakah rantai ini reversibel?
+
+\i\label{exer 11.5.12} Berikan contoh rantai Markov ergodik dengan tiga keadaan
+yang tidak reversibel.
+
+\i\label{exer 11.5.13} Misalkan $\mat{P}$ adalah matriks transisi suatu rantai
+Markov ergodik dan $\mat{P}^*$ adalah matriks transisi balik. Tunjukkan bahwa
+keduanya mempunyai vektor peluang tetap yang sama, yaitu~$\mat{w}$.
+
+\i\label{exer 11.5.14} Jika $\mat{P}$ adalah rantai Markov reversibel, apakah
+waktu rata-rata untuk berpindah dari keadaan~$i$ ke keadaan~$j$ selalu sama
+dengan waktu rata-rata untuk berpindah dari keadaan~$j$ ke keadaan~$i$?
+\emx {Petunjuk}: Cobalah contoh Negeri Oz (Contoh~\ref{exam 11.1.1}).
+
+\i\label{exer 11.5.15} Tunjukkan bahwa setiap rantai Markov ergodik dengan
+matriks transisi simetris (yakni, $p_{ij} = p_{ji})$ bersifat reversibel.
+
+\i\label{exer 11.5.18} (Crowell\footnote{Komunikasi
+pribadi.})\index{CROWELL, R.} Misalkan $\mat{P}$ adalah matriks transisi suatu
+rantai Markov ergodik. Tunjukkan bahwa
+$$
+(\mat {I} + \mat {P} +\cdots+ \mat {P}^{n - 1})(\mat {I} - \mat {P} + \mat {W})
+= \mat {I} -
+\mat {P}^n + n\mat {W}\ ,
+$$
+dan dari sini tunjukkan bahwa
+$$
+\frac{\mat {I} + \mat {P} +\cdots+ \mat {P}^{n - 1}}n \to \mat {W}\ ,
+$$ 
+ketika $n \rightarrow \infty$.
+
+\i\label{exer 11.5.19} Suatu rantai Markov ergodik dimulai dalam keadaan
+setimbang (yakni, dengan vektor peluang awal~$\mat{w}$). Waktu rata-rata sampai
+kemunculan keadaan~$s_i$ berikutnya adalah
+$\bar{m_i} = \sum_k w_k m_{ki} + w_i r_i$. Tunjukkan bahwa
+$\bar {m_i} = z_{ii}/w_i$ dengan menggunakan kenyataan bahwa $\mat {w}\mat {Z}
+= \mat {w}$ dan $m_{ki} = (z_{ii} - z_{ki})/w_i$.
+
+\i\label{exer 11.5.20} Di tempat Charley berlangsung permainan
+craps\index{craps} tanpa henti. Jones datang ke tempat Charley pada suatu malam
+ketika 100 putaran telah dimainkan. Ia berencana bermain sampai mata ular
+(sepasang angka satu) berikutnya dilempar. Jones bertanya-tanya berapa kali ia
+akan bermain. Di satu pihak, ia menyadari bahwa waktu rata-rata antara dua mata
+ular adalah 36, sehingga ia seharusnya bermain sekitar 18~kali karena ia sama
+mungkin datang pada salah satu sisi titik tengah di antara dua kemunculan mata
+ular. Di pihak lain, dadu tidak mempunyai ingatan, sehingga tampaknya ia harus
+bermain 36 kali lagi, apa pun hasil-hasil sebelumnya. Manakah, jika ada, argumen
+Jones yang Anda percayai? Dengan menggunakan hasil Latihan~\ref{exer 11.5.19},
+hitunglah waktu yang diharapkan untuk mencapai mata ular dalam keadaan setimbang,
+dan lihatlah apakah hal ini menyelesaikan paradoks yang tampak. Jika Anda masih
+ragu, simulasikan percobaan tersebut untuk menentukan argumen mana yang benar.
+Dapatkah Anda memberikan argumen intuitif yang menjelaskan hasil ini?
+
+\i\label{exer 11.5.22} Tunjukkan bahwa, untuk suatu rantai Markov ergodik (lihat
+Teorema \ref{thm 11.5.19}),
+$$
+\sum_j m_{ij} w_j = \sum_j z_{jj} - 1 = K\ .
+$$
+Ekspresi kedua di atas menunjukkan bahwa bilangan $K$ tidak bergantung pada $i$.
+Bilangan $K$ disebut \emx {konstanta Kemeny.}\index{konstanta Kemeny} Sebuah
+hadiah ditawarkan kepada orang pertama yang memberikan alasan intuitif yang
+masuk akal mengapa jumlah di atas tidak bergantung pada~$i$. (Lihat juga
+Latihan~\ref{exer 11.5.27}.)
+
+\i\label{exer 11.5.23} Tinjaulah permainan yang dimainkan sebagai berikut. Anda
+diberi suatu rantai Markov reguler dengan matriks transisi $\mat P$, vektor
+peluang tetap $\mat{w}$, dan fungsi imbalan $\mat f$ yang menetapkan bagi setiap
+keadaan $s_i$ suatu besaran $f_i$ yang dapat bernilai positif atau negatif.
+Andaikan bahwa $\mat {w}\mat {f} = 0$. Anda mengamati rantai Markov ini
+selama rantai itu berevolusi, dan setiap kali berada dalam keadaan $s_i$, Anda menerima
+imbalan sebesar $f_i$. Tunjukkan bahwa nilai harapan kemenangan Anda setelah
+$n$~langkah dapat direpresentasikan oleh vektor kolom~$\mat{g}^{(n)}$, dengan
+$$\mat{g}^{(n)} = (\mat {I} + \mat {P} + \mat {P}^2 +\cdots+ \mat {P}^n)
+\mat {f}.$$ Tunjukkan bahwa ketika $n \to
+\infty$, $\mat {g}^{(n)} \to \mat {g}$ dengan $\mat {g} = \mat {Z} \mat {f}$.
+ 
+\i\label{exer 11.5.24} Permainan ``Monopoly" yang sangat disederhanakan dimainkan
+pada papan dengan empat petak seperti ditunjukkan pada
+Gambar~\ref{fig 11.7}.\index{Monopoly} Anda mulai di GO. Anda melempar sebuah
+dadu dan bergerak searah jarum jam mengelilingi papan sebanyak jumlah petak yang
+sama dengan angka yang muncul pada dadu. Anda menerima atau membayar jumlah yang
+tertera pada petak tempat Anda berhenti. Kemudian Anda melempar dadu lagi dan
+bergerak mengelilingi papan dengan cara yang sama dari posisi terakhir. Dengan
+menggunakan hasil Latihan~\ref{exer 11.5.23}, taksirlah jumlah kemenangan yang
+seharusnya Anda harapkan dalam jangka panjang ketika memainkan versi Monopoly
+ini.
+\putfig{1truein}{PSfig11-7}{Monopoly yang disederhanakan.}{fig 11.7}
+
+%\begin{figure}[here]
+%\centerline{\epsfxsize=1truein 
+%\epsffile{PSfig11-7}}
+%\caption{Monopoly yang disederhanakan.}\label{fig 11.7}
+%\end{figure}
+  
+\i\label{exer 11.5.28} Tunjukkan bahwa jika $\mat P$ adalah matriks transisi suatu
+rantai Markov reguler dan $\mat W$ adalah matriks yang setiap barisnya merupakan
+vektor peluang tetap yang bersesuaian dengan $\mat {P}$, maka
+$\mat {P}\mat {W} = \mat {W}$ dan $\mat {W}^k = \mat {W}$ bagi semua bilangan
+bulat positif $k$.
+
+\i\label{exer 11.5.29} Andaikan suatu rantai Markov ergodik mempunyai keadaan
+$s_1, s_2, \ldots, s_k$. Misalkan $S^{(n)}_j$ menyatakan berapa kali rantai
+berada dalam keadaan $s_j$ selama $n$ langkah pertama. Misalkan $\mat{w}$
+menyatakan vektor baris peluang tetap bagi rantai ini. Tunjukkan bahwa, terlepas
+dari keadaan awal, nilai harapan $S^{(n)}_j$, dibagi dengan $n$, menuju $w_j$
+ketika $n \rightarrow \infty$. \emx {Petunjuk}: Jika rantai dimulai dalam
+keadaan $s_i$, nilai harapan $S^{(n)}_j$ diberikan oleh ekspresi
+$$\sum_{h = 0}^n p^{(h)}_{ij}\ .$$
+
+\i\label{exer 11.5.27} Ketika berjalan kaki bersama Snell di sepanjang Minnehaha Avenue di Minneapolispada musim gugur 1983, Peter Doyle\footnote{Komunikasi
+pribadi.}\index{DOYLE, P. G.} mengusulkan penjelasan berikut bagi kekonstanan\emx {konstanta Kemeny
+}\index{konstanta Kemeny} (lihat
+Latihan~\ref{exer 11.5.22}). Pilihlah keadaan sasaran menurutvektor tetap~$\mat{w}$. Mulailah dari keadaan $i$ dan tunggulah sampai waktu $T$ ketikakeadaan sasaran muncul untuk pertama kalinya. Misalkan $K_i$ adalah nilai harapandari $T$. Perhatikan bahwa$$K_i + w_i \cdot 1/w_i= \sum_j P_{ij} K_j + 1\ ,$$dan oleh karena itu$$K_i = \sum_j P_{ij} K_j\ .
+$$Menurut prinsip maksimum, $K_i$ adalah konstanta.Pantaskah Peter menerima hadiah tersebut?
+\end{LJSItem}

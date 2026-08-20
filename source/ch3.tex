@@ -1,0 +1,2571 @@
+% Bab ini telah diubah pada 1/12/05.
+%\setcounter{chapter}{2}
+\chapter{Kombinatorika}\label{chp 3} 
+
+\section{Permutasi}\label{sec 3.1}
+
+Banyak masalah dalam teori peluang mengharuskan kita menghitung banyaknya cara suatu
+kejadian tertentu dapat terjadi.  Untuk itu, kita mempelajari topik {\em permutasi} dan
+{\em kombinasi.}  Pada bagian ini kita membahas permutasi, sedangkan kombinasi dibahas
+pada bagian berikutnya.
+
+Sebelum membahas permutasi, ada baiknya kita memperkenalkan suatu teknik pencacahan umum
+yang akan memungkinkan kita menyelesaikan berbagai masalah pencacahan, termasuk masalah
+menghitung banyaknya permutasi yang mungkin dari $n$ objek.
+ 
+\subsection*{Masalah Pencacahan}
+
+Perhatikan suatu percobaan yang berlangsung dalam beberapa tahap sedemikian rupa sehingga
+banyaknya hasil $m$ pada tahap ke-$n$ tidak bergantung pada hasil tahap-tahap sebelumnya.
+Bilangan $m$ dapat berbeda untuk tahap yang berbeda.  Kita ingin menghitung banyaknya cara
+seluruh percobaan tersebut dapat dilakukan.
+
+\begin{example}\label{exam 3.1} Anda sedang makan di restoran \'Emile's\index{Emile's
+restaurant}, dan pramusaji memberi tahu bahwa Anda memiliki (a)~dua pilihan makanan
+pembuka: sup atau jus;  (b)~tiga pilihan hidangan utama: hidangan daging, ikan, atau
+sayuran; dan (c)~dua pilihan hidangan penutup: es krim atau kue.  Berapa banyak pilihan
+yang mungkin untuk hidangan lengkap Anda?  Kita menggambarkan hidangan-hidangan yang
+mungkin dengan diagram pohon pada Gambar~\ref{fig 3.1}.  Menu Anda ditentukan dalam tiga
+tahap---pada setiap tahap, banyaknya pilihan yang mungkin tidak bergantung pada pilihan
+di tahap-tahap sebelumnya: dua pilihan pada tahap pertama, tiga pada tahap kedua, dan
+dua pada tahap ketiga.  Dari diagram pohon terlihat bahwa jumlah seluruh pilihan adalah
+hasil kali banyaknya pilihan pada setiap tahap.  Dalam contoh ini terdapat
+$2 \cdot 3 \cdot 2 = 12$ menu yang mungkin.  Contoh menu kita merupakan contoh teknik
+pencacahan umum berikut.
+\end{example}
+
+\putfig{4truein}{PSfig3-1}{Pohon untuk menu Anda.}{fig 3.1} 
+
+\subsection*{Teknik Pencacahan}
+
+Suatu tugas akan dilakukan dalam urutan $r$ tahap.  Terdapat $n_1$ cara untuk
+melakukan tahap pertama; untuk setiap dari $n_1$ cara tersebut, terdapat $n_2$ cara
+untuk melakukan tahap kedua; untuk setiap dari $n_2$ cara tersebut, terdapat
+$n_3$ cara untuk melakukan tahap ketiga, dan seterusnya.  Dengan demikian, jumlah
+seluruh cara untuk menyelesaikan tugas itu diberikan oleh hasil kali
+$N = n_1 \cdot n_2 \cdot \dots \cdot n_r$.
+
+\putfig{4truein}{PSfig3-2}{Penetapan peluang dua tahap.}{fig 3.2} 
+ 
+\subsection*{Diagram Pohon}\index{diagram pohon}
+
+Diagram pohon sering berguna ketika kita mempelajari peluang kejadian yang berkaitan
+dengan percobaan yang berlangsung dalam beberapa tahap dan peluang hasil pada setiap
+tahap telah diberikan.  Sebagai contoh, anggaplah pemilik restoran \'Emile's mengamati
+bahwa 80 persen pelanggannya memilih sup sebagai makanan pembuka dan 20 persen memilih
+jus.  Di antara mereka yang memilih sup, 50 persen memilih daging, 30 persen memilih
+ikan, dan 20 persen memilih hidangan sayuran.  Di antara mereka yang memilih jus sebagai
+makanan pembuka, 30 persen memilih daging, 40 persen memilih ikan, dan 30 persen memilih
+hidangan sayuran.  Kita dapat menggunakan informasi ini untuk memperkirakan peluang pada
+dua tahap pertama sebagaimana ditunjukkan pada diagram pohon di Gambar~\ref{fig 3.2}.
+
+Sebagai ruang sampel, kita memilih himpunan $\Omega$ yang berisi semua lintasan yang
+mungkin, $\omega =
+\omega_1$,~$\omega_2$, \dots,~$\omega_6$, melalui pohon tersebut.
+Bagaimanakah kita harus menetapkan distribusi peluangnya?  Sebagai contoh, peluang apa
+yang harus kita tetapkan bagi pelanggan yang memilih sup lalu daging?  Jika 8/10
+pelanggan memilih sup dan kemudian 1/2 di antaranya memilih daging, proporsi pelanggan
+yang memilih sup lalu daging adalah $8/10 \cdot 1/2 = 4/10$.  Hal ini menyarankan agar
+distribusi peluang untuk setiap lintasan melalui pohon dipilih sebagai {\em hasil kali}
+peluang pada setiap tahap di sepanjang lintasan tersebut.  Hasilnya adalah distribusi
+peluang untuk titik-titik sampel $\omega$ yang ditunjukkan pada Gambar~\ref{fig 3.2}.
+(Perhatikan bahwa $m(\omega_1) + \cdots +
+m(\omega_6) = 1$.)  Dari sini terlihat,
+misalnya, bahwa peluang seorang pelanggan memilih daging adalah
+$m(\omega_1) + m(\omega_4) = .46$.
+\par
+Kita akan membahas ukuran pada pohon ini lebih lanjut ketika membicarakan konsep
+peluang bersyarat dalam Bab~\ref{chp 4}.    Sekarang kita kembali ke masalah pencacahan
+lainnya.
+
+\begin{example}\label{exam 3.2} Kita dapat menunjukkan bahwa setidaknya ada dua orang di
+Columbus, Ohio, yang memiliki tiga inisial yang sama.  Dengan menganggap setiap orang
+memiliki tiga inisial, terdapat 26 kemungkinan untuk inisial pertama, 26 untuk inisial
+kedua, dan 26 untuk inisial ketiga.  Jadi, terdapat $26^3 = 17{,}576$ susunan inisial
+yang mungkin.  Angka ini lebih kecil daripada jumlah penduduk Columbus, Ohio; karena
+itu, pasti ada setidaknya dua orang dengan tiga inisial yang sama.
+\end{example}
+
+Selanjutnya kita membahas masalah ulang tahun yang terkenal---masalah yang sering
+digunakan untuk menunjukkan bahwa intuisi naif tidak selalu dapat dipercaya dalam
+peluang.
+
+\subsection*{Masalah Ulang Tahun}\index{masalah ulang tahun}
+
+\begin{example}\label{exam 3.3} Berapa banyak orang yang perlu berada dalam sebuah
+ruangan agar kita layak bertaruh bahwa dua orang di ruangan itu memiliki tanggal ulang
+tahun yang sama (yakni, peluang keberhasilannya lebih besar daripada 1/2)?
+
+Karena terdapat 365 tanggal ulang tahun yang mungkin, kita mungkin tergoda untuk
+menebak bahwa diperlukan sekitar 1/2 dari jumlah tersebut, yaitu 183.  Dengan jumlah
+itu Anda pasti memenangkan taruhan.  Sebenarnya, jumlah yang diperlukan agar taruhan
+menguntungkan hanya 23.  Untuk menunjukkannya, kita mencari peluang $p_r$ bahwa dalam
+ruangan berisi $r$ orang tidak ada tanggal ulang tahun yang sama; taruhan kita
+menguntungkan jika peluang ini kurang dari setengah.
+
+Anggaplah terdapat 365 tanggal ulang tahun yang mungkin bagi setiap orang (kita
+mengabaikan tahun kabisat).  Urutkan orang-orang tersebut dari~1 hingga~$r$.  Untuk
+sebuah titik sampel $\omega$, kita memilih suatu urutan ulang tahun yang mungkin dengan
+panjang $r$, yang masing-masing dipilih dari salah satu di antara 365 tanggal yang
+mungkin.  Terdapat 365 kemungkinan untuk unsur pertama dalam urutan, dan untuk setiap
+pilihan tersebut terdapat 365 kemungkinan bagi unsur kedua, dan seterusnya, sehingga
+menghasilkan $365^r$ urutan ulang tahun yang mungkin.  Kita harus mencari banyaknya
+urutan yang tidak memuat tanggal ulang tahun yang sama.  Untuk urutan seperti itu, kita
+dapat memilih sembarang dari 365 hari untuk unsur pertama, lalu sembarang dari 364 hari
+yang tersisa untuk unsur kedua, 363 untuk unsur ketiga, dan seterusnya, sampai kita
+membuat $r$ pilihan.  Untuk pilihan ke-$r$, akan terdapat $365 - r + 1$ kemungkinan.
+Jadi, jumlah seluruh urutan tanpa tanggal ulang tahun yang sama adalah
+$$ 365 \cdot 364 \cdot 363 \cdot \dots \cdot (365 - r + 1)\ .
+$$ Dengan demikian, jika setiap urutan sama mungkinnya,
+$$ p_r = \frac{365 \cdot 364 \cdot \dots \cdot (365 - r + 1)}{365^r}\ .
+$$ Kita menyatakan hasil kali
+$$(n)(n-1)\cdots (n - r +1)$$ dengan $(n)_r$ (dibaca ``$n$ turun $r$," atau ``$n$
+lebih rendah $r$").  Jadi,
+$$ p_r = \frac{(365)_r}{(365)^r}\ .
+$$
+
+Program {\bf Birthday}\index{Birthday (program)} melakukan perhitungan ini dan mencetak
+peluang untuk $r = 20$ hingga~25.  Dengan menjalankan program tersebut, kita memperoleh
+hasil yang ditunjukkan pada Tabel~\ref{table
+3.1}.
+\begin{table}
+\centering
+\begin{tabular}{cc} Jumlah orang     & Peluang semua tanggal ulang tahun
+berbeda \\ 
+\\
+20 & .5885616 \\ 21 & .5563117 \\ 22 & .5243047 \\ 23 & .4927028 \\
+24 & .4616557 \\ 25 & .4313003 \\ 
+\end{tabular}
+\caption{Masalah ulang tahun.}
+\label{table 3.1}
+\end{table}
+Seperti yang kita nyatakan di atas, peluang bahwa tidak ada tanggal ulang tahun yang
+sama berubah dari lebih besar daripada setengah menjadi kurang daripada setengah ketika
+jumlah orang bertambah dari~22 menjadi~23.  Untuk melihat betapa kecil kemungkinan kita
+kalah dalam taruhan pada jumlah orang yang lebih besar, kita menjalankan kembali program
+tersebut dengan mencetak nilai dari $r = 10$ hingga $r = 100$ dalam langkah sebesar~10.
+Kita melihat bahwa di ruangan berisi 40 orang, rasio peluang sudah sangat mendukung
+terjadinya kesamaan tanggal ulang tahun, dan di ruangan berisi 100 orang, rasio peluang
+tersebut sangat besar.
+\begin{table}
+\centering
+\begin{tabular}{cc} Jumlah orang     & Peluang semua tanggal ulang tahun
+berbeda \\ 
+\\
+10 & .8830518 \\ 20 & .5885616 \\ 30 & .2936838 \\ 40 & .1087682 \\
+50 & .0296264 \\ 60 & .0058773 \\ 70 & .0008404 \\ 80 & .0000857 \\ 90 & .0000062 \\
+100 & .0000003 \\ 
+\end{tabular}
+\caption{Masalah ulang tahun.}
+\label{table 3.2}
+\end{table}
+Kita telah menganggap bahwa ulang tahun sama mungkinnya jatuh pada hari mana pun.
+Bukti statistik menunjukkan bahwa anggapan ini tidak benar.  Namun, secara intuitif
+jelas (meskipun tidak mudah dibuktikan) bahwa ketidakseragaman ini justru membuat
+kesamaan ulang tahun lebih mungkin terjadi dalam kelompok berisi 23 orang.  (Lihat
+Latihan~\ref{exer 3.1.19} untuk mengetahui apa yang terjadi di planet yang memiliki
+lebih atau kurang dari 365 hari dalam setahun.)
+\end{example}
+
+Sekarang kita beralih ke topik permutasi.
+
+\subsection*{Permutasi}\index{permutasi}
+\begin{definition}\label{def 3.1} Misalkan $A$ suatu himpunan berhingga.  Sebuah
+{\em permutasi dari $A$} adalah pemetaan satu-ke-satu dari $A$ ke dirinya sendiri.
+\end{definition}
+
+Untuk menentukan suatu permutasi tertentu, kita menuliskan unsur-unsur $A$ dan, di
+bawahnya, menunjukkan ke mana setiap unsur dipetakan oleh pemetaan satu-ke-satu.
+Sebagai contoh, jika $A = \{a,b,c\}$, salah satu permutasi $\sigma$ yang mungkin adalah
+$$
+\sigma = \pmatrix{ a & b & c \cr b & c & a \cr}.
+$$
+
+Oleh permutasi $\sigma$, $a$ dipetakan ke $b$, $b$ dipetakan ke $c$, dan $c$ dipetakan
+ke $a$.  Syarat bahwa pemetaan itu satu-ke-satu berarti tidak ada dua unsur $A$ yang
+dipetakan ke unsur $A$ yang sama.
+
+Kita dapat menyusun unsur-unsur himpunan dalam suatu urutan dan menamainya kembali
+1,~2, \dots,~$n$.  Kemudian, suatu permutasi khas dari himpunan $A =
+\{a_1,a_2,a_3,a_4\}$ dapat ditulis dalam bentuk
+$$
+\sigma = \pmatrix{ 1 & 2 & 3 & 4 \cr 2 & 1 & 4 & 3 \cr},
+$$ yang menunjukkan bahwa $a_1$ dipetakan ke $a_2$, $a_2$ ke $a_1$, $a_3$ ke $a_4$,
+dan $a_4$ ke $a_3$.
+
+Jika kita selalu memilih baris atas sebagai 1 2 3 4, untuk menentukan permutasi kita
+hanya perlu memberikan baris bawah, dengan pengertian bahwa baris ini menunjukkan ke
+mana 1, 2, dan seterusnya dipetakan.  Jika ditulis dengan cara ini, permutasi sering
+disebut {\em penyusunan ulang} atas $n$ objek 1,~2,~3, \dots,~$n$.  Sebagai contoh,
+semua permutasi, atau penyusunan ulang, yang mungkin atas himpunan $A = \{1,2,3\}$ adalah:
+$$ 
+123,\ 132,\ 213,\ 231,\ 312,\ 321\ .
+$$
+\par
+Menghitung banyaknya permutasi yang mungkin atas $n$ objek merupakan hal yang mudah.
+Menurut prinsip pencacahan umum kita, terdapat $n$ cara untuk menetapkan unsur pertama;
+untuk setiap cara tersebut terdapat $n - 1$ cara untuk menetapkan objek kedua,
+$n - 2$ untuk yang ketiga, dan seterusnya.  Hal ini membuktikan teorema berikut.
+
+\begin{theorem}\label{thm 3.1}\label{thm 3.1.1} Jumlah seluruh permutasi dari suatu
+himpunan $A$ yang memiliki $n$ unsur diberikan oleh $n
+\cdot (n~-~1) \cdot (n - 2) \cdot \ldots \cdot 1$.
+\end{theorem}
+
+Kadang-kadang ada gunanya mempertimbangkan pengurutan subhimpunan dari suatu himpunan.
+Hal ini mendorong definisi berikut.
+\begin{definition} Misalkan $A$ suatu himpunan dengan $n$ unsur, dan misalkan $k$
+suatu bilangan bulat antara 0 dan $n$.  Maka permutasi-$k$ dari $A$ adalah daftar
+terurut suatu subhimpunan $A$ berukuran $k$.
+\end{definition}
+
+Dengan menggunakan teknik yang sama seperti dalam teorema sebelumnya, hasil berikut
+mudah dibuktikan.
+
+\begin{theorem}\label{thm 3.2} Jumlah seluruh permutasi-$k$ dari suatu himpunan $A$
+yang memiliki $n$ unsur diberikan oleh
+$n \cdot (n-1) \cdot (n-2) \cdot \ldots \cdot (n - k + 1)$.
+\end{theorem}
+
+\subsection*{Faktorial}
+
+Bilangan yang diberikan dalam Teorema~\ref{thm 3.1} disebut {\em faktorial $n$,}
+\index{faktorial} dan dinyatakan dengan $n!$\index{$n"!$}.  Ungkapan 0! didefinisikan
+sebagai 1 agar rumus-rumus tertentu menjadi lebih sederhana.  Beberapa nilai pertama
+fungsi ini ditunjukkan pada Tabel~\ref{table 3.25}.  Pembaca akan melihat bahwa fungsi
+ini tumbuh sangat cepat.
+
+\begin{table}
+\centering
+\begin{tabular}{rr} $n$     & $n!$ \\
+\\ 
+0 & 1 \\
+1 & 1 \\
+2 & 2 \\
+3 & 6 \\
+4 & 24 \\
+5 & 120 \\
+6 & 720 \\
+7 & 5040 \\
+8 & 40320 \\
+9 & 362880 \\
+10 & 3628800 \\
+
+\end{tabular}
+\caption{Nilai fungsi faktorial.}
+\label{table 3.25}
+\end{table}
+
+
+
+
+\par Ungkapan $n!$ akan muncul dalam banyak perhitungan kita, dan kita akan memerlukan
+perkiraan besarnya ketika $n$ besar.  Jelas tidak praktis melakukan perhitungan eksak
+dalam hal ini.  Sebagai gantinya, kita akan menggunakan hasil yang disebut {\em rumus
+Stirling.}  Sebelum menyatakan rumus tersebut, kita memerlukan sebuah definisi.
+
+\begin{definition}\label{def 3.2} Misalkan $a_n$ dan $b_n$ dua barisan bilangan.  Kita
+mengatakan bahwa $a_n$ {\em setara secara asimtotik\index{setara secara asimtotik}
+dengan $b_n$}, dan menulis $a_n \sim b_n$, jika
+$$
+\lim_{n \to \infty} \frac{a_n}{b_n} = 1\ .
+$$
+\end{definition}
+\begin{example}\label{exam 3.4} Jika $a_n = n + \sqrt n$ dan $b_n = n$, karena
+$a_n/b_n = 1 + 1/\sqrt n$ dan rasio ini menuju 1 ketika $n$ menuju tak hingga, kita
+memperoleh $a_n \sim b_n$.
+\end{example}
+
+\begin{theorem}{\bf (Rumus Stirling)}\label{thm 3.3}\index{rumus Stirling} Barisan
+$n!$ setara secara asimtotik dengan
+$$ n^ne^{-n}\sqrt{2\pi n}\ .
+$$
+\end{theorem}
+
+Bukti rumus Stirling dapat ditemukan dalam sebagian besar buku analisis.  Mari kita
+periksa pendekatan ini dengan menggunakan komputer.  Program {\bf
+StirlingApproximations}\index{StirlingApproximations\\ (program)} mencetak
+$n!$, pendekatan Stirling, dan terakhir rasio kedua bilangan tersebut.  Contoh keluaran
+program ini ditunjukkan pada Tabel~\ref{table 3.26}.  Perhatikan bahwa meskipun rasio
+kedua bilangan makin mendekati 1, selisih antara nilai eksak dan pendekatannya justru
+meningkat.  Bahkan, selisih ini akan menuju tak hingga ketika $n$ menuju tak hingga,
+meskipun rasionya menuju 1.  (Hal yang sama juga berlaku dalam Contoh~\ref{exam 3.4},
+ketika $n +
+\sqrt n \sim n$, tetapi selisihnya adalah $\sqrt n$.)
+
+\begin{table}
+\centering
+\begin{tabular}{rrrr} $n$     & $n!$ &Pendekatan &Rasio \\
+\\ 
+1 & 1 & .922 & 1.084\\
+2 & 2  & 1.919 & 1.042\\
+3 & 6  & 5.836 & 1.028\\
+4 & 24 & 23.506 & 1.021\\
+5 & 120 & 118.019 & 1.016\\
+6 & 720 & 710.078 & 1.013\\
+7 & 5040 & 4980.396 & 1.011\\
+8 & 40320 & 39902.395 & 1.010\\
+9 & 362880 & 359536.873 & 1.009\\
+10 & 3628800 & 3598696.619 & 1.008\\
+
+\end{tabular}
+\caption{Pendekatan Stirling untuk fungsi faktorial.}
+\label{table 3.26}
+\end{table}
+
+\subsection*{Menghasilkan Permutasi Acak}
+Sekarang kita membahas cara menghasilkan permutasi acak dari bilangan bulat antara 1 dan
+$n$.  Perhatikan percobaan berikut.  Kita mulai dengan setumpuk $n$ kartu yang diberi
+label 1 hingga $n$.  Kita memilih sebuah kartu secara acak dari tumpukan, mencatat
+labelnya, lalu menyisihkan kartu itu.  Proses ini diulangi sampai seluruh $n$ kartu
+terpilih.  Jelas bahwa setiap permutasi bilangan bulat dari 1 hingga $n$ dapat muncul
+sebagai urutan label dalam percobaan ini, dan setiap urutan label sama mungkinnya untuk
+muncul.  Dalam implementasi algoritma komputer kita, prosedur di atas disebut {\bf
+RandomPermutation}.\index{RandomPermutation (program)}  
+
+
+
+\subsection*{Titik Tetap} Ada banyak masalah menarik yang berkaitan dengan sifat
+permutasi yang dipilih secara acak dari himpunan semua permutasi atas suatu himpunan
+berhingga.  Sebagai contoh, karena permutasi merupakan pemetaan satu-ke-satu dari
+himpunan ke dirinya sendiri, menarik untuk menanyakan berapa banyak titik yang dipetakan
+ke dirinya sendiri.  Titik-titik seperti itu kita sebut {\em titik tetap}
+\index{permutasi!titik tetap dari}\index{titik tetap} dari pemetaan tersebut.
+\par
+Misalkan $p_k(n)$ adalah peluang bahwa suatu permutasi acak dari himpunan
+$\{1, 2, \ldots, n\}$ memiliki tepat $k$ titik tetap.  Kita akan mencoba mempelajari
+peluang-peluang ini dengan menggunakan simulasi.  Program {\bf FixedPoints}
+\index{FixedPoints (program)} menggunakan prosedur {\bf RandomPermutation} untuk
+menghasilkan permutasi acak dan menghitung titik tetap.  Program ini mencetak proporsi
+kejadian dengan $k$ titik tetap serta rata-rata jumlah titik tetap.  Hasil program untuk
+500 simulasi pada kasus $n = 10$,~20, dan~30 ditunjukkan pada Tabel~\ref{table 3.3}.
+\begin{table}
+\centering
+\begin{tabular}{|c|l|l|l|} \hline
+Jumlah titik tetap & \multicolumn{3}{c|} {Proporsi permutasi} \\ \cline{2-4}
+  & n = 10 & n = 20 & n = 30 \\ \hline
+0 & \makebox[.375in][r]{.362}   & \makebox[.375in][r]{.370}    & \makebox[.375in][r]{.358}  
+\\ 1 & \makebox[.375in][r]{.368}   & \makebox[.375in][r]{.396}   &
+\makebox[.375in][r]{.358}  
+\\ 2 & \makebox[.375in][r]{.202}   & \makebox[.375in][r]{.164}   &
+\makebox[.375in][r]{.192}  
+\\ 3 & \makebox[.375in][r]{.052}   & \makebox[.375in][r]{.060}    &
+\makebox[.375in][r]{.070}   
+\\ 4 & \makebox[.375in][r]{.012}   & \makebox[.375in][r]{.008}   &
+\makebox[.375in][r]{.020}   
+\\ 5 & \makebox[.375in][r]{.004}   & \makebox[.375in][r]{.002}   & \makebox[.375in][r]{.002}  
+\\ \hline Rata-rata jumlah titik tetap & \makebox[.375in][r]{.996}   & \makebox[.375in][r]{.948}   
+& \makebox[.125in][r]1.042 \\ \hline
+\end{tabular}
+\caption{Distribusi titik tetap.}
+\label{table 3.3}
+\end{table}
+Perhatikan fakta yang cukup mengejutkan bahwa perkiraan peluang kita tampaknya tidak
+terlalu bergantung pada banyaknya unsur dalam permutasi.  Sebagai contoh, peluang tidak
+adanya titik tetap ketika $n = 10,\ 20,$ atau~30 diperkirakan berada antara
+.35~dan~.37.  Kelak kita akan melihat (lihat Contoh~\ref{exam 3.13}) bahwa untuk
+$n \geq 10$, peluang eksak $p_n(0)$, hingga ketelitian enam tempat desimal, sama dengan
+$1/e \approx
+.367879$.  Jadi, untuk semua keperluan praktis, setelah $n = 10$ peluang
+bahwa suatu permutasi acak dari himpunan $\{1, 2, \ldots, n\}$ tidak memiliki titik
+tetap tidak bergantung pada $n$.  Simulasi ini juga menyarankan bahwa rata-rata jumlah
+titik tetap mendekati 1.  Dapat ditunjukkan (lihat Contoh~\ref{exam 6.1}) bahwa rata-rata
+tersebut tepat sama dengan 1 untuk semua $n$.
+\par
+Versi masalah titik tetap yang lebih mudah dibayangkan antara lain: Anda telah menyusun
+buku di rak menurut urutan abjad nama penulis, lalu buku-buku itu dikembalikan ke rak
+secara acak; berapakah peluang bahwa tepat $k$ buku berakhir di posisi yang benar?
+(Masalah perpustakaan.)\index{masalah perpustakaan}  Di sebuah restoran, $n$ topi
+dititipkan lalu tercampur aduk; berapakah peluang tidak seorang pun
+mendapatkan kembali topinya sendiri?  (Masalah penitipan topi.)
+\index{masalah penitipan topi}  Dalam Catatan Historis di akhir bagian ini, kita
+memberikan satu metode untuk menyelesaikan masalah penitipan topi secara eksak.  Metode
+lain diberikan dalam Contoh~\ref{exam 3.13}.  
+
+
+\subsection*{Rekor}\index{rekor}
+
+Berikut adalah masalah peluang menarik lainnya yang melibatkan permutasi.  Perkiraan
+jumlah curah salju yang diukur dalam inci di Hanover\index{salju di Hanover}, New
+Hampshire, selama sepuluh tahun dari 1974 hingga 1983 ditunjukkan pada
+Tabel~\ref{table 3.4}.
+\begin{table}
+\centering
+\begin{tabular}{lc} Tahun & Curah salju dalam inci \\ \hline
+  1974  & \hspace{.1in}75   \\
+  1975  & \hspace{.1in}88   \\
+  1976  & \hspace{.1in}72   \\
+  1977  & \hspace{.031in}110 \\
+  1978  & \hspace{.1in}85   \\
+  1979  & \hspace{.1in}30   \\
+  1980  & \hspace{.1in}55   \\
+  1981  & \hspace{.1in}86   \\
+  1982  & \hspace{.1in}51   \\
+  1983  & \hspace{.1in}64   \\
+\end{tabular}
+\caption{Curah salju di Hanover.}
+\label{table 3.4}
+\end{table}
+Misalkan kita mulai mencatat rekor pada 1974.  Curah salju pada tahun pertama dapat
+dianggap sebagai rekor curah salju sejak pencatatan dimulai.  Rekor baru tercipta pada
+1975; rekor berikutnya tercipta pada 1977, dan tidak ada rekor baru setelah tahun itu.
+Jadi, dalam periode sepuluh tahun ini tercipta tiga rekor: 1974, 1975, dan 1977.
+Pertanyaan kita adalah: Berapa banyak rekor yang dapat kita harapkan tercipta dalam
+periode sepuluh tahun seperti itu?  Kita dapat menghitung banyaknya rekor dalam bentuk
+suatu permutasi sebagai berikut: Kita menomori tahun dari 1 hingga~10.  Besarnya curah
+salju yang sebenarnya tidak penting, tetapi ukuran relatifnya penting.  Karena itu,
+kita dapat mengubah angka curah salju menjadi bilangan 1 hingga~10 dengan mengganti
+angka terkecil dengan 1, angka terkecil berikutnya dengan 2, dan seterusnya.  (Kita
+menganggap tidak ada nilai yang sama.)  Untuk contoh ini, kita memperoleh data yang
+ditunjukkan pada Tabel~\ref{table 3.5}.
+
+\begin{table}
+\centering
+\begin{tabbing}
+\hskip.5in  Tahun \hskip.5in \= 1\hskip.3in\= 2\hskip.3in \= 3\hskip.3in \= \,\,4\hskip.3in 
+                  \= 5\hskip.3in\= 6\hskip.3in \= 7\hskip.3in \= 8\hskip.3in \=
+9\hskip.3in \= 10\\
+\hskip.5in  Peringkat        \> 6 \> 9 \> 5 \> 10 \> 7 \> 1 \> 3 \> 8 \> 2 \> \,\,4 
+\end{tabbing}
+\caption{Peringkat curah salju total.}
+\label{table 3.5}
+\end{table}
+
+Ini memberi kita suatu permutasi bilangan dari 1~hingga~10, dan dari permutasi ini kita
+dapat membaca rekor-rekornya; rekor tersebut terjadi pada tahun 1,~2, dan~4.  Dengan
+demikian, kita dapat mendefinisikan rekor untuk suatu permutasi sebagai berikut:
+
+\begin{definition}\label{def 3.3} Misalkan $\sigma$ suatu permutasi dari himpunan
+$\{1, 2, \ldots, n\}$.  Maka $i$ adalah suatu {\em rekor} dari $\sigma$ jika
+$i = 1$ atau $\sigma(j) < \sigma(i)$ untuk setiap $j = 1,\ldots,\,i - 1$.
+\end{definition}
+
+Sekarang, jika kita menganggap semua peringkat curah salju selama periode $n$ tahun
+sama mungkinnya (dan tidak mengizinkan nilai yang sama), kita dapat memperkirakan
+peluang terdapat $k$ rekor dalam $n$ tahun serta rata-rata jumlah rekor melalui simulasi.
+\par
+Kita telah menulis program {\bf Records}\index{Records (program)} yang menghitung jumlah
+rekor dalam permutasi yang dipilih secara acak.  Kita telah menjalankan program ini
+untuk kasus $n = 10$,~20,~30.  Untuk $n = 10$, rata-rata jumlah rekor adalah 2.968,
+untuk 20 nilainya 3.656, dan untuk 30 nilainya 3.960.  Sekarang terlihat bahwa rata-rata
+tersebut meningkat, tetapi sangat lambat.  Kelak kita akan melihat (lihat
+Contoh~\ref{exam 6.5}) bahwa rata-rata itu kira-kira $\log n$.  Karena
+$\log 10 = 2.3$,
+$\log 20 = 3$, dan
+$\log 30 = 3.4$, hal ini konsisten dengan hasil simulasi kita.
+\par
+Seperti telah disebutkan, kita akan dapat memperoleh rumus untuk hasil eksak beberapa
+masalah sejenis di atas.  Namun, perubahan kecil saja pada masalah dapat membuat hal
+ini mustahil.  Kekuatan simulasi adalah bahwa perubahan kecil pada suatu masalah tidak
+membuat simulasinya jauh lebih sulit.  (Lihat Latihan~\ref{exer 3.1.20} untuk variasi
+menarik dari masalah penitipan topi.)
+
+\subsection*{Daftar Permutasi}
+
+Metode lain untuk menyelesaikan masalah yang tidak peka terhadap perubahan kecil adalah
+meminta komputer mencantumkan semua permutasi yang mungkin dan menghitung proporsi yang
+memiliki sifat yang diinginkan.  Program {\bf AllPermutations}
+\index{AllPermutations (program)} menghasilkan daftar seluruh permutasi dari $n$.
+Ketika mencoba menjalankan program ini, kita berhadapan dengan keterbatasan penggunaan
+komputer.  Banyaknya permutasi dari $n$ meningkat sedemikian cepat sehingga bahkan
+mencantumkan semua permutasi dari 20 objek pun tidak praktis.
+
+\subsection*{Catatan Historis} 
+Prinsip pencacahan dasar kita menyatakan bahwa jika Anda dapat melakukan satu hal
+dengan $r$ cara dan, untuk setiap cara tersebut, melakukan hal lain dengan $s$ cara,
+maka Anda dapat melakukan kedua hal tersebut dengan $rs$ cara.  Hasil ini begitu jelas
+dengan sendirinya sehingga Anda mungkin menduga hasil tersebut muncul sangat awal dalam
+matematika.  N.~L. Biggs menyarankan agar kita menelusuri salah satu contoh prinsip ini
+sebagai berikut: Pertama, ia mengisahkan sebuah sajak anak-anak\index{sajak anak-anak}
+populer yang berasal setidaknya dari 1730:\index{St. Ives}
+\par
+\vskip .2in
+\begin{tabular}{@{\extracolsep{1in}}ll}
+&Ketika aku pergi ke St. Ives,\\
+&Aku bertemu pria dengan tujuh istri,\\
+&Setiap istri memiliki tujuh karung,\\
+&Setiap karung memiliki tujuh kucing,\\
+&Setiap kucing memiliki tujuh anak kucing.\\
+&Anak kucing, kucing, karung, dan istri,\\
+&Berapa banyak yang pergi ke St. Ives?
+\end{tabular}
+\par
+\vskip .2in
+\noindent
+(Anda hanya memerlukan prinsip kita jika tidak cukup cermat untuk menyadari bahwa
+jawabannya seharusnya {\em satu,} sebab hanya penuturnya yang sedang pergi ke
+St.~Ives; yang lain berjalan ke arah berlawanan!)
+\par Ia juga memberikan suatu masalah yang muncul dalam salah satu naskah matematika
+tertua yang masih bertahan, dari sekitar 1650~{\footnotesize B.C.}, yang secara kasar
+diterjemahkan sebagai berikut:
+\par
+\vskip .2in
+\begin{tabular}{lr}
+ \hspace{1.5in}Rumah \hspace{2in}&   7\\
+ \hspace{1.5in}Kucing           &  49                  \\
+ \hspace{1.5in}Tikus            &  343                 \\
+ \hspace{1.5in}Gandum           &  2401         \\
+ \hspace{1.5in}Hekat            &  {\underbar{16807}} \\
+                  &  19607              \\
+\end{tabular}
+\par
+\vskip .2in
+Penafsiran berikut telah diajukan: terdapat tujuh rumah, masing-masing dengan tujuh
+kucing; setiap kucing membunuh tujuh tikus; setiap tikus akan memakan tujuh bulir
+gandum, yang masing-masing akan menghasilkan tujuh takaran hekat biji-bijian.  Dengan
+penafsiran ini, tabel tersebut menjawab pertanyaan tentang berapa banyak takaran hekat
+yang diselamatkan oleh tindakan kucing-kucing itu.  Tidak jelas mengapa penulis tabel
+ingin menjumlahkan bilangan-bilangan tersebut.\index{BIGGS, N. L.}\footnote{N.~L. Biggs, ``The Roots of Combinatorics," {\em
+Historia Mathematica,} vol.~6 (1979), pp.~109--136.}
+
+Salah satu penggunaan faktorial paling awal muncul dalam bukti Euclid\index{EUCLID}
+bahwa terdapat tak berhingga banyaknya bilangan prima.  Euclid berpendapat bahwa pasti
+ada bilangan prima di antara $n$ dan $n! + 1$ sebagai berikut: $n!$ dan $n! + 1$ tidak
+dapat memiliki faktor persekutuan.  Bilangan $n! + 1$ merupakan bilangan prima atau
+memiliki faktor sejati.  Dalam kasus kedua, faktor tersebut tidak dapat membagi $n!$
+dan karenanya harus berada di antara $n$ dan $n! + 1$.  Jika faktor ini bukan bilangan
+prima, faktor tersebut memiliki faktor yang, dengan argumen yang sama, harus lebih besar
+daripada $n$.  Dengan cara ini, pada akhirnya kita mencapai bilangan prima yang lebih
+besar daripada $n$, dan hal ini berlaku untuk setiap $n$.
+
+Kaidah ``$n!$" untuk banyaknya permutasi tampaknya pertama kali muncul di India.
+Contoh-contohnya telah ditemukan sejak 300~{\footnotesize B.C.}, dan pada abad kesebelas
+rumus umumnya tampaknya telah dikenal luas di India, kemudian di negeri-negeri Arab.
+
+{\em Masalah penitipan topi}\index{masalah penitipan topi} ditemukan dalam sebuah buku
+peluang awal yang ditulis oleh de~Montmort\index{de MONTMORT, P. R.} dan pertama kali
+dicetak pada 1708.\footnote{P.~R. de~Montmort, {\em
+Essay d'Analyse sur des Jeux de Hazard,} 2d~ed. (Paris: Quillau, 1713).}  Buku tersebut
+memuat permainan bernama {\em Treize.}\index{Treize}  Dalam versi sederhana permainan ini yang
+dibahas oleh de~Montmort, seseorang membalik kartu bernomor 1 hingga 13 sambil menyebut
+1,~2, \dots,~13 ketika kartu-kartu diperiksa.  De~Montmort menanyakan peluang bahwa
+tidak ada kartu yang dibalik cocok dengan nomor yang disebutkan.
+\par
+Peluang ini sama dengan peluang bahwa suatu permutasi acak atas 13 unsur tidak memiliki
+titik tetap.  De~Montmort menyelesaikan masalah ini dengan menggunakan relasi rekursi
+sebagai berikut: misalkan $w_n$ adalah banyaknya permutasi atas $n$ unsur tanpa titik
+tetap (permutasi demikian disebut {\em permutasi tanpa titik tetap})
+\index{permutasi tanpa titik tetap}.  Maka $w_1 = 0$ dan
+$w_2 = 1$.
+\par Sekarang anggaplah $n \ge 3$ dan pilih suatu permutasi tanpa titik tetap atas
+bilangan bulat antara 1 dan $n$.  Misalkan $k$ adalah bilangan bulat pada posisi pertama
+dalam permutasi tersebut.  Menurut definisi permutasi tanpa titik tetap, kita memiliki
+$k \ne 1$.  Ada dua kemungkinan penting mengenai posisi 1 dalam permutasi: 1 berada
+pada posisi ke-$k$ atau berada di tempat lain.  Dalam kasus pertama, $n-2$ bilangan bulat
+yang tersisa dapat ditempatkan dengan $w_{n-2}$ cara tanpa menghasilkan titik tetap.
+Dalam kasus kedua, kita mempertimbangkan himpunan bilangan bulat
+$\{1, 2, \ldots, k-1, k+1, \ldots, n\}$.  Bilangan-bilangan dalam himpunan ini harus
+menempati posisi $\{2, 3, \ldots, n\}$ sedemikian rupa sehingga tidak satu pun bilangan
+selain 1 dalam himpunan tersebut menjadi titik tetap, dan juga agar 1 tidak berada pada
+posisi $k$.  Banyaknya cara untuk menghasilkan susunan seperti ini tepat sebesar
+$w_{n-1}$.  Karena terdapat $n-1$ nilai $k$ yang mungkin, kita memperoleh
+$$ w_n = (n - 1)w_{n - 1} + (n - 1)w_{n -2}
+$$ untuk $n \ge 3$.  Dari persamaan terakhir ini, kita mungkin menduga bahwa barisan
+$\{w_n\}$ tumbuh seperti barisan $\{n!\}$.  
+\par Sebenarnya, dengan induksi mudah dibuktikan bahwa
+$$ w_n = nw_{n - 1} + (-1)^n\ .
+$$ Maka $p_i = w_i/i!$ memenuhi
+$$ p_i - p_{i - 1} = \frac{(-1)^i}{i!}\ .
+$$ Jika kita menjumlahkan dari $i = 2$ hingga~$n$, dan menggunakan fakta bahwa
+$p_1 = 0$, kita memperoleh
+$$ p_n = \frac1{2!} - \frac1{3!} + \cdots + \frac{(-1)^n}{n!}\ .
+$$ Ini sama dengan $n + 1$ suku pertama dalam ekspansi $e^x$ untuk $x = -1$, sehingga
+untuk $n$ besar nilainya kira-kira $e^{-1} \approx .368$.  David
+\index{DAVID, F. N.} menyatakan bahwa ini mungkin merupakan penggunaan pertama fungsi
+eksponensial dalam peluang.\footnote{F.~N. David, {\em Games, Gods and Gambling} (London: Griffin,
+1962), p.~146.}  Pada bagian berikutnya, kita akan melihat cara lain untuk menurunkan
+hasil de~Montmort dengan menggunakan metode yang dikenal sebagai metode inklusi-eksklusi.
+\par
+Baru-baru ini, sebuah masalah terkait muncul dalam kolom Marilyn vos Savant.\footnote{M.
+vos Savant, Ask Marilyn, \emx{Parade Magazine, Boston Globe}, 21
+August 1994.}\index{vos SAVANT, M.}  Charles Price\index{PRICE, C.} menulis untuk
+menanyakan pengalamannya memainkan suatu bentuk solitaire yang kadang-kadang disebut
+``frustration solitaire."\index{frustration solitaire}  Dalam permainan ini, setumpuk
+kartu dikocok, lalu dibagikan satu per satu.  Ketika kartu dibagikan, pemain menghitung
+dari 1 hingga 13, kemudian mulai lagi dari 1.  (Dengan demikian, setiap bilangan disebut
+empat kali.)  Jika bilangan yang sedang disebut sama dengan nilai kartu yang sedang
+dibuka, pemain kalah.  Price mendapati bahwa ia jarang menang dan bertanya-tanya seberapa
+sering semestinya ia menang.  Vos~Savant menyatakan bahwa jumlah kecocokan yang diharapkan
+adalah 4, sehingga permainan tersebut seharusnya sulit dimenangkan.
+\par
+Mencari peluang menang merupakan masalah yang lebih sulit daripada masalah yang
+diselesaikan de~Montmort karena ketika seluruh tumpukan kartu diperiksa, terdapat pola
+kecocokan berbeda yang mungkin terjadi.  Sebagai contoh, kecocokan dapat terjadi pada
+dua kartu dengan nilai sama, misalnya dua kartu as, atau pada dua nilai berbeda,
+misalnya kartu dua dan kartu tiga.
+\par
+Pembahasan masalah ini dapat ditemukan dalam Riordan.\footnote{J. Riordan, \emx{ An
+Introduction to Combinatorial Analysis,} (New York: John Wiley \& Sons, 1958).}\index{RIORDAN, J.}
+Dalam buku tersebut ditunjukkan bahwa ketika $n \rightarrow \infty$, peluang tidak
+adanya kecocokan menuju $1/e^4$.
+\par
+Permainan Treize asli lebih sulit dianalisis daripada frustration solitaire.  Treize
+dimainkan sebagai berikut.  Satu orang dipilih sebagai bandar dan yang lain menjadi
+pemain.  Setiap pemain selain bandar memasang taruhan.  Bandar mengocok kartu dan
+membukanya satu per satu sambil menyebut, ``As, dua, tiga,..., raja," seperti dalam
+frustration solitaire.  Jika bandar melewati 13 kartu tanpa kecocokan, ia membayar para
+pemain sejumlah taruhan mereka, lalu peran bandar berpindah kepada orang lain.  Jika
+terjadi kecocokan, bandar mengambil taruhan para pemain; para pemain memasang taruhan
+baru, dan bandar melanjutkan membuka kartu sambil menyebut, ``As, dua, tiga, ...."
+Jika kehabisan kartu, bandar mengocok ulang dan melanjutkan hitungan dari tempat ia
+berhenti.  Ia terus bermain sampai terdapat rangkaian 13 kartu tanpa kecocokan, lalu
+bandar baru dipilih.
+\par
+Pertanyaannya sekarang adalah berapa banyak uang yang dapat diharapkan dimenangkan
+bandar dari setiap pemain.  De~Montmort menemukan bahwa jika setiap pemain memasang
+taruhan sebesar 1, misalnya, bandar akan menang kira-kira .801 dari setiap pemain.  
+\par
+Peter Doyle\index{DOYLE, P. G.} menghitung secara eksak besarnya kemenangan yang dapat
+diharapkan oleh bandar.  Jawabannya adalah:
+\vskip .2in
+\noindent
+26516072156010218582227607912734182784642120482136091446715371962089931\break
+52311343541724554334912870541440299239251607694113500080775917818512013\break    
+82176876653563173852874555859367254632009477403727395572807459384342747\break    
+87664965076063990538261189388143513547366316017004945507201764278828306\break    
+60117107953633142734382477922709835281753299035988581413688367655833113\break
+24476153310720627474169719301806649152698704084383914217907906954976036\break
+28528211590140316202120601549126920880824913325553882692055427830810368\break
+57818861208758248800680978640438118582834877542560955550662878927123048\break
+26997601700116233592793308297533642193505074540268925683193887821301442\break
+70519791882/\break
+33036929133582592220117220713156071114975101149831063364072138969878007\break
+99647204708825303387525892236581323015628005621143427290625658974433971\break
+65719454122908007086289841306087561302818991167357863623756067184986491\break
+35353553622197448890223267101158801016285931351979294387223277033396967\break
+79797069933475802423676949873661605184031477561560393380257070970711959\break
+69641268242455013319879747054693517809383750593488858698672364846950539\break
+88868628582609905586271001318150621134407056983214740221851567706672080\break
+94586589378459432799868706334161812988630496327287254818458879353024498\break
+00322425586446741048147720934108061350613503856973048971213063937040515\break
+59533731591.\break
+\par
+\noindent
+Nilai ini adalah .803 jika dibulatkan hingga 3 tempat desimal.  Uraian algoritma yang
+digunakan untuk menemukan jawaban ini dapat ditemukan di halaman Web miliknya.\footnote{P.~Doyle, ``Solution to Montmort's Probleme du Treize,''
+http://math.ucsd.edu/$\tilde{\ }$doyle/.}  Pembahasan masalah ini dan masalah lainnya
+dapat ditemukan dalam Doyle et al.\footnote{P. Doyle, C. Grinstead, and J. Snell, ``Frustration Solitaire,"
+\emx{UMAP Journal}, vol.\ 16, no.\ 2 (1995), pp.~137-145.}\index{GRINSTEAD, C. M.}\index{SNELL, J. L.}
+\par
+{\em Masalah ulang tahun} tampaknya tidak memiliki sejarah yang sangat panjang.  Masalah
+jenis ini pertama kali dibahas oleh von~Mises.\index{von MISES, R.}\footnote{R. von~Mises, ``\"Uber
+Aufteilungs- und Besetzungs-Wahrscheinlichkeiten," {\em Revue de la Facult\'e des
+Sciences de l'Universit\'e d'Istanbul, N. S.} vol.~4 (1938-39), pp.~145-163.}  Masalah ini
+dipopulerkan pada dekade 1950-an oleh buku Feller.\footnote{W.~Feller, \emx {Introduction to
+Probability Theory and Its Applications,} vol.~1, 3rd~ed. (New York: John Wiley \&
+Sons, 1968).}
+\par
+Stirling menyajikan rumusnya
+$$ n! \sim \sqrt{2\pi n}\left(\frac{n}{e}\right)^n
+$$ dalam karyanya {\em Methodus Differentialis} yang diterbitkan pada
+1730.\index{STIRLING, J.}\footnote{J.~Stirling, {\em Methodus Differentialis,} (London: Bowyer,
+1730).}  Pendekatan ini digunakan oleh de~Moivre ketika merumuskan teorema limit pusatnya
+yang terkenal, yang akan kita pelajari dalam Bab~\ref{chp 9}.  De~Moivre sendiri telah
+menetapkan pendekatan ini secara mandiri, tetapi tanpa mengidentifikasi konstanta $\pi$.
+Setelah menetapkan pendekatan
+$$
+\frac{2B}{\sqrt n}
+$$ untuk suku tengah distribusi binomial, dengan konstanta $B$ yang ditentukan oleh
+suatu deret tak hingga, de~Moivre menulis:
+\begin{quote}
+\dots~sahabat saya yang terhormat dan terpelajar, Tn.\ James Stirling, yang setelah saya
+menekuni penyelidikan itu, menemukan bahwa Besaran $B$ menyatakan Akar Kuadrat Keliling
+Lingkaran yang Jari-jarinya Satu, sehingga jika Keliling itu disebut $c$, Rasio Suku
+tengah terhadap Jumlah semua Suku akan dinyatakan oleh
+$2/\sqrt{nc}\,$\dots.\index{de MOIVRE, A.}\footnote{A. de~Moivre, {\em The Doctrine of Chances,}
+3rd~ed. (London: Millar, 1756).}
+\end{quote}
+
+\exercises
+\begin{LJSItem}
+
+\i\label{exer 3.1.1} Empat orang akan disusun dalam satu baris untuk difoto.  Berapa
+banyak cara penyusunan yang dapat dilakukan?
+
+\i\label{exer 3.1.2} Sebuah produsen mobil menyediakan empat warna untuk bagian luar
+mobil dan tiga warna untuk bagian dalam.  Berapa banyak kombinasi warna berbeda yang
+dapat diproduksinya?
+
+\i\label{exer 3.1.3} Dalam komputer digital, sebuah {\em bit} adalah salah satu bilangan
+bulat \{0,1\}, dan sebuah {\em kata} adalah sembarang untaian 32 bit.  Berapa banyak
+kata berbeda yang mungkin?
+
+\i\label{exer 3.1.4} Berapakah peluang bahwa setidaknya 2 presiden Amerika Serikat
+meninggal pada tanggal yang sama dalam setahun?  Jika Anda bertaruh bahwa hal ini telah
+terjadi, apakah Anda akan memenangkan taruhan?
+
+\i\label{exer 3.1.5} Terdapat tiga rute berbeda yang menghubungkan kota A dengan kota B.
+Berapa banyak cara yang dapat digunakan untuk melakukan perjalanan pulang-pergi dari A
+ke B lalu kembali?
+Berapa banyak cara jika rute pulang harus berbeda?
+
+\i\label{exer 3.1.6} Dalam menyusun orang mengelilingi meja bundar, kita memperhitungkan
+posisi tempat duduk mereka relatif satu sama lain, bukan posisi sebenarnya dari salah
+satu orang.  Tunjukkan bahwa $n$ orang dapat disusun mengelilingi meja bundar dengan
+$(n - 1)!$ cara.
+
+\i\label{exer 3.1.7} Lima orang menaiki sebuah lift\index{lift} yang berhenti di lima
+lantai.  Dengan menganggap setiap orang memiliki peluang yang sama untuk menuju lantai
+mana pun, carilah peluang bahwa mereka semua turun di lantai yang berbeda.
+
+\i\label{exer 3.1.8} Suatu himpunan berhingga $\Omega$ memiliki $n$ unsur.  Tunjukkan
+bahwa jika himpunan kosong dan $\Omega$ dihitung sebagai subhimpunan, terdapat $2^n$
+subhimpunan dari $\Omega$.
+
+\i\label{exer 3.1.9} Ketaksamaan yang lebih teliti untuk mendekati $n!$ diberikan oleh
+$$
+\sqrt{2\pi n}\left(\frac ne\right)^n e^{1/(12n + 1)} < n! < \sqrt{2\pi n}\left(\frac
+ne\right)^n e^{1/(12n)}\ .
+$$ Tulislah program komputer untuk mengilustrasikan ketaksamaan ini bagi $n = 1$ hingga~9.
+
+\i\label{exer 3.1.10} Setumpuk kartu biasa dikocok dan 13 kartu dibagikan.  Berapakah
+peluang bahwa kartu terakhir yang dibagikan adalah kartu as?
+
+\i\label{exer 3.1.11} Terdapat $n$ pelamar untuk jabatan direktur komputasi.  Setiap
+anggota komite pencarian yang beranggotakan tiga orang mewawancarai para pelamar secara
+mandiri dan memberi peringkat dari 1 hingga $n$.  Seorang kandidat akan dipekerjakan
+jika setidaknya dua dari ketiga pewawancara menempatkannya pada peringkat pertama.
+Carilah peluang bahwa seorang kandidat akan diterima jika para anggota komite sama
+sekali tidak mampu menilai kandidat dan hanya memberi peringkat secara acak.  Secara
+khusus, bandingkan peluang ini untuk kasus tiga kandidat dan kasus sepuluh kandidat.
+
+\i\label{exer 3.1.12} Sebuah orkestra simfoni memiliki repertoar yang terdiri atas 30
+simfoni Haydn, 15 karya modern, dan 9 simfoni Beethoven.  Programnya selalu terdiri
+atas sebuah simfoni Haydn yang diikuti karya modern, lalu sebuah simfoni Beethoven.
+
+\begin{enumerate}
+\item Berapa banyak program berbeda yang dapat dimainkannya?
+
+\item Berapa banyak program berbeda yang ada jika ketiga karya dapat dimainkan dalam
+urutan apa pun?
+
+\item Berapa banyak program tiga karya yang berbeda jika lebih dari satu karya dari
+kategori yang sama dapat dimainkan dan karya-karya itu dapat dimainkan dalam urutan
+apa pun?
+\end{enumerate}
+
+\i\label{exer 3.1.13} Suatu negara bagian memiliki pelat nomor kendaraan yang memuat
+tiga angka dan tiga huruf.  Berapa banyak pelat nomor berbeda yang mungkin
+
+\begin{enumerate}
+\item jika angka harus mendahului huruf?
+
+\item jika tidak ada batasan mengenai letak huruf dan angka?
+\end{enumerate}
+
+\i\label{exer 3.1.14} Pintu pusat komputer memiliki kunci dengan lima tombol yang
+diberi nomor dari~1 hingga~5.  Kombinasi angka yang membuka kunci merupakan urutan
+lima angka dan diatur ulang setiap minggu.
+
+\begin{enumerate}
+\item Berapa banyak kombinasi yang mungkin jika setiap tombol harus digunakan sekali?
+
+\item Anggaplah kunci juga dapat memiliki kombinasi yang mengharuskan Anda menekan dua
+tombol secara bersamaan, lalu tiga tombol lainnya satu per satu.  Berapa banyak kombinasi
+tambahan yang dimungkinkan?
+\end{enumerate}
+
+\i\label{exer 3.1.15} Sebuah pusat komputasi memiliki 3 prosesor yang menerima $n$
+pekerjaan.  Pekerjaan tersebut dialokasikan kepada prosesor sepenuhnya secara acak sehingga
+semua $3^n$ alokasi yang mungkin sama mungkinnya.  Carilah peluang bahwa tepat satu
+prosesor tidak menerima pekerjaan.
+
+\i\label{exer 3.1.16} Buktikan bahwa setidaknya dua orang di Atlanta, Georgia, memiliki
+inisial yang sama, dengan menganggap tidak seorang pun memiliki lebih dari empat inisial.
+
+\i\label{exer 3.1.17} Carilah rumus untuk peluang bahwa di antara suatu himpunan berisi
+$n$ orang, setidaknya dua orang berulang tahun pada bulan yang sama (dengan menganggap
+ulang tahun sama mungkinnya jatuh pada setiap bulan).
+
+\i\label{exer 3.1.18} Perhatikan masalah mencari peluang adanya lebih dari satu kesamaan
+ulang tahun dalam kelompok berisi $n$ orang.  Hal ini mencakup, misalnya, tiga orang
+dengan ulang tahun yang sama, atau dua pasang orang dengan ulang tahun yang sama, atau
+kesamaan yang lebih besar.  Tunjukkan bagaimana Anda dapat menghitung peluang ini, lalu
+tulislah program komputer untuk melakukan perhitungan tersebut.  Gunakan program Anda
+untuk mencari jumlah orang terkecil sehingga bertaruh bahwa akan terjadi lebih dari satu
+kesamaan ulang tahun merupakan taruhan yang menguntungkan.
+
+\istar\label{exer 3.1.19} Misalkan di planet Zorg\index{Zorg, planet}, satu tahun
+memiliki $n$ hari, dan makhluk hidup di sana sama mungkinnya menetas pada hari mana pun
+dalam setahun.  Kita ingin memperkirakan $d$, yaitu jumlah minimum makhluk hidup yang
+diperlukan agar peluang setidaknya dua di antaranya memiliki tanggal ulang tahun yang
+sama melebihi 1/2.
+\begin{enumerate}
+\item Dalam Contoh~\ref{exam 3.3}, telah ditunjukkan bahwa dalam suatu himpunan berisi
+$d$ makhluk hidup, peluang bahwa tidak ada dua makhluk hidup yang memiliki tanggal
+ulang tahun yang sama
+adalah $${{(n)_d}\over{n^d}}\ ,$$ dengan $(n)_d = (n)(n-1)\cdots (n-d+1)$. Jadi, kita
+ingin menyamakannya dengan 1/2 dan menyelesaikan persamaan untuk $d$.
+
+\item  Dengan menggunakan rumus Stirling, tunjukkan bahwa
+$${{(n)_d}\over{n^d}} \sim \biggl(1 + {d\over{n-d}}\biggr)^{n-d + 1/2} e^{-d}\ .$$
+\item Sekarang ambil logaritma dari ungkapan di ruas kanan, dan gunakan fakta bahwa
+untuk nilai $x$ yang kecil, kita memiliki
+$$\log(1+x) \sim x - {{x^2}\over 2}\ .$$ (Secara tersirat, kita menggunakan fakta bahwa
+$d$ berorde lebih kecil daripada $n$.  Kita juga akan menggunakan fakta ini dalam bagian (d).)
+
+\item Samakan ungkapan yang ditemukan dalam bagian (c) dengan $-\log(2)$, lalu
+selesaikan untuk $d$ sebagai fungsi dari $n$, sehingga menunjukkan bahwa
+$$d \sim \sqrt{2(\log 2)\,n}\ .$$ 
+\emx {Petunjuk}:  Jika ketiga suku dalam ungkapan yang ditemukan pada bagian (b)
+digunakan, diperoleh persamaan kubik dalam $d$.  Jika suku terkecil dari ketiganya
+dibuang, diperoleh persamaan kuadrat dalam $d$.
+
+\item Gunakan komputer untuk menghitung nilai eksak $d$ bagi berbagai nilai $n$.
+Bandingkan nilai-nilai ini dengan nilai pendekatan yang diperoleh menggunakan jawaban
+bagian (d).
+\end{enumerate}
+
+\i\label{exer 3.1.20}  Dalam sebuah konferensi matematika, sepuluh peserta duduk secara
+acak mengelilingi meja bundar saat makan.  Dengan menggunakan simulasi, perkirakan
+peluang bahwa tidak ada sepasang orang yang duduk bersebelahan saat makan siang sekaligus
+saat makan malam.  Dapatkah Anda membuat dugaan yang masuk akal untuk kasus $n$ peserta
+ketika $n$ besar?
+
+\i\label{exer 3.1.21} Ubahlah program {\bf AllPermutations} untuk menghitung banyaknya
+permutasi dari $n$ objek yang memiliki tepat $j$ titik tetap untuk $j = 0$,~1,~2,
+\dots,~$n$.  Jalankan program Anda untuk $n = 2$ hingga~6.  Buatlah dugaan mengenai
+hubungan antara banyaknya permutasi yang memiliki 0 titik tetap dan yang memiliki tepat
+1 titik tetap.  Bukti dugaan yang benar dapat ditemukan dalam Wilf.
+\index{WILF, H. S.}\footnote{H.~S.
+Wilf, ``A Bijection in the Theory of Derangements," \emx {Mathematics Magazine,} vol.~57, no.~1
+(1984), pp.~37--40. }
+
+\i\label{exer 3.1.22} Tn.~Wimply Dimple, salah seorang pembuat jam paling bergengsi di
+London, datang menemui Sherlock Holmes\index{Holmes, Sherlock} dalam keadaan panik setelah
+mengetahui bahwa seseorang telah memproduksi dan menjual tiruan kasar dari jam tangan
+terlarisnya\index{jam tangan, palsu}.  Sebanyak 16 barang palsu yang ditemukan sejauh ini
+memiliki nomor cap yang semuanya berada di antara 1 dan 56, dan Dimple ingin sekali
+mengetahui seberapa besar skala pekerjaan si pemalsu.  Semua yang hadir sepakat bahwa masuk
+akal untuk menganggap barang palsu yang diproduksi sejauh ini memiliki nomor berurutan
+dari~1 hingga berapa pun jumlah totalnya.
+\par
+``Tenanglah, Dimple," ujar Dr.\ Watson.  ``Jika saya menjadi Anda, saya tidak akan
+terlalu khawatir; Prinsip Kemungkinan Maksimum\index{Prinsip Kemungkinan\\ Maksimum}, yang
+memperkirakan jumlah total sebagai nilai yang memberikan peluang tertinggi bagi deret
+nomor yang ditemukan, menyarankan agar kita menebak 56 itu sendiri sebagai jumlah total.
+Jadi, para pemalsumu bukanlah jaringan besar, dan kita akan menjebloskan mereka ke balik
+jeruji sebelum usahamu mengalami kerugian berarti."
+\par
+``Omong kosong; tak usah bawa-bawa prinsipmu yang muluk-muluk itu, Watson," balas
+Holmes.  ``Siapa pun dapat melihat bahwa jumlah jam tangan itu tentu jauh lebih banyak
+daripada 56---rasio peluang bahwa kita kebetulan menemukan tepat jam tangan dengan
+nomor tertinggi yang diproduksi begitu kecil hingga menggelikan.  Tebakan yang jauh
+lebih baik adalah
+\emx{dua kali} 56."
+
+\begin{enumerate}
+\item Tunjukkan bahwa Watson benar: Prinsip Kemungkinan Maksimum memberikan 56.
+
+\item Tulislah program komputer untuk membandingkan strategi tebakan Holmes dan Watson
+sebagai berikut: tetapkan jumlah total $N$ dan pilih secara acak 16 bilangan bulat antara
+1 dan $N$.  Misalkan $m$ menyatakan bilangan terbesar di antaranya.  Maka tebakan Watson
+untuk $N$ adalah $m$, sedangkan tebakan Holmes adalah $2m$.  Lihat tebakan mana yang lebih
+dekat dengan $N$.  Ulangi percobaan ini (dengan $N$ tetap) seratus kali atau lebih, lalu
+tentukan proporsi percobaan ketika setiap tebakan lebih dekat.  Strategi siapa yang tampaknya
+lebih baik?
+\end{enumerate}
+
+\i\label{exer 3.1.23} Barbara Smith sedang mewawancarai kandidat untuk menjadi
+sekretarisnya.  Saat mewawancarai para kandidat, ia dapat menentukan peringkat relatif
+mereka, tetapi bukan peringkat sebenarnya.  Jadi, jika terdapat enam kandidat dengan
+peringkat sebenarnya 6, 1, 4, 2, 3, 5 (dengan 1 sebagai yang terbaik), setelah
+mewawancarai tiga kandidat pertama ia akan memberi mereka peringkat 3, 1, 2.  Ketika
+mewawancarai setiap kandidat, ia harus menerima atau menolaknya.  Jika tidak menerima
+kandidat setelah wawancara, ia kehilangan kesempatan untuk memilih kandidat tersebut.
+Ia ingin menentukan strategi untuk memutuskan kapan harus berhenti dan menerima seorang
+kandidat agar peluang memperoleh kandidat terbaik menjadi maksimum.  Anggaplah terdapat
+$n$ kandidat dan mereka tiba dalam urutan peringkat yang acak.
+
+\begin{enumerate}
+\item Berapakah peluang Barbara memperoleh kandidat terbaik jika ia mewawancarai semua
+kandidat?  Berapakah peluangnya jika ia memilih kandidat pertama?
+
+\item Anggaplah Barbara memutuskan untuk mewawancarai separuh pertama kandidat, lalu
+melanjutkan wawancara sampai menemukan kandidat yang lebih baik daripada semua kandidat
+yang telah ditemuinya.  Tunjukkan bahwa peluangnya untuk akhirnya memperoleh kandidat
+terbaik lebih besar daripada 25 persen.
+\end{enumerate}
+
+\i\label{exer 3.1.24} Untuk tugas yang dijelaskan dalam Latihan~\ref{exer 3.1.23}, dapat
+ditunjukkan\footnote{E.~B. Dynkin and A.~A. Yushkevich, \emx{Markov Processes: Theorems
+and Problems,} trans.~J.~S. Wood (New York: Plenum, 1969).} bahwa strategi terbaik adalah
+melewatkan $k - 1$ kandidat pertama, dengan $k$ sebagai
+bilangan bulat terkecil yang memenuhi
+$$
+\frac 1k + \frac 1{k + 1} + \cdots + \frac 1{n - 1} \leq 1\ .
+$$ Dengan strategi ini, peluang memperoleh kandidat terbaik kira-kira $1/e = .368$.
+Tulislah program untuk menyimulasikan wawancara Barbara Smith jika ia menggunakan
+strategi optimal ini dengan $n = 10$, lalu lihat apakah Anda dapat memverifikasi bahwa
+peluang keberhasilannya kira-kira $1/e$.
+\end{LJSItem}
+\vspace{.25in}
+
+\section{Kombinasi}\label{sec 3.2} 
+
+Setelah menguasai permutasi, sekarang kita membahas kombinasi.  Misalkan $U$ suatu
+himpunan dengan $n$ unsur; kita ingin menghitung banyaknya subhimpunan berbeda dari
+himpunan $U$ yang memiliki tepat $j$ unsur.  Himpunan kosong dan himpunan $U$ dianggap
+sebagai subhimpunan dari $U$.  Himpunan kosong biasanya dinyatakan dengan $\phi$.
+
+\begin{example}\label{exam 3.7} Misalkan $U = \{a,b,c\}$.  Subhimpunan dari $U$ adalah
+$$ \phi,\ \{a\},\ \{b\},\ \{c\},\ \{a,b\},\ \{a,c\},\ \{b,c\},\ \{a,b,c\}\ .$$ 
+\end{example}
+
+\subsection*{Koefisien Binomial}
+
+Banyaknya subhimpunan berbeda dengan $j$ unsur yang dapat dipilih dari suatu himpunan
+dengan $n$ unsur dinyatakan dengan ${n \choose j}$, dan dibaca ``$n$ pilih $j$."
+Bilangan $n \choose j$ disebut \emx{koefisien binomial.}\index{koefisien binomial}
+Istilah ini berasal dari penerapannya dalam aljabar yang akan dibahas kemudian pada
+bagian ini.
+
+Dalam contoh di atas, terdapat satu subhimpunan tanpa unsur, tiga subhimpunan dengan
+tepat 1 unsur, tiga subhimpunan dengan tepat 2 unsur, dan satu subhimpunan dengan tepat
+3 unsur.  Jadi, ${3 \choose 0} = 1$, ${3 \choose 1} = 3$, ${3 \choose 2} = 3$,
+dan ${3 \choose 3} = 1$.   Perhatikan bahwa seluruhnya terdapat $2^3 = 8$ subhimpunan.
+(Kita telah melihat bahwa suatu himpunan dengan $n$ unsur memiliki $2^n$ subhimpunan;
+lihat Latihan~\ref{sec 3.1}.\ref{exer
+3.1.8}.) Dengan demikian,
+
+$$ {3 \choose 0} + {3 \choose 1}  + {3 \choose 2} + {3 \choose 3} = 2^3 = 8\ ,
+$$
+$$ {n \choose 0}  = {n \choose n} = 1\ .  
+$$
+
+Anggaplah $n > 0$.  Karena hanya ada satu cara untuk memilih himpunan tanpa unsur dan
+hanya satu cara untuk memilih himpunan dengan $n$ unsur, nilai $n \choose j$ lainnya
+ditentukan oleh \emx{relasi rekurensi} berikut:
+
+\begin{theorem}\label{thm 3.6}                 
+Untuk bilangan bulat $n$ dan $j$, dengan $0 < j < n$, koefisien binomial memenuhi:
+\begin{equation} {n \choose j} = {{n-1} \choose j} + {{n-1} \choose {j - 1}}\ .
+\label{eq 3.3}                                                                              
+\end{equation}
+\proof Kita ingin memilih subhimpunan dengan $j$ unsur.  Pilih sebuah unsur $u$ dari
+$U$.  Pertama, anggaplah kita tidak menginginkan $u$ berada dalam subhimpunan.  Maka
+kita harus memilih $j$ unsur dari himpunan dengan $n - 1$ unsur; hal ini dapat dilakukan
+dengan ${{n-1} \choose j}$ cara.  Sebaliknya, anggaplah kita menginginkan $u$ berada
+dalam subhimpunan.  Maka kita harus memilih $j - 1$ unsur lainnya dari $n - 1$ unsur
+$U$ yang tersisa; hal ini dapat dilakukan dengan ${{n-1} \choose {j - 1}}$ cara.
+Karena $u$ berada atau tidak berada dalam subhimpunan kita, banyaknya cara memilih
+subhimpunan dengan $j$ unsur adalah jumlah banyaknya subhimpunan dengan $j$ unsur yang
+memuat $u$ dan banyaknya yang tidak memuatnya---inilah yang dinyatakan oleh
+Persamaan~\ref{eq 3.3}.
+\end{theorem}
+
+Koefisien binomial $n \choose j$ didefinisikan sebagai 0 jika $j < 0$ atau jika
+$j > n$.  Dengan definisi ini, pembatasan pada $j$ dalam Teorema~\ref{thm 3.6} tidak
+diperlukan.
+
+\subsection*{Segitiga Pascal}
+
+Relasi \ref{eq 3.3}, bersama dengan pengetahuan bahwa
+$$ {n \choose 0} = {n \choose n }= 1\ ,
+$$ menentukan sepenuhnya bilangan $n \choose j$.  Kita dapat menggunakan relasi ini
+untuk menentukan \emx{segitiga Pascal}\index{segitiga Pascal} yang terkenal, yang
+menampilkan semua bilangan tersebut dalam bentuk matriks (lihat Gambar~\ref{fig 3.6}).
+
+\putfig{4.5truein}{PSfig3-6}{Segitiga Pascal.}{fig 3.6}   
+
+Baris ke-$n$ segitiga ini memiliki entri $n \choose 0$,~$n \choose 1$,\dots,~$n
+\choose n$.   Kita mengetahui bahwa bilangan pertama dan terakhir adalah 1.  Bilangan
+lainnya ditentukan oleh relasi rekurensi Persamaan~\ref{eq 3.3}; yaitu, entri
+${n \choose j}$ untuk $0 < j < n$ pada baris ke-$n$ segitiga Pascal merupakan
+\emx{jumlah} entri yang tepat berada di atasnya dan entri yang tepat berada di sebelah
+kirinya pada baris ke-$(n - 1)$.  Sebagai contoh, ${5 \choose 2} = 6 + 4 = 10$.
+
+Algoritma untuk membangun segitiga Pascal ini dapat digunakan untuk menulis program
+komputer yang menghitung koefisien binomial.  Anda diminta melakukannya dalam
+Latihan~\ref{exer 3.2.4}.
+\par
+Meskipun segitiga Pascal menyediakan cara untuk membangun koefisien binomial secara
+rekursif, kita juga dapat memberikan rumus untuk $n \choose j$.
+
+\begin{theorem}\label{thm 3.7}  Koefisien binomial diberikan oleh rumus
+\begin{equation} {n \choose j }= \frac{(n)_j}{j!}\ .
+\label{eq 3.4}  
+\end{equation}                                                                        
+\proof Setiap subhimpunan berukuran $j$ dari suatu himpunan berukuran $n$ dapat
+diurutkan dengan $j!$ cara.  Setiap pengurutan tersebut merupakan permutasi-$j$ dari
+himpunan berukuran $n$.  Banyaknya permutasi-$j$ adalah $(n)_j$, sehingga banyaknya
+subhimpunan berukuran $j$ adalah
+$$
+\frac{(n)_j}{j!}\ .
+$$ Hal ini menyelesaikan bukti.
+\end{theorem}
+
+Rumus di atas dapat ditulis kembali dalam bentuk
+$${n \choose j} = \frac{n!}{j!(n-j)!}\ .$$ Hal ini langsung menunjukkan bahwa
+$$ {n \choose j} = {n \choose {n-j}}\ .
+$$ Ketika menggunakan Persamaan~\ref{eq 3.4} untuk menghitung ${n \choose j}$, jika
+perkalian dan pembagian dilakukan secara berselang-seling, semua nilai antara dalam
+perhitungan merupakan bilangan bulat.  Selain itu, tidak satu pun nilai antara tersebut
+melebihi nilai akhir.  (Lihat Latihan~\ref{exer 3.2.39}.)
+\par
+Hal lain yang perlu dinyatakan mengenai Persamaan~\ref{eq 3.4} adalah bahwa jika
+persamaan tersebut digunakan untuk \emx {mendefinisikan} koefisien binomial, $n$ tidak
+lagi harus berupa bilangan bulat positif.  Menurut definisi ini, peubah $j$ tetap harus
+berupa bilangan bulat tak-negatif.  Gagasan ini berguna ketika memperluas Teorema
+Binomial ke eksponen umum.  (Teorema Binomial untuk eksponen bilangan bulat tak-negatif
+diberikan di bawah sebagai Teorema~\ref{thm 3.9}.)
+\subsection*{Tangan Poker}\index{poker}
+
+\begin{example}\label{exam 3.8} Pemain poker kadang-kadang bertanya-tanya mengapa
+\emx{four of a kind} mengalahkan \emx{full house.}  Satu tangan poker merupakan
+subhimpunan acak berisi 5 unsur dari setumpuk 52 kartu.  Suatu tangan memiliki four of
+a kind jika memuat empat kartu bernilai sama---misalnya, empat kartu enam atau empat
+raja.  Tangan itu merupakan full house jika memuat tiga kartu dari satu nilai dan dua
+kartu dari nilai lain---misalnya, tiga kartu dua dan dua ratu.  Mari kita lihat tangan
+mana yang lebih mungkin.  Berapa banyak tangan yang memiliki four of a kind?  Terdapat
+13 cara untuk menentukan nilai keempat kartu.  Untuk setiap cara tersebut, terdapat
+48 kemungkinan bagi kartu kelima.  Jadi, banyaknya tangan four of a kind adalah $13
+\cdot 48 = 624$.  Karena jumlah seluruh tangan yang mungkin adalah ${52 \choose 5} =
+2598960$, peluang tangan dengan four of a kind adalah $624/2598960 = .00024$.
+\par
+Sekarang perhatikan kasus full house; berapa banyak tangan seperti itu?  Terdapat 13
+pilihan untuk nilai yang muncul tiga kali; untuk setiap pilihan tersebut, terdapat
+${4 \choose 3} = 4$ pilihan bagi tiga kartu tertentu dengan nilai itu yang berada dalam
+tangan.  Setelah memilih ketiga kartu tersebut, terdapat 12 kemungkinan untuk nilai
+yang muncul dua kali; untuk setiap kemungkinan, terdapat ${4 \choose 2} = 6$ pilihan
+bagi pasangan tertentu dengan nilai itu.  Jadi, banyaknya full house adalah $13 \cdot 4
+\cdot 12 \cdot 6 = 3744$, dan peluang memperoleh tangan full house adalah
+$3744/2598960 = .0014$.  Jadi, meskipun kedua jenis tangan jarang diperoleh, peluang
+Anda memperoleh full house enam kali lebih besar daripada peluang memperoleh four of a kind.
+\end{example}
+\pagebreak[4]
+\subsection*{Percobaan Bernoulli}
+
+Penggunaan utama koefisien binomial akan muncul dalam kajian salah satu proses acak
+penting yang disebut \emx{percobaan Bernoulli.}\index{proses percobaan Bernoulli}
+
+\begin{definition}\label{def 3.4} Suatu \emx{proses percobaan Bernoulli} adalah urutan
+$n$ percobaan acak sedemikian rupa sehingga
+\begin{enumerate}
+\item Setiap percobaan memiliki dua hasil yang mungkin, yang dapat kita sebut
+\emx{keberhasilan} dan \emx{kegagalan.}
+\item Peluang keberhasilan $p$ pada setiap percobaan sama untuk seluruh percobaan, dan
+peluang ini tidak dipengaruhi oleh pengetahuan apa pun mengenai hasil sebelumnya.
+Peluang kegagalan $q$ diberikan oleh $q = 1 - p$.
+\end{enumerate}
+\end{definition}
+
+\putfig{4truein}{PSfig3-7}{Diagram pohon tiga percobaan Bernoulli.}{fig 3.7} 
+
+\begin{example}\label{exam 3.9} Berikut adalah proses percobaan Bernoulli:
+\begin{enumerate}
+\item Sebuah koin dilempar sepuluh kali.  Dua hasil yang mungkin adalah sisi kepala dan
+sisi ekor.  Peluang munculnya sisi kepala pada setiap lemparan adalah 1/2.
+\item Suatu jajak pendapat dilakukan dengan menanyakan kepada 1000 orang yang dipilih
+secara acak dari populasi apakah mereka mendukung Equal Rights Amendment---dua hasilnya
+adalah ya dan tidak.  Peluang $p$ untuk jawaban ya (yaitu, keberhasilan) menunjukkan
+proporsi orang dalam seluruh populasi yang mendukung amendemen tersebut.
+\item Seorang penjudi memasang serangkaian taruhan 1 dolar, setiap kali bertaruh pada
+warna hitam dalam rolet di Las~Vegas.  Di sini, keberhasilan berarti menang 1 dolar dan
+kegagalan berarti kehilangan 1 dolar.  Karena dalam rolet Amerika penjudi menang jika
+bola berhenti pada salah satu dari 18 di antara 38 posisi dan kalah jika tidak, peluang
+menang adalah $p = 18/38 =
+.474$.
+\end{enumerate}
+\end{example}
+
+Untuk menganalisis proses percobaan Bernoulli, kita memilih pohon biner sebagai ruang
+sampel dan menetapkan distribusi peluang pada lintasan-lintasan di pohon tersebut.
+Sebagai contoh, misalkan kita memiliki tiga percobaan Bernoulli.  Hasil yang mungkin
+ditunjukkan dalam diagram pohon pada Gambar~\ref{fig 3.7}.  Kita mendefinisikan $X$
+sebagai peubah acak yang mewakili hasil proses, yaitu tripel terurut yang tersusun atas
+simbol S dan F.  Peluang yang ditetapkan pada cabang pohon mewakili peluang setiap percobaan
+tersendiri.  Misalkan hasil percobaan ke-$i$ dinyatakan dengan peubah acak $X_i$, dengan
+fungsi distribusi $m_i$.  Karena kita telah menganggap bahwa hasil suatu percobaan tidak
+memengaruhi hasil percobaan lainnya, kita menetapkan peluang yang sama pada setiap
+tingkat pohon.  Suatu hasil $\omega$ untuk seluruh percobaan merupakan lintasan melalui
+pohon.  Sebagai contoh, $\omega_3$ mewakili hasil SFS.  Penafsiran frekuensi atas
+peluang membuat kita mengharapkan proporsi $p$ keberhasilan pada percobaan pertama; di
+antaranya, proporsi $q$ kegagalan pada percobaan kedua; dan di antaranya lagi, proporsi
+$p$ keberhasilan pada percobaan ketiga.  Hal ini menyarankan penetapan peluang $pqp$
+pada hasil $\omega_3$.  Secara lebih umum, kita menetapkan fungsi distribusi
+$m(\omega)$ untuk lintasan~$\omega$ dengan mendefinisikan $m(\omega)$ sebagai hasil kali
+peluang cabang di sepanjang lintasan~$\omega$.  Jadi, peluang terjadinya tiga kejadian,
+S pada percobaan pertama, F pada percobaan kedua, dan S pada percobaan ketiga, merupakan
+hasil kali peluang masing-masing kejadian.  Pada bab berikutnya kita akan melihat bahwa
+hal ini berarti kejadian-kejadian tersebut \emx{saling bebas}, dalam arti pengetahuan
+tentang satu kejadian tidak memengaruhi prediksi kita mengenai terjadinya kejadian lain.
+
+\subsection*{Peluang Binomial}
+
+Kita terutama akan tertarik pada peluang bahwa dalam $n$ percobaan Bernoulli terdapat
+tepat $j$ keberhasilan.  Peluang ini kita nyatakan dengan $b(n,p,j)$.  Mari kita hitung
+nilai khusus $b(3,p,2)$ berdasarkan ukuran pohon kita.  Terlihat bahwa ada tiga lintasan yang
+memiliki tepat dua keberhasilan dan satu kegagalan, yaitu $\omega_2$,~$\omega_3$,
+dan~$\omega_5$.  Setiap lintasan ini memiliki peluang yang sama, $p^2q$.  Jadi,
+$b(3,p,2) = 3p^2q$.  Dengan mempertimbangkan semua jumlah keberhasilan yang mungkin,
+kita memperoleh
+
+\begin{eqnarray*} 
+b(3,p,0) &=& q^3\ ,\\
+b(3,p,1) &=& 3pq^2\ ,\\ 
+b(3,p,2) &=& 3p^2q\ ,\\
+b(3,p,3) &=& p^3\ .
+\end{eqnarray*}
+Dengan cara yang sama, kita dapat membuat ukuran pohon untuk $n$ percobaan dan
+menentukan $b(n,p,j)$ bagi kasus umum $n$ percobaan Bernoulli.
+
+\begin{theorem}\label{thm 3.8} Diberikan $n$ percobaan Bernoulli dengan peluang
+keberhasilan $p$ pada setiap percobaan, peluang tepat $j$ keberhasilan adalah
+$$ b(n,p,j) = {n \choose j} p^j q^{n - j}
+$$ dengan $q = 1 - p$.
+\proof Kita membangun ukuran pohon sebagaimana dijelaskan di atas.  Kita ingin mencari
+jumlah peluang semua lintasan yang memiliki tepat $j$ keberhasilan dan $n - j$
+kegagalan.  Setiap lintasan tersebut diberi peluang $p^j q^{n - j}$.  Ada berapa banyak
+lintasan seperti itu?  Untuk menentukan suatu lintasan, dari $n$ percobaan yang mungkin,
+kita harus memilih suatu subhimpunan berisi $j$ percobaan sebagai keberhasilan, sedangkan
+$n-j$ hasil yang tersisa merupakan kegagalan.  Hal ini dapat dilakukan dengan
+$n \choose j$ cara.   Jadi, jumlah peluangnya adalah
+$$ b(n,p,j) = {n \choose j} p^j q^{n - j}\ .
+$$
+\end{theorem}
+
+\begin{example}\label{exam 3.10} Sebuah koin seimbang dilempar enam kali.  Berapakah
+peluang muncul tepat tiga sisi kepala?  Jawabannya adalah
+$$ b(6,.5,3) = {6 \choose 3} \left(\frac12\right)^3 \left(\frac12\right)^3 = 20 \cdot
+\frac1{64} = .3125\ .
+$$
+\end{example}
+
+\begin{example}\label{exam 3.11} Sebuah dadu dilempar empat kali.  Berapakah peluang
+bahwa kita memperoleh tepat satu~6?  Kita memperlakukannya sebagai percobaan Bernoulli
+dengan \emx{keberhasilan} = ``melempar 6" dan \emx{kegagalan} = ``melempar bilangan
+selain 6."  Maka $p = 1/6$, dan peluang tepat satu keberhasilan dalam empat percobaan
+adalah
+$$ b(4,1/6,1) = {4 \choose 1 }\left(\frac16\right)^1 \left(\frac56\right)^3 = .386\ .
+$$
+\end{example}
+
+Untuk menghitung peluang binomial dengan komputer, kalikan fungsi choose$(n,k)$ dengan
+$p^kq^{n - k}$.  Program {\bf BinomialProbabilities}
+\index{BinomialProbabilities (program)} mencetak peluang binomial $b(n, p, k)$ untuk $k$
+di antara $kmin$ dan $kmax$, beserta jumlah peluang tersebut.  Kita telah menjalankan
+program ini untuk $n = 100$, $p = 1/2$, $kmin = 45$, dan $kmax = 55$; keluarannya
+ditunjukkan pada Tabel~\ref{table 3.27}.  Perhatikan bahwa peluang masing-masing cukup
+kecil.  Peluang muncul tepat 50 sisi kepala dalam 100 lemparan koin adalah sekitar .08.
+Intuisi kita mengatakan bahwa ini merupakan hasil yang paling mungkin, dan itu benar;
+namun demikian, hasil tersebut bukanlah hasil yang sangat mungkin.
+
+\begin{table}
+\centering
+\begin{tabular}{cc} $k$     & $b(n,p,k)$ \\
+\\ 
+45 & .0485 \\
+46 & .0580 \\
+47 & .0666 \\
+48 & .0735 \\
+49 & .0780 \\
+50 & .0796 \\
+51 & .0780 \\
+52 & .0735 \\
+53 & .0666 \\
+54 & .0580 \\
+55 & .0485 \\
+
+\end{tabular}
+\caption{Peluang binomial untuk $n = 100,\ p = 1/2$.}
+\label{table 3.27}
+\end{table}
+
+
+
+
+\subsection*{Distribusi Binomial}
+
+\begin{definition}\label{def 3.5} Misalkan $n$ bilangan bulat positif dan $p$ bilangan
+real antara 0 dan 1.  Misalkan $B$ peubah acak yang menghitung jumlah keberhasilan dalam
+proses percobaan Bernoulli dengan parameter $n$ dan $p$.  Maka distribusi $b(n, p, k)$
+dari $B$ disebut \emx{distribusi binomial}.\index{distribusi binomial}
+\index{fungsi distribusi!binomial}
+\end{definition}
+
+Kita dapat memperoleh gambaran yang lebih baik mengenai distribusi binomial dengan
+membuat grafik distribusi ini untuk berbagai nilai $n$ dan $p$ (lihat
+Gambar~\ref{fig 3.8}).  Plot dalam gambar tersebut dibuat menggunakan program
+{\bf BinomialPlot}.\index{BinomialPlot (program)}
+
+\putfig{4.5truein}{PSfig3-8}{Distribusi binomial.}{fig 3.8} 
+
+\par Kita telah menjalankan program ini untuk $p = .5$ dan $p = .3$.  Perhatikan bahwa
+bahkan untuk $p = .3$, grafiknya cukup simetris.  Kita akan memperoleh penjelasan
+mengenai hal ini dalam Bab~\ref{chp 9}.   Kita juga memperhatikan bahwa peluang tertinggi
+terjadi di sekitar nilai $np$, tetapi peluang tertinggi ini makin kecil ketika $n$
+bertambah.  Dalam Bab~\ref{chp 6}, kita akan melihat bahwa $np$ merupakan nilai
+\emx{rata-rata} atau nilai \emx{harapan} dari distribusi binomial $b(n,p,k)$.
+\par
+Contoh berikut memberikan cara yang baik untuk melihat distribusi binomial ketika $p =
+1/2$.
+\begin{example}\label{exam 3.2.1}
+Sebuah \emx{papan Galton}\index{papan Galton} adalah papan tempat sejumlah besar butir
+peluru BB dijatuhkan dari saluran di bagian atas papan dan dibelokkan oleh sejumlah pasak dalam
+perjalanannya menuju bagian bawah papan.  Posisi akhir setiap peluru merupakan hasil
+sejumlah pembelokan acak ke kiri atau ke kanan.  Kita telah menulis program
+{\bf GaltonBoard}\index{GaltonBoard (program)} untuk menyimulasikan percobaan ini.
+\par
+Kita telah menjalankan program untuk kasus 20 baris pasak dan 10{,}000 peluru yang
+dijatuhkan.  Hasil simulasi ini ditunjukkan pada Gambar~\ref{fig 2.22}.
+\par
+\putfig{4.5truein}{PSfig2-22}{Simulasi papan Galton.}{fig 2.22} 
+
+Perhatikan bahwa jika kita menulis 0 setiap kali peluru dibelokkan ke kiri, dan 1 setiap
+kali peluru dibelokkan ke kanan, lintasan peluru dapat dijelaskan dengan urutan 0 dan 1
+sepanjang $n$, sama seperti pada pelemparan koin sebanyak $n$ kali.
+\par
+Distribusi yang ditunjukkan pada Gambar~\ref{fig 2.22} merupakan contoh distribusi
+empiris, dalam arti distribusi itu muncul melalui serangkaian percobaan.  Seperti yang
+diharapkan, distribusi empiris ini menyerupai distribusi binomial yang bersesuaian dengan
+parameter $n = 20$ dan $p = 1/2$.
+\end{example}
+
+
+
+\subsection*{Pengujian Hipotesis}\index{pengujian hipotesis}
+
+\begin{example}\label{exam 3.12} Misalkan aspirin biasa terbukti efektif mengatasi sakit
+kepala pada 60~persen kasus, dan sebuah perusahaan obat mengklaim bahwa aspirin barunya
+dengan zat tambahan khusus untuk sakit kepala lebih efektif.  Kita dapat menguji klaim
+ini sebagai berikut: klaim mereka kita sebut \emx{hipotesis alternatif,} sedangkan
+negasinya, yaitu bahwa zat tambahan itu tidak memiliki pengaruh yang berarti, kita sebut
+\emx{hipotesis nol.}  Jadi, hipotesis nol menyatakan bahwa $p = .6$, sedangkan hipotesis
+alternatif menyatakan bahwa $p > .6$, dengan $p$ sebagai peluang aspirin baru itu efektif.
+\par Kita memberikan aspirin tersebut kepada $n$ orang untuk diminum ketika mereka sakit
+kepala.  Kita ingin mencari suatu bilangan $m$, yang disebut \emx{nilai kritis} bagi
+percobaan kita, sedemikian rupa sehingga kita menolak hipotesis nol jika setidaknya $m$
+orang sembuh, dan menerimanya jika tidak.  Bagaimana kita menentukan nilai kritis ini?
+\par Pertama, perhatikan bahwa kita dapat melakukan dua jenis galat.  Galat pertama,
+yang dalam statistika sering disebut \emx{galat tipe~1}\index{galat tipe 1}, adalah
+menolak hipotesis nol padahal sebenarnya benar.  Galat kedua, yang disebut \emx{galat
+tipe~2,}\index{galat tipe 2} adalah menerima hipotesis nol ketika hipotesis itu salah.
+Untuk menentukan peluang kedua jenis galat ini, kita memperkenalkan fungsi $\alpha(p)$,
+yang didefinisikan sebagai peluang kita menolak hipotesis nol, dengan peluang tersebut
+dihitung berdasarkan anggapan bahwa hipotesis nol benar.  Dalam kasus ini, kita memiliki
+$$\alpha(p)  =  \sum_{m \leq k \leq n} b(n,p,k)\ .$$
+\par 
+Perhatikan bahwa $\alpha(.6)$ adalah peluang galat tipe~1, sebab ini merupakan peluang
+jumlah keberhasilan yang tinggi bagi zat tambahan yang tidak efektif.  Jadi, untuk $n$
+tertentu, kita ingin memilih $m$ agar $\alpha(.6)$ cukup kecil, sehingga kemungkinan
+galat tipe~1 berkurang.  Namun, ketika $m$ meningkat melampaui nilai yang paling mungkin
+$np
+= .6n$, $\alpha(.6)$, sebagai ekor atas distribusi binomial, mendekati 0.  Jadi,
+\emx{meningkatkan} $m$ membuat galat tipe~1 kurang mungkin terjadi.
+\par Sekarang misalkan zat tambahan itu memang efektif, sehingga $p$ jauh lebih besar
+daripada .6; katakanlah $p = .8$.  (Nilai alternatif $p$ ini dipilih secara sembarang;
+perhitungan berikut bergantung pada pilihan tersebut.)  Memilih $m$ jauh di bawah $np =
+.8n$ akan meningkatkan $\alpha(.8)$, sebab sekarang $\alpha(.8)$ mencakup hampir seluruh
+distribusi binomial kecuali ekor bawahnya.  Bahkan, jika kita menetapkan
+$\beta(.8) = 1 - \alpha(.8)$, maka $\beta(.8)$ memberi kita peluang galat tipe~2,
+sehingga \emx{menurunkan} $m$ membuat galat tipe~2 kurang mungkin terjadi.
+\par Produsen ingin menghindari galat tipe~2, sebab jika galat tersebut terjadi,
+pengujian tidak menunjukkan bahwa obat baru lebih baik, padahal sebenarnya demikian.
+Jika nilai alternatif $p$ dipilih lebih dekat dengan nilai $p$ dalam hipotesis nol
+(dalam kasus ini $p =.6$), maka untuk populasi uji tertentu, nilai $\beta$ akan meningkat.
+Jadi, jika ahli statistik produsen memilih nilai alternatif $p$ yang dekat dengan nilai
+dalam hipotesis nol, diperlukan biaya besar (yaitu, populasi uji harus besar) untuk
+menolak hipotesis nol dengan nilai $\beta$ yang kecil.
+\par Jadi, untuk populasi uji $n$ tertentu, kita berharap dapat memilih nilai $m$ yang,
+jika mungkin, membuat kedua peluang ini kecil.  Jika melakukan galat tipe~1, kita akan
+membeli banyak aspirin yang pada dasarnya biasa dengan harga yang terlalu tinggi;
+galat tipe~2 berarti kita melewatkan kesempatan memperoleh obat yang lebih unggul dengan
+harga murah.  Katakanlah kita ingin bilangan kritis $m$ membuat peluang masing-masing
+kasus yang tidak diinginkan ini kurang dari 5 persen.
+\par Kita menulis program {\bf PowerCurve}\index{PowerCurve (program)} untuk memplot,
+bagi $n = 100$ dan beberapa nilai $m$ yang dipilih, fungsi $\alpha(p)$, dengan $p$
+berkisar dari .4 hingga~1.  Hasilnya ditunjukkan pada Gambar~\ref{fig 3.9}.  Dalam grafik,
+kita menyertakan sebuah kotak (dengan garis putus-putus) dari .6 hingga .8, dengan sisi
+bawah dan atas pada ketinggian .05 dan .95.  Suatu nilai $m$ memenuhi persyaratan kita
+jika dan hanya jika grafik $\alpha$ memasuki kotak dari bawah dan keluar dari atas
+(mengapa?---mana kriteria tipe~1 dan mana kriteria tipe~2?).  Ketika $m$ meningkat,
+grafik $\alpha$ bergeser ke kanan.  Beberapa percobaan menunjukkan bahwa $m = 69$
+merupakan nilai terkecil $m$ yang mencegah galat tipe~1, sedangkan $m = 73$ merupakan
+nilai terbesar yang mencegah galat tipe~2.  Jadi, kita dapat memilih nilai kritis antara
+69 dan 73.  Jika kita lebih ingin menghindari galat tipe~1, kita memilih 73; demikian
+pula, kita memilih 69 jika menganggap galat tipe~2 lebih buruk.  Tentu saja, perusahaan
+obat mungkin tidak senang dengan peluang galat sebesar 5 persen.  Mereka mungkin
+menuntut peluang galat sebesar 1 persen.  Untuk itu, kita harus meningkatkan jumlah
+percobaan $n$ (lihat Latihan~\ref{exer 3.2.28}).
+\end{example}
+
+\putfig{4.5truein}{PSfig3-9}{Kurva kuasa.}{fig 3.9} 
+
+\subsection*{Ekspansi Binomial}
+
+Selanjutnya kita mengingatkan pembaca tentang penerapan koefisien binomial dalam aljabar.
+Penerapan ini adalah \emx{ekspansi binomial,} yang menjadi asal istilah koefisien binomial.
+\begin{theorem}\label{thm 3.9}{\bf (Teorema Binomial)}\index{Teorema Binomial} Kuantitas $(a +
+b)^n$ dapat dinyatakan dalam bentuk
+$$ (a + b)^n = \sum_{j = 0}^n {n \choose j} a^j b^{n - j}\ .
+$$
+\proof Untuk melihat bahwa ekspansi ini benar, tuliskan
+$$ (a + b)^n = (a + b)(a + b) \cdots (a + b)\ .
+$$ Ketika mengalikannya, kita akan memperoleh jumlah suku yang masing-masing dihasilkan
+dari pilihan sebuah $a$ atau $b$ untuk setiap faktor dari $n$ faktor tersebut.  Ketika kita memilih
+$j$ buah $a$ dan $(n - j)$ buah $b$, kita memperoleh suku berbentuk $a^j b^{n - j}$.
+Untuk menentukan suku tersebut, kita harus menetapkan $j$ dari $n$ suku dalam hasil
+kali yang menjadi tempat kita memilih $a$.  Hal ini dapat dilakukan dengan
+$n \choose j$ cara.   Jadi, mengumpulkan suku-suku ini dalam penjumlahan menghasilkan
+suku ${n \choose j} a^j b^{n - j}$.
+\end{theorem}
+\par
+Sebagai contoh, kita memiliki
+\begin{eqnarray*} (a + b)^0 & = & 1 \\ (a + b)^1 & = & a + b \\ (a + b)^2 & = & a^2 +
+2ab + b^2 \\ (a + b)^3 & = & a^3 + 3a^2b + 3ab^2 + b^3\ .
+\end{eqnarray*}
+Di sini terlihat bahwa koefisien pangkat-pangkat berurutan memang menghasilkan segitiga
+Pascal.\index{segitiga Pascal}
+
+\begin{corollary}\label{cor 3.1}  Jumlah unsur pada baris ke-$n$ segitiga Pascal adalah
+$2^n$.  Jika unsur pada baris ke-$n$ segitiga Pascal dijumlahkan dengan tanda
+berselang-seling, jumlahnya adalah~0.
+\proof Pernyataan pertama dalam akibat ini mengikuti fakta bahwa
+$$ 2^n = (1 + 1)^n = {n \choose 0} + {n \choose 1} + {n \choose 2} + \cdots + {n
+\choose n}\ ,
+$$ dan pernyataan kedua mengikuti fakta bahwa
+$$ 0 = (1 - 1)^n = {n \choose 0} - {n \choose 1} + {n \choose 2}- \cdots + {(-1)^n}{n
+\choose n}\ .
+$$
+\end{corollary}
+
+Pernyataan pertama dari akibat tersebut memberi tahu kita bahwa banyaknya subhimpunan
+dari suatu himpunan dengan $n$ unsur adalah $2^n$.  Kita akan menggunakan pernyataan
+kedua dalam penerapan teorema binomial berikutnya.
+
+Kita telah melihat bahwa ketika $A$ dan $B$ adalah sembarang dua kejadian
+(bdk.~Bagian~\ref{sec 1.2}),
+$$ P(A \cup B) = P(A) + P(B) - P(A \cap B).
+$$ Sekarang kita memperluas teorema ini menjadi versi yang lebih umum, yang memungkinkan
+kita mencari peluang bahwa setidaknya satu dari sejumlah kejadian terjadi.
+
+\subsection*{Prinsip Inklusi-Eksklusi}\index{Prinsip Inklusi-Eksklusi}
+
+\begin{theorem}\label{thm 3.10} Misalkan $P$ suatu distribusi peluang pada ruang sampel
+$\Omega$, dan misalkan $\{A_1,\ A_2,\ \dots,\ A_n\}$ suatu himpunan kejadian berhingga.
+Maka
+$$ P(A_1 \cup A_2 \cup \cdots \cup A_n)  =  \sum_{i = 1}^n P(A_i)\ - 
+\sum_{1 \leq i < j \leq n} P(A_i \cap A_j) 
+$$
+\begin{equation} 
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \
+\ 
+\ \ \ \ \ \ \ \ \ \ \ \ \  + \sum_{1 \leq i < j < k \leq n} P(A_i \cap A_j \cap A_k) -
+\cdots\ .\label{eq 3.5}
+\end{equation}
+Artinya, untuk mencari peluang bahwa setidaknya satu dari $n$ kejadian $A_i$ terjadi,
+mula-mula jumlahkan peluang setiap kejadian, kemudian kurangi dengan peluang semua irisan
+pasangan kejadian, tambahkan peluang semua irisan tiga kejadian, dan seterusnya.
+\proof Jika hasil $\omega$ terjadi dalam setidaknya satu kejadian $A_i$, peluangnya
+ditambahkan tepat sekali oleh ruas kiri Persamaan~\ref{eq 3.5}.  Kita harus menunjukkan
+bahwa peluang itu ditambahkan tepat sekali oleh ruas kanan Persamaan~\ref{eq 3.5}.
+Anggaplah $\omega$ berada dalam tepat $k$ himpunan.   Maka peluangnya ditambahkan $k$
+kali dalam suku pertama, dikurangkan $k \choose 2$ kali dalam suku kedua, ditambahkan
+$k \choose 3$ kali dalam suku ketiga, dan seterusnya.   Jadi, jumlah keseluruhan peluang
+itu ditambahkan adalah
+$$ {k \choose 1} - {k \choose 2} + {k \choose 3} - \cdots {(-1)^{k-1}} {k \choose k}\ .
+$$ Namun,
+$$ 0 = (1 - 1)^k = \sum_{j = 0}^k {k \choose j} (-1)^j = {k \choose 0} - \sum_{j = 1}^k
+{k \choose j} {(-1)^{j - 1}}\ .
+$$ Oleh karena itu,
+$$ 1 = {k \choose 0} = \sum_{j = 1}^k {k \choose j} {(-1)^{j - 1}}\ .
+$$
+Jika hasil $\omega$ tidak berada dalam satu pun kejadian $A_i$, hasil tersebut tidak
+dihitung pada kedua ruas persamaan.
+\end{theorem}
+
+\subsection*{Masalah Penitipan Topi}
+
+\begin{example}\label{exam 3.13}  Kita kembali ke masalah penitipan topi
+\index{masalah penitipan topi} yang dibahas dalam Bagian~\ref{sec 3.1}, yaitu masalah
+mencari peluang bahwa suatu permutasi acak memuat setidaknya satu titik tetap.  Ingatlah
+bahwa permutasi merupakan pemetaan satu-ke-satu dari suatu himpunan
+$A = \{a_1,a_2,\dots,a_n\}$ ke dirinya sendiri.  Misalkan $A_i$ adalah kejadian bahwa
+unsur ke-$i$, $a_i$, tetap pada pemetaan tersebut.  Jika kita mengharuskan $a_i$ tetap,
+pemetaan atas $n - 1$ unsur lainnya memberikan sembarang permutasi dari $(n -
+1)$ objek.  Karena terdapat $(n - 1)!$ permutasi demikian,
+$P(A_i) = (n - 1)!/n! =
+1/n$.  Karena terdapat $n$ pilihan untuk $a_i$, suku pertama
+Persamaan~\ref{eq 3.5} adalah 1.  Dengan cara yang sama, agar suatu pasangan tertentu
+$(a_i,a_j)$ tetap, kita dapat memilih sembarang permutasi atas $n - 2$ unsur yang
+tersisa; terdapat $(n - 2)!$ pilihan demikian, sehingga
+$$ P(A_i \cap A_j) = \frac{(n - 2)!}{n!} = \frac 1{n(n - 1)}\ .
+$$ Banyaknya suku berbentuk demikian di ruas kanan Persamaan~\ref{eq 3.5} adalah $$ {n
+\choose 2} = \frac{n(n - 1)}{2!}\ .
+$$ Jadi, suku kedua Persamaan~\ref{eq 3.5} adalah
+$$ -\frac{n(n - 1)}{2!} \cdot \frac 1{n(n - 1)} = -\frac 1{2!}\ .
+$$ Dengan cara yang sama, untuk sembarang tiga kejadian tertentu $A_i$, $A_j$, $A_k$,
+$$ P(A_i \cap A_j \cap A_k) = \frac{(n - 3)!}{n!} = \frac 1{n(n - 1)(n - 2)}\ ,
+$$ dan banyaknya suku demikian adalah
+$$ {n \choose 3} = \frac{n(n - 1)(n - 2)}{3!}\ ,
+$$ sehingga suku ketiga Persamaan~\ref{eq 3.5} sama dengan 1/3!.  Dengan melanjutkan
+cara ini, kita memperoleh
+$$ P(\mbox {paling\ sedikit\ satu\ titik\ tetap}) = 1 - \frac 1{2!} + \frac 1{3!} - \cdots
+(-1)^{n-1} \frac 1{n!}
+$$ dan
+$$ P(\mbox {tanpa\ titik\ tetap}) = \frac 1{2!} - \frac 1{3!} + \cdots (-1)^n \frac 1{n!}\ .
+$$
+
+Dari kalkulus kita mengetahui bahwa
+$$ e^x = 1 + x + \frac 1{2!}x^2 + \frac 1{3!}x^3 + \cdots + \frac 1{n!}x^n + \cdots\ .
+$$ Jadi, jika $x = -1$, kita memiliki
+\begin{eqnarray*} e^{-1} & = &\frac 1{2!} - \frac 1{3!} + \cdots + \frac{(-1)^n}{n!} +
+\cdots \\
+       & = & .3678794\ .
+\end{eqnarray*} Oleh karena itu, peluang tidak adanya titik tetap, yaitu tidak seorang
+pun dari $n$ orang memperoleh kembali topinya sendiri, sama dengan jumlah $n$ suku
+pertama dalam ungkapan untuk $e^{-1}$.  Deret ini konvergen sangat cepat.  Menghitung
+jumlah parsial untuk $n = 3$ hingga~10 memberikan data pada Tabel~\ref{table 3.7}.
+\begin{table}
+\centering
+\begin{tabular}{rl}
+      &        Peluang tidak seorang pun  \\
+   n  &        memperoleh topinya sendiri \\\hline
+   3  &       \hspace{.25in}.333333     \\
+   4  &       \hspace{.2in} .375        \\
+   5  &       \hspace{.25in}.366667     \\
+   6  &       \hspace{.25in}.368056     \\
+   7  &       \hspace{.25in}.367857     \\
+   8  &       \hspace{.25in}.367882     \\
+   9  &       \hspace{.25in}.367879     \\
+  10  &       \hspace{.25in}.367879     \\\hline
+\end{tabular}
+\caption{Masalah penitipan topi.}
+\label{table 3.7}
+\end{table}
+\par
+Setelah $n = 9$, peluang-peluang tersebut pada dasarnya sama hingga enam angka penting.
+Menariknya, peluang tidak adanya titik tetap meningkat dan menurun secara bergantian
+ketika $n$ bertambah.  Terakhir, kita mencatat bahwa hasil eksak kita sangat sesuai
+dengan simulasi yang dilaporkan pada bagian sebelumnya.
+\end{example}
+
+\subsection*{Memilih Ruang Sampel}
+
+Sekarang kita memiliki beberapa alat yang diperlukan untuk mendeskripsikan ruang sampel
+secara akurat dan menetapkan fungsi peluang pada ruang sampel tersebut.  Meskipun
+demikian, dalam beberapa kasus, proses deskripsi dan penetapan ini agak arbitrer.
+Tentu saja, kita berharap ruang sampel yang dipilih beserta fungsi peluang yang ditetapkan
+padanya menghasilkan model yang secara akurat memprediksi apa yang akan terjadi jika
+percobaan benar-benar dilakukan.  Seperti ditunjukkan contoh-contoh berikut, ada keadaan
+ketika deskripsi ruang sampel yang ``masuk akal" tidak menghasilkan model yang sesuai dengan
+data.
+
+Dalam buku Feller,\index{FELLER, W.}\footnote{W.~Feller, \emx{Introduction to Probability Theory and
+Its Applications} vol.~1, 3rd~ed. (New York: John Wiley and Sons, 1968), p. 41}
+diberikan sepasang model yang menjelaskan susunan jenis-jenis partikel elementer tertentu,
+seperti foton\index{foton} dan proton\index{proton}.  Eksperimen ternyata menunjukkan
+bahwa jenis partikel elementer tertentu memperlihatkan perilaku yang dijelaskan secara
+akurat oleh satu model, yang disebut \emx{``statistika Bose-Einstein,"}
+\index{statistika Bose-Einstein}, sedangkan jenis partikel elementer lainnya dapat
+dimodelkan menggunakan \emx{``statistika Fermi-Dirac."}\index{statistika Fermi-Dirac}
+Feller\index{FELLER, W.} menggunakan contoh ini untuk menegaskan bahwa pemilihan model
+peluang memerlukan bukti empiris: argumen \emx{a priori} saja tidak dapat menentukan bahwa
+foton dan proton harus mengikuti hukum peluang yang berbeda. Ini merupakan ringkasan editorial;
+ungkapan sumber tidak diterjemahkan atau direproduksi.
+
+Sekarang kita memberikan beberapa contoh proses penjelasan dan penetapan ini.
+
+\begin{example}\label{exam 3.14}
+ Dalam model mekanika kuantum\index{mekanika kuantum} untuk atom helium\index{helium},
+berbagai parameter dapat digunakan untuk mengklasifikasikan keadaan energi atom.  Dalam
+keadaan spin triplet ($S =
+1$) dengan momentum sudut orbital 1 ($L = 1$), terdapat tiga kemungkinan, 0, 1, atau 2,
+untuk momentum sudut total ($J$).  (Pembaca tidak diharapkan memahami arti semua ini;
+bahkan, contoh tersebut lebih jelas jika pembaca \emx{tidak} mengetahui apa pun tentang
+mekanika kuantum.)  Kita ingin menetapkan peluang pada tiga kemungkinan bagi $J$.
+Anda tentu akan menolak gagasan untuk menetapkan peluang $1/3$ pada setiap hasil
+tersebut.  Sekarang tanyakan kepada diri sendiri mengapa Anda menolak penetapan ini.
+Jawabannya mungkin karena Anda tidak memiliki ``intuisi" (yaitu,
+pengalaman) mengenai perilaku atom helium.  Sebenarnya, dalam contoh ini, peluang
+$1/9,\ 3/9,$ dan $5/9$ ditetapkan oleh teori.  Teori memberikan penetapan ini karena
+frekuensi tersebut diamati \emx{dalam eksperimen}, lalu parameter lebih lanjut
+dikembangkan dalam teori agar frekuensi tersebut dapat diprediksi.
+\end{example}
+
+\begin{example}\label{exam 3.15}  Misalkan dua keping uang logam satu sen masing-masing
+dilempar satu kali.   Ada beberapa cara yang ``masuk akal" untuk mendeskripsikan ruang sampel.  Salah satu
+caranya adalah menghitung jumlah sisi kepala dalam hasil; dalam kasus ini, ruang sampel
+dapat ditulis $\{0, 1,
+2\}$.  Deskripsi lain atas ruang sampel adalah himpunan semua pasangan terurut $H$ dan
+$T$,
+yaitu \[ \{(H,H), (H, T), (T, H), (T, T)\}. \]
+\noindent Kedua deskripsi ini akurat, tetapi mudah dilihat bahwa (paling banyak) hanya
+salah satunya, jika diberi fungsi peluang konstan, yang dapat mengklaim memodelkan
+kenyataan secara akurat.  Dalam kasus ini, tidak seperti contoh sebelumnya, pembaca
+mungkin akan mengatakan bahwa deskripsi kedua, dengan setiap hasil diberi peluang
+$1/4$, merupakan deskripsi yang ``benar".  Keyakinan ini berasal dari pengalaman;
+tidak ada bukti bahwa kenyataan bekerja dengan cara demikian.
+\end{example} 
+\par
+Pembaca juga diarahkan ke Latihan~\ref{exer 3.2.26} untuk contoh lain dari proses ini.
+
+\subsection*{Catatan Historis}
+
+Koefisien binomial memiliki sejarah panjang dan penuh warna yang berpuncak pada karya
+Pascal\index{PASCAL, B.}, \emx{Treatise on the Arithmetical Triangle,}
+\footnote{B.~Pascal, \emx{Trait\'e du Triangle Arithm\'etique} (Paris: Desprez, 1665).}
+tempat Pascal mengembangkan banyak sifat penting bilangan-bilangan ini.  Sejarah tersebut
+dipaparkan dalam buku \emx{Pascal's Arithmetical Triangle} karya A.~W.~F. Edwards.
+\index{EDWARDS, A. W. F.}\footnote{A.~W.~F. Edwards, \emx{Pascal's Arithmetical Triangle}
+(London: Griffin, 1987).}  Pascal menulis segitiganya\index{segitiga Pascal} dalam bentuk
+yang ditunjukkan pada Tabel~\ref{table 3.8}.
+\begin{table}
+\centering
+\begin{tabular}{llrrrrrrll} 
+1  & 1 & 1  & 1  & 1  & 1   & 1  & 1  & 1 & 1\cr 
+1  & 2 & 3  & 4  & 5  & 6   & 7  & 8  & 9  \cr  
+1  & 3 & 6  & 10 & 15 & 21  & 28 & 36 \cr  
+1  & 4 & 10 & 20 & 35 & 56  & 84 \cr  
+1  & 5 & 15 & 35 & 70 & 126 \cr  
+1  & 6 & 21 & 56 &126 \cr  
+1  & 7 & 28 & 84 \cr  
+1  & 8 & 36 \cr  
+1  & 9 \cr  
+1 \cr
+\end{tabular}
+\caption{Segitiga Pascal.}
+\label{table 3.8}
+\end{table}
+
+\par Edwards menelusuri tiga cara berbeda munculnya koefisien binomial.  Ia menyebutnya
+\emx{bilangan figuratif,} \emx{bilangan kombinatorial,} dan \emx{bilangan binomial.}
+Semuanya merupakan nama untuk hal yang sama (yang kita sebut koefisien binomial), tetapi
+kesamaan ketiganya baru disadari pada abad keenam belas.
+
+\emx{Bilangan figuratif}\index{bilangan figuratif} berawal dari ketertarikan kaum
+Pythagoras pada pola bilangan sekitar 540~{\footnotesize{SM}.}   Kaum Pythagoras
+mempertimbangkan, misalnya, pola segitiga yang ditunjukkan pada Gambar~\ref{fig 3.10}.
+Barisan bilangan
+$$ 1, 3, 6, 10, \dots
+$$ yang diperoleh sebagai banyaknya titik dalam setiap segitiga disebut \emx{bilangan
+segitiga.}\index{bilangan segitiga}  Dari segitiga tersebut jelas bahwa bilangan
+segitiga ke-$n$ hanyalah jumlah $n$ bilangan bulat pertama.  \emx{Bilangan tetrahedral}
+\index{bilangan tetrahedral} merupakan jumlah bilangan segitiga dan diperoleh oleh
+matematikawan Yunani Theon dan Nicomachus pada awal abad kedua~{\footnotesize{SM}.}
+Sebagai contoh, bilangan tetrahedral 10 memiliki representasi geometris yang ditunjukkan
+pada Gambar~\ref{fig 3.11}.  Tiga jenis pertama bilangan figuratif dapat ditampilkan
+dalam bentuk tabel seperti pada Tabel~\ref{table 3.9}.
+
+\putfig{4.5truein}{PSfig3-10}{Pola segitiga Pythagoras.}{fig 3.10} 
+
+\putfig{2truein}{PSfig3-11}{Representasi geometris bilangan tetrahedral 10.}{fig
+3.11} 
+
+
+\begin{table}
+\centering
+$$
+\begin{array}{llllllllll} 
+ \mbox {bilangan\ asli}       & 1\hskip.2in & 2\hskip.2in & 3\hskip.2in & 4\hskip.2in & 5\hskip.2in & 6\hskip.2in & 7\hskip.2in & 8\hskip.2in & 9  \cr
+ \mbox {bilangan\ segitiga}   & 1     & 3     & 6    & 10   & 15   & 21   & 28   & 36  & 45 \cr
+ \mbox {bilangan\ tetrahedral}& 1     & 4     & 10   & 20   & 35   & 56   & 84   & 120 &165  
+\end{array}
+$$
+\caption{Bilangan figuratif.}
+\label{table 3.9}
+\end{table}
+\par Bilangan-bilangan ini memberikan empat baris pertama segitiga Pascal, tetapi tabel
+tersebut baru diselesaikan di Barat pada abad keenam belas.
+\par
+Di Timur, matematikawan Hindu mulai menemukan koefisien binomial dalam masalah
+kombinatorial.  Dalam \emx{Lilavati} dari 1150, Bhaskara memberikan kaidah untuk mencari
+banyaknya sediaan obat yang menggunakan 1, 2, 3, 4, 5, atau~6 bahan yang mungkin.
+\footnote{ibid., p.~27.}  Kaidahnya setara dengan rumus kita
+$$ {n \choose r} = \frac{(n)_r}{r!}\ .
+$$
+\begin{figure}[ht]
+\centering
+\small
+\begin{tabular}{c}
+$1$\\
+$1\quad 1$\\
+$1\quad 2\quad 1$\\
+$1\quad 3\quad 3\quad 1$\\
+$1\quad 4\quad 6\quad 4\quad 1$\\
+$1\quad 5\quad 10\quad 10\quad 5\quad 1$\\
+$1\quad 6\quad 15\quad 20\quad 15\quad 6\quad 1$\\
+$1\quad 7\quad 21\quad 34\quad 35\quad 21\quad 7\quad 1$\\
+$1\quad 8\quad 28\quad 56\quad 70\quad 56\quad 28\quad 8\quad 1$
+\end{tabular}
+\caption{Transkripsi numerik mandiri susunan segitiga Chu Shih-chieh hingga
+pangkat kedelapan; kesalahan penyalinan historis yang dibahas di bawah
+dipertahankan.}
+\label{fig 3.12}
+\end{figure}
+\par
+Bilangan binomial sebagai koefisien dari $(a + b)^n$ muncul dalam karya matematikawan
+di Tiongkok sekitar 1100.  Sumber-sumber dari sekitar masa ini menyebut adanya metode
+tabulasi untuk memperoleh koefisien binomial.  Segitiga yang memberikan koefisien hingga
+pangkat kedelapan disajikan oleh Chu Shih-chieh\index{CHU, S.-C.} dalam sebuah buku yang
+ditulis sekitar 1303. Gambar~\ref{fig 3.12} menyajikan kembali susunan
+matematisnya, bukan faksimile sumber historis.\footnote{Rujukan historis: J.\
+Needham, \emx{Science and Civilization in China,} vol.~3 (New York: Cambridge
+University Press, 1959), p.~135.}
+Naskah asli buku Chu telah hilang, tetapi salinannya masih bertahan.  Edwards mencatat
+bahwa ada kesalahan dalam salinan segitiga Chu ini.  Dapatkah Anda menemukannya?
+(\emx {Petunjuk}: Dua bilangan yang seharusnya sama ternyata tidak sama.)  Salinan lain
+tidak memuat kesalahan ini.
+\par
+Kemunculan pertama segitiga Pascal di Barat tampaknya berasal dari perhitungan Tartaglia
+tentang banyaknya kemungkinan hasil lemparan $n$ dadu.\index{TARTAGLIA, N.}
+\footnote{N. Tartaglia, \emx{General Trattato di Numeri et Misure} (Vinegia, 1556).}
+Untuk satu dadu, jawabannya jelas 6.  Untuk dua dadu, kemungkinan hasilnya dapat
+ditampilkan seperti pada Tabel~\ref{table 3.10}.
+
+\begin{table}
+\centering
+$$\matrix{  11\cr   12 & 22\cr   13 & 23 & 33\cr   14 & 24 & 34 & 44\cr   15 & 25 & 35
+& 45 & 55\cr   16 & 26 & 36 & 46 & 56 & 66\ \cr }
+$$
+\caption{Hasil pelemparan dua dadu.}
+\label{table 3.10}
+\end{table}
+
+Menampilkannya dengan cara ini menyarankan bilangan segitiga keenam
+$1 + 2 + 3 + 4 + 5 + 6 =
+21$ untuk pelemparan 2 dadu.  Menurut catatan Tartaglia, ia memikirkan masalah itu
+semalaman di Verona pada hari pertama Prapaskah 1523.
+\footnote{Ringkasan berdasarkan Edwards, op.\ cit., p.~37; ungkapan sumber tidak
+diterjemahkan atau direproduksi.} Ia menyadari bahwa perluasan tabel
+figuratif memberikan jawaban untuk $n$ dadu.  Masalah tersebut terpikir oleh Tartaglia
+setelah melihat orang meramal horoskop mereka sendiri menggunakan sebuah \emx{ Book of
+Fortune,} untuk memilih syair melalui proses yang mencakup pencatatan angka pada muka
+tiga dadu.  Sebanyak 56 kemungkinan hasil tiga dadu dicantumkan pada setiap halaman.
+Cara bilangan ditulis dalam buku itu tidak menunjukkan kaitannya dengan bilangan
+figuratif, tetapi metode pencacahan yang serupa dengan metode kita untuk 2 dadu
+menunjukkannya.  Tabel Tartaglia baru diterbitkan pada 1556.
+\par
+Sebuah tabel koefisien binomial diterbitkan pada 1554 oleh matematikawan Jerman, Stifel.
+\index{STIFEL, M.}\footnote{M. Stifel, \emx{ Arithmetica Integra} (Norimburgae, 1544).}
+Segitiga Pascal juga muncul dalam \emx{Opus novum} karya Cardano dari 1570.
+\index{CARDANO, G.}\footnote{G. Cardano, \emx{Opus Novum de Proportionibus Numerorum}
+(Basilea, 1570).}  Cardano tertarik pada masalah mencari banyaknya cara memilih $r$
+objek dari $n$.  Jadi, pada masa karya Pascal, segitiganya telah muncul sebagai hasil
+kajian bilangan figuratif, bilangan kombinatorial, dan bilangan binomial, dan fakta bahwa
+ketiganya sama tampaknya telah dipahami dengan cukup baik.
+\par
+Ketertarikan Pascal\index{PASCAL, B.|(}\index{FERMAT, P.|(} pada bilangan binomial
+berasal dari surat-menyuratnya dengan Fermat mengenai masalah yang dikenal sebagai
+masalah pembagian taruhan.\index{masalah pembagian taruhan}  Masalah ini dan
+surat-menyurat antara Pascal dan Fermat dibahas dalam Bab~\ref{chp 1}.  Pembaca akan
+mengingat bahwa masalah ini dapat dijelaskan sebagai berikut: Dua pemain A dan B
+memainkan serangkaian permainan, dan pemain pertama yang memenangkan $n$ permainan
+memenangkan pertandingan.  Kita ingin mencari peluang A memenangkan pertandingan pada
+saat A telah memenangkan $a$ permainan dan B telah memenangkan $b$ permainan.  (Lihat
+Latihan~\ref{sec 4.1}.\ref{exer 5.1.11}-\ref{sec
+4.1}.\ref{exer 5.1.13}.)
+\par
+Pascal menyelesaikan masalah tersebut dengan induksi mundur, hampir sama dengan cara
+kita menulis program komputer untuk menyelesaikannya sekarang.  Ia merujuk pada metode
+kombinatorial Fermat yang berjalan sebagai berikut: Jika A memerlukan $c$ kemenangan dan
+B memerlukan $d$ kemenangan untuk menang, kita meminta para pemain terus bermain sampai
+mereka memainkan $c + d - 1$ permainan.  Pemenang rangkaian yang diperpanjang ini akan
+sama dengan pemenang rangkaian asli.  Peluang A menang dalam rangkaian yang diperpanjang,
+dan dengan demikian dalam rangkaian asli, adalah
+$$
+\sum_{r = c}^{c + d - 1} \frac 1{2^{c + d - 1}} {{c + d - 1} \choose r}\ .
+$$ 
+Bahkan pada saat surat-surat itu ditulis, Pascal tampaknya telah memahami rumus ini.
+\par Misalkan pemain pertama yang memenangkan $n$ permainan memenangkan pertandingan,
+dan misalkan setiap pemain memasang taruhan sebesar $x$.  Pascal mempelajari nilai
+kemenangan dalam suatu permainan tertentu.  Yang dimaksudnya adalah peningkatan nilai
+harapan perolehan bagi pemenang permainan tertentu yang sedang dibahas.  Ia menunjukkan
+bahwa nilai permainan pertama adalah
+$$ \frac {1\cdot3\cdot5\cdot\dots\cdot(2n - 1)}{2\cdot4\cdot6\cdot\dots\cdot(2n)}x\ .
+$$ 
+Buktinya tampaknya menggunakan rumus Fermat dan fakta bahwa rasio hasil kali bilangan
+ganjil terhadap hasil kali bilangan genap di atas sama dengan peluang muncul tepat $n$
+sisi kepala dalam $2n$ lemparan koin.  (Lihat Latihan~\ref{exer 3.2.38}.)
+\par
+Pascal menyajikan kepada Fermat tabel yang ditunjukkan pada Tabel~\ref{table 3.11}.
+\begin{table}
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{ccccccc}\hline
+                          &\multicolumn{6}{c}{jika masing-masing mempertaruhkan 256 dalam} \\
+Dari 256 milik lawan saya &   6    & 5     & 4     & 3     & 2     & 1     \\ 
+yang saya peroleh, untuk  & permainan & permainan & permainan & permainan & permainan & permainan \\ \cline{2-7}
+permainan ke-1            & 63     & 70    & 80    & 96    & 128   & 256   \\
+permainan ke-2            & 63     & 70    & 80    & 96    & 128   \\
+permainan ke-3            & 56     & 60    & 64    & 64\\
+permainan ke-4            & 42     & 40    & 32    \\
+permainan ke-5            & 24     & 16   \\ 
+permainan ke-6            & \makebox[.15in][r]{8}          \\\hline
+\end{tabular}
+}
+\caption{Penyelesaian Pascal untuk masalah pembagian taruhan.}
+\label{table 3.11}
+\end{table}               
+\noindent Menurut ringkasan uraian Pascal, nilai permainan pertama sama dengan nilai
+permainan kedua, sebagaimana dapat dibuktikan secara kombinatorial. Bilangan-bilangan pada
+tiga baris pertama tabel meningkat, sedangkan bilangan pada baris keempat, kelima, dan
+seterusnya menurun; Pascal mencatat bahwa pola ini tampak ganjil.\footnote{F.\ N. David,
+op.\ cit., p.~235. Ringkasan editorial; ungkapan terjemahan modern tidak diterjemahkan
+atau direproduksi.}
+\par Mahasiswa dapat menyelidiki pertanyaan ini lebih lanjut menggunakan komputer dan
+metode iterasi mundur Pascal untuk menghitung hasil harapan pada titik mana pun dalam
+rangkaian.
+\par Dalam risalahnya, Pascal memberikan bukti formal atas rumus kombinatorial Fermat,
+serta bukti banyak sifat dasar lain dari bilangan binomial.  Banyak buktinya melibatkan
+induksi dan termasuk di antara bukti-bukti pertama yang menggunakan metode ini.  Bukunya
+menyatukan semua aspek bilangan dalam segitiga Pascal yang dikenal pada 1654; Edwards
+menilai bahwa penamaan Segitiga Aritmetika menurut Pascal memiliki dasar sejarah yang
+kuat.\index{PASCAL, B.|)}\index{FERMAT, P.|)}\footnote{A.~W.~F. Edwards, op.\ cit.,
+p.~ix. Ringkasan editorial; ungkapan sumber tidak diterjemahkan atau direproduksi.}
+\par Kajian serius pertama mengenai distribusi binomial dilakukan oleh James Bernoulli
+dalam \emx{Ars Conjectandi} yang diterbitkan pada 1713.\index{BERNOULLI, J.}
+\footnote{J. Bernoulli, \emx{Ars Conjectandi} (Basil: Thurnisiorum, 1713).}  Kita akan
+kembali ke karya ini dalam catatan historis di Bab~\ref{chp 8}.
+
+\exercises
+\begin{LJSItem}
+
+\i\label{exer 3.2.1} Hitunglah berikut ini:
+\begin{enumerate}
+\item ${6 \choose 3}$
+
+\item $b(5,.2,4)$
+
+\item ${7 \choose 2}$
+
+\item ${{26} \choose {26}}$
+
+\item $b(4,.2,3)$
+
+\item ${6 \choose 2}$
+
+\item ${{10} \choose 9}$
+
+\item $b(8, .3, 5)$
+\end{enumerate}
+
+\i\label{exer 3.2.2} Ada berapa cara untuk memilih lima orang dari kelompok yang
+terdiri atas sepuluh orang guna membentuk sebuah panitia?
+
+\i\label{exer 3.2.3} Berapa banyak subhimpunan berunsur tujuh yang terdapat dalam
+suatu himpunan berunsur sembilan?
+
+\i\label{exer 3.2.4} Dengan menggunakan relasi dalam Persamaan~3.1, tulislah sebuah
+program untuk menghitung segitiga Pascal dan menempatkan hasilnya dalam sebuah matriks.
+Buatlah program Anda mencetak segitiga tersebut untuk $n = 10$.
+
+\i\label{exer 3.2.5} Gunakan program {\bf BinomialProbabilities} untuk mencari peluang
+bahwa, dalam 100 lemparan koin seimbang, banyaknya sisi kepala yang muncul terletak di
+antara 35 dan 65, di antara 40 dan 60, serta di antara 45 dan 55.
+
+\i\label{exer 3.2.6} Charles mengaku dapat membedakan bir dan ale dalam 75 persen
+kesempatan.  Ruth bertaruh bahwa ia tidak mampu melakukannya dan sebenarnya hanya
+menebak.  Untuk menyelesaikan persoalan ini, dibuatlah taruhan berikut: Charles diberi
+sepuluh gelas kecil, yang masing-masing telah diisi dengan bir atau ale sebagaimana
+ditentukan oleh lemparan koin seimbang.  Ia memenangkan taruhan jika menjawab benar
+sebanyak tujuh kali atau lebih.  Carilah peluang Charles menang jika ia memang memiliki
+kemampuan yang diakuinya.  Carilah peluang Ruth menang jika Charles hanya menebak.
+
+\i\label{exer 3.2.7} Tunjukkan bahwa
+$$ b(n,p,j) = \frac pq \left(\frac {n - j + 1}j \right) b(n,p,j - 1)\ ,
+$$ untuk $j \ge 1$. Gunakan fakta ini untuk menentukan nilai atau nilai-nilai $j$ yang
+membuat $b(n,p,j)$ mencapai nilai terbesarnya.  \emx {Petunjuk}: Perhatikan rasio-rasio
+berturutan ketika $j$ bertambah.
+
+\i\label{exer 3.2.8} Sebuah dadu dilempar 30 kali.  Berapakah peluang bahwa angka 6
+muncul tepat 5 kali?  Berapa kali kemunculan angka 6 yang paling mungkin?
+
+\i\label{exer 3.2.9} Carilah bilangan bulat $n$ dan $r$ sedemikian sehingga persamaan
+berikut benar:
+$$
+ {13 \choose 5} + 2{13 \choose 6} + {13 \choose 7} = {n \choose r}\ .
+$$
+
+\i\label{exer 3.2.10} Dalam ujian benar-salah yang terdiri atas sepuluh soal, carilah
+peluang seorang siswa memperoleh nilai 70 persen atau lebih hanya dengan menebak.
+Jawablah pertanyaan yang sama jika ujian tersebut terdiri atas 30 soal dan jika ujian
+tersebut terdiri atas 50 soal.
+
+\i\label{exer 3.2.11} Sebuah restoran menawarkan pai apel dan pai bluberi serta
+menyediakan kedua jenis pai dalam jumlah yang sama.  Setiap hari sepuluh pelanggan
+memesan pai.  Dengan peluang yang sama, mereka memilih salah satu dari kedua jenis pai
+itu.  Berapa potong dari setiap jenis pai yang harus disediakan pemilik agar peluang
+setiap pelanggan memperoleh pai pilihannya kira-kira .95?
+
+\i\label{exer 3.2.12} Satu tangan poker adalah himpunan 5 kartu yang dipilih secara
+acak dari setumpuk 52 kartu.  Carilah peluang memperoleh
+
+\begin{enumerate}
+\item royal flush (sepuluh, jack, ratu, raja, dan as dari satu kembang).
+
+\item straight flush (lima kartu berurutan dari satu kembang, tetapi bukan royal flush).
+
+\item four of a kind (empat kartu dengan nilai muka yang sama).
+
+\item full house (satu pasangan dan satu tripel, masing-masing bernilai muka sama).
+
+\item flush (lima kartu dari satu kembang, tetapi bukan straight atau royal flush).
+
+\item straight (lima kartu berurutan yang tidak semuanya dari kembang yang sama).
+(Perhatikan bahwa dalam straight, as dapat dihitung sebagai kartu tinggi atau rendah.)
+\end{enumerate}
+
+\i\label{exer 3.2.13} Jika suatu himpunan memiliki $2n$ unsur, tunjukkan bahwa
+himpunan itu memiliki lebih banyak subhimpunan berunsur $n$ daripada subhimpunan dengan
+jumlah unsur lainnya.
+
+\i\label{exer 3.2.14} Misalkan $b(2n,.5,n)$ adalah peluang bahwa dalam $2n$ lemparan
+koin seimbang muncul tepat $n$ sisi kepala.  Dengan menggunakan rumus Stirling
+(Teorema~\ref{thm 3.3}), tunjukkan bahwa $b(2n,.5,n)
+\sim 1/\sqrt{\pi n}$.  Gunakan program {\bf BinomialProbabilities} untuk membandingkan
+pendekatan ini dengan nilai eksaknya untuk $n = 10$ sampai~25.
+
+\i\label{exer 3.2.15} Seorang pemain bisbol bernama Smith memiliki rata-rata pukulan
+$.300$ dan biasanya mendapat giliran memukul tiga kali dalam satu pertandingan.
+Anggaplah bahwa pukulan berhasil Smith dalam suatu pertandingan dapat dipandang sebagai
+proses percobaan Bernoulli dengan peluang .3 untuk \emx{keberhasilan.} Carilah peluang
+Smith memperoleh 0,~1,~2, dan~3 pukulan berhasil.
+
+\i\label{exer 3.2.16} Tim sepak bola Universitas Siwash memainkan delapan pertandingan
+dalam satu musim, dengan tiga kemenangan, tiga kekalahan, dan dua hasil seri.  Tunjukkan
+bahwa banyaknya cara hal ini dapat terjadi adalah
+$$ {8 \choose 3}{5 \choose 3} = \frac {8!}{3!\,3!\,2!}\ .
+$$
+
+\i\label{exer 3.2.17} Dengan menggunakan teknik pada Latihan~\ref{exer 3.2.16},
+tunjukkan bahwa banyaknya cara menempatkan $n$ benda berbeda ke dalam tiga kotak,
+dengan $a$ benda dalam kotak pertama, $b$ benda dalam kotak kedua, dan $c$ benda dalam
+kotak ketiga, adalah $n!/(a!\,b!\,c!)$.
+
+\i\label{exer 3.2.18} Baumgartner, Prosser, dan Crowell sedang memeriksa ujian
+kalkulus.  Dalam ujian itu terdapat satu soal benar-salah yang terdiri atas sepuluh
+bagian.  Baumgartner memperhatikan bahwa seorang siswa hanya menjawab benar dua dari
+sepuluh bagian dan berkata, ``Siswa itu bahkan tidak cukup cerdas untuk melempar koin
+dalam menentukan jawabannya."  ``Belum tentu," kata Prosser.  ``Dengan 340 siswa, saya
+berani bertaruh bahwa jika mereka semua melempar koin untuk menentukan jawaban, akan ada
+setidaknya satu lembar ujian dengan paling banyak dua jawaban benar." Crowell berkata,
+``Saya sependapat dengan Prosser.  Bahkan, saya berani bertaruh bahwa semestinya ada
+setidaknya satu lembar ujian tanpa satu pun jawaban benar jika semua orang hanya
+menebak."  Siapakah yang benar dalam persoalan ini?
+
+\i\label{exer 3.2.19} Satu tangan gin terdiri atas 10 kartu dari setumpuk 52 kartu.
+Carilah peluang bahwa tangan gin tersebut memiliki
+
+\begin{enumerate}
+\item seluruh 10 kartu dari kembang yang sama.
+
+\item tepat 4 kartu dari satu kembang dan masing-masing 3 kartu dari dua kembang lainnya.
+
+\item sebaran kembang 4, 3, 2, 1.
+\end{enumerate}
+
+\i\label{exer 3.2.20} Satu tangan berisi enam kartu dibagikan dari setumpuk kartu
+biasa.  Carilah peluang bahwa:
+\begin{enumerate}
+\item Keenam kartu tersebut adalah kartu hati.
+
+\item Terdapat tiga as, dua raja, dan satu ratu.
+
+\item Terdapat tiga kartu dari satu kembang dan tiga kartu dari kembang lainnya.
+\end{enumerate}
+
+\i\label{exer 3.2.21} Seorang perempuan ingin mewarnai kuku-kuku pada satu tangannya
+dengan menggunakan paling banyak dua warna di antara merah, kuning, dan biru.  Ada
+berapa cara ia dapat melakukannya?
+
+\i\label{exer 3.2.22} Ada berapa cara untuk memasukkan enam surat yang tidak dapat
+dibedakan ke dalam tiga kotak surat?  \emx {Petunjuk}: Salah satu cara merepresentasikan
+hal ini diberikan oleh urutan $|$LL$|$L$|$LLL$|$, dengan tanda $|$ menyatakan sekat
+antarkotak dan huruf L menyatakan surat.  Setiap cara yang mungkin dapat digambarkan
+seperti itu.  Perhatikan bahwa kita memerlukan dua garis di kedua ujung, sedangkan dua
+garis lainnya dan keenam huruf L dapat ditempatkan dalam urutan apa pun.
+
+\i\label{exer 3.2.23} Dengan menggunakan metode dalam petunjuk
+Latihan~\ref{exer 3.2.22}, tunjukkan bahwa $r$ benda yang tidak dapat dibedakan dapat
+ditempatkan ke dalam $n$ kotak dengan
+$$
+ {{n + r - 1} \choose {n - 1}} = {{n + r - 1} \choose r}
+$$ cara yang berbeda.
+
+\i\label{exer 3.2.24} Sebuah biro perjalanan memperkirakan bahwa ketika 20 wisatawan
+pergi ke sebuah tempat wisata yang memiliki sepuluh hotel, mereka menyebar seolah-olah
+biro tersebut menempatkan 20 benda yang tidak dapat dibedakan ke dalam sepuluh kotak
+yang dapat dibedakan.  Dengan menganggap model ini benar, carilah peluang tidak ada
+hotel yang kosong ketika kelompok pertama yang terdiri atas 20 wisatawan tiba.
+
+\i\label{exer 3.2.25} Sebuah lift\index{lift} membawa enam penumpang dan berhenti di
+sepuluh lantai.  Kita dapat menetapkan dua ukuran peluang seragam yang berbeda untuk
+cara para penumpang turun: (a)~kita menganggap para penumpang dapat dibedakan atau
+(b)~kita menganggap mereka tidak dapat dibedakan (lihat Latihan~\ref{exer 3.2.23} untuk
+kasus ini).  Untuk setiap kasus, hitunglah peluang bahwa semua penumpang turun di lantai
+yang berbeda.
+
+\i\label{exer 3.2.26} Anda bermain \emx{kepala atau ekor} dengan Prosser, tetapi Anda
+mencurigai bahwa koinnya tidak seimbang.  Von~Neumann menyarankan prosedur berikut:
+Lemparlah koin Prosser dua kali.  Jika hasilnya HT, sebut hasil tersebut \emx{menang;} jika
+hasilnya TH, sebut hasil tersebut \emx{kalah.} Jika hasilnya TT atau HH, abaikan hasil itu
+dan lempar kembali koin Prosser dua kali.  Lanjutkan sampai Anda memperoleh HT atau TH,
+lalu sebut hasil tersebut menang atau kalah dalam satu permainan.  Ulangi prosedur ini
+untuk setiap permainan.  Anggaplah koin Prosser menghasilkan sisi kepala dengan peluang
+$p$.
+\begin{enumerate}
+\item Carilah peluang HT, TH, HH, dan TT dalam dua lemparan koin Prosser.
+
+\item Dengan menggunakan bagian (a), tunjukkan bahwa peluang menang dalam setiap satu
+permainan adalah 1/2, berapa pun nilai $p$.
+\end{enumerate}
+
+\i\label{exer 3.2.27} John mengaku memiliki kemampuan persepsi ekstrasensorik dan dapat
+menentukan satu di antara dua simbol yang terdapat pada kartu tertelungkup (lihat
+Contoh~\ref{exam 3.12}).  Untuk menguji kemampuannya, ia diminta melakukan hal tersebut
+dalam serangkaian percobaan.  Misalkan hipotesis nolnya adalah bahwa ia sekadar menebak,
+sehingga peluang ia menjawab benar setiap kali adalah 1/2, sedangkan hipotesis
+alternatifnya adalah bahwa ia dapat menyebutkan simbol yang benar lebih dari separuh
+waktu.  Rancanglah suatu uji yang peluang galat tipe 1-nya kurang dari .05 dan peluang
+galat tipe 2-nya kurang dari .05 jika John dapat menyebutkan simbol yang benar dalam 75
+persen kesempatan.
+
+\i\label{exer 3.2.28} Dalam Contoh~\ref{exam 3.12}, anggaplah hipotesis alternatifnya
+adalah $p = .8$ dan peluang setiap jenis galat diinginkan kurang dari .01.  Gunakan
+program {\bf PowerCurve} untuk menentukan nilai $n$ dan $m$ yang memenuhi syarat ini.
+Pilihlah $n$ sekecil mungkin.
+
+\i\label{exer 3.2.29} Suatu obat dianggap efektif dengan peluang $p$ yang tidak
+diketahui.  Untuk menaksir $p$, obat tersebut diberikan kepada $n$ pasien dan ternyata
+efektif bagi $m$ pasien.  \emx{Metode kemungkinan maksimum}\index{Prinsip Kemungkinan\\
+Maksimum} untuk menaksir $p$ menyatakan bahwa kita harus memilih nilai $p$ yang
+memberikan peluang terbesar untuk memperoleh hasil yang kita peroleh dalam percobaan.
+Dengan menganggap percobaan tersebut dapat dipandang sebagai proses percobaan Bernoulli
+dengan peluang keberhasilan $p$, tunjukkan bahwa taksiran kemungkinan maksimum bagi $p$
+adalah proporsi keberhasilan $m/n$.
+
+\i\label{exer 3.2.30} Ingatlah bahwa dalam World Series, tim pertama yang memenangkan
+empat pertandingan menjadi pemenang seri.  Seri tersebut berlangsung paling banyak
+tujuh pertandingan.  Anggaplah Red Sox dan Mets sedang memainkan seri itu, dan Mets
+memenangkan setiap pertandingan dengan peluang $p$.  Fermat mengamati bahwa meskipun
+seri itu mungkin tidak berlangsung sampai tujuh pertandingan, peluang Mets memenangkan
+seri sama dengan peluang mereka memenangkan empat pertandingan atau lebih dalam seri
+yang dipaksakan berlangsung tujuh pertandingan, tanpa memandang siapa yang memenangkan
+setiap pertandingan.
+
+\begin{enumerate}
+\item Dengan menggunakan program {\bf PowerCurve} pada Contoh~\ref{exam 3.12}, carilah
+peluang Mets memenangkan seri untuk kasus $p = .5$, $p = .6$, dan $p =.7$.
+
+\item Anggaplah Mets memiliki peluang .6 untuk memenangkan setiap pertandingan.  Gunakan
+program {\bf PowerCurve} untuk mencari nilai $n$ sedemikian sehingga, jika seri
+berlangsung sampai salah satu tim menjadi yang pertama memenangkan lebih dari separuh
+pertandingan, Mets memiliki peluang 95 persen untuk memenangkan seri.  Pilihlah $n$
+sekecil mungkin.
+\end{enumerate}
+
+\i\label{exer 3.2.31} Masing-masing dari empat mesin pada sebuah pesawat berfungsi
+dengan baik dalam suatu penerbangan dengan peluang .99, dan mesin-mesin tersebut
+berfungsi saling bebas.  Anggaplah pesawat dapat mendarat dengan selamat jika sedikitnya
+dua mesinnya berfungsi dengan baik.  Berapakah peluang keadaan mesin-mesin tersebut
+memungkinkan pesawat mendarat dengan selamat?
+
+\i\label{exer 3.2.32} Seorang anak laki-laki tersesat ketika menuruni Gunung
+Washington.  Pemimpin tim pencari memperkirakan bahwa anak itu menuruni sisi timur
+dengan peluang $p$ dan sisi barat dengan peluang $1 - p$.  Tim pencarinya terdiri atas
+$n$ orang yang akan mencari secara saling bebas; jika anak tersebut berada di sisi yang
+sedang disusuri, setiap anggota akan menemukannya dengan peluang $u$.  Tentukan cara
+pemimpin itu harus membagi $n$ orang tersebut menjadi dua kelompok untuk menyusuri kedua
+sisi gunung agar peluang menemukan anak itu menjadi sebesar mungkin.  Bagaimana
+jawabannya bergantung pada $u$?
+
+\istar\label{exer 3.2.33} Sebanyak $2n$ bola dipilih secara acak dari kumpulan yang
+terdiri atas $2n$ bola merah dan $2n$ bola biru.  Carilah ungkapan kombinatorial bagi
+peluang bahwa bola-bola terpilih terbagi sama banyak menurut warna.  Gunakan rumus
+Stirling untuk menaksir peluang ini.  Dengan menggunakan {\bf BinomialProbabilities},
+bandingkan nilai eksaknya dengan pendekatan Stirling untuk $n = 20$.
+
+\i\label{exer 3.2.34} Anggaplah bahwa setiap kali Anda membeli sekotak
+Wheaties\index{Wheaties}, Anda memperoleh salah satu gambar dari $n$ pemain New York
+Yankees\index{New York Yankees}.  Selama suatu periode, Anda membeli $m \geq n$ kotak
+Wheaties.
+\begin{enumerate}
+\item Gunakan Teorema~\ref{thm 3.10} untuk menunjukkan bahwa peluang Anda memperoleh
+seluruh $n$ gambar adalah
+\begin{eqnarray*}
+   1 &-& {n \choose 1} \left(\frac{n - 1}n\right)^m + {n \choose 2} \left(\frac{n - 2}n\right)^m -
+           \cdots  \\
+     &+& (-1)^{n - 1} {n \choose {n - 1}}\left(\frac 1n \right)^m.
+\end{eqnarray*}
+\emx {Petunjuk}: Misalkan $E_k$ adalah kejadian bahwa Anda tidak memperoleh gambar
+pemain ke-$k$.
+
+\item Tulislah sebuah program komputer untuk menghitung peluang ini.  Gunakan program
+tersebut untuk mencari, bagi $n$ tertentu, nilai terkecil $m$ yang menghasilkan peluang
+$\geq .5$ untuk memperoleh seluruh $n$ gambar.  Tinjau $n = 50$,~100, dan~150, lalu
+tunjukkan bahwa $m = n\log n + n \log 2$ merupakan taksiran yang baik bagi banyaknya
+kotak yang diperlukan.  (Untuk penurunan taksiran ini, lihat
+Feller.\footnote{W. Feller, \emx{Introduction to Probability Theory and its Applications,}
+vol.~I, 3rd~ed. (New York: John Wiley \& Sons, 1968), p.~106.})
+\end{enumerate}
+
+\istar\label{exer 3.2.35} Buktikan \emx{identitas binomial} berikut:
+$$
+ {2n \choose n} = \sum_{j = 0}^n { n \choose j}^2\ .
+$$ \emx {Petunjuk}: Perhatikan sebuah guci yang berisi $n$ bola merah dan $n$ bola
+biru.  Tunjukkan bahwa setiap ruas persamaan sama dengan banyaknya cara memilih $n$ bola
+dari guci tersebut.
+
+\i\label{exer 3.2.35.5} Misalkan $j$ dan $n$ bilangan bulat positif, dengan $j \le n$.
+Suatu percobaan terdiri atas pemilihan secara acak sebuah tupel-$j$ bilangan bulat
+\emx{positif} yang jumlahnya paling besar $n$.
+\begin{enumerate}
+\item Carilah ukuran ruang sampelnya.  \emx {Petunjuk}: Perhatikan $n$ bola yang tidak
+dapat dibedakan dan disusun dalam satu baris.  Tempatkan $j$ penanda di antara
+pasangan-pasangan bola yang bersebelahan, tanpa menempatkan dua penanda di antara
+pasangan bola yang sama.  (Kita juga mengizinkan salah satu dari $n$ penanda ditempatkan
+di ujung barisan bola.)  Tunjukkan bahwa terdapat korespondensi 1-1 antara
+himpunan posisi penanda yang mungkin dan himpunan tupel-$j$ yang jumlahnya sedang kita
+hitung.
+\item Carilah peluang bahwa tupel-$j$ yang dipilih memuat sedikitnya satu angka 1.
+\end{enumerate}
+
+\i\label{exer 3.2.36} Misalkan $n\ (\mbox{mod}\ m)$ menyatakan sisa pembagian bilangan
+bulat $n$ oleh bilangan bulat $m$.  Tulislah sebuah program komputer untuk menghitung
+bilangan ${n \choose j}\ (\mbox{mod}\ m)$, dengan ${n \choose j}$ suatu koefisien
+binomial dan $m$ suatu bilangan bulat.  Anda dapat melakukannya dengan menggunakan
+relasi rekurensi untuk menghasilkan koefisien binomial dan mengerjakan seluruh
+aritmetika memakai fungsi dasar mod($n,m$).  Usahakan agar program Anda membuat tabel
+sebesar mungkin.  Jalankan program untuk kasus $m = 2$ sampai~7.  Apakah Anda melihat
+suatu pola?  Khususnya, untuk kasus $m = 2$ dan $n$ merupakan pangkat~2, periksalah bahwa
+semua entri pada baris ke-$(n - 1)$ adalah 1.  (Bilangan binomial yang bersesuaian
+bersifat ganjil.)  Gunakan gambar Anda untuk menjelaskan mengapa hal ini benar.
+
+\i\label{exer 3.2.37} Lucas\index{LUCAS, E.}\footnote{E. Lucas, ``Th\'eorie des Functions
+Num\'eriques Simplement Periodiques," \emx{American J. Math.,} vol.~1 (1878), pp.~184-240,
+289-321.} membuktikan hasil umum berikut yang berkaitan dengan Latihan~\ref{exer
+3.2.36}.  Jika $p$ sebarang bilangan prima, maka ${n
+\choose j}~ (\mbox{mod\ }p)$ dapat dicari sebagai berikut: Uraikan $n$ dan $j$ dalam
+basis $p$, berturut-turut sebagai $n = s_0 + s_1p + s_2p^2 + \cdots + s_kp^k$ dan $j =
+r_0 + r_1p + r_2p^2 + \cdots + r_kp^k$.  (Di sini $k$ dipilih cukup besar untuk
+merepresentasikan semua bilangan dari 0 sampai $n$ dalam basis $p$ dengan menggunakan
+$k$ digit.)  Misalkan $s = (s_0,s_1,s_2,\dots,s_k)$ dan $r =
+(r_0,r_1,r_2,\dots,r_k)$.  Maka
+$$
+ {n \choose j}~(\mbox{mod\ }p) = \prod_{i = 0}^k   {{s_i} \choose {r_i}}~(\mbox{mod\
+}p)\ .
+$$ Sebagai contoh, jika $p = 7$, $n = 12$, dan $j = 9$, maka
+
+\begin{eqnarray*} 12 & = & 5 \cdot 7^0 + 1 \cdot 7^1\ , \\
+ 9 & = & 2 \cdot 7^0 + 1 \cdot 7^1\ , 
+\end{eqnarray*} sehingga
+\begin{eqnarray*} s & = & (5, 1)\ , \\ r & = & (2, 1)\ , 
+\end{eqnarray*} dan hasil ini menyatakan bahwa
+$$ {12 \choose 9}~(\mbox{mod\ }p) = {5 \choose 2}  {1 \choose 1}~(\mbox{mod\ }7)\ .
+$$ Karena ${12 \choose 9} = 220 = 3~(\mbox{mod\ }7)$ dan ${5 \choose 2} = 10 = 3~
+(\mbox{mod\ }7)$, terlihat bahwa hasil tersebut benar untuk contoh ini.
+
+Tunjukkan bahwa hasil ini menyiratkan bahwa, untuk $p = 2$, baris ke-$(p^k - 1)$ pada
+segitiga Anda dalam Latihan~\ref{exer 3.2.36} tidak memiliki entri nol.
+
+\i\label{exer 3.2.38} Buktikan bahwa peluang munculnya tepat $n$ sisi kepala dalam
+$2n$ lemparan koin seimbang diberikan oleh hasil kali bilangan-bilangan ganjil sampai
+$2n - 1$ dibagi dengan hasil kali bilangan-bilangan genap sampai $2n$.
+
+\i\label{exer 3.2.39} Misalkan $n$ bilangan bulat positif dan anggaplah $j$ bilangan
+bulat positif yang tidak melebihi $n/2$.  Tunjukkan bahwa dalam Teorema~\ref{thm 3.7},
+jika perkalian dan pembagian dikerjakan secara berselang-seling, semua nilai antara
+dalam perhitungan merupakan bilangan bulat.  Tunjukkan pula bahwa tidak satu pun nilai
+antara tersebut melebihi nilai akhir.
+
+\end{LJSItem}
+
+\section{Pengocokan Kartu}\label{sec 3.3}\index{pengocokan kartu} 
+
+Sebagian besar bagian ini didasarkan pada artikel karya Brad Mann,\footnote{B. Mann, ``How Many
+Times Should You Shuffle a Deck of Cards?", \emx 
+{UMAP Journal}, vol. 15, no. 4 (1994), pp. 303--331.}\index{MANN, B.}
+yang merupakan uraian atas artikel karya David Bayer dan Persi Diaconis.\footnote{D. Bayer and
+P. Diaconis, ``Trailing the Dovetail Shuffle to its Lair," \emx {Annals of Applied Probability},
+vol. 2, no. 2 (1992), pp. 294--313.}\index{DIACONIS, P.}
+\index{BAYER, D.}
+\subsection*{Kocokan Riffle}
+Diberikan setumpuk $n$ kartu, berapa kali kita harus mengocoknya agar menjadi ``acak"?
+Tentu saja, jawabannya bergantung pada metode pengocokan yang digunakan dan pada makna
+``acak" yang kita maksud.  Kita akan mulai mengkaji pertanyaan ini dengan meninjau model
+standar bagi kocokan riffle.\index{kocokan riffle}
+\par Kita mulai dengan setumpuk $n$ kartu, yang kita anggap diberi label bilangan bulat
+dari 1 sampai $n$ dalam urutan menaik.  Kocokan riffle terdiri atas pemotongan\index{pemotongan}
+tumpukan menjadi dua tumpukan dan penyisipan berselang-seling\index{penyisipan berselang-seling}
+kedua tumpukan tersebut.  Sebagai contoh, jika $n = 6$, pengurutan awalnya adalah
+$(1, 2, 3, 4, 5, 6)$, dan pemotongan dapat dilakukan di antara kartu 2 dan 3.  Hal ini
+menghasilkan dua tumpukan, yaitu $(1, 2)$ dan $(3, 4, 5, 6)$.  Keduanya disisipkan secara
+berselang-seling untuk membentuk pengurutan baru tumpukan kartu.  Sebagai contoh, kedua
+tumpukan ini dapat membentuk pengurutan $(1, 3, 4, 2, 5, 6)$.  Untuk membahas pengocokan
+semacam itu, kita perlu menetapkan suatu distribusi peluang pada himpunan semua pengocokan
+yang mungkin.  Ada beberapa cara yang masuk akal untuk melakukannya.  Kita akan memberikan
+beberapa strategi penetapan yang berbeda dan menunjukkan bahwa semuanya setara.  (Ini tidak
+berarti bahwa penetapan tersebut merupakan satu-satunya penetapan yang masuk akal.)
+Pertama, kita menetapkan peluang binomial $b(n, 1/2, k)$ pada kejadian bahwa pemotongan
+dilakukan setelah kartu ke-$k$.  Selanjutnya, kita menganggap bahwa, untuk suatu
+pemotongan, semua penyisipan berselang-seling yang mungkin memiliki peluang sama.  Jadi,
+untuk melengkapi penetapan peluang, kita perlu menentukan banyaknya penyisipan
+berselang-seling yang mungkin bagi dua tumpukan kartu yang masing-masing berisi $k$ dan
+$n-k$ kartu.
+\par Kita mulai dengan menuliskan tumpukan kedua dalam satu baris, dengan ruang di antara
+setiap pasangan kartu yang berurutan serta ruang di awal dan akhir (jadi, terdapat
+$n-k+1$ ruang).  Dengan pengembalian, kita memilih $k$ dari ruang-ruang ini dan
+menempatkan kartu-kartu dari tumpukan pertama pada ruang yang dipilih.  Hal ini dapat
+dilakukan dengan
+$${{n}\choose{k}}$$ cara.  Jadi, peluang suatu penyisipan berselang-seling tertentu
+seharusnya adalah
+$${1\over{{n}\choose{k}}}\ .$$
+\par Selanjutnya, perhatikan bahwa jika pengurutan baru bukan pengurutan identitas,
+pengurutan itu merupakan hasil dari tepat satu pasangan pemotongan-penyisipan.  Jika
+pengurutan baru adalah pengurutan identitas, pengurutan itu merupakan hasil dari salah
+satu di antara $n+1$ pasangan pemotongan-penyisipan.
+\par Kita mendefinisikan \emx{barisan naik}\index{barisan naik} dalam suatu pengurutan
+sebagai subbarisan maksimal bilangan bulat berurutan dalam urutan menaik.  Sebagai contoh,
+dalam pengurutan
+$$(2, 3, 5, 1, 4, 7, 6)\ ,$$
+terdapat 4 barisan naik, yaitu $(1)$, $(2, 3, 4)$, $(5, 6)$, dan $(7)$.  Mudah dilihat
+bahwa suatu pengurutan merupakan hasil penerapan kocokan riffle pada pengurutan identitas
+jika dan hanya jika pengurutan tersebut memiliki paling banyak dua barisan naik.  (Jika
+pengurutan itu memiliki dua barisan naik, barisan-barisan tersebut bersesuaian dengan dua
+tumpukan yang dihasilkan oleh pemotongan; jika pengurutan itu memiliki satu barisan naik,
+pengurutan tersebut merupakan pengurutan identitas.)  Jadi, ruang sampel pengurutan yang
+diperoleh dengan menerapkan kocokan riffle pada pengurutan identitas secara alami dapat
+dideskripsikan sebagai himpunan semua pengurutan yang memiliki paling banyak dua barisan
+naik.
+\par Sekarang mudah untuk menetapkan distribusi peluang pada ruang sampel ini.  Setiap
+pengurutan dengan dua barisan naik diberi nilai
+$${{b(n, 1/2, k)}\over{{{n}\choose{k}}}} = {1\over{2^n}}\ ,$$ sedangkan pengurutan
+identitas diberi nilai
+$${{n+1}\over{2^n}}\ .$$
+\par Ada cara lain untuk memandang kocokan riffle.  Kita dapat membayangkan memulai dengan
+tumpukan kartu yang dipotong menjadi dua tumpukan seperti sebelumnya, dengan penetapan
+peluang yang sama seperti sebelumnya, yaitu distribusi binomial.  Setelah memperoleh dua
+tumpukan, kita mengambil kartu satu demi satu dari bagian bawah kedua tumpukan dan
+menempatkannya pada satu tumpukan.  Jika pada suatu tahap proses ini kedua tumpukan
+masing-masing berisi $k_1$ dan $k_2$ kartu, kita menganggap bahwa peluang kartu berikutnya
+diambil dari suatu tumpukan sebanding dengan ukuran tumpukan tersebut saat itu.  Hal ini
+menyiratkan bahwa peluang kartu berikutnya diambil dari tumpukan pertama sama dengan
+$${{k_1}\over{k_1 + k_2}}\ ,$$
+sedangkan peluang yang bersesuaian untuk tumpukan kedua adalah
+$${{k_2}\over{k_1 + k_2}}\ .$$
+Sekarang kita akan menunjukkan bahwa proses ini menetapkan peluang seragam pada setiap
+penyisipan berselang-seling yang mungkin dari kedua tumpukan.
+\par 
+Sebagai contoh, misalkan suatu penyisipan berselang-seling terbentuk karena kartu-kartu
+dari kedua tumpukan dipilih dalam suatu urutan.  Peluang hasil ini terjadi merupakan hasil
+kali peluang pada setiap tahap proses, sebab pemilihan kartu pada setiap tahap dianggap
+saling bebas dari pemilihan sebelumnya.  Setiap faktor dalam hasil kali ini berbentuk
+$${{k_i}\over{k_1 + k_2}}\ ,$$ dengan $i = 1$ atau $2$, dan penyebut setiap faktor sama
+dengan banyaknya kartu yang masih harus dipilih.  Jadi, penyebut peluang tersebut adalah
+$n!$.  Pada saat sebuah kartu dipilih dari tumpukan yang berisi $i$ kartu, pembilang
+faktor peluang yang bersesuaian adalah $i$, dan banyaknya kartu dalam tumpukan ini
+berkurang sebanyak 1.  Jadi, pembilangnya adalah $k!(n-k)!$, sebab semua kartu dalam
+kedua tumpukan pada akhirnya dipilih.  Oleh karena itu, proses ini menetapkan peluang
+$${1\over{{n}\choose{k}}}$$ pada setiap penyisipan berselang-seling yang mungkin.
+\par 
+Sekarang kita beralih ke pertanyaan mengenai apa yang terjadi ketika kita melakukan
+kocokan riffle sebanyak $s$ kali.  Jelas bahwa jika kita mulai dengan pengurutan
+identitas, kita memperoleh pengurutan dengan paling banyak $2^s$ barisan naik, sebab satu
+kocokan riffle menghasilkan paling banyak dua barisan naik dari setiap barisan naik dalam
+pengurutan awal.  Bahkan, tidak sulit untuk melihat bahwa setiap pengurutan demikian
+merupakan hasil dari $s$ kocokan riffle.  Dengan demikian, pertanyaannya menjadi: ada
+berapa cara suatu pengurutan dengan $r$ barisan naik dapat terbentuk dengan menerapkan
+$s$ kocokan riffle pada pengurutan identitas?  Untuk menjawab pertanyaan ini, kita beralih
+ke gagasan kocokan-$a$.
+\subsection*{Kocokan-$a$}
+Ada beberapa cara untuk memvisualisasikan kocokan-$a$.  Salah satunya adalah membayangkan
+makhluk bertangan $a$ yang diberi setumpuk kartu untuk dikocok dengan teknik riffle.
+Makhluk itu secara alami memotong tumpukan menjadi $a$ tumpukan, lalu menyisipkan semuanya
+secara berselang-seling.  (Bayangkan saja!)  Jadi, kocokan riffle biasa merupakan
+kocokan-2.  Seperti dalam kocokan-2 biasa, kita mengizinkan beberapa tumpukan berisi 0
+kartu.  Cara lain untuk memvisualisasikan kocokan-$a$ adalah dengan memikirkan inversnya,
+yang disebut penguraian-$a$.  Gagasan ini dijelaskan dalam bukti teorema berikutnya.
+\par Sekarang kita akan menunjukkan bahwa kocokan-$a$ yang diikuti kocokan-$b$ setara
+dengan kocokan-$ab$.  Secara khusus, ini berarti bahwa $s$ kocokan riffle berturut-turut
+setara dengan satu kocokan-$2^s$.  Kesetaraan ini dirumuskan secara tepat oleh teorema
+berikut.
+\noindent
+\begin{theorem}\label{thm 3.3.1} Misalkan $a$ dan $b$ dua bilangan bulat positif.
+Misalkan $S_{a,b}$ himpunan semua pasangan terurut dengan entri pertama berupa
+kocokan-$a$ dan entri kedua berupa kocokan-$b$.  Misalkan $S_{ab}$ himpunan semua
+kocokan-$ab$.  Maka terdapat korespondensi 1-1 antara $S_{a,b}$ dan $S_{ab}$ dengan sifat
+berikut.  Misalkan $(T_1, T_2)$ bersesuaian dengan $T_3$.  Jika $T_1$ diterapkan pada
+pengurutan identitas dan $T_2$ diterapkan pada pengurutan yang dihasilkan, pengurutan
+akhirnya sama dengan pengurutan yang diperoleh dengan menerapkan $T_3$ pada pengurutan
+identitas.
+\proof Cara termudah untuk menjelaskan korespondensi yang diperlukan adalah melalui
+gagasan penguraian\index{penguraian}.  Penguraian-$a$ dimulai dengan setumpuk $n$ kartu.
+Satu demi satu, kartu diambil dari bagian atas tumpukan dan, dengan peluang yang sama,
+ditempatkan di bagian bawah salah satu dari $a$ tumpukan, yang diberi label dari 0 sampai
+$a-1$.  Setelah semua kartu dibagikan, kita menggabungkan tumpukan-tumpukan itu untuk
+membentuk satu tumpukan dengan menempatkan tumpukan $i$ di atas tumpukan $i+1$, untuk
+$0 \le i \le a-1$.  Mudah dilihat bahwa jika kita memulai dengan satu tumpukan kartu,
+tepat ada satu cara untuk memotongnya sehingga diperoleh $a$ tumpukan yang dihasilkan
+oleh penguraian-$a$; dengan $a$ tumpukan tersebut, tepat ada satu cara untuk menyisipkan
+kartu-kartunya secara berselang-seling sehingga diperoleh tumpukan dalam urutan sebelum
+penguraian dilakukan.  Jadi, penguraian-$a$ ini bersesuaian dengan tepat satu kocokan-$a$,
+dan kocokan-$a$ tersebut merupakan invers dari penguraian-$a$ semula.
+\par 
+Jika kita menerapkan penguraian-$ab$ $U_3$ pada satu tumpukan kartu, kita memperoleh
+himpunan yang terdiri atas $ab$ tumpukan, yang kemudian digabungkan menurut urutan untuk
+membentuk satu tumpukan.  Kita melabeli tumpukan-tumpukan ini dengan pasangan terurut
+bilangan bulat, dengan koordinat pertama berada di antara 0 dan $a-1$, sedangkan koordinat
+kedua berada di antara 0 dan $b-1$.  Kemudian kita melabeli setiap kartu dengan label
+tumpukannya.  Banyaknya label yang mungkin adalah $ab$, sebagaimana diperlukan.  Dengan
+pelabelan ini, kita dapat menjelaskan cara mencari penguraian-$b$ dan penguraian-$a$
+sedemikian sehingga, jika kedua penguraian tersebut diterapkan dalam urutan ini pada
+tumpukan kartu, kita memperoleh himpunan $ab$ tumpukan yang sama dengan yang diperoleh
+melalui penguraian-$ab$.
+\par 
+Untuk memperoleh penguraian-$b$ $U_2$, kita mengelompokkan tumpukan kartu menjadi $b$
+tumpukan, dengan tumpukan ke-$i$ memuat semua kartu yang koordinat keduanya $i$, untuk
+$0 \le i \le b-1$.  Kemudian tumpukan-tumpukan tersebut digabungkan untuk membentuk satu
+tumpukan.  Penguraian-$a$ $U_1$ berlangsung dengan cara yang sama, kecuali bahwa koordinat
+pertama pada label yang digunakan.  Selanjutnya, $a$ tumpukan yang dihasilkan digabungkan
+untuk membentuk satu tumpukan.
+\par Uraian di atas menunjukkan bahwa kartu-kartu yang akhirnya berada di atas adalah
+semua kartu berlabel $(0, 0)$.  Kartu-kartu ini diikuti oleh kartu berlabel $(0, 1),\ (0, 2),$ $\  
+\ldots,\ (0, b - 1),\ (1, 0),\ (1,1),\ldots,\ (a-1, b-1)$.  Selain itu,
+urutan relatif setiap pasangan kartu yang memiliki label sama tidak pernah berubah.
+Namun, hal ini tepat sama dengan penguraian-$ab$ jika, pada awal penguraian tersebut,
+kita melabeli setiap kartu dengan salah satu label $(0, 0),\ (0, 1),\ \ldots,\ (0, b-1),\ (1, 0),\ (1,1),\ \ldots,\ (a-1, b-1)$.  Hal ini menyelesaikan bukti.
+\end{theorem}
+\par
+Pada Gambar~\ref{fig 3.14}, kita menampilkan label untuk penguraian-2 atas setumpuk 10
+kartu.  Terdapat 4 kartu berlabel 0 dan 6 kartu berlabel 1, sehingga jika penguraian-2
+dilakukan, tumpukan pertama akan berisi 4 kartu dan tumpukan kedua akan berisi 6 kartu.
+Ketika penguraian ini dilakukan, tumpukan kartu berakhir dalam pengurutan identitas.
+\par
+Pada Gambar~\ref{fig 3.15}, kita menampilkan label untuk penguraian-4 atas tumpukan kartu
+yang sama (karena terdapat empat label yang digunakan).  Gambar ini juga dapat dipandang
+sebagai contoh sepasang penguraian-2, sebagaimana dijelaskan dalam bukti di atas.
+Penguraian-2 pertama akan menggunakan koordinat kedua pada label untuk menentukan
+tumpukan.  Dalam kasus ini, kedua tumpukan memuat kartu-kartu yang nilainya adalah
+$$
+\{5, 1, 6, 2, 7\}\ {\rm dan}\ \{8, 9, 3, 4, 10\}\ .
+$$ 
+Setelah penguraian-2 ini dilakukan, tumpukan kartu berada dalam urutan yang ditunjukkan
+pada Gambar~\ref{fig 3.14}, sebagaimana dapat diperiksa oleh pembaca.  Jika kita ingin
+melakukan penguraian-4 pada tumpukan kartu dengan menggunakan label yang ditampilkan,
+kita mengurutkan kartu secara leksikografis sehingga memperoleh empat tumpukan
+$$
+\{1, 2\},\ \{3, 4\},\ \{5, 6, 7\},\ {\rm dan}\ \{8, 9, 10\}\ .
+$$
+Ketika tumpukan-tumpukan ini digabungkan, kita sekali lagi memperoleh pengurutan identitas
+tumpukan kartu.  Pokok teorema di atas adalah bahwa kedua prosedur pengurutan selalu
+menghasilkan pengurutan awal yang sama.
+\putfig{3truein}{PSfig3-14}{Sebelum penguraian-2.}{fig 3.14}  
+\putfig{3truein}{PSfig3-15}{Sebelum penguraian-4.}{fig 3.15} 
+\begin{theorem}\label{thm 3.3.2} Jika $D$ adalah sebarang pengurutan yang merupakan hasil
+penerapan kocokan-$a$, kemudian kocokan-$b$, pada pengurutan identitas, maka peluang yang
+ditetapkan pada $D$ oleh pasangan operasi ini sama dengan peluang yang ditetapkan pada
+$D$ oleh proses penerapan kocokan-$ab$ pada pengurutan identitas.
+\proof Sebut ruang sampel kocokan-$a$ sebagai $S_a$.  Jika kita melabeli tumpukan dengan
+bilangan bulat dari $0$ sampai $a-1$, setiap pasangan pemotongan-penyisipan, yaitu
+kocokan, bersesuaian dengan tepat satu bilangan bulat $n$ digit berbasis $a$, dengan
+digit ke-$i$ pada bilangan bulat tersebut menyatakan tumpukan yang memuat
+kartu ke-$i$.  Jadi, banyaknya pasangan pemotongan-penyisipan sama dengan banyaknya
+bilangan bulat $n$ digit berbasis $a$, yaitu $a^n$.  Tentu saja, tidak
+semua pasangan tersebut menghasilkan pengurutan yang berbeda.  Banyaknya pasangan yang
+menghasilkan pengurutan tertentu akan dibahas kemudian.  Untuk keperluan kita, cukup
+ditunjukkan bahwa pasangan pemotongan-penyisipanlah yang menentukan penetapan peluang.
+\par Teorema sebelumnya menunjukkan bahwa terdapat korespondensi 1-1 antara $S_{a,b}$
+dan $S_{ab}$.  Selain itu, unsur-unsur yang bersesuaian memberikan pengurutan yang sama
+ketika diterapkan pada pengurutan identitas.  Diberikan sebarang pengurutan $D$, misalkan
+$m_1$ adalah banyaknya unsur $S_{a,b}$ yang, ketika diterapkan pada pengurutan identitas,
+menghasilkan $D$.  Misalkan $m_2$ adalah banyaknya unsur $S_{ab}$ yang, ketika diterapkan
+pada pengurutan identitas, menghasilkan $D$.  Teorema sebelumnya menyiratkan bahwa $m_1
+= m_2$.  Jadi, kedua himpunan menetapkan peluang
+$${{m_1}\over{(ab)^n}}$$
+pada $D$.  Hal ini menyelesaikan bukti.
+\end{theorem}
+\subsection*{Kaitan dengan Masalah Ulang Tahun} 
+Ada hal lain yang dapat dikemukakan mengenai label yang diberikan kepada kartu oleh
+penguraian-penguraian berturut-turut.  Misalkan kita melakukan penguraian-2 pada setumpuk $n$ kartu
+sampai semua label pada kartu berbeda.  Mudah dilihat bahwa proses ini menghasilkan
+setiap permutasi dengan peluang yang sama; artinya, proses ini merupakan proses acak.
+Untuk melihatnya, perhatikan bahwa jika label-label menjadi berbeda pada penguraian-2
+ke-$s$, urutan penguraian-2 ini dapat dipandang sebagai satu penguraian-$2^s$, dengan
+setiap tumpukan yang ditentukan oleh penguraian tersebut memuat paling banyak satu kartu
+(ingatlah bahwa tumpukan-tumpukan itu bersesuaian dengan label).  Jika setiap tumpukan
+memuat paling banyak satu kartu, maka untuk sebarang dua kartu dalam tumpukan, peluang
+kartu pertama memiliki label lebih rendah sama dengan peluangnya memiliki label lebih
+tinggi daripada kartu kedua.  Jadi, setiap pengurutan yang mungkin memiliki peluang sama
+untuk dihasilkan oleh penguraian-$2^s$ ini.
+\par
+Misalkan $T$ peubah acak yang menghitung banyaknya penguraian-2 sampai semua label berbeda.
+Kita dapat memandang $T$ sebagai ukuran lamanya proses penguraian sampai keacakan tercapai.
+Karena pengocokan dan penguraian merupakan proses yang saling invers, $T$ juga mengukur
+banyaknya pengocokan yang diperlukan untuk mencapai keacakan.  Misalkan kita memiliki
+setumpuk $n$ kartu dan ingin mencari $P(T \le s)$.  Nilai ini sama dengan $1 - P(T > s)$.
+Namun, $T > s$ jika dan hanya jika setelah $s$ penguraian-2 tidak semua label berbeda.
+Ini tidak lain dari masalah ulang tahun: kita mencari peluang sedikitnya dua orang
+memiliki ulang tahun yang sama, jika terdapat $n$ orang dan $2^s$ kemungkinan tanggal
+ulang tahun.  Dengan menggunakan rumus dari Contoh~\ref{exam 3.3}, kita memperoleh
+\begin{equation}
+P(T > s) = 1 - {{2^s} \choose n} \frac {n!}{2^{sn}}\ .
+\label{eq 3.3.1}
+\end{equation}
+\par
+Dalam Bab~\ref{chp 6}, kita akan mendefinisikan nilai rata-rata suatu peubah acak.  Dengan
+menggunakan gagasan ini dan persamaan di atas, kita dapat menghitung nilai rata-rata
+peubah acak $T$ (lihat Latihan~\ref{sec 6.1}.\ref{exer 6.1.42}).  Sebagai contoh, jika
+$n = 52$, nilai rata-rata $T$ kira-kira 11.7.  Artinya, rata-rata diperlukan sekitar 12
+kocokan riffle agar proses dapat dianggap acak.
+
+
+\subsection*{Pasangan Pemotongan-Penyisipan dan Pengurutan}
+Seperti dicatat dalam bukti Teorema~\ref{thm 3.3.2}, tidak semua pasangan
+pemotongan-penyisipan menghasilkan pengurutan yang berbeda.  Namun, terdapat rumus
+sederhana yang memberikan banyaknya pasangan semacam itu yang menghasilkan suatu
+pengurutan tertentu.
+\begin{theorem}\label{thm 3.3.3} Jika suatu pengurutan sepanjang $n$ memiliki $r$
+barisan naik, banyaknya pasangan pemotongan-penyisipan dalam kocokan-$a$ atas pengurutan
+identitas yang menghasilkan pengurutan tersebut adalah
+$${{n + a - r}\choose{n}}\ .$$
+\proof Untuk melihat mengapa hal ini benar, kita perlu menghitung banyaknya cara
+pemotongan dalam kocokan-$a$ dapat dilakukan sehingga menghasilkan suatu pengurutan
+dengan $r$ barisan naik.  Penyisipan berselang-seling dapat kita abaikan, sebab setelah
+pemotongan dilakukan, paling banyak satu penyisipan akan menghasilkan suatu pengurutan
+tertentu.  Karena pengurutan yang diberikan memiliki $r$ barisan naik, sebanyak $r-1$
+titik pembagian dalam pemotongan telah ditentukan.  Sisanya, yaitu sebanyak $a - 1 -
+(r - 1) = a - r$ titik pembagian, dapat ditempatkan di mana saja.  Banyaknya tempat untuk
+menempatkan titik pembagian yang tersisa ini adalah $n+1$ (yaitu banyaknya ruang di antara
+pasangan-pasangan kartu yang berurutan, termasuk posisi di awal dan akhir tumpukan).
+Tempat-tempat ini dipilih dengan pengulangan yang diizinkan, sehingga banyaknya cara
+melakukan pilihan tersebut adalah
+$${{n + a - r}\choose{a-r}} = {{n + a - r}\choose{n}}\ .$$
+\par Secara khusus, ini berarti bahwa jika $D$ merupakan pengurutan yang dihasilkan
+dengan menerapkan kocokan-$a$ pada pengurutan identitas dan jika $D$ memiliki $r$ barisan
+naik, peluang yang ditetapkan pada $D$ oleh proses ini adalah
+$${{{{n + a - r}\choose{n}}}\over{a^n}}\ .$$ Hal ini menyelesaikan bukti.
+\end{theorem}
+\par
+Teorema di atas menunjukkan bahwa informasi pokok mengenai peluang yang ditetapkan pada
+suatu pengurutan dalam kocokan-$a$ hanyalah banyaknya barisan naik dalam pengurutan
+tersebut.  Jadi, jika kita menentukan banyaknya pengurutan yang memuat tepat $r$ barisan
+naik untuk setiap $r$ di antara 1 dan $n$, kita telah menentukan fungsi distribusi peubah
+acak yang dihasilkan dengan menerapkan kocokan-$a$ acak pada pengurutan identitas.
+\par Banyaknya pengurutan $\{1, 2, \ldots, n\}$ yang memiliki $r$ barisan naik
+dinyatakan dengan $A(n, r)$ dan disebut bilangan Eulerian\index{bilangan Eulerian}.  Ada
+banyak cara untuk menghitung nilai bilangan-bilangan ini; teorema berikut memberikan satu
+metode rekursif yang langsung mengikuti apa yang telah kita ketahui mengenai kocokan-$a$.
+\begin{theorem}\label{thm 3.3.4} Misalkan $a$ dan $n$ bilangan bulat positif.  Maka
+\begin{equation}
+a^n = \sum_{r = 1}^a {{n + a - r}\choose{n}}A(n, r)\ .
+\label{eq 3.6}
+\end{equation}
+Jadi,
+$$
+A(n, a) = a^n - \sum_{r = 1}^{a-1}{{n + a - r}\choose{n}}A(n, r)\ .
+$$
+Selain itu,
+$$A(n, 1) = 1\ .$$
+\proof Persamaan kedua dapat digunakan untuk menghitung nilai bilangan Euler dan
+langsung mengikuti Persamaan~\ref{eq 3.6}.  Persamaan terakhir merupakan akibat dari
+fakta bahwa satu-satunya pengurutan $\{1, 2, \ldots, n\}$ yang memiliki satu barisan naik
+adalah pengurutan identitas.  Jadi, tinggal membuktikan Persamaan~\ref{eq 3.6}.  Kita akan
+menghitung himpunan kocokan-$a$ atas setumpuk $n$ kartu dengan dua cara.  Pertama, kita
+mengetahui bahwa terdapat $a^n$ pengocokan demikian (hal ini dicatat dalam bukti
+Teorema~\ref{thm 3.3.2}).  Namun, terdapat $A(n, r)$ pengurutan $\{1, 2, \ldots, n\}$
+yang memiliki $r$ barisan naik, dan Teorema~\ref{thm 3.3.3} menyatakan bahwa untuk setiap
+pengurutan demikian, tepat terdapat
+$${{n+a-r}\choose n}$$ 
+pasangan pemotongan-penyisipan yang menghasilkan pengurutan tersebut.  Oleh karena itu,
+ruas kanan Persamaan~\ref{eq 3.6} menghitung himpunan kocokan-$a$ atas setumpuk $n$ kartu.
+Hal ini menyelesaikan\linebreak[4] bukti.
+\end{theorem}
+\subsection*{Pengurutan Acak dan Proses Acak}
+Sekarang kita beralih ke pertanyaan kedua yang diajukan pada awal bagian ini: Apa yang
+kita maksud dengan pengurutan ``acak"\index{pengurutan, acak}\index{pengurutan acak}?
+Agak menyesatkan jika suatu pengurutan tertentu dianggap acak atau tidak acak.  Jika kita
+ingin memilih pengurutan acak dari himpunan semua pengurutan $\{1, 2, \ldots, n\}$, yang
+kita maksud adalah bahwa setiap pengurutan harus dipilih dengan peluang yang sama; artinya,
+setiap pengurutan sama ``acaknya" dengan pengurutan lainnya.
+\par Kata ``acak" sebenarnya seharusnya digunakan untuk menjelaskan suatu proses.  Kita
+akan mengatakan bahwa proses yang menghasilkan suatu objek dari himpunan objek (berhingga)
+merupakan proses acak\index{proses, acak}\index{proses acak} jika setiap objek dalam
+himpunan itu dihasilkan oleh proses tersebut dengan peluang yang sama.  Dalam keadaan
+sekarang, objek-objeknya adalah pengurutan, dan proses yang menghasilkan objek-objek itu
+adalah proses pengocokan.  Mudah dilihat bahwa tidak ada kocokan-$a$ yang benar-benar
+merupakan proses acak, sebab jika $T_1$ dan $T_2$ adalah dua pengurutan dengan banyaknya
+barisan naik yang berbeda, keduanya dihasilkan oleh kocokan-$a$ yang diterapkan pada
+pengurutan identitas dengan peluang yang berbeda.
+\subsection*{Jarak Variasi}
+Alih-alih mensyaratkan bahwa suatu urutan pengocokan menghasilkan proses acak, kita akan
+mendefinisikan ukuran yang menjelaskan seberapa jauh suatu proses tertentu dari proses
+acak.  Misalkan $X$ sebarang proses yang menghasilkan pengurutan $\{1, 2, \ldots, n\}$.
+Definisikan $f_X(\pi)$ sebagai peluang bahwa $X$ menghasilkan pengurutan $\pi$.
+(Jadi, $X$ dapat dipandang sebagai peubah acak dengan fungsi distribusi $f$.)  Misalkan
+$\Omega_n$ himpunan semua pengurutan $\{1, 2, \ldots, n\}$.  Terakhir, misalkan
+$u(\pi) = 1/|\Omega_n|$ untuk semua $\pi \in \Omega_n$.  Fungsi $u$ merupakan fungsi
+distribusi suatu proses acak yang menghasilkan pengurutan.  Untuk setiap pengurutan
+$\pi \in \Omega_n$, kuantitas
+$$|f_X(\pi) - u(\pi)|$$ adalah selisih antara peluang sebenarnya dan peluang yang
+diinginkan bahwa $X$ menghasilkan $\pi$.  Jika kita menjumlahkannya untuk semua pengurutan
+$\pi$ dan menyebut jumlah ini $S$, terlihat bahwa $S = 0$ jika dan hanya jika $X$ acak,
+dan jika tidak, $S$ positif.  Mudah ditunjukkan bahwa nilai maksimum $S$ adalah 2, sehingga
+kita mengalikan jumlah tersebut dengan $1/2$ agar nilainya berada dalam interval $[0, 1]$.
+Jadi, kita memperoleh jumlah berikut sebagai rumus bagi \emx{jarak variasi}\index{jarak variasi}
+antara kedua proses:
+$$\parallel f_X - u \parallel = {1\over 2}\sum_{\pi \in \Omega_n} |f_X(\pi) - u(\pi)|\
+.$$
+\par Sekarang kita menerapkan gagasan ini pada kasus pengocokan.  Misalkan $X$ adalah
+proses yang terdiri atas $s$ kocokan riffle berturut-turut yang diterapkan pada
+pengurutan identitas.  Kita mengetahui bahwa $X$ juga dapat dipandang sebagai satu
+kocokan-$2^s$.  Kita juga mengetahui bahwa $f_X$ konstan pada himpunan semua pengurutan
+dengan $r$ barisan naik, dengan $r$ sebarang bilangan bulat positif.  Terakhir, kita
+mengetahui nilai $f_X$ pada pengurutan dengan $r$ barisan naik serta banyaknya pengurutan
+demikian.  Jadi, dalam kasus khusus ini, kita memiliki
+$$\parallel f_X - u \parallel = {1\over 2}\sum_{r=1}^n A(n, r) 
+\biggl|{{2^s + n - r}\choose{n}}/2^{ns} - {1\over{n!}}\biggr|\ .$$ Karena jumlah ini
+hanya memiliki $n$ suku, mudah untuk menghitungnya bagi nilai $n$ berukuran sedang.
+Untuk $n = 52$, kita memperoleh daftar nilai yang diberikan dalam
+Tabel~\ref{table 3.12}.
+
+\begin{table}
+\centering
+\begin{tabular}{ccrrrccllc}
+\multicolumn{6}{c} {Banyaknya Kocokan Riffle} &
+\multicolumn{4}{c} {Jarak Variasi}\\
+\hline
+&&&&1&&&&1\\
+&&&&2&&&&1\\
+&&&&3&&&&1\\
+&&&&4&&&&0.9999995334\\
+&&&&5&&&&0.9237329294\\
+&&&&6&&&&0.6135495966\\
+&&&&7&&&&0.3340609995\\
+&&&&8&&&&0.1671586419\\
+&&&&9&&&&0.0854201934\\
+&&&&10&&&&0.0429455489\\
+&&&&11&&&&0.0215023760\\
+&&&&12&&&&0.0107548935\\
+&&&&13&&&&0.0053779101\\
+&&&&14&&&&0.0026890130
+\end{tabular}
+\caption{Jarak terhadap proses acak.}
+\label{table 3.12}
+\end{table}
+
+\putfig{4truein}{PSfig3-13-5}{Jarak terhadap proses acak.}{fig 3.13}
+ 
+\par Untuk membantu memahami data ini, data tersebut ditampilkan dalam bentuk grafik
+pada Gambar~\ref{fig 3.13}.  Program {\bf VariationList}\index{VariationList (program)}
+menghasilkan data yang ditampilkan dalam Tabel~\ref{table 3.12} dan
+Gambar~\ref{fig 3.13}.  Terlihat bahwa sebelum terjadi 5 pengocokan, keluaran $X$ masih
+sangat jauh dari acak.  Setelah 5 pengocokan, jarak dari proses acak pada dasarnya menjadi
+setengah setiap kali pengocokan dilakukan.
+\par Diberikan fungsi distribusi $f_X(\pi)$ dan $u(\pi)$ seperti di atas, ada cara lain
+untuk memandang jarak variasi $\parallel f_X - u\parallel$.  Diberikan sebarang kejadian
+$T$ (yang merupakan subhimpunan $S_n$), kita dapat menghitung peluangnya dalam proses $X$
+dan dalam proses seragam.  Sebagai contoh, kita dapat membayangkan bahwa $T$ mewakili
+himpunan semua permutasi ketika pemain pertama dalam permainan poker yang terdiri atas 7
+pemain dibagikan straight flush (lima kartu berurutan dari kembang yang sama).  Menarik
+untuk meninjau seberapa besar peluang kejadian ini setelah sejumlah pengocokan tertentu
+berbeda dari peluang kejadian ini jika semua permutasi memiliki peluang sama.  Selisih
+ini dapat dipandang sebagai penjelasan seberapa dekat proses $X$ dengan proses acak dalam
+kaitannya dengan kejadian $T$.
+\par Sekarang tinjau kejadian $T$ yang membuat nilai mutlak selisih kedua peluang tersebut
+sebesar mungkin.  Dapat ditunjukkan bahwa nilai mutlak ini merupakan jarak variasi antara
+proses $X$ dan proses seragam.  (Pembaca diminta membuktikan fakta ini dalam
+Latihan~\ref{exer 3.3.4}.)
+\par Kita baru saja melihat bahwa, untuk setumpuk 52 kartu, jarak variasi antara proses
+7 kocokan riffle dan proses acak kira-kira $.334$.  Menarik untuk mencari suatu kejadian
+$T$ sedemikian sehingga selisih antara peluang kedua proses menghasilkan $T$ mendekati
+$.334$.  Kejadian dengan sifat ini dapat dijelaskan melalui permainan yang disebut
+New-Age Solitaire.
+
+\subsection*{New-Age Solitaire}\index{New-Age Solitaire}
+
+Permainan ini diciptakan oleh Peter Doyle.  Permainan ini dimainkan dengan setumpuk
+standar 52 kartu.  Kita membagikan kartu dalam keadaan terbuka, satu demi satu, ke
+tumpukan buangan.  Jika menemukan kartu as, misalnya as Hati, kita menggunakannya untuk
+memulai tumpukan Hati.  Setiap tumpukan kembang harus disusun secara berurutan dari as
+sampai raja, hanya dengan menggunakan kartu yang dibagikan setelahnya.  Setelah semua
+kartu dibagikan, kita mengambil tumpukan buangan dan melanjutkan permainan.  Kita
+mendefinisikan kembang Yin\index{Yin} sebagai Hati dan Keriting, sedangkan kembang
+Yang\index{Yang} sebagai Wajik dan Sekop.  Permainan berakhir ketika kedua tumpukan
+kembang Yin telah selesai atau kedua tumpukan kembang Yang telah selesai.  Jelas bahwa
+jika pengurutan tumpukan kartu dihasilkan oleh proses acak, peluang kedua tumpukan
+kembang Yin selesai lebih dahulu tepat sama dengan 1/2.
+\par Sekarang misalkan kita membeli setumpuk kartu baru, membuka segel kemasannya, dan
+mengocok tumpukan itu dengan teknik riffle sebanyak 7 kali.  Jika percobaan ini dilakukan,
+ternyata kembang Yin menang sekitar 75\% dari seluruh permainan.  Angka ini 25\% lebih
+tinggi daripada yang kita peroleh jika tumpukan kartu benar-benar
+diurutkan secara acak.  Penyimpangan ini cukup dekat dengan maksimum teoretis sebesar
+$33.4$\% yang diperoleh di atas.
+\par Mengapa kembang Yin begitu sering menang?  Dalam setumpuk kartu yang benar-benar
+baru, kembang-kembangnya tersusun dalam urutan berikut dari atas ke bawah: as sampai raja
+Hati, as sampai raja Keriting, raja sampai as Wajik, dan raja sampai as Sekop.  Perhatikan
+bahwa jika kartu sama sekali tidak dikocok, tumpukan kembang Yin akan selesai dalam
+putaran pertama, bahkan sebelum satu pun kartu kembang Yang terlihat.  Jika kita terus
+memainkan permainan sampai tumpukan kembang Yang selesai, diperlukan 13 putaran melalui
+tumpukan kartu.  Jadi, terlihat bahwa dalam tumpukan baru, kembang Yin berada dalam
+urutan yang paling menguntungkan dan kembang Yang dalam urutan yang paling tidak
+menguntungkan.  Setelah 7 kocokan riffle, keunggulan relatif kembang Yin atas kembang
+Yang masih dipertahankan sampai batas tertentu.
+
+\exercises
+\begin{LJSItem}
+\i\label{exer 3.3.1} Diberikan sebarang pengurutan $\sigma$ atas $\{1, 2, \ldots, n\}$,
+kita dapat mendefinisikan $\sigma^{-1}$, yaitu pengurutan invers dari $\sigma$, sebagai
+pengurutan yang unsur ke-$i$-nya merupakan posisi yang ditempati oleh $i$ dalam $\sigma$.
+Sebagai contoh, jika $\sigma = (1, 3, 5, 2, 4, 7, 6)$, maka $\sigma^{-1} = (1, 4, 2, 5,
+3, 7, 6)$.  (Jika pengurutan-pengurutan ini dipandang sebagai permutasi, maka
+$\sigma^{-1}$ merupakan invers dari $\sigma$.)
+\par Suatu \emx{penurunan}\index{penurunan} terjadi di antara dua posisi dalam suatu
+pengurutan jika posisi kiri ditempati oleh bilangan yang lebih besar daripada bilangan
+di posisi kanan.  Sebagai kesepakatan, kita mengatakan bahwa setiap pengurutan memiliki
+penurunan setelah posisi terakhir.  Dalam contoh di atas, $\sigma^{-1}$ memiliki empat
+penurunan.  Penurunan tersebut terjadi setelah posisi kedua, keempat, keenam, dan ketujuh.
+Buktikan bahwa banyaknya barisan naik dalam suatu pengurutan $\sigma$ sama dengan banyaknya
+penurunan dalam $\sigma^{-1}$.
+
+\i\label{exer 3.3.2} Tunjukkan bahwa jika kita memulai dengan pengurutan identitas
+$\{1, 2, \ldots, n\}$, peluang bahwa kocokan-$a$ menghasilkan pengurutan dengan tepat
+$r$ barisan naik adalah
+$${{{n + a - r}\choose{n}}\over{a^n}}A(n, r)\ ,$$ untuk $1 \le r \le a$.
+
+\i\label{exer 3.3.3} Misalkan $D$ adalah setumpuk $n$ kartu.  Kita telah melihat bahwa terdapat
+$a^n$ kocokan-$a$ atas $D$.  Pengodean himpunan penguraian-$a$ diberikan dalam bukti
+Teorema~\ref{thm 3.3.1}.  Sekarang kita akan memberikan pengodean kocokan-$a$ yang
+bersesuaian dengan pengodean penguraian-$a$.  Misalkan $S$ himpunan semua tupel-$n$
+bilangan bulat, dengan setiap bilangan berada di antara 0 dan $a-1$.  Misalkan $M =
+(m_1, m_2, \ldots, m_n)$ adalah sebarang unsur $S$.  Misalkan $n_i$ adalah banyaknya kemunculan
+$i$ dalam $M$, untuk $0 \le i \le a-1$.  Anggaplah kita memulai dengan tumpukan kartu
+dalam urutan menaik (yaitu, kartu-kartu diberi nomor dari 1 sampai $n$).  Kita memberi
+$n_0$ kartu pertama label 0, $n_1$ kartu berikutnya label 1, dan seterusnya.
+Kemudian, kocokan-$a$ yang bersesuaian dengan $M$ adalah pengocokan yang menghasilkan
+pengurutan dengan kartu-kartu berlabel $i$ ditempatkan pada posisi dalam $M$ yang memuat
+label $i$.  Kartu-kartu berlabel sama ditempatkan pada posisi-posisi tersebut dalam
+urutan menaik berdasarkan nomornya.  Sebagai contoh, jika $n = 6$ dan $a = 3$, misalkan
+$M = (1, 0, 2, 2, 0, 2)$.  Maka $n_0 = 2,\ n_1 = 1,$ dan $n_2 = 3$.  Jadi, kita memberi
+kartu 1 dan 2 label 0, kartu 3 label 1, serta kartu 4, 5, dan 6 label 2.
+Kemudian kartu 1 dan 2 ditempatkan pada posisi 2 dan 5, kartu 3 ditempatkan pada posisi 1,
+serta kartu 4, 5, dan 6 ditempatkan pada posisi 3, 4, dan 6, sehingga menghasilkan
+pengurutan $(3, 1, 4, 5, 2, 6)$.
+\begin{enumerate}
+\item Dengan menggunakan pengodean ini, tunjukkan bahwa dalam kocokan-$a$, peluang kartu
+pertama (yaitu, kartu nomor 1) berpindah ke posisi ke-$i$ diberikan oleh ungkapan berikut:
+$$ {{(a-1)^{i-1}a^{n-i} + (a-2)^{i-1}(a-1)^{n-i} + \cdots + 1^{i-1}2^{n-i}}\over{a^n}}\ .
+$$
+\item Berikan taksiran akurat bagi peluang bahwa, dalam tiga kocokan riffle atas setumpuk
+52 kartu, kartu pertama berakhir di salah satu dari 26 posisi pertama.  Dengan menggunakan
+komputer, taksirlah secara akurat peluang kejadian yang sama setelah tujuh kocokan riffle.
+\end{enumerate}
+
+\i\label{exer 3.3.4} Misalkan $X$ menyatakan suatu proses tertentu yang menghasilkan
+unsur-unsur $S_n$, dan misalkan $U$ menyatakan proses seragam.  Misalkan fungsi distribusi
+kedua proses ini berturut-turut dinyatakan dengan $f_X$ dan $u$.  Tunjukkan bahwa jarak
+variasi
+\newline	
+$\parallel f_X - u\parallel$ sama dengan
+$$\max_{T \subset S_n} \sum_{\pi \in T} \Bigl(f_X(\pi) - u(\pi)\Bigr)\ .$$ 
+\emx {Petunjuk}:
+Tuliskan permutasi-permutasi dalam $S_n$ menurut urutan menurun dari selisih $f_X(\pi) -
+u(\pi)$.
+
+\i\label{exer 3.3.5} Tinjaulah proses yang dijelaskan dalam teks, yaitu setumpuk $n$
+kartu berulang kali diberi label dan dikenai penguraian-2 dengan cara yang dijelaskan
+dalam bukti Teorema~\ref{thm 3.3.1}.  (Lihat Gambar~\ref{fig 3.12} dan
+\ref{fig 3.13}.)  Proses berlanjut sampai semua label berbeda.  Tunjukkan bahwa proses
+tidak pernah berakhir sebelum sedikitnya $\lceil \log_2(n) \rceil$ penguraian dilakukan.
+\end{LJSItem}

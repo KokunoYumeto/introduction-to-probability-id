@@ -1,0 +1,2703 @@
+% This chapter has been modified on 6-4-05.
+%\setcounter{chapter}{5}
+
+
+\chapter{Nilai Harapan dan Varians}\label{chp 6}
+
+\section[Nilai Harapan]{Nilai Harapan Peubah Acak Diskret}\label{sec 6.1}
+
+Ketika sekumpulan besar bilangan dihimpun, seperti dalam suatu sensus, biasanya kita
+tidak tertarik pada tiap-tiap bilangan, melainkan pada besaran deskriptif tertentu,
+seperti rata-rata atau median. Secara umum, hal yang sama berlaku bagi distribusi
+peluang suatu peubah acak bernilai numerik. Dalam bagian ini dan bagian berikutnya,
+kita akan membahas dua besaran deskriptif semacam itu: \emx {nilai harapan} dan
+\emx {varians.} Kedua besaran ini hanya berlaku bagi peubah acak bernilai numerik;
+karena itu, dalam bagian-bagian ini kita menganggap bahwa semua peubah acak mempunyai
+nilai numerik. Untuk memberikan pembenaran intuitif bagi definisi kita, tinjaulah
+permainan berikut.
+
+\subsection*{Nilai Rata-Rata}
+
+Sebuah dadu dilempar. Jika muncul bilangan ganjil, kita menang sebesar bilangan
+tersebut; jika muncul bilangan genap, kita kalah sebesar bilangan tersebut. Sebagai
+contoh, jika muncul dua kita kalah 2, dan jika muncul tiga kita menang 3. Kita ingin
+menentukan apakah permainan ini layak dimainkan. Mula-mula kita mencoba simulasi.
+Program {\bf Die}\index{Die (program)} menjalankan simulasi ini.
+\par
+Program tersebut mencetak frekuensi dan frekuensi relatif munculnya setiap hasil.
+Program itu juga menghitung rata-rata kemenangan. Kita telah menjalankan program dua
+kali. Hasilnya ditampilkan dalam Tabel~\ref{table 6.1}.
+
+\medskip
+\begin{table}[h]\centering
+\centering
+\begin{tabular}{|c|c|c|c|c|} \hline
+        & \multicolumn{2}{c|}{n = 100}    & \multicolumn{2}{c|}{n = 10000} \\ \cline{2-5}
+Kemenangan & \hskip.1in Frekuensi \hskip.1in & Relatif  & \hskip.1in Frekuensi \hskip.1in & Relatif  \\  
+        &                                 & Frekuensi &                                 & Frekuensi
+\\ \cline{1-5} 1       & 17        & .17                 & 1681       &.1681 \\  -2      & 17       
+& .17                 & 1678       &.1678 \\   3       & 16        & .16                 &
+1626       &.1626 \\   -4      & 18        & .18                 & 1696       &.1696 \\ 
+5       & 16        & .16                 & 1686       &.1686 \\ 
+-6      & 16        & .16                 & 1633       &.1633 \\\hline
+\end{tabular}
+\caption{Frekuensi untuk permainan dadu.}
+\label{table 6.1}
+\end{table}
+
+Pada pengoperasian pertama, kita memainkan permainan itu 100 kali. Dalam pengoperasian
+ini, rata-rata keuntungan kita adalah $-.57$. Tampaknya permainan itu merugikan, dan
+kita ingin mengetahui seberapa merugikannya. Untuk memperoleh gambaran yang lebih
+baik, kita memainkan permainan itu 10{,}000 kali. Dalam kasus ini, rata-rata keuntungan
+kita adalah $-.4949$.
+\par
+Kita perhatikan bahwa frekuensi relatif setiap satu dari enam hasil yang mungkin cukup
+dekat dengan peluang 1/6 bagi hasil tersebut. Hal ini sesuai dengan penafsiran
+frekuensi kita atas peluang. Hal ini juga menunjukkan bahwa untuk jumlah permainan
+yang sangat besar, rata-rata keuntungan kita seharusnya
+\begin{eqnarray*}
+\mu & = & 1 \Bigl(\frac 16\Bigr) - 2\Bigl(\frac 16\Bigr) + 3 \Bigl(\frac 16\Bigr) - 4
+\Bigl(\frac 16\Bigr) + 5 \Bigl(\frac 16\Bigr) - 6 \Bigl(\frac 16\Bigr) \\
+    & = & \frac 96 - \frac {12}6 = -\frac 36 = -.5\ .
+\end{eqnarray*} Nilai ini cukup sesuai dengan rata-rata keuntungan kita untuk 10{,}000
+permainan.
+
+Kita perhatikan bahwa nilai yang kita pilih sebagai rata-rata keuntungan diperoleh
+dengan mengambil hasil-hasil yang mungkin, mengalikan masing-masing dengan peluangnya,
+lalu menjumlahkan hasil perkalian itu. Hal ini menyarankan definisi berikut bagi hasil
+yang diharapkan dari suatu percobaan.
+
+\subsection*{Nilai Harapan}
+
+\begin{definition}\label{def 6.1} Misalkan $X$ adalah peubah acak diskret bernilai
+numerik dengan ruang sampel $\Omega$ dan fungsi distribusi $m(x)$. {\em Nilai
+harapan}\index{nilai harapan} $E(X)$ didefinisikan oleh
+$$ E(X) = \sum_{x \in \Omega} x m(x)\ ,
+$$ asalkan jumlah ini konvergen mutlak. Nilai harapan sering kita sebut
+\emx {rataan,}\index{rataan} dan untuk singkatnya $E(X)$ kita lambangkan dengan
+$\mu$. Jika jumlah di atas tidak konvergen mutlak, kita katakan bahwa $X$ tidak
+mempunyai nilai harapan.
+\end{definition}
+
+\begin{example}\label{exam 6.03} Misalkan suatu percobaan terdiri atas pelemparan
+sebuah koin adil sebanyak tiga kali. Misalkan $X$ menyatakan banyaknya kepala yang
+muncul. Nilai-nilai $X$ yang mungkin adalah $0, 1, 2$, dan $3$. Peluang yang
+bersesuaian adalah $1/8, 3/8, 3/8,$ dan $1/8$. Dengan demikian, nilai harapan $X$
+adalah
+$$0\biggl(\frac 18\biggr) + 1\biggl(\frac 38\biggr) + 2\biggl(\frac 38\biggr) +
+3\biggl(\frac 18\biggr) = \frac 32\ .$$ Nanti dalam bagian ini kita akan melihat
+cara yang lebih cepat untuk menghitung nilai harapan tersebut, berdasarkan fakta bahwa
+$X$ dapat ditulis sebagai jumlah peubah-peubah acak yang lebih sederhana.
+\end{example}
+
+
+\begin{example}\label{exam 6.05} Misalkan kita melempar sebuah koin adil hingga
+kepala muncul untuk pertama kalinya, dan misalkan $X$ menyatakan banyaknya lemparan
+yang dilakukan. Nilai-nilai $X$ yang mungkin adalah $1, 2, \ldots$, dan fungsi
+distribusi $X$ didefinisikan oleh
+$$m(i) = {1\over {2^i}}\ .$$ (Ini tidak lain adalah distribusi geometrik dengan
+parameter $1/2$.) Dengan demikian, kita memperoleh
+\begin{eqnarray*}  E(X) & = &\sum_{i = 1}^\infty i {1\over{2^i}} \\ & = & \sum_{i =
+1}^\infty {1\over{2^i}} + \sum_{i = 2}^\infty {1\over{2^i}} + \cdots \\ & = & 1 +
+{1\over 2} + {1\over{2^2}} + \cdots \\ & = & 2\ .
+\end{eqnarray*}
+
+\end{example}
+
+\begin{example}(Lanjutan Contoh~\ref{exam 6.05})\label{exam 6.055} Misalkan kita
+melempar sebuah koin hingga kepala muncul untuk pertama kalinya; jika banyaknya
+lemparan sama dengan $n$, kita dibayar $2^n$ dolar. Berapakah nilai harapan pembayaran
+itu?
+\par Misalkan $Y$ menyatakan pembayaran tersebut. Maka,
+$$P(Y = 2^n) = {1\over{2^n}}\ ,$$ untuk $n \ge 1$. Dengan demikian,
+$$E(Y) = \sum_{n = 1}^\infty 2^n {1\over{2^n}}\ ,$$ yang merupakan jumlah divergen.
+Jadi, $Y$ tidak mempunyai nilai harapan. Contoh ini disebut \emx {Paradoks
+St. Petersburg}.\index{Paradoks St. Petersburg}
+Fakta bahwa jumlah di atas tak hingga menunjukkan bahwa seorang pemain seharusnya
+bersedia membayar berapa pun jumlah tetap per permainan demi hak memainkan permainan
+ini. Pembaca diminta mempertimbangkan berapa banyak yang bersedia ia bayar untuk hak
+tersebut. Kecil kemungkinan jawaban pembaca melebihi 10 dolar; di situlah letak
+paradoksnya.
+\par Pada masa awal sejarah peluang, berbagai matematikawan mengemukakan cara untuk
+menyelesaikan paradoks ini. Salah satu gagasan (oleh G.~Cramer)\index{CRAMER, G.}
+adalah menganggap bahwa jumlah uang di dunia terhingga. Jadi, ia menganggap terdapat
+suatu nilai tetap $n$ sedemikian sehingga jika banyaknya lemparan sama dengan atau
+melebihi $n$, pembayarannya adalah $2^n$ dolar. Dalam Latihan~\ref{exer 6.1.21},
+pembaca diminta menunjukkan bahwa nilai harapan pembayaran itu kini terhingga.
+\par Daniel Bernoulli\index{BERNOULLI, D.} dan Cramer juga mempertimbangkan cara lain
+untuk memberikan nilai pada pembayaran. Gagasan mereka adalah bahwa nilai suatu
+pembayaran merupakan fungsi tertentu dari pembayaran itu; fungsi semacam itu kini
+disebut fungsi utilitas\index{fungsi utilitas}. Contoh fungsi utilitas yang wajar dapat
+berupa fungsi akar kuadrat atau fungsi logaritma. Dalam kedua kasus, nilai $2n$ dolar
+lebih kecil daripada dua kali nilai $n$ dolar. Dapat ditunjukkan dengan mudah bahwa
+dalam kedua kasus, nilai harapan utilitas pembayaran itu terhingga (lihat
+Latihan~\ref{exer 6.1.21}).
+\end{example}
+
+\begin{example}\label{exam 6.8} Misalkan $T$ adalah waktu sampai keberhasilan
+pertama dalam suatu proses percobaan Bernoulli. Kita ambil sebagai ruang sampel
+$\Omega$ bilangan bulat $1,~2,~\ldots\ $ dan menetapkan distribusi geometrik
+$$ m(j) = P(T = j) = q^{j - 1}p\ . $$ Dengan demikian,
+\begin{eqnarray*}  E(T) & = & 1 \cdot p + 2qp + 3q^2p +\cdots \\
+     & = & p(1 + 2q + 3q^2 +\cdots )\ .
+\end{eqnarray*} Sekarang, jika $|x| < 1$, maka
+$$ 1 + x + x^2 + x^3 + \cdots = \frac 1{1 - x}\ .$$ Dengan mendiferensialkan rumus
+ini, kita memperoleh
+$$ 1 + 2x + 3x^2 +\cdots = \frac 1{(1 - x)^2}\ ,$$ sehingga
+$$ E(T) = \frac p{(1 - q)^2} = \frac p{p^2} = \frac 1p\ .$$ Secara khusus, kita
+melihat bahwa jika sebuah koin adil dilempar berulang kali, nilai harapan waktu sampai
+kepala pertama adalah 1/(1/2) = 2. Jika sebuah dadu dilempar berulang kali, nilai
+harapan banyaknya lemparan sampai enam pertama adalah 1/(1/6) = 6.
+\end{example}
+
+\subsection*{Penafsiran Nilai Harapan}
+
+Dalam statistika, kita sering berkepentingan dengan nilai rata-rata suatu kumpulan
+data. Contoh berikut menunjukkan bahwa gagasan nilai rata-rata dan nilai harapan
+berkaitan sangat erat.
+
+\begin{example}\label{exam 6.8.5} Tinggi badan, dalam inci, para pemain perempuan
+dalam tim bola basket Swarthmore adalah 5' 9", 5' 9", 5' 6", 5' 8", 5' 11",
+5' 5", 5' 7", 5' 6", 5' 6", 5' 7", 5' 10", dan 6' 0".
+\par Seorang statistikawan akan menghitung rata-rata tinggi badan (dalam inci) sebagai
+berikut:
+$$\frac{69 + 69 + 66 + 68 + 71 + 65 + 67 + 66 + 66 + 67 + 70 + 72}{12} = 67.9\ .$$
+Bilangan ini juga dapat ditafsirkan sebagai nilai harapan suatu peubah acak. Untuk
+melihatnya, misalkan suatu percobaan terdiri atas pemilihan salah seorang pemain itu
+secara acak, dan misalkan $X$ menyatakan tinggi badannya. Maka nilai harapan $X$ sama
+dengan 67.9.
+\end{example}
+
+\par Tentu saja, sebagaimana pada penafsiran frekuensi atas peluang, penafsiran nilai
+harapan sebagai hasil rata-rata memerlukan pembenaran lebih lanjut. Kita tahu bahwa
+untuk setiap percobaan terhingga, rata-rata hasilnya tidak dapat diramalkan. Namun,
+kelak kita akan membuktikan bahwa rata-rata itu biasanya dekat dengan $E(X)$ jika
+percobaan diulang sangat banyak kali. Mula-mula kita perlu mengembangkan beberapa
+sifat nilai harapan. Dengan menggunakan sifat-sifat ini, beserta sifat konsep varians
+yang akan diperkenalkan pada bagian berikutnya, kita akan dapat membuktikan
+\emx {Hukum Bilangan Besar.} Teorema ini akan membenarkan secara matematis baik konsep
+frekuensi peluang kita maupun penafsiran nilai harapan sebagai nilai rata-rata yang
+diharapkan dalam sejumlah besar percobaan.
+
+
+\subsection*{Nilai Harapan Fungsi Peubah Acak}
+
+Misalkan $X$ adalah peubah acak diskret dengan ruang sampel $\Omega$, dan $\phi(x)$
+adalah fungsi bernilai real dengan domain $\Omega$. Maka $\phi(X)$ adalah peubah acak
+bernilai real. Salah satu cara menentukan nilai harapan $\phi(X)$ adalah terlebih
+dahulu menentukan fungsi distribusi peubah acak ini, lalu menggunakan definisi nilai
+harapan. Namun, terdapat cara yang lebih baik untuk menghitung nilai harapan
+$\phi(X)$, sebagaimana ditunjukkan dalam contoh berikut.
+
+\begin{example}\label{exam 6.1.5} Misalkan sebuah koin dilempar 9 kali, dengan hasil
+\[ HHHTTTTHT\ . \]    
+\noindent Kelompok pertama yang terdiri atas tiga kepala disebut suatu
+\emx {rentetan}\index{rentetan}. Dalam barisan ini terdapat tiga rentetan lagi, yaitu
+empat ekor berikutnya, kepala berikutnya, dan ekor berikutnya. Kita tidak menganggap
+dua lemparan pertama saja membentuk suatu rentetan, karena lemparan ketiga mempunyai
+nilai yang sama dengan kedua lemparan pertama.
+\par Sekarang misalkan suatu percobaan terdiri atas pelemparan sebuah koin adil tiga
+kali. Carilah nilai harapan banyaknya rentetan. Akan berguna jika kita memikirkan dua
+peubah acak, $X$ dan $Y$, yang berkaitan dengan percobaan ini. Misalkan $X$ menyatakan
+barisan kepala dan ekor yang dihasilkan ketika percobaan dilakukan, dan $Y$ menyatakan
+banyaknya rentetan dalam hasil $X$. Hasil-hasil $X$ yang mungkin dan nilai-nilai $Y$
+yang bersesuaian ditampilkan dalam Tabel~\ref{table 6.2}.
+\begin{table}
+\centering
+$$\begin{tabular}{cc} X    &  Y \\ \hline HHH  & 1\\ HHT  & 2\\ HTH  & 3\\ HTT  & 2\\
+THH  & 2\\ THT  & 3\\ TTH  & 2\\ TTT  & 1\\
+\end{tabular}
+$$
+\caption{Melempar sebuah koin tiga kali.}
+\label{table 6.2}
+\end{table}
+
+Untuk menghitung $E(Y)$ dengan definisi nilai harapan, mula-mula kita harus mencari
+fungsi distribusi $m(y)$ dari $Y$; artinya, kita mengelompokkan nilai-nilai $X$ yang
+mempunyai nilai $Y$ yang sama, lalu menjumlahkan peluangnya. Dalam kasus ini, kita
+menghitung bahwa fungsi distribusi $Y$ adalah: $m(1) = 1/4,\ m(2) = 1/2,$ dan
+$m(3) = 1/4$. Dengan mudah diperoleh $E(Y) = 2$.
+\par Sekarang misalkan kita tidak mengelompokkan nilai-nilai $X$ yang mempunyai nilai
+$Y$ yang sama. Sebaliknya, untuk setiap nilai $X$, yaitu $x$, kita mengalikan peluang
+$x$ dengan nilai $Y$ yang bersesuaian, lalu menjumlahkan hasilnya. Kita memperoleh
+$$1\biggl(\frac 18\biggr) +2\biggl(\frac 18\biggr) +3\biggl(\frac 18\biggr)
++2\biggl(\frac 18\biggr) +2\biggl(\frac 18\biggr) +3\biggl(\frac 18\biggr)
++2\biggl(\frac 18\biggr) +1\biggl(\frac 18\biggr)\ ,$$ yang sama dengan 2.
+\par Hal ini menggambarkan asas umum berikut. Jika $X$ dan $Y$ adalah dua peubah acak,
+dan $Y$ dapat ditulis sebagai fungsi $X$, maka nilai harapan $Y$ dapat dihitung dengan
+menggunakan fungsi distribusi $X$.
+\end{example}
+
+\begin{theorem}\label{thm 6.3.5} Jika $X$ adalah peubah acak diskret dengan ruang
+sampel $\Omega$ dan fungsi distribusi $m(x)$, dan jika
+%$\phi : \Omega \to {\bf\rm R}$ is a function, then 
+$\phi : \Omega \to$ \mat{\rm R} adalah suatu fungsi, maka
+$$ E(\phi(X)) = \sum_{x \in \Omega} \phi(x) m(x)\ ,
+$$ asalkan deret tersebut konvergen mutlak.
+\end{theorem}
+ 
+Bukti teorema ini langsung, tidak lebih dari mengelompokkan nilai-nilai $X$ yang
+mempunyai nilai $Y$ yang sama, seperti dalam Contoh~\ref{exam 6.1.5}.
+
+\subsection*{Jumlah Dua Peubah Acak}
+
+Banyak hasil penting dalam teori peluang berkaitan dengan jumlah peubah acak. Mula-mula
+kita tinjau apa artinya menjumlahkan dua peubah acak.
+
+\begin{example}\label{exam 6.06} Kita melempar sebuah koin dan menetapkan $X$ bernilai
+1 jika koin menghasilkan kepala dan 0 jika koin menghasilkan ekor. Kemudian kita
+melempar sebuah dadu dan misalkan $Y$ menyatakan sisi yang muncul. Apa arti $X+Y$,
+dan bagaimana distribusinya? Dalam kasus ini pertanyaan tersebut mudah dijawab dengan
+meninjau, seperti yang kita lakukan dalam Bab~\ref{chp 4}, peubah acak gabungan
+$Z = (X,Y)$, yang hasil-hasilnya berupa pasangan terurut $(x, y)$, dengan
+$0 \le x \le 1$ dan $1 \le y \le 6$. Deskripsi percobaan itu membuat kita wajar
+menganggap bahwa $X$ dan $Y$ saling bebas, sehingga fungsi distribusi $Z$ seragam,
+dengan $1/12$ ditetapkan bagi setiap hasil. Sekarang himpunan hasil $X+Y$ beserta
+fungsi distribusinya mudah ditemukan.
+\end{example}
+
+Dalam Contoh~\ref{exam 6.03}, peubah acak $X$ menyatakan banyaknya kepala yang muncul
+ketika sebuah koin adil dilempar tiga kali. Wajar untuk memandang $X$ sebagai jumlah
+peubah-peubah acak $X_1, X_2, X_3$, dengan $X_i$ didefinisikan bernilai 1 jika
+lemparan ke-$i$ menghasilkan kepala, dan 0 jika lemparan ke-$i$ menghasilkan ekor.
+Nilai harapan setiap $X_i$ sangat mudah dihitung. Ternyata nilai harapan $X$ dapat
+diperoleh hanya dengan menjumlahkan nilai harapan setiap $X_i$. Fakta ini dinyatakan
+dalam teorema berikut.
+
+\begin{theorem}\label{thm 6.1} Misalkan $X$ dan $Y$ adalah peubah acak dengan nilai
+harapan terhingga. Maka
+$$ E(X + Y) = E(X) + E(Y)\ ,
+$$ dan jika $c$ adalah sebarang konstanta, maka
+$$ E(cX) = cE(X)\ .
+$$
+\proof Misalkan ruang sampel $X$ dan $Y$ masing-masing dilambangkan dengan $\Omega_X$
+dan $\Omega_Y$, serta misalkan
+$$\Omega_X = \{x_1, x_2, \ldots\}$$ dan
+$$\Omega_Y = \{y_1, y_2, \ldots\}\ .$$ Maka peubah acak $X + Y$ dapat kita pandang
+sebagai hasil penerapan fungsi $\phi(x, y) = x + y$ pada peubah acak gabungan
+$(X,Y)$. Dengan Teorema~\ref{thm 6.3.5}, kita memperoleh
+\begin{eqnarray*} E(X+Y) & = &\sum_j \sum_k (x_j + y_k) P(X = x_j,\ Y = y_k) \\
+       & = &\sum_j \sum_k x_j P(X = x_j,\ Y = y_k) +
+\sum_j \sum_k y_k P(X = x_j,\ Y = y_k) \\ & = &\sum_j x_j P(X = x_j) + \sum_k y_k P(Y
+= y_k)\ .
+\end{eqnarray*} Kesamaan terakhir mengikuti fakta bahwa
+$$\sum_k P(X = x_j,\ Y = y_k)\ \  =\ \  P(X = x_j)$$ dan
+$$\sum_j P(X = x_j,\ Y = y_k)\ \  =\ \  P(Y = y_k)\ .$$ Dengan demikian,
+$$E(X+Y) = E(X) + E(Y)\ .$$ Jika $c$ adalah sebarang konstanta,
+\begin{eqnarray*}  E(cX) & = & \sum_j cx_j P(X = x_j) \\
+      & = & c\sum_j x_j P(X = x_j)\\
+      & = & cE(X)\ .
+\end{eqnarray*}
+\end{theorem}
+Dapat dibuktikan dengan mudah melalui induksi matematika bahwa \emx {nilai harapan
+jumlah sebarang banyak terhingga peubah acak sama dengan jumlah nilai harapan setiap
+peubah acak tersebut.}
+\par Penting diperhatikan bahwa kebebasan bersama suku-suku penjumlah tidak diperlukan
+sebagai hipotesis dalam Teorema~\ref{thm 6.1} maupun generalisasinya. Fakta bahwa nilai
+harapan dapat dijumlahkan, terlepas dari apakah suku-suku penjumlah saling bebas,
+kadang-kadang disebut Misteri Fundamental Pertama Peluang.\index{Misteri Fundamental
+Pertama Peluang}
+
+\begin{example}\label{exam 6.1} Misalkan $Y$ adalah banyaknya titik tetap dalam suatu
+permutasi acak himpunan $\{a,b,c\}$. Untuk mencari nilai harapan $Y$, akan berguna
+jika kita meninjau peubah acak dasar yang berkaitan dengan percobaan ini, yaitu peubah
+acak $X$ yang menyatakan permutasi acak tersebut. Ada enam hasil $X$ yang mungkin,
+dan masing-masing kita beri peluang $1/6$ (lihat Tabel~\ref{table 6.3}). Kemudian kita
+dapat menghitung $E(Y)$ dengan Teorema~\ref{thm 6.3.5}, sebagai
+$$3\Bigl({1\over 6}\Bigr) + 1\Bigl({1\over 6}\Bigr) + 1\Bigl({1\over 6}\Bigr) +
+0\Bigl({1\over 6}\Bigr) +  0\Bigl({1\over 6}\Bigr) + 1\Bigl({1\over 6}\Bigr) = 1\ .
+$$
+\begin{table}
+\centering
+\begin{tabular}{ccc} &                          & \\ 
+\hline &$X$                 & $Y$ \\
+\hline  &$a\;\;\;b\;\;\;   c$       & 3 \\  &$a\;\;\; c\;\;\;  b$       & 1 \\ 
+&$b\;\;\; a\;\;\;  c$       & 1 \\  &$b\;\;\; c\;\;\;  a$       & 0 \\  &$c\;\;\;
+a\;\;\;  b$       & 0 \\  &$c\;\;\; b\;\;\;  a$       & 1 \\ 
+\hline
+\end{tabular}
+\caption{Banyaknya titik tetap.}
+\label{table 6.3}
+\end{table}
+
+\par Sekarang kita berikan cara yang sangat cepat untuk menghitung rata-rata banyaknya
+titik tetap dalam suatu permutasi acak himpunan $\{1, 2, 3, \ldots, n\}$. Misalkan
+$Z$ menyatakan permutasi acak tersebut. Untuk setiap $i$, $1 \le i \le n$, misalkan
+$X_i$ sama dengan 1 jika $Z$ menetapkan $i$, dan 0 jika tidak. Jadi, jika $F$
+menyatakan banyaknya titik tetap dalam $Z$, maka
+$$F = X_1 + X_2 + \cdots + X_n\ .$$ Karena itu, Teorema~\ref{thm 6.1} menyiratkan
+$$E(F) = E(X_1) + E(X_2) + \cdots + E(X_n)\ .$$ Namun, mudah dilihat bahwa untuk
+setiap $i$,
+$$E(X_i) = {1\over n}\ ,$$ sehingga
+$$E(F) = 1\ .$$ Metode penghitungan nilai harapan ini sering sangat berguna. Metode
+tersebut berlaku setiap kali peubah acak yang ditinjau dapat ditulis sebagai jumlah
+peubah-peubah acak yang lebih sederhana. Sekali lagi kita tekankan bahwa suku-suku
+penjumlah itu tidak harus saling bebas.
+\end{example}
+
+\subsection*{Percobaan Bernoulli}
+
+\begin{theorem}\label{thm 6.3} Misalkan $S_n$ adalah banyaknya keberhasilan dalam
+$n$ percobaan Bernoulli dengan peluang keberhasilan $p$ pada setiap percobaan. Maka
+nilai harapan banyaknya keberhasilan adalah $np$. Artinya,
+$$ E(S_n) = np\ .
+$$
+\proof Misalkan $X_j$ adalah peubah acak yang bernilai~1 jika hasil ke-$j$ merupakan
+keberhasilan dan~0 jika merupakan kegagalan. Maka, untuk setiap $X_j$,
+$$ E(X_j) = 0\cdot(1 - p) + 1\cdot p = p\ .
+$$ Karena
+$$ S_n = X_1 + X_2 +\cdots+ X_n\ ,
+$$ dan nilai harapan suatu jumlah sama dengan jumlah nilai-nilai harapannya, kita
+memperoleh
+\begin{eqnarray*} E(S_n) & = & E(X_1) + E(X_2) +\cdots+ E(X_n) \\
+       & = & np\ .
+\end{eqnarray*}
+\end{theorem}
+
+\subsection*{Distribusi Poisson}
+
+Ingat bahwa distribusi Poisson dengan parameter $\lambda$ diperoleh sebagai limit
+distribusi binomial dengan parameter $n$ dan $p$, dengan asumsi $np = \lambda$ dan
+$n \rightarrow \infty$. Karena untuk setiap $n$ distribusi binomial yang bersesuaian
+mempunyai nilai harapan $\lambda$, wajar untuk menduga bahwa distribusi Poisson dengan
+parameter $\lambda$ juga mempunyai nilai harapan $\lambda$. Memang demikian halnya,
+dan pembaca dipersilakan menunjukkannya (lihat Latihan~\ref{exer 6.1.100}).
+
+\subsection*{Kebebasan}
+
+Jika $X$ dan $Y$ adalah dua peubah acak, secara umum tidak benar bahwa $E(X
+\cdot Y) = E(X)E(Y)$. Namun, hal ini benar jika $X$ dan $Y$ \emx {saling bebas.}
+
+\begin{theorem}\label{thm 6.4} Jika $X$ dan $Y$ adalah peubah acak yang saling bebas,
+maka
+$$ E(X \cdot Y) = E(X)E(Y)\ .
+$$
+\proof Misalkan
+$$\Omega_X = \{x_1, x_2, \ldots\}$$ dan
+$$\Omega_Y = \{y_1, y_2, \ldots\}$$ masing-masing adalah ruang sampel $X$ dan $Y$.
+Dengan menggunakan Teorema~\ref{thm 6.3.5}, kita memperoleh
+$$ E(X \cdot Y) = \sum_j \sum_k x_jy_k P(X = x_j,\ Y = y_k)\ .
+$$
+
+Namun, jika $X$ dan $Y$ saling bebas,
+$$ P(X = x_j, Y = y_k) = P(X = x_j)P(Y = y_k)\ .
+$$ Dengan demikian,
+\begin{eqnarray*} E(X \cdot Y) & = & \sum_j\sum_k x_j y_k P(X = x_j) P(Y = y_k) \\
+             & = & \left(\sum_j x_j P(X = x_j)\right) \left(\sum_k y_k P(Y =
+y_k)\right) \\
+             & = &E(X) E(Y)\ .
+\end{eqnarray*}
+\end{theorem}
+
+\begin{example}\label{exam 6.3} Sebuah koin dilempar dua kali. $X_i = 1$ jika
+lemparan ke-$i$ menghasilkan kepala dan~0 jika tidak. Kita tahu bahwa $X_1$ dan $X_2$
+saling bebas. Masing-masing mempunyai nilai harapan 1/2. Jadi,
+$E(X_1 \cdot X_2) = E(X_1) E(X_2) = (1/2)(1/2) = 1/4$.
+\end{example}
+
+Berikutnya kita berikan contoh sederhana untuk menunjukkan bahwa nilai harapan tidak
+harus dapat dikalikan jika peubah-peubah acaknya tidak saling bebas.
+
+\begin{example}\label{exam 6.4} Tinjaulah satu kali pelemparan koin. Kita definisikan
+peubah acak $X$ bernilai~1 jika muncul kepala dan~0 jika muncul ekor, serta kita
+tetapkan $Y = 1 - X$. Maka $E(X) = E(Y) = 1/2$. Namun, $X \cdot Y = 0$ untuk kedua
+hasil. Karena itu, $E(X \cdot Y) = 0 \ne E(X) E(Y)$.
+\end{example}
+
+Kita kembali ke contoh rekor dalam Bagian~\ref{sec 3.1} untuk penerapan lain dari
+hasil bahwa nilai harapan jumlah peubah acak sama dengan jumlah nilai harapan setiap
+peubah acak tersebut.
+
+\subsection*{Rekor}\index{rekor}
+
+\begin{example}\label{exam 6.5} Kita mulai mencatat rekor curah salju tahun ini dan
+ingin mencari nilai harapan banyaknya rekor yang akan terjadi dalam $n$ tahun
+berikutnya. Tahun pertama pasti merupakan rekor. Tahun kedua akan menjadi rekor jika
+curah salju pada tahun kedua lebih besar daripada pada tahun pertama. Berdasarkan
+simetri, peluang ini adalah 1/2. Secara lebih umum, misalkan $X_j$ bernilai~1 jika
+tahun ke-$j$ merupakan rekor dan~0 jika tidak. Untuk mencari $E(X_j)$, kita hanya
+perlu mencari peluang bahwa tahun ke-$j$ merupakan rekor. Namun, rekor curah salju
+selama $j$ tahun pertama mempunyai kemungkinan yang sama untuk jatuh pada salah satu
+dari tahun-tahun tersebut, sehingga $E(X_j) = 1/j$. Oleh karena itu, jika $S_n$
+adalah jumlah seluruh rekor yang diamati selama $n$ tahun pertama,
+$$ E(S_n) = 1 + \frac 12 + \frac 13 +\cdots+ \frac 1n\ .
+$$ Ini adalah \emx {deret harmonik divergen} yang terkenal. Mudah ditunjukkan bahwa
+$$ E(S_n) \sim \log n
+$$ ketika $n \rightarrow \infty$. Hampiran yang lebih akurat bagi $E(S_n)$ diberikan
+oleh bentuk
+$$\log n + \gamma + {1\over {2n}}\ ,$$
+dengan $\gamma$ menyatakan konstanta Euler, yang kira-kira sama dengan .5772.
+
+Jadi, dalam sepuluh tahun nilai harapan banyaknya rekor kira-kira $2.9298$; nilai
+eksaknya adalah jumlah sepuluh suku pertama deret harmonik, yaitu 2.9290.
+\end{example}
+
+\subsection*{Craps}\index{craps}
+
+\begin{example}\label{exam 6.6} Dalam permainan craps, pemain memasang taruhan dan
+melempar sepasang dadu. Jika jumlah kedua angka adalah 7~atau~11, pemain menang; jika
+jumlahnya 2,~3, atau~12, pemain kalah. Jika diperoleh bilangan lain, misalnya $r$,
+maka $r$ menjadi poin pemain dan ia terus melempar hingga muncul $r$ atau 7. Jika $r$
+muncul lebih dahulu, ia menang; jika 7 muncul lebih dahulu, ia kalah. Program
+{\bf Craps}\index{Craps (program)} menyimulasikan permainan ini beberapa kali.
+\par Kita telah menjalankan program untuk 1000 permainan, dengan pemain memasang
+taruhan 1~dolar setiap kali. Rata-rata kemenangan pemain adalah $-.006$. Tampaknya
+permainan craps hanya sedikit merugikan. Mari kita hitung nilai harapan kemenangan
+dalam satu permainan untuk memeriksa apakah memang demikian. Kita menyusun ukuran
+pohon dua tahap seperti ditunjukkan dalam Gambar~\ref{fig 6.1}.
+
+\putfig{4.5truein}{PSfig6-1}{Ukuran pohon untuk craps.}{fig 6.1}
+
+Tahap pertama menyatakan jumlah-jumlah yang mungkin pada lemparan pertamanya. Tahap
+kedua menyatakan hasil-hasil permainan yang mungkin jika permainan belum berakhir
+pada lemparan pertama. Pada tahap ini kita menyatakan hasil-hasil yang mungkin dari
+suatu barisan lemparan yang diperlukan untuk menentukan hasil akhir. Peluang cabang
+untuk tahap pertama dihitung dengan cara biasa, dengan menganggap semua 36 hasil yang
+mungkin bagi pasangan dadu mempunyai peluang yang sama. Untuk tahap kedua, kita
+menganggap permainan pada akhirnya akan berakhir, lalu menghitung peluang bersyarat
+untuk memperoleh poin atau~7. Sebagai contoh, anggaplah poin pemain adalah~6. Maka
+permainan akan berakhir ketika salah satu dari sebelas pasangan, $(1,5)$, $(2,4)$,
+$(3,3)$, $(4,2)$, $(5,1)$,
+$(1,6)$, $(2,5)$,
+$(3,4)$, $(4,3)$, $(5,2)$, $(6,1)$, muncul. Kita menganggap setiap pasangan yang
+mungkin ini mempunyai peluang yang sama. Pemain menang dalam lima kasus pertama dan
+kalah dalam enam kasus terakhir. Jadi, peluang menang adalah 5/11 dan peluang kalah
+adalah 6/11. Dari peluang lintasan, kita dapat mencari peluang bahwa pemain menang
+1~dolar, yaitu 244/495. Peluang kalah kemudian 251/495. Jadi, jika $X$ adalah
+kemenangannya untuk taruhan satu dolar,
+\begin{eqnarray*} E(X) & = & 1\Bigl(\frac {244}{495}\Bigr) + (-1)\Bigl(\frac
+{251}{495}\Bigr) \\
+     & = & -\frac {7}{495} \approx -.0141\ .
+\end{eqnarray*} Permainan tersebut merugikan, tetapi hanya sedikit. Nilai harapan
+keuntungan pemain dalam $n$ permainan adalah $-n(.0141)$. Jika $n$ tidak besar, ini
+merupakan nilai harapan kerugian yang kecil bagi pemain. Kasino menjalankan sangat
+banyak permainan, sehingga mampu memperoleh rata-rata keuntungan kecil per permainan
+namun tetap mengharapkan laba besar.
+\end{example}
+
+\subsection*{Roulette}\index{roulette}
+
+\begin{example}\label{exam 6.7} Di Las Vegas, sebuah roda roulette mempunyai 38 petak
+bernomor 0,\ 00,\ 1,\ 2,\ \ldots,\ 36. Petak 0 dan 00 berwarna hijau, sedangkan
+separuh dari 36 petak sisanya berwarna merah dan separuh lainnya hitam. Seorang bandar
+memutar roda dan melemparkan bola gading. Jika Anda bertaruh 1 dolar pada merah, Anda
+menang 1 dolar jika bola berhenti pada petak merah; jika tidak, Anda kehilangan satu
+dolar. Kita ingin menghitung nilai harapan kemenangan Anda jika Anda bertaruh 1 dolar
+pada merah.
+\par
+Misalkan $X$ adalah peubah acak yang menyatakan kemenangan Anda dalam taruhan 1 dolar
+pada merah dalam roulette Las Vegas. Distribusi $X$ diberikan oleh
+$$ m_{X} = \pmatrix{
+   -1 & 1 \cr 20/38 & 18/38 \cr},
+$$ dan dapat dihitung dengan mudah (lihat Latihan~\ref{exer 6.1.5}) bahwa
+$$ 
+E(X) \approx -.0526\ .
+$$
+\par
+Sekarang kita tinjau permainan roulette di Monte Carlo, dengan mengikuti pembahasan
+Sagan.\footnote{H. Sagan, \emx {Markov Chains in Monte Carlo,} Math. Mag., vol. 54, no. 1 (1981),
+pp. 3-10.}\index{SAGAN, H.} Dalam permainan roulette di Monte Carlo hanya terdapat
+satu~0. Jika Anda bertaruh 1 franc pada merah dan muncul~0, maka, bergantung pada
+kasinonya, satu atau lebih pilihan berikut dapat ditawarkan:
+\par
+\noindent
+(a) Anda menerima kembali 1/2 taruhan Anda, dan kasino mengambil separuh lainnya.
+\par
+\noindent
+(b) Taruhan Anda ``dipenjara," yang akan kita lambangkan dengan $P_1$. Jika merah
+muncul pada putaran berikutnya, Anda menerima kembali taruhan Anda (tetapi tidak
+memenangkan uang). Jika hitam atau 0 muncul, Anda kehilangan taruhan Anda.
+\par
+\noindent
+(c) Taruhan Anda dipenjara dalam $P_1$, seperti sebelumnya. Jika merah muncul pada
+putaran berikutnya, taruhan Anda dikembalikan; jika hitam muncul pada putaran
+berikutnya, Anda kehilangan taruhan. Jika 0 muncul pada putaran berikutnya, taruhan
+Anda dimasukkan ke penjara ganda, yang akan kita lambangkan dengan $P_2$. Jika taruhan
+Anda berada dalam penjara ganda dan merah muncul pada putaran berikutnya, taruhan itu
+dipindahkan kembali ke penjara $P_1$ dan permainan berlanjut seperti sebelumnya. Jika
+taruhan Anda berada dalam penjara ganda dan hitam atau 0 muncul pada putaran
+berikutnya, Anda kehilangan taruhan. Lihat Gambar~\ref{fig 6.1.5}, yang menampilkan
+pohon untuk pilihan ini. Dalam gambar tersebut, $S$ adalah posisi awal, $W$ berarti
+Anda memenangkan taruhan, $L$ berarti Anda kehilangan taruhan, dan $E$ berarti Anda
+impas.
+\putfig{4.5truein}{PSfig6-1-5}{Pohon untuk roulette Monte Carlo dengan 2 penjara.}{fig 6.1.5}
+\par
+Menarik untuk membandingkan nilai harapan kemenangan dari taruhan 1 franc pada merah
+di bawah masing-masing dari ketiga pilihan ini. Dua perhitungan pertama kita serahkan
+sebagai latihan (lihat Latihan~\ref{exer 6.1.38}). Misalkan Anda memilih alternatif
+(c). Perhitungan untuk kasus ini menggambarkan cara para ahli peluang Prancis pada masa
+awal mengerjakan masalah seperti ini.
+\par
+Misalkan Anda bertaruh pada merah, memilih alternatif (c), dan muncul~0. Hasil-hasil
+mendatang yang mungkin ditampilkan dalam diagram pohon pada Gambar~\ref{fig 6.2}.
+Anggaplah uang Anda berada di penjara pertama, dan misalkan $x$ adalah peluang Anda
+kehilangan franc tersebut. Dari diagram pohon kita melihat bahwa
+$$
+x = \frac {18}{37} + \frac 1{37}P({\rm Anda\ kehilangan\ franc\ Anda\ }|\ {\rm franc\ Anda\ berada
+\ di\ }P_2)\ .
+$$
+Selain itu,
+$$
+P({\rm Anda\ kehilangan\ franc\ Anda\ }|\ {\rm franc\ Anda\ berada
+\ di\ }P_2) =  \frac {19}{37} + \frac{18}{37}x\ .
+$$
+Jadi, kita mempunyai
+$$x = \frac{18}{37} + \frac 1{37}\Bigl(\frac {19}{37} + \frac{18}{37}x\Bigr)\ .$$
+Dengan menyelesaikan persamaan bagi $x$, kita memperoleh $x = 685/1351$. Jadi, jika
+dimulai dari $S$, peluang bahwa Anda kehilangan taruhan sama dengan
+$$\frac {18}{37} + \frac 1{37}x = \frac{25003}{49987}\ .$$
+\par
+Untuk mencari peluang bahwa Anda menang ketika bertaruh pada merah, perhatikan bahwa
+Anda hanya dapat menang jika merah muncul pada putaran pertama, dan hal ini terjadi
+dengan peluang 18/37. Dengan demikian, nilai harapan kemenangan Anda adalah
+$$ 1 \cdot {\frac{18}{37}} -1 \cdot {\frac {25003}{49987}} = -\frac{687}{49987} 
+\approx -.0137\ .$$
+
+\putfig{4.5truein}{PSfig6-2}{Uang Anda dimasukkan ke penjara.}  {fig 6.2}
+
+Menarik untuk diperhatikan bahwa pilihan (c) yang lebih romantis ternyata kurang
+menguntungkan daripada pilihan (a) (lihat Latihan~\ref{exer 6.1.38}).
+\par
+Jika Anda bertaruh 1~dolar pada bilangan 17, fungsi distribusi kemenangan Anda $X$
+adalah
+$$ P_X = \pmatrix{
+   -1 & 35 \cr 36/37 & 1/37 \cr}\ ,
+$$ 
+dan nilai harapan kemenangannya adalah
+$$ -1 \cdot {\frac{36}{37}} + 35 \cdot {\frac 1{37}} = -\frac 1{37} \approx -.027\ .
+$$ 
+Jadi, di Monte Carlo taruhan yang berbeda mempunyai nilai harapan yang berbeda. Di
+Las Vegas, hampir semua taruhan mempunyai nilai harapan yang sama, yaitu
+$-2/38 = -.0526$ (lihat Latihan~\ref{exer 6.1.4} dan \ref{exer 6.1.5}).
+\end{example}
+
+\subsection*{Nilai Harapan Bersyarat}
+
+\begin{definition}\label{def 6.3} Jika $F$ adalah sebarang kejadian dan $X$ adalah
+peubah acak dengan ruang sampel $\Omega = \{x_1, x_2, \ldots\}$, maka
+\emx {nilai harapan bersyarat\index{nilai harapan bersyarat} dengan syarat $F$}
+didefinisikan oleh
+$$ E(X|F) = \sum_j x_j P(X = x_j|F)\ .
+$$ Nilai harapan bersyarat paling sering digunakan dalam bentuk yang diberikan oleh
+teorema berikut.
+\end{definition}
+
+\begin{theorem}\label{thm 6.5} Misalkan $X$ adalah peubah acak dengan ruang sampel
+$\Omega$. Jika $F_1$,~$F_2$, \dots,~$F_r$ adalah kejadian-kejadian sedemikian sehingga
+$F_i \cap F_j = \emptyset$ untuk $i \ne j$ dan $\Omega = \cup_j F_j$, maka
+$$ E(X) = \sum_j E(X|F_j) P(F_j)\ .
+$$
+\proof Kita mempunyai
+\begin{eqnarray*}
+\sum_j E(X|F_j) P(F_j) & = & \sum_j \sum_k x_k P(X = x_k|F_j) P(F_j) \\
+                       & = & \sum_j \sum_k x_k P(X = x_k\,\, {\rm dan}\,\, 
+F_j\,\,{\rm terjadi}) \\
+                       & = & \sum_k \sum_j x_k P(X = x_k\,\,{\rm dan}\,\,F_j\,\,{\rm
+terjadi})
+\\
+                       & = & \sum_k x_k P(X = x_k) \\
+                       & = & E(X)\ .
+\end{eqnarray*}
+\end{theorem}
+
+\begin{example}(Lanjutan Contoh~\ref{exam 6.6}){\label{exam 6.10}}\index{craps}
+Misalkan $T$ adalah banyaknya lemparan dalam satu permainan craps. Kita dapat memandang
+satu permainan sebagai proses dua tahap. Tahap pertama terdiri atas satu lemparan
+sepasang dadu. Permainan berakhir jika lemparan ini menghasilkan 2, 3, 7, 11, atau 12.
+Jika tidak, poin pemain ditetapkan dan tahap kedua dimulai. Tahap kedua ini terdiri atas
+barisan lemparan yang berakhir ketika poin pemain atau 7 muncul. Kita mencatat hasil
+percobaan dua tahap ini dengan menggunakan peubah acak $X$ dan $S$, dengan $X$
+menyatakan lemparan pertama dan $S$ menyatakan banyaknya lemparan pada tahap kedua
+percobaan (tentu saja, kadang-kadang $S$ sama dengan 0). Perhatikan bahwa $T = S+1$.
+Kemudian, berdasarkan Teorema~\ref{thm 6.5},
+$$ E(T) = \sum_{j = 2}^{12} E(T|X = j) P(X = j)\ .
+$$ Jika $j = 7$,~11 atau~2, 3,~12, maka $E(T|X = j) = 1$. Jika $j = 4, 5, 6, 8,
+9,$ atau $10$, kita dapat menggunakan Contoh~\ref{exam 6.8} untuk menghitung nilai
+harapan $S$. Dalam setiap kasus ini, kita terus melempar hingga memperoleh $j$ atau 7.
+Jadi, $S$ berdistribusi geometrik dengan parameter $p$, yang bergantung pada $j$.
+Sebagai contoh, jika $j = 4$, nilai $p$ adalah $3/36 + 6/36 = 1/4$. Maka, dalam
+kasus ini, nilai harapan banyaknya lemparan tambahan adalah $1/p = 4$, sehingga
+$E(T|X = 4) = 1 + 4 = 5$. Dengan melakukan perhitungan yang bersesuaian bagi nilai
+$j$ lain yang mungkin dan menggunakan Teorema~\ref{thm 6.5}, diperoleh
+\begin{eqnarray*} E(T) & = & 1\Bigl(\frac {12}{36}\Bigr)   
+    + \Bigl(1 + \frac {36}{3 + 6}\Bigr)\Bigl(\frac 3{36}\Bigr)   
+    + \Bigl(1 + \frac {36}{4 + 6}\Bigr)\Bigl(\frac 4{36}\Bigr) \\
+& & + \Bigl(1 + \frac {36}{5 + 6}\Bigr)\Bigl(\frac 5{36}\Bigr)  
+    + \Bigl(1 + \frac {36}{5 + 6}\Bigr)\Bigl(\frac 5{36}\Bigr) \\
+& & + \Bigl(1 + \frac {36}{4 + 6}\Bigr)\Bigl(\frac 4{36}\Bigr) 
+    + \Bigl(1 + \frac {36}{3 + 6}\Bigr)\Bigl(\frac 3{36}\Bigr) \\ 
+& = & \frac {557}{165} \\
+& \approx & 3.375\dots\ .
+\end{eqnarray*}
+\end{example}
+
+\subsection*{Martingal}
+
+Kita dapat memperluas gagasan keadilan bagi seorang pemain yang memainkan serangkaian
+permainan dengan menggunakan konsep nilai harapan bersyarat.
+
+\begin{example}\label{exam 6.11} Misalkan $S_1$,~$S_2$, \dots,~$S_n$ adalah kekayaan
+Peter yang terkumpul selama memainkan kepala atau ekor (lihat
+Contoh~\ref{exam 1.3}). Maka
+$$ E(S_n | S_{n - 1} = a,\dots,S_1 = r) = \frac 12 (a + 1) + \frac 12 (a - 1) = a\ .
+$$
+
+Kita perhatikan bahwa nilai harapan kekayaan Peter setelah permainan berikutnya sama
+dengan kekayaannya saat ini. Jika hal ini terjadi, kita katakan bahwa permainannya
+\emx {adil.}\index{permainan adil} Permainan adil juga disebut
+\emx {martingal.}\index{martingal} Jika koin tidak seimbang dan menghasilkan kepala
+dengan peluang $p$ serta ekor dengan peluang $q = 1 - p$, maka
+$$ E(S_n | S_{n - 1} = a,\dots,S_1 = r) = p (a + 1) + q (a - 1) = a + p - q\ .
+$$ Jadi, jika $p < q$, permainan ini merugikan, dan jika $p > q$, permainan ini
+menguntungkan.
+\end{example}
+
+Jika Anda berada di kasino, Anda akan melihat para pemain menerapkan \emx {sistem}
+permainan yang rumit\index{sistem perjudian} untuk mencoba mengubah permainan yang
+merugikan menjadi menguntungkan. Dua sistem semacam itu, sistem penggandaan martingal
+dan sistem Labouchere yang lebih konservatif, dijelaskan dalam
+Latihan~\ref{sec 1.1}.\ref{exer 1.1.9}~dan~\ref{sec 1.1}.\ref{exer 1.1.10}.
+Sayangnya, sistem semacam itu bahkan tidak dapat mengubah permainan adil menjadi
+permainan yang menguntungkan.
+
+Meskipun demikian, mengembangkan sistem permainan untuk perjudian dan permainan lain,
+seperti pasar saham, merupakan kegemaran banyak orang. Kita menutup bagian ini dengan
+ilustrasi sederhana mengenai sistem semacam itu.
+
+\subsection*{Harga Saham}\index{harga saham}
+
+\begin{example}\label{exam 6.12} Anggaplah nilai suatu saham naik atau turun 1~dolar
+setiap hari, masing-masing dengan peluang 1/2. Model yang disederhanakan ini dapat kita
+samakan dengan permainan kepala atau ekor yang sudah kita kenal. Kita menganggap
+seorang pembeli, Tn.\ Ace\index{Ace, Tn.}, menerapkan strategi berikut. Ia membeli
+saham pada hari pertama dengan harga $V$. Kemudian ia menunggu sampai harga saham naik
+satu menjadi $V + 1$, lalu menjualnya. Setelah itu ia terus mengamati saham hingga
+harganya turun kembali ke $V$. Ia membeli lagi, menunggu sampai harganya naik menjadi
+$V + 1$, lalu menjualnya. Jadi, ia memegang saham selama selang-selang ketika harganya
+naik 1~dolar. Dalam setiap selang semacam itu, ia memperoleh laba 1~dolar. Namun, kita
+menganggap ia hanya dapat melakukannya selama sejumlah terhingga hari perdagangan.
+Dengan demikian, ia dapat merugi jika, dalam selang terakhir ketika ia memegang saham,
+harganya tidak kembali naik ke $V + 1$; inilah satu-satunya cara ia dapat merugi.
+Dalam Gambar~\ref{fig 6.3}, kita menggambarkan riwayat khas jika Tn.\ Ace harus
+berhenti setelah dua puluh hari.
+\putfig{4truein}{PSfig6-3}{Sistem Tn.\ Ace.}{fig 6.3}
+Tn.\ Ace memegang saham berdasarkan sistemnya selama hari-hari yang ditunjukkan dengan
+garis putus-putus. Kita perhatikan bahwa untuk riwayat dalam Gambar~\ref{fig 6.3},
+sistemnya memberinya keuntungan bersih 4~dolar.
+\par
+Kita telah menulis program {\bf StockSystem}\index{StockSystem (program)} untuk
+menyimulasikan kekayaan Tn.\ Ace jika ia menggunakan sistemnya selama periode $n$
+hari. Jika program ini dijalankan sangat banyak kali, misalnya untuk $n = 20$, kita
+mendapati bahwa nilai harapan kemenangannya sangat dekat dengan 0, tetapi peluang ia
+berada di depan setelah 20 hari jauh lebih besar daripada 1/2. Untuk nilai $n$ yang
+kecil, distribusi tepat kemenangannya dapat dihitung. Distribusi untuk kasus $n = 20$
+ditampilkan dalam Gambar~\ref{fig 6.3.1}. Dengan menggunakan distribusi ini, mudah
+dihitung bahwa nilai harapan kemenangannya tepat 0. Ini merupakan contoh lain dari
+fakta bahwa permainan adil (suatu martingal\index{martingal}) tetap adil di bawah
+sistem permainan yang cukup umum.
+\putfig{4truein}{PSfig6-3-1}{Distribusi kemenangan untuk $n = 20$.}{fig 6.3.1}
+\par
+Walaupun nilai harapan kemenangannya adalah 0, peluang Tn.\ Ace berada di depan setelah
+20 hari sekitar .610. Jadi, jika model acak sederhana kita benar, ia dapat mengatakan
+kepada teman-temannya bahwa sistemnya memberinya peluang lebih besar untuk berada di
+depan daripada seseorang yang sekadar membeli saham lalu menyimpannya. Sejumlah
+penelitian telah dilakukan untuk menentukan seberapa acak pasar saham itu.
+\end{example}
+
+
+\subsection*{Catatan Sejarah}
+
+%**********Put an account of the St. Petersburg paradox in this section.
+Dengan Hukum Bilangan Besar yang memperkuat penafsiran frekuensi atas peluang, wajar
+bagi kita untuk membenarkan definisi nilai harapan berdasarkan hasil rata-rata dari
+sejumlah besar pengulangan percobaan. Konsep nilai harapan telah digunakan sebelum
+didefinisikan secara formal; ketika digunakan, konsep itu tidak dipandang sebagai
+nilai rata-rata, melainkan sebagai nilai yang sesuai bagi suatu pertaruhan. Sebagai
+contoh, ingatlah dari bagian Catatan Sejarah dalam Bab~\ref{chp 1},
+Bagian~\ref{sec 1.2}, cara Pascal mencari nilai suatu seri tiga permainan yang harus
+dihentikan sebelum selesai.
+\par
+Pascal\index{PASCAL, B.} mula-mula mengamati bahwa jika masing-masing pemain hanya
+perlu memenangkan satu permainan lagi, taruhan sebesar 64~pistole harus dibagi rata.
+Kemudian ia meninjau kasus ketika seorang pemain telah memenangkan dua permainan dan
+pemain lainnya satu.
+
+Jika pemain pertama menang pada permainan berikutnya, ia memperoleh 64~pistole; jika
+kalah, ia masih memperoleh 32. Karena 32~pistole pertama sudah pasti menjadi haknya dan
+sisa 32~pistole bergantung pada pertaruhan seimbang, bagian yang adil baginya ialah
+$32+16=48$~pistole, sedangkan pemain lain memperoleh 16.\footnote{Ringkasan berdasarkan
+F.~N. David, \emx {Games, Gods and Gambling} (London: Griffin, 1962), p.~231;
+ungkapan terjemahan modern tidak diterjemahkan atau direproduksi.}
+
+Perhatikan bahwa Pascal mereduksi masalah itu menjadi pertaruhan simetris, ketika
+masing-masing pemain memperoleh jumlah yang sama, dan menganggap jelas bahwa dalam
+kasus ini taruhan harus dibagi rata.
+
+Kajian sistematis pertama mengenai nilai harapan muncul dalam buku
+Huygens.\index{HUYGENS, C.|(} Seperti Pascal, Huygens mencari nilai suatu pertaruhan
+dengan menganggap bahwa jawabannya jelas untuk situasi simetris tertentu, lalu
+menggunakannya untuk menurunkan nilai harapan bagi situasi umum. Ia melakukannya
+secara bertahap. Proposisi pertamanya adalah
+
+\begin{quote} Prop.~I. Jika saya mengharapkan $a$ atau $b$, yang masing-masing dapat
+jatuh kepada saya dengan peluang yang sama, maka nilai Harapan saya adalah
+$(a + b)/2$, yaitu setengah dari Jumlah $a$ dan $b$.\footnote{C. Huygens,
+\emx {Calculating in Games of Chance,} terjemahan yang dinisbatkan kepada John
+Arbuthnot (London, 1692), p.~34.}
+\end{quote}
+
+Huygens membuktikannya sebagai berikut. Anggaplah dua pemain A dan B memainkan suatu
+permainan; masing-masing memasang taruhan $(a + b)/2$ dengan peluang yang sama untuk
+memenangkan seluruh taruhan. Maka nilai permainan bagi masing-masing pemain adalah
+$(a + b)/2$. Sebagai contoh, jika permainan harus dihentikan, jelas masing-masing
+pemain cukup menerima kembali taruhan awalnya. Sekarang, berdasarkan simetri, nilai
+ini tidak berubah jika kita menambahkan syarat bahwa pemenang permainan harus membayar
+$b$ kepada pihak yang kalah sebagai hadiah hiburan. Bagi pemain A, nilainya tetap
+$(a + b)/2$. Namun, apa hasil yang mungkin baginya dalam permainan yang diubah ini?
+Jika menang, ia memperoleh seluruh taruhan $a + b$ dan harus membayar $b$ kepada B,
+sehingga akhirnya memperoleh $a$. Jika kalah, ia memperoleh $b$ dari pemain B. Jadi,
+pemain A memenangkan $a$ atau $b$ dengan peluang yang sama, dan nilai permainan
+baginya adalah $(a + b)/2$.
+
+Huygens menggambarkan bukti ini dengan sebuah contoh. Jika Anda ditawari permainan
+dengan peluang yang sama untuk memenangkan 2~atau~8, nilai harapannya adalah~5, karena
+permainan ini setara dengan permainan ketika masing-masing pemain mempertaruhkan 5 dan
+sepakat membayar 3 kepada pihak yang kalah --- permainan yang nilainya jelas 5.
+
+Proposisi kedua Huygens adalah
+
+\begin{quote} Prop.~II. Jika saya mengharapkan $a$,~$b$, atau~$c$, yang masing-masing
+dapat terjadi dengan kemudahan yang sama, maka Nilai Harapan saya adalah
+$(a + b + c)/3$, atau sepertiga dari Jumlah $a$,~$b$, dan~$c$.\footnote{ibid.,
+p.~35.}
+\end{quote}
+
+Argumennya di sini serupa. Tiga pemain, A,~B, dan~C, masing-masing mempertaruhkan
+$$(a+b+c)/3$$ 
+dalam permainan yang masing-masing mempunyai peluang sama untuk dimenangkan. Nilai
+permainan ini bagi pemain A jelas sebesar jumlah yang dipertaruhkannya. Lebih lanjut,
+nilai ini tidak berubah jika A membuat perjanjian dengan B bahwa jika salah satu dari
+mereka menang, pemenang membayar hadiah hiburan $b$ kepada yang lain, serta membuat
+perjanjian serupa dengan C dengan hadiah hiburan $c$. Berdasarkan simetri,
+perjanjian-perjanjian ini tidak mengubah nilai permainan. Dalam permainan yang diubah
+ini, jika A menang, ia memenangkan seluruh taruhan $a + b + c$ dikurangi hadiah
+hiburan $b + c$, sehingga kemenangan akhirnya adalah $a$. Jika B menang, A
+memenangkan $b$, dan jika C menang, A memenangkan $c$. Jadi, A berada dalam permainan
+bernilai $(a + b + c)/3$ dengan hasil $a$,~$b$, dan~$c$ yang terjadi dengan peluang
+sama. Hal ini membuktikan Proposisi II.
+\par
+Secara lebih umum, penalaran ini menunjukkan bahwa jika terdapat $n$ hasil
+$$a_1,\ a_2,\ \ldots,\ a_n\ ,$$ 
+yang semuanya terjadi dengan peluang yang sama, nilai harapannya adalah
+$$
+\frac {a_1 + a_2 +\cdots+ a_n}n\ .
+$$
+
+Dalam proposisi ketiganya, Huygens meninjau kasus ketika Anda memenangkan $a$ atau
+$b$, tetapi dengan peluang yang tidak sama. Ia menganggap terdapat $p$ kesempatan
+untuk memenangkan $a$ dan $q$ kesempatan untuk memenangkan $b$, semuanya mempunyai
+peluang yang sama. Kemudian ia menunjukkan bahwa nilai harapannya adalah
+$$ E = \frac p{p + q} \cdot a + \frac q{p + q} \cdot b\ .
+$$ Hal ini diperoleh dengan meninjau pertaruhan yang setara dengan $p + q$ hasil yang
+semuanya terjadi dengan peluang sama, dengan pembayaran $a$ pada $p$ hasil dan $b$
+pada $q$ hasil. Cara ini memungkinkan Huygens menghitung nilai harapan bagi percobaan
+dengan peluang yang tidak sama, setidaknya ketika peluang-peluang tersebut berupa
+bilangan rasional.
+\par
+Jadi, alih-alih mendefinisikan nilai harapan sebagai rata-rata berbobot, Huygens
+menganggap nilai harapan pertaruhan simetris tertentu telah diketahui, lalu menurunkan
+nilai-nilai lainnya dari sana. Walaupun memerlukan cukup banyak manipulasi cerdik,
+Huygens pada akhirnya memperoleh nilai-nilai yang sesuai dengan definisi modern kita
+tentang nilai harapan. Salah satu keunggulan metode ini adalah bahwa metode tersebut
+memberikan pembenaran bagi nilai harapan dalam kasus ketika tidak wajar menganggap
+bahwa percobaan dapat diulang sangat banyak kali, misalnya dalam taruhan bahwa
+sekurang-kurangnya dua presiden meninggal pada tanggal yang sama dalam setahun.
+(Kenyataannya, tiga orang demikian; semuanya penandatangan Deklarasi Kemerdekaan, dan
+ketiganya meninggal pada 4~Juli.)
+\par
+Dalam bukunya, Huygens menghitung nilai harapan permainan dengan menggunakan teknik
+yang serupa dengan teknik yang kita gunakan untuk menghitung nilai harapan roulette di
+Monte Carlo. Sebagai contoh, proposisi XIV-nya berbunyi:
+
+\begin{quote} Prop.~XIV. Jika saya bermain bergiliran dengan orang lain, menggunakan
+dua Dadu, dengan Syarat bahwa jika saya melempar 7 saya menang, dan jika ia melempar 6
+ia menang, dengan membiarkannya melakukan Lemparan pertama: Carilah perbandingan
+Bahaya saya terhadap bahayanya.\footnote{ibid., p.~47.}
+\end{quote}
+\par Deskripsi modern permainan ini adalah sebagai berikut. Huygens dan lawannya
+bergiliran melempar sepasang dadu. Permainan berakhir jika Huygens melempar 7 atau
+lawannya melempar 6. Lawannya melempar lebih dahulu. Berapakah peluang Huygens
+memenangkan permainan?
+\par Untuk menyelesaikan masalah ini, Huygens memisalkan $x$ sebagai peluangnya menang
+ketika lawannya melempar lebih dahulu dan $y$ sebagai peluangnya menang ketika ia
+melempar lebih dahulu. Pada lemparan pertama, lawannya menang pada 5 dari 36
+kemungkinan. Dengan demikian,
+$$ x = \frac {31}{36} \cdot y\ .
+$$ Namun, ketika Huygens melempar, ia menang pada 6 dari 36 hasil yang mungkin, dan
+pada 30 hasil lainnya ia kembali ke keadaan ketika peluangnya adalah $x$. Jadi,
+$$ y = \frac 6{36} + \frac {30}{36} \cdot x\ .
+$$ Dari kedua persamaan ini, Huygens memperoleh $x = 31/61$.\index{HUYGENS, C.|)}
+
+Penggunaan awal lain nilai harapan muncul dalam argumen Pascal\index{PASCAL, B.} untuk
+menunjukkan bahwa orang yang rasional seharusnya percaya akan keberadaan
+Tuhan.\index{keberadaan Tuhan}\footnote{Dibahas dalam I. Hacking, \emx {The Emergence
+of Probability} (Cambridge: Cambridge Univ.\ Press, 1975).} Pascal mengatakan bahwa
+kita harus bertaruh apakah akan percaya atau tidak percaya. Misalkan $p$ menyatakan
+peluang bahwa Tuhan tidak ada. Pembahasannya menunjukkan bahwa kita memainkan
+permainan dengan dua strategi, percaya dan tidak percaya, dengan pembayaran seperti
+ditampilkan dalam Tabel~\ref{table 6.4}.
+\begin{table}
+\centering 
+$$\begin{tabular}{ccc}
+              & \hspace{.7in}Tuhan tidak ada & \hspace{.05in}Tuhan ada \\
+              & \\
+              & \hspace{.8in}$p$              & \hspace{.15in}$1 - p$ \\
+\end{tabular}
+$$
+$$\begin{tabular}{l|c|c|}\cline{2-2} \cline{3-3} 
+ percaya      & \hspace{.5in} $-u$\hspace{.5in} &\hspace{.3in} $v\hspace{.3in} $\\
+\cline{2-2} \cline{3-3} 
+ tidak percaya  &    0  & $-x$\\ \cline{2-2} \cline{3-3} 
+\end{tabular}
+$$
+\caption{Pembayaran.}
+\label{table 6.4}
+\end{table}
+
+Di sini $-u$ menyatakan biaya yang Anda tanggung karena melepaskan beberapa kesenangan
+duniawi sebagai akibat dari kepercayaan bahwa Tuhan ada. Jika Anda tidak percaya dan
+Tuhan adalah Tuhan yang membalas dendam, Anda akan kehilangan $x$. Jika Tuhan ada dan
+Anda percaya, Anda akan memperoleh v. Sekarang, untuk menentukan strategi terbaik,
+Anda harus membandingkan kedua nilai harapan
+$$ p(-u) + (1 - p)v \qquad {\rm dan} \qquad p0 + (1 - p)(-x),
+$$ lalu memilih yang lebih besar. Secara umum, pilihan tersebut bergantung pada nilai
+$p$. Namun, Pascal menganggap nilai $v$ tak hingga, sehingga strategi percaya adalah
+yang terbaik berapa pun peluang yang Anda tetapkan bagi keberadaan Tuhan. Contoh ini
+dianggap oleh sebagian orang sebagai awal teori keputusan. Analisis keputusan semacam
+ini kini muncul dalam banyak bidang dan, khususnya, merupakan bagian penting dari
+diagnostik medis serta keputusan bisnis perusahaan.
+
+Penggunaan awal lain nilai harapan adalah untuk menentukan harga
+anuitas.\index{anuitas} Kajian statistika berawal dari penggunaan catatan kematian yang
+disimpan di paroki-paroki London sejak 1603. Catatan tersebut memuat jumlah pembaptisan
+dan pemakaman setiap minggu. Dari catatan ini, John Graunt\index{GRAUNT, J.} membuat
+estimasi populasi London dan juga menyediakan data kematian pertama,\index{tabel
+kematian}\footnote{ibid., p.~108.} yang ditampilkan dalam Tabel~\ref{table 6.5}.
+\begin{table}
+\centering
+$$ 
+\begin{tabular}{rr}
+    & \\ \hline
+ Usia &\hspace{.35in} Penyintas  \\ \hline
+ 0    &  100  \\
+ 6    &   64  \\ 16    &   40  \\ 26    &   25  \\ 36    &   16  \\ 46    &   10  \\
+56    &    6  \\ 66    &    3  \\ 76    &    1  \\ \hline
+\end{tabular}$$
+\caption{Data kematian Graunt.}
+\label{table 6.5}
+\end{table}
+
+Seperti diamati Hacking, tampaknya Graunt menyusun tabel ini dengan menganggap bahwa
+setelah usia~6 terdapat peluang tetap sekitar 5/8 untuk bertahan hidup selama satu
+dasawarsa lagi.\footnote{ibid., p.~109.} Sebagai contoh, dari 64~orang yang bertahan
+hidup hingga usia~6, sebanyak 5/8 dari 64, atau~40, bertahan hingga~16; sebanyak 5/8
+dari 40 ini, atau~25, bertahan hingga~26; dan seterusnya. Tentu saja, ia membulatkan
+angkanya ke bilangan bulat orang terdekat.
+
+Jelas, laju kematian yang konstan tidak mungkin benar di seluruh rentang tersebut, dan
+tabel-tabel yang kemudian disediakan oleh Halley lebih realistis dalam hal
+ini.\footnote{E.
+Halley, ``An Estimate of The Degrees of Mortality of Mankind," \emx {Phil.\ Trans.\
+Royal.\ Soc.,} vol.~17 (1693), pp.~596--610; 654--656.}
+
+Suatu \emx {anuitas berjangka}\index{anuitas!berjangka} memberikan sejumlah uang tetap
+selama periode $n$ tahun. Untuk menentukan harga anuitas berjangka, kita hanya perlu
+mengetahui suku bunga yang sesuai. Suatu \emx {anuitas seumur hidup}\index{anuitas!seumur
+hidup} memberikan jumlah tetap selama setiap tahun kehidupan pembeli. Harga yang
+sesuai bagi anuitas seumur hidup adalah nilai harapan anuitas berjangka yang dievaluasi
+pada masa hidup acak pembeli. Jadi, karya Huygens dalam memperkenalkan nilai harapan
+serta karya Graunt dan Halley dalam menentukan tabel kematian menghasilkan metode yang
+lebih rasional untuk menetapkan harga anuitas. Ini merupakan salah satu penggunaan
+serius pertama teori peluang di luar rumah perjudian.
+
+Walaupun nilai harapan kini berperan dalam setiap cabang ilmu pengetahuan, arti
+pentingnya tetap bertahan di kasino. Pada 1962, buku Edward Thorp\index{THORP, E.}
+\emx {Beat the Dealer}\footnote{E. Thorp, \emx {Beat the Dealer} (New York: Random
+House, 1962).} memberi pembaca strategi untuk memainkan permainan kasino populer
+blackjack\index{blackjack} yang menjamin nilai harapan kemenangan positif bagi pemain.
+Buku ini untuk selamanya mengubah keyakinan kasino bahwa mereka tidak dapat dikalahkan.
+
+\exercises
+\begin{LJSItem}
+
+\i\label{exer 6.1.1} Sebuah kartu diambil secara acak dari setumpuk kartu yang
+bernomor 2 sampai~10. Seorang pemain menang 1~dolar jika angka pada kartu itu ganjil dan
+kalah 1~dolar jika angkanya genap. Berapakah nilai harapan kemenangan pemain tersebut?
+
+\i\label{exer 6.1.2} Sebuah kartu diambil secara acak dari setumpuk kartu remi. Jika
+kartu itu merah, pemain menang 1~dolar; jika hitam, pemain kalah 2~dolar.
+Carilah nilai harapan permainan tersebut.
+
+\i\label{exer 6.1.3} Di suatu kelas terdapat 20~siswa: 3 siswa bertinggi 5' 6", 5 siswa 5'8", 4
+siswa 5'10", 4 siswa 6', dan 4 siswa 6' 2". Seorang siswa dipilih secara acak. Berapakah
+nilai harapan tinggi badan siswa tersebut?
+
+\i\label{exer 6.1.4} Di Las Vegas, roda roulette memiliki~0 dan~00, lalu
+angka 1~sampai~36 yang ditandai pada petak-petak berukuran sama; roda diputar dan sebuah bola berhenti secara acak di
+salah satu petak. Ketika seorang pemain mempertaruhkan 1~dolar pada suatu angka, ia menerima 36~dolar jika
+bola berhenti pada angka tersebut, sehingga keuntungan bersihnya 35~dolar; jika tidak, ia kehilangan
+taruhan satu dolarnya. Carilah nilai harapan kemenangannya.
+
+\i\label{exer 6.1.5} Dalam versi kedua roulette di Las Vegas, seorang pemain bertaruh
+pada merah atau hitam. Separuh angka dari~1 sampai~36 berwarna merah, dan separuhnya hitam. Jika seorang
+pemain mempertaruhkan satu dolar pada hitam, dan bola berhenti pada angka hitam, ia memperoleh kembali
+dolarnya beserta satu dolar tambahan. Jika bola berhenti pada angka merah atau pada~0 atau~00, ia
+kehilangan dolarnya. Carilah nilai harapan kemenangan dari taruhan ini.
+
+\i\label{exer 6.1.6} Sebuah dadu dilempar dua kali. Misalkan $X$ menyatakan jumlah kedua
+angka yang muncul, dan $Y$ selisih kedua angka tersebut (tepatnya, angka
+pada lemparan pertama dikurangi angka pada lemparan kedua). Tunjukkan bahwa $E(XY) = E(X)E(Y)$. Apakah
+$X$ dan $Y$ saling bebas?
+
+\istar\label{exer 6.1.7} Tunjukkan bahwa jika $X$ dan $Y$ adalah peubah acak yang masing-masing hanya
+mengambil dua nilai, dan jika $E(XY) = E(X)E(Y)$, maka $X$ dan $Y$ saling bebas.
+
+\i\label{exer 6.1.8} Sebuah keluarga kerajaan terus mempunyai anak sampai memperoleh seorang anak laki-laki atau sampai
+mempunyai tiga anak, mana pun yang terjadi lebih dahulu. Asumsikan bahwa setiap anak adalah laki-laki dengan
+probabilitas 1/2. Carilah nilai harapan banyaknya anak laki-laki dalam keluarga kerajaan ini dan
+nilai harapan banyaknya anak perempuan.
+
+\i\label{exer 6.1.9} Jika lemparan pertama dalam permainan craps bukan natural maupun
+craps, pemain dapat memasang taruhan tambahan, sebesar taruhan awalnya, bahwa ia akan
+mencapai poin sebelum tujuh muncul. Jika poinnya empat atau sepuluh, ia dibayar
+dengan rasio $2 : 1$; jika lima atau sembilan, ia dibayar dengan rasio $3 : 2$; dan jika
+enam atau delapan, ia dibayar dengan rasio $6 : 5$. Carilah nilai harapan kemenangan pemain
+jika ia memasang taruhan tambahan ini ketika mendapat kesempatan.
+
+\i\label{exer 6.1.10} Dalam Contoh~\ref{exam 6.12}, asumsikan bahwa Tn. Ace memutuskan untuk membeli saham
+dan menahannya sampai harganya naik 1~dolar, kemudian menjualnya dan tidak membeli lagi. Modifikasilah
+program {\bf StockSystem} untuk mencari distribusi keuntungannya menurut sistem ini
+setelah periode dua puluh hari. Carilah nilai harapan keuntungan dan probabilitas bahwa ia memperoleh
+keuntungan.
+
+\i\label{exer 6.1.11} Pada 26~September 1980, \emx {New York Times} melaporkan
+bahwa seorang asing misterius melangkah masuk ke sebuah kasino Las Vegas, memasang satu taruhan sebesar
+777{,}000 dolar pada garis ``don't pass" di meja craps, lalu pergi membawa
+lebih dari 1.5 juta dolar. Dalam taruhan ``don't pass", petaruh pada dasarnya
+bertaruh bersama pihak kasino. Pengecualian terjadi jika pelempar memperoleh~12 pada lemparan
+pertama. Dalam hal ini, pelempar kalah dan petaruh ``don't pass" hanya menerima kembali
+uang yang dipertaruhkan, alih-alih menang. Tunjukkan bahwa petaruh ``don't pass" memiliki taruhan yang lebih
+menguntungkan daripada pelempar.
+
+\i\label{exer 6.1.12} Ingatlah bahwa dalam \emx {sistem penggandaan martingal}\index{sistem taruhan
+martingal} (lihat Latihan~\ref{sec 1.1}.\ref{exer 1.1.10}), pemain menggandakan
+taruhannya setiap kali kalah. Misalkan Anda
+bermain roulette di sebuah \emx {kasino adil} tanpa 0, dan setiap kali bertaruh pada merah.
+Dengan demikian, setiap kali Anda menang dengan probabilitas 1/2. Asumsikan bahwa Anda memasuki kasino dengan
+100~dolar, memulai dengan
+taruhan 1-dolar, dan menggunakan sistem martingal. Anda berhenti segera setelah memenangi satu taruhan, atau jika peristiwa yang kecil kemungkinannya terjadi, yaitu hitam muncul enam kali berturut-turut,
+sehingga Anda telah rugi 63~dolar dan tidak dapat memasang taruhan 64-dolar yang diperlukan. Carilah
+nilai harapan kemenangan Anda dengan sistem permainan ini.
+
+\i\label{exer 6.1.13} Anda memiliki 80~dolar dan memainkan permainan berikut. Sebuah kotak
+berisi dua bola putih dan dua bola hitam. Anda mengambil bola satu demi satu
+tanpa pengembalian sampai semua bola habis. Pada setiap pengambilan, Anda mempertaruhkan separuh
+kekayaan Anda saat itu bahwa Anda akan mengambil bola putih. Berapakah nilai harapan kekayaan akhir Anda?
+
+\i\label{exer 6.1.14} Dalam masalah penitipan topi (lihat Contoh~\ref{exam 3.13}),
+diasumsikan bahwa $N$ orang menitipkan topi mereka dan topi-topi itu dikembalikan
+secara acak. Misalkan $X_j = 1$ jika orang ke-$j$ menerima topinya sendiri dan 0
+jika tidak. Carilah $E(X_j)$ dan $E(X_j \cdot X_k)$ untuk $j$ yang tidak sama dengan $k$. Apakah $X_j$
+dan $X_k$ saling bebas?
+
+\i\label{exer 6.1.16} Sebuah kotak berisi dua bola emas dan tiga bola perak. Anda
+diperbolehkan mengambil bola secara berurutan dan acak dari kotak tersebut. Anda menang 1~dolar
+setiap kali mengambil bola emas dan kalah 1~dolar setiap kali mengambil bola perak.
+Setelah diambil, bola tidak dikembalikan. Tunjukkan bahwa jika Anda terus mengambil sampai unggul
+1~dolar atau sampai tidak ada lagi bola emas, permainan ini menguntungkan.
+
+\i\label{exer 6.1.17} Gerolamo Cardano\index{CARDANO, G.}, dalam bukunya \emx {The Gambling Scholar,}
+yang ditulis pada awal 1500-an, membahas permainan karnaval berikut. Terdapat enam
+dadu. Setiap dadu memiliki lima sisi kosong. Sisi keenam memuat sebuah angka antara
+1~dan~6---angka yang berbeda pada setiap dadu. Keenam dadu dilempar dan pemain
+memenangi hadiah yang bergantung pada jumlah angka yang muncul.
+
+\begin{enumerate}
+\item Carilah, seperti yang dilakukan Cardano, nilai harapan jumlah tersebut tanpa mencari distribusinya.
+
+\item Hadiah besar diberikan untuk jumlah yang besar, sedangkan biaya memainkan permainan ini tidak mahal.
+Jelaskan mengapa hal ini dapat dilakukan.
+\end{enumerate}
+
+\i\label{exer 6.1.18} Misalkan $X$ adalah saat pertama suatu \emx {kegagalan} terjadi dalam
+barisan tak hingga percobaan Bernoulli dengan probabilitas keberhasilan $p$. Misalkan $p_k
+= P(X = k)$ untuk $k = 1$,~2, \dots. Tunjukkan bahwa $p_k = p^{k - 1}q$ dengan $q = 1 - p$.
+Tunjukkan bahwa $\sum_k p_k = 1$. Tunjukkan bahwa $E(X) = 1/q$. Berapakah nilai harapan banyaknya
+lemparan koin yang diperlukan untuk memperoleh ekor pertama?
+
+\i\label{exer 6.1.19} Tepat satu dari enam kunci yang serupa dapat membuka suatu pintu. Jika
+Anda mencoba kunci-kunci itu satu demi satu, berapakah nilai harapan banyaknya kunci yang harus
+Anda coba sebelum berhasil?
+
+\i\label{exer 6.1.20} Suatu ujian pilihan ganda diberikan. Sebuah soal memiliki empat
+kemungkinan jawaban, dan tepat satu jawaban benar. Siswa diperbolehkan
+memilih suatu subhimpunan dari keempat kemungkinan jawaban sebagai jawabannya. Jika subhimpunan yang dipilih
+memuat jawaban benar, siswa memperoleh tiga poin, tetapi kehilangan satu
+poin untuk setiap jawaban salah dalam subhimpunan pilihannya. Tunjukkan bahwa jika ia sekadar menebak suatu
+subhimpunan secara seragam dan acak, nilai harapan skornya adalah nol.
+
+\i\label{exer 6.1.21} Anda ditawari permainan berikut: sebuah koin seimbang
+dilempar sampai kepala muncul untuk pertama kali (lihat Contoh~\ref{exam 6.055}). Jika
+hal ini terjadi pada lemparan pertama, Anda menerima 2~dolar; jika terjadi pada lemparan kedua,
+Anda menerima $2^2 = 4$ dolar; dan secara umum, jika kepala muncul untuk pertama kali
+pada lemparan ke-$n$, Anda menerima $2^n$ dolar.
+
+\begin{enumerate}
+\item Tunjukkan bahwa nilai harapan kemenangan Anda tidak ada (yakni, diberikan oleh
+suatu jumlah divergen) untuk permainan ini. Apakah ini berarti bahwa permainan ini menguntungkan berapa pun
+biaya yang Anda bayarkan untuk memainkannya?
+
+\item Asumsikan bahwa Anda hanya menerima $2^{10}$ dolar jika banyaknya lemparan yang diperlukan untuk memperoleh kepala pertama
+lebih besar dari atau sama dengan sepuluh. Tunjukkan bahwa nilai harapan Anda
+untuk permainan yang dimodifikasi ini berhingga dan carilah nilainya.
+
+\item Asumsikan bahwa Anda membayar 10~dolar untuk setiap kali memainkan permainan asli. Tulislah sebuah
+program untuk menyimulasikan 100 kali permainan dan lihatlah hasil Anda.
+
+\item Sekarang asumsikan bahwa utilitas dari $n$ dolar adalah $\sqrt n$. Tulislah suatu bentuk
+untuk nilai harapan utilitas pembayaran tersebut, dan tunjukkan bahwa bentuk ini memiliki nilai
+berhingga. Perkirakan nilai ini. Ulangi latihan ini untuk kasus ketika fungsi
+utilitasnya adalah $\log(n)$.
+
+\end{enumerate}
+
+\i\label{exer 6.1.100} Misalkan $X$ adalah peubah acak yang
+berdistribusi Poisson dengan parameter $\lambda$. Tunjukkan bahwa $E(X) = \lambda$. \emx {Petunjuk}:
+Ingat bahwa
+$$e^x = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots\,.$$
+
+\i\label{exer 6.1.22} Ingatlah bahwa dalam Latihan~\ref{sec 1.1}.\ref{exer 1.1.14}, kita
+meninjau sebuah kota dengan dua rumah sakit.\index{rumah sakit} Di rumah sakit besar, sekitar 45 bayi
+lahir setiap hari, sedangkan di rumah sakit kecil sekitar 15 bayi\index{bayi} lahir setiap hari. Kita
+tertarik untuk menebak rumah sakit mana yang secara rata-rata memiliki jumlah hari terbanyak
+dengan sifat bahwa lebih dari 60 persen anak yang lahir pada hari tersebut adalah
+laki-laki. Untuk setiap rumah sakit, carilah nilai harapan banyaknya hari dalam setahun yang memiliki
+sifat bahwa lebih dari 60~persen anak yang lahir pada hari tersebut adalah laki-laki.
+
+\i\label{exer 6.1.23} Sebuah perusahaan asuransi memiliki 1{,}000 polis untuk pria berusia~50.
+Perusahaan tersebut memperkirakan bahwa probabilitas seorang pria berusia~50 meninggal dalam waktu satu tahun adalah
+.01. Perkirakan banyaknya klaim yang dapat diharapkan perusahaan dari para penerima manfaat pria-pria
+tersebut dalam waktu satu tahun.
+
+\i\label{exer 6.1.24} Dengan menggunakan tabel kehidupan tahun 1981 dalam Lampiran~C, tulislah
+sebuah program untuk menghitung nilai harapan lama hidup pria dan wanita pada setiap kemungkinan usia
+dari~1 sampai~85. Bandingkan hasil untuk pria dan wanita. Berikan komentar apakah premi asuransi
+jiwa seharusnya berbeda bagi pria dan wanita.
+
+\istar\label{exer 6.1.25} Satu set kartu ESP\index{ESP} terdiri dari 20 kartu dalam dua jenis:
+misalnya sepuluh bintang dan sepuluh lingkaran (biasanya terdapat lima jenis). Set kartu dikocok dan
+kartu dibuka satu demi satu. Anda, orang yang dianggap memiliki kemampuan persepsi, harus menyebutkan
+simbol pada setiap kartu \emx {sebelum} kartu itu dibuka.
+\par
+Misalkan bahwa Anda sebenarnya hanya menebak kartu-kartu tersebut. Jika Anda tidak dapat melihat
+setiap kartu setelah membuat tebakan, nilai harapan banyaknya tebakan benar mudah
+dihitung, yaitu sepuluh.
+\par
+Sebaliknya, jika Anda menebak dengan informasi, yaitu jika Anda melihat setiap
+kartu setelah menebak, tentu saja Anda mungkin berharap memperoleh skor yang lebih tinggi. Hal ini
+memang benar, tetapi menghitung nilai harapan yang tepat tidak lagi mudah.
+\par
+Namun, simulasi komputer atas penebakan dengan informasi ini mudah dilakukan, sehingga kita
+dapat memperoleh perkiraan yang baik atas nilai harapannya melalui simulasi. (Ini serupa dengan cara
+pemain blackjack terampil menjadikan blackjack sebagai permainan yang menguntungkan dengan mengamati
+kartu-kartu yang telah dimainkan. Lihat Latihan~\ref{exer 6.1.29}.)
+
+\begin{enumerate}
+\item Pertama, lakukan simulasi penebakan tanpa informasi dengan mengulangi
+percobaan sekurang-kurangnya 1000 kali. Perkirakan nilai harapan banyaknya jawaban benar dan
+bandingkan hasil Anda dengan nilai harapan teoretis.
+
+\item Apakah strategi terbaik untuk menebak dengan informasi?
+
+\item Lakukan simulasi penebakan dengan informasi menggunakan strategi dalam (b).
+Ulangi percobaan sekurang-kurangnya 1000 kali, dan perkirakan nilai harapan dalam kasus ini.
+
+\item Misalkan $S$ adalah banyaknya bintang dan $C$ banyaknya lingkaran dalam set kartu. Misalkan
+$h(S,C)$ adalah nilai harapan kemenangan dengan menggunakan strategi penebakan optimal dalam (b). Tunjukkan
+bahwa $h(S,C)$ memenuhi relasi rekursi
+$$ h(S,C) = \frac S{S + C} h(S - 1,C) + \frac C{S + C} h(S,C - 1) + \frac
+{\max(S,C)}{S + C}\ ,
+$$ dan $h(0,0) = h(-1,0) = h(0,-1) = 0$. Dengan menggunakan relasi ini, tulislah sebuah program untuk
+menghitung $h(S,C)$ dan mencari $h(10,10)$. Bandingkan nilai $h(10,10)$ yang dihitung dengan
+hasil simulasi Anda dalam (c). Untuk pembahasan lebih lanjut tentang latihan ini dan
+Latihan~\ref{exer 6.1.26}, lihat Diaconis dan Graham.\index{DIACONIS, P.}\index{GRAHAM,
+R.}\footnote{P. Diaconis and R. Graham, ``The Analysis of Sequential Experiments with Feedback to
+Subjects," \emx {Annals of Statistics,} vol.~9 (1981), pp.~3--23.}
+\end{enumerate}
+
+\istar\label{exer 6.1.26} Tinjaulah masalah ESP\index{ESP} seperti yang dijelaskan dalam Latihan~\ref{exer
+6.1.25}. Sekali lagi Anda menebak dengan informasi, dan Anda menggunakan strategi
+penebakan optimal: tebak \emx {bintang} jika set kartu yang tersisa memuat lebih banyak bintang, {\em
+lingkaran} jika lebih banyak lingkaran, dan lempar koin jika banyaknya bintang dan lingkaran
+sama. Asumsikan bahwa $S \geq C$, dengan $S$ menyatakan banyaknya bintang dan $C$ banyaknya
+lingkaran.
+\par Kita dapat menggambarkan hasil suatu permainan biasa pada sebuah grafik, dengan sumbu horizontal
+menyatakan banyaknya langkah dan sumbu vertikal menyatakan \emx {selisih}
+antara banyaknya bintang dan banyaknya lingkaran yang telah dibuka. Sebuah
+permainan biasa ditunjukkan dalam Gambar~\ref{fig 6.4}. Dalam permainan khusus ini, urutan
+kartu yang dibuka adalah $(C,S,S,S,S,C,C,S,S,C)$. Jadi, dalam permainan khusus
+ini, terdapat enam bintang dan empat lingkaran dalam set kartu. Ini berarti, khususnya,
+bahwa setiap permainan dengan set kartu ini akan memiliki grafik yang berakhir pada titik
+$(10, 2)$. Kita definisikan garis $L$ sebagai garis horizontal yang melalui
+titik akhir pada grafik (jadi koordinat vertikalnya hanyalah selisih antara
+banyaknya bintang dan lingkaran dalam set kartu).
+
+\putfig{4truein}{PSfig6-4}{Jalan acak untuk ESP.}{fig 6.4}
+
+\begin{enumerate}
+\item Tunjukkan bahwa ketika jalan acak berada di bawah garis $L$, pemain menebak dengan benar
+saat grafik naik (bintang dibuka), dan ketika jalan berada di atas garis tersebut,
+pemain menebak dengan benar saat jalan turun (lingkaran dibuka). Dari sifat ini,
+tunjukkan bahwa peserta pasti memiliki sekurang-kurangnya $S$ tebakan benar.
+
+\item Ketika jalan berada pada titik $(x,x)$ \emx {di} garis $L$, banyaknya bintang
+dan lingkaran yang tersisa sama, sehingga peserta melempar koin. Tunjukkan bahwa
+probabilitas jalan tersebut mencapai $(x,x)$ adalah
+$$
+\frac{{S \choose x}{C \choose x}}{{{S + C} \choose {2x}}}\ .
+$$ \emx {Petunjuk}: Hasil dari $2x$ kartu memiliki distribusi hipergeometrik (lihat
+Bagian~\ref{sec 5.1}).
+
+\item Dengan menggunakan hasil (a) dan (b), tunjukkan bahwa nilai harapan banyaknya
+tebakan benar dengan penebakan cerdas adalah
+$$ S + \sum_{x = 1}^C \frac12 \frac{{S \choose x}{C \choose x}}{{{S + C} \choose
+{2x}}}\ .
+$$
+\end{enumerate}
+
+\i\label{exer 6.1.27} Konon\footnote{J.~F. Box,  \emx {R.~A. Fisher, The
+Life of a Scientist} (New York: John Wiley and Sons, 1978).}, Dr.~B.~Muriel
+Bristol menolak secangkir teh\index{teh} karena ia lebih menyukai cangkir yang terlebih dahulu dituangi
+susu\index{susu}. Statistikawan terkenal R.~A. Fisher\index{FISHER, R. A.}
+melakukan pengujian untuk melihat apakah ia dapat membedakan susu yang dituangkan sebelum atau sesudah teh.
+Asumsikan bahwa dalam pengujian tersebut Dr.~Bristol diberi delapan cangkir teh---empat dengan susu yang dituangkan
+sebelum teh dan empat dengan susu yang dituangkan sesudah teh.
+% (cf. Exercise~\ref{sec 3.2}.\ref{exer 3.2.8}).
+
+\begin{enumerate}
+\item Berapakah nilai harapan banyaknya tebakan benar yang dibuat wanita tersebut jika ia tidak memperoleh
+informasi setelah setiap pengujian dan hanya menebak?
+
+\item Dengan menggunakan hasil Latihan~\ref{exer 6.1.26}, carilah nilai harapan banyaknya
+tebakan benar jika ia diberi tahu hasil setiap tebakan dan menggunakan strategi penebakan
+optimal.
+\end{enumerate}
+
+\i\label{exer 6.1.28} Dalam sebuah permainan komputer populer, komputer memilih suatu bilangan bulat
+dari~1 sampai~$n$ secara acak. Pemain diberi $k$ kesempatan untuk menebak angka tersebut. Setelah
+setiap tebakan, komputer menjawab ``benar," ``terlalu kecil," atau ``terlalu besar."
+
+\begin{enumerate}
+\item Tunjukkan bahwa jika $n \leq 2^k - 1$, maka terdapat strategi yang menjamin Anda
+akan menebak angka tersebut dengan benar dalam $k$ percobaan.
+
+\item Tunjukkan bahwa jika $n \geq 2^k - 1$, terdapat strategi yang memastikan Anda
+dapat mengidentifikasi salah satu dari $2^k - 1$ angka dan dengan demikian memberikan probabilitas kemenangan sebesar $(2^k - 1)/n$.
+Mengapa strategi ini optimal? Ilustrasikan hasil Anda untuk
+kasus $n = 9$ dan $k = 3$.
+\end{enumerate}
+
+\i\label{exer 6.1.29} Dalam permainan kasino blackjack\index{blackjack}, bandar dibagikan dua
+kartu, satu terbuka dan satu tertutup, dan setiap pemain dibagikan dua kartu yang keduanya
+tertutup. Jika kartu bandar yang tampak adalah as, pemain dapat melihat kartu tertutupnya lalu
+memasang taruhan yang disebut taruhan \emx {asuransi}. (Pemain ahli akan memahami mengapa taruhan ini
+disebut asuransi.) Jika memasang taruhan ini, Anda akan memenanginya jika kartu kedua
+bandar adalah \emx {kartu bernilai sepuluh}: yaitu sepuluh, jack, ratu, atau raja. Jika menang, Anda
+dibayar dua kali taruhan asuransi; jika tidak, Anda kehilangan taruhan ini. Tunjukkan bahwa jika satu-satunya
+kartu yang dapat Anda lihat adalah as milik bandar dan dua kartu Anda, dan jika kartu Anda bukan
+kartu bernilai sepuluh, maka taruhan asuransi tidak menguntungkan. Namun, tunjukkan bahwa jika Anda
+memainkan dua tangan sekaligus dan tidak memiliki kartu bernilai sepuluh, taruhan tersebut
+menguntungkan. (Thorp\index{THORP, E.}\footnote{E.~Thorp,  \emx {Beat the Dealer} (New York: Random
+House, 1962).} telah menunjukkan bahwa permainan blackjack menguntungkan bagi pemain jika ia dapat
+mengingat dengan cukup baik kartu-kartu yang telah dimainkan.)
+
+\i\label{exer 6.1.30} Asumsikan bahwa setiap kali membeli sekotak Wheaties\index{Wheaties}, Anda
+menerima gambar salah satu dari $n$ pemain New York Yankees\index{New York Yankees} (lihat
+Latihan~\ref{sec 3.2}.\ref{exer 3.2.34}). Misalkan $X_k$ adalah
+banyaknya kotak tambahan yang harus Anda beli setelah memperoleh $k - 1$ gambar berbeda,
+untuk memperoleh gambar baru berikutnya. Jadi $X_1 = 1$, sedangkan $X_2$ adalah banyaknya
+kotak yang dibeli setelah itu untuk memperoleh gambar yang berbeda dari gambar pertama yang
+diperoleh, dan seterusnya.
+
+\begin{enumerate}
+\item Tunjukkan bahwa $X_k$ memiliki distribusi geometrik dengan $p = (n - k + 1)/n$.
+
+\item Simulasikan percobaan untuk tim dengan 26 pemain (25 akan lebih tepat,
+tetapi kita menginginkan bilangan genap). Lakukan sejumlah simulasi dan perkirakan
+nilai harapan waktu yang diperlukan untuk memperoleh 13 pemain pertama serta nilai harapan waktu untuk memperoleh
+13 pemain kedua. Bagaimana perbandingan kedua nilai harapan ini?
+
+\item Tunjukkan bahwa jika terdapat $2n$ pemain, nilai harapan waktu untuk memperoleh separuh pertama
+pemain adalah
+$$ 2n \left( \frac 1{2n} + \frac 1{2n - 1} +\cdots+ \frac 1{n + 1} \right)\ ,
+$$ dan nilai harapan waktu untuk memperoleh separuh kedua adalah
+$$ 2n \left( \frac 1n + \frac 1{n - 1} +\cdots+ 1 \right)\ .
+$$
+
+\item Dalam Contoh~\ref{exam 6.5}, kita menyatakan bahwa
+$$ 1 + \frac 12 + \frac 13 +\cdots+ \frac 1n \sim \log n + .5772 + \frac 1{2n}\ .
+$$ Gunakan ini untuk memperkirakan bentuk dalam (c). Bandingkan perkiraan tersebut dengan
+nilai eksaknya dan juga dengan perkiraan yang Anda peroleh melalui simulasi untuk kasus $n =
+26$.
+\end{enumerate}
+
+\istar\label{exer 6.1.31} (Feller\index{FELLER, W.}\footnote{W. Feller,  \emx {Introduction to
+Probability Theory and Its Applications,} 3rd ed., vol.~1 (New York: John Wiley and
+Sons, 1968), p.~240.}) Sejumlah besar orang, $N$, menjalani tes\index{tes darah}
+darah. Tes ini dapat diberikan dengan dua cara: (1)~Setiap orang dapat diuji secara terpisah; dalam
+hal ini diperlukan $N$ tes, (2)~sampel darah dari $k$ orang dapat digabungkan
+dan dianalisis bersama. Jika tes ini \emx {negatif,} satu tes tersebut cukup untuk
+$k$ orang. Jika tesnya \emx {positif,} masing-masing dari $k$ orang harus
+diuji secara terpisah, sehingga seluruhnya diperlukan $k + 1$ tes untuk $k$ orang tersebut. Asumsikan
+bahwa probabilitas $p$ suatu tes memberikan hasil positif sama untuk semua orang dan bahwa
+peristiwa-peristiwa ini saling bebas.
+
+\begin{enumerate}
+\item Carilah probabilitas bahwa tes atas sampel gabungan dari $k$ orang akan memberikan hasil
+positif.
+
+\item Berapakah nilai harapan banyaknya tes $X$ yang diperlukan menurut
+rencana~(2)? (Asumsikan bahwa $N$ habis dibagi $k$.)
+
+\item Untuk $p$ yang kecil, tunjukkan bahwa nilai $k$ yang meminimumkan nilai harapan
+banyaknya tes menurut rencana kedua kira-kira $1/\sqrt p$.
+\end{enumerate}
+
+\i\label{exer 6.1.32} Tulislah sebuah program untuk menjumlahkan bilangan-bilangan acak yang dipilih dari $[0,1]$
+sampai jumlahnya untuk pertama kali lebih besar dari satu. Mintalah program Anda mengulangi
+percobaan ini beberapa kali untuk memperkirakan nilai harapan banyaknya pemilihan yang diperlukan
+agar jumlah bilangan yang dipilih untuk pertama kali melebihi~1. Berdasarkan
+percobaan Anda, berapakah perkiraan Anda untuk bilangan ini?
+
+\istar\label{exer 6.1.33} Masalah diskret terkait berikut juga memberikan petunjuk yang baik
+untuk jawaban Latihan~\ref{exer 6.1.32}. Pilihlah secara acak dengan pengembalian
+$t_1$,~$t_2$,
+\dots,~$t_r$ dari himpunan $(1/n, 2/n, \dots, n/n)$. Misalkan $X$ adalah nilai terkecil
+$r$ yang memenuhi
+$$ t_1 + t_2 +\cdots+ t_r > 1\ .
+$$ Maka $E(X) = (1 + 1/n)^n$. Untuk membuktikan ini, kita dapat pula memilih
+$t_1$,~$t_2$, \dots,~$t_r$ secara acak dengan pengembalian dari himpunan $(1, 2,
+\dots, n)$ dan memisalkan $X$ sebagai nilai terkecil $r$ sehingga
+$$ t_1 + t_2 +\cdots+ t_r > n\ .
+$$
+\begin{enumerate}
+\item Gunakan Latihan~\ref{sec 3.2}.\ref{exer 3.2.35.5} untuk menunjukkan bahwa
+$$ P(X \geq j + 1) = {n \choose j}{\Bigl(\frac {1}{n}\Bigr)^j}\ .
+$$
+\item Tunjukkan bahwa
+$$ E(X) = \sum_{j = 0}^n P(X \geq j + 1)\ .
+$$
+\item Dari kedua fakta ini, carilah suatu bentuk untuk $E(X)$. Bukti ini dikemukakan oleh
+Harris Schultz.\index{SCHULTZ, H.}\footnote{H. Schultz, ``An Expected Value Problem," \emx {Two-Year
+Mathematics Journal,} vol.~10, no.~4 (1979), pp.~277--78.}
+\end{enumerate}
+
+\istar\label{exer 6.1.34} (Kotak Korek Api Banach\index{Kotak Korek Api Banach}\footnote{W.~Feller, {\em
+Introduction to Probability Theory,} vol. 1, p.~166.}) Seorang pria membawa sekotak korek api yang mula-mula berisi $N$ batang di masing-masing dari kedua
+saku depannya. Setiap kali memerlukan korek api, ia memilih
+salah satu saku secara acak dan mengambil sebatang dari kotak tersebut. Pada suatu hari ia merogoh salah satu saku
+dan mendapati kotaknya kosong.
+
+\begin{enumerate}
+\item Misalkan $p_r$ menyatakan probabilitas bahwa saku lainnya berisi $r$ batang korek api.
+Definisikan suatu barisan peubah acak \emx {pencacah} sebagai berikut: Misalkan
+$X_i = 1$ jika pengambilan ke-$i$ berasal dari saku kiri, dan 0 jika berasal dari saku kanan.
+Tafsirkan $p_r$ dalam $S_n = X_1 + X_2 +\cdots+ X_n$. Carilah suatu bentuk
+binomial untuk $p_r$.
+
+\item Tulislah program komputer untuk menghitung $p_r$, serta probabilitas bahwa
+saku lainnya memuat sekurang-kurangnya $r$ batang korek api, untuk $N = 100$ dan $r$ dari~0 sampai~50.
+
+\item Tunjukkan bahwa $(N - r)p_r = (1/2)(2N + 1)p_{r + 1} - (1/2)(r + 1)p_{r + 1}$\ .
+
+\item Hitunglah $\sum_r p_r$.
+
+\item Gunakan (c) dan (d) untuk menentukan nilai harapan $E$ dari distribusi
+$\{p_r\}$.
+
+\item Gunakan rumus Stirling untuk memperoleh pendekatan bagi $E$. Berapa banyak batang korek api
+yang harus dimuat setiap kotak agar nilai harapan $E$ bernilai sekitar 13?
+(Ambil $\pi = 22/7$.)
+\end{enumerate}
+
+\i\label{exer 6.1.35} Sebuah koin dilempar sampai kepala muncul untuk pertama kali. Jika
+hal ini terjadi pada lemparan ke-$n$ dan $n$ ganjil, Anda menang $2^n/n$, tetapi jika $n$ genap,
+Anda kalah
+$2^n/n$. Maka, jika nilai harapan kemenangan Anda ada, nilainya diberikan oleh deret konvergen
+$$ 1 - \frac 12 + \frac 13 - \frac 14 +\cdots
+$$ yang disebut \emx {deret harmonik berselang-seling.} Mungkin kita tergoda untuk mengatakan bahwa nilai ini
+seharusnya merupakan nilai harapan percobaan. Tunjukkan bahwa jika kita melakukannya,
+nilai harapan suatu percobaan akan bergantung pada urutan hasil-hasilnya
+didaftarkan.
+
+\i\label{exer 6.1.37} Misalkan kita memiliki sebuah kotak yang berisi $c$
+bola kuning dan $d$ bola hijau. Kita mengambil $k$ bola tanpa pengembalian
+dari kotak tersebut. Carilah nilai harapan banyaknya bola kuning yang terambil. \emx {Petunjuk}: Tuliskan
+banyaknya bola kuning yang terambil sebagai jumlah dari $c$ peubah acak.
+
+\i\label{exer 6.1.38} Pembaca dipersilakan melihat Contoh~\ref{exam 6.7} untuk penjelasan
+tentang berbagai opsi yang tersedia dalam roulette Monte Carlo.
+\begin{enumerate}
+\item Hitunglah nilai harapan kemenangan dari taruhan 1 franc pada merah menurut opsi (a).
+\item Ulangi bagian (a) untuk opsi (b).
+\item Bandingkan nilai harapan kemenangan untuk ketiga opsi.
+\end{enumerate}
+
+\istar\label{exer 6.1.39}
+(dari Pittel\footnote{B. Pittel, Problem \#1195, \emx {Mathematics Magazine,} vol.~58,
+no.\ 3 (May 1985), pg.~183.})\index{PITTEL, B.} Sebanyak $n$ buku telepon\index{buku telepon}
+disimpan dalam suatu tumpukan. Probabilitas bahwa buku bernomor $i$ (dengan $1 \le i \le
+n$) digunakan untuk suatu panggilan telepon adalah $p_i > 0$, dengan jumlah seluruh $p_i$ sama dengan 1. Setelah sebuah
+buku digunakan, buku tersebut diletakkan di puncak tumpukan. Asumsikan bahwa panggilan-panggilan itu saling bebas,
+berjarak waktu sama, dan sistem ini telah digunakan sejak waktu yang tak berhingga jauhnya di masa lalu. Misalkan
+$d_i$ adalah kedalaman rata-rata buku $i$ dalam tumpukan. Tunjukkan bahwa $d_i \le d_j$ setiap kali $p_i
+\ge p_j$. Jadi, secara rata-rata, buku yang lebih populer cenderung berada lebih dekat ke
+puncak tumpukan. \emx {Petunjuk}: Misalkan $p_{ij}$ menyatakan probabilitas bahwa buku $i$ berada di atas
+buku $j$. Tunjukkan bahwa $p_{ij} = p_{ij}(1 - p_j) + p_{ji}p_i$.
+
+\istar\label{exer 6.1.40}
+(dari Propp\footnote{J. Propp, Problem \#1159, \emx {Mathematics Magazine} vol.~57, no.\ 1
+(Feb. 1984), pg.~50.})\index{PROPP, J.} Dalam soal sebelumnya, misalkan $P$ adalah probabilitas
+bahwa pada saat ini setiap buku berada di tempat yang tepat, yakni buku $i$ berada pada urutan ke-$i$ dari
+puncak. Carilah rumus untuk $P$ dalam $p_i$. Selain itu, carilah batas atas
+terkecil untuk $P$ jika $p_i$ diperbolehkan berubah-ubah. \emx {Petunjuk}: Pertama, carilah probabilitas
+bahwa buku 1 berada di tempat yang tepat. Kemudian carilah probabilitas bahwa buku 2 berada di tempat yang tepat
+dengan syarat buku 1 berada di tempat yang tepat. Lanjutkan.
+
+\istar\label{exer 6.1.41}
+(dari H. Shultz dan B. Leonard\footnote{H. Shultz and B. Leonard, ``Unexpected Occurrences of the
+Number $e$,"
+\emx {Mathematics Magazine} vol.~62, no. 4 (October, 1989), pp.~269-271.})\index{SHULTZ,
+H.}\index{LEONARD, B.} Suatu barisan bilangan acak dalam $[0, 1)$ dibangkitkan sampai barisan tersebut
+tidak lagi naik monoton. Bilangan-bilangannya dipilih menurut distribusi seragam. Berapakah
+nilai harapan panjang barisan tersebut? (Dalam menghitung panjangnya, suku yang merusak
+kemonotonan ikut dihitung.) \emx {Petunjuk}: Misalkan $a_1,\ a_2,\ \ldots$ adalah barisan tersebut dan $X$ menyatakan
+panjang barisan. Maka
+$$P(X > k) = P(a_1 < a_2 < \cdots < a_k)\ ,$$
+dan probabilitas pada ruas kanan mudah dihitung. Lebih lanjut, dapat ditunjukkan bahwa
+$$E(X) = 1 + P(X > 1) + P(X > 2) + \cdots\ .$$
+
+\i\label{exer 6.1.42}
+Misalkan $T$ adalah peubah acak yang menghitung banyaknya 2-unshuffle yang dilakukan pada setumpuk $n$ kartu
+sampai semua label pada kartu berbeda. Peubah acak ini telah dibahas dalam
+Bagian~\ref{sec 3.3}. Dengan menggunakan Persamaan~\ref{eq 3.3.1} dalam bagian tersebut, bersama rumus
+$$
+E(T) = \sum_{s = 0}^\infty P(T > s)
+$$
+yang dibuktikan dalam Latihan~\ref{exer 6.1.33}, tunjukkan bahwa
+$$
+E(T) = \sum_{s = 0}^\infty \left(1 - {{2^s}\choose n}\frac {n!}{2^{sn}}\right)\ .
+$$
+Tunjukkan bahwa untuk $n = 52$, bentuk ini kira-kira sama dengan 11.7. (Seperti dinyatakan dalam
+Bab~\ref{chp 3}, ini berarti bahwa secara rata-rata, hampir 12 kocokan riffle pada setumpuk 52 kartu
+diperlukan agar prosesnya dapat dianggap acak.)
+
+
+\end{LJSItem}
+
+\section{Varians Peubah Acak Diskret}\label{sec 6.2}
+
+Nilai harapan semakin berguna sebagai prediksi hasil suatu percobaan ketika hasil
+tersebut kecil kemungkinannya menyimpang terlalu jauh dari nilai harapan. Dalam bagian
+ini kita akan memperkenalkan suatu ukuran penyimpangan tersebut, yang disebut
+varians.
+
+\subsection*{Varians}
+
+%**********Some comments we made on pg. 238 (prompted by Mark) have not been acted
+%upon yet.
+
+\begin{definition}\label{def 6.4} Misalkan $X$ adalah peubah acak bernilai numerik
+dengan nilai harapan $\mu = E(X)$. Maka \emx {varians}\index{varians} dari $X$, yang dilambangkan dengan
+$V(X)$, adalah
+$$ V(X) = E((X - \mu)^2)\ .
+$$
+\end{definition} Perhatikan bahwa menurut Teorema~\ref{thm 6.3.5}, $V(X)$ diberikan oleh
+
+\begin{equation} V(X) = \sum_x (x - \mu)^2 m(x)\ , 
+\label{eq 6.1}
+\end{equation} dengan $m$ sebagai fungsi distribusi dari $X$.
+
+\subsection*{Simpangan Baku}
+
+\emx {Simpangan baku}\index{simpangan baku} dari $X$, yang dilambangkan dengan $D(X)$, adalah $D(X) =
+\sqrt {V(X)}$. Kita sering menulis $\sigma$ untuk $D(X)$ dan $\sigma^2$ untuk $V(X)$.
+
+
+\begin{example}\label{exam 6.13} Tinjaulah satu kali lemparan sebuah dadu. Misalkan $X$ adalah angka
+yang muncul. Untuk mencari
+$V(X)$, pertama-tama kita harus mencari nilai harapan $X$. Nilainya adalah
+\begin{eqnarray*}
+\mu & = & E(X) = 1\Bigl(\frac 16\Bigr) + 2\Bigl(\frac 16\Bigr) + 3\Bigl(\frac
+16\Bigr) +  4\Bigl(\frac 16\Bigr) + 5\Bigl(\frac 16\Bigr) + 6\Bigl(\frac 16\Bigr) \\
+    & = & \frac 72\ .
+\end{eqnarray*}
+
+Untuk mencari varians $X$, kita membentuk peubah acak baru $(X - \mu)^2$ dan
+menghitung nilai harapannya. Kita dapat melakukannya dengan mudah menggunakan tabel berikut.
+
+\begin{table}
+\centering
+$$\begin{tabular}{ccc}
+  && \\ \hline
+$x$ & $m(x)$ & $(x - 7/2)^2$ \\ \hline 1 & 1/6 &       25/4  \\ 2 & 1/6
+&\hspace{.05in}       9/4  \\ 3 & 1/6 &\hspace{.05in}       1/4  \\ 4 & 1/6
+&\hspace{.05in}       1/4  \\ 5 & 1/6 &\hspace{.05in}       9/4  \\ 6 & 1/6 &      
+25/4  \\\hline
+\end{tabular}
+$$ 
+\caption{Perhitungan varians.}
+\label{table 6.6}
+\end{table}
+
+Dari tabel ini kita memperoleh $E((X - \mu)^2)$ sebagai
+\begin{eqnarray*} V(X) & = & \frac 16 \left( \frac {25}4 + \frac 94 + \frac 14 +
+\frac 14 + \frac 94 + \frac {25}4 \right) \\
+     & = &\frac {35}{12}\ ,
+\end{eqnarray*} dan simpangan baku $D(X) = \sqrt{35/12} \approx 1.707$.
+\end{example}
+
+\subsection*{Perhitungan Varians}\index{varians!perhitungan}
+
+Selanjutnya kita membuktikan sebuah teorema yang memberikan bentuk alternatif yang berguna untuk menghitung
+varians.
+
+\begin{theorem}\label{thm 6.7} Jika $X$ adalah sebarang peubah acak dengan $E(X) = \mu$, maka
+$$ V(X) = E(X^2) - \mu^2\ .
+$$
+\proof Kita mempunyai
+\begin{eqnarray*} V(X) & = & E((X - \mu)^2) = E(X^2 - 2\mu X + \mu^2) \\
+     & = & E(X^2) - 2\mu E(X) + \mu^2 = E(X^2) - \mu^2\ .
+\end{eqnarray*}
+\end{theorem}
+
+Dengan menggunakan Teorema~\ref{thm 6.7}, kita dapat menghitung varians hasil satu lemparan
+dadu dengan terlebih dahulu menghitung
+\begin{eqnarray*} E(X^2) & = & 1\Bigl(\frac 16\Bigr) + 4\Bigl(\frac 16\Bigr) +
+9\Bigl(\frac 16\Bigr) + 16\Bigl(\frac 16\Bigr) + 25\Bigl(\frac 16\Bigr) +
+36\Bigl(\frac 16\Bigr) \\
+       & = &\frac {91}6\ ,
+\end{eqnarray*} dan,
+$$ 
+V(X)  =  E(X^2) - \mu^2 = \frac {91}{6} - \Bigl(\frac 72\Bigr)^2
+ = \frac {35}{12}\ ,
+$$
+yang sesuai dengan nilai yang diperoleh langsung dari definisi
+$V(X)$.
+
+
+\subsection*{Sifat-Sifat Varians}
+
+Varians memiliki sifat-sifat yang sangat berbeda dari nilai harapan. Jika
+$c$ adalah sebarang konstanta, $E(cX) = cE(X)$ dan $E(X + c) = E(X) + c$. Kedua pernyataan ini
+menyiratkan bahwa nilai harapan merupakan fungsi linear. Namun, varians tidak
+linear, seperti terlihat dalam teorema berikut.
+
+\begin{theorem}\label{thm 6.6} Jika $X$ adalah sebarang peubah acak dan $c$ adalah sebarang konstanta,
+maka
+$$ V(cX)  = c^2 V(X)
+$$ dan
+$$ V(X + c) = V(X)\ .
+$$
+\proof Misalkan $\mu = E(X)$. Maka $E(cX) = c\mu$, dan
+\begin{eqnarray*} V(cX) &=& E((cX - c\mu)^2) = E(c^2(X - \mu)^2) \\
+      &=& c^2 E((X - \mu)^2) = c^2 V(X)\ .
+\end{eqnarray*}
+
+Untuk membuktikan pernyataan kedua, perhatikan bahwa untuk menghitung $V(X + c)$, kita mengganti
+$x$ dengan $x + c$ dan $\mu$ dengan $\mu + c$ dalam Persamaan~\ref{eq 6.1}. Kemudian suku-suku
+$c$ saling menghilangkan, sehingga tersisa $V(X)$.
+\end{theorem}
+
+Sekarang kita beralih ke beberapa sifat umum varians. Ingatlah bahwa jika $X$ dan
+$Y$ adalah dua peubah acak sebarang, $E(X + Y) = E(X) + E(Y)$. Hal ini tidak selalu berlaku
+untuk varians. Sebagai contoh, misalkan $X$ adalah peubah acak dengan
+$V(X) \ne 0$, dan definisikan $Y = -X$. Maka $V(X) = V(Y)$, sehingga $V(X) + V(Y) =
+2V(X)$. Namun,
+$X + Y$ selalu 0 dan karenanya memiliki varians 0. Jadi, $V(X + Y) \ne V(X) + V(Y)$.
+\par Namun, dalam kasus penting peubah-peubah acak yang saling bebas, \emx {varians
+jumlah sama dengan jumlah varians.}
+
+\begin{theorem}\label{thm 6.8} Misalkan $X$ dan $Y$ adalah dua peubah acak yang \emx {saling
+bebas}. Maka
+$$V(X + Y) = V(X) + V(Y)\ .$$
+\proof Misalkan $E(X) = a$ dan $E(Y) = b$. Maka
+\begin{eqnarray*} V(X + Y) & = & E((X + Y)^2) - (a + b)^2 \\
+         & = & E(X^2) + 2E(XY) + E(Y^2) - a^2 - 2ab - b^2\ .
+\end{eqnarray*} Karena $X$ dan $Y$ saling bebas, $E(XY) = E(X)E(Y) = ab$. Jadi,
+$$ V(X + Y) = E(X^2) - a^2 + E(Y^2) - b^2 = V(X) + V(Y)\ .
+$$
+\end{theorem}
+
+Bukti ini mudah diperluas melalui induksi matematika untuk menunjukkan bahwa {\em
+varians jumlah sebarang banyaknya peubah acak yang saling bebas sama dengan jumlah
+varians masing-masing.} Dengan demikian, kita memperoleh teorema berikut.
+
+\begin{theorem}\label{thm 6.9} Misalkan $X_1$,~$X_2$, \dots,~$X_n$ merupakan suatu proses
+percobaan saling bebas dengan $E(X_j) =
+\mu$ dan $V(X_j) = \sigma^2$. Misalkan
+$$ S_n = X_1 + X_2 +\cdots+ X_n
+$$ merupakan jumlahnya, dan
+$$ A_n = \frac {S_n}n
+$$ merupakan rataannya. Maka
+\begin{eqnarray*} E(S_n) &=& n\mu\ , \\
+V(S_n) &=& n\sigma^2\ , \\ 
+\sigma(S_n) &=& \sigma \sqrt{n}\ , \\
+E(A_n) &=& \mu\ , \\
+V(A_n) &=& \frac {\sigma^2}\ , \\
+\sigma(A_n) &=& \frac{\sigma}{\sqrt n}\ .
+\end{eqnarray*}
+\proof Karena semua peubah acak $X_j$ mempunyai nilai harapan yang sama, kita mempunyai
+$$ E(S_n) = E(X_1) +\cdots+ E(X_n) = n\mu\ ,
+$$ 
+$$ V(S_n) = V(X_1) +\cdots+ V(X_n) = n\sigma^2\ ,
+$$
+dan
+$$\sigma(S_n) = \sigma \sqrt{n}\ .$$
+
+Kita telah melihat bahwa jika suatu peubah acak $X$ dengan rataan $\mu$ dan varians
+$\sigma^2$ dikalikan dengan konstanta $c$, peubah acak baru tersebut memiliki nilai harapan $c\mu$ dan
+varians $c^2\sigma^2$. Jadi,
+$$ E(A_n) = E\left(\frac {S_n}n \right) = \frac {n\mu}n = \mu\ ,
+$$ dan
+$$ V(A_n) = V\left( \frac {S_n}n \right) = \frac {V(S_n)}{n^2} = \frac
+{n\sigma^2}{n^2} = \frac {\sigma^2}n\ .
+$$ 
+Terakhir, simpangan baku $A_n$ diberikan oleh
+$$\sigma(A_n) = \frac {\sigma}{\sqrt n}\ .$$
+\end{theorem}
+
+Persamaan terakhir dalam teorema di atas menyiratkan bahwa dalam suatu proses percobaan saling bebas,
+jika masing-masing suku memiliki varians berhingga, maka simpangan baku
+rataannya menuju 0 ketika $n \rightarrow \infty$. Karena simpangan baku memberi kita
+informasi tentang sebaran distribusi di sekitar rataan, kita melihat bahwa untuk nilai $n$
+yang besar, nilai $A_n$ biasanya sangat dekat dengan rataan $A_n$, yang
+sama dengan $\mu$, seperti ditunjukkan di atas. Pernyataan ini dibuat tepat dalam Bab~\ref{chp 8},
+dan disebut Hukum Bilangan Besar. Sebagai contoh, misalkan $X$ menyatakan hasil lemparan
+sebuah dadu seimbang. Dalam Gambar~\ref{fig 6.4.5}, kita menunjukkan distribusi peubah acak
+$A_n$ yang berkaitan dengan $X$, untuk $n = 10$ dan $n = 100$.
+
+\putfig{5truein}{PSfig6-4-5}
+{Distribusi empiris $A_n$.}{fig 6.4.5}
+
+\begin{example}\label{exam 6.14} Tinjaulah $n$ kali lemparan sebuah dadu. Kita telah melihat bahwa jika
+$X_j$ adalah hasil lemparan
+ke-$j$, maka $E(X_j) = 7/2$ dan $V(X_j) = 35/12$. Jadi, jika $S_n$ adalah jumlah
+hasil-hasil tersebut, dan $A_n = S_n/n$ adalah rataan hasilnya, kita mempunyai
+$E(A_n) = 7/2$ dan $V(A_n) = (35/12)/n$. Oleh karena itu, ketika $n$ bertambah, nilai harapan
+rataan tetap konstan, tetapi varians menuju~0. Jika varians
+merupakan ukuran nilai harapan penyimpangan dari rataan, hal ini menunjukkan bahwa untuk
+$n$ yang besar, kita dapat mengharapkan rataan sangat dekat dengan nilai harapan. Hal ini memang
+benar, dan kita akan membenarkannya dalam Bab~\ref{chp 8}.
+\end{example}
+
+\subsection*{Percobaan Bernoulli}
+
+Selanjutnya, tinjaulah proses percobaan Bernoulli umum. Seperti biasa, kita misalkan $X_j = 1$ jika
+hasil ke-$j$ merupakan keberhasilan dan 0 jika merupakan kegagalan. Jika $p$ adalah probabilitas
+keberhasilan, dan $q = 1 - p$, maka
+\begin{eqnarray*} E(X_j) & = & 0q + 1p = p\ , \\ E(X_j^2) & = & 0^2q + 1^2p = p\ ,
+\end{eqnarray*} dan
+$$ V(X_j) = E(X_j^2) - (E(X_j))^2 = p - p^2 = pq\ .
+$$
+
+Jadi, untuk percobaan Bernoulli, jika $S_n = X_1 + X_2 +\cdots+ X_n$ adalah banyaknya
+keberhasilan, maka $E(S_n) = np$, $V(S_n) = npq$, dan $D(S_n) = \sqrt{npq}.$ Jika
+$A_n = S_n/n$ adalah proporsi keberhasilan, maka $E(A_n) = p$, $V(A_n) = pq/n$,
+dan $D(A_n) = \sqrt{pq/n}$. Kita melihat bahwa nilai harapan proporsi keberhasilan tetap
+$p$ dan varians menuju~0. Hal ini menunjukkan bahwa penafsiran frekuensi atas
+peluang adalah tepat. Kita akan membuat pernyataan ini lebih tepat dalam Bab~\ref{chp 8}.
+
+\begin{example}\label{exam 6.15} Misalkan $T$ menyatakan banyaknya percobaan sampai keberhasilan
+pertama dalam suatu proses percobaan Bernoulli. Maka $T$ berdistribusi geometrik. Berapakah
+varians $T$? Dalam Contoh~\ref{exam 5.7}, kita melihat bahwa
+$$ m_T = \pmatrix{1 &  2 &    3 & \cdots \cr p & qp & q^2p & \cdots \cr}.
+$$ Dalam Contoh~\ref{exam 6.8}, kita menunjukkan bahwa
+$$E(T) = 1/p\ .$$  
+Jadi,
+$$V(T) = E(T^2) - 1/p^2\ ,$$  
+sehingga kita hanya perlu mencari
+\begin{eqnarray*} E(T^2) & = & 1p + 4qp + 9q^2p + \cdots \\
+       & = & p(1 + 4q + 9q^2 + \cdots )\ .
+\end{eqnarray*} Untuk menghitung jumlah ini, kita mulai lagi dengan
+$$ 1 + x + x^2 +\cdots= \frac 1{1 - x}\ .
+$$ Dengan mendiferensialkan, kita memperoleh
+$$ 1 + 2x + 3x^2 +\cdots= \frac 1{(1 - x)^2}\ .
+$$ Dengan mengalikan dengan $x$,
+$$ x + 2x^2 + 3x^3 +\cdots= \frac x{(1 - x)^2}\ .
+$$ Dengan mendiferensialkan sekali lagi, diperoleh
+$$ 1 + 4x + 9x^2 +\cdots= \frac {1 + x}{(1 - x)^3}\ .
+$$ Jadi,
+$$ E(T^2) = p\frac {1 + q}{(1 - q)^3} = \frac {1 + q}{p^2}
+$$ dan
+\begin{eqnarray*} V(T) & = & E(T^2) - (E(T))^2 \\
+     & = & \frac {1 + q}{p^2} - \frac 1{p^2} = \frac q{p^2}\ .
+\end{eqnarray*}
+
+Sebagai contoh, varians banyaknya lemparan koin sampai kepala pertama
+muncul adalah $(1/2)/(1/2)^2 = 2$. Varians banyaknya lemparan dadu sampai
+enam pertama muncul adalah $(5/6)/(1/6)^2 = 30$. Perhatikan bahwa ketika $p$ mengecil,
+varians meningkat dengan cepat. Hal ini berkaitan dengan meningkatnya sebaran
+distribusi geometrik ketika $p$ mengecil (seperti dicatat dalam Gambar~\ref{fig 5.4}).
+\end{example}
+
+\subsection*{Distribusi Poisson}\index{distribusi Poisson!varians}
+
+Seperti dalam kasus nilai harapan, varians distribusi
+Poisson dengan parameter $\lambda$ mudah diduga. Ingatlah bahwa varians suatu
+distribusi binomial dengan parameter $n$ dan $p$ sama dengan $npq$. Ingat pula bahwa
+distribusi Poisson dapat diperoleh sebagai limit distribusi binomial jika
+$n$ menuju $\infty$ dan $p$ menuju 0 sedemikian sehingga hasil kalinya tetap pada
+nilai $\lambda$. Dalam kasus ini, $npq = \lambda q$ mendekati $\lambda$, karena
+$q$ menuju 1. Jadi, untuk distribusi Poisson dengan parameter $\lambda$, kita patut
+menduga bahwa variansnya adalah $\lambda$. Pembaca diminta menunjukkan hal ini dalam
+Latihan~\ref{exer 6.2.100}.
+
+\exercises
+\begin{LJSItem}
+
+ 
+\i\label{exer 6.2.1} Sebuah bilangan dipilih secara acak dari himpunan
+$S = \{-1,0,1\}$. Misalkan $X$ adalah bilangan yang dipilih.  Carilah nilai harapan,
+varians, dan simpangan baku $X$.
+
+\i\label{exer 6.2.2} Peubah acak $X$ memiliki distribusi
+$$ p_X = \pmatrix{ 0 & 1 & 2 & 4 \cr 1/3 & 1/3 & 1/6 & 1/6 \cr}\ .
+$$ Carilah nilai harapan, varians, dan simpangan baku $X$.
+
+\i\label{exer 6.2.3} Anda memasang taruhan 1 dolar pada bilangan 17 di Las Vegas,
+sedangkan teman Anda memasang taruhan 1 dolar pada warna hitam (lihat
+Latihan~\ref{sec 1.1}.\ref{exer 1.1.6}~dan~\ref{sec 1.1}.\ref{exer 1.1.7}).  Misalkan
+$X$ adalah kemenangan Anda dan $Y$ adalah kemenangan teman Anda.  Bandingkan
+$E(X)$,~$E(Y)$ serta $V(X)$,~$V(Y)$.  Apa yang disampaikan perhitungan ini tentang
+sifat kemenangan Anda jika Anda dan teman Anda membuat serangkaian taruhan, dengan
+Anda selalu bertaruh pada suatu bilangan dan teman Anda bertaruh pada suatu warna?
+
+\i\label{exer 6.2.4} $X$ adalah peubah acak dengan $E(X) = 100$ dan $V(X) = 15$.
+Carilah
+\begin{enumerate}
+\item $E(X^2)$.
+
+\item $E(3X + 10)$.
+
+\item $E(-X)$.
+
+\item $V(-X)$.
+
+\item $D(-X)$.
+\end{enumerate}
+
+\i\label{exer 6.2.5} Dalam suatu proses manufaktur, suhu (Fahrenheit) tidak pernah
+menyimpang lebih dari $2^\circ$ dari $62^\circ$.  Suhu tersebut sebenarnya merupakan
+peubah acak $F$ dengan distribusi
+$$ P_F = \pmatrix{ 60 & 61 & 62 & 63 & 64 \cr 1/10 & 2/10 & 4/10 & 2/10 & 1/10 \cr}\ .
+$$
+\begin{enumerate}
+\item Carilah $E(F)$ dan $V(F)$.
+\item Definisikan $T = F - 62$.  Carilah $E(T)$ dan $V(T)$, lalu bandingkan jawaban
+ini dengan jawaban pada bagian (a).
+
+\item Diputuskan bahwa pembacaan suhu akan dilaporkan pada skala Celsius, yaitu
+$C = (5/9)(F - 32)$.  Sekarang berapakah nilai harapan dan varians pembacaan tersebut?
+\end{enumerate}
+
+\i\label{exer 6.2.6} Tulislah program komputer untuk menghitung rataan dan varians
+suatu distribusi yang Anda tentukan sebagai data.  Gunakan program tersebut untuk
+membandingkan varians kedua densitas berikut, yang sama-sama memiliki nilai harapan~0:
+$$  p_X = \pmatrix{ -2 & -1 & 0 & 1 & 2 \cr 3/11 & 2/11 & 1/11 & 2/11 & 3/11 \cr}\ ;
+$$
+$$ p_Y = \pmatrix{ -2 & -1 & 0 & 1 & 2 \cr 1/11 & 2/11 & 5/11 & 2/11 & 1/11 \cr}\ .
+$$
+
+\i\label{exer 6.2.7} Sebuah koin dilempar tiga kali.  Misalkan $X$ adalah banyaknya
+kepala yang muncul.  Carilah $V(X)$ dan $D(X)$.
+
+\i\label{exer 6.2.8} Sebuah sampel acak berisi 2400 orang ditanya apakah mereka
+mendukung usulan pemerintah untuk membangun pembangkit listrik tenaga nuklir baru.
+Jika 40~persen penduduk negara tersebut mendukung usulan ini, carilah nilai harapan
+dan simpangan baku bagi banyaknya orang $S_{2400}$ dalam sampel yang mendukung usulan.
+
+\i\label{exer 6.2.9} Sebuah dadu diberi bobot sedemikian rupa sehingga peluang
+kemunculan suatu sisi sebanding dengan bilangan pada sisi tersebut.  Dadu dilempar
+dengan hasil~$X$.  Carilah $V(X)$ dan $D(X)$.
+
+\i\label{exer 6.2.10} Buktikan fakta-fakta berikut tentang simpangan baku.
+\begin{enumerate}
+\item $D(X + c) = D(X)$.
+
+\item $D(cX) = |c|D(X)$.
+\end{enumerate}
+
+\i\label{exer 6.2.11} Sebuah bilangan dipilih secara acak dari bilangan bulat
+1,~2,~3, \dots,~$n$.  Misalkan $X$ adalah bilangan yang dipilih.  Tunjukkan bahwa
+$E(X) = (n + 1)/2$ dan $V(X) = (n - 1)(n + 1)/12$.   \emx {Petunjuk}: Identitas
+berikut mungkin berguna:
+$$ 1^2 + 2^2 + \cdots + n^2 = \frac{(n)(n+1)(2n+1)}{6}\ .
+$$
+
+\i\label{exer 6.2.13} Misalkan $X$ adalah peubah acak dengan $\mu = E(X)$ dan
+$\sigma^2 = V(X)$.  Definisikan $X^* = (X - \mu)/\sigma$.  Peubah acak $X^*$ disebut
+\emx {peubah acak baku}\index{peubah acak baku} yang berkaitan dengan $X$.  Tunjukkan
+bahwa peubah acak baku ini memiliki nilai harapan 0 dan varians 1.
+
+\i\label{exer 6.2.14} Peter dan Paul memainkan Kepala atau Ekor (lihat
+Contoh~\ref{exam 1.3}).  Misalkan $W_n$ adalah kemenangan Peter setelah $n$
+pertandingan.  Tunjukkan bahwa $E(W_n) = 0$ dan $V(W_n) = n$.
+
+\i\label{exer 6.2.15} Carilah nilai harapan dan varians banyaknya anak laki-laki
+serta banyaknya anak perempuan dalam sebuah keluarga kerajaan yang terus memiliki
+anak sampai lahir seorang anak laki-laki atau sampai terdapat tiga anak, mana pun yang
+terjadi lebih dahulu.
+
+\i\label{exer 6.2.16} Misalkan topi milik $n$ orang dikembalikan secara acak.
+Misalkan $X_i = 1$ jika orang ke-$i$ memperoleh kembali topinya sendiri dan 0 jika
+tidak.  Misalkan
+$S_n =
+\sum_{i = 1}^n X_i$.  Maka $S_n$ adalah banyaknya orang yang memperoleh kembali
+topinya sendiri.  Tunjukkan bahwa
+\begin{enumerate}
+\item $E(X_i^2) = 1/n$.
+
+\item $E(X_i \cdot X_j) = 1/n(n - 1)$ untuk $i \ne j$.
+
+\item $E(S_n^2) = 2$ (gunakan (a) dan (b)).
+
+\item $V(S_n) = 1$.
+\end{enumerate}
+
+\i\label{exer 6.2.17} Misalkan $S_n$ adalah banyaknya keberhasilan dalam $n$
+percobaan independen.  Gunakan program {\bf BinomialProbabilities}
+(Bagian~\ref{sec 3.2}) untuk menghitung, bagi $n$,~$p$, dan~$j$ yang diberikan, peluang
+$$ P(-j\sqrt{npq} < S_n - np < j\sqrt{npq})\ .
+$$
+\begin{enumerate}
+\item Misalkan $p = .5$, dan hitunglah peluang ini untuk $j = 1$,~2,~3 serta $n =
+10$,~30,~50.  Lakukan hal yang sama untuk $p = .2$.
+
+\item Tunjukkan bahwa \emx {peubah acak baku} $S_n^* = (S_n - np)/\sqrt{npq}$
+memiliki nilai harapan 0 dan varians 1.  Apa yang disampaikan hasil Anda dari (a)
+tentang besaran baku $S_n^*$ ini?
+\end{enumerate}
+
+\i\label{exer 6.2.18} Misalkan $X$ adalah hasil suatu percobaan acak dengan
+$E(X) = \mu$ dan $V(X) = \sigma^2$.  Ketika $\mu$ dan $\sigma^2$ tidak diketahui,
+statistikawan sering mengestimasikannya dengan mengulangi percobaan $n$ kali dan
+memperoleh hasil $x_1$,~$x_2$, \dots,~$x_n$. Parameter $\mu$ diestimasi dengan
+\emx {rataan sampel}\index{rataan sampel}
+$$
+\bar{x} = \frac 1n \sum_{i = 1}^n x_i\ ,
+$$ dan $\sigma^2$ dengan \emx {varians sampel}\index{varians sampel}
+$$ s^2 = \frac 1n \sum_{i = 1}^n (x_i - \bar x)^2\ .
+$$ Maka $s$ adalah \emx {simpangan baku sampel.}\index{simpangan baku sampel}
+Rumus-rumus ini seharusnya mengingatkan pembaca pada definisi rataan dan varians
+teoretis.  (Banyak statistikawan mendefinisikan varians sampel dengan mengganti
+koefisien $1/n$ menjadi $1/(n-1)$.  Jika definisi alternatif ini digunakan, nilai
+harapan $s^2$ sama dengan $\sigma^2$. Lihat Latihan~\ref{exer 6.2.19}, bagian (d).)
+
+Tulislah program komputer yang melempar dadu $n$ kali dan menghitung rataan sampel
+serta varians sampel.  Ulangi percobaan ini beberapa kali untuk~$n = 10$ dan~$n =
+1000$.  Seberapa baik rataan sampel dan varians sampel mengestimasi rataan sebenarnya
+7/2 dan varians 35/12?
+
+\i\label{exer 6.2.19} Tunjukkan bahwa, untuk rataan sampel $\bar x$ dan varians
+sampel $s^2$ sebagaimana didefinisikan dalam Latihan~\ref{exer 6.2.18},
+\begin{enumerate}
+\item $E(\bar x) = \mu$.
+
+\item $E\bigl((\bar x - \mu)^2\bigr) = \sigma^2/n$.
+
+\item $E(s^2) = \frac {n-1}n\sigma^2$. \emx {Petunjuk}: Untuk (c), tuliskan
+\begin{eqnarray*}
+\sum_{i = 1}^n (x_i - \bar x)^2 & = & \sum_{i = 1}^n \bigl((x_i - \mu) -
+(\bar x - \mu)\bigr)^2 \\
+     & = & \sum_{i = 1}^n (x_i - \mu)^2 - 2(\bar x - \mu) \sum_{i = 1}^n (x_i -
+\mu) + n(\bar x - \mu)^2 \\
+     & = & \sum_{i = 1}^n (x_i - \mu)^2 - n(\bar x - \mu)^2,
+\end{eqnarray*} lalu ambil nilai harapan kedua ruas, dengan menggunakan bagian (b)
+jika diperlukan.
+
+\item Tunjukkan bahwa jika dalam definisi $s^2$ pada Latihan~\ref{exer 6.2.18} kita
+mengganti koefisien $1/n$ dengan koefisien $1/(n-1)$, maka $E(s^2) = \sigma^2$.
+(Hal ini menunjukkan mengapa banyak statistikawan menggunakan koefisien $1/(n-1)$.
+Bilangan $s^2$ digunakan untuk mengestimasi besaran $\sigma^2$ yang tidak diketahui.
+Jika suatu estimator memiliki nilai rata-rata yang sama dengan besaran yang
+diestimasi, estimator itu disebut \emx {tak bias}.\index{estimator tak bias}  Jadi,
+pernyataan $E(s^2) = \sigma^2$ mengatakan bahwa $s^2$ merupakan estimator tak bias
+bagi $\sigma^2$.)
+\end{enumerate}
+
+\i\label{exer 6.2.20} Misalkan $X$ adalah peubah acak yang mengambil nilai
+$a_1$,~$a_2$, \dots, $a_r$ dengan peluang $p_1$,~$p_2$, \dots,~$p_r$ dan memenuhi
+$E(X) = \mu$.  Definisikan \emx {ukuran sebaran}\index{ukuran sebaran} $X$ sebagai berikut:
+$$
+\bar\sigma = \sum_{i = 1}^r |a_i - \mu|p_i\ .
+$$ Besaran ini, seperti simpangan baku, merupakan cara mengukur seberapa tersebar
+suatu peubah acak di sekitar rataannya.  Ingat bahwa varians jumlah peubah acak yang
+saling independen sama dengan jumlah varians masing-masing peubah.  Kuadrat ukuran
+sebaran berhubungan dengan varians seperti ukuran sebaran berhubungan dengan simpangan
+baku.  Tunjukkan dengan sebuah contoh bahwa kuadrat ukuran sebaran jumlah dua peubah
+acak independen tidak harus sama dengan jumlah kuadrat ukuran sebaran masing-masing.
+
+\i\label{exer 6.2.21} Kita memiliki dua instrumen yang mengukur jarak antara dua
+titik.  Pengukuran yang diberikan oleh kedua instrumen merupakan peubah acak $X_1$
+dan $X_2$ yang independen dengan $E(X_1) = E(X_2) = \mu$, dengan $\mu$ sebagai jarak
+sebenarnya.  Berdasarkan pengalaman dengan instrumen ini, kita mengetahui nilai
+varians $\sigma_1^2$ dan $\sigma_2^2$.  Kedua varians ini tidak harus sama.  Dari dua
+pengukuran, kita mengestimasi $\mu$ dengan rata-rata berbobot $\bar \mu = wX_1 +
+(1 - w)X_2$.  Di sini $w$ dipilih dalam $[0,1]$ untuk meminimumkan varians $\bar \mu$.
+\begin{enumerate}
+\item Berapakah $E(\bar \mu)$?
+
+\item Bagaimanakah $w$ harus dipilih dalam $[0,1]$ agar varians $\bar \mu$ minimum?
+\end{enumerate}
+
+\i\label{exer 6.2.22} Misalkan $X$ adalah peubah acak dengan $E(X) = \mu$ dan
+$V(X) = \sigma^2$.  Tunjukkan bahwa fungsi $f(x)$ yang didefinisikan oleh
+$$ f(x) = \sum_\omega (X(\omega) - x)^2 p(\omega)
+$$ mencapai nilai minimum ketika $x = \mu$.
+
+\i\label{exer 6.2.23} Misalkan $X$ dan $Y$ adalah dua peubah acak yang didefinisikan
+pada ruang sampel terhingga $\Omega$.  Asumsikan bahwa $X$,~$Y$, $X + Y$, dan~$X - Y$
+semuanya memiliki distribusi yang sama.  Buktikan bahwa $P(X = Y = 0) = 1$.
+
+\i\label{exer 6.2.24} Jika $X$ dan $Y$ adalah sebarang dua peubah acak, maka {\em
+kovarians} $X$ dan $Y$ didefinisikan oleh {\rm Cov}$(X,Y) = E((X - E(X))(Y -
+E(Y)))$.  Perhatikan bahwa {\rm Cov}$(X,X) = V(X)$.  Tunjukkan bahwa jika $X$ dan $Y$
+independen, maka {\rm Cov}$(X,Y) = 0$; lalu berikan contoh yang menunjukkan bahwa
+dapat berlaku {\rm Cov}$(X,Y) = 0$ sementara $X$ dan $Y$ tidak independen.
+
+\istar\label{exer 6.2.25} Seorang profesor ingin menyusun ujian benar-salah
+\index{ujian benar-salah} dengan $n$ soal.  Ia mengasumsikan bahwa soal-soal dapat
+dirancang sedemikian rupa sehingga mahasiswa menjawab soal ke-$j$ dengan benar dengan
+peluang $p_j$, dan bahwa jawaban atas berbagai soal dapat dipandang sebagai percobaan
+independen.  Misalkan $S_n$ adalah banyaknya soal yang dijawab benar oleh seorang
+mahasiswa.  Profesor ingin memilih $p_j$ sehingga $E(S_n) = .7n$ dan varians $S_n$
+sebesar mungkin.  Tunjukkan bahwa untuk mencapainya, ia harus memilih $p_j = .7$
+untuk semua~$j$; artinya, semua soal harus memiliki tingkat kesulitan yang sama.
+
+\i\label{exer 6.2.26} (Lamperti\index{LAMPERTI, J.}\footnote{Komunikasi pribadi.})
+Sebuah guci berisi tepat 5000 bola. Sebanyak $X$ bola berwarna putih, dengan jumlah
+ini tidak diketahui, dan sisanya merah; $X$ adalah peubah acak dengan distribusi peluang pada
+bilangan bulat 0,~1,~2, \dots,~5000.
+\begin{enumerate}
+\item Misalkan kita mengetahui bahwa $E(X) = \mu$.  Tunjukkan bahwa informasi ini
+cukup untuk menghitung peluang bahwa sebuah bola yang diambil secara acak dari guci
+berwarna putih.  Berapakah peluang ini?
+
+\item Kita mengambil sebuah bola dari guci, memeriksa warnanya, mengembalikannya,
+lalu mengambil bola lain.  Dalam kondisi apakah, jika ada, hasil kedua pengambilan
+independen; yakni, apakah
+$$
+ P({{\rm putih},{\rm putih}}) =  P({{\rm putih}})^2\ ?
+$$
+
+\item Misalkan varians $X$ adalah $\sigma^2$.  Berapakah peluang mengambil dua bola
+putih dalam bagian (b)?
+
+\end{enumerate}
+
+
+\i\label{exer 6.2.27} Untuk barisan percobaan Bernoulli, misalkan $X_1$ adalah
+banyaknya percobaan hingga keberhasilan pertama.  Untuk~$j \geq 2$, misalkan $X_j$
+adalah banyaknya percobaan setelah keberhasilan ke-$(j - 1)$ hingga keberhasilan
+ke-$j$.  Dapat ditunjukkan bahwa $X_1$,~$X_2$,~\dots merupakan proses percobaan
+independen.
+\begin{enumerate}
+\item Apakah distribusi, nilai harapan, dan varians bersama bagi $X_j$?
+
+\item Misalkan $T_n = X_1 + X_2 +\cdots+ X_n$.  Maka $T_n$ adalah waktu hingga
+keberhasilan ke-$n$.  Carilah $E(T_n)$ dan $V(T_n)$.
+
+\item Gunakan hasil (b) untuk mencari nilai harapan dan varians banyaknya lemparan
+koin hingga kemunculan kepala ke-$n$.
+\end{enumerate}
+
+\i\label{exer 6.2.28} Dengan mengacu pada
+Latihan~\ref{sec 6.1}.\ref{exer 6.1.30}, carilah varians banyaknya kotak Wheaties yang
+dibeli sebelum memperoleh gambar setengah dari para pemain dan varians banyaknya kotak
+tambahan yang diperlukan untuk memperoleh gambar separuh pemain sisanya.
+
+\i\label{exer 6.2.99} Dalam Contoh~\ref{exam 5.3}, asumsikan bahwa buku yang dimaksud
+memiliki 1000 halaman.  Misalkan $X$ adalah banyaknya halaman tanpa kesalahan.
+Tunjukkan bahwa $E(X) = 905$ dan $V(X) = 86$.  Dengan menggunakan hasil ini, tunjukkan
+bahwa peluang terdapat lebih dari 924 halaman tanpa kesalahan atau kurang dari 866
+halaman tanpa kesalahan adalah ${} \leq .05$.
+
+\i\label{exer 6.2.100} Misalkan $X$ berdistribusi Poisson dengan parameter
+$\lambda$.  Tunjukkan bahwa $V(X) = \lambda$.
+
+\end{LJSItem}
+
+\choice{}{\section{Peubah Acak Kontinu}\label{sec 6.3}
+
+Pada bagian ini kita membahas sifat-sifat nilai harapan dan varians suatu peubah acak
+kontinu. Besaran-besaran ini didefinisikan sama seperti untuk peubah acak diskret dan
+memiliki sifat-sifat yang sama.
+
+\subsection*{Nilai Harapan}
+
+\begin{definition}\label{def 6.5} Misalkan $X$ adalah peubah acak bernilai real dengan
+fungsi densitas $f(x)$. \emx {Nilai harapan}\index{nilai harapan} $\mu = E(X)$
+didefinisikan oleh
+$$
+\mu = E(X) = \int_{-\infty}^{+\infty} xf(x)\,dx\ ,
+$$
+asalkan integral
+$$
+\int_{-\infty}^{+\infty} |x|f(x)\,dx
+$$
+berhingga.
+\end{definition}
+
+Bandingkan definisi ini dengan definisi yang bersesuaian untuk peubah acak diskret
+dalam Bagian~\ref{sec 6.1}. Secara intuitif, seperti pada bagian-bagian sebelumnya,
+kita dapat menafsirkan $E(X)$ sebagai nilai yang kita harapkan akan diperoleh jika kita
+melakukan banyak percobaan independen dan merata-ratakan nilai-nilai $X$ yang dihasilkan.
+
+\par Sifat-sifat $E(X)$ dapat dirangkum sebagai berikut (bandingkan
+Teorema~\ref{thm 6.1}).
+
+\begin{theorem}\label{thm 6.10} Jika $X$ dan $Y$ adalah peubah acak bernilai real dan
+$c$ adalah sebarang konstanta, maka
+\begin{eqnarray*} 
+E(X + Y) &=& E(X) + E(Y)\ , \\ 
+E(cX)    &=& cE(X)\ .
+\end{eqnarray*}
+%\end{theorem}
+
+Buktinya sangat mirip dengan bukti Teorema~\ref{thm 6.1}, sehingga tidak disertakan.
+\end{theorem}
+\par Secara lebih umum, jika $X_1$,~$X_2$, \dots,~$X_n$ adalah $n$ peubah acak
+bernilai real dan $c_1$,~$c_2$, \dots,~$c_n$ adalah $n$ konstanta, maka
+$$ E(c_1X_1 + c_2X_2 +\cdots+ c_nX_n) = c_1E(X_1) + c_2E(X_2) +\cdots+ c_nE(X_n)\ .
+$$
+
+\begin{example}\label{exam 6.16} Misalkan $X$ berdistribusi seragam pada interval
+$[0, 1]$. Maka
+$$E(X) = \int_0^1 x\,dx = 1/2\ .$$ Dengan demikian, jika kita memilih sejumlah besar
+$N$ bilangan acak dari $[0,1]$ dan mengambil rataannya, kita dapat mengharapkan bahwa
+rataan ini mendekati nilai harapan 1/2.
+\end{example}
+
+\begin{example}\label{exam 6.17} Misalkan $Z = (x, y)$ menyatakan sebuah titik yang
+dipilih secara acak dan seragam dari cakram satuan, seperti dalam permainan lempar
+panah pada Contoh~\ref{exam 2.2.2}, dan misalkan $X = (x^2 + y^2)^{1/2}$ adalah jarak
+dari $Z$ ke pusat cakram. Dengan mudah dapat ditunjukkan bahwa fungsi densitas $X$
+adalah $f(x) = 2x$, sehingga menurut definisi nilai harapan,
+\begin{eqnarray*} E(X) & = & \int_0^1 x f(x)\,dx \\ & = & \int_0^1 x (2x)\,dx \\ & =
+& \frac 23\ .
+\end{eqnarray*}
+\end{example}
+
+\begin{example}\label{exam 6.18} Dalam contoh pasangan yang bertemu di penginapan
+(Contoh~\ref{exam 2.2.7.4}), masing-masing orang tiba pada waktu yang berdistribusi
+seragam antara pukul 5:00 dan 6:00 sore. Peubah acak $Z$ yang ditinjau adalah lamanya
+orang pertama harus menunggu sampai orang kedua tiba. Telah ditunjukkan bahwa
+$$f_Z(z) = 2(1-z)\ ,$$ untuk $0 \le z \le 1$. Jadi,
+\begin{eqnarray*} E(Z) & = & \int_0^1 zf_Z(z)\,dz \\
+     & = & \int_0^1 2z(1-z)\,dz \\
+     & = & \Bigl[z^2 - \frac 23 z^3\Bigl]_0^1 \\  = \frac 13\ .
+\end{eqnarray*}
+\end{example}
+
+\subsection*{Nilai Harapan Fungsi dari Peubah Acak}
+
+Misalkan $X$ adalah peubah acak bernilai real dan $\phi(x)$ adalah fungsi kontinu dari
+{\bf R} ke {\bf R}. Teorema berikut merupakan analog kontinu dari
+Teorema~\ref{thm 6.3.5}.
+
+\begin{theorem}\label{thm 6.11} Jika $X$ adalah peubah acak bernilai real dan jika
+%$\phi : {\bf\rm R} \to {\bf\rm R}$ is a continuous real-valued function with domain
+$\phi :$ {\bf R} $\to\ $ {\bf R} adalah fungsi kontinu bernilai real dengan domain
+$[a,b]$, maka
+$$ E(\phi(X)) = \int_{-\infty}^{+\infty} \phi(x) f_X(x)\, dx\ ,
+$$ asalkan integral tersebut ada.
+\end{theorem}
+
+Untuk bukti teorema ini, lihat Ross.\index{ROSS, S.}\footnote{S. Ross,  \emx {A First Course in
+Probability,} (New York: Macmillan, 1984), hlm. 241--245.}
+
+
+
+\subsection*{Nilai Harapan Hasil Kali Dua Peubah Acak}
+
+Secara umum, $E(XY) = E(X)E(Y)$ tidak selalu benar karena integral suatu hasil kali
+bukanlah hasil kali integral-integralnya. Namun, jika $X$ dan $Y$ independen, nilai
+harapan hasil kalinya sama dengan hasil kali nilai harapan masing-masing.
+
+\begin{theorem}\label{thm 6.12} Misalkan $X$ dan $Y$ adalah peubah acak kontinu
+bernilai real yang independen dengan nilai harapan berhingga. Maka
+$$ E(XY) = E(X)E(Y)\ .
+$$
+\proof Kita hanya akan membuktikan kasus ketika daerah nilai $X$ dan $Y$ masing-masing
+termuat dalam interval $[a, b]$ dan $[c, d]$. Misalkan fungsi densitas $X$ dan $Y$
+masing-masing dinyatakan oleh $f_X(x)$ dan $f_Y(y)$. Karena $X$ dan $Y$ independen,
+fungsi densitas bersama $X$ dan $Y$ adalah hasil kali fungsi-fungsi densitasnya. Jadi,
+\begin{eqnarray*} E(XY) & = & \int_a^b \int_c^d xy f_X(x) f_Y(y)\, dy\,dx \\
+      & = & \int_a^b x f_X(x)\, dx \int_c^d y f_Y(y)\, dy \\
+      & = & E(X)E(Y)\ .
+\end{eqnarray*}
+\par
+Bukti untuk kasus umum menggunakan barisan peubah acak terbatas yang mendekati $X$
+dan $Y$ dan agak teknis, sehingga tidak disertakan.
+\end{theorem}
+
+Dengan cara yang sama, dapat ditunjukkan bahwa jika $X_1$,~$X_2$, \dots,~$X_n$
+adalah $n$ peubah acak bernilai real yang saling independen, maka
+$$ 
+E(X_1 X_2 \cdots X_n) = E(X_1)\,E(X_2)\,\cdots\,E(X_n)\ .
+$$
+
+\begin{example}\label{exam 6.19} Misalkan $Z = (X, Y)$ adalah sebuah titik yang
+dipilih secara acak dalam persegi satuan. Misalkan $A = X^2$ dan $B = Y^2$. Maka
+Teorema~\ref{thm 4.3} mengakibatkan bahwa $A$ dan $B$ independen. Dengan menggunakan
+Teorema~\ref{thm 6.11}, nilai harapan $A$ dan $B$ mudah dihitung:
+\begin{eqnarray*} E(A) = E(B) & = & \int_0^1 x^2\,dx \\ & = & \frac 13\ .
+\end{eqnarray*} Dengan menggunakan Teorema~\ref{thm 6.12}, nilai harapan $AB$ tidak
+lain adalah hasil kali $E(A)$ dan $E(B)$, yaitu 1/9. Kegunaan teorema ini tampak jika
+kita perhatikan bahwa menghitung $E(AB)$ dari definisi nilai harapan jauh lebih sulit.
+Diperoleh bahwa fungsi densitas $AB$ adalah
+$$f_{AB}(t) = \frac {-\log(t)}{4\sqrt t}\ ,$$ so
+\begin{eqnarray*} E(AB) & = & \int_0^1 t f_{AB}(t)\,dt \\ & = & \frac 19\ .
+\end{eqnarray*}
+\end{example}
+
+\begin{example}\label{exam 6.20} Sekali lagi, misalkan $Z = (X, Y)$ adalah sebuah
+titik yang dipilih secara acak dalam persegi satuan dan misalkan $W = X + Y$. Maka
+$Y$ dan $W$ tidak independen, dan kita mempunyai
+\begin{eqnarray*} E(Y) & = &\frac 12\ , \\ E(W) & = & 1\ , \\ E(YW) & = & E(XY + Y^2)
+= E(X)E(Y) + \frac 13 = \frac 7{12}
+\ne E(Y)E(W)\ .
+\end{eqnarray*}
+\end{example}
+
+Sekarang kita beralih ke varians.
+
+
+\subsection*{Varians}
+
+\begin{definition}\label{def 6.6} Misalkan $X$ adalah peubah acak bernilai real dengan
+fungsi densitas $f(x)$. \emx {Varians}\index{varians} $\sigma^2 = V(X)$ didefinisikan oleh
+$$
+\sigma^2 = V(X) = E((X - \mu)^2)\ . 
+$$
+\end{definition}
+Hasil berikut mudah diperoleh dari Teorema~\ref{thm 6.3.5}. Ada cara lain untuk
+menghitung varians peubah acak kontinu yang biasanya sedikit lebih mudah. Cara
+tersebut diberikan dalam Teorema~\ref{thm 6.14}.
+\begin{theorem}\label{thm 6.13.5} Jika $X$ adalah peubah acak bernilai real dengan
+$E(X) = \mu$, maka
+$$
+\sigma^2 = \int_{-\infty}^\infty (x - \mu)^2 f(x)\, dx\ .
+$$
+\end{theorem}
+\par Semua sifat yang dinyatakan dalam tiga teorema berikut dibuktikan dengan cara
+yang tepat sama dengan pembuktian teorema-teorema yang bersesuaian untuk peubah acak
+diskret dalam Bagian~\ref{sec 6.2}.
+\begin{theorem}\label{thm 6.13} Jika $X$ adalah peubah acak bernilai real yang
+didefinisikan pada $\Omega$ dan $c$ adalah sebarang konstanta, maka (bandingkan
+Teorema~\ref{thm 6.6})
+\begin{eqnarray*}
+V(cX)    &=& c^2 V(X)\ , \\ 
+V(X + c) &=& V(X)\ .
+\end{eqnarray*}
+\end{theorem}
+
+\begin{theorem}\label{thm 6.14} Jika $X$ adalah peubah acak bernilai real dengan
+$E(X) = \mu$, maka (bandingkan Teorema~\ref{thm 6.7})
+$$ V(X) = E(X^2) - \mu^2\ .
+$$
+\end{theorem}
+
+\begin{theorem}\label{thm 6.15} Jika $X$ dan $Y$ adalah peubah acak bernilai real yang
+independen pada $\Omega$, maka (bandingkan Teorema~\ref{thm 6.8})
+$$ V(X + Y) = V(X) + V(Y)\ .
+$$
+\end{theorem}
+
+\begin{example} (lanjutan Contoh~\ref{exam 6.16})\label{exam 6.18.5} Jika $X$
+berdistribusi seragam pada $[0, 1]$, maka dengan menggunakan Teorema~\ref{thm 6.14}
+kita memperoleh
+$$  V(X) = \int_0^1 \Bigl(x - \frac 12 \Bigr)^2\, dx = \frac 1{12}\ .
+$$
+\end{example}
+
+\begin{example}\label{exam 6.21} Misalkan $X$ adalah peubah acak berdistribusi
+eksponensial dengan parameter $\lambda$. Maka fungsi densitas $X$ adalah
+$$ f_X(x) = \lambda e^{-\lambda x}\ .
+$$ Dari definisi nilai harapan dan integrasi parsial, kita memperoleh
+\begin{eqnarray*} E(X) & = & \int_0^\infty x f_X(x)\, dx \\
+     & = & \lambda \int_0^\infty x e^{-\lambda x}\, dx \\
+     & = & \biggl.-xe^{-\lambda x}\biggr|_0^\infty + \int_0^\infty e^{-\lambda x}\,
+dx \\
+     & = & 0 + \biggl.\frac {e^{-\lambda x}}{-\lambda}\biggr|_0^\infty =
+\frac 1\lambda\ .
+\end{eqnarray*}
+
+Dengan cara serupa, menggunakan Teorema~\ref{thm 6.11} dan \ref{thm 6.14}, kita
+memperoleh
+\begin{eqnarray*} V(X) & = & \int_0^\infty x^2 f_X(x)\, dx - \frac 1{\lambda^2} \\
+     & = & \lambda \int_0^\infty x^2 e^{-\lambda x}\, dx - \frac 1{\lambda^2} \\
+     & = & \biggl.-x^2 e^{-\lambda x}\biggr|_0^\infty + 2\int_0^\infty x e^{-\lambda
+x}\, dx - \frac 1{\lambda^2} \\
+     & = & \biggl.-x^2 e^{-\lambda x}\biggr|_0^\infty - \biggl.\frac {2xe^{-\lambda
+x}}\lambda\biggr|_0^\infty - \biggl.\frac 2{\lambda^2} e^{-\lambda x}\biggr|_0^\infty
+-
+\frac 1{\lambda^2} =
+\frac 2{\lambda^2} - \frac 1{\lambda^2} = \frac 1{\lambda^2}\ .
+\end{eqnarray*} Dalam kasus ini, $E(X)$ dan $V(X)$ keduanya berhingga jika $\lambda > 0$.
+\end{example}
+
+\begin{example}\label{exam 6.22} Misalkan $Z$ adalah peubah acak normal baku dengan
+fungsi densitas
+$$ f_Z(x) = \frac 1{\sqrt{2\pi}} e^{-x^2/2}\ .
+$$ Karena fungsi densitas ini simetris terhadap sumbu-$y$, mudah ditunjukkan bahwa
+$$\int_{-\infty}^\infty x f_Z(x)\, dx$$ bernilai 0. Namun, perlu diingat bahwa nilai
+harapan didefinisikan sebagai integral di atas hanya jika integral
+$$\int_{-\infty}^\infty |x| f_Z(x)\, dx$$ berhingga. Integral ini sama dengan
+$$2\int_0^\infty x f_Z(x)\, dx\ ,$$ yang dengan mudah dapat ditunjukkan berhingga.
+Jadi, nilai harapan $Z$ adalah 0.
+\par Untuk menghitung varians $Z$, kita mulai dengan menerapkan Teorema~\ref{thm 6.14}:
+$$V(Z) =  \int_{-\infty}^{+\infty} x^2 f_Z(x)\, dx - \mu^2\ .$$ Jika kita menulis
+$x^2$ sebagai $x\cdot x$ dan melakukan integrasi parsial, kita memperoleh
+$$\biggl.\frac 1{\sqrt{2\pi}} (-x e^{-x^2/2})\biggr|_{-\infty}^{+\infty} + \frac
+1{\sqrt{2\pi}} \int_{-\infty}^{+\infty} e^{-x^2/2}\, dx\ .
+$$ Suku pertama di atas dapat ditunjukkan sama dengan 0 karena ketika $x \rightarrow
+\pm \infty$, $e^{-x^2/2}$ mengecil lebih cepat daripada pertumbuhan $x$. Suku kedua
+hanyalah densitas normal baku yang diintegralkan pada domainnya, sehingga nilainya
+adalah 1. Oleh karena itu, varians densitas normal baku sama dengan 1.
+\par Sekarang misalkan $X$ adalah peubah acak normal (tidak harus baku) dengan
+parameter $\mu$ dan $\sigma$. Maka fungsi densitas $X$ adalah
+$$ f_X(x) = \frac 1{\sqrt{2\pi}\sigma} e^{-(x - \mu)^2/2\sigma^2}\ .
+$$ Kita dapat menulis $X = \sigma Z + \mu$, dengan $Z$ sebagai peubah acak normal
+baku. Karena menurut perhitungan di atas $E(Z) = 0$ dan $V(Z) = 1$,
+Teorema~\ref{thm 6.10} dan \ref{thm 6.13} mengakibatkan bahwa
+\begin{eqnarray*} 
+E(X)  &=& E(\sigma Z + \mu)\ =\ \mu\ , \\ 
+V(X)  &=& V(\sigma Z + \mu)\ =\ \sigma^2\ .
+\end{eqnarray*}
+\end{example}
+
+\begin{example}\label{exam 6.23} Misalkan $X$ adalah peubah acak kontinu dengan fungsi
+densitas Cauchy
+$$ f_X(x) = \frac {a}{\pi} \frac {1}{a^2 + x^2}\ .
+$$ Maka nilai harapan $X$ tidak ada karena integral
+$$
+\frac a\pi \int_{-\infty}^{+\infty} \frac {|x|\,dx}{a^2 + x^2}
+$$ divergen. Dengan demikian, varians $X$ juga tidak ada. Densitas yang variansnya
+tidak terdefinisi, seperti densitas Cauchy, dalam sejumlah hal penting berperilaku
+cukup berbeda dari densitas yang variansnya berhingga. Salah satu contoh perbedaan ini
+akan kita lihat dalam Bagian~\ref{sec 8.2}.
+\end{example}
+
+
+\subsection*{Percobaan Independen}
+
+\begin{corollary}\label{cor 6.1}                                                
+Jika $X_1$,~$X_2$, \dots,~$X_n$ merupakan proses percobaan independen dari peubah
+acak bernilai real, dengan $E(X_i) = \mu$ dan $V(X_i) = \sigma^2$, dan jika
+\begin{eqnarray*} S_n & = & X_1 + X_2 +\cdots+ X_n\ , \\ A_n & = & \frac {S_n}n\ ,
+\end{eqnarray*} 
+maka
+\begin{eqnarray*}
+E(S_n) & = & n\mu\ ,\\
+E(A_n) & = & \mu\ ,\\
+V(S_n) & = & n\sigma^2\ ,\\
+V(A_n) & = & \frac {\sigma^2} n\ .
+\end{eqnarray*}
+Akibatnya, jika kita menetapkan
+$$ 
+S_n^* = \frac {S_n - n\mu}{\sqrt{n\sigma^2}}\ ,
+$$ 
+maka
+\begin{eqnarray*} 
+E(S_n^*) & = & 0\ ,\\
+V(S_n^*) & = & 1\ .
+\end{eqnarray*}
+Kita mengatakan bahwa $S_n^*$ adalah \emx {versi baku dari} $S_n$ (lihat
+Latihan~\ref{exer 6.2.13} dalam Bagian~\ref{sec 6.2}).
+\end{corollary}
+
+
+\subsection*{Antrean}\index{antrean}
+
+\begin{example}\label{exam 6.24} Mari kita tinjau kembali masalah antrean, yaitu
+masalah pelanggan yang menunggu pelayanan dalam antrean (lihat Contoh~\ref{exam
+5.21}). Sekali lagi kita menganggap bahwa pelanggan memasuki antrean sedemikian rupa
+sehingga waktu antar-kedatangan merupakan peubah acak $X$ yang berdistribusi
+eksponensial dengan fungsi densitas
+$$ f_X(t) = \lambda e^{-\lambda t}\ .
+$$ Maka nilai harapan waktu antar-kedatangan hanyalah $1/\lambda$ (lihat
+Contoh~\ref{exam 6.21}), seperti yang dinyatakan dalam Contoh~\ref{exam 5.21}.
+Kebalikannya, yaitu $\lambda$, sering disebut \emx {laju kedatangan.} \emx {Waktu
+pelayanan} seseorang yang berada paling depan didefinisikan sebagai lamanya orang
+tersebut berada di kepala antrean sebelum pergi. Kita menganggap pelanggan dilayani
+sedemikian rupa sehingga waktu pelayanan merupakan peubah acak lain $Y$ yang
+berdistribusi eksponensial dengan fungsi densitas
+$$ f_X(t) = \mu e^{-\mu t}\ .
+$$ Maka nilai harapan waktu pelayanan adalah
+$$ E(X) = \int_0^\infty t f_X(t)\, dt = \frac 1\mu\ .
+$$ Kebalikan nilai harapan ini, yaitu $\mu$, sering disebut {\em laju pelayanan.}
+\par Berdasarkan pengalaman sehari-hari dengan antrean, kita menduga bahwa jika laju
+pelayanan lebih besar daripada laju kedatangan, ukuran rata-rata antrean akan cenderung
+stabil. Namun, jika laju pelayanan lebih kecil daripada laju kedatangan, panjang
+antrean akan cenderung bertambah tanpa batas (lihat Gambar~\ref{fig 5.17}). Simulasi
+dalam Contoh~\ref{exam 5.21} cenderung mendukung pengalaman sehari-hari tersebut. Kita
+dapat menyatakan kesimpulan ini dengan lebih tepat jika kita mendefinisikan \emx
+{intensitas lalu lintas} sebagai hasil kali
+$$
+\rho = ({\rm laju\ kedatangan})({\rm waktu\ pelayanan\ rata-rata}) = \frac \lambda\mu =
+\frac {1/\mu}{1/\lambda}\ .
+$$ Intensitas lalu lintas juga merupakan rasio waktu pelayanan rata-rata terhadap
+waktu rata-rata antar-kedatangan. Jika intensitas lalu lintas kurang dari~1, antrean
+akan berperilaku wajar, tetapi jika lebih dari~1, antrean akan membesar tanpa
+batas. Dalam kasus kritis $\rho = 1$, dapat ditunjukkan bahwa antrean akan menjadi
+panjang, tetapi selalu ada saat-saat ketika antrean kosong.\footnote{L.
+Kleinrock,  \emx {Queueing Systems,} vol.~2 (New York: John Wiley and Sons, 1975).}
+
+Jika intensitas lalu lintas kurang dari~1, kita dapat memandang panjang antrean sebagai
+peubah acak $Z$ dengan nilai harapan berhingga,
+$$ E(Z) = N\ .
+$$
+
+Waktu yang dihabiskan seorang pelanggan dalam antrean dapat dipandang sebagai peubah
+acak $W$ dengan nilai harapan berhingga,
+$$ E(W) = T\ .
+$$ Kemudian dapat dikatakan bahwa ketika seorang pelanggan memasuki antrean, ia
+mengharapkan menemukan $N$ orang di depannya, sedangkan ketika meninggalkan antrean,
+ia mengharapkan menemukan $\lambda T$ orang di belakangnya. Karena dalam keadaan
+setimbang kedua besaran ini seharusnya sama, kita mengharapkan bahwa
+$$ N = \lambda T\ .
+$$ Hubungan terakhir ini disebut \emx {hukum Little untuk antrean.}\index{hukum
+Little untuk antrean}\footnote{ibid., hlm.~17.} Kita tidak akan membuktikannya di sini.
+Sebuah bukti dapat ditemukan dalam Ross.\index{ROSS, S.}\footnote{S. M. Ross,  \emx
+{Applied Probability Models with Optimization Applications,} (San Francisco:
+Holden-Day, 1970)} Perhatikan bahwa dalam kasus ini kita menghitung waktu tunggu semua
+pelanggan, termasuk mereka yang sama sekali tidak perlu menunggu. Dalam simulasi pada
+Bagian~\ref{sec 4.2}, pelanggan-pelanggan ini tidak diperhitungkan.
+\par Jika kita mengetahui nilai harapan panjang antrean, kita dapat menggunakan hukum
+Little untuk memperoleh nilai harapan waktu tunggu karena
+$$ T = \frac N\lambda\ .
+$$ Panjang antrean adalah peubah acak dengan distribusi diskret. Distribusi ini dapat
+diestimasi melalui simulasi dengan mencatat panjang antrean pada saat seorang pelanggan
+tiba. Hasil simulasi ini (menggunakan program {\bf Queue}) ditampilkan dalam
+Gambar~\ref{fig 6.5}.
+\putfig{4truein}{PSfig6-5}{Distribusi panjang antrean.}{fig 6.5}
+\par Perhatikan bahwa distribusi tersebut tampak sebagai distribusi geometrik. Dalam
+kajian teori antrean ditunjukkan bahwa distribusi panjang antrean dalam keadaan setimbang
+memang merupakan distribusi geometrik dengan
+$$ s_j = (1 - \rho) \rho^j \qquad {\rm untuk}\  j = 0, 1, 2, \dots\ ,
+$$ jika $\rho < 1$.
+Nilai harapan peubah acak dengan distribusi ini adalah
+$$ N = \frac \rho{(1 - \rho)}
+$$ (lihat Contoh~\ref{exam 6.8}). Dengan demikian, menurut hasil Little, nilai harapan
+waktu tunggu adalah
+$$ T = \frac \rho{\lambda(1 - \rho)} = \frac 1{\mu - \lambda}\ ,
+$$ dengan $\mu$ sebagai laju pelayanan, $\lambda$ sebagai laju kedatangan, dan $\rho$
+sebagai intensitas lalu lintas.
+\par 
+Dalam simulasi kita, laju kedatangan adalah 1 dan laju pelayanan adalah 1.1. Jadi,
+intensitas lalu lintas adalah $1/1.1 = 10/11$, nilai harapan ukuran antrean adalah
+$$
+\frac {10/11}{(1 - 10/11)} = 10\ ,
+$$ dan nilai harapan waktu tunggu adalah
+$$
+\frac 1{1.1 - 1} = 10\ .
+%*********The simulation values weren't very close to the theoretical ones.
+%Do we want to rerun it?
+$$ Dalam simulasi kita, ukuran rata-rata antrean adalah 8.19 dan waktu tunggu rata-rata
+adalah 7.37. Dalam Gambar~\ref{fig 6.5.5}, ditampilkan histogram waktu tunggu.
+Histogram ini menunjukkan bahwa densitas waktu tunggu bersifat eksponensial dengan
+parameter $\mu - \lambda$, dan memang demikian halnya.
+\putfig{4truein}{PSfig6-5-5}{Distribusi waktu tunggu dalam antrean.}{fig 6.5.5}
+\end{example}
+
+\exercises
+\begin{LJSItem}
+
+\i\label{exer 6.3.1} Misalkan $X$ adalah peubah acak dengan daerah nilai $[-1,1]$ dan
+misalkan $f_X(x)$ adalah fungsi densitas $X$. Carilah $\mu(X)$ dan $\sigma^2(X)$ jika,
+untuk $|x| < 1$,
+
+\begin{enumerate}
+\item $f_X(x) = 1/2$.
+
+\item $f_X(x) = |x|$.
+
+\item $f_X(x) = 1 - |x|$.
+
+\item $f_X(x) = (3/2) x^2$.
+\end{enumerate}
+
+
+\i\label{exer 6.3.3} Misalkan $X$ adalah peubah acak dengan daerah nilai $[-1,1]$ dan
+$f_X$ adalah fungsi densitasnya. Carilah $\mu(X)$ dan $\sigma^2(X)$ jika, untuk $|x| >
+1$, $f_X(x) = 0$, dan untuk $|x| < 1$,
+
+\begin{enumerate}
+\item $f_X(x) = (3/4)(1 - x^2)$.
+
+\item $f_X(x) = (\pi/4)\cos(\pi x/2)$.
+
+\item $f_X(x) = (x + 1)/2$.
+
+\item $f_X(x) = (3/8)(x + 1)^2$.
+\end{enumerate}
+
+\i\label{exer 6.3.5} Masa pakai bola lampu super ACME, diukur dalam jam, merupakan
+peubah acak $T$ dengan fungsi densitas $f_T(t) = \lambda^2 t e^{-\lambda t}$, dengan
+$\lambda = .05$. Berapakah nilai harapan masa pakai bola lampu ini? Berapakah
+variansnya?
+
+\i\label{exer 6.3.6} Misalkan $X$ adalah peubah acak dengan daerah nilai $[-1,1]$
+dan fungsi densitas $f_X(x) = ax + b$ jika $|x| < 1$.
+
+\begin{enumerate}
+\item Tunjukkan bahwa jika $\int_{-1}^{+1} f_X(x)\, dx = 1$, maka $b = 1/2$.
+
+\item Tunjukkan bahwa jika $f_X(x) \geq 0$, maka $-1/2 \leq a \leq 1/2$.
+
+\item Tunjukkan bahwa $\mu = (2/3)a$, dan karenanya $-1/3 \leq \mu \leq 1/3$.
+
+\item Tunjukkan bahwa $\sigma^2(X) = (2/3)b - (4/9)a^2 = 1/3 - (4/9)a^2$.
+\end{enumerate}
+
+\i\label{exer 6.3.7} Misalkan $X$ adalah peubah acak dengan daerah nilai $[-1,1]$
+dan fungsi densitas $f_X(x) = ax^2 + bx + c$ jika $|x| < 1$ dan~0 selainnya.
+
+\begin{enumerate}
+\item Tunjukkan bahwa $2a/3 + 2c = 1$ (lihat Latihan~\ref{exer 6.3.6}).
+
+\item Tunjukkan bahwa $2b/3 = \mu(X)$.
+
+\item Tunjukkan bahwa $2a/5 + 2c/3 = \sigma^2(X)$.
+
+\item Carilah $a$,~$b$, dan~$c$ jika $\mu(X) = 0$, $\sigma^2(X) = 1/15$, lalu
+buatlah sketsa grafik $f_X$.
+
+\item Carilah $a$,~$b$, dan~$c$ jika $\mu(X) = 0$, $\sigma^2(X) = 1/2$, lalu
+buatlah sketsa grafik $f_X$.
+\end{enumerate}
+
+\i\label{exer 6.3.8} Misalkan $T$ adalah peubah acak dengan daerah nilai $[0,\infty]$
+dan $f_T$ adalah fungsi densitasnya. Carilah $\mu(T)$ dan $\sigma^2(T)$ jika, untuk $t
+< 0$, $f_T(t) = 0$, dan untuk $t > 0$,
+\begin{enumerate}
+
+\item $f_T(t) = 3e^{-3t}$.
+
+\item $f_T(t) = 9te^{-3t}$.
+
+\item $f_T(t) = 3/(1 + t)^4$.
+\end{enumerate}
+
+\i\label{exer 6.3.9} Misalkan $X$ adalah peubah acak dengan fungsi densitas $f_X$.
+Dengan menggunakan kalkulus dasar, tunjukkan bahwa fungsi
+$$
+\phi(a) = E((X - a)^2)
+$$ mencapai nilai minimumnya ketika $a = \mu(X)$, dan dalam kasus tersebut $\phi(a) =
+\sigma^2(X)$.
+
+\i\label{exer 6.3.10} Misalkan $X$ adalah peubah acak dengan rataan $\mu$ dan varians
+$\sigma^2$. Misalkan $Y = aX^2 + bX + c$. Carilah nilai harapan $Y$.
+
+\i\label{exer 6.3.11} Misalkan $X$,~$Y$, dan~$Z$ adalah peubah acak independen yang
+masing-masing memiliki rataan $\mu$ dan varians $\sigma^2$.
+
+\begin{enumerate}
+\item Carilah nilai harapan dan varians $S = X + Y + Z$.
+
+\item Carilah nilai harapan dan varians $A = (1/3)(X + Y + Z)$.
+
+\item Carilah nilai harapan $S^2$ dan $A^2$.
+\end{enumerate}
+
+\i\label{exer 6.3.12} Misalkan $X$ dan $Y$ adalah peubah acak independen dengan
+fungsi densitas seragam pada $[0,1]$. Carilah
+
+\begin{enumerate}
+\item $E(|X - Y|)$.
+
+\item $E(\max(X,Y))$.
+
+\item $E(\min(X,Y))$.
+
+\item $E(X^2 + Y^2)$.
+
+\item $E((X + Y)^2)$.
+\end{enumerate}
+
+\i\label{exer 6.3.13} Pilsdorff Beer Company\index{Pilsdorff Beer Company}
+mengoperasikan armada truk di sepanjang jalan 100~mil dari Hangtown\index{Hangtown}
+ke Dry Gulch\index{Dry Gulch}. Truk-truk tersebut sudah tua dan dapat mogok di
+sebarang titik sepanjang jalan dengan peluang yang sama. Di manakah perusahaan harus
+menempatkan garasi agar nilai harapan jarak dari lokasi mogok yang tipikal ke garasi
+minimum? Dengan kata lain, jika $X$ adalah peubah acak yang menyatakan lokasi mogok,
+diukur misalnya dari Hangtown, dan $b$ menyatakan lokasi garasi, pilihan $b$ manakah
+yang meminimumkan $E(|X - b|)$? Sekarang anggaplah $X$ tidak berdistribusi seragam
+pada $[0,100]$, melainkan memiliki fungsi densitas $f_X(x) = 2x/10{,}000$. Dalam
+kasus ini, pilihan $b$ manakah yang meminimumkan $E(|X - b|)$?
+
+\i\label{exer 6.3.14} Carilah $E(X^Y)$, dengan $X$ dan $Y$ sebagai peubah acak
+independen yang seragam pada $[0, 1]$. Kemudian verifikasikan jawaban Anda melalui
+simulasi.
+
+\i\label{exer 6.3.15} Misalkan $X$ adalah peubah acak yang mengambil nilai-nilai
+non-negatif dan memiliki fungsi distribusi $F(x)$. Tunjukkan bahwa
+$$ E(X) = \int_0^\infty (1 - F(x))\, dx\ .
+$$ 
+ \emx {Petunjuk}: Lakukan integrasi parsial.
+
+Ilustrasikan hasil ini dengan menghitung $E(X)$ melalui metode ini jika $X$ memiliki
+distribusi eksponensial $F(x) = 1 - e^{-\lambda x}$ untuk $x \geq 0$, dan $F(x) = 0$
+selainnya.
+
+\i\label{exer 6.3.15.5} Misalkan $X$ adalah peubah acak kontinu dengan fungsi
+densitas $f_X(x)$. Tunjukkan bahwa jika
+$$
+\int_{-\infty}^{+\infty} x^2 f_X(x)\, dx < \infty\ ,
+$$ maka
+$$
+\int_{-\infty}^{+\infty} |x| f_X(x)\, dx < \infty\ .
+$$ 
+ \emx {Petunjuk}: Di luar interval $[-1, 1]$, integran pertama lebih besar daripada
+integran kedua.
+
+\i\label{exer 6.3.16} Misalkan $X$ adalah peubah acak yang berdistribusi seragam pada
+$[0,20]$. Definisikan peubah acak baru $Y$ dengan $Y = \lfloor X\rfloor$ (bilangan
+bulat terbesar yang tidak melebihi $X$). Carilah nilai harapan~$Y$. Lakukan hal yang sama untuk $Z =
+\lfloor X + .5\rfloor$. Hitung $E\bigl(|X-Y|\bigr)$ dan $E\bigl(|X-Z|\bigr)$.
+(Perhatikan bahwa $Y$ adalah nilai~$X$ yang dibulatkan ke bilangan bulat lebih kecil
+terdekat, sedangkan $Z$ adalah nilai~$X$ yang dibulatkan ke bilangan bulat terdekat.
+Metode pembulatan manakah yang lebih baik? Mengapa?)
+
+\i\label{exer 6.3.17} Anggaplah masa pakai suatu komponen mesin diesel merupakan
+peubah acak $X$ dengan densitas $f_X$. Ketika komponen tersebut aus, komponen itu
+diganti dengan komponen lain yang memiliki densitas sama. Misalkan $N(t)$ adalah
+banyaknya komponen yang digunakan selama waktu $t$. Kita ingin mempelajari peubah acak
+$N(t)/t$. Karena rata-rata komponen diganti setiap $E(X)$ satuan waktu, kita
+mengharapkan sekitar $t/E(X)$ komponen digunakan selama waktu $t$. Artinya, kita
+mengharapkan bahwa
+$$
+\lim_{t \to \infty} E \Bigl(\frac {N(t)}t\Bigr) = \frac 1{E(X)}\ .
+$$ Hasil ini benar, tetapi cukup sulit dibuktikan. Tulislah program yang memungkinkan
+Anda menentukan densitas $f_X$ dan waktu $t$, lalu menyimulasikan percobaan ini untuk
+memperoleh $N(t)/t$. Mintalah program Anda mengulangi percobaan tersebut 500 kali dan
+menggambar diagram batang untuk hasil-hasil acak $N(t)/t$. Dari data ini, estimasikan
+$E(N(t)/t)$ dan bandingkan dengan $1/E(X)$. Secara khusus, lakukan hal ini untuk~$t =
+100$ dengan dua densitas berikut:
+
+\begin{enumerate}
+\item $f_X = e^{-t}$.
+
+\item $f_X = te^{-t}$.
+\end{enumerate}
+
+\i\label{exer 6.3.18} Misalkan $X$ dan $Y$ adalah peubah acak. \emx {Kovarians}
+$\rm {Cov}(X,Y)$ didefinisikan oleh (lihat Latihan~\ref{sec 6.2}.\ref{exer 6.2.24})
+$$
+\rm {cov}(X,Y) = E ((X - \mu(X))(Y - \mu(Y)) )\ .
+$$
+\begin{enumerate}
+\item Tunjukkan bahwa $\rm {cov}(X,Y) = E(XY) - E(X)E(Y)$.
+
+\item Dengan menggunakan (a), tunjukkan bahwa ${\rm cov}(X,Y) = 0$, jika $X$ dan
+$Y$ independen. (Perhatian: kebalikannya \emx {tidak} selalu benar.)
+
+\item Tunjukkan bahwa $V(X + Y) = V(X) + V(Y) + 2{\rm cov}(X,Y)$.
+\end{enumerate}
+
+\i\label{exer 6.3.19} Misalkan $X$ dan $Y$ adalah peubah acak dengan varians positif.
+\emx {Korelasi} $X$ dan $Y$ didefinisikan sebagai
+$$
+\rho(X,Y) = \frac{{\rm cov}(X,Y)}{\sqrt{V(X)V(Y)}}\ .
+$$
+\begin{enumerate}
+\item Dengan menggunakan Latihan~\ref{exer 6.3.18}(c), tunjukkan bahwa
+$$ 0 \leq V\left( \frac X{\sigma(X)} + \frac Y{\sigma(Y)} \right) = 2(1 +
+\rho(X,Y))\ .
+$$
+
+\item Sekarang tunjukkan bahwa
+$$ 0 \leq V\left( \frac X{\sigma(X)} - \frac Y{\sigma(Y)} \right) = 2(1 -
+\rho(X,Y))\ .
+$$
+
+\item Dengan menggunakan (a) dan (b), tunjukkan bahwa
+$$ -1 \leq \rho(X,Y) \leq 1\ .
+$$
+\end{enumerate}
+
+\i\label{exer 6.3.20} Misalkan $X$ dan $Y$ adalah peubah acak independen dengan
+densitas seragam pada $[0,1]$. Misalkan $Z = X + Y$ dan $W = X - Y$. Carilah
+
+\begin{enumerate}
+\item $\rho(X,Y)$ (lihat Latihan~\ref{exer 6.3.19}).
+
+\item $\rho(X,Z)$.
+
+\item $\rho(Y,W)$.
+
+\item $\rho(Z,W)$.
+\end{enumerate}
+
+\istar\label{exer 6.3.21} Ketika mempelajari data fisiologis tertentu, seperti tinggi
+badan ayah dan anak laki-laki, sering kali wajar untuk menganggap bahwa data tersebut
+(misalnya, tinggi badan para ayah dan anak laki-laki mereka) dideskripsikan oleh peubah
+acak dengan densitas normal. Namun, peubah-peubah acak ini tidak independen, melainkan
+berkorelasi. Sebagai contoh, densitas normal baku dua dimensi untuk peubah acak yang
+berkorelasi berbentuk
+$$ f_{X,Y}(x,y) = \frac 1{2\pi\sqrt{1 - \rho^2}} \cdot e^{-(x^2 - 2\rho xy + y^2)/2(1
+- \rho^2)}\ .
+$$
+\begin{enumerate}
+\item Tunjukkan bahwa $X$ dan $Y$ masing-masing memiliki densitas normal baku.
+
+\item Tunjukkan bahwa korelasi $X$ dan $Y$ (lihat Latihan~\ref{exer 6.3.19}) adalah
+$\rho$.
+\end{enumerate}
+
+\istar\label{exer 6.3.22} Untuk peubah acak berkorelasi $X$ dan $Y$, wajar untuk
+menanyakan nilai harapan~$X$ jika~$Y$ diketahui. Sebagai contoh,
+Galton\index{GALTON, F.} menghitung nilai harapan tinggi badan seorang anak laki-laki
+jika tinggi badan ayahnya diketahui. Ia menggunakannya untuk menunjukkan bahwa pria
+tinggi rata-rata dapat diharapkan memiliki anak laki-laki yang tidak setinggi mereka.
+Demikian pula, siswa yang memperoleh hasil sangat baik pada suatu ujian dapat
+diharapkan memperoleh hasil yang tidak sebaik itu pada ujian berikutnya, dan
+seterusnya. Hal ini disebut \emx {regresi menuju rataan.}\index{regresi menuju rataan}
+Untuk mendefinisikan nilai harapan bersyarat ini, pertama-tama kita mendefinisikan
+densitas bersyarat~$X$ jika~$Y = y$ diketahui dengan
+$$ f_{X|Y}(x|y) = \frac {f_{X,Y}(x,y)}{f_Y(y)}\ ,
+$$ dengan $f_{X,Y}(x,y)$ sebagai densitas bersama $X$ dan $Y$, serta $f_Y$ sebagai
+densitas $Y$. Kemudian nilai harapan bersyarat~$X$ jika~$Y$ diketahui adalah
+$$ E(X|Y = y) = \int_a^b x f_{X|Y}(x|y)\, dx\ .
+$$ Untuk densitas normal dalam Latihan~\ref{exer 6.3.21}, tunjukkan bahwa densitas
+bersyarat $f_{X|Y}(x|y)$ adalah normal dengan rataan $\rho y$ dan varians $1 - \rho^2$.
+Dari sini kita melihat bahwa jika $X$ dan $Y$ berkorelasi positif $(0 < \rho < 1)$ dan
+jika $y > E(Y)$, maka nilai harapan~$X$ jika~$Y = y$ diketahui akan kurang dari~$y$
+(yakni, terjadi regresi menuju rataan).
+
+\i\label{exer 6.3.23} Sebuah titik $Y$ dipilih secara acak dari $[0,1]$. Kemudian
+titik kedua $X$ dipilih dari interval $[0,Y]$. Carilah densitas $X$. \emx
+{Petunjuk}: Hitung $f_{X|Y}$ seperti dalam Latihan~\ref{exer 6.3.22}, lalu gunakan
+$$ f_X(x) = \int_x^1 f_{X|Y}(x|y) f_Y(y)\, dy\ .
+$$ Dapatkah Anda juga menurunkan hasil tersebut secara geometris?
+
+%**********Provide an answer in the answer key to the following problem  (it has been significantly
+%changed).   In addition, we should find out what it means to be inside one of the ellipses
+%discussed in the problem.
+
+\istar\label{exer 6.3.24} Misalkan $X$ dan $V$ adalah dua peubah acak normal baku.
+Misalkan $\rho$ adalah bilangan real antara -1 dan 1.
+\begin{enumerate}
+\item
+Misalkan $Y = \rho X + \sqrt{1 - \rho^2} V$. Tunjukkan bahwa $E(Y) = 0$ dan $Var(Y)
+= 1$. Kelak akan kita lihat (lihat Contoh~\ref{exam 7.8} dan
+Contoh~\ref{exam 10.3.3}) bahwa jumlah dua peubah acak normal independen juga normal.
+Jadi, dengan mengasumsikan fakta ini, kita telah menunjukkan bahwa $Y$ adalah normal
+baku.
+\item
+Dengan menggunakan Latihan~\ref{exer 6.3.18} dan \ref{exer 6.3.19}, tunjukkan bahwa
+korelasi $X$ dan $Y$ adalah $\rho$.
+\item
+Dalam Latihan~\ref{exer 6.3.21}, diberikan fungsi densitas bersama $f_{X,Y}(x, y)$
+untuk peubah acak $(X, Y)$. Sekarang anggaplah kita ingin mengetahui himpunan titik
+$(x, y)$ pada bidang-$xy$ sedemikian sehingga $f_{X,Y}(x, y) = C$ untuk suatu
+konstanta $C$. Himpunan titik ini disebut himpunan berdensitas konstan. Secara kasar,
+himpunan berdensitas konstan adalah himpunan titik tempat hasil $(X, Y)$ memiliki
+peluang yang sama untuk jatuh. Tunjukkan bahwa untuk $C$ tertentu, himpunan titik
+berdensitas konstan merupakan kurva dengan persamaan
+$$x^2 - 2\rho x y + y^2 = D\ ,$$
+dengan $D$ sebagai konstanta yang bergantung pada $C$. (Kurva ini merupakan elips.)
+\item
+Elips pada bagian (c) dapat digambar dengan menggunakan persamaan parametrik
+\begin{eqnarray*} x & = & \frac {r\cos\theta}{\sqrt{2(1 - \rho)}} + \frac
+{r\sin\theta}{\sqrt{2(1 +
+\rho)}}\ , \\ y & = & \frac {r\cos\theta}{\sqrt{2(1 - \rho)}} - \frac
+{r\sin\theta}{\sqrt{2(1 +
+\rho)}}\ .
+\end{eqnarray*}
+Tulislah program untuk menggambar 1000 pasangan $(X, Y)$ bagi $\rho = -1/2, 0, 1/2$.
+Pada setiap gambar, mintalah program Anda menggambar kurva parametrik di atas untuk
+$r = 1, 2, 3$.
+\end{enumerate}
+
+\istar\label{exer 6.3.25} Mengikuti Galton, anggaplah bahwa tinggi badan para ayah dan
+anak laki-laki mereka merupakan peubah acak normal yang dependen. Anggaplah tinggi
+badan rata-rata adalah 68~inci, simpangan bakunya 2.7~inci, dan koefisien korelasinya
+adalah~.5 (lihat Latihan~\ref{exer 6.3.21}~dan~\ref{exer 6.3.22}). Artinya, anggaplah
+tinggi badan para ayah dan anak laki-laki mereka masing-masing berbentuk $2.7X + 68$
+dan $2.7Y + 68$, dengan $X$ dan $Y$ sebagai peubah acak normal baku yang berkorelasi,
+dengan koefisien korelasi~.5.
+
+\begin{enumerate}
+\item Berapakah nilai harapan tinggi badan anak laki-laki dari seorang ayah yang
+tinggi badannya 72~inci?
+
+\item Gambarlah diagram pencar tinggi badan 1000 pasangan ayah dan anak laki-laki.
+\emx {Petunjuk}: Anda dapat memilih pasangan baku seperti dalam
+Latihan~\ref{exer 6.3.24}, lalu menggambar $(2.7X + 68, 2.7Y + 68)$.
+\end{enumerate}
+
+
+%***********This problem is very time-consuming for the student to do.  Either we
+%should make a file containing the data, or else we should delete the problem.  We
+%will try to find the original data (instead of just the table).
+
+\istar\label{exer 6.3.26} Jika kita memiliki pasangan data $(x_i,y_i)$ yang merupakan
+hasil dari pasangan peubah acak dependen $X$,~$Y$, kita dapat mengestimasi koefisien
+korelasi $\rho$ dengan
+$$
+\bar r = \frac {\sum_i (x_i - \bar x)(y_i - \bar y)}{(n - 1)s_Xs_Y}\ ,
+$$ dengan $\bar x$ dan $\bar y$ masing-masing sebagai rataan sampel $X$ dan $Y$, serta
+$s_X$ dan $s_Y$ sebagai simpangan baku sampel $X$ dan $Y$ (lihat
+Latihan~\ref{sec 6.2}.\ref{exer 6.2.18}). Tulislah program untuk menghitung rataan
+sampel, varians, dan korelasi bagi data dependen semacam itu. Gunakan program Anda
+untuk menghitung besaran-besaran tersebut bagi data Galton tentang tinggi badan orang
+tua dan anak yang diberikan dalam Lampiran~B.
+\par
+Gambarlah elips berdensitas sama sebagaimana didefinisikan dalam
+Latihan~\ref{exer 6.3.24} untuk~$r = 4$,~6, dan~8, lalu pada grafik yang sama cetaklah
+nilai-nilai yang muncul dalam tabel pada titik-titik yang sesuai. Sebagai contoh,
+cetaklah 12 pada titik $(70.5,68.2)$, yang menunjukkan bahwa terdapat 12 kasus ketika
+tinggi badan orang tua adalah 70.5 dan tinggi badan anak adalah 68.12. Periksalah
+apakah data Galton konsisten dengan elips-elips berdensitas sama tersebut.
+
+\i\label{exer 6.3.27} (dari Hamming\index{HAMMING, R. W.}\footnote{R.~W.~Hamming,
+\emx {The Art of Probability for Scientists and Engineers} (Redwood City:
+Addison-Wesley, 1991), hlm.~192.}) Anggaplah Anda berdiri di tepi sungai yang lurus.
+\begin{enumerate}
+\item Pilihlah secara acak suatu arah yang membuat Anda tetap berada di daratan, lalu
+berjalanlah 1 km ke arah tersebut. Misalkan $P$ menyatakan posisi Anda. Berapakah nilai
+harapan jarak dari $P$ ke sungai?
+\item Sekarang anggaplah Anda bertindak seperti pada bagian (a), tetapi ketika tiba di
+$P$, Anda memilih arah acak (dari \emx {semua} arah) dan berjalan sejauh 1 km.
+Berapakah peluang Anda mencapai sungai sebelum perjalanan kedua selesai?
+\end{enumerate}
+
+\i\label{exer 6.3.28} (dari Hamming\index{HAMMING, R. W.}\footnote{ibid., hlm. 205.})
+Sebuah permainan dimainkan sebagai berikut: Bilangan acak $X$ dipilih secara seragam
+dari $[0, 1]$. Kemudian barisan bilangan acak $Y_1, Y_2, \ldots$ dipilih secara
+independen dan seragam dari $[0, 1]$. Permainan berakhir untuk pertama kalinya ketika
+$Y_i~>~X$. Anda kemudian dibayar $(i-1)$ dolar. Berapakah biaya masuk yang adil untuk
+permainan ini?
+
+\i\label{exer 6.3.29} Sebuah jarum panjang dengan panjang $L$ yang jauh lebih besar
+daripada 1 dijatuhkan pada kisi yang garis horizontal dan vertikalnya berjarak satu
+satuan. Tunjukkan bahwa banyaknya garis yang dipotong rata-rata, yaitu $a$, kira-kira
+$$
+a = \frac{4L}\pi\ .
+$$
+
+\end{LJSItem}}
+%\end{document}

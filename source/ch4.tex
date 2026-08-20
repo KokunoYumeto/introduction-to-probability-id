@@ -1,0 +1,2405 @@
+% This chapter has been modified on 6/4/05.
+%\setcounter{chapter}{3}
+
+\chapter{Peluang Bersyarat}\label{chp 4}  
+
+\section{Peluang Bersyarat Diskret}\label{sec 4.1} 
+
+\subsection*{Peluang Bersyarat}
+\par
+Dalam bagian ini kita mengajukan dan menjawab pertanyaan berikut.  Misalkan kita menetapkan
+suatu fungsi distribusi pada sebuah ruang sampel, lalu mengetahui bahwa kejadian $E$ telah
+terjadi.  Bagaimana seharusnya kita mengubah peluang kejadian-kejadian yang tersisa?  Peluang
+baru untuk suatu kejadian $F$ akan kita sebut \emx {peluang
+bersyarat\index{peluang!bersyarat}\index{peluang bersyarat} $F$ dengan syarat $E$} dan
+kita lambangkan dengan
+$P(F|E)$.
+
+\begin{example}\label{exam 4.1}
+Suatu percobaan terdiri atas pelemparan sebuah dadu satu kali.  Misalkan $X$ adalah hasilnya.  Misalkan $F$ adalah kejadian
+$\{X = 6\}$, dan misalkan $E$ adalah kejadian $\{X > 4\}$.  Kita menetapkan
+fungsi distribusi
+$m(\omega) = 1/6$ untuk $\omega = 1, 2, \ldots , 6$.  Jadi, $P(F) =
+1/6$.  Sekarang misalkan dadu dilempar dan kita diberi tahu bahwa kejadian $E$ telah terjadi.  
+Dengan demikian hanya tersisa dua hasil yang mungkin: 5 dan~6.  Tanpa informasi lain, 
+kita tetap menganggap kedua hasil ini berpeluang sama, sehingga 
+peluang $F$ menjadi 1/2, jadi $P(F|E) = 1/2$.
+\end{example}
+
+\begin{example}\label{exam 4.1.5}
+Dalam Tabel Hayat (lihat Lampiran~C), kita mendapati bahwa dalam populasi 100{,}000 perempuan, 89.835\%
+diperkirakan hidup hingga usia 60 tahun, sedangkan 57.062\% diperkirakan hidup hingga usia 80 tahun.  Dengan syarat seorang perempuan telah berusia
+60 tahun, berapakah peluang bahwa ia hidup hingga usia 80 tahun?
+\par
+Ini adalah contoh peluang bersyarat.  Dalam kasus ini, ruang sampel semula
+dapat dipandang sebagai himpunan 100{,}000 perempuan.  Kejadian $E$ dan $F$ masing-masing adalah subhimpunan
+ruang sampel yang terdiri atas semua perempuan yang hidup sekurang-kurangnya 60 tahun dan sekurang-kurangnya 80 tahun.
+Kita menganggap $E$ sebagai ruang sampel baru dan mencatat bahwa $F$ merupakan subhimpunan $E$. 
+Jadi, ukuran $E$ adalah 89{,}835 dan ukuran $F$ adalah 57{,}062.  Maka, peluang yang
+ditanyakan sama dengan $57{,}062/89{,}835 = .6352$.  Dengan demikian, seorang perempuan berusia 60 tahun memiliki peluang 63.52\% untuk
+hidup hingga usia 80 tahun.
+\end{example}
+
+
+\begin{example}\label{exam 4.2}
+Perhatikan kembali contoh pemungutan suara dari Bagian~\ref{sec 1.2}: tiga kandidat A, B,
+dan C mencalonkan diri.  Kita memutuskan bahwa A dan B memiliki peluang yang sama untuk
+menang, sedangkan peluang C untuk menang hanya 1/2 peluang A.  Misalkan $A$ adalah kejadian ``A
+menang," $B$ adalah kejadian ``B menang," dan $C$ adalah kejadian ``C menang."  Karena itu, kita menetapkan
+peluang $P(A) = 2/5$, $P(B) = 2/5$, dan $P(C) = 1/5$.  
+\par
+Misalkan sebelum pemilihan berlangsung, $A$ mengundurkan diri.  Seperti dalam Contoh~\ref{exam
+4.1}, wajar jika kita menetapkan peluang baru untuk kejadian $B$ dan $C$ yang
+sebanding dengan peluang semula.  Dengan demikian, kita memperoleh $P(B|~A) = 2/3$, dan
+$P(C|~A) = 1/3$.  Penting untuk dicatat bahwa setiap kali kita menetapkan peluang pada kejadian di dunia nyata,
+distribusi yang dihasilkan hanya berguna jika kita memperhitungkan semua informasi yang
+relevan.  Dalam contoh ini, kita mungkin mengetahui bahwa sebagian besar pemilih yang mendukung $A$ akan memilih
+$C$ jika $A$ tidak lagi ikut serta.  Hal ini jelas membuat peluang
+$C$ menang lebih besar daripada nilai 1/3 yang ditetapkan di atas.
+\end{example}
+
+Dalam contoh-contoh ini kita menetapkan suatu fungsi distribusi, lalu memperoleh informasi
+baru yang menentukan ruang sampel baru, yang terdiri atas hasil-hasil yang
+masih mungkin, dan membuat kita menetapkan fungsi distribusi baru pada
+ruang tersebut.
+
+Kita hendak memformalkan prosedur yang dilakukan dalam contoh-contoh tersebut.  Misalkan
+$\Omega = \{\omega_1,\omega_2,\dots,\omega_r\}$ adalah ruang sampel semula
+yang telah diberi fungsi distribusi $m(\omega_j)$.  Misalkan kita mengetahui bahwa
+kejadian $E$ telah terjadi.  Kita hendak menetapkan fungsi distribusi baru
+$m(\omega_j|E)$ pada $\Omega$ untuk mencerminkan fakta ini.  Jelas bahwa jika suatu titik sampel
+$\omega_j$ tidak berada dalam $E$, kita menginginkan $m(\omega_j|E) = 0$.  Selain itu, jika tidak ada
+informasi yang menyatakan sebaliknya, wajar untuk menganggap bahwa
+peluang bagi $\omega_k$ dalam $E$ harus mempertahankan perbandingan relatif yang sama
+seperti sebelum kita mengetahui bahwa $E$ telah terjadi.  Untuk itu kita mensyaratkan
+bahwa
+$$
+m(\omega_k|E) = cm(\omega_k)
+$$
+untuk semua $\omega_k$ dalam $E$, dengan $c$ suatu konstanta positif.  Namun, kita juga harus
+memiliki
+$$
+\sum_E m(\omega_k|E) = c\sum_E m(\omega_k) = 1\ .
+$$
+Jadi,
+$$
+c = \frac 1{\sum_E m(\omega_k)} = \frac 1{P(E)}\ .
+$$
+(Perhatikan bahwa hal ini mengharuskan kita mengasumsikan $P(E) > 0$.)  Dengan demikian, kita
+mendefinisikan
+$$
+m(\omega_k|E) = \frac {m(\omega_k)}{P(E)}
+$$
+untuk $\omega_k$ dalam $E$.  Distribusi baru ini akan kita sebut \emx {distribusi
+bersyarat}\index{distribusi bersyarat} dengan syarat $E$.  Untuk suatu kejadian umum $F$, diperoleh
+$$
+P(F|E) = \sum_{F \cap E} m(\omega_k|E) = \sum_{F \cap E}\frac {m(\omega_k)}{P(E)} = 
+\frac {P(F \cap E)}{P(E)}\ .
+$$
+
+Kita menyebut $P(F|E)$ sebagai \emx {peluang bersyarat terjadinya $F$ dengan syarat $E$ terjadi,}
+dan menghitungnya dengan rumus
+$$
+P(F|E) = \frac {P(F \cap E)}{P(E)}\ .
+$$
+
+\begin{example}(Lanjutan Contoh~\ref{exam 4.1}){\label{exam 4.3}}
+Mari kembali ke contoh pelemparan dadu.  Ingat bahwa $F$ adalah kejadian $X = 6$, dan
+$E$ adalah kejadian $X > 4$.  Perhatikan bahwa $E \cap F$ adalah kejadian $F$.  Jadi, rumus di atas memberikan
+\begin{eqnarray*}
+P(F|E) & = & \frac {P(F \cap E)}{P(E)} \\
+& = & \frac {1/6}{1/3} \\
+& = & \frac 12\ ,\\
+\end{eqnarray*}
+sesuai dengan perhitungan sebelumnya.
+\end{example}
+
+\begin{example}\label{exam 4.4}
+Kita memiliki dua guci, I dan II.  Guci I berisi 2 bola hitam dan 3 bola putih. 
+Guci II berisi 1 bola hitam dan 1 bola putih.  Sebuah guci dipilih secara acak dan sebuah bola
+dipilih secara acak dari guci tersebut.  Kita dapat menyajikan ruang sampel percobaan ini sebagai lintasan-lintasan
+pada sebuah pohon seperti ditunjukkan dalam Gambar~\ref{fig 4.1}. Peluang yang ditetapkan pada lintasan-lintasan tersebut
+juga ditampilkan.  
+\par
+Misalkan $B$ adalah kejadian ``sebuah bola hitam terambil," dan $I$ adalah kejadian ``guci I
+terpilih."  Bobot cabang 2/5, yang ditunjukkan pada salah satu cabang dalam gambar, kini dapat
+ditafsirkan sebagai peluang bersyarat $P(B|I)$.
+
+\putfig{4.5truein}{PSfig4-1}{Diagram pohon.}{fig 4.1}
+
+\par
+Misalkan kita hendak menghitung $P(I|B)$.  Dengan menggunakan rumus tersebut, kita memperoleh
+\begin{eqnarray*}
+P(I|B) & = & \frac {P(I \cap B)}{P(B)} \\
+       & = & \frac {P(I \cap B)}{P(B \cap I) + P(B \cap II)} \\
+       & = & \frac {1/5}{1/5 + 1/4} = \frac 49\ .
+\end{eqnarray*}
+\end{example}
+
+\subsection*{Peluang Bayes}
+
+Ukuran pohon semula memberikan peluang terambilnya bola dengan
+warna tertentu, dengan syarat guci yang dipilih diketahui.  Kita baru saja menghitung \emx {peluang
+balikan} bahwa guci tertentu telah dipilih, dengan syarat warna bolanya diketahui. 
+Peluang balikan semacam ini disebut \emx {peluang Bayes}\index{peluang
+Bayes}\index{peluang!Bayes} dan dapat diperoleh dengan rumus yang akan kita kembangkan
+kemudian.  Peluang Bayes juga dapat diperoleh hanya dengan menyusun ukuran pohon untuk
+percobaan dua tahap yang dilakukan dalam urutan terbalik.  Pohon ini ditampilkan dalam Gambar~\ref{fig 4.2}.
+
+\putfig{4.5truein}{PSfig4-2}{Diagram pohon terbalik.}{fig 4.2}
+
+Lintasan-lintasan pada pohon terbalik berkorespondensi satu-satu dengan lintasan pada pohon maju,
+karena masing-masing bersesuaian dengan hasil tertentu dari percobaan, sehingga diberi
+peluang yang sama.  Dari pohon maju, kita memperoleh bahwa peluang terambilnya bola hitam adalah
+$$
+\frac 12 \cdot \frac 25 + \frac 12 \cdot \frac 12 = \frac 9{20}\ .
+$$
+
+Peluang untuk cabang-cabang pada tingkat kedua diperoleh dengan pembagian
+sederhana.  Sebagai contoh, jika $x$ adalah peluang yang akan ditetapkan pada
+cabang teratas di tingkat kedua, kita harus mempunyai
+$$
+\frac 9{20} \cdot x = \frac 15
+$$
+atau $x = 4/9$.  Jadi, $P(I|B) = 4/9$, sesuai dengan
+perhitungan kita sebelumnya.  Pohon terbalik itu kemudian menampilkan semua peluang
+balikan, atau peluang Bayes.  
+
+\begin{example}\label{exam 4.5}
+Sekarang kita membahas suatu masalah yang disebut masalah \emx {Monty Hall}\index{masalah Monty Hall}.   Masalah ini
+telah lama menjadi masalah favorit, tetapi kembali populer setelah Craig Whitaker\index{WHITAKER,
+C.} mengirim surat kepada Marilyn vos Savant\index{vos SAVANT, M.} untuk dibahas dalam kolomnya di \emx {Parade
+Magazine}.\footnote{Marilyn vos Savant, Ask Marilyn, \emx {Parade Magazine}, 9 
+September;  2 December;  17  February 1990, dicetak ulang dalam Marilyn vos Savant, \emx {Ask
+Marilyn}, St. Martins, New York, 1992.}  Persoalannya dapat dirumuskan secara mandiri sebagai berikut.
+Terdapat tiga pintu: satu menyembunyikan mobil\index{mobil} dan dua lainnya kambing\index{kambing}.
+Peserta memilih pintu~1. Pembawa acara, yang mengetahui letak hadiah, lalu membuka pintu~3 dan
+memperlihatkan seekor kambing, kemudian menawarkan pintu~2 sebagai pengganti. Apakah beralih pintu
+menguntungkan? Uraian ini tidak menerjemahkan atau mereproduksi ungkapan surat pembaca.
+\par
+Marilyn memberikan solusi yang menyimpulkan bahwa Anda sebaiknya beralih, dan jika melakukannya, peluang Anda untuk
+menang adalah 2/3.  Beberapa pembaca yang marah, sebagian di antaranya menyatakan memiliki gelar PhD dalam
+matematika, mengatakan bahwa hal itu tidak masuk akal karena setelah Monty menyingkirkan satu pintu, hanya ada dua
+pintu yang mungkin dan masing-masing seharusnya tetap memiliki peluang 1/2, sehingga beralih
+tidak memberikan keuntungan.  Marilyn mempertahankan solusinya dan mendorong para pembacanya untuk menyimulasikan permainan tersebut serta menarik
+kesimpulan sendiri.  Kami juga mendorong pembaca untuk melakukannya (lihat
+Latihan~\ref{exer 4.1.9.6}).
+\par
+Pembaca lain mengeluhkan bahwa Marilyn belum menggambarkan masalah itu secara lengkap.  Secara khusus,
+cara pengambilan keputusan tertentu selama permainan tidak dijelaskan.  Aspek
+masalah ini akan dibahas dalam Bagian~\ref{sec 4.3}.  Kita akan mengasumsikan bahwa mobil ditempatkan
+di balik sebuah pintu dengan melempar dadu bersisi tiga, sehingga ketiga pilihan berpeluang sama.  Monty
+mengetahui letak mobil dan selalu membuka pintu yang di baliknya ada kambing.  Terakhir, kita mengasumsikan bahwa jika 
+Monty dapat memilih di antara dua pintu (yaitu, peserta telah memilih pintu yang di baliknya ada mobil), ia
+memilih masing-masing pintu dengan peluang 1/2.  Marilyn
+jelas mengharapkan para pembacanya mengasumsikan bahwa permainan berlangsung dengan cara ini.
+\par
+Seperti kebanyakan paradoks semu, masalah ini dapat diselesaikan melalui analisis yang cermat.
+Kita mulai dengan menjelaskan pertanyaan terkait yang lebih sederhana.  Kita katakan bahwa seorang peserta menggunakan
+strategi ``bertahan" jika ia memilih sebuah pintu dan, ketika ditawari kesempatan untuk beralih ke pintu lain,
+menolak (yaitu, ia bertahan pada pilihan semula).  Demikian pula, kita katakan bahwa
+peserta menggunakan strategi ``beralih" jika ia memilih sebuah pintu dan, ketika ditawari kesempatan untuk beralih ke
+pintu lain, menerima tawaran itu.  Sekarang misalkan seorang peserta memutuskan sejak awal untuk memakai
+strategi ``bertahan."  Satu-satunya tindakannya dalam kasus ini adalah memilih sebuah pintu (dan menolak tawaran untuk
+beralih, jika tawaran diberikan).  Berapakah peluang ia memenangkan sebuah mobil?  Pertanyaan yang sama
+dapat diajukan untuk strategi ``beralih."  
+\par
+Dengan strategi ``bertahan," seorang peserta akan memenangkan mobil dengan peluang 1/3, karena dalam 1/3
+kasus mobil berada di balik pintu yang dipilihnya.  Di pihak lain, jika seorang peserta memakai
+strategi ``beralih," ia akan menang setiap kali mobil tidak berada di balik pintu yang semula
+dipilihnya, yang terjadi dalam 2/3 kasus.  
+\par
+Analisis yang sangat sederhana ini, meskipun benar, belum sepenuhnya menyelesaikan masalah yang diajukan Craig.  Craig
+menanyakan peluang bersyarat bahwa Anda menang jika beralih, dengan syarat Anda telah memilih pintu 1
+dan Monty telah memilih pintu 3.  Untuk menyelesaikan masalah ini, kita menyusun masalah sebelum
+memperoleh informasi tersebut, lalu menghitung peluang bersyarat berdasarkan informasi itu. 
+Proses ini berlangsung dalam beberapa tahap; mobil ditempatkan di balik sebuah pintu, peserta
+memilih sebuah pintu, dan akhirnya Monty membuka sebuah pintu.  Karena itu, wajar untuk menganalisisnya dengan ukuran
+pohon.  Di sini kita membuat asumsi tambahan bahwa jika Monty dapat memilih di antara dua pintu (yaitu,
+peserta telah memilih pintu yang di baliknya ada mobil), ia memilih masing-masing pintu dengan peluang
+1/2.  Asumsi-asumsi yang kita buat menentukan peluang cabang, yang kemudian menentukan
+ukuran pohon. Pohon dan ukuran pohon yang dihasilkan ditampilkan dalam Gambar~\ref{fig 4.4}.  Mungkin terasa menggoda untuk
+memperkecil pohon dengan membuat asumsi tertentu, misalnya: ``Tanpa mengurangi keumuman, kita
+akan mengasumsikan bahwa peserta selalu memilih pintu 1."  Demi kejelasan, kita memilih untuk tidak membuat
+asumsi semacam itu.  
+
+\putfig{4.5truein}{PSfig4-0}{Masalah Monty Hall.}{fig 4.4}
+\par
+Sekarang informasi yang diberikan, yaitu peserta memilih pintu 1 dan Monty memilih pintu 3, berarti
+hanya dua lintasan pada pohon yang mungkin (lihat Gambar~\ref{fig 4.4.5}).  
+\putfig{4.5truein}{PSfig4-4-5}{Peluang bersyarat untuk masalah Monty Hall.}{fig 4.4.5}
+Pada salah satu lintasan, mobil berada di balik pintu 1, sedangkan pada lintasan lainnya mobil berada di balik pintu 2.  
+Lintasan dengan mobil di balik pintu 2 berpeluang dua kali lebih besar daripada lintasan dengan mobil di balik pintu 1. 
+Jadi, peluang bersyarat bahwa mobil berada di balik pintu 2 adalah 2/3 dan bahwa mobil berada 
+di balik pintu 1 adalah 1/3. Karena itu, jika Anda beralih, peluang Anda memenangkan mobil adalah 2/3, seperti yang dikatakan Marilyn.
+\par
+Pada titik ini, pembaca mungkin mengira bahwa kedua masalah di atas sama karena jawabannya
+sama.  Ingat bahwa dalam masalah semula kita mengasumsikan bahwa jika peserta
+memilih pintu dengan mobil di baliknya, sehingga Monty dapat memilih di antara dua pintu, Monty memilih masing-masing pintu dengan
+peluang 1/2.  Sekarang misalkan sebagai gantinya, ketika Monty dapat memilih, ia memilih pintu
+dengan nomor lebih besar dengan peluang 3/4.  Dalam masalah ``beralih" versus ``bertahan,"
+peluang menang dengan strategi ``beralih" tetap 2/3.  Namun, dalam
+masalah semula, jika peserta beralih, ia menang dengan peluang 4/7.  Pembaca dapat
+memeriksanya dengan mencatat bahwa hanya dua lintasan yang sama seperti sebelumnya yang mungkin pada pohon. 
+Lintasan yang menghasilkan kemenangan jika peserta beralih memiliki peluang 1/3, sedangkan lintasan yang
+menghasilkan kekalahan jika peserta beralih memiliki peluang 1/4.
+\end{example}
+
+
+\subsection*{Kejadian Bebas}     
+
+Sering kali, pengetahuan bahwa suatu kejadian $E$ telah terjadi tidak memengaruhi
+peluang terjadinya kejadian lain $F$, yaitu $P(F|E) = P(F)$.  Dalam
+kasus ini, kita juga mengharapkan persamaan
+$P(E|F) = P(E)$ berlaku.  Bahkan (lihat Latihan~\ref{exer 4.1.1}), 
+masing-masing persamaan mengakibatkan persamaan yang lain.  Jika persamaan-persamaan ini berlaku, kita dapat mengatakan
+bahwa $F$ \emx {bebas} dari $E$.  Sebagai contoh, kita tidak mengharapkan
+pengetahuan tentang hasil lemparan pertama sebuah koin mengubah peluang
+yang kita tetapkan pada hasil-hasil yang mungkin dari lemparan kedua; dengan kata lain, kita
+tidak mengharapkan lemparan kedua bergantung pada lemparan pertama.  Gagasan ini
+diformalkan dalam definisi kejadian bebas berikut.
+
+\begin{definition}\label{def 4.2}
+Misalkan $E$ dan $F$ adalah dua kejadian.  Kita mengatakan bahwa keduanya \emx {bebas}\index{kejadian!bebas}\index{kebebasan
+kejadian} jika 1) kedua kejadian memiliki peluang positif dan
+$$
+P(E|F) = P(E)\ {\rm dan}\ P(F|E) = P(F)\ ,
+$$
+atau 2) sekurang-kurangnya salah satu kejadian memiliki peluang 0.
+\end{definition}
+
+Seperti dicatat di atas, jika $P(E)$ dan $P(F)$ keduanya positif, masing-masing persamaan di atas
+mengakibatkan persamaan yang lain. Karena itu, untuk menentukan apakah dua kejadian bebas, hanya satu dari
+persamaan tersebut yang perlu diperiksa (lihat Latihan~\ref{exer 4.1.1}).
+\par
+Teorema berikut memberikan cara lain untuk memeriksa kebebasan.
+
+\begin{theorem}\label{thm 4.1}
+Dua kejadian $E$ dan $F$ bebas jika dan hanya jika 
+$$P(E\cap F) = P(E)P(F)\ .$$
+\proof
+Jika salah satu kejadian memiliki peluang 0, kedua kejadian itu bebas dan persamaan di atas 
+berlaku, sehingga teorema benar dalam kasus ini.  Oleh karena itu, selanjutnya kita dapat mengasumsikan bahwa kedua kejadian memiliki 
+peluang positif. Asumsikan bahwa $E$ dan $F$ bebas.  Maka $P(E|F) = P(E)$, sehingga
+\begin{eqnarray*}
+P(E\cap F) & = & P(E|F)P(F) \\
+       & = & P(E)P(F)\ .
+\end{eqnarray*}
+
+Selanjutnya asumsikan bahwa $P(E\cap F) = P(E)P(F)$.  Maka
+$$
+P(E|F) = \frac {P(E \cap F)}{P(F)} = P(E)\ .
+$$
+Selain itu,
+$$
+P(F|E) = \frac {P(F \cap E)}{P(E)} = P(F)\ .
+$$
+Jadi, $E$ dan $F$ bebas.
+\end{theorem}
+
+\begin{example}\label{exam 4.6}
+Misalkan kita memiliki sebuah koin yang menghasilkan kepala dengan peluang $p$ dan ekor dengan peluang
+$q$.  Sekarang misalkan koin ini dilempar dua kali.  Dengan menggunakan penafsiran frekuensi atas peluang, wajar untuk menetapkan
+pada hasil $(H,H)$ peluang $p^2$, pada hasil $(H, T)$ peluang $pq$, dan seterusnya.  
+Misalkan $E$ adalah kejadian munculnya kepala pada lemparan pertama dan $F$ adalah kejadian munculnya ekor pada
+lemparan kedua.  Sekarang kita akan memeriksa bahwa dengan penetapan peluang di atas, kedua kejadian ini
+bebas, seperti yang diharapkan.  Kita mempunyai $P(E) = p^2 + pq = p$, $P(F) = pq + q^2 = q$.  Terakhir, $P(E\cap
+F) = pq$, sehingga $P(E\cap F) = \linebreak[4] P(E)P(F)$.  
+\end{example}
+
+\begin{example}\label{exam 4.7}
+Sering kali, tetapi tidak selalu, kita dapat melihat secara intuitif kapan dua kejadian
+bebas.  Dalam Contoh~\ref{exam 4.6}, misalkan $A$ adalah kejadian ``lemparan
+pertama menghasilkan kepala" dan $B$ adalah kejadian ``kedua hasil sama." Maka
+$$
+P(B|A) = \frac {P(B \cap A)}{P(A)} = \frac {P\{\mbox {HH}\}}{P\{\mbox {HH,HT}\}} =
+\frac {1/4}{1/2} = \frac 12 = P(B).
+$$
+Jadi, $A$ dan $B$ bebas, meskipun hasil tersebut tidak begitu jelas secara intuitif.
+\end{example}
+
+\begin{example}\label{exam 4.8}
+Terakhir, mari kita berikan contoh dua kejadian yang tidak bebas. 
+Dalam Contoh~\ref{exam 4.6}, misalkan $I$ adalah kejadian ``kepala pada lemparan pertama" dan $J$
+adalah kejadian ``muncul dua kepala."  Maka $P(I) = 1/2$ dan $P(J) = 1/4$.  Kejadian
+$I \cap J$ adalah kejadian ``kepala pada kedua lemparan" dan memiliki peluang $1/4$. 
+Jadi, $I$ dan $J$ tidak bebas karena $P(I)P(J) = 1/8 \ne P(I \cap J)$.
+\end{example}
+
+Kita dapat memperluas konsep kebebasan pada sebarang himpunan berhingga kejadian
+$A_1$,~$A_2$, \dots,~$A_n$.
+
+\begin{definition}\label{def 4.3}
+Suatu himpunan kejadian $\{A_1,\ A_2,\ \ldots,\ A_n\}$ disebut \emx {saling
+bebas}\index{kebebasan kejadian!saling}\index{kejadian saling bebas} jika untuk setiap
+subhimpunan
+$\{A_i,\ A_j,\ldots,\ A_m\}$ dari kejadian-kejadian tersebut berlaku
+$$
+P(A_i \cap A_j \cap\cdots\cap A_m) = P(A_i)P(A_j)\cdots P(A_m),
+$$
+atau secara ekuivalen, jika untuk sebarang barisan $\bar A_1$,~$\bar A_2$,
+\dots,~$\bar A_n$ dengan $\bar A_j = A_j$ atau $\tilde A_j$,
+$$
+P(\bar A_1 \cap \bar A_2 \cap\cdots\cap \bar A_n) =
+P(\bar A_1)P(\bar A_2)\cdots P(\bar A_n).
+$$
+(Untuk bukti keekuivalenan dalam kasus $n = 3$, 
+lihat Latihan~\ref{exer 4.1.31}.)
+\end{definition}
+Dengan terminologi ini, setiap barisan  $(\mbox S,\mbox S,\mbox F,\mbox
+F, \mbox S, \dots,\mbox S)$ dari hasil-hasil yang mungkin dalam suatu proses percobaan Bernoulli membentuk barisan kejadian yang saling
+bebas.
+\par
+Wajar untuk bertanya: Jika setiap pasangan dalam suatu himpunan kejadian bebas, apakah keseluruhan himpunan itu
+saling bebas?  Jawabannya adalah \emx {belum tentu,} dan sebuah contoh diberikan dalam
+Latihan~\ref{exer 4.1.7}.
+\par
+Penting untuk dicatat bahwa pernyataan 
+$$
+P(A_1 \cap A_2 \cap \cdots \cap A_n) = P(A_1)P(A_2) \cdots P(A_n)
+$$
+tidak mengakibatkan bahwa kejadian-kejadian $A_1$,~$A_2$, \dots,~$A_n$ saling bebas (lihat
+Latihan~\ref{exer 4.1.8}).
+
+\subsection*{Fungsi Distribusi Gabungan dan Kebebasan Peubah Acak}
+
+Sering kali, ketika suatu percobaan dilakukan, beberapa besaran berbeda yang
+berkaitan dengan hasilnya diselidiki.  
+
+\begin{example}\label{exam 4.91}
+Misalkan kita melempar sebuah koin tiga kali.  Peubah acak dasar ${\bar X}$ yang berkaitan
+dengan percobaan ini memiliki delapan hasil yang mungkin, yaitu tripel terurut yang terdiri
+atas H dan T.  Kita juga dapat mendefinisikan peubah acak $X_i$, untuk $i = 1, 2, 3$, sebagai
+hasil lemparan ke-$i$.  Jika koin itu adil, kita harus menetapkan peluang
+1/8 pada masing-masing dari delapan hasil yang mungkin.  Jadi, fungsi distribusi $X_1$,
+$X_2$, dan $X_3$ identik; dalam setiap kasus fungsi itu didefinisikan oleh $m(H) = m(T) = 1/2$.
+\end{example}
+
+Jika kita memiliki beberapa peubah acak $X_1, X_2, \ldots, X_n$ yang berkaitan dengan suatu
+percobaan, kita dapat mempertimbangkan peubah acak gabungan ${\bar X} = (X_1, X_2,
+\ldots, X_n)$ yang didefinisikan dengan mengambil suatu hasil $\omega$ dari percobaan dan menuliskan,
+sebagai sebuah tupel-$n$, $n$ hasil yang bersesuaian untuk peubah acak $X_1, X_2, \ldots, X_n$. 
+Jadi, jika himpunan hasil yang mungkin bagi peubah acak $X_i$ adalah himpunan $R_i$, maka
+himpunan hasil yang mungkin bagi peubah acak gabungan ${\bar X}$ adalah hasil kali Kartesius
+dari himpunan-himpunan $R_i$, yaitu himpunan semua tupel-$n$ hasil yang mungkin bagi peubah-peubah $X_i$.
+
+\begin{example}(Lanjutan Contoh~\ref{exam 4.91}){\label{exam 4.92}}
+Dalam contoh pelemparan koin di atas, misalkan $X_i$ menyatakan hasil lemparan ke-$i$.  Maka
+peubah acak gabungan ${\bar X} = (X_1, X_2, X_3)$ memiliki delapan hasil yang mungkin.
+\par
+Sekarang misalkan kita mendefinisikan $Y_i$, untuk $i = 1, 2, 3$, sebagai banyaknya kepala yang muncul dalam
+$i$ lemparan pertama.  Maka hasil yang mungkin bagi $Y_i$ adalah $\{0, 1, \ldots, i\}$, sehingga sekilas
+himpunan hasil yang mungkin bagi peubah acak gabungan ${\bar Y} = (Y_1,
+Y_2, Y_3)$ seharusnya merupakan himpunan
+$$\{(a_1, a_2, a_3)\ :\ 0 \le a_1 \le 1, 0 \le a_2 \le 2, 0 \le a_3 \le 3\}\ .$$
+Namun, hasil $(1, 0, 1)$ tidak mungkin terjadi karena harus berlaku $a_1 \le a_2 \le a_3$.  Penyelesaian
+masalah ini adalah mendefinisikan peluang hasil $(1, 0, 1)$ sebagai 0.  Selain itu, harus
+berlaku $a_{i+1} - a_i \le 1$ untuk $i = 1, 2$.
+\par
+Sekarang kita menggambarkan penetapan peluang pada berbagai hasil bagi peubah acak gabungan
+${\bar X}$ dan ${\bar Y}$.  Dalam kasus pertama, masing-masing dari
+delapan hasil harus diberi peluang 1/8 karena kita mengasumsikan koin yang digunakan
+adil.  Dalam kasus kedua, karena $Y_i$ memiliki $i+1$ hasil yang mungkin, himpunan hasil yang
+mungkin berukuran 24.    Hanya delapan dari 24 hasil tersebut yang benar-benar dapat terjadi, yaitu hasil yang
+memenuhi $a_1 \le a_2 \le a_3$.  Masing-masing hasil ini bersesuaian dengan tepat satu
+hasil peubah acak ${\bar X}$, sehingga wajar untuk menetapkan peluang 1/8
+pada masing-masing hasil tersebut.  Kita menetapkan peluang 0 pada 16 hasil lainnya.  Dalam setiap kasus,
+fungsi peluang itu disebut fungsi distribusi gabungan.
+\end{example}
+
+Kita merangkum gagasan-gagasan di atas dalam sebuah definisi.
+
+\begin{definition}\label{def 4.4}
+Misalkan $X_1, X_2, \ldots, X_n$ adalah peubah acak yang berkaitan dengan suatu percobaan.  Misalkan
+ruang sampel (yaitu, himpunan hasil yang mungkin) bagi $X_i$ adalah himpunan $R_i$.  Maka
+peubah acak gabungan\index{peubah acak!gabungan}\index{peubah acak gabungan} ${\bar
+X} = (X_1, X_2,
+\ldots, X_n)$ didefinisikan sebagai peubah acak yang hasilnya terdiri atas tupel-$n$ terurut,
+dengan koordinat
+ke-$i$ terletak dalam himpunan $R_i$.  Ruang sampel $\Omega$ bagi ${\bar X}$ adalah
+hasil kali Kartesius dari himpunan-himpunan $R_i$:  
+$$\Omega = R_1 \times R_2 \times \cdots \times R_n\ .$$
+Fungsi distribusi gabungan\index{fungsi distribusi!gabungan}\index{fungsi distribusi
+gabungan} bagi
+${\bar X}$ adalah fungsi yang memberikan peluang bagi setiap hasil
+${\bar X}$.
+\end{definition}
+
+\begin{example}(Lanjutan Contoh~\ref{exam 4.91}){\label{exam 4.93}}
+Sekarang kita meninjau penetapan peluang dalam contoh di atas.  Untuk peubah acak
+${\bar X}$, peluang sebarang hasil $(a_1, a_2, a_3)$ hanyalah hasil kali
+peluang $P(X_i = a_i)$, untuk $i = 1, 2, 3$.  Namun, untuk
+${\bar Y}$, peluang yang ditetapkan pada hasil $(1, 1, 0)$ bukanlah hasil kali
+peluang $P(Y_1 = 1)$, $P(Y_2 = 1)$, dan $P(Y_3 = 0)$.  Perbedaan antara kedua
+situasi ini adalah bahwa nilai $X_i$ tidak memengaruhi nilai $X_j$ jika $i \ne j$,
+sedangkan nilai $Y_i$ dan $Y_j$ saling memengaruhi.  Sebagai contoh, jika $Y_1 = 1$, maka
+$Y_2$ tidak mungkin sama dengan 0.  Hal ini mendorong definisi berikut.
+\end{example}
+
+\begin{definition}\label{def 4.4.5}
+Peubah-peubah acak $X_1$,~$X_2$, \ldots,~$X_n$ disebut \emx {saling
+bebas}\index{kebebasan peubah acak!saling}\index{peubah acak yang saling\\ 
+bebas}\index{peubah acak!kebebasan saling} jika
+\begin{eqnarray*}
+&&P(X_1 = r_1, X_2 = r_2, \ldots, X_n = r_n)   \\
+&& \;\;\;\;\;\;\;\;\;\;\;\;\;\;\; = P(X_1 = r_1) P(X_2 = r_2) \cdots  P(X_n = r_n)
+\end{eqnarray*} 
+untuk sebarang pilihan $r_1, r_2, \ldots, r_n$.  Jadi, jika $X_1,~X_2, \ldots,~X_n$ saling
+bebas, fungsi distribusi gabungan peubah acak 
+$${\bar X} = (X_1, X_2, \ldots, X_n)$$
+hanyalah hasil kali fungsi-fungsi distribusi
+masing-masing.  Jika dua peubah\linebreak[4] acak saling bebas, secara lebih
+singkat kita katakan keduanya \emx {be-\linebreak[4] bas.}\index{kebebasan peubah\\
+acak}\index{peubah acak!kebebasan}
+\end{definition}
+
+\begin{example}\label{exam 4.94} Dalam sekelompok 60 orang, banyaknya orang yang merokok atau tidak merokok
+dan menderita atau tidak menderita kanker dilaporkan seperti dalam Tabel~\ref{table 4.1}.
+\begin{table}
+\centering
+\begin{tabular}{l|cc|c}
+             &\hspace{.15in}Tidak merokok\hspace{.15in}&\hspace{.15in}Merokok\hspace{.15in}&\hspace{.15in}Total\hspace{.15in}  \\ \hline
+ Tanpa kanker  & 40             & 10             & 50 \\
+ Kanker      & \hspace{.1in}7 &\hspace{.075in}3& 10 \\ \hline
+ Total      & 47          & 13     & 60 \\
+\end{tabular}
+\caption{Merokok dan kanker.}
+\label{table 4.1}
+\end{table}
+Misalkan $\Omega$ adalah ruang sampel yang terdiri atas 60 orang ini.  Seseorang dipilih secara acak
+dari kelompok tersebut.  Misalkan $C(\omega) = 1$ jika orang ini menderita kanker dan~0 jika tidak, serta $S(\omega) =
+1$ jika orang ini merokok dan~0 jika tidak. Maka distribusi gabungan $\{C,S\}$ diberikan dalam 
+Tabel~\ref{table 4.2}.
+\begin{table}
+\centering
+\begin{tabular}{lr|lcr}
+  &    &            &  S      \\
+  &    & \hspace{.15in} 0&  & 1\hspace{.15in}\\ \hline
+  & 0  &  40/60     &  &10/60  \\ 
+C &    &            &  &       \\
+  & 1  & \hspace{.1in}7/60  &  &3/60   \\
+\end{tabular}
+\caption{Distribusi gabungan.}
+\label{table 4.2}
+\end{table}
+\noindent Sebagai contoh, $P(C = 0, S = 0) = 40/60$, $P(C = 0, S = 1) = 10/60$, dan seterusnya.  Distribusi
+peubah acak masing-masing disebut \emx {distribusi
+marginal.}\index{fungsi distribusi marginal}\index{fungsi distribusi!marginal}  Distribusi marginal
+$C$ dan $S$ adalah:
+$$ p_C = \pmatrix{ 0     & 1     \cr 50/60 & 10/60 \cr},
+$$
+
+$$ p_S = \pmatrix{ 0     & 1     \cr 47/60 & 13/60 \cr}.
+$$
+Peubah acak $S$ dan $C$ tidak bebas karena
+\begin{eqnarray*}
+ P(C = 1,S = 1)   &=& \frac 3{60} = .05\ , \\
+P(C = 1)P(S = 1) &=& \frac {10}{60} \cdot \frac
+{13}{60} = .036\ .
+\end{eqnarray*}
+Perhatikan bahwa kita juga dapat melihatnya dari fakta bahwa
+\begin{eqnarray*} P(C = 1|S = 1) &=& \frac 3{13} = .23\ , \\
+P(C = 1) &=& \frac 16 = .167\ .
+\end{eqnarray*}
+
+\end{example}
+
+\subsection*{Proses Percobaan Bebas}
+
+Kajian peubah acak dilanjutkan dengan mempertimbangkan kelas-kelas khusus peubah acak. 
+Salah satu kelas yang akan kita pelajari adalah kelas \emx {percobaan bebas.}
+
+\begin{definition}\label{def 5.5} Suatu barisan peubah acak $X_1$,~$X_2$, \dots,~$X_n$
+yang saling bebas dan memiliki distribusi yang sama disebut barisan
+percobaan bebas atau \emx {proses percobaan bebas.}\index{proses percobaan bebas}
+
+Proses percobaan bebas muncul secara alami dengan cara berikut.  Kita memiliki satu
+percobaan dengan ruang sampel $R = \{r_1,r_2,\dots,r_s\}$ dan fungsi distribusi
+$$m_X = \pmatrix{ r_1 & r_2 & \cdots & r_s \cr p_1 & p_2 & \cdots & p_s\cr}\ .
+$$
+
+Kita mengulangi percobaan ini sebanyak $n$ kali.  Untuk menggambarkan percobaan keseluruhan, sebagai ruang
+sampel kita memilih ruang
+$$
+\Omega = R \times R \times\cdots\times R,
+$$ yang terdiri atas semua barisan yang mungkin $\omega = (\omega_1,\omega_2,\dots,\omega_n)$ dengan
+nilai setiap $\omega_j$ dipilih dari $R$.  Kita menetapkan fungsi distribusi berupa
+\emx {distribusi hasil kali}
+$$ m(\omega) = m(\omega_1)\cdot\ \ldots\ \cdot m(\omega_n)\ ,
+$$ 
+dengan $m(\omega_j) = p_k$ ketika $\omega_j = r_k$.  Kemudian kita menggunakan $X_j$ untuk menyatakan koordinat ke-$j$
+dari hasil $(r_1, r_2, \ldots, r_n)$.  Peubah-peubah acak
+$X_1$,~\dots,~$X_n$ membentuk suatu proses percobaan bebas.
+\end{definition}
+
+\begin{example}\label{exam 5.6.1} Suatu percobaan terdiri atas pelemparan sebuah dadu tiga kali.  Misalkan
+$X_i$ menyatakan hasil lemparan ke-$i$, untuk $i = 1, 2, 3$.  Fungsi distribusi yang
+sama untuk ketiganya adalah
+$$ m_i = \pmatrix{ 1 & 2 & 3 & 4 & 5 & 6 \cr 1/6 & 1/6 & 1/6 & 1/6 & 1/6 & 1/6 \cr}.
+$$
+
+Ruang sampelnya adalah $R^3 = R \times R \times R$ dengan $R = \{1,2,3,4,5,6\}$.  Jika
+$\omega = (1,3,6)$, maka $X_1(\omega) = 1$, $X_2(\omega) = 3$, dan
+$X_3(\omega) = 6$, yang menunjukkan bahwa lemparan pertama menghasilkan 1, lemparan kedua 3, dan lemparan ketiga
+6.  Peluang yang ditetapkan pada sebarang titik sampel adalah
+$$ m(\omega) = \frac16 \cdot \frac16 \cdot \frac16 = \frac1{216}\ .
+$$
+\end{example}
+
+\begin{example}\label{exam 5.7} Selanjutnya, perhatikan suatu proses percobaan Bernoulli dengan peluang $p$
+untuk sukses pada setiap percobaan.  Misalkan $X_j(\omega) = 1$ jika hasil ke-$j$ adalah sukses dan
+$X_j(\omega) = 0$ jika gagal.  Maka $X_1$,~$X_2$, \dots,~$X_n$ adalah suatu proses
+percobaan bebas.  Setiap $X_j$ memiliki fungsi distribusi yang sama,
+$$ m_j = \pmatrix{ 0 & 1 \cr q & p  \cr},
+$$ dengan $q = 1 - p$.
+
+Jika $S_n = X_1 + X_2 +\cdots + X_n$, maka
+$$ P(S_n = j) = {n \choose j} p^{j} q^{n - j}\ ,  
+$$ dan distribusi $S_n$ adalah distribusi binomial $b(n,p,j)$.
+\end{example}
+
+\subsection*{Rumus Bayes}     
+
+Dalam contoh-contoh kita, kita telah membahas peluang bersyarat dengan bentuk
+berikut: Dengan mengetahui hasil tahap kedua dari suatu percobaan dua tahap, tentukan
+peluang suatu hasil pada tahap pertama.  Kita telah menyebutkan bahwa peluang-peluang
+ini disebut \emx {peluang Bayes.}
+
+Sekarang kita kembali ke perhitungan peluang Bayes yang lebih umum.  Misalkan
+kita memiliki himpunan kejadian $H_1,$~$H_2$, \dots,~$H_m$ yang saling lepas berpasangan
+dan sedemikian sehingga ruang sampel $\Omega$ memenuhi persamaan
+$$
+\Omega = H_1 \cup H_2 \cup\cdots\cup H_m\ .
+$$
+Kejadian-kejadian ini kita sebut \emx {hipotesis.}\index{hipotesis}  Kita juga memiliki kejadian $E$ yang memberi kita
+sejumlah informasi tentang hipotesis mana yang benar.  Kejadian ini kita sebut \emx {bukti.}
+
+Sebelum menerima bukti, kita memiliki sekumpulan \emx {peluang
+prior}\index{peluang prior} $P(H_1)$,                \hfill\break
+~$P(H_2)$, \dots,~$P(H_m)$ bagi hipotesis-hipotesis tersebut. 
+Jika kita mengetahui hipotesis yang benar, kita mengetahui peluang bukti itu.  Dengan
+kata lain, kita mengetahui $P(E|H_i)$ untuk semua $i$.  Kita ingin menentukan peluang
+hipotesis dengan syarat bukti telah diperoleh.  Artinya, kita ingin menentukan peluang
+bersyarat $P(H_i|E)$.  Peluang-peluang ini disebut \emx {peluang
+posterior.}\index{peluang posterior}
+
+Untuk menentukan peluang-peluang ini, kita menuliskannya dalam bentuk
+
+\begin{equation}
+P(H_i|E) = \frac{P(H_i \cap E)}{P(E)}\ . \label{eq 4.1}
+\end{equation}
+Kita dapat menghitung pembilang dari informasi yang diberikan melalui
+\begin{equation}
+P(H_i \cap E) = P(H_i)P(E|H_i)\ . \label{eq 4.2}  
+\end{equation}
+Karena tepat satu dari kejadian $H_1$,~$H_2$, \dots,~$H_m$ dapat terjadi, kita
+dapat menuliskan peluang $E$ sebagai
+
+$$
+P(E) = P(H_1 \cap E)  + P(H_2 \cap E)  + \cdots + P(H_m \cap E)\ .
+$$
+Dengan menggunakan Persamaan~\ref{eq 4.2}, bentuk di atas dapat dilihat sama dengan
+
+\begin{equation}
+   P(H_1)P(E|H_1) + P(H_2)P(E|H_2) + \cdots + P(H_m)P(E|H_m) \ .
+\label{eq 4.3}                                               
+\end{equation}
+Dengan menggunakan (\ref{eq 4.1}), (\ref{eq 4.2}), dan (\ref{eq 4.3}),
+kita memperoleh \emx {rumus Bayes}:\index{rumus Bayes}
+$$
+P(H_i|E) = \frac{P(H_i)P(E|H_i)}{\sum_{k = 1}^m P(H_k)P(E|H_k)}\ .
+$$
+
+Meskipun rumus ini sangat terkenal, kita jarang akan menggunakannya.  Jika banyaknya
+hipotesis sedikit, perhitungan ukuran pohon yang sederhana mudah
+dilakukan, seperti dalam contoh-contoh kita.  Jika banyaknya hipotesis besar, kita sebaiknya
+menggunakan komputer.
+\par
+Peluang Bayes sangat sesuai untuk diagnosis medis.  Seorang
+dokter ingin mengetahui penyakit mana di antara beberapa kemungkinan yang mungkin diderita pasien.  Dokter tersebut
+mengumpulkan bukti berupa hasil sejumlah tes.  Dari
+kajian statistik, dokter dapat menentukan peluang prior berbagai
+penyakit sebelum tes dilakukan, serta peluang hasil tes tertentu
+dengan syarat pasien menderita penyakit tertentu.  Yang ingin diketahui dokter adalah peluang
+posterior penyakit tersebut dengan syarat hasil-hasil tes telah diketahui.
+
+\begin{example}\label{exam 4.10}
+Seorang dokter sedang menentukan apakah seorang pasien menderita salah satu dari tiga penyakit,
+$d_1$,~$d_2$, atau~$d_3$.  Dua tes akan dilakukan, yang masing-masing memberikan hasil
+positif $(+)$ atau negatif $(-)$.  Ada empat pola tes yang mungkin,
+$+{}+$,~$+{}-$, $-{}+$, dan~$-{}-$.  Catatan nasional menunjukkan
+bahwa untuk 10{,}000 orang yang menderita salah satu dari ketiga penyakit ini, distribusi
+penyakit dan hasil tes adalah seperti dalam Tabel~\ref{table 4.3}.
+
+%\Mplace{\Table \paste{maintab}4 \endTable}
+\begin{table}
+\centering
+\begin{tabular}{c|c|cccc} 
+             & Jumlah penderita & \multicolumn{4}{c}{\underbar{Hasil tes}}  \\
+  Penyakit    & penyakit ini\hspace{.25in} &\hspace{.2in}+\hspace{.1in}+\hspace{.2in}
+&\hspace{.1in}+\hspace{.1in}--\hspace{.2in}&\hspace{.2in}--\hspace{.1in}+\hspace{.2in}
+&\hspace{.1in}--\hspace{.1in}--\hspace{.2in}\\ \hline
+  $ d_{1} $  &\hspace{.075in}3215&2110            &\hspace{.15in}301&\hspace{.1in}704  & \hspace{.1in}100\\
+  $ d_{2} $  &\hspace{.075in}2125&\hspace{.1in}396&\hspace{.15in}132&1187  & \hspace{.1in}410\\
+  $ d_{3} $  &\hspace{.075in}4660&\hspace{.1in}510&\hspace{.075in}3568&\hspace{.15in}73  & \hspace{.1in}509\\ \hline
+Total        &10000  &&&&\\ \hline
+\end{tabular}
+\caption{Data penyakit.}
+\label{table 4.3}
+\end{table}
+
+Dari data ini, kita dapat menaksir peluang prior masing-masing
+penyakit dan, dengan syarat suatu penyakit tertentu, peluang suatu hasil tes
+tertentu.  Sebagai contoh, peluang prior penyakit $d_1$ dapat ditaksir
+sebesar $3215/10{,}000 = .3215$.  Peluang hasil tes $+{}-$ dengan syarat
+penyakit $d_1$ dapat ditaksir sebesar $301/3215 = .094$.
+\par
+Sekarang kita dapat menggunakan rumus Bayes untuk menghitung berbagai peluang posterior.  Program
+komputer {\bf Bayes}\index{Bayes (program)} menghitung peluang-peluang posterior ini.  Hasil
+untuk contoh ini ditampilkan dalam Tabel~\ref{table 4.35}.
+
+
+\begin{table}
+\centering
+\begin{tabular}{lccc}
+                                    &  $d_1$ &  $d_2$ &  $d_3$  \\
++\hspace{.1in}+                     & .700   & .131   & .169    \\
++\hspace{.125in}--                    & .075   & .033   & .892    \\
+\hspace{.025in}--\hspace{.125in}+     &
+.358   & .604   & .038    \\
+\hspace{.025in}--\hspace{.15in}--  &
+.098   & .403   & .499    \\
+\end{tabular}
+\caption{Peluang posterior.}
+\label{table 4.35}
+\end{table}
+Dari hasil tersebut kita mencatat bahwa ketika hasil tes adalah $++$, penyakit $d_1$
+memiliki peluang yang jauh lebih tinggi daripada dua penyakit lainnya.  Ketika hasilnya $+-$,
+hal ini berlaku untuk penyakit $d_3$.  Ketika hasilnya $-+$, hal ini berlaku untuk penyakit $d_2$.
+Perhatikan bahwa pernyataan-pernyataan ini mungkin dapat diduga dengan melihat datanya. Jika hasilnya $--$, 
+penyebab yang paling mungkin adalah $d_3$, tetapi peluang bahwa pasien menderita $d_2$ hanya sedikit lebih kecil.
+Jika kita melihat data dalam kasus ini, kita dapat melihat bahwa mungkin sulit untuk menduga mana di antara kedua
+penyakit $d_2$ dan $d_3$ yang lebih mungkin.
+\end{example}
+  
+Contoh terakhir kita menunjukkan bahwa kita harus berhati-hati ketika peluang prior
+kecil.
+
+\begin{example}\label{exam 4.11}
+Seorang dokter memberikan tes untuk suatu kanker tertentu\index{kanker} kepada seorang pasien.  Sebelum hasil
+tes diperoleh, satu-satunya bukti yang dimiliki dokter adalah bahwa 1 dari~1000 perempuan menderita
+kanker ini.  Pengalaman menunjukkan bahwa dalam 99 persen kasus ketika
+kanker ada, hasil tes positif; dan dalam 95 persen kasus ketika
+kanker tidak ada, hasil tes negatif.  Jika ternyata hasil tes positif,
+peluang berapakah yang seharusnya dokter tetapkan pada kejadian bahwa kanker ada? 
+Bentuk lain pertanyaan ini adalah menanyakan frekuensi relatif positif 
+palsu dan kanker.
+
+Kita diberi bahwa %${\rm prior(cancer)} = .001$ and
+$\mbox{prior(kanker)} = .001$ dan
+$\mbox{prior(tidak\ kanker)} = .999$.  Kita juga mengetahui bahwa $P(+| \mbox{kanker}) =
+.99$, $P(-|\mbox{kanker}) = .01$, $P(+|\mbox{tidak\ kanker}) = .05$, dan
+$P(-|\mbox{tidak\ kanker}) = .95$.  Penggunaan data ini memberikan hasil yang ditampilkan dalam
+Gambar~\ref{fig 4.5}.
+
+\putfig{5truein}{PSfig4-5}{Diagram pohon maju dan terbalik.}{fig 4.5}
+
+Sekarang kita melihat bahwa peluang adanya kanker dengan syarat hasil tes positif hanya
+meningkat dari .001 menjadi .019.  Meskipun peningkatan ini hampir dua puluh kali lipat,
+peluang bahwa pasien menderita kanker masih kecil.  Dengan kata lain,
+di antara hasil positif, 98.1 persen merupakan positif palsu dan 1.9 persen merupakan 
+kanker.  Ketika pertanyaan ini diajukan kepada sekelompok mahasiswa kedokteran tahun kedua, lebih dari separuh
+mahasiswa keliru menduga bahwa peluangnya lebih besar dari .5.  
+\end{example}
+
+\subsection*{Catatan Sejarah}
+
+Peluang bersyarat telah digunakan jauh sebelum didefinisikan secara formal.  Pascal dan Fermat
+membahas \emx {masalah pembagian taruhan}:\index{masalah pembagian taruhan} dengan syarat tim A telah memenangi $m$
+permainan dan tim B telah memenangi $n$ permainan, berapakah peluang bahwa A akan memenangi rangkaian tersebut?  (Lihat
+Latihan~\ref{exer 5.1.11}--\ref{exer 5.1.13}.)  Ini jelas merupakan masalah peluang
+bersyarat.  
+\par
+Dalam bukunya, Huygens\index{HUYGENS, C.} memberikan masalah berikut. Sebuah guci memuat
+12 bola, terdiri atas 4 bola putih dan 8 bola hitam. Tiga pemain, A, B, dan C, mengambil bola
+secara bergiliran dalam urutan tersebut tanpa melihat; pemain pertama yang memperoleh bola putih
+menang. Tentukan rasio peluang menang A, B, dan C.\footnote{Ringkasan berdasarkan F.~N. David,
+\emx {Games, Gods and Gambling} (London: Griffin, 1962), p.~119; ungkapan terjemahan modern
+tidak diterjemahkan atau direproduksi.}
+\par
+Dari jawabannya, jelas bahwa Huygens bermaksud setiap bola dikembalikan setelah
+diambil.  Namun, John Hudde\index{HUDDE, J.}, wali kota Amsterdam, mengasumsikan bahwa Huygens bermaksud melakukan
+pengambilan sampel tanpa pengembalian dan berkorespondensi dengan Huygens tentang perbedaan
+jawaban mereka.  Menurut ringkasan Hacking, masing-masing tidak berhasil memahami model yang
+digunakan pihak lain.\index{HACKING, I.}\footnote{I.~Hacking, \emx {The Emergence of Probability}
+(Cambridge: Cambridge University Press, 1975), p.~99. Ringkasan editorial; ungkapan sumber
+tidak diterjemahkan atau direproduksi.}
+\par
+Pada masa terbitnya buku de~Moivre\index{de MOIVRE, A.}, \emx {The Doctrine of Chances,} perbedaan-perbedaan ini
+telah dipahami dengan baik.  De~Moivre mendefinisikan kebebasan dan
+kebergantungan sebagai berikut:
+\begin{quote}
+\indent Dua Kejadian bebas jika tidak memiliki hubungan satu dengan yang
+lain, dan terjadinya salah satu tidak mempercepat ataupun menghambat
+terjadinya yang lain.
+\par
+Dua Kejadian bergantung jika keduanya terhubung sedemikian rupa sehingga
+Peluang terjadinya salah satu berubah akibat terjadinya kejadian yang
+lain.\footnote{A.~de~Moivre, \emx {The Doctrine of Chances,} 3rd~ed. (New York:
+Chelsea, 1967), p.~6.}
+\end{quote}
+
+De~Moivre menggunakan pengambilan sampel dengan dan tanpa pengembalian untuk menunjukkan bahwa
+peluang terjadinya kedua kejadian bebas adalah hasil kali peluang
+keduanya, dan bahwa untuk kejadian bergantung:
+\begin{quote}
+Peluang terjadinya dua Kejadian yang bergantung adalah hasil kali
+Peluang terjadinya salah satu kejadian dengan Peluang terjadinya kejadian yang lain
+ketika kejadian pertama dianggap telah terjadi; dan
+Aturan yang sama berlaku untuk terjadinya sebanyak apa pun Kejadian yang dapat
+ditentukan.\footnote{ibid, p.~7.}
+\end{quote}
+\par
+Rumus yang kita sebut rumus Bayes, serta gagasan menghitung
+peluang suatu hipotesis dengan syarat bukti tertentu, berasal dari sebuah esai terkenal karya
+Thomas Bayes\index{BAYES, T.}.  Bayes adalah pendeta tertahbis di Tunbridge Wells dekat London. 
+Minat matematikanya membuatnya terpilih sebagai anggota Royal Society pada~1742,
+tetapi tidak satu pun hasilnya diterbitkan semasa hidupnya.  Karya yang
+melandasi ketenarannya, ``An Essay Toward Solving a Problem in the Doctrine of
+Chances," diterbitkan pada~1763, tiga tahun setelah
+kematiannya.\footnote{T.~Bayes, ``An Essay Toward Solving a Problem in the Doctrine
+of Chances," \emx {Phil.\ Trans.\ Royal Soc.\ London,} vol.~53 (1763),
+pp.~370--418.}  Bayes meninjau beberapa konsep dasar peluang, lalu
+membahas jenis baru masalah peluang balikan yang memerlukan penggunaan
+peluang bersyarat.
+\par
+Dalam kajiannya tentang proses yang kini kita sebut percobaan Bernoulli, Bernoulli\index{BERNOULLI, J.} telah
+membuktikan hukum bilangan besar yang terkenal, yang akan kita pelajari dalam Bab~\ref{chp
+8}.  Teorema ini menjamin bahwa jika pelaku percobaan mengetahui peluang $p$
+untuk sukses, ia dapat meramalkan bahwa proporsi sukses akan mendekati
+nilai tersebut ketika jumlah percobaan diperbesar.  Bernoulli sendiri
+menyadari bahwa dalam kebanyakan kasus yang menarik, nilai $p$ tidak diketahui, dan
+memandang teoremanya sebagai langkah penting untuk menunjukkan bahwa $p$ dapat ditentukan melalui
+percobaan.
+\par
+Untuk mengkaji masalah ini lebih lanjut, Bayes mulai dengan mengasumsikan bahwa peluang
+$p$ untuk sukses itu sendiri ditentukan oleh suatu percobaan acak.  Ia bahkan
+mengasumsikan bahwa percobaan tersebut membuat nilai $p$ memiliki peluang yang sama untuk
+menjadi sebarang nilai di antara 0 dan 1.\choice{\footnote{Bayes menggunakan peluang
+kontinu seperti yang dibahas dalam Bab 2 buku lengkap Grinstead-Snell.}}{}  Tanpa mengetahui nilai ini, kita
+melakukan
+$n$ percobaan dan mengamati $m$ sukses.  Bayes mengajukan masalah untuk menentukan
+peluang bersyarat bahwa peluang $p$ yang tidak diketahui terletak di antara $a$
+dan $b$.  Ia memperoleh jawaban:
+$$
+P(a \leq p < b | m {\mbox{\,\,sukses\,\, dalam}}\,\,n \,\,{\mbox{percobaan}}) 
+= \frac {\int_a^b x^m(1 - x)^{n - m}\,dx}{\int_0^1 x^m(1 - x)^{n - m}\,dx}\ .
+$$
+\par
+\choice{}{Dalam bagian berikutnya kita akan melihat bagaimana hasil ini diperoleh.}  Bayes jelas
+ingin menunjukkan bahwa fungsi distribusi bersyarat, dengan syarat hasil dari
+semakin banyak percobaan, menjadi terkonsentrasi di sekitar nilai $p$ yang sebenarnya. 
+Jadi, Bayes berusaha menyelesaikan suatu \emx {masalah balikan.}  Perhitungan
+integral-integral tersebut terlalu sulit untuk diselesaikan secara eksak kecuali untuk nilai
+$j$ dan~$n$ yang kecil, sehingga Bayes mencoba metode pendekatan.  Metodenya tidak
+begitu memuaskan, dan ada dugaan bahwa hal ini membuatnya enggan
+menerbitkan hasil-hasilnya.
+\par
+Namun, makalahnya merupakan yang pertama dalam serangkaian kajian penting yang dilakukan
+oleh Laplace, Gauss, dan matematikawan besar lainnya untuk menyelesaikan masalah balikan. 
+Mereka mengkaji masalah ini dalam kaitannya dengan galat pengukuran dalam astronomi.  Jika
+seorang astronom mengetahui nilai sebenarnya suatu jarak dan sifat
+galat acak yang disebabkan oleh alat ukurnya, ia dapat meramalkan sifat probabilistik
+pengukurannya.  Namun, pada kenyataannya ia menghadapi masalah balikan:
+ia mengetahui sifat galat acak dan nilai-nilai pengukuran, lalu ingin
+membuat inferensi tentang nilai sebenarnya yang tidak diketahui.
+\par
+Seperti dinyatakan Maistrov, rumus yang kita sebut rumus Bayes tidak
+muncul dalam esai Bayes.  Laplace memberinya nama tersebut ketika ia mengkaji masalah-masalah
+balikan ini.\index{MAISTROV, L.}\footnote{L.~E. Maistrov, \emx {Probability Theory: A Historical
+Sketch,} trans.~and ed.~Samual Kotz (New York: Academic Press, 1974), p.~100.}
+Perhitungan peluang balikan bersifat mendasar bagi statistika dan telah
+melahirkan cabang penting statistika yang disebut analisis Bayesian, sehingga
+esai singkat Bayes memberinya ketenaran abadi.
+
+\exercises
+\begin{LJSItem}
+
+\i\label{exer 4.1.1} Anggaplah $E$ dan $F$ adalah dua kejadian dengan peluang
+positif.  Tunjukkan bahwa jika $P(E|F) = P(E)$, maka $P(F|E) = P(F)$.
+
+\i\label{exer 4.1.2} Sebuah koin dilempar tiga kali.  Berapakah peluang tepat dua
+kepala muncul, dengan syarat bahwa
+\begin{enumerate}
+\item hasil pertama adalah kepala?
+
+\item hasil pertama adalah ekor?
+
+\item dua hasil pertama adalah kepala?
+
+\item dua hasil pertama adalah ekor?
+
+\item hasil pertama adalah kepala dan hasil ketiga adalah kepala?
+\end{enumerate}
+
+\i\label{exer 4.1.3} Sebuah dadu dilempar dua kali.  Berapakah peluang bahwa jumlah mata dadu
+lebih besar dari 7, dengan syarat bahwa
+\begin{enumerate}
+\item hasil pertama adalah 4?
+
+\item hasil pertama lebih besar dari 3?
+
+\item hasil pertama adalah 1?
+
+\item hasil pertama kurang dari 5?
+\end{enumerate}
+
+\i\label{exer 4.1.4} Sebuah kartu diambil secara acak dari setumpuk kartu.  Berapakah peluang
+bahwa
+\begin{enumerate}
+\item kartu itu berhati, dengan syarat kartu itu merah?
+
+\item nilainya lebih tinggi dari 10, dengan syarat kartu itu berhati? (Tafsirkan J,~Q, K,~A
+sebagai 11,~12, 13,~14.)
+
+\item kartu itu jack, dengan syarat kartu itu merah?
+\end{enumerate} 
+
+\i\label{exer 4.1.5} Sebuah koin dilempar tiga kali.  Tinjaulah kejadian-kejadian berikut.\newline
+$A$: Kepala pada lemparan pertama.\newline
+$B$: Ekor pada lemparan kedua.\newline
+$C$: Kepala pada lemparan ketiga.\newline
+$D$: Ketiga hasil sama (HHH atau TTT).\newline
+$E$: Tepat satu kepala muncul.
+\begin{enumerate}
+\item Manakah di antara pasangan kejadian berikut yang saling bebas?\newline
+(1) $A$, $B$\newline
+(2) $A$, $D$\newline
+(3) $A$, $E$\newline
+(4) $D$, $E$
+
+\item Manakah di antara rangkap tiga kejadian berikut yang saling
+bebas?\newline
+(1) $A$, $B$, $C$\newline
+(2) $A$, $B$, $D$\newline
+(3) $C$, $D$, $E$
+\end{enumerate}
+
+\i\label{exer 4.1.6} Dari setumpuk lima kartu yang masing-masing bernomor 2,~4, 6, 8, dan~10,
+sebuah kartu diambil secara acak lalu dikembalikan.  Proses ini dilakukan tiga kali.  Berapakah
+peluang bahwa kartu bernomor 2 terambil tepat dua kali, dengan syarat
+jumlah nomor pada ketiga pengambilan adalah~12?
+
+\i\label{exer 4.1.7} Sebuah koin dilempar dua kali.  Tinjaulah
+kejadian-kejadian berikut.\newline
+$A$: Kepala pada lemparan pertama.\newline
+$B$: Kepala pada lemparan kedua.\newline
+$C$: Kedua lemparan memberikan hasil yang sama.
+\begin{enumerate}
+\item Tunjukkan bahwa $A$,~$B$,~$C$ bebas berpasangan, tetapi tidak
+saling bebas.
+
+\item Tunjukkan bahwa $C$ bebas terhadap $A$ dan $B$, tetapi tidak terhadap $A \cap B$.
+\end{enumerate}
+
+\i\label{exer 4.1.8} Misalkan $\Omega = \{a,b,c,d,e,f\}$.  Anggaplah $m(a) = m(b) = 1/8$ dan
+$m(c) = m(d) = m(e) = m(f) = 3/16$.  Misalkan $A$,~$B$, dan~$C$ adalah kejadian $A = \{d,e,a\}$, 
+$B = \{c,e,a\}$, $C = \{c,d,a\}$.  Tunjukkan bahwa $P(A \cap B \cap C) = P(A)P(B)P(C)$, tetapi tidak ada dua dari
+kejadian-kejadian ini yang saling bebas.
+ 
+\i\label{exer 4.1.9} Berapakah peluang bahwa suatu keluarga dengan dua anak mempunyai
+\begin{enumerate}
+\item dua anak laki-laki, dengan syarat sekurang-kurangnya satu anaknya laki-laki?
+
+\item dua anak laki-laki, dengan syarat anak pertamanya laki-laki?
+\end{enumerate}
+
+\i\label{exer 4.1.9.5}  Dalam Contoh~\ref{exam 4.1.5}, kita menggunakan Tabel Hayat (lihat Lampiran~C)
+untuk menghitung suatu peluang bersyarat.  Bilangan 93{,}753 dalam tabel itu, yang bersesuaian dengan
+laki-laki berusia 40 tahun, berarti bahwa dari seluruh laki-laki yang lahir di Amerika Serikat pada 1950, sebanyak 93.753\%
+masih hidup pada 1990.  Apakah wajar menggunakan nilai ini sebagai taksiran peluang bahwa seorang laki-laki yang lahir
+tahun ini akan bertahan hidup sampai usia 40 tahun? 
+
+\i\label{exer 4.1.9.6} Simulasikan masalah Monty Hall.  Nyatakan dengan cermat setiap asumsi
+yang Anda buat ketika menulis program.  Menurut Anda, versi masalah manakah yang
+Anda simulasikan?
+
+\i\label{exer 4.1.10} Dalam Contoh~\ref{exam 4.11}, seberapa besarkah peluang prior
+kanker agar diperoleh peluang posterior .5 untuk kanker dengan syarat hasil tes
+positif?
+
+\i\label{exer 4.1.11} Dua kartu diambil dari setumpuk kartu bridge.  Berapakah peluang bahwa
+kartu kedua yang diambil berwarna merah?
+
+\i\label{exer 4.1.12} Jika $P(\tilde B) = 1/4$ dan $P(A|B) = 1/2$, berapakah $P(A \cap B)$?
+
+\i\label{exer 4.1.13}
+\begin{enumerate} 
+\item Berapakah peluang bahwa pasangan bridge Anda memiliki tepat dua kartu as,
+dengan syarat ia memiliki sekurang-kurangnya satu kartu as?
+
+\item Berapakah peluang bahwa pasangan bridge Anda memiliki tepat dua kartu as,
+dengan syarat ia memiliki kartu as sekop?
+\end{enumerate}
+
+\i\label{exer 4.1.14} Buktikan bahwa untuk sebarang tiga kejadian $A$,~$B$,~$C$ yang masing-masing memiliki
+peluang positif dan memenuhi $P(A \cap B) > 0$,
+$$
+P(A \cap B \cap C) = P(A)P(B|A)P(C|A \cap B)\ .
+$$
+
+\i\label{exer 4.1.15} Buktikan bahwa jika $A$ dan $B$ saling bebas, maka pasangan berikut juga saling bebas:
+\begin{enumerate}
+\item $A$ dan $\tilde B$.
+
+\item $\tilde A$ dan $\tilde B$.
+\end{enumerate}
+
+\i\label{exer 4.1.16} Seorang dokter menganggap bahwa seorang pasien menderita salah satu dari tiga penyakit $d_1$,~$d_2$,
+atau~$d_3$.  Sebelum melakukan tes apa pun, ia menganggap setiap penyakit memiliki peluang yang sama. 
+Ia melakukan suatu tes yang akan memberikan hasil positif dengan peluang .8 jika pasien
+menderita $d_1$, .6 jika pasien menderita penyakit $d_2$, dan .4 jika pasien menderita penyakit $d_3$.  Dengan syarat
+hasil tes positif, peluang berapakah yang sekarang seharusnya ditetapkan dokter
+bagi ketiga penyakit yang mungkin itu?
+
+\i\label{exer 4.1.17} Dalam suatu permainan poker, John memiliki kombinasi kartu yang sangat kuat dan bertaruh 5 dolar.  Peluang
+bahwa Mary memiliki kombinasi yang lebih baik adalah .04.  Jika Mary memiliki kombinasi yang lebih baik, ia
+akan menaikkan taruhan dengan peluang .9, tetapi dengan kombinasi yang lebih buruk ia hanya akan menaikkan taruhan
+dengan peluang .1.  Jika Mary menaikkan taruhan, berapakah peluang bahwa ia memiliki
+kombinasi yang lebih baik daripada John?
+
+\i\label{exer 4.1.18} Model guci Polya\index{model guci Polya} untuk penularan adalah sebagai berikut: Kita
+mulai dengan sebuah guci yang berisi satu bola putih dan satu bola hitam.  Pada setiap
+detik kita memilih sebuah bola secara acak dari guci, mengembalikan bola itu, lalu menambahkan satu bola lagi
+dengan warna yang terpilih.  Tulislah program untuk menyimulasikan model ini, dan lihat apakah
+Anda dapat membuat prediksi tentang proporsi bola putih dalam guci
+setelah sejumlah besar pengambilan.  Apakah dalam jangka panjang terdapat kecenderungan bahwa sebagian besar
+bola memiliki warna yang sama?
+
+\i\label{exer 4.1.19} Kita ingin mencari peluang bahwa dalam suatu pembagian kartu bridge setiap pemain
+menerima satu kartu as.  Seorang mahasiswa berargumen sebagai berikut.  Tidak penting kepada siapa
+kartu as pertama dibagikan.  Kartu as kedua harus dibagikan kepada salah satu dari tiga pemain lainnya dan
+hal ini terjadi dengan peluang 3/4.  Kemudian kartu as berikutnya harus dibagikan kepada salah satu dari dua pemain, suatu
+kejadian dengan peluang 1/2, dan akhirnya kartu as terakhir harus dibagikan kepada pemain yang
+belum memiliki kartu as.  Hal ini terjadi dengan peluang 1/4.  Peluang bahwa
+semua kejadian ini terjadi adalah hasil kali $(3/4)(1/2)(1/4) = 3/32$.  Apakah
+argumen ini benar?
+
+\i\label{exer 4.1.20} Satu koin dalam kumpulan 65 koin mempunyai dua sisi kepala.  Koin-koin lainnya seimbang.  Jika sebuah
+koin yang dipilih secara acak dari kumpulan itu lalu dilempar menghasilkan kepala 6 kali
+berturut-turut, berapakah peluang bahwa koin tersebut adalah koin berkepala dua?
+
+\i\label{exer 4.1.21} Anda diberi dua guci dan lima puluh bola.  Separuh bola berwarna putih dan
+separuhnya hitam.  Anda diminta membagikan bola-bola tersebut ke dalam kedua guci tanpa
+pembatasan jumlah bola dari masing-masing warna dalam suatu guci.  Bagaimanakah Anda harus
+membagikan bola-bola itu agar peluang memperoleh bola
+putih menjadi maksimum jika sebuah guci dipilih secara acak dan sebuah bola diambil secara acak? 
+Berikan alasan bagi jawaban Anda.
+
+\i\label{exer 4.1.22} Sebuah koin seimbang dilempar $n$ kali.  Tunjukkan bahwa peluang bersyarat
+munculnya kepala pada suatu lemparan tertentu, dengan syarat terdapat total $k$ kepala dalam $n$
+lemparan, adalah $k/n$ $(k > 0)$.
+
+\i\label{exer 4.1.23} (Johnsonbough\index{JOHNSONBOUGH, R.}\footnote{R. Johnsonbough, ``Problem
+\#103," \emx {Two Year College Math Journal,} vol.~8 (1977), p.~292.})  Sebuah koin dengan peluang
+$p$ untuk kepala dilempar $n$ kali.  Misalkan $E$ adalah kejadian ``kepala diperoleh pada
+lemparan pertama" dan $F_k$ adalah kejadian ``tepat $k$ kepala diperoleh."  Untuk pasangan
+$(n,k)$ manakah $E$ dan $F_k$ saling bebas?
+
+\i\label{exer 4.1.24} Misalkan $A$ dan $B$ adalah kejadian sedemikian sehingga $P(A|B) = P(B|A)$, $P(A
+\cup B) = 1$, dan $P(A \cap B) > 0$.  Buktikan bahwa $P(A) > 1/2$.
+
+\i\label{exer 4.1.25} (Chung\index{CHUNG, K. L.}\footnote{K. L. Chung, \emx {Elementary
+Probability Theory With Stochastic Processes, 3rd ed.} (New York:  Springer-Verlag, 1979), p.~152.})
+Di London, hujan turun pada separuh hari.  Peramal cuaca benar sebanyak 2/3 dari seluruh kesempatan;
+artinya, peluang hujan turun dengan syarat ia meramalkan hujan dan peluang hujan
+tidak turun dengan syarat ia meramalkan tidak akan hujan, keduanya sama dengan 2/3.  Ketika hujan
+diramalkan, Tn.\ Pickwick\index{Pickwick, Tn.} membawa payungnya.  Ketika hujan tidak diramalkan, ia
+membawanya dengan peluang 1/3.  Carilah
+\begin{enumerate}
+\item peluang bahwa Pickwick tidak membawa payung, dengan syarat hujan turun.
+
+\item peluang bahwa ia membawa payung, dengan syarat hujan tidak turun.
+\end{enumerate}
+
+\i\label{exer 4.1.26} Teori peluang digunakan dalam suatu perkara pengadilan
+terkenal: \emx {People v. Collins.}\index{Collins, People v.}\index{People v. Collins}\footnote{M.~W.
+Gray, ``Statistics and the Law," \emx {Mathematics Magazine,} vol.~56 (1983), pp.~67--81.}  Dalam
+perkara ini, sebuah dompet dirampas dari seorang lansia di pinggiran Los Angeles.  Sepasang orang yang terlihat
+berlari dari tempat kejadian digambarkan sebagai seorang pria kulit hitam berjanggut\index{janggut} dan
+berkumis\index{kumis}, serta seorang perempuan berambut pirang yang dikuncir\index{kuncir}.  Para saksi mengatakan
+mereka melarikan diri dengan mobil yang sebagian berwarna kuning.  Malcolm dan Janet Collins ditangkap.  Malcolm berkulit hitam dan,
+meskipun bercukur bersih ketika ditangkap, menunjukkan bukti bahwa belum lama sebelumnya ia berjanggut
+dan berkumis.  Janet berambut pirang dan biasanya menguncir rambutnya.  Mereka
+mengendarai Lincoln yang sebagian berwarna kuning.  Jaksa menghadirkan seorang profesor matematika
+sebagai saksi; ia mengusulkan bahwa sekumpulan peluang konservatif untuk
+ciri-ciri yang dicatat para saksi adalah seperti yang ditampilkan dalam Tabel~\ref{table 4.4}.
+\begin{table}[h]
+\centering
+\begin{tabular}{lc}
+{\rm pria berkumis}    & 1/4          \cr
+{\rm perempuan berambut pirang} & 1/3          \cr
+{\rm perempuan berambut dikuncir}   & 1/10         \cr
+{\rm pria kulit hitam berjanggut} & 1/10          \cr
+{\rm pasangan antar-ras dalam mobil} & 1/1000 \cr
+{\rm mobil yang sebagian berwarna kuning}    & 1/10    \cr
+\end{tabular}
+\caption{Peluang-peluang dalam perkara Collins.}
+\label{table 4.4}
+\end{table}
+\par
+Jaksa kemudian berargumen bahwa peluang semua
+ciri ini dipenuhi oleh pasangan yang dipilih secara acak adalah hasil kali
+peluang-peluangnya, yaitu 1/12{,}000{,}000, yang sangat kecil.  Ia menyatakan bahwa hal ini merupakan bukti
+tanpa keraguan yang beralasan bahwa para terdakwa bersalah.  Juri menyetujuinya
+dan menjatuhkan putusan bersalah atas perampokan tingkat dua.
+
+Jika Anda menjadi pengacara pasangan Collins, bagaimanakah Anda akan membantah
+argumen di atas?  (Banding dalam perkara ini dibahas dalam 
+Latihan~\ref{sec 5.1}.\ref{exer 9.2.23}.)
+
+\i\label{exer 4.1.27} Seorang mahasiswa mendaftar ke Harvard dan Dartmouth.  Ia menaksir bahwa ia
+memiliki peluang .5 untuk diterima di Dartmouth dan .3 untuk diterima di
+Harvard.  Ia juga menaksir bahwa peluang ia diterima di keduanya
+adalah .2.  Berapakah peluang bahwa ia diterima di Dartmouth jika ia
+diterima di Harvard?  Apakah kejadian ``diterima di Harvard" bebas terhadap
+kejadian ``diterima di Dartmouth"?
+
+\i\label{exer 4.1.28} Luxco, produsen grosir bola lampu, memiliki dua pabrik.  Pabrik A
+menjual bola lampu dalam lot yang masing-masing terdiri atas 1000 bola lampu biasa dan 2000 bola lampu \emx {softglow}.
+Pengambilan sampel acak menunjukkan bahwa secara rata-rata cenderung terdapat
+sekitar 2 bola lampu biasa yang rusak dan 11 bola lampu softglow yang rusak per lot.  Di pabrik B,
+komposisi lot dibalik---terdapat 2000 bola lampu biasa dan 1000 bola lampu softglow per lot---dan
+cenderung terdapat 5 bola lampu biasa yang rusak dan 6 bola lampu softglow yang rusak per lot.
+
+Manajer pabrik A menyatakan, ``Jelas kami produsen yang lebih baik; tingkat
+bola lampu rusak kami adalah .2 persen dan .55 persen, dibandingkan dengan .25 persen dan
+.6 persen milik B.  Untuk bola lampu biasa maupun softglow, kami lebih baik sebesar setengah dari sepersepuluh
+persen."
+
+``Sebaliknya," bantah manajer B, ``setiap lot kami yang berisi 3000 bola lampu
+hanya mengandung 11 bola lampu rusak, sedangkan lot A yang berisi 3000 bola lampu mengandung 13.  Jadi, tingkat
+bola lampu rusak kami sebesar .37 persen mengalahkan tingkat mereka sebesar .43 persen."
+\par
+Siapakah yang benar?
+
+\i\label{exer 4.1.29} Dengan menggunakan Tabel Hayat tahun 1981 yang diberikan dalam Lampiran~C, carilah
+peluang bahwa seorang laki-laki yang berusia~60 tahun pada 1981 hidup sampai usia~80 tahun.  Carilah
+peluang yang sama untuk seorang perempuan.
+
+\i\label{exer 4.1.30}
+\begin{enumerate}
+\item Telah terjadi badai salju dan Helen berusaha berkendara dari Woodstock\index{Woodstock}
+ke Tunbridge\index{Tunbridge}, yang terhubung seperti pada graf teratas dalam Gambar~\ref{fig
+4.51}.  Di sini $p$ dan $q$ adalah peluang bahwa kedua jalan dapat dilalui.  Berapakah
+peluang bahwa Helen dapat pergi dari Woodstock ke Tunbridge?
+
+\item Sekarang misalkan Woodstock dan Tunbridge terhubung seperti pada graf tengah 
+dalam Gambar~\ref{fig 4.51}.
+Berapakah sekarang peluang bahwa Helen dapat pergi dari $W$ ke $T$?  Perhatikan bahwa jika kita
+memandang jalan-jalan itu sebagai komponen suatu sistem, maka dalam
+(a) dan (b) kita telah menghitung
+\emx {keandalan}\index{keandalan suatu sistem} sistem yang komponennya tersusun (a)~\emx {secara
+seri} dan (b)~\emx {secara paralel.}
+
+\item Sekarang misalkan $W$ dan $T$ terhubung seperti pada graf terbawah dalam Gambar~\ref{fig 4.51}.
+Carilah peluang bahwa Helen dapat pergi dari $W$ ke $T$.  \emx {Petunjuk}: Jika
+jalan dari $C$ ke $D$ tidak dapat dilalui, jalan itu dapat dianggap tidak ada; jika jalan itu
+dapat dilalui, carilah cara menggunakan bagian (b) dua kali.
+\end{enumerate}
+
+\putfig{3.5truein}{PSfig4}{Dari Woodstock ke Tunbridge.}{fig 4.51} %%3.5truein
+
+
+\i\label{exer 4.1.31} Misalkan $A_1$,~$A_2$, dan $A_3$ adalah kejadian, dan misalkan $B_i$ menyatakan
+$A_i$ atau komplemennya $\tilde A_i$.  Maka terdapat delapan pilihan yang mungkin untuk
+rangkap tiga $(B_1, B_2, B_3)$.  Buktikan bahwa kejadian $A_1$,~$A_2$,~$A_3$ saling bebas jika dan
+hanya jika $$P(B_1 \cap B_2 \cap B_3) = P(B_1)P(B_2)P(B_3)\ ,$$
+untuk kedelapan pilihan yang mungkin bagi rangkap tiga $(B_1, B_2, B_3)$.
+
+\i\label{exer 5.1.4} Empat perempuan, A,~B, C, dan~D, menitipkan topi mereka, lalu topi-topi tersebut dikembalikan
+secara acak.  Misalkan $\Omega$ adalah himpunan semua permutasi yang mungkin dari A,~B, C,~D.  Misalkan
+$X_j = 1$ jika perempuan ke-$j$ menerima kembali topinya sendiri dan 0 jika tidak.  Apakah
+distribusi $X_j$?  Apakah semua $X_i$ saling bebas?
+
+\i\label{exer 5.1.5} Sebuah kotak memuat bilangan 1 hingga 10.  Sebuah bilangan diambil secara acak.  Misalkan
+$X_1$ adalah bilangan yang diambil.  Bilangan ini dikembalikan, lalu kesepuluh bilangan dicampur.  Bilangan kedua,
+$X_2$, diambil.  Carilah distribusi $X_1$ dan $X_2$.  Apakah
+$X_1$ dan $X_2$ saling bebas?  Jawablah pertanyaan yang sama jika bilangan pertama tidak dikembalikan
+sebelum bilangan kedua diambil.
+
+\i\label{exer 5.1.6} Sebuah dadu dilempar dua kali.  Misalkan $X_1$ dan $X_2$ menyatakan hasilnya. 
+Definisikan $X = \min(X_1, X_2)$.  Carilah distribusi $X$.
+
+\istar\label{exer 5.1.7} \begin{sloppypar} Dengan diketahui bahwa $P(X = a) = r$, $P(\max(X,Y) = a) = s$,
+dan  
+$P(\min(X,Y) = a) = t$, tunjukkan bahwa Anda dapat menentukan $u = P(Y = a)$ dalam bentuk $r$,~$s$,
+dan~$t$.\end{sloppypar}
+
+\i\label{exer 5.1.8} Sebuah koin seimbang dilempar tiga kali.  Misalkan $X$ adalah banyaknya kepala yang
+muncul pada dua lemparan pertama dan $Y$ adalah banyaknya kepala yang muncul pada lemparan ketiga. 
+Berikan distribusi
+\begin{enumerate}
+\item peubah acak $X$ dan $Y$.
+
+\item peubah acak $Z = X + Y$.
+
+\item peubah acak $W = X - Y$.
+\end{enumerate}
+
+\i\label{exer 5.1.10} Anggaplah peubah acak $X$ dan $Y$ memiliki distribusi gabungan
+yang diberikan dalam Tabel~\ref{table 4.5}.
+\begin{table}
+\centering
+\begin{tabular}{lr|rrrrr} 
+     &     &  $Y$  &       &        &        \\
+     &     &   -1  &  0    &  1     &  2     \\ \hline
+$X$  & -1  &   0   & 1/36  &  1/6   & 1/12   \\
+     &  0  & 1/18  &  0    &  1/18  &  0     \\
+     &  1  &   0   & 1/36  &  1/6   & 1/12   \\
+     &  2  & 1/12  &  0    &  1/12  & 1/6    \\
+\end{tabular}
+\caption{Distribusi gabungan.}
+\label{table 4.5}
+\end{table}
+
+\begin{enumerate}
+\item Berapakah $P(X \geq 1\ \mbox {dan\ } Y \leq 0)$?
+
+\item Berapakah peluang bersyarat bahwa $Y \leq 0$ dengan syarat $X = 2$?
+
+\item Apakah $X$ dan $Y$ saling bebas?
+
+\item Bagaimanakah distribusi $Z = XY$?
+\end{enumerate}
+
+\i\label{exer 5.1.11} Dalam \emx {masalah pembagian taruhan}\index{masalah pembagian taruhan}, yang dibahas dalam 
+catatan sejarah pada Bagian~\ref{sec 3.2}, dua pemain, A dan B, memainkan serangkaian poin dalam suatu
+permainan; pemain A memenangi setiap poin dengan peluang $p$, sedangkan pemain B memenangi setiap poin dengan
+peluang
+$q = 1 - p$.  Pemain pertama yang memenangi $N$ poin memenangi permainan.  Anggaplah $N = 3$.  Misalkan $X$
+adalah peubah acak yang bernilai~1 jika pemain A memenangi rangkaian dan 0 jika tidak.  Misalkan
+$Y$ adalah peubah acak yang nilainya sama dengan banyaknya poin yang dimainkan dalam suatu permainan.  Carilah
+distribusi $X$ dan $Y$ ketika $p = 1/2$.  Apakah $X$ dan $Y$ saling bebas dalam kasus ini?  Jawablah
+pertanyaan yang sama untuk kasus $p = 2/3$.
+
+\i\label{exer 5.1.12} Surat-menyurat antara Pascal\index{PASCAL, B.} dan Fermat\index{FERMAT, P.}, yang
+sering dianggap telah memulai teori peluang, sebagian besar membahas \emx {masalah pembagian
+taruhan} yang diuraikan dalam Latihan~\ref{exer 5.1.11}.  Pascal dan Fermat meninjau masalah
+menentukan pembagian taruhan yang adil jika permainan harus dihentikan ketika pemain pertama telah memenangi
+$r$ permainan dan pemain kedua telah memenangi $s$ permainan, dengan $r < N$ dan $s < N$.  Misalkan $P(r,s)$ adalah
+peluang bahwa pemain A memenangi permainan jika ia telah memenangi $r$ poin dan pemain B telah memenangi
+$s$ poin.  Maka
+\begin{enumerate}
+\item $P(r,N) = 0$ jika $r < N$,
+\item $P(N,s) = 1$ jika $s < N$,
+\item $P(r,s) = pP(r + 1,s) + qP(r,s + 1)$ jika $r < N$ dan $s < N$;
+\end{enumerate} dan (1),~(2), serta~(3) menentukan $P(r,s)$ untuk $r \leq N$ dan $s \leq N$.  Pascal
+menggunakan fakta-fakta ini untuk mencari $P(r,s)$ dengan bekerja mundur: Mula-mula ia memperoleh $P(N - 1,j)$ untuk $j =
+N - 1$,~$N - 2$, \dots,~0; kemudian, dari nilai-nilai ini, ia memperoleh
+$P(N - 2,j)$ untuk $j = N - 1$,~$N - 2$, \dots,~0 dan, dengan terus bekerja mundur, memperoleh semua
+nilai $P(r,s)$.  Tulislah program untuk menghitung $P(r,s)$ bagi $N$,~$a$, $b$, dan~$p$ yang diberikan.  \emx {
+Peringatan}: Ikutilah Pascal dan Anda akan dapat menjalankan $N = 100$; gunakan rekursi dan Anda
+tidak akan dapat menjalankan $N = 20$.
+
+\i\label{exer 5.1.13} Fermat menyelesaikan \emx {masalah pembagian taruhan} (lihat Latihan~\ref{exer
+5.1.11}) sebagai berikut: Ia menyadari bahwa masalah tersebut sulit karena berbagai kemungkinan jalannya
+permainan tidak memiliki peluang yang sama.  Sebagai contoh, ketika pemain pertama memerlukan dua kemenangan lagi
+dan pemain kedua memerlukan tiga kemenangan lagi, dua kemungkinan jalannya rangkaian bagi pemain pertama
+adalah WLW dan LWLW.  Kedua barisan ini tidak memiliki peluang yang sama.  Untuk menghindari kesulitan ini, Fermat
+memperpanjang permainan dengan menambahkan permainan fiktif sehingga rangkaian berlangsung selama jumlah maksimum permainan yang
+diperlukan (empat dalam kasus ini).  Ia memperoleh hasil-hasil dengan peluang yang sama dan, pada hakikatnya, menggunakan
+segitiga Pascal untuk menghitung $P(r,s)$.  Tunjukkan bahwa cara ini menghasilkan suatu \emx {rumus} untuk $P(r,s)$
+bahkan dalam kasus $p \ne 1/2$.
+
+\i\label{exer 5.1.14} Yankees bertanding melawan Dodgers dalam suatu seri dunia.  Yankees memenangi
+setiap pertandingan dengan peluang .6.  Berapakah peluang bahwa Yankees memenangi seri tersebut?  (Seri
+dimenangkan oleh tim pertama yang memenangi empat pertandingan.)
+
+\i\label{exer 5.1.15} C.~L. Anderson\index{ANDERSON, C. L.}\footnote{C.~L. Anderson, ``Note on the
+Advantage of First Serve," \emx {Journal of Combinatorial Theory,} Series~A, vol.~23 (1977),
+p.~363.} menggunakan argumen Fermat untuk \emx {masalah pembagian taruhan} guna membuktikan hasil berikut
+yang berasal dari J.~G. Kingston\index{KINGSTON, J. G.}.  Anda memainkan \emx {permainan perolehan poin} (lihat
+Latihan~\ref{exer 5.1.11}), tetapi pada setiap poin, ketika Anda melakukan servis, Anda menang dengan peluang $p$, dan
+ketika lawan melakukan servis, Anda menang dengan peluang $\bar{p}$.  Anda melakukan servis terlebih dahulu, tetapi Anda
+dapat memilih salah satu dari dua aturan servis berikut: pada aturan pertama, Anda
+bergantian melakukan servis (tenis)\index{tenis}, sedangkan pada aturan kedua, orang yang melakukan servis terus melakukannya
+hingga kehilangan satu poin, lalu pemain lain melakukan servis (raketbol)\index{raketbol}.  Pemain
+pertama yang memenangi $N$ poin memenangi permainan.  Masalahnya adalah menunjukkan bahwa peluang
+memenangi permainan sama pada kedua aturan.
+\begin{enumerate}
+
+\item Tunjukkan bahwa menurut aturan mana pun, Anda akan melakukan servis paling banyak untuk $N$ poin dan lawan Anda
+paling banyak untuk $N - 1$ poin.
+
+\item Perpanjang jumlah poin menjadi $2N - 1$ sehingga Anda melakukan servis untuk $N$ poin dan lawan Anda
+melakukan servis untuk $N - 1$ poin.  Sebagai contoh, Anda melakukan servis untuk setiap poin tambahan yang diperlukan agar jumlah servis Anda menjadi $N$, lalu
+lawan Anda melakukan servis untuk setiap poin tambahan yang diperlukan agar jumlah servisnya menjadi $N - 1$. 
+Pemenangnya sekarang adalah orang yang memenangi poin terbanyak dalam permainan yang diperpanjang.  Tunjukkan bahwa
+memainkan poin-poin tambahan ini tidak mengubah pemenang.
+
+\item Tunjukkan bahwa (a) dan (b) membuktikan bahwa peluang Anda memenangi permainan sama menurut
+kedua aturan.
+\end{enumerate}
+
+\i\label{exer 5.1.15.5}
+Dalam soal sebelumnya, anggaplah $p = 1 - \bar{p}$.
+\begin{enumerate}
+\item  Tunjukkan bahwa menurut aturan servis mana pun, pemain pertama akan lebih sering menang daripada pemain kedua
+jika dan hanya jika $p > .5$.
+\item
+Dalam bola voli,\index{bola voli} sebuah tim hanya dapat memenangi poin ketika sedang melakukan servis.  Dengan demikian, setiap
+``rally" berakhir dengan pemberian poin kepada tim yang melakukan servis atau dengan perpindahan servis
+ke tim lain.  Tim pertama yang memenangi $N$ poin memenangi permainan.  (Di sini kita mengabaikan 
+syarat tambahan bahwa tim pemenang harus unggul sekurang-kurangnya dua poin pada akhir
+permainan.)  Anggaplah setiap tim memiliki peluang yang sama untuk memenangi rally ketika melakukan servis, yakni 
+$p = 1 - \bar{p}$.  Tunjukkan bahwa dalam kasus ini, tim yang melakukan servis pertama akan menang lebih dari separuh
+kesempatan, selama $p > 0$.  (Jika $p = 0$, permainan tidak pernah berakhir.)  \emx {Petunjuk}: Definisikan $p'$ sebagai
+peluang bahwa suatu tim memenangi poin berikutnya, dengan syarat tim itu sedang melakukan servis.  Jika kita tulis $q = 1 -
+p$, maka dapat ditunjukkan bahwa 
+$$p' = \frac p{1-q^2}\ .$$
+Jika sekarang permainan ini ditinjau dengan cara yang sedikit berbeda, dapat dilihat bahwa aturan servis kedua
+dalam soal sebelumnya dapat digunakan dengan mengganti $p$ oleh $p'$.
+\end{enumerate} 
+
+\i\label{exer 5.1.19} Suatu kombinasi poker terdiri atas 5 kartu yang dibagikan dari setumpuk 52 kartu.  Misalkan $X$
+dan $Y$ berturut-turut adalah banyaknya kartu as dan raja dalam kombinasi poker.  Carilah distribusi
+gabungan $X$ dan $Y$.
+
+\i\label{exer 5.1.24.5} Misalkan $X_1$ dan $X_2$ adalah peubah acak yang saling bebas dan misalkan $Y_1 =
+\phi_1(X_1)$ dan $Y_2 = \phi_2(X_2)$.
+\begin{enumerate}
+
+\item Tunjukkan bahwa
+$$ P(Y_1 = r, Y_2 = s) = \sum_{\phi_1(a) = r \atop \phi_2(b) = s} P(X_1 = a, X_2 = b)\ .
+$$
+
+\item Dengan menggunakan (a), tunjukkan bahwa $P(Y_1 = r, Y_2 = s) = P(Y_1 = r)P(Y_2 = s)$ sehingga $Y_1$ dan
+$Y_2$ saling bebas.
+\end{enumerate}
+
+\i\label{exer 4.1.32} Misalkan $\Omega$ adalah ruang sampel suatu percobaan.  Misalkan $E$ adalah
+kejadian dengan $P(E) > 0$ dan definisikan $m_E(\omega)$ dengan
+$m_E(\omega) = m(\omega|E)$.  Buktikan bahwa $m_E(\omega)$ adalah fungsi distribusi pada
+$E$, yakni bahwa $m_E(\omega) \geq 0$ dan $\sum_{\omega\in\Omega}
+m_E(\omega) = 1$.  Fungsi $m_E$ disebut \emx {distribusi bersyarat dengan syarat $E$.}
+
+\i\label{exer 4.1.33} Anda diberi dua guci yang masing-masing berisi dua koin bias.  Koin-koin dalam
+guci~I menghasilkan kepala dengan peluang~$p_1$, sedangkan koin-koin dalam guci~II menghasilkan
+kepala dengan peluang $p_2 \ne p_1$.  Anda diberi pilihan (a)~memilih
+sebuah guci secara acak dan melempar kedua koin di dalam guci itu atau (b)~memilih satu koin
+dari setiap guci dan melempar kedua koin tersebut.  Anda memenangi hadiah jika kedua koin menghasilkan
+kepala.  Tunjukkan bahwa pilihan (a) lebih menguntungkan.
+
+\i\label{exer 4.1.34} Buktikan bahwa jika $A_1$,~$A_2$, \dots,~$A_n$ adalah kejadian-kejadian saling bebas
+yang didefinisikan pada ruang sampel $\Omega$ dan jika $0 < P(A_j) < 1$ untuk semua $j$, maka
+$\Omega$ harus memiliki sekurang-kurangnya $2^n$ titik.
+
+\i\label{exer 4.1.35} Buktikan bahwa jika
+$$
+P(A|C) \geq P(B|C) \mbox{\,\,dan\,\,} P(A|\tilde C) \geq P(B|\tilde C)\ ,
+$$
+maka $P(A) \geq P(B)$.
+
+\i\label{exer 4.1.36} Sebuah koin berada dalam salah satu dari $n$ kotak.  Peluang bahwa koin itu berada dalam kotak ke-$i$
+adalah $p_i$.  Jika Anda mencari dalam kotak ke-$i$ dan koin itu ada di sana, Anda menemukannya dengan
+peluang $a_i$.  Tunjukkan bahwa peluang~$p$ bahwa koin berada dalam kotak ke-$j$,
+dengan syarat Anda telah mencari dalam kotak ke-$i$ dan tidak menemukannya, adalah
+$$
+p =  \left \{ \matrix{
+                 p_j/(1-a_ip_i),&\,\,\, \mbox{jika} \,\,\, j \ne i,\cr
+                 (1 - a_i)p_i/(1 - a_ip_i),&\,\,\,\mbox{jika} \,\, j = i.\cr}\right. 
+$$
+
+\i\label{exer 4.1.37} George Wolford\index{WOLFORD, G.} mengusulkan variasi berikut dari
+masalah Linda (lihat Latihan~\ref{sec 1.2}.\ref{exer 1.2.24}).  
+Registrar membawa kartu registrasi John dan Mary, lalu menjatuhkannya ke dalam
+genangan air.  Ketika memungutnya, ia tidak dapat membaca nama-nama pada kartu, tetapi pada kartu pertama
+yang dipungutnya ia dapat mengenali Mathematics 23 dan Government 35, sedangkan pada kartu kedua
+ia hanya dapat mengenali Mathematics 23.  Ia bertanya apakah Anda dapat membantunya
+menentukan kartu mana yang milik Mary.  Anda tahu bahwa Mary menyukai ilmu pemerintahan, tetapi
+tidak menyukai matematika.  Anda tidak mengetahui apa pun tentang John dan menganggapnya sebagai
+mahasiswa Dartmouth pada umumnya.  Berdasarkan hal ini, Anda menaksir:
+\vskip .1in
+$$\begin{array}{ll}
+P(\mbox {Mary\ mengambil\ Government\ 35})  &= .5\ , \\
+P(\mbox {Mary\ mengambil\ Mathematics\ 23}) &= .1\ , \\
+P(\mbox {John\ mengambil\ Government\ 35})  &= .3\ , \\
+P(\mbox {John\ mengambil\ Mathematics\ 23}) &= .2\ .
+\end{array}
+$$
+\vskip .1in
+Anggaplah pilihan mata kuliah mereka merupakan kejadian-kejadian saling bebas.  Tunjukkan bahwa
+kartu yang menampilkan Mathematics 23 dan Government 35 lebih mungkin merupakan milik Mary
+daripada milik John.  Kekeliruan konjungsi yang disebutkan dalam masalah Linda adalah
+menganggap bahwa kejadian ``Mary mengambil Mathematics 23 dan Government 35"
+lebih mungkin daripada kejadian ``Mary mengambil Mathematics 23."  Mengapa kita tidak
+melakukan kekeliruan tersebut di sini?
+
+\i\label{exer 4.1.38} (Diusulkan oleh Eisenberg dan Ghosh\index{EISENBERG,
+B.}\index{GHOSH, B. K.}\footnote{B. Eisenberg and B.~K. Ghosh, ``Independent Events in a Discrete
+Uniform Probability Space," \emx {The American Statistician,} vol.~41, no.~1 (1987),
+pp.~52--56.})  Setumpuk kartu permainan dapat dinyatakan sebagai hasil kali Cartesius
+$$
+\mbox{Tumpukan} =  \mbox{Kembang} \times \mbox{Nilai}\ ,
+$$
+dengan $\mbox{Kembang} = \{\clubsuit,\diamondsuit,\heartsuit,\spadesuit\}$ dan %
+$\mbox{Nilai} = \{2,3,\dots,10,{\mbox J},{\mbox Q},{\mbox K},{\mbox A}\}$.  Hal ini
+hanya berarti bahwa setiap kartu dapat dipandang sebagai pasangan terurut seperti
+$(\diamondsuit,2)$.  Yang dimaksud dengan \emx {kejadian kembang}\index{kejadian kembang} adalah sebarang kejadian $A$ di dalam
+Tumpukan yang hanya dinyatakan menurut kembang.  Sebagai contoh, jika $A$ adalah ``kembang
+berwarna merah," maka
+$$
+A = \{\diamondsuit,\heartsuit\} \times \mbox{Nilai}\ ,
+$$
+sehingga $A$ terdiri atas semua kartu berbentuk $(\diamondsuit,r)$ atau
+$(\heartsuit,r)$, dengan $r$ suatu nilai kartu sembarang.  Demikian pula, \emx {kejadian nilai kartu}\index{kejadian nilai kartu} adalah sebarang
+kejadian yang hanya dinyatakan menurut nilai kartu.
+\begin{enumerate}
+\item Tunjukkan bahwa jika $A$ adalah sebarang kejadian kembang dan $B$ adalah sebarang kejadian nilai kartu, maka $A$
+dan $B$ \emx {saling bebas.}  (Kita dapat menyatakannya secara ringkas dengan mengatakan bahwa
+kembang dan nilai kartu saling bebas.)
+
+\item Buanglah kartu as sekop.  Tunjukkan bahwa sekarang tidak ada kejadian kembang nontrivial (yakni,
+bukan himpunan kosong maupun seluruh ruang) $A$ yang bebas terhadap sebarang
+kejadian nilai kartu nontrivial $B$.  \emx {Petunjuk}: Di sini kebebasan tereduksi menjadi
+$$
+c/51 = (a/51) \cdot (b/51)\ ,
+$$
+dengan $a$,~$b$,~$c$ berturut-turut adalah ukuran $A$,~$B$, dan~$A \cap B$.  Akibatnya,
+51 harus membagi $ab$, sehingga 3 harus membagi salah satu dari $a$ dan $b$,
+sedangkan 17 membagi yang lain.  Akan tetapi, kemungkinan ukuran kejadian kembang dan nilai kartu tidak memungkinkan
+hal ini.
+
+\item Tunjukkan bahwa tumpukan kartu pada (b) bagaimanapun memang memiliki
+pasangan kejadian nontrivial yang saling bebas, $A$,~$B$.  \emx {Petunjuk}: Carilah 2 kejadian
+$A$ dan $B$ yang masing-masing berukuran 3 dan 17 serta beririsan di satu titik.
+
+\item Tambahkan satu kartu joker ke setumpuk kartu lengkap.  Tunjukkan bahwa sekarang tidak ada pasangan $A$,~$B$
+berupa kejadian nontrivial yang saling bebas.  \emx {Petunjuk}: Lihat petunjuk pada
+(b); 53 adalah bilangan prima.
+\end{enumerate}
+\par
+\medskip
+\noindent
+Soal-soal berikut diusulkan oleh Stanley Gudder\index{GUDDER, S.} dalam artikelnya
+``Do Good Hands Attract?"\footnote{S. Gudder, ``Do Good Hands Attract?" \emx {
+Mathematics Magazine,} vol.~54, no.~1 (1981), pp.~13--16.}  Ia mengatakan bahwa
+kejadian $A$ \emx {menarik}\index{kejadian!daya tarik} kejadian $B$ jika $P(B|A) > P(B)$ dan \emx {
+menolak}\index{kejadian!daya tolak}
+$B$ jika $P(B|A) < P(B)$.
+
+\i\label{exer 4.1.39} Misalkan $R_i$ adalah kejadian bahwa pemain ke-$i$ dalam permainan poker memiliki
+royal flush.  Tunjukkan bahwa satu royal flush (A,K,Q,J,10 dari satu kembang) menarik royal flush lainnya, 
+yakni $P(R_2|R_1) > P(R_2)$.  Tunjukkan bahwa royal flush menolak full house.
+
+\i\label{exer 4.1.40} Buktikan bahwa $A$ menarik $B$ jika dan hanya jika $B$ menarik $A$.  Oleh karena itu, kita
+dapat mengatakan bahwa $A$ dan $B$ \emx {saling menarik} jika $A$ menarik $B$.
+
+\i\label{exer 4.1.41} Buktikan bahwa $A$ tidak menarik maupun menolak $B$ jika dan hanya jika $A$ dan
+$B$ saling bebas.
+
+\i\label{exer 4.1.42} Buktikan bahwa $A$ dan $B$ saling menarik jika dan hanya jika $P(B|A) >
+P(B|\tilde A)$.
+
+\i\label{exer 4.1.43} Buktikan bahwa jika $A$ menarik $B$, maka $A$ menolak $\tilde B$.
+
+\i\label{exer 4.1.44} Buktikan bahwa jika $A$ menarik $B$ maupun $C$, dan $A$ menolak $B \cap C$,
+maka $A$ menarik $B \cup C$.  Adakah contoh ketika $A$ menarik
+$B$ maupun $C$, tetapi menolak $B \cup C$?
+
+\i\label{exer 4.1.45} Buktikan bahwa jika $B_1$,~$B_2$, \dots,~$B_n$ saling lepas dan
+secara bersama-sama mencakup seluruh ruang, dan jika $A$ menarik suatu $B_i$, maka $A$ harus menolak
+suatu $B_j$.
+
+\i\label{exer 4.1.46} 
+\begin{enumerate}
+\item
+Misalkan Anda mencari di dalam meja tulis Anda sebuah surat dari beberapa waktu lalu.  Meja tulis itu memiliki delapan
+laci, dan Anda menaksir bahwa peluang surat berada dalam setiap laci tertentu adalah 10\% (jadi terdapat
+peluang 20\% bahwa surat sama sekali tidak berada dalam meja).  Sekarang misalkan Anda mulai mencari 
+secara sistematis di meja itu, satu laci demi satu.  Selain itu, misalkan Anda belum menemukan
+surat dalam $i$ laci pertama, dengan $0 \le i \le 7$.  Misalkan $p_i$ menyatakan peluang bahwa
+surat akan ditemukan dalam laci berikutnya, dan misalkan $q_i$ menyatakan peluang bahwa surat 
+akan ditemukan dalam suatu laci setelahnya (baik $p_i$ maupun $q_i$ merupakan peluang bersyarat karena
+keduanya didasarkan pada asumsi bahwa surat tidak berada dalam $i$ laci pertama).  Tunjukkan bahwa
+nilai-nilai $p_i$ meningkat dan nilai-nilai $q_i$ menurun.  (Soal ini berasal dari Falk dkk.\footnote{R.\
+Falk, A.\ Lipson, and C.\ Konold, ``The ups and downs of the hope function in a fruitless search,"
+in \emx{Subjective Probability,} G.\ Wright and P.\ Ayton, (eds.) (Chichester: Wiley, 1994), pgs.
+353-377.})\index{FALK, R.}\index{LIPSON, A.}\index{KONOLD, C.}
+\item
+Data berikut dimuat dalam sebuah artikel di Wall Street Journal.\footnote{C. Crossen, ``Fright by the
+numbers:  Alarming disease data are frequently flawed," \emx{Wall Street Journal,} 11 April 1996, p.
+B1.}\index{Wall Street Journal}\index{CROSSEN, C.} Pada usia 20, 30, 40, 50, dan 60 tahun, peluang seorang 
+perempuan di A.S.\ terkena kanker dalam sepuluh tahun berikutnya berturut-turut adalah 0.5\%, 1.2\%, 3.2\%, 6.4\%, dan 10.8\%.
+Pada rangkaian usia yang sama, peluang seorang perempuan di A.S.\ pada akhirnya terkena kanker
+berturut-turut adalah 39.6\%, 39.5\%, 39.1\%, 37.5\%, dan 34.2\%.  Menurut Anda, apakah soal pada bagian (a) memberikan
+penjelasan bagi data ini? 
+\end{enumerate}
+
+\i\label{exer 4.1.47} 
+Berikut ini dua variasi masalah Monty Hall yang dibahas oleh Granberg.\footnote{D.
+Granberg, ``To switch or not to switch," in
+\emx{The power of logical thinking,} M. vos~Savant, (New York: St.\ Martin's
+1996).}\index{GRANBERG, D.}\index{masalah Monty Hall}
+\begin{enumerate}
+\item
+Misalkan semuanya sama, kecuali bahwa Monty lupa mencari tahu terlebih dahulu pintu mana yang menyembunyikan mobil.
+Dengan semangat ``pertunjukan harus terus berjalan," ia menebak pintu mana di antara kedua pintu yang akan dibuka dan
+beruntung membuka pintu yang menyembunyikan seekor kambing.  Sekarang, haruskah peserta berpindah pilihan?
+\item
+Anda telah lama mengamati pertunjukan tersebut dan mendapati bahwa mobil diletakkan di balik pintu A dalam 45\% kesempatan,
+di balik pintu B dalam 40\% kesempatan, dan di balik pintu C dalam 15\% kesempatan. Anggaplah segala hal lain
+tentang pertunjukan itu tetap sama.  Sekali lagi Anda memilih pintu A. Monty membuka pintu yang menyembunyikan kambing dan
+menawarkan kesempatan kepada Anda untuk berpindah pilihan. Haruskah Anda berpindah?  Misalkan Anda sebelumnya sudah mengetahui bahwa Monty akan memberi Anda
+kesempatan untuk berpindah.  Apakah seharusnya sejak awal Anda memilih pintu A?
+\end{enumerate}
+
+\end{LJSItem}
+
+%At one point, the following \choice command starting giving errors,
+%so I commented it out (I also commented out the ending }).
+%\choice{}{\section{Continuous Conditional Probability}\label{sec 4.2}
+\section{Peluang Bersyarat Kontinu}\label{sec 4.2}
+
+Dalam situasi ketika ruang sampel bersifat kontinu, kita akan mengikuti prosedur yang sama seperti pada
+bagian sebelumnya.  Jadi, sebagai contoh, jika $X$ adalah peubah acak kontinu dengan fungsi densitas
+$f(x)$, dan jika $E$ adalah kejadian dengan peluang positif, kita mendefinisikan fungsi
+densitas bersyarat\index{densitas bersyarat}\index{fungsi densitas!bersyarat} dengan rumus
+$$ f(x|E) = \left \{ \matrix{
+ f(x)/P(E), &  \mbox{jika} \,\,x \in E,       \cr
+         0, & \mbox{jika}\,\,x \not \in E.  \cr}\right.        
+$$
+Maka, untuk sebarang kejadian $F$, kita mempunyai
+$$ 
+P(F|E) = \int_F f(x|E)\,dx\ .
+$$
+Ekspresi $P(F|E)$ disebut peluang bersyarat $F$ dengan syarat $E$.  Seperti pada
+bagian sebelumnya, kita dapat dengan mudah memperoleh ekspresi alternatif bagi peluang ini:
+$$
+P(F|E) = \int_F f(x|E)\,dx = \int_{E\cap F} \frac {f(x)}{P(E)}\,dx = \frac {P(E\cap F)}{P(E)}\ .
+$$
+\par
+Kita dapat memandang fungsi densitas bersyarat sebagai fungsi yang bernilai 0 kecuali pada $E$, dan
+dinormalisasi agar integralnya di atas $E$ sama dengan 1.  Perhatikan bahwa jika densitas semula adalah
+densitas seragam yang bersesuaian dengan suatu percobaan ketika semua kejadian berukuran sama
+\emx {berpeluang sama,} maka hal yang sama berlaku bagi densitas
+bersyarat.
+
+\begin{example}\label{exam 4.12}
+Dalam percobaan pemutar\index{pemutar} (bdk.\ Contoh~\ref{exam 2.1.1}),
+misalkan kita mengetahui bahwa pemutar berhenti dengan ujung penunjuk pada separuh bagian atas
+lingkaran, $0 \leq x \leq 1/2$.  Berapakah peluang bahwa $1/6 \leq x
+\leq 1/3$?
+
+Di sini $E = [0,1/2]$, $F = [1/6,1/3]$, dan $F \cap E = F$.  Oleh karena itu,
+\begin{eqnarray*}
+P(F|E) &=& \frac {P(F \cap E)}{P(E)} \\
+       &=& \frac {1/6}{1/2} \\
+       &=& \frac 13\ ,
+\end{eqnarray*}
+yang masuk akal karena ukuran $F$ adalah 1/3 ukuran $E$.  Fungsi densitas
+bersyarat di sini diberikan oleh
+
+$$
+f(x|E) =  \left \{ \matrix{
+               2, & \mbox{jika}\,\,\, 0   \leq x < 1/2, \cr
+               0, & \mbox{jika}\,\,\, 1/2 \leq x < 1.\cr}\right.
+$$
+Jadi, fungsi densitas bersyarat hanya tidak nol pada $[0,1/2]$, dan bersifat
+seragam di sana.
+\end{example}
+
+\begin{example}\label{exam 4.13}
+Dalam permainan anak panah\index{anak panah} (bdk.\ Contoh~\ref{exam 2.2.2}),
+misalkan kita mengetahui bahwa anak panah jatuh pada separuh bagian atas sasaran.  Berapakah
+peluang bahwa jaraknya dari pusat kurang dari 1/2?
+
+Di sini $E = \{\,(x,y) : y \geq 0\,\}$ dan $F = \{\,(x,y) : x^2 + y^2 <
+(1/2)^2\,\}$.  Oleh karena itu,
+\begin{eqnarray*}
+P(F|E) & = & \frac {P(F \cap E)}{P(E)} = \frac {(1/\pi)[(1/2)(\pi/4)]}
+{(1/\pi)(\pi/2)} \\
+       & = & 1/4\ .
+\end{eqnarray*}
+Di sini sekali lagi, ukuran $F \cap E$ adalah 1/4 ukuran $E$.  Fungsi densitas
+bersyaratnya adalah
+$$
+f((x,y)|E) =  \left \{ \matrix{
+        f(x,y)/P(E) = 2/\pi, &\mbox{jika}\,\,\,(x,y) \in E, \cr
+        0,                   &\mbox{jika}\,\,\,(x,y) \not \in E.\cr}\right.
+$$
+\end{example}
+
+\begin{example}\label{exam 4.14}
+Kita kembali ke densitas eksponensial\index{densitas eksponensial}\index{fungsi
+densitas!eksponensial} (bdk.\ Contoh~\ref{exam 2.2.7.5}).  Misalkan kita mengamati sebongkah
+plutonium-239.  Percobaan kita terdiri atas menunggu suatu emisi, lalu menyalakan pencatat waktu, dan
+mencatat lamanya waktu $X$ yang berlalu sampai emisi berikutnya.   Pengalaman menunjukkan bahwa
+$X$ memiliki densitas eksponensial dengan suatu parameter $\lambda$, yang bergantung pada ukuran
+bongkahan.  Misalkan ketika kita melakukan percobaan ini, kita melihat bahwa pencatat waktu menunjukkan $r$ detik
+dan masih berjalan.  Berapakah peluang bahwa tidak terjadi emisi selama tambahan $s$ detik?
+
+Misalkan $G(t)$ adalah peluang bahwa partikel berikutnya dipancarkan setelah waktu $t$.  Maka
+\begin{eqnarray*}
+G(t) & = & \int_t^\infty \lambda e^{-\lambda x}\,dx \\
+     & = & \left.-e^{-\lambda x}\right|_t^\infty = e^{-\lambda t}\ .
+\end{eqnarray*}
+
+Misalkan $E$ adalah kejadian ``partikel berikutnya dipancarkan setelah waktu $r$" dan $F$ adalah kejadian ``partikel
+berikutnya dipancarkan setelah waktu $r + s$."  Maka
+\begin{eqnarray*}
+P(F|E) & = & \frac {P(F \cap E)}{P(E)} \\
+       & = & \frac {G(r + s)}{G(r)} \\
+       & = & \frac {e^{-\lambda(r + s)}}{e^{-\lambda r}} \\
+       & = & e^{-\lambda s}\ .
+\end{eqnarray*}
+
+
+Hal ini memberi tahu kita fakta yang cukup mengejutkan bahwa peluang kita harus
+menunggu tambahan $s$ detik untuk suatu emisi, dengan syarat belum terjadi emisi selama $r$ detik,
+\emx {tidak bergantung} pada waktu $r$.  Sifat ini (disebut \emx {
+tanpa ingatan}\index{sifat tanpa ingatan}) diperkenalkan dalam Contoh~\ref{exam 2.2.7.5}. 
+Ketika mencoba memodelkan berbagai fenomena, sifat ini membantu kita memutuskan apakah
+densitas eksponensial sesuai.  
+\par
+Fakta bahwa densitas eksponensial bersifat tanpa ingatan berarti bahwa wajar untuk menganggap
+bahwa jika seseorang menjumpai sebongkah isotop radioaktif pada suatu waktu acak, maka lama waktu
+sampai emisi berikutnya memiliki densitas eksponensial dengan parameter yang sama seperti waktu
+antaremisi.
+Sebuah contoh terkenal, yang disebut ``paradoks bus,"\index{paradoks bus}, mengganti
+emisi dengan bus.  Paradoks yang tampak ini muncul dari dua fakta berikut:  1) Jika Anda mengetahui bahwa
+secara rata-rata bus datang setiap 30 menit, maka jika Anda tiba di halte bus pada waktu acak,
+secara rata-rata Anda seharusnya hanya perlu menunggu 15 menit untuk sebuah bus, dan 2) Karena waktu
+kedatangan bus dimodelkan dengan densitas eksponensial, kapan pun Anda tiba,
+secara rata-rata Anda harus menunggu 30 menit untuk sebuah bus.
+\par
+Pembaca sekarang dapat melihat bahwa dalam Latihan~\ref{sec 2.2}.\ref{exer 2.2.8.5}, 
+\ref{sec 2.2}.\ref{exer 2.2.8.6}, dan \ref{sec 2.2}.\ref{exer
+2.2.11}, kita meminta simulasi peluang bersyarat berdasarkan berbagai asumsi
+tentang distribusi waktu antarkedatangan.  Jika seseorang membuat asumsi yang wajar tentang
+distribusi ini, seperti asumsi dalam Latihan~\ref{sec 2.2}.\ref{exer 2.2.8.6}, maka waktu 
+tunggu rata-rata lebih mendekati separuh waktu antarkedatangan rata-rata.
+\end{example}
+
+\subsection*{Kejadian Bebas}
+
+Jika $E$ dan $F$ adalah dua kejadian dengan peluang positif dalam ruang sampel kontinu, maka seperti pada
+ruang sampel diskret, kita mendefinisikan $E$ dan $F$ sebagai \emx {
+bebas}\index{kejadian!bebas}\index{kebebasan kejadian} jika 
+$P(E|F) = P(E)$ dan $P(F|E) = P(F)$.  Seperti sebelumnya, masing-masing persamaan di atas mengakibatkan
+persamaan yang lain, sehingga untuk melihat apakah dua kejadian saling bebas, hanya satu dari persamaan ini yang perlu
+diperiksa.  Selain itu, jika $E$ dan $F$ saling bebas, maka $P(E \cap F) = P(E)P(F)$.
+
+\begin{example}(Lanjutan Contoh~\ref{exam 4.12}){\label{exam 4.15}}
+Dalam permainan anak panah\index{anak panah} (lihat Contoh~\ref{exam 4.12}), misalkan $E$ adalah kejadian bahwa
+anak panah jatuh pada separuh bagian \emx {atas} sasaran ($y \geq 0$) dan $F$ adalah
+kejadian bahwa anak panah jatuh pada separuh bagian \emx {kanan} sasaran ($x \geq
+0$).  Maka $P(E \cap F)$ adalah peluang bahwa anak panah berada dalam kuadran pertama
+sasaran, dan
+\begin{eqnarray*}
+P(E \cap F) & = & \frac 1\pi \int_{E \cap F} 1\,dxdy \\
+            & = & \mbox{Luas}\,(E\cap F)         \\
+            & = & \mbox{Luas}\,(E)\,\mbox{Luas}\,(F)  \\
+            & = & \left(\frac 1\pi \int_E 1\,dxdy\right) \left(\frac 1\pi \int_F
+1\,dxdy\right) \\
+            & = & P(E)P(F)
+\end{eqnarray*}
+sehingga $E$ dan $F$ saling bebas.  Hal yang membuat perhitungan ini berhasil adalah bahwa kejadian
+$E$ dan $F$ dinyatakan dengan membatasi koordinat yang berbeda.  Gagasan ini dibuat 
+lebih tepat\linebreak[4] di bawah.
+\end{example}
+
+\subsection*{Fungsi Densitas dan Distribusi Kumulatif Gabungan}
+
+Dengan cara yang serupa dengan peubah acak diskret, kita dapat mendefinisikan fungsi densitas
+gabungan dan fungsi distribusi kumulatif untuk peubah acak kontinu multidimensi.  
+
+\begin{definition}\label{def 4.5}
+Misalkan $X_1,~X_2, \ldots,~X_n$ adalah peubah acak kontinu yang berkaitan dengan suatu percobaan, dan
+misalkan ${\bar X} = (X_1,~X_2, \ldots,~X_n)$.  Maka fungsi distribusi kumulatif
+gabungan\index{fungsi distribusi kumulatif!gabungan}\index{fungsi distribusi kumulatif 
+\\ gabungan} dari
+${\bar X}$ didefinisikan oleh
+$$F(x_1, x_2, \ldots, x_n) = P(X_1 \le x_1, X_2 \le x_2, \ldots, X_n \le x_n)\ .$$
+Fungsi densitas gabungan\index{fungsi densitas gabungan}\index{fungsi densitas!gabungan} dari
+${\bar X}$ memenuhi persamaan berikut:
+$$F(x_1, x_2, \ldots, x_n) = \int_{-\infty}^{x_1} \int_{-\infty}^{x_2} \cdots
+\int_{-\infty}^{x_n} f(t_1, t_2, \ldots t_n)\,dt_ndt_{n-1}\ldots dt_1\ .$$
+\end{definition}
+
+Dengan notasi di atas, dapat ditunjukkan secara langsung bahwa
+\begin{equation}
+f(x_1, x_2, \ldots, x_n) = {{\partial^n F(x_1, x_2, \ldots, x_n)}\over
+{\partial x_1 \partial x_2 \cdots \partial x_n}}\ .\label{eq 4.4}
+\end{equation}
+
+\subsection*{Peubah Acak Bebas}
+
+Seperti pada peubah acak diskret, kita dapat mendefinisikan kebebasan bersama untuk
+peubah acak kontinu.
+
+\begin{definition}\label{def 4.6} Misalkan $X_1$,~$X_2$, \ldots,~$X_n$ adalah peubah acak
+kontinu dengan fungsi distribusi kumulatif $F_1(x),~F_2(x), \ldots,~F_n(x)$.  Maka
+peubah-peubah acak ini \emx {saling bebas}\index{kebebasan peubah acak!bersama} jika
+$$F(x_1, x_2, \ldots, x_n) = F_1(x_1)F_2(x_2) \cdots  F_n(x_n)$$   
+untuk sebarang pilihan $x_1, x_2,
+\ldots, x_n$.  Jadi, jika $X_1,~X_2, \ldots,~X_n$ saling bebas, maka fungsi distribusi
+kumulatif gabungan peubah acak ${\bar X} = (X_1, X_2, \ldots,
+X_n)$ hanyalah hasil kali fungsi-fungsi distribusi kumulatif masing-masing.  Ketika dua peubah
+acak saling bebas, secara lebih singkat kita mengatakan keduanya \emx {
+bebas.}\index{kebebasan peubah\\ acak}
+\end{definition}
+
+Dengan menggunakan Persamaan~\ref{eq 4.4}, teorema berikut dapat dengan mudah ditunjukkan berlaku untuk peubah acak
+kontinu yang saling bebas.
+
+\begin{theorem}\label{thm 4.2}
+Misalkan $X_1$,~$X_2$, \ldots,~$X_n$ adalah peubah acak kontinu dengan fungsi densitas
+$f_1(x),~f_2(x), \ldots,~f_n(x)$.  Maka peubah-peubah acak ini \emx {saling
+bebas} jika dan hanya jika
+$$f(x_1, x_2, \ldots, x_n) = f_1(x_1)f_2(x_2) \cdots  f_n(x_n)$$    untuk sebarang pilihan $x_1,
+x_2, \ldots, x_n$.  
+\end{theorem}
+
+Mari kita tinjau beberapa contoh.
+
+\begin{example}
+Dalam contoh ini, kita mendefinisikan tiga peubah acak, $X_1,\ X_2$, dan $X_3$.  Kita akan menunjukkan bahwa
+$X_1$ dan $X_2$ saling bebas, sedangkan $X_1$ dan $X_3$ tidak saling bebas.  Pilihlah sebuah titik
+$\omega = (\omega_1,\omega_2)$ secara acak dari persegi satuan.  Tetapkan $X_1 =
+\omega_1^2$, $X_2 = \omega_2^2$, dan $X_3 =
+\omega_1 + \omega_2$.  Carilah distribusi gabungan $F_{12}(r_1,r_2)$ dan $F_{23}(r_2,r_3)$.
+
+Kita telah melihat (lihat Contoh~\ref{exam 2.2.7.1}) bahwa
+\begin{eqnarray*}
+ F_1(r_1) & = & P(-\infty < X_1 \leq r_1) \\
+         & = & \sqrt{r_1}, \qquad \mbox{jika} \,\,0 \leq r_1 \leq 1\ ,
+\end{eqnarray*}
+dan dengan cara serupa,
+$$ F_2(r_2) = \sqrt{r_2}\ ,$$
+jika $0 \leq r_2 \leq 1$.
+Sekarang kita mempunyai (lihat Gambar~\ref{fig 5.15})
+\putfig{3truein}{PSfig5-15}{$X_1$ dan $X_2$ saling bebas.}{fig 5.15}
+\begin{eqnarray*}
+ F_{12}(r_1,r_2) & = & P(X_1 \leq r_1 \,\, \mbox{dan}\,\, X_2 \leq r_2) \\
+                & = & P(\omega_1 \leq \sqrt{r_1} \,\,\mbox{dan}\,\, \omega_2 \leq
+\sqrt{r_2}) \\
+                & = & \mbox{Luas}\,(E_1)\\
+                & = & \sqrt{r_1} \sqrt{r_2} \\
+                & = &F_1(r_1)F_2(r_2)\ .
+\end{eqnarray*}
+Dalam kasus ini $F_{12}(r_1,r_2) = F_1(r_1)F_2(r_2)$ sehingga $X_1$ dan $X_2$
+saling bebas.  Di sisi lain, jika $r_1 = 1/4$ dan $r_3 = 1$, maka (lihat Gambar~\ref{fig
+5.16})
+\putfig{3truein}{PSfig5-16}{$X_1$ dan $X_3$ tidak saling bebas.}{fig 5.16}
+\begin{eqnarray*}
+F_{13}(1/4,1) & = & P(X_1 \leq 1/4,\ X_3 \leq 1) \\
+              & = & P(\omega_1 \leq 1/2,\ \omega_1 + \omega_2 \leq 1) \\
+              & = & \mbox{Luas}\,(E_2) \\
+              & = & \frac 12 - \frac 18 = \frac 38\ .
+\end{eqnarray*}
+Sekarang, dengan mengingat bahwa
+$$F_3(r_3) = \left \{ \matrix{
+                  0, & \mbox{jika} \,\,r_3 < 0, \cr
+         (1/2)r_3^2, & \mbox{jika} \,\,0 \leq r_3 \leq 1, \cr
+   1-(1/2)(2-r_3)^2, & \mbox{jika} \,\,1 \leq r_3 \leq 2, \cr
+                  1, & \mbox{jika} \,\,2 < r_3,\cr}\right.
+$$ (lihat Contoh~\ref{exam 2.2.7.2}), kita mempunyai $F_1(1/4)F_3(1) = (1/2)(1/2) = 1/4$.  Oleh karena itu, $X_1$
+dan $X_3$ bukan peubah acak yang saling bebas.  Perhitungan serupa menunjukkan bahwa $X_2$ dan
+$X_3$ juga tidak saling bebas.
+\end{example}
+
+Meskipun tidak akan kita buktikan di sini, teorema berikut berguna.  Pernyataan ini
+juga berlaku bagi peubah acak diskret yang saling bebas.  Suatu bukti dapat
+ditemukan dalam R\'enyi.\index{R\'ENYI, A.}\footnote{A. R\'enyi, \emx {Probability Theory} (Budapest:
+Akad\'emiai Kiad\'o, 1970), p.~183.}
+
+\begin{theorem}\label{thm 4.3}
+Misalkan $X_1, X_2, \ldots, X_n$ adalah peubah acak kontinu yang saling bebas dan misalkan
+$\phi_1(x), \phi_2(x), \ldots, \phi_n(x)$ adalah fungsi kontinu.  Maka $\phi_1(X_1),$
+\newline
+$\phi_2(X_2), \ldots, \phi_n(X_n)$ saling bebas.
+\end{theorem}
+
+\subsection*{Percobaan Bebas}
+
+Dengan menggunakan gagasan kebebasan, sekarang kita dapat merumuskan gagasan
+percobaan bebas untuk ruang sampel kontinu (lihat Definisi~\ref{def 5.5}).
+
+\begin{definition}\label{def 5.12} Suatu barisan $X_1$,~$X_2$, \dots,~$X_n$ dari peubah acak
+$X_i$ yang saling bebas dan memiliki densitas yang sama disebut \emx {proses
+percobaan\linebreak[4] bebas.}\index{proses percobaan bebas}
+\end{definition}
+\par
+Seperti pada peubah acak diskret, proses percobaan bebas ini muncul secara
+alami dalam situasi ketika suatu percobaan yang dinyatakan oleh satu peubah acak diulang
+$n$ kali.
+
+\subsection*{Densitas Beta}
+
+Selanjutnya kita meninjau contoh yang melibatkan ruang sampel dengan koordinat diskret
+maupun kontinu.  Untuk contoh ini kita memerlukan fungsi densitas baru
+yang disebut \emx {densitas beta.}\index{fungsi densitas!beta}\index{densitas beta}  Densitas ini
+memiliki dua parameter,
+$\alpha$,~$\beta$, dan didefinisikan oleh
+$$
+B(\alpha,\beta,x) =  \left \{ \matrix{ 
+(1/B(\alpha,\beta))x^{\alpha - 1}(1 - x)^{\beta - 1}, & {\mbox{jika}}\,\, 0 \leq x \leq 1, \cr
+                                                   0, & {\mbox{lainnya}}.\cr}\right. 
+$$
+Di sini $\alpha$ dan $\beta$ adalah sebarang bilangan positif, dan fungsi beta
+$B(\alpha,\beta)$ diberikan oleh luas di bawah grafik $x^{\alpha - 1}(1 -
+x)^{\beta - 1}$ antara 0 dan 1:
+$$
+B(\alpha,\beta) = \int_0^1 x^{\alpha - 1}(1 - x)^{\beta - 1}\,dx\ .
+$$
+Perhatikan bahwa ketika $\alpha = \beta = 1$, densitas beta adalah densitas seragam. 
+Ketika $\alpha$ dan $\beta$ lebih besar dari 1, densitas tersebut berbentuk lonceng, tetapi
+ketika keduanya kurang dari 1, densitas itu berbentuk U, sebagaimana ditunjukkan oleh contoh-contoh dalam
+Gambar~\ref{fig 4.6}.
+
+\putfig{4truein}{PSfig4-6}{Densitas beta untuk $\alpha = \beta = .5,1,2.$}{fig 4.6}
+
+Kita hanya akan memerlukan nilai fungsi beta untuk nilai bulat
+$\alpha$ dan $\beta$, dan dalam kasus ini
+$$
+B(\alpha,\beta) = \frac{(\alpha - 1)!\,(\beta - 1)!}{(\alpha + \beta - 1)!}\ .
+$$
+
+\begin{example}\label{exam 4.16}
+Dalam masalah medis, sering diasumsikan bahwa suatu obat efektif dengan
+peluang~$x$ setiap kali digunakan dan berbagai percobaan bersifat
+saling bebas, sehingga pada hakikatnya kita melempar koin bias dengan peluang
+$x$ untuk kepala.  
+Sebelum melakukan percobaan lebih lanjut, Anda tidak mengetahui nilai $x$, tetapi pengalaman sebelumnya mungkin memberikan
+sejumlah informasi tentang nilai-nilai yang mungkin. Wajar untuk menyatakan informasi ini
+dengan membuat sketsa fungsi densitas
+guna menentukan distribusi bagi $x$.  Jadi, kita memandang $x$ sebagai peubah acak
+kontinu yang mengambil nilai antara 0 dan 1.  Jika Anda sama sekali tidak memiliki pengetahuan, Anda akan
+membuat sketsa densitas seragam.  Jika pengalaman sebelumnya menunjukkan bahwa
+$x$ sangat mungkin berada dekat 2/3, Anda akan membuat sketsa densitas dengan maksimum di 2/3 dan
+sebaran yang mencerminkan ketidakpastian Anda dalam taksiran 2/3 tersebut. Kemudian Anda ingin mencari
+fungsi densitas yang secara wajar sesuai dengan sketsa Anda.  Densitas beta menyediakan suatu kelas
+densitas yang dapat disesuaikan dengan sebagian besar sketsa yang mungkin Anda buat. Sebagai contoh, untuk
+$\alpha > 1$ dan $\beta > 1$, densitas itu berbentuk lonceng, dengan parameter $\alpha$ dan $\beta$
+menentukan puncak dan sebarannya. 
+\par
+Anggaplah pelaku percobaan telah memilih suatu densitas beta untuk menyatakan keadaan
+pengetahuannya tentang $x$ sebelum percobaan.  Kemudian ia memberikan obat tersebut kepada $n$
+subjek dan mencatat banyaknya sukses, $i$.   Bilangan $i$ merupakan peubah acak
+diskret, sehingga kita dapat dengan mudah menyatakan himpunan hasil yang mungkin dari percobaan ini
+dengan merujuk pada pasangan terurut $(x, i)$.
+\par
+Misalkan $m(i|x)$ menyatakan peluang bahwa kita mengamati $i$ sukses dengan syarat nilai $x$.  Berdasarkan
+asumsi kita, $m(i|x)$ merupakan distribusi binomial dengan peluang~$x$ untuk sukses:
+$$
+m(i|x) = b(n,x,i) = {n \choose i} x^i(1 - x)^j\ ,
+$$
+dengan $j = n - i$.  
+\par
+Jika $x$ dipilih secara acak dari $[0,1]$ dengan densitas beta
+$B(\alpha,\beta,x)$, maka fungsi densitas bagi hasil berupa
+pasangan $(x,i)$ adalah
+\begin{eqnarray*}
+f(x,i) & = & m(i|x)B(\alpha,\beta,x) \\
+       & = & {n \choose i} x^i(1 - x)^j \frac 1{B(\alpha,\beta)} x^{\alpha - 1}(1 -
+x)^{\beta - 1} \\
+       & = & {n \choose i}  \frac 1{B(\alpha,\beta)} x^{\alpha + i - 1}(1 - x)^{\beta +
+j - 1}\ .
+\end{eqnarray*}
+Sekarang misalkan $m(i)$ adalah peluang bahwa kita mengamati $i$ sukses \emx {tanpa}
+mengetahui nilai $x$.  Maka
+\begin{eqnarray*}
+m(i) & = & \int_0^1 m(i|x) B(\alpha,\beta,x)\,dx \\
+     & = & {n \choose i} \frac 1{B(\alpha,\beta)} \int_0^1 x^{\alpha + i - 1}(1 -
+x)^{\beta + j - 1}\,dx \\
+     & = & {n \choose i} \frac {B(\alpha + i,\beta + j)}{B(\alpha,\beta)}\ .
+\end{eqnarray*}
+Oleh karena itu, densitas peluang $f(x|i)$ untuk $x$, dengan syarat $i$ sukses
+teramati, adalah
+$$
+f(x|i)  =  \frac {f(x,i)}{m(i)} 
+$$
+\begin{equation}
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =  
+\frac {x^{\alpha + i - 1}(1 - x)^{\beta + j - 1}}{B(\alpha + i,\beta
++ j)}\ ,\label{eq 4.5}
+\end{equation}
+yakni, $f(x|i)$ merupakan densitas beta lainnya.  Hal ini mengatakan bahwa jika kita mengamati $i$
+sukses dan $j$ kegagalan pada $n$ subjek, maka densitas baru bagi
+peluang bahwa obat tersebut efektif kembali berupa densitas beta, tetapi dengan
+parameter $\alpha + i$, $\beta + j$.
+\par
+Sekarang kita menganggap bahwa sebelum percobaan, kita memilih densitas beta dengan
+parameter $\alpha$ dan $\beta$, dan bahwa dalam percobaan tersebut
+kita memperoleh $i$ sukses dalam $n$ percobaan.  Baru saja kita melihat bahwa dalam kasus ini,
+densitas baru bagi $x$
+adalah densitas beta dengan parameter $\alpha + i$ dan $\beta + j$.  
+\par
+Sekarang kita ingin menghitung peluang bahwa obat tersebut efektif pada subjek berikutnya.  Untuk setiap
+bilangan real tertentu $t$ antara 0 dan 1, peluang bahwa $x$ memiliki nilai $t$ diberikan oleh
+ekspresi dalam Persamaan~\ref{eq 4.5}.  Dengan syarat $x$ bernilai $t$, peluang bahwa obat
+efektif pada subjek berikutnya hanyalah $t$.  Jadi, untuk memperoleh peluang bahwa obat tersebut efektif
+pada subjek berikutnya, kita mengintegralkan hasil kali ekspresi dalam Persamaan~\ref{eq 4.5} dan $t$ atas semua
+nilai $t$ yang mungkin.  Kita memperoleh:
+\begin{eqnarray*}
+\lefteqn{\frac 1{B(\alpha + i,\beta + j)} 
+\int_0^1 t\cdot t^{\alpha + i - 1}(1 - t)^{\beta + j - 1}\,dt}
+\\
+  & = & \frac {B(\alpha + i + 1,\beta + j)}{B(\alpha + i,\beta + j)} \\
+  & = & \frac {(\alpha + i)!\,(\beta + j - 1)!}{(\alpha + \beta + i + j)!} \cdot 
+\frac {(\alpha + \beta + i + j - 1)!}{(\alpha + i - 1)!\,(\beta + j - 1)!} \\
+  & = & \frac {\alpha + i}{\alpha + \beta + n}\ .
+\end{eqnarray*}
+Jika $n$ besar, maka taksiran kita bagi peluang sukses setelah percobaan
+kira-kira sama dengan proporsi sukses yang diamati dalam percobaan, yang
+tentu merupakan kesimpulan yang wajar.
+\end{example}
+
+Contoh berikut merupakan contoh lain ketika peluang yang sebenarnya tidak diketahui dan harus
+ditaksir berdasarkan data percobaan.
+
+\begin{example}(Masalah bandit berlengan dua)\label{exam 4.17}\index{bandit berlengan dua}
+Anda berada di sebuah kasino dan berhadapan dengan dua mesin slot.  Setiap mesin membayar
+1 dolar atau tidak membayar apa pun.  Peluang bahwa mesin pertama membayar
+satu dolar adalah $x$, sedangkan peluang bahwa mesin kedua membayar satu dolar adalah $y$.  Kita menganggap
+bahwa $x$ dan $y$ adalah bilangan acak yang dipilih secara saling bebas dari interval
+$[0,1]$ dan tidak Anda ketahui.  Anda diizinkan bermain sepuluh kali,
+dengan memilih salah satu mesin setiap kali.  Bagaimanakah Anda harus memilih agar
+banyaknya kemenangan menjadi maksimum?
+
+Salah satu strategi yang terdengar masuk akal adalah menghitung pada setiap tahap
+peluang bahwa masing-masing mesin akan membayar, lalu memilih mesin dengan
+peluang yang lebih tinggi.  Misalkan menang($i$), untuk~$i = 1$ atau~2, adalah berapa kali
+Anda menang pada mesin ke-$i$.  Demikian pula, misalkan kalah($i$) adalah berapa kali
+Anda kalah pada mesin ke-$i$.  Maka, dari Contoh~\ref{exam
+4.16}, peluang $p(i)$ bahwa Anda menang jika memilih mesin ke-$i$ adalah 
+$$
+p(i) = \frac {{\mbox{menang}}(i) + 1} {{\mbox{menang}}(i) + {\mbox{kalah}}(i) + 2}\ .
+$$
+Jadi, jika $p(1) > p(2)$, Anda akan memainkan mesin 1; jika tidak, Anda akan memainkan
+mesin 2.  Kita telah menulis program {\bf TwoArm}\index{TwoArm (program)} untuk menyimulasikan
+percobaan ini.  Dalam program tersebut, pengguna menentukan nilai awal $x$ dan
+$y$ (tetapi nilai-nilai ini tidak diketahui oleh pelaku percobaan).  Pada
+setiap tahap, program menghitung dua densitas bersyarat bagi $x$ dan $y$ dengan syarat hasil
+percobaan sebelumnya, lalu menghitung $p(i)$ untuk~$i = 1$,~2.  Kemudian program memilih
+mesin dengan nilai peluang menang tertinggi untuk permainan
+berikutnya.  Program mencetak mesin yang dipilih pada setiap permainan beserta hasil
+permainan tersebut.  Program juga menggambar densitas baru bagi~$x$ (garis utuh) dan $y$
+(garis putus-putus), dengan hanya menampilkan densitas saat ini.  Kita telah menjalankan program selama
+sepuluh permainan untuk kasus $x = .6$ dan $y = .7$.  Hasilnya ditampilkan dalam
+Gambar~\ref{fig 4.7}.
+
+\putfig{4.5truein}{PSfig4-7}{Mainkan mesin terbaik.}{fig 4.7}
+
+Jalannya program menunjukkan kelemahan strategi ini.  Peluang awal kita untuk
+menang pada mesin yang lebih baik di antara keduanya adalah .7.  Kita mulai dengan
+mesin yang lebih buruk, dan hasil-hasilnya membuat kita selalu memiliki peluang menang
+lebih besar dari .6, sehingga kita terus memainkan mesin ini walaupun
+mesin lainnya lebih baik.  Seandainya kalah pada permainan pertama, kita akan
+berpindah mesin.  Densitas akhir kita bagi $y$ sama dengan densitas
+awal, yakni densitas seragam.  Densitas akhir kita bagi $x$ berbeda
+dan mencerminkan pengetahuan yang jauh lebih akurat tentang $x$.  Komputer bekerja cukup
+baik dengan strategi ini dan menang pada tujuh dari sepuluh percobaan, tetapi sepuluh percobaan
+belum cukup untuk menilai apakah strategi ini baik dalam jangka panjang.
+
+\putfig{4.5truein}{PSfig4-8}{Mainkan pemenang.}{fig 4.8}
+
+Strategi populer lainnya adalah \emx {strategi mainkan-pemenang.}  Seperti tersirat dari namanya,
+dalam strategi ini kita memilih mesin yang sama ketika menang dan berpindah
+mesin ketika kalah.  Program {\bf TwoArm} juga akan menyimulasikan
+strategi ini.  Dalam Gambar~\ref{fig 4.8}, kita memperlihatkan hasil menjalankan program
+dengan strategi mainkan-pemenang dan peluang sebenarnya yang sama, yaitu .6 dan .7,
+untuk kedua mesin.  Setelah sepuluh permainan, densitas kita bagi peluang
+menang yang tidak diketahui menunjukkan bahwa mesin kedua memang
+lebih baik di antara keduanya.  Kita kembali menang pada tujuh dari sepuluh percobaan.
+
+Tidak satu pun strategi yang kita simulasikan merupakan strategi terbaik untuk
+memaksimumkan rata-rata kemenangan kita.  Strategi terbaik tersebut sangat rumit, tetapi
+dihampiri secara wajar oleh strategi mainkan-pemenang.  Berbagai variasi
+contoh ini berperan penting dalam masalah uji klinis obat,
+ketika pelaku percobaan menghadapi situasi serupa.
+\end{example}
+
+\exercises
+\begin{LJSItem}
+
+\i\label{exer 4.2.1} Pilih sebuah titik $x$ secara acak (dengan densitas seragam) di dalam interval
+$[0,1]$.  Tentukan peluang bahwa $x > 1/2$, dengan syarat
+\begin{enumerate}
+\item $x > 1/4$.
+
+\item $x < 3/4$.
+
+\item $|x - 1/2| < 1/4$.
+
+\item $x^2 - x + 2/9 < 0$.
+\end{enumerate}
+
+\i\label{exer 4.2.2} Suatu bahan radioaktif memancarkan partikel $\alpha$ dengan laju yang dijelaskan oleh
+fungsi densitas
+$$
+f(t) = .1e^{-.1t}\ .
+$$
+Tentukan peluang
+bahwa sebuah partikel dipancarkan dalam 10~detik pertama, dengan syarat
+\begin{enumerate}
+\item tidak ada partikel yang dipancarkan dalam detik pertama.
+
+\item tidak ada partikel yang dipancarkan dalam 5 detik pertama.
+
+\item sebuah partikel dipancarkan dalam 3 detik pertama.
+
+\item sebuah partikel dipancarkan dalam 20 detik pertama.
+\end{enumerate}
+
+\i\label{exer 4.2.3} Bola lampu Acme Super\index{bola lampu} diketahui memiliki masa guna yang
+dijelaskan oleh fungsi densitas
+$$
+f(t) = .01e^{-.01t}\ ,
+$$
+dengan waktu $t$ diukur dalam jam.  
+\begin{enumerate}
+\item Tentukan \emx {laju kegagalan} bola lampu ini 
+(lihat Latihan~\ref{sec 2.2}.\ref{exer 2.2.6}).
+
+\item Tentukan \emx {keandalan} bola lampu ini setelah 20 jam.
+
+\item Dengan syarat bola lampu bertahan selama 20 jam, tentukan peluang bahwa bola lampu
+tersebut bertahan selama 20 jam lagi.
+
+\item Tentukan peluang bahwa bola lampu padam pada jam keempat puluh satu, dengan syarat
+bola lampu bertahan selama 40 jam.
+\end{enumerate}
+
+\i\label{exer 4.2.4} Misalkan Anda melempar anak panah pada sasaran berbentuk lingkaran berjari-jari 10 inci.  Dengan syarat
+anak panah jatuh di setengah bagian atas sasaran, tentukan peluang bahwa
+\begin{enumerate}
+\item anak panah jatuh di setengah bagian kanan sasaran.
+
+\item jaraknya dari pusat kurang dari 5 inci.
+
+\item jaraknya dari pusat lebih dari 5 inci.
+
+\item anak panah jatuh dalam jarak 5 inci dari titik $(0,5)$.
+\end{enumerate}
+
+\i\label{exer 4.2.5} Misalkan Anda memilih dua bilangan $x$ dan $y$, secara acak dan saling bebas dari
+interval $[0,1]$.  Dengan syarat jumlah keduanya terletak dalam interval $[0,1]$,
+tentukan peluang bahwa
+\begin{enumerate}
+\item $|x - y| < 1$.
+
+\item $xy < 1/2$.
+
+\item $\max\{x,y\} < 1/2$.
+
+\item $x^2 + y^2 < 1/4$.
+
+\item $x > y$.
+\end{enumerate}
+
+\i\label{exer 4.2.6} Tentukan fungsi-fungsi densitas bersyarat untuk percobaan berikut.
+\begin{enumerate}
+\item Sebuah bilangan $x$ dipilih secara acak dalam interval $[0,1]$, dengan syarat
+$x > 1/4$.
+
+\item Sebuah bilangan $t$ dipilih secara acak dalam interval $[0,\infty)$ dengan
+densitas eksponensial $e^{-t}$, dengan syarat $1 < t < 10$.
+
+\item Sebuah anak panah dilemparkan pada sasaran berbentuk lingkaran berjari-jari 10 inci, dengan syarat
+anak panah itu jatuh di setengah bagian atas sasaran.
+
+\item Dua bilangan $x$ dan $y$ dipilih secara acak dalam interval
+$[0,1]$, dengan syarat $x > y$.
+\end{enumerate}
+
+\i\label{exer 4.2.7} Misalkan $x$ dan $y$ dipilih secara acak dari interval $[0,1]$.  Tunjukkan
+bahwa kejadian $x > 1/3$ dan $y > 2/3$ merupakan kejadian yang saling bebas.
+
+\i\label{exer 4.2.8} Misalkan $x$ dan $y$ dipilih secara acak dari interval $[0,1]$.  Pasangan
+manakah di antara kejadian berikut yang saling bebas?
+\begin{enumerate}
+\item $x > 1/3$.
+
+\item $y > 2/3$.
+
+\item $x > y$.
+
+\item $x + y < 1$.
+\end{enumerate}
+
+\i\label{exer 4.2.8.5}  Misalkan $X$ dan $Y$ adalah peubah acak kontinu dengan
+fungsi densitas masing-masing $f_X(x)$ dan $f_Y(y)$.  Misalkan $f(x, y)$ menyatakan fungsi
+densitas gabungan dari $(X, Y)$.  Tunjukkan bahwa
+$$
+\int_{-\infty}^\infty f(x, y)\, dy = f_X(x)\ ,
+$$ dan
+$$
+\int_{-\infty}^\infty f(x, y)\, dx = f_Y(y)\ .
+$$
+
+
+\istar\label{exer 4.2.9} Dalam Latihan~\ref{sec 2.2}.\ref{exer 2.2.13} Anda
+telah membuktikan hal berikut: Jika Anda mengambil sebatang tongkat sepanjang satu satuan dan mematahkannya menjadi tiga bagian,
+dengan memilih titik-titik patahnya secara acak (yakni, memilih dua bilangan real secara saling bebas 
+dan seragam dari [0, 1]), maka peluang bahwa ketiga bagian tersebut membentuk
+sebuah segitiga adalah 1/4.  Sekarang tinjau percobaan serupa: Pertama patahkan tongkat secara
+acak, lalu patahkan bagian yang lebih panjang secara acak.  Tunjukkan bahwa kedua percobaan
+tersebut sebenarnya cukup berbeda, sebagai berikut:
+\begin{enumerate}
+\item Tulis sebuah program yang menyimulasikan kedua kasus dalam satu rangkaian 1000 percobaan,
+mencetak proporsi sukses untuk setiap rangkaian, dan mengulangi proses ini
+sepuluh kali.  (Sebut sebuah percobaan sukses jika ketiga bagian tersebut memang membentuk segitiga.) 
+Mintalah program Anda memilih $(x,y)$ secara acak dalam persegi satuan, dan dalam setiap kasus
+gunakan $x$ dan $y$ untuk menentukan kedua titik patah.  Untuk setiap percobaan, mintalah program itu menggambar
+$(x,y)$ jika $(x,y)$ menghasilkan sukses.
+
+\item Tunjukkan bahwa dalam percobaan kedua, peluang sukses teoretis
+sebenarnya adalah $2\log 2 - 1$.
+\end{enumerate}
+
+\i\label{exer 4.2.10} Sebuah koin memiliki bias tak diketahui $p$ yang diasumsikan
+berdistribusi seragam antara 0 dan 1.  Koin tersebut dilempar $n$ kali dan sisi kepala muncul
+$j$ kali serta sisi ekor muncul $k$ kali.  Kita telah melihat bahwa peluang
+sisi kepala muncul pada lemparan berikutnya adalah
+$$
+\frac {j + 1}{n + 2}\ .
+$$
+Tunjukkan bahwa nilai ini sama dengan peluang bahwa bola berikutnya berwarna hitam dalam
+model guci Polya\index{model guci Polya} pada Latihan~\ref{sec 4.1}.\ref{exer 4.1.18}. 
+Gunakan hasil ini untuk menjelaskan mengapa, dalam model guci Polya, proporsi bola hitam
+tidak cenderung menuju 0~atau~1 seperti yang mungkin diduga, tetapi justru menuju
+distribusi seragam pada interval $[0,1]$.
+
+\i\label{exer 4.2.11} Pengalaman sebelumnya dengan suatu obat menunjukkan bahwa peluang~$p$
+obat tersebut efektif merupakan besaran acak yang memiliki densitas beta dengan
+parameter $\alpha = 2$ dan $\beta = 3$.  Obat itu digunakan pada sepuluh subjek dan
+terbukti berhasil pada empat dari sepuluh subjek tersebut.  Densitas apa yang sekarang
+harus kita tetapkan bagi peluang~$p$?  Berapa peluang bahwa obat itu
+akan berhasil pada penggunaan berikutnya?
+
+\i\label{exer 4.2.12} Tulis sebuah program yang memungkinkan Anda membandingkan strategi mainkan-pemenang
+dan mainkan-mesin-terbaik untuk masalah bandit berlengan dua pada Contoh~\ref{exam
+4.17}.  Mintalah program Anda menentukan peluang awal bahwa setiap mesin membayar
+dengan memilih sepasang bilangan acak antara 0 dan 1.  Mintalah
+program Anda menjalankan 20 permainan dan mencatat banyaknya kemenangan untuk masing-masing dari
+kedua strategi.  Terakhir, mintalah program Anda melakukan 1000 pengulangan rangkaian 20
+permainan dan menghitung rata-rata kemenangan per 20 permainan.  Strategi mana yang tampaknya
+terbaik?  Ulangi simulasi ini dengan mengganti 20 menjadi 100.  Apakah jawaban Anda atas
+pertanyaan di atas berubah?
+
+\i\label{exer 4.2.13} Tinjau masalah bandit berlengan dua pada Contoh~\ref{exam 4.17}. 
+Bruce Barnes\index{BARNES, B.} mengusulkan strategi berikut, yang merupakan variasi dari
+strategi mainkan-mesin-terbaik.  Mesin dengan peluang
+menang terbesar dimainkan \emx {kecuali jika} dua syarat berikut terpenuhi: (a)~selisih
+peluang menang kurang dari .08, dan (b)~rasio
+banyaknya permainan pada mesin yang lebih sering dimainkan terhadap banyaknya
+permainan pada mesin yang lebih jarang dimainkan lebih besar dari 1.4.  Jika
+kedua syarat di atas terpenuhi, mesin dengan peluang
+menang yang lebih kecil dimainkan.  Tulis sebuah program untuk menyimulasikan strategi ini.  Mintalah
+program Anda memilih peluang pembayaran awal setiap mesin secara acak dari
+interval satuan $[0,1]$, menjalankan 20 permainan, dan mencatat banyaknya kemenangan. 
+Ulangi percobaan ini 1000 kali dan peroleh rata-rata banyaknya kemenangan per 20
+permainan.  Terapkan strategi kedua---misalnya, strategi mainkan-mesin-terbaik atau strategi
+pilihan Anda sendiri, lalu lihat bagaimana strategi kedua ini dibandingkan dengan strategi Bruce berdasarkan
+rata-rata banyaknya kemenangan.
+
+%\end{LJSItem}}
+\end{LJSItem}
+
+\section{Paradoks}\label{sec 4.3}
+
+Sebagian besar bagian ini didasarkan pada artikel Snell dan Vanderbei.\index{SNELL, J.
+L.}\index{VANDERBEI, R.}\footnote{J. L. Snell and R. Vanderbei, ``Three Bewitching
+Paradoxes," in \emx {Topics in Contemporary Probability and Its Applications}, CRC Press, Boca
+Raton, 1995.}
+\par
+Kita harus sangat berhati-hati ketika menangani persoalan yang melibatkan peluang
+bersyarat.  Pembaca tentu ingat bahwa dalam masalah Monty Hall
+(Contoh~\ref{exam 4.5}), jika peserta memilih pintu yang menyembunyikan mobil, Monty
+dapat memilih pintu mana yang akan dibuka.  Kita membuat asumsi bahwa dalam hal ini,
+ia memilih setiap pintu dengan peluang 1/2.  Kita kemudian mencatat bahwa jika asumsi
+ini diubah, jawaban atas pertanyaan semula juga berubah.  Dalam bagian ini, kita akan
+mempelajari contoh-contoh lain dari fenomena yang sama.
+
+\begin{example}\label{exam 4.3.1}
+Tinjau sebuah keluarga dengan dua anak.  Dengan diketahui bahwa salah satu anak
+adalah laki-laki, berapakah peluang bahwa kedua anak adalah laki-laki?
+\par
+Salah satu cara mendekati masalah ini adalah mengatakan bahwa anak lainnya mempunyai
+peluang sama untuk menjadi laki-laki atau perempuan, sehingga peluang kedua anak
+laki-laki adalah 1/2.  Penyelesaian ``buku teks" akan menggambar diagram pohon, lalu
+membentuk pohon bersyarat dengan menghapus lintasan sehingga hanya lintasan yang
+sesuai dengan informasi yang diberikan yang tersisa.  Hasilnya ditampilkan dalam
+Gambar~\ref{fig 4.3}. Kita melihat bahwa peluang dua anak laki-laki dengan diketahui
+ada anak laki-laki dalam keluarga bukanlah 1/2, melainkan 1/3.
+\putfig{3.5truein}{PSfig4-3}{Pohon untuk Contoh \protect\ref{exam 4.3.1}\protect.}{fig 4.3}
+\end{example}
+
+Masalah ini dan masalah sejenis dibahas oleh Bar-Hillel dan
+Falk.\index{BAR-HILLEL, M.}\index{FALK, R.}\footnote{M. Bar-Hillel and R. Falk, ``Some teasers
+concerning conditional probabilities," \emx {Cognition}, vol. 11 (1982), pgs. 109-122.} Para
+penulis menekankan bahwa jawaban atas peluang bersyarat semacam ini dapat berubah,
+bergantung pada cara informasi yang diberikan benar-benar diperoleh.  Sebagai contoh,
+mereka menunjukkan bahwa 1/2 merupakan jawaban yang benar untuk skenario berikut.
+
+\begin{example}\label{exam 4.3.2}
+Tn.\ Smith memiliki dua anak.  Kita bertemu dengannya ketika ia berjalan di jalan
+bersama seorang anak laki-laki yang dengan bangga ia perkenalkan sebagai putranya.
+Berapakah peluang bahwa anak Tn.\ Smith yang lain juga laki-laki?
+\par
+Seperti biasa, kita harus membuat beberapa asumsi tambahan.  Sebagai contoh, kita
+akan mengasumsikan bahwa jika Tn.\ Smith memiliki seorang anak laki-laki dan seorang
+anak perempuan, peluang ia memilih salah satunya untuk menemaninya berjalan adalah
+sama. Dalam Gambar~\ref{fig 4.3.5}, kita menampilkan analisis pohon bagi masalah ini
+dan melihat bahwa 1/2 memang merupakan jawaban yang benar.
+\putfig{5truein}{PSfig4-3-5}{Pohon untuk Contoh \protect\ref{exam 4.3.2}\protect.}{fig 4.3.5}
+\end{example}
+
+\begin{example}\label{exam 4.3.3}
+Tidak mudah memikirkan skenario masuk akal yang menghasilkan jawaban klasik 1/3.
+Stephen Geller\index{GELLER, S.} mencoba melakukannya ketika mengajukan masalah ini kepada Marilyn vos
+Savant.\index{vos SAVANT, M.}\footnote{M. vos Savant, ``Ask Marilyn," \emx {Parade
+Magazine}, 9  September;  2 December;  17  February 1990, reprinted in Marilyn
+vos Savant, \emx {Ask Marilyn}, St. Martins, New York, 1992.}
+Masalah Geller adalah sebagai berikut: Seorang pemilik toko berkata bahwa ia memiliki
+dua anak anjing beagle baru untuk diperlihatkan kepada Anda, tetapi ia tidak tahu
+apakah keduanya jantan, keduanya betina, atau masing-masing satu.  Anda mengatakan
+bahwa Anda hanya menginginkan yang jantan, lalu ia menelepon orang yang sedang
+memandikan keduanya.  ``Apakah setidaknya satu jantan?" tanyanya. ``Ya," katanya
+kepada Anda sambil tersenyum.  Berapakah peluang bahwa anak anjing yang \emx {lain}
+juga jantan?
+\par
+Pembaca diminta memutuskan apakah model yang memberikan jawaban 1/3 layak digunakan
+dalam kasus ini.
+\end{example}
+
+Dalam contoh-contoh sebelumnya, paradoks yang tampak dapat diselesaikan dengan mudah
+dengan menyatakan secara jelas model yang digunakan dan asumsi yang dibuat.  Sekarang
+kita beralih ke beberapa contoh yang paradoksnya tidak begitu mudah diselesaikan.
+
+\begin{example}\label{exam 4.3.4}
+Dua amplop masing-masing berisi sejumlah uang.  Satu amplop diberikan kepada
+Ali\index{Ali} dan yang lain kepada Baba\index{Baba}; mereka diberi tahu bahwa satu
+amplop berisi uang dua kali lebih banyak daripada amplop lainnya.  Namun, keduanya
+tidak tahu siapa yang mendapat hadiah lebih besar.  Sebelum ada yang membuka amplop,
+Ali ditanya apakah ia ingin menukar amplopnya dengan Baba.  Ali bernalar sebagai
+berikut: Misalkan jumlah dalam amplop saya adalah $x$.  Jika saya bertukar, saya akan
+memperoleh $x/2$ dengan peluang 1/2 dan $2x$ dengan peluang 1/2.  Jika saya diberi
+kesempatan memainkan permainan ini berkali-kali dan selalu bertukar, secara rata-rata
+saya akan memperoleh
+$$
+\frac 12 \frac x2 + \frac 12 2x = \frac 54 x\ .
+$$
+Nilai ini lebih besar daripada kemenangan rata-rata saya jika saya tidak bertukar.
+\par
+Tentu saja, Baba mendapat kesempatan yang sama dan bernalar dengan cara serupa hingga
+menyimpulkan bahwa ia juga ingin bertukar.  Maka mereka bertukar, dan masing-masing
+berpikir bahwa kekayaan bersihnya baru saja meningkat 25\%.
+\par
+Karena keduanya belum membuka amplop, proses ini dapat diulangi dan mereka pun
+bertukar lagi.  Sekarang mereka kembali memegang amplop semula, tetapi mereka berpikir
+bahwa kekayaan masing-masing telah meningkat 25\% sebanyak dua kali.  Dengan penalaran
+ini, mereka dapat meyakinkan diri bahwa dengan bertukar amplop berulang kali, mereka
+dapat menjadi kaya tanpa batas.  Jelas ada yang salah dalam penalaran di atas, tetapi
+di manakah kesalahannya?
+\par
+Salah satu siasat dalam membuat paradoks adalah menjadikannya sedikit lebih rumit
+daripada yang diperlukan agar kita makin bingung.  Seperti yang disarankan John
+Finn\index{FINN, J.}, paradoks ini sebenarnya dapat dimulai dengan masalah yang lebih
+sederhana.  Misalkan Ali dan Baba tahu bahwa saya akan memberikan sebuah amplop
+berisi \$5 atau sebuah amplop berisi \$10.  Saya akan melempar koin untuk menentukan
+amplop mana yang diberikan kepada Ali, lalu memberikan amplop lainnya kepada Baba.
+Ali kemudian dapat berargumen bahwa Baba memiliki $2x$ dengan peluang $1/2$ dan $x/2$
+dengan peluang $1/2$.  Hal ini membawa Ali pada kesimpulan yang sama seperti
+sebelumnya.  Namun, sekarang jelas bahwa penalaran ini tidak masuk akal. Jika Ali
+memiliki amplop berisi \$5, Baba tidak mungkin memiliki setengahnya, yakni \$2.50,
+karena jumlah itu bahkan bukan salah satu pilihan.  Demikian pula, jika Ali memiliki
+\$10, Baba tidak mungkin memiliki dua kali lipatnya, yakni \$20. Dalam masalah yang
+lebih sederhana ini, hasil-hasil yang mungkin ditampilkan oleh diagram pohon dalam
+Gambar~\ref{fig 4.9}.
+\putfig{3truein}{PSfig4-9}{Versi John Finn dari Contoh \protect\ref{exam 4.3.4}\protect.}{fig 4.9}%%4.5truein 
+Dari diagram tersebut, jelas bahwa pertukaran tidak membuat salah satu pihak lebih untung.
+\end{example}
+
+Dalam contoh di atas, penalaran Ali keliru karena ia menyimpulkan bahwa jika jumlah
+dalam amplopnya adalah $x$, peluang amplopnya memuat jumlah yang lebih kecil adalah
+1/2, dan peluang amplopnya memuat jumlah yang lebih besar juga 1/2.  Sebenarnya,
+peluang bersyarat ini bergantung pada distribusi jumlah uang yang dimasukkan ke dalam
+amplop.
+\par
+Untuk memperjelas, misalkan $X$ adalah peubah acak bernilai bilangan bulat positif
+yang menyatakan jumlah lebih kecil di antara dua jumlah dalam amplop.  Selain itu,
+misalkan distribusi $X$ diberikan; yakni, untuk setiap bilangan bulat positif $x$,
+kita diberi nilai
+$$p_x = P(X = x)\ .$$
+(Dalam contoh Finn, $p_5 = 1$, dan $p_{n} = 0$ untuk semua nilai $n$ lainnya.)
+Kita lalu dapat menghitung dengan mudah peluang bersyarat bahwa sebuah amplop memuat
+jumlah lebih kecil, dengan diketahui bahwa amplop tersebut memuat $x$ dolar.  Dua
+titik sampel yang mungkin adalah $(x, x/2)$ dan $(x, 2x)$.  Jika $x$ ganjil, titik
+sampel pertama memiliki peluang 0 karena $x/2$ bukan bilangan bulat, sehingga peluang
+bersyarat yang dicari adalah 1 bahwa $x$ merupakan jumlah lebih kecil.  Jika $x$
+genap, kedua titik sampel masing-masing memiliki peluang $p_{x/2}$ dan $p_x$, sehingga
+peluang bersyarat bahwa $x$ merupakan jumlah lebih kecil adalah
+$$\frac{p_x}{p_{x/2} + p_x}\ ,$$
+yang tidak harus sama dengan 1/2.
+\par
+Steven Brams\index{BRAMS, S.} dan D. Marc Kilgour\index{KILGOUR, D. M.}\footnote{S. J. Brams
+and D. M. Kilgour, ``The Box Problem:  To Switch or Not to Switch," \emx {Mathematics Magazine},
+vol. 68, no. 1 (1995),  p. 29.} mempelajari, untuk berbagai distribusi, persoalan
+apakah seseorang sebaiknya menukar amplop jika tujuannya memaksimumkan kemenangan
+rata-rata jangka panjang.  Misalkan $x$ adalah jumlah dalam amplop Anda.  Mereka
+menunjukkan bahwa untuk setiap distribusi $X$, terdapat setidaknya satu nilai $x$ yang
+membuat Anda sebaiknya bertukar.  Mereka memberikan contoh distribusi yang hanya
+memiliki satu nilai $x$ yang membuat Anda sebaiknya bertukar (lihat
+Latihan~\ref{exer 4.3.5}).  Barangkali kasus yang paling menarik adalah distribusi
+yang membuat Anda selalu sebaiknya bertukar.  Sekarang kita berikan contoh tersebut.
+
+\begin{example}\label{exam 4.3.5}
+Misalkan ada dua amplop\index{amplop} di hadapan kita, dan satu amplop berisi uang dua
+kali lebih banyak daripada yang lain (kedua jumlah berupa bilangan bulat positif).
+Kita diberi salah satu amplop dan ditanya apakah kita ingin bertukar.
+\par
+Seperti di atas, misalkan $X$ menyatakan jumlah lebih kecil di antara kedua jumlah
+dalam amplop, dan misalkan
+$$p_x = P(X = x)\ .$$
+Sekarang kita dapat menghitung kemenangan rata-rata jangka panjang jika kita
+bertukar.  (Rata-rata jangka panjang ini merupakan contoh konsep peluang yang dikenal
+sebagai nilai harapan dan akan dibahas dalam Bab~\ref{chp 6}.)  Dengan diketahui bahwa
+salah satu dari dua titik sampel telah terjadi, peluang bahwa titik tersebut adalah
+$(x, x/2)$ adalah
+$$\frac{p_{x/2}}{p_{x/2} + p_x}\ ,$$
+dan peluang bahwa titik tersebut adalah $(x, 2x)$ ialah
+$$\frac{p_x}{p_{x/2} + p_x}\ .$$
+Jadi, jika kita bertukar, kemenangan rata-rata jangka panjang kita adalah
+$$\frac{p_{x/2}}{p_{x/2} + p_x}\frac x2 + \frac{p_x}{p_{x/2} + p_x} 2x\ .$$
+Jika nilai ini lebih besar daripada $x$, dalam jangka panjang kita memperoleh
+keuntungan dengan bertukar.  Perhitungan aljabar rutin menunjukkan bahwa ekspresi di
+atas lebih besar daripada $x$ jika dan hanya jika
+\begin{equation}
+\frac{p_{x/2}}{p_{x/2} + p_x} < \frac 23\ .
+\label{eq 4.3.1}
+\end{equation}
+\par
+Menarik untuk meninjau apakah terdapat distribusi pada bilangan bulat positif yang
+membuat pertidaksamaan~\ref{eq 4.3.1} benar untuk semua nilai genap $x$.  Brams dan
+Kilgour\footnote{ibid.} memberikan contoh berikut.
+\par
+Kita definisikan $p_x$ sebagai berikut:
+$$
+p_x = \left \{ \matrix{
+               \frac 13 \Bigl(\frac 23\Bigr)^{k-1}, & \mbox{jika}\,\, x = 2^k, \cr
+               0, & \mbox{selainnya.}\cr
+}\right.
+$$
+Mudah dihitung (lihat Latihan~\ref{exer 4.3.4}) bahwa untuk semua nilai $x$ yang
+relevan, kita mempunyai
+$$
+\frac{p_{x/2}}{p_{x/2} + p_x} = \frac 35\ ,
+$$
+yang berarti pertidaksamaan~\ref{eq 4.3.1} selalu benar.
+\end{example}
+
+Sejauh ini, kita dapat menyelesaikan paradoks dengan menyatakan secara jelas asumsi
+yang dibuat dan secara tepat model yang digunakan.  Kita mengakhiri bagian ini dengan
+menjelaskan paradoks yang tidak dapat kita selesaikan.
+
+\begin{example}\label{exam 4.3.6}
+Misalkan ada dua amplop\index{amplop} di hadapan kita, dan kita diberi tahu bahwa
+kedua amplop masing-masing berisi $X$ dan $Y$ dolar, dengan $X$ dan $Y$ bilangan bulat
+positif yang berbeda.  Kita memilih salah satu amplop secara acak dan membukanya;
+misalkan isinya $X$.  Apakah mungkin menentukan, dengan peluang lebih besar daripada
+1/2, apakah $X$ merupakan jumlah dolar yang lebih kecil?
+\par
+Bahkan jika kita tidak mengetahui distribusi bersama $X$ dan $Y$, secara mengejutkan
+jawabannya adalah ya!  Caranya sebagai berikut.  Lemparkan koin adil hingga kepala
+muncul untuk pertama kalinya.  Misalkan $Z$ menyatakan banyaknya lemparan yang
+diperlukan ditambah 1/2.  Jika $Z > X$, kita mengatakan bahwa $X$ merupakan jumlah
+yang lebih kecil, dan jika $Z < X$, kita mengatakan bahwa $X$ merupakan jumlah yang
+lebih besar.
+\par
+Pertama, jika $Z$ berada di antara $X$ dan $Y$, kita pasti benar.  Karena $X$ dan $Y$
+tidak sama, $Z$ berada di antara keduanya dengan peluang positif.  Kedua, jika $Z$
+tidak berada di antara $X$ dan $Y$, maka $Z$ lebih besar daripada $X$ dan $Y$, atau
+lebih kecil daripada $X$ dan $Y$.  Dalam kedua kasus, berdasarkan simetri, $X$ merupakan
+jumlah yang lebih kecil dengan peluang 1/2 (ingat, kita memilih amplop secara acak).
+Jadi, peluang bahwa kita benar lebih besar daripada 1/2.
+\end{example}
+
+\exercises
+\begin{LJSItem}
+
+\i\label{exer 4.3.1}
+Salah satu paradoks peluang bersyarat yang pertama dikemukakan oleh
+Bertrand.\index{BERTRAND, J.}\footnote{J. Bertrand, \emx {Calcul des Probabilit\'{e}s},
+Gauthier-Uillars, 1888.}  Paradoks ini disebut \emx {Paradoks Kotak}\index{Paradoks
+kotak}.  Sebuah lemari memiliki tiga laci. Laci pertama berisi dua bola emas, laci
+kedua berisi dua bola perak, dan laci ketiga berisi satu bola perak serta satu bola
+emas. Sebuah laci dipilih secara acak, lalu satu bola dipilih secara acak dari dua
+bola di dalam laci.  Dengan diketahui bahwa bola emas terambil, berapakah peluang
+bahwa laci yang berisi dua bola emaslah yang dipilih?
+
+\i\label{exer 4.3.2}
+Masalah berikut disebut \emx {masalah dua as}\index{masalah dua as}. Masalah yang
+berasal dari tahun 1936 ini dikaitkan dengan matematikawan Inggris J. H. C.
+Whitehead\index{WHITEHEAD, J. H. C.} (lihat Gridgeman\index{GRIDGEMAN, N. T.}\footnote{N. T. 
+Gridgeman, Letter, \emx {American Statistician}, 21 (1967), pgs. 38-39.}). Masalah ini juga
+diajukan kepada Marilyn vos Savant\index{vos SAVANT, M.} oleh pakar teka-teki matematika Martin
+Gardner\index{GARDNER, M.}, yang menyebutnya sebagai salah satu masalah kesukaannya.
+\par
+Satu tangan bridge\index{bridge} telah dibagikan, yakni tiga belas kartu dibagikan
+kepada setiap pemain.  Dengan diketahui bahwa pasangan Anda memiliki setidaknya satu
+as, berapakah peluang bahwa ia memiliki setidaknya dua as?  Dengan diketahui bahwa
+pasangan Anda memiliki as hati, berapakah peluang bahwa ia memiliki setidaknya dua as?
+Jawablah pertanyaan ini untuk versi bridge yang menggunakan delapan kartu, yaitu empat
+as dan empat raja, dengan dua kartu dibagikan kepada setiap pemain.  (Pembaca mungkin
+ingin menyelesaikan masalah ini dengan setumpuk 52 kartu.)
+
+\i\label{exer 4.3.3}
+Dalam latihan sebelumnya, wajar untuk bertanya, ``Bagaimana kita memperoleh informasi
+bahwa tangan tersebut memiliki sebuah as?" Gridgeman meninjau dua cara berbeda untuk
+memperoleh informasi ini.  (Sekali lagi, asumsikan tumpukan terdiri atas delapan kartu.)
+\begin{enumerate}
+\item
+Asumsikan bahwa orang yang memegang tangan ditanya, ``Sebutkan satu as dalam tangan
+Anda," dan menjawab, ``As hati."  Berapakah peluang bahwa ia memiliki as kedua?
+\item
+Misalkan orang yang memegang tangan diberi pertanyaan yang lebih langsung, ``Apakah
+Anda memiliki as hati?" dan jawabannya ya.  Berapakah peluang bahwa ia memiliki as kedua?
+\end{enumerate}
+
+\i\label{exer 4.3.4}  Dengan menggunakan notasi yang diperkenalkan dalam
+Contoh~\ref{exam 4.3.5}, tunjukkan bahwa dalam contoh Brams\index{BRAMS, S.} dan
+Kilgour\index{KILGOUR, D. M.}, jika $x$ merupakan pangkat positif dari 2, maka
+$$
+\frac{p_{x/2}}{p_{x/2} + p_x} = \frac 35\ .
+$$
+
+\i\label{exer 4.3.5} Dengan menggunakan notasi yang diperkenalkan dalam
+Contoh~\ref{exam 4.3.5}, misalkan
+$$
+p_x = \left \{ \matrix{
+               \frac 23 \Bigl(\frac 13\Bigr)^k, & \mbox{jika}\,\, x = 2^k, \cr
+               0, & \mbox{selainnya.}\cr
+}\right.
+$$
+Tunjukkan bahwa terdapat tepat satu nilai $x$ sedemikian sehingga jika amplop Anda
+berisi $x$, Anda sebaiknya bertukar.
+
+
+\istar\label{exer 4.3.6} (Hanya untuk pemain bridge\index{bridge}.  Dari
+Sutherland.\index{SUTHERLAND, E.}\footnote{E. Sutherland, ``Restricted Choice\index{restricted
+choice, principle of} --- Fact or Fiction?", \emx {Canadian Master Point}, November 1, 1993.})  
+Misalkan kita adalah deklaran dalam satu tangan bridge dan memiliki raja, 9, 8, 7,
+serta 2 dari suatu jenis kartu, sedangkan dummy memiliki as, 10, 5, dan 4 dari jenis
+yang sama.  Misalkan kita ingin memainkan jenis kartu ini sedemikian rupa sehingga
+peluang tidak mengalami kekalahan pada jenis tersebut menjadi maksimum.  Kita mulai
+dengan memainkan 2 menuju as dan melihat bahwa ratu jatuh di sebelah kiri kita.  Kita
+kemudian memainkan 10 dari dummy, dan lawan di sebelah kanan memainkan enam (setelah
+memainkan tiga pada putaran pertama).  Haruskah kita melakukan finesse atau bermain
+dengan mengandalkan jatuhnya kartu?
+
+
+\end{LJSItem}

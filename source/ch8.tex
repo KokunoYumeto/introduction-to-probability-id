@@ -1,0 +1,908 @@
+% This chapter was modified on 1/12/05.
+%\setcounter{chapter}{7}
+\chapter{Hukum Bilangan Besar}\label{chp 8} 
+
+\section[Peubah Acak Diskret]{Hukum Bilangan Besar untuk Peubah Acak Diskret}
+\label{sec 8.1}
+Kita kini siap membuktikan teorema fundamental pertama kita dalam probabilitas.  
+Kita telah melihat bahwa cara intuitif untuk memandang peluang suatu hasil tertentu adalah sebagai 
+frekuensi kemunculan hasil tersebut dalam jangka panjang, ketika percobaan diulang sangat 
+banyak kali.  Kita juga telah mendefinisikan peluang secara matematis sebagai nilai suatu fungsi 
+distribusi bagi peubah acak yang merepresentasikan percobaan.   Hukum Bilangan Besar, yaitu
+teorema yang dibuktikan dalam model matematis probabilitas, menunjukkan bahwa model ini konsisten 
+dengan interpretasi frekuensi atas peluang.  Teorema ini kadang-kadang disebut \emx {hukum
+rata-rata.}  Untuk mengetahui apa yang akan terjadi jika hukum ini tidak benar, lihat artikel karya 
+Robert M. Coates.\index{COATES, R. M.}\footnote{R.~M.~Coates, ``The Law," \emx {The World of
+Mathematics,} ed. James R. Newman (New York: Simon and Schuster, 1956.}
+
+\subsection*{Ketaksamaan Chebyshev}
+Untuk membahas Hukum Bilangan Besar, pertama-tama kita memerlukan sebuah ketaksamaan penting
+yang disebut \emx {Ketaksamaan Chebyshev.}
+
+\begin{theorem}{\bf (Ketaksamaan Chebyshev)}\index{Ketaksamaan Chebyshev}
+Misalkan $X$ adalah peubah acak diskret dengan nilai harapan $\mu = E(X)$, dan misalkan $\epsilon
+> 0$ sebarang bilangan real positif.  Maka
+$$
+P(|X - \mu| \geq \epsilon) \leq \frac {V(X)}{\epsilon^2}\ .
+$$
+\proof
+Misalkan $m(x)$ menyatakan fungsi distribusi $X$.  Maka peluang bahwa $X$
+berselisih dari $\mu$ sekurang-kurangnya sebesar $\epsilon$ diberikan oleh
+$$P(|X - \mu| \geq \epsilon) = \sum_{|x - \mu| \geq \epsilon} m(x)\ .$$
+Kita mengetahui bahwa 
+$$V(X) = \sum_x (x - \mu)^2 m(x)\ ,$$
+dan nilai ini jelas sekurang-kurangnya sebesar
+$$\sum_{|x - \mu| \geq \epsilon} (x - \mu)^2 m(x)\ ,$$
+karena semua suku penjumlahan bernilai positif dan kita telah membatasi rentang penjumlahan pada
+jumlah kedua.  Namun, jumlah terakhir ini sekurang-kurangnya sebesar
+\begin{eqnarray*}
+\sum_{|x - \mu| \geq \epsilon} \epsilon^2 m(x) &=& 
+\epsilon^2 \sum_{|x - \mu| \geq \epsilon} m(x) \\
+&=& \epsilon^2 P(|X - \mu| \geq \epsilon)\ .\\
+\end{eqnarray*}
+Jadi,
+$$ P(|X - \mu| \geq \epsilon) \leq \frac {V(X)}{\epsilon^2}\ .
+$$
+\end{theorem}
+Perhatikan bahwa $X$ dalam teorema di atas dapat berupa sebarang peubah acak diskret, dan
+$\epsilon$ dapat berupa sebarang bilangan positif.
+
+\begin{example}
+Misalkan $X$ sebarang peubah acak dengan $E(X) = \mu$ dan $V(X) = \sigma^2$.  Maka,
+jika $\epsilon = k\sigma$, Ketaksamaan Chebyshev menyatakan bahwa
+$$
+P(|X - \mu| \geq k\sigma) \leq \frac {\sigma^2}{k^2\sigma^2} = \frac 1{k^2}\ .
+$$
+Jadi, untuk sebarang peubah acak, peluang penyimpangan dari rata-rata yang besarnya
+lebih dari~$k$ simpangan baku adalah ${} \leq 1/k^2$.  Sebagai contoh, jika
+$k = 5$, $1/k^2 = .04$.
+\end{example}
+
+Ketaksamaan Chebyshev merupakan ketaksamaan terbaik yang mungkin dalam arti bahwa, untuk
+sebarang $\epsilon > 0$, kita dapat memberikan contoh peubah acak yang
+membuat Ketaksamaan Chebyshev berlaku sebagai kesamaan.  Untuk melihat hal ini, dengan
+$\epsilon > 0$ yang diberikan, pilih $X$ dengan distribusi
+$$
+p_X = \pmatrix{
+-\epsilon & +\epsilon \cr
+1/2 & 1/2 \cr}\ .
+$$
+Maka $E(X) = 0$, $V(X) = \epsilon^2$, dan
+$$
+P(|X - \mu| \geq \epsilon) = \frac {V(X)}{\epsilon^2} = 1\ .
+$$
+
+Kita kini siap menyatakan dan membuktikan Hukum Bilangan Besar.
+
+\subsection*{Hukum Bilangan Besar}
+\begin{theorem}{\bf (Hukum Bilangan Besar)}\index{Hukum Bilangan Besar}
+Misalkan $X_1$,~$X_2$, \dots,~$X_n$ membentuk proses percobaan saling bebas, dengan
+nilai harapan berhingga $\mu = E(X_j)$ dan varians berhingga $\sigma^2 =
+V(X_j)$.  Misalkan $S_n = X_1 + X_2 +\cdots+ X_n$.  Maka untuk
+sebarang $\epsilon > 0$, 
+$$ P\left( \left| \frac {S_n}n - \mu \right| \geq \epsilon
+\right) \to 0
+$$
+ketika $n \rightarrow \infty$.
+Secara ekuivalen,
+$$
+P\left( \left| \frac {S_n}n - \mu \right| < \epsilon \right) \to 1
+$$
+ketika $n \rightarrow \infty$.
+\proof
+Karena $X_1$,~$X_2$, \dots,~$X_n$ saling bebas dan memiliki distribusi yang sama,
+kita dapat menerapkan Teorema~\ref{thm 6.9}.  Kita memperoleh
+$$
+V(S_n) = n\sigma^2\ ,
+$$
+dan
+$$
+V (\frac {S_n}n) = \frac {\sigma^2}n\ .
+$$
+Kita juga mengetahui bahwa
+$$
+E (\frac {S_n}n) = \mu\ .
+$$
+Berdasarkan Ketaksamaan Chebyshev, untuk sebarang $\epsilon > 0$,
+$$
+P\left( \left| \frac {S_n}n - \mu \right| \geq \epsilon \right) \leq \frac
+{\sigma^2}{n\epsilon^2}\ .
+$$
+Jadi, untuk $\epsilon$ tetap,
+$$
+P\left( \left| \frac {S_n}n - \mu \right| \geq \epsilon \right) \to 0
+$$
+ketika $n \rightarrow \infty$, atau secara ekuivalen,
+$$
+P\left( \left| \frac {S_n}n - \mu \right| < \epsilon \right) \to 1
+$$
+ketika $n \rightarrow \infty$.
+\end{theorem}
+
+\subsection*{Hukum Rata-Rata}
+Perhatikan bahwa $S_n/n$ adalah rata-rata hasil-hasil individual, dan Hukum
+Bilangan Besar sering disebut ``hukum rata-rata."  Merupakan kenyataan yang mencolok
+bahwa kita dapat memulai dengan percobaan acak yang hanya sedikit dapat diprediksi
+dan, dengan mengambil rata-rata, memperoleh percobaan yang hasilnya dapat
+diprediksi dengan tingkat kepastian tinggi.  Hukum Bilangan Besar, sebagaimana
+telah kita nyatakan, sering disebut ``Hukum Lemah Bilangan Besar" untuk
+membedakannya dari ``Hukum Kuat Bilangan Besar" yang dijelaskan dalam
+Latihan~\ref{exer 8.1.16}.
+
+Pertimbangkan kasus khusus penting berupa percobaan Bernoulli dengan peluang~$p$
+untuk sukses.  Misalkan $X_j = 1$ jika hasil ke-$j$ adalah sukses dan~0 jika
+gagal.  Maka $S_n = X_1 + X_2 +\cdots+ X_n$ adalah banyaknya sukses dalam $n$
+percobaan dan $\mu = E(X_1) = p$.  Hukum Bilangan Besar menyatakan bahwa untuk sebarang
+$\epsilon > 0$
+$$
+P\left( \left| \frac {S_n}n - p \right| < \epsilon \right) \to 1
+$$
+ketika $n \rightarrow \infty$.  Pernyataan di atas mengatakan bahwa, dalam pengulangan
+percobaan Bernoulli yang jumlahnya besar, kita dapat mengharapkan proporsi percobaan yang
+menghasilkan kejadian tersebut mendekati $p$.  Ini menunjukkan bahwa model matematis probabilitas kita
+sesuai dengan interpretasi frekuensi atas peluang.  
+
+\subsection*{Pelemparan Koin}
+Mari kita pertimbangkan kasus khusus pelemparan sebuah koin sebanyak $n$ kali, dengan $S_n$
+menyatakan banyaknya kemunculan sisi kepala.  Maka peubah acak $S_n/n$ menyatakan
+proporsi kemunculan sisi kepala dan memiliki nilai antara 0~dan~1.  Hukum
+Bilangan Besar memprediksi bahwa hasil peubah acak ini, untuk
+$n$ yang besar, akan mendekati 1/2.
+
+Pada Gambar~\ref{fig 8.1}, kita telah menggambar distribusi dalam contoh ini untuk nilai
+~$n$ yang semakin besar. Kita telah menandai hasil antara .45~dan~.55 dengan titik-titik di puncak
+batang.  Kita melihat bahwa ketika
+$n$ meningkat, distribusi semakin terkonsentrasi di sekitar~.5 dan persentase
+luas total yang termuat dalam interval $(.45,.55)$ semakin
+besar, sebagaimana diprediksi oleh Hukum Bilangan Besar.
+
+\putfig{5.0truein}{PSfig8-1}{Distribusi percobaan Bernoulli.}{fig 8.1} 
+
+
+\subsection*{Pelemparan Dadu}
+\begin{example}
+Pertimbangkan $n$ lemparan sebuah dadu.  Misalkan $X_j$ adalah hasil lemparan ke-$j$.  Maka
+$S_n = X_1 + X_2 +\cdots+ X_n$ adalah jumlah hasil dari $n$ lemparan pertama.  Ini merupakan
+proses percobaan saling bebas dengan $E(X_j) = 7/2$.  Jadi, berdasarkan Hukum Bilangan
+Besar, untuk sebarang $\epsilon > 0$
+$$
+P\left( \left| \frac {S_n}n - \frac 72 \right| \geq \epsilon \right) \to 0
+$$
+ketika $n \rightarrow \infty$.  Pernyataan yang ekuivalen adalah bahwa, untuk sebarang $\epsilon > 0$,
+$$
+P\left( \left| \frac {S_n}n - \frac 72 \right| < \epsilon \right) \to 1
+$$
+ketika $n \rightarrow \infty$.
+\end{example}
+
+\subsection*{Perbandingan Numerik}
+Perlu ditekankan bahwa, walaupun Ketaksamaan Chebyshev membuktikan Hukum Bilangan
+Besar, ketaksamaan tersebut sebenarnya sangat kasar untuk peluang-peluang yang terlibat.  Namun,
+kekuatannya terletak pada kenyataan bahwa ketaksamaan tersebut berlaku bagi sebarang peubah acak dan memungkinkan
+kita membuktikan teorema yang sangat kuat.
+\par
+Dalam contoh berikut, kita membandingkan taksiran yang diberikan oleh Ketaksamaan Chebyshev dengan
+nilai sebenarnya.
+\begin{example}
+Misalkan $X_1$,~$X_2$, \dots,~$X_n$ membentuk proses percobaan Bernoulli dengan
+peluang~.3 untuk sukses dan~.7 untuk kegagalan.  Misalkan $X_j = 1$ jika hasil ke-$j$
+adalah sukses dan~0 jika gagal.  Maka, $E(X_j) = .3$ dan $V(X_j) =
+(.3)(.7) = .21$.  Jika
+$$
+A_n = \frac {S_n}n = \frac {X_1 + X_2 +\cdots+ X_n}n
+$$
+adalah \emx {rata-rata} dari $X_i$, maka $E(A_n) = .3$ dan $V(A_n) =
+V(S_n)/n^2 = .21/n$.  Ketaksamaan Chebyshev menyatakan bahwa, jika misalnya
+$\epsilon = .1$,
+$$
+P(|A_n - .3| \geq .1) \leq \frac {.21}{n(.1)^2} = \frac {21}n\ .
+$$
+Jadi, jika $n = 100$,
+$$
+P(|A_{100} - .3| \geq .1) \leq .21\ ,
+$$
+atau jika $n = 1000$,
+$$
+P(|A_{1000} - .3| \geq .1) \leq .021\ .
+$$
+Pernyataan ini dapat ditulis ulang sebagai
+ \begin{eqnarray*}
+P(.2 < A_{100} < .4) &\geq& .79\ , \\
+P(.2 < A_{1000} < .4) &\geq& .979\ .
+\end{eqnarray*} 
+Nilai-nilai ini perlu dibandingkan dengan nilai sebenarnya, yaitu (hingga enam tempat
+desimal)
+\begin{eqnarray*}
+P(.2 < A_{100} < .4) &\approx& .962549 \\
+P(.2 < A_{1000} < .4) &\approx& 1\ .\\
+\end{eqnarray*}
+Program {\bf Law}\index{Law (program)} dapat digunakan untuk melakukan perhitungan di atas secara
+sistematis.
+\end{example}
+
+
+\subsection*{Catatan Historis}
+Hukum Bilangan Besar pertama kali dibuktikan oleh matematikawan Swiss, James
+Bernoulli\index{BERNOULLI, J.|(}, dalam bagian keempat karyanya, \emx {Ars Conjectandi}, yang diterbitkan
+secara anumerta pada~1713.\footnote{J. Bernoulli, \emx {The Art of Conjecturing
+IV,} trans.~Bing Sung, Technical Report No.~2, Dept.\ of Statistics, Harvard
+Univ., 1966}  Seperti yang sering terjadi pada pembuktian pertama, pembuktian Bernoulli jauh
+lebih sulit daripada pembuktian yang telah kita sajikan menggunakan Ketaksamaan Chebyshev. 
+Chebyshev mengembangkan ketaksamaannya untuk membuktikan bentuk umum Hukum Bilangan
+Besar (lihat Latihan~\ref{exer 8.1.13}).  Ketaksamaan itu sendiri muncul
+jauh lebih awal dalam karya Bienaym\'e.\index{BIENAYM\'E, I.} Dalam pembahasannya tentang sejarah ketaksamaan ini,
+Maistrov\index{MAISTROV, L.} menyatakan bahwa ketaksamaan tersebut lama disebut Ketaksamaan
+Bienaym\'e-Chebyshev.\footnote{L. E. Maistrov, \emx {Probability Theory: A Historical
+Approach,} trans.\ and ed.~Samual Kotz, (New York: Academic Press, 1974),
+p.~202}
+
+Dalam \emx {Ars Conjectandi}, Bernoulli menyajikan kepada pembacanya pembahasan panjang
+tentang makna teoremanya disertai banyak contoh.  Dalam notasi modern, ia membahas
+sebuah kejadian yang terjadi dengan peluang~$p$, tetapi ia tidak mengetahui $p$.  Ia ingin
+menaksir $p$ menggunakan $\bar{p}$, yakni proporsi pengulangan yang menghasilkan kejadian tersebut,
+dari sejumlah pengulangan percobaan.  Ia membahas secara terperinci
+masalah menaksir, dengan metode ini, proporsi bola putih dalam sebuah guci
+yang memuat bola putih dan bola hitam dalam jumlah yang tidak diketahui.  Ia melakukannya dengan
+mengambil serangkaian bola dari guci, mengembalikan bola yang diambil setelah setiap
+pengambilan, dan menaksir proporsi bola putih yang tidak diketahui dalam guci dengan
+proporsi bola putih di antara bola-bola yang diambil.  Ia menunjukkan bahwa, dengan memilih $n$
+cukup besar, ia dapat memperoleh tingkat ketepatan dan keandalan apa pun yang diinginkan untuk
+taksiran tersebut.  Ia juga memberikan pembahasan yang menarik tentang penerapan
+teoremanya untuk menaksir peluang meninggal akibat penyakit tertentu,
+terjadinya berbagai jenis cuaca, dan sebagainya.
+
+Ketika membicarakan banyaknya percobaan yang diperlukan untuk membuat suatu penilaian, Bernoulli
+mengamati bahwa bahkan tanpa pelatihan formal orang memahami dua hal: satu atau dua percobaan
+tidak memadai, dan risiko taksiran meleset dari sasaran berkurang ketika jumlah pengamatan
+diperbesar.\footnote{Bernoulli, op.\ cit., p.~38. Ringkasan editorial; ungkapan terjemahan
+modern tidak diterjemahkan atau direproduksi.}
+
+\noindent Namun, ia juga merumuskan pertanyaan yang harus dijawab: ketika banyaknya
+pengamatan bertambah, apakah peluang bahwa frekuensi teramati mendekati rasio sebenarnya dapat
+melampaui setiap taraf kepastian yang ditentukan sebelumnya, ataukah terdapat batas atas yang
+tidak dapat dilampaui?\footnote{ibid., p.~39. Ringkasan editorial; ungkapan terjemahan
+modern tidak diterjemahkan atau direproduksi.}
+
+\noindent Bernoulli menekankan bahwa ia telah memikirkan masalah tersebut selama dua
+puluh tahun dan menilai kebaruan, kegunaan, serta kesulitannya cukup besar untuk menandingi
+seluruh bagian lain dalam risalahnya.\footnote{ibid., p.~42. Ringkasan editorial; ungkapan
+terjemahan modern tidak diterjemahkan atau direproduksi.}
+
+\noindent Pada akhir pembuktiannya, Bernoulli menghubungkan pengamatan tanpa batas dengan
+munculnya rasio tetap dan pola pergiliran yang stabil: bahkan kejadian acak akan tampak
+mengikuti suatu keniscayaan. Ia lalu membandingkan gagasan itu dengan ajaran Plato tentang
+kembalinya segala sesuatu secara universal setelah rentang zaman yang amat panjang.\footnote{ibid.,
+pp.~65--66. Ringkasan editorial; ungkapan terjemahan modern tidak diterjemahkan atau
+direproduksi.}\index{BERNOULLI, J.|)}
+
+\exercises
+\begin{LJSItem}
+
+\i\label{exer 8.1.1} Sebuah koin seimbang dilempar 100 kali.  Nilai harapan banyaknya kemunculan
+sisi kepala adalah~50, dan simpangan baku bagi banyaknya kemunculan sisi kepala adalah $(100 \cdot
+1/2 \cdot 1/2)^{1/2} = 5$.  Apakah yang dinyatakan Ketaksamaan Chebyshev tentang
+peluang bahwa banyaknya kemunculan sisi kepala menyimpang dari nilai harapan
+50 sebesar tiga simpangan baku atau lebih (yakni, sekurang-kurangnya 15)?
+
+\i\label{exer 8.1.100} Tulis sebuah program yang menggunakan fungsi 
+$\mbox {binomial}(n,p,x)$ untuk menghitung secara tepat peluang yang Anda taksir dalam
+Latihan~\ref{exer 8.1.1}.  Bandingkan kedua hasilnya.
+
+\i\label{exer 8.1.101} Tulis sebuah program untuk melempar koin 10{,}000 kali.  Misalkan $S_n$ adalah
+banyaknya kemunculan sisi kepala dalam $n$ lemparan pertama.  Mintalah program Anda mencetak, setelah setiap
+1000 lemparan, $S_n - n/2$.  Berdasarkan simulasi ini, apakah tepat
+mengatakan bahwa Anda dapat mengharapkan sisi kepala muncul kira-kira separuh waktu ketika melempar koin
+berkali-kali?
+
+\i\label{exer 8.1.102} Taruhan 1 dolar pada permainan craps memiliki nilai harapan keuntungan $-.0141$.  Apa
+yang dikatakan Hukum Bilangan Besar tentang keuntungan Anda jika Anda memasang banyak
+taruhan 1 dolar di meja craps?  Apakah hukum tersebut menjamin bahwa kerugian Anda akan
+kecil?  Apakah hukum tersebut menjamin bahwa jika $n$ sangat besar Anda akan mengalami kerugian?
+
+\i\label{exer 8.1.103} Misalkan $X$ adalah peubah acak dengan $E(X) =0$ dan $V(X) = 1$.  Nilai
+bilangan bulat~$k$ berapakah yang menjamin bahwa $P(|X| \geq k) \leq .01$?
+
+\i\label{exer 8.1.6} Misalkan $S_n$ adalah banyaknya sukses dalam $n$ percobaan
+Bernoulli dengan peluang~$p$ untuk sukses pada setiap percobaan.  Dengan menggunakan Ketaksamaan
+Chebyshev, tunjukkan bahwa untuk sebarang $\epsilon > 0$
+$$
+P\left( \left| \frac {S_n}n - p \right| \geq \epsilon \right) \leq \frac {p(1 -
+p)}{n\epsilon^2}\ .
+$$
+
+\i\label{exer 8.1.7} Tentukan nilai maksimum yang mungkin bagi $p(1 - p)$ jika $0 < p
+< 1$.  Dengan menggunakan hasil ini dan Latihan~\ref{exer 8.1.6}, tunjukkan bahwa taksiran
+$$
+P\left( \left| \frac {S_n}n - p \right| \geq \epsilon \right) \leq \frac
+1{4n\epsilon^2}
+$$
+berlaku untuk sebarang $p$.
+
+\i\label{exer 8.1.104} Sebuah koin seimbang dilempar berkali-kali.  Apakah Hukum Bilangan
+Besar menjamin bahwa, jika $n$ cukup besar, dengan $\mbox {peluang} >
+.99$ banyaknya kemunculan sisi kepala tidak akan menyimpang dari $n/2$ lebih dari
+100?
+
+\i\label{exer 8.1.105} Dalam Latihan~\ref{sec 6.2}.\ref{exer 6.2.16}, Anda menunjukkan bahwa, untuk
+masalah penitipan topi, banyaknya orang $S_n$ yang memperoleh kembali topi mereka sendiri memiliki $E(S_n) =
+V(S_n) = 1$.  Dengan menggunakan Ketaksamaan Chebyshev, tunjukkan bahwa $P(S_n \geq 11) \leq .01$
+untuk sebarang $n \geq 11$.
+
+\i\label{exer 8.1.106} Misalkan $X$ sebarang peubah acak yang mengambil nilai 0,~1,~2,
+\dots,~$n$ dan memiliki $E(X) = V(X) = 1$.  Tunjukkan bahwa, untuk sebarang bilangan bulat positif $k$,
+$$
+P(X \geq k + 1) \leq \frac 1{k^2}\ .
+$$
+
+\i\label{exer 8.1.107} Kita mempunyai dua koin: satu koin seimbang dan satu lagi menghasilkan
+sisi kepala dengan peluang 3/4.  Salah satu dari kedua koin dipilih secara acak,
+dan koin tersebut dilempar $n$ kali.  Misalkan $S_n$ adalah banyaknya kemunculan sisi kepala
+dalam $n$ lemparan ini.  Apakah Hukum Bilangan Besar memungkinkan kita memprediksi
+proporsi kemunculan sisi kepala dalam jangka panjang?  Setelah mengamati
+banyak lemparan, dapatkah kita mengetahui koin mana yang dipilih?  Berapa banyak lemparan
+yang cukup untuk membuat kita yakin 95~persen?
+
+\i\label{exer 8.1.13} (Chebyshev\index{CHEBYSHEV, P. L.}\footnote{P. L. Chebyshev, ``On Mean
+Values," \emx {J.\ Math.\ Pure.\ Appl.,} vol.~12 (1867), pp.~177--184.})  Misalkan
+$X_1$,~$X_2$, \dots,~$X_n$ adalah peubah acak saling bebas yang mungkin memiliki
+distribusi berbeda, dan misalkan $S_n$ adalah jumlahnya.  Misalkan $m_k = E(X_k)$,
+$\sigma_k^2 = V(X_k)$, dan $M_n = m_1 + m_2 +\cdots+ m_n$.  Andaikan
+$\sigma_k^2 < R$ untuk semua~$k$.  Buktikan bahwa, untuk sebarang $\epsilon > 0$,
+$$
+P\left( \left| \frac {S_n}n - \frac {M_n}n \right| < \epsilon \right) \to 1
+$$
+ketika $n \rightarrow \infty$.
+
+\i\label{exer 8.1.108}  Sebuah koin seimbang dilempar berulang kali.  Sebelum setiap lemparan, Anda boleh
+memutuskan apakah akan bertaruh pada hasilnya.  Dapatkah Anda menjelaskan sistem taruhan dengan
+tak terhingga banyak taruhan yang memungkinkan Anda, dalam jangka panjang, memenangkan lebih dari separuh taruhan? 
+(Perhatikan bahwa kita tidak mengizinkan sistem taruhan yang menyuruh Anda bertaruh sampai unggul, lalu
+berhenti.) Tulis sebuah program komputer yang menerapkan sistem taruhan ini.  Seperti dinyatakan di atas,
+program Anda harus memutuskan apakah akan bertaruh pada suatu hasil tertentu sebelum hasil tersebut ditentukan.
+Sebagai contoh, Anda dapat memilih hanya hasil yang muncul setelah
+sisi ekor muncul tiga kali berturut-turut.  Uji apakah Anda dapat memperoleh lebih dari 50\% sisi kepala
+dengan ``sistem" Anda.
+
+\istar\label{exer 8.1.109} Buktikan analog berikut dari Ketaksamaan Chebyshev:
+$$
+P(|X - E(X)| \geq \epsilon) \leq \frac 1\epsilon E(|X - E(X)|)\ .
+$$
+
+\istar\label{exer 8.1.16} Kita telah membuktikan teorema yang sering disebut ``Hukum Lemah
+Bilangan Besar."  Intuisi kebanyakan orang dan simulasi komputer kita menunjukkan
+bahwa, jika kita melempar koin berulang kali, proporsi kemunculan sisi kepala benar-benar
+akan mendekati 1/2; yaitu, jika $S_n$ adalah banyaknya kemunculan sisi kepala dalam $n$ lemparan, maka
+kita akan memperoleh
+$$
+A_n = \frac {S_n}n \to \frac 12
+$$
+ketika $n \to \infty$.  Tentu saja, kita tidak dapat memastikan hal ini karena kita tidak mampu
+melempar koin tak terhingga kali dan, seandainya mampu, koin tersebut dapat
+selalu menampilkan sisi kepala.  Namun, ``Hukum Kuat Bilangan Besar,"\index{Hukum Kuat 
+Bilangan\\ Besar} yang dibuktikan dalam mata kuliah lebih lanjut menyatakan bahwa
+$$
+P\left( \frac {S_n}n \to \frac 12 \right) = 1\ .
+$$
+Jelaskan sebuah ruang sampel $\Omega$ yang memungkinkan kita membicarakan
+kejadian
+$$
+E = \left\{\, \omega : \frac {S_n}n \to \frac 12\, \right\}\ .
+$$
+Bisakah kita menetapkan ukuran berpeluang sama pada ruang ini?  
+\choice{}{(Lihat
+Contoh~\ref{exam 2.2.12}.)} 
+
+\istar\label{exer 8.1.16.5} 
+Dalam latihan ini, kita akan membangun contoh barisan peubah acak
+yang memenuhi Hukum Lemah Bilangan Besar, tetapi tidak memenuhi Hukum
+Kuat. Distribusi $X_i$ harus bergantung pada $i$, karena
+jika tidak, kedua hukum tersebut akan terpenuhi.  (Masalah ini disampaikan kepada kami
+oleh David Maslen.)
+\vskip .1in
+Misalkan kita memiliki barisan tak hingga kejadian yang saling bebas $A_1,
+A_2, \ldots$. Misalkan $a_i = P(A_i)$, dan misalkan $r$ adalah bilangan bulat positif.
+
+\begin{enumerate}
+\item Tentukan ekspresi untuk peluang bahwa tidak satu pun $A_i$ dengan
+$i>r$ terjadi.
+
+\item Gunakan fakta bahwa $x-1 \leq e^{-x}$ untuk menunjukkan bahwa
+$$
+P(\mbox{Tiada\ $A_i$\ dengan\ $i > r$\ terjadi}) \leq e^{-\sum_{i=r}^{\infty}
+a_i}
+$$
+\item (Lemma Borel-Cantelli pertama)  Buktikan bahwa jika $\sum_{i=1}^{\infty} a_i$ divergen, maka
+$$
+P(\mbox{Tak\ terhingga\ banyaknya $A_i$\ terjadi}) = 1.
+$$
+\vskip .1in
+\noindent
+Sekarang, misalkan $X_i$ adalah barisan peubah acak yang saling bebas sedemikian
+sehingga untuk setiap bilangan bulat positif $i \geq 2$,
+$$
+P(X_i = i) = \frac{1}{2i\log i}, \quad P(X_i = -i) =
+\frac{1}{2i\log i}, \quad P(X_i =0) = 1 - \frac{1}{i \log i}.
+$$
+Ketika $i=1$, kita tetapkan $X_i=0$ dengan peluang $1$.  Seperti biasa, kita tetapkan $S_n = X_1
++ \cdots + X_n$.  Perhatikan bahwa nilai harapan setiap $X_i$ adalah $0$.
+\item Tentukan varians $S_n$.
+\item Tunjukkan bahwa barisan $\langle X_i \rangle$ memenuhi Hukum Lemah
+Bilangan Besar, yakni buktikan bahwa untuk sebarang $\epsilon > 0$
+$$
+P\biggl(\biggl|{\frac{S_n}{n}}\biggr| \geq \epsilon\biggr) \rightarrow 0\ ,
+$$
+ketika $n$ menuju tak hingga.
+\vskip .1in
+\noindent
+Sekarang kita menunjukkan bahwa $\{ X_i \}$ tidak memenuhi Hukum Kuat
+Bilangan Besar.  Andaikan $S_n / n \rightarrow 0$. Maka, karena
+$$
+\frac{X_n}{n} = \frac{S_n}{n} - \frac{n-1}{n} \frac{S_{n-1}}{n-1}\ ,
+$$
+kita mengetahui bahwa $X_n / n \rightarrow 0$.  Dari definisi limit, kita
+menyimpulkan bahwa ketaksamaan $|X_i| \geq \frac{1}{2} i$ hanya dapat
+berlaku untuk berhingga banyak $i$.
+\item Misalkan $A_i$ adalah kejadian $|X_i| \geq \frac{1}{2} i$. Tentukan
+$P(A_i)$. Tunjukkan bahwa $\sum_{i=1}^{\infty} P(A_i)$ divergen (gunakan 
+Uji Integral).
+\item Buktikan bahwa $A_i$ terjadi untuk tak terhingga banyak $i$.
+\item Buktikan bahwa 
+$$
+P\biggl(\frac{S_n}{n} \rightarrow 0\biggr) = 0,
+$$
+dan karena itu Hukum Kuat Bilangan Besar tidak berlaku bagi barisan
+$\{ X_i \}$.
+
+\end{enumerate}
+\istar\label{exer 8.1.110} Mari kita lempar sebuah koin bias yang menghasilkan sisi kepala dengan peluang~$p$
+dan andaikan Hukum Kuat Bilangan Besar berlaku sebagaimana dijelaskan
+dalam Latihan~\ref{exer 8.1.16}.  Maka, dengan peluang~1, $$
+\frac {S_n}n \to p
+$$
+ketika $n \to \infty$.  Jika $f(x)$ adalah fungsi kontinu pada interval satuan,
+maka kita juga memperoleh
+$$
+f\left( \frac {S_n}n \right) \to f(p)\ .
+$$
+
+Akhirnya, kita dapat berharap bahwa
+$$
+E\left(f\left( \frac {S_n}n \right)\right) \to E(f(p)) = f(p)\ .
+$$
+Tunjukkan bahwa, jika semua ini benar, dan memang demikian, kita telah membuktikan bahwa
+setiap fungsi kontinu pada interval satuan merupakan limit fungsi-fungsi
+polinomial.  Ini adalah sketsa pembuktian probabilistik bagi sebuah teorema penting 
+dalam matematika yang disebut \emx {teorema aproksimasi Weierstrass.}\index{Teorema
+Aproksimasi Weierstrass}
+\end{LJSItem}
+
+
+\choice{}{\section[Peubah Acak Kontinu]{Hukum Bilangan Besar untuk Peubah Acak
+Kontinu}
+\label{sec 8.2}
+Dalam bagian sebelumnya, kita membahas dengan cukup terperinci Hukum Bilangan Besar
+untuk distribusi peluang diskret.  Hukum ini memiliki analog alami untuk
+distribusi peluang kontinu, yang kita bahas secara agak lebih ringkas
+di sini.
+
+\subsection*{\bf Ketaksamaan Chebyshev} \hfill\break\index{Ketaksamaan Chebyshev}
+Seperti dalam kasus diskret, kita memulai pembahasan dengan Ketaksamaan
+Chebyshev.
+
+\begin{theorem}{\bf (Ketaksamaan Chebyshev)} \index{Ketaksamaan Chebyshev}
+Misalkan $X$ adalah peubah acak kontinu dengan fungsi densitas $f(x)$.  Andaikan $X$ memiliki 
+nilai harapan berhingga $\mu = E(X)$ dan varians berhingga $\sigma^2 = V(X)$.  Maka untuk sebarang
+bilangan positif $\epsilon > 0$ berlaku
+$$
+P(|X - \mu| \geq \epsilon) \leq \frac {\sigma^2}{\epsilon^2}\ .
+$$
+\end{theorem}
+
+Pembuktiannya sepenuhnya analog dengan pembuktian dalam kasus diskret sehingga tidak kita sertakan.
+\par
+Perhatikan bahwa teorema ini tidak memberikan informasi jika $\sigma^2 = V(X)$ tak hingga.
+
+
+\begin{example}
+Misalkan $X$ sebarang peubah acak kontinu dengan $E(X) = \mu$ dan $V(X) =
+\sigma^2$.  Maka, jika $\epsilon = k\sigma = k$ simpangan baku
+untuk suatu bilangan bulat~$k$, berlaku
+$$
+P(|X - \mu| \geq k\sigma) \leq \frac {\sigma^2}{k^2\sigma^2} = \frac 1{k^2}\ ,
+$$
+seperti dalam kasus diskret.
+\end{example}
+
+\subsection*{Hukum Bilangan Besar}
+Dengan Ketaksamaan Chebyshev, kini kita dapat menyatakan dan membuktikan Hukum Bilangan
+Besar untuk kasus kontinu.
+
+\begin{theorem}{\bf (Hukum Bilangan Besar)}\index{Hukum Bilangan Besar}
+Misalkan $X_1$,~$X_2$, \dots,~$X_n$ membentuk proses percobaan saling bebas dengan
+fungsi densitas kontinu~$f$, nilai harapan berhingga~$\mu$, dan
+varians berhingga~$\sigma^2$.  Misalkan $S_n = X_1 + X_2 +\cdots+ X_n$ adalah jumlah
+$X_i$.  Maka untuk sebarang bilangan real $\epsilon > 0$ berlaku
+$$
+\lim_{n \to \infty} P\left( \left| \frac {S_n}n - \mu \right| \geq \epsilon
+\right) = 0\ ,
+$$
+atau secara ekuivalen,
+$$
+\lim_{n \to \infty} P\left( \left| \frac {S_n}n - \mu \right| < \epsilon
+\right) = 1\ .
+$$
+\end{theorem}
+
+Perhatikan bahwa teorema ini belum tentu benar jika $\sigma^2$ tak hingga
+(lihat Contoh~\ref{exam 8.2.5}).
+
+Seperti dalam kasus diskret, Hukum Bilangan Besar menyatakan bahwa nilai rata-rata
+dari $n$ percobaan saling bebas menuju nilai harapan ketika $n \to \infty$, dalam
+arti tepat bahwa, untuk $\epsilon > 0$ yang diberikan, peluang bahwa nilai rata-rata
+dan nilai harapan berselisih lebih dari $\epsilon$ menuju~0 ketika $n
+\to \infty$.
+
+Sekali lagi, kita tidak menyertakan pembuktiannya karena identik dengan pembuktian dalam kasus diskret.
+\subsection*{Kasus Seragam}
+\begin{example}
+Misalkan kita memilih secara acak $n$ bilangan dari interval $[0,1]$ dengan
+distribusi seragam.  Jika $X_i$ menyatakan pilihan ke-$i$, maka
+\begin{eqnarray*}
+          \mu & = & E(X_i) = \int_0^1 x\, dx = \frac 12\ , \\
+     \sigma^2 & = & V(X_i) = \int_0^1 x^2\, dx - \mu^2 \\
+              & = & \frac 13 - \frac 14 = \frac 1{12}\ .
+\end{eqnarray*}
+Jadi,
+\begin{eqnarray*}
+E \left( \frac {S_n}n \right)  & = & \frac 12\ , \\
+V \left( \frac {S_n}n \right)  & = & \frac 1{12n}\ ,
+\end{eqnarray*}
+dan untuk sebarang $\epsilon > 0$,
+$$
+P \left( \left| \frac {S_n}n - \frac 12 \right| \geq \epsilon \right) \leq \frac
+1{12n \epsilon^2}\ .
+$$
+
+Pernyataan ini berarti bahwa jika kita memilih $n$ bilangan secara acak dari $[0,1]$, maka,
+dengan peluang lebih besar daripada $1 - 1/(12n\epsilon^2)$, selisih $|S_n/n -
+1/2|$ kurang dari~$\epsilon$.  Perhatikan bahwa $\epsilon$ berperan sebagai
+besar galat yang bersedia kita toleransi: Jika kita memilih $\epsilon = 0.1$, misalnya,
+maka peluang bahwa $|S_n/n - 1/2|$ kurang dari~0.1 lebih besar daripada $1 -
+100/(12n)$.  Untuk $n = 100$, nilainya sekitar .92, tetapi jika $n = 1000$, nilainya lebih besar
+daripada .99, dan jika $n = 10{,}000$, nilainya lebih besar daripada .999.
+\putfig{5.0truein}{PSfig8-2}{Ilustrasi Hukum Bilangan Besar --- kasus seragam.}{fig 8.2}
+
+Kita dapat menggambarkan secara grafis pernyataan Hukum Bilangan Besar untuk contoh ini.
+Densitas bagi $A_n = S_n/n$ ditentukan oleh
+$$
+f_{A_n}(x) = nf_{S_n}(nx)\ .
+$$
+
+Kita telah melihat dalam Bagian~\ref{sec 7.2} bahwa kita dapat menghitung densitas
+$f_{S_n}(x)$ bagi jumlah $n$ peubah acak seragam.  Dalam Gambar~\ref{fig 8.2}, kita telah
+menggunakan hasil ini untuk menggambar densitas $A_n$ bagi berbagai nilai~$n$.  Kita telah
+mengarsir daerah tempat $A_n$ terletak di antara .45~dan~.55.  Kita melihat bahwa ketika
+$n$ diperbesar, bagian luas total di dalam daerah yang diarsir semakin
+besar.  Hukum Bilangan Besar menyatakan bahwa kita dapat memperoleh sebanyak apa pun
+bagian luas total di dalam daerah yang diarsir dengan memilih $n$ cukup besar
+(lihat juga Gambar~\ref{fig 8.1}).
+\end{example}
+
+\subsection*{Kasus Normal}
+\begin{example}
+Misalkan kita memilih secara acak $n$ bilangan real
+menggunakan distribusi normal dengan rata-rata~0 dan varians~1.  Maka
+\begin{eqnarray*}
+         \mu &=& E(X_i) = 0\ , \\
+    \sigma^2 &=& V(X_i) = 1\ .
+\end{eqnarray*}
+Jadi,
+\begin{eqnarray*}
+E \left( \frac {S_n}n \right) &=& 0\ , \\
+V \left( \frac {S_n}n \right) &=& \frac 1n\ ,
+\end{eqnarray*}
+dan, untuk sebarang $\epsilon > 0$,
+$$
+P\left( \left| \frac {S_n}n - 0 \right| \geq \epsilon \right) \leq \frac
+1{n\epsilon^2}\ .
+$$
+Dalam kasus ini, kita dapat membandingkan taksiran Chebyshev bagi $P(|S_n/n -
+\mu| \geq \epsilon)$ dalam Hukum Bilangan Besar dengan nilai tepat, karena kita
+mengetahui secara tepat fungsi densitas bagi $S_n/n$ (lihat Contoh~\ref{exam 7.12}). 
+Perbandingan tersebut ditampilkan dalam Tabel~\ref{table 8.1}, untuk $\epsilon = .1$.  Data
+dalam tabel ini dihasilkan oleh program {\bf LawContinuous}.\index{LawContinuous (program)}
+\begin{table}
+\centering
+\begin{tabular}{r|r|r}
+$n$ & $P(|S_n/n| \ge .1)$ & Chebyshev \\
+\hline
+100 & .31731 & 1.00000 \\
+200 & .15730 & .50000 \\
+300 & .08326 & .33333 \\
+400 & .04550 & .25000 \\
+500 & .02535 & .20000 \\
+600 & .01431 & .16667 \\
+700 & .00815 & .14286 \\
+800 & .00468 & .12500 \\
+900 & .00270 & .11111 \\
+1000 & .00157 & .10000 \\
+\hline
+\end{tabular}
+\caption{Taksiran Chebyshev.}
+\label{table 8.1}
+\end{table}
+Di sini kita melihat bahwa taksiran Chebyshev pada umumnya \emx {tidak} begitu 
+akurat.
+\end{example}
+
+\subsection*{Metode Monte Carlo}
+Berikut adalah contoh yang agak lebih menarik.
+
+\begin{example}
+Misalkan $g(x)$ adalah fungsi kontinu yang didefinisikan untuk $x \in [0,1]$ dengan nilai dalam
+$[0,1]$.  Dalam Bagian~\ref{sec 2.1}, kita menunjukkan cara menaksir luas
+daerah di bawah grafik $g(x)$ dengan metode Monte Carlo, yaitu dengan
+memilih banyak nilai acak $x$~dan~$y$ yang berdistribusi
+seragam, lalu melihat berapa proporsi titik $P(x,y)$ yang jatuh di dalam
+daerah di bawah grafik (lihat Contoh~\ref{exam 2.1.2}).
+\par
+Berikut adalah cara yang lebih baik untuk menaksir luas yang sama (lihat Gambar~\ref{fig 8.3}).  Mari kita pilih
+banyak nilai $X_n$ yang saling bebas dan acak dari $[0,1]$ dengan
+densitas seragam, tetapkan $Y_n = g(X_n)$, lalu tentukan nilai rata-rata $Y_n$.  Maka
+rata-rata ini merupakan taksiran kita bagi luas tersebut.  Untuk melihatnya, perhatikan bahwa jika
+fungsi densitas bagi~$X_n$ seragam,
+\begin{eqnarray*}
+\mu & = & E(Y_n) = \int_0^1 g(x) f(x)\, dx \\
+    & = & \int_0^1 g(x)\, dx \\
+    & = & \mbox {nilai\ rata-rata\ dari\ }  g(x)\ ,
+\end{eqnarray*}
+sedangkan variansnya adalah
+$$
+\sigma^2 = E((Y_n - \mu)^2) = \int_0^1 (g(x) - \mu)^2\, dx < 1\ ,
+$$
+karena untuk semua $x$ dalam $[0, 1]$, $g(x)$ berada dalam $[0, 1]$, sehingga $\mu$ berada dalam $[0, 1]$, dan
+karena itu $|g(x) - \mu| \le 1$.  Sekarang misalkan $A_n = (1/n)(Y_1 + Y_2 +\cdots+ Y_n)$.  Berdasarkan Ketaksamaan
+Chebyshev, kita memperoleh
+$$
+P(|A_n - \mu| \geq \epsilon) \leq \frac {\sigma^2}{n\epsilon^2} < \frac
+1{n\epsilon^2}\ .
+$$
+
+\putfig{3truein}{PSfig8-3}{Masalah luas.}{fig 8.3} 
+
+Pernyataan ini berarti bahwa agar berada dalam jarak $\epsilon$ dari nilai sebenarnya bagi $\mu = \int_0^1
+g(x)\, dx$ dengan peluang sekurang-kurangnya $p$, kita harus memilih $n$ sehingga
+$1/n\epsilon^2 \leq 1 - p$ (yakni, sehingga $n \geq 1/\epsilon^2(1 - p)$).  Perhatikan
+bahwa metode ini memberi tahu kita seberapa besar $n$ harus dipilih untuk memperoleh ketepatan yang diinginkan.
+\end{example}
+
+Hukum Bilangan Besar mensyaratkan agar varians $\sigma^2$ dari densitas
+yang mendasarinya berhingga: $\sigma^2 < \infty$.  Dalam kasus ketika syarat ini tidak
+terpenuhi, Hukum Bilangan Besar juga dapat gagal.  Berikut sebuah contohnya.
+
+\subsection*{Kasus Cauchy}
+\begin{example}\label{exam 8.2.5}
+Misalkan kita memilih $n$ bilangan dari $(-\infty,+\infty)$ dengan densitas Cauchy
+berparameter $a = 1$.  Kita mengetahui bahwa nilai harapan dan
+varians densitas Cauchy tidak terdefinisi (lihat Contoh~\ref{exam 6.23}).  Dalam kasus ini,
+fungsi densitas bagi
+$$
+A_n = \frac {S_n}n
+$$
+diberikan oleh (lihat Contoh~\ref{exam 7.9})
+$$
+f_{A_n}(x) = \frac 1{\pi(1 + x^2)}\ ,
+$$
+yakni, \emx {fungsi densitas bagi $A_n$ sama untuk semua $n$.}  Dalam
+kasus ini, ketika $n$ meningkat, fungsi densitas sama sekali tidak berubah dan
+Hukum Bilangan Besar tidak berlaku.
+\end{example}
+
+\exercises
+\begin{LJSItem}
+
+\i\label{exer 8.2.1} Misalkan $X$ adalah peubah acak kontinu dengan rata-rata $\mu =
+10$ dan varians $\sigma^2 = 100/3$.  Dengan menggunakan Ketaksamaan Chebyshev, tentukan
+batas atas bagi peluang-peluang berikut.
+\begin{enumerate}
+\item $P(|X - 10| \geq 2)$.
+
+\item $P(|X - 10| \geq 5)$.
+
+\item $P(|X - 10| \geq 9)$.
+
+\item $P(|X - 10| \geq 20)$.
+\end{enumerate}
+
+\i\label{exer 8.2.2} Misalkan $X$ adalah peubah acak kontinu dengan nilai yang
+berdistribusi seragam pada interval $[0,20]$.
+\begin{enumerate}
+\item Tentukan rata-rata dan varians $X$.
+
+\item Hitung secara tepat $P(|X - 10| \geq 2)$, $P(|X - 10| \geq 5)$, $P(|X - 10| \geq
+9)$, dan $P(|X - 10| \geq 20)$.  Bagaimana jawaban Anda dibandingkan dengan jawaban
+Latihan~\ref{exer 8.2.1}?  Seberapa baik Ketaksamaan Chebyshev dalam kasus ini?
+\end{enumerate}
+
+\i\label{exer 8.2.3} Misalkan $X$ adalah peubah acak dalam Latihan~\ref{exer
+8.2.2}.
+\begin{enumerate}
+\item Hitung fungsi $f(x) = P(|X - 10| \geq x)$.
+
+\item Sekarang gambarkan grafik fungsi $f(x)$ dan, pada sumbu yang sama, gambarkan grafik
+fungsi Chebyshev $g(x) = 100/(3x^2)$.  Tunjukkan bahwa $f(x) \leq g(x)$ untuk semua~$x >
+0$, tetapi $g(x)$ bukan hampiran yang terlalu baik bagi~$f(x)$.
+\end{enumerate}
+
+\i\label{exer 8.2.100} Misalkan $X$ adalah peubah acak kontinu dengan nilai yang berdistribusi
+eksponensial pada $[0,\infty)$ dengan parameter $\lambda = 0.1$.
+\begin{enumerate}
+\item Tentukan rata-rata dan varians $X$.
+
+\item Dengan menggunakan Ketaksamaan Chebyshev, tentukan batas atas bagi
+peluang-peluang berikut: $P(|X - 10| \geq 2)$, $P(|X - 10| \geq 5)$, $P(|X - 10| \geq
+9)$, dan $P(|X - 10| \geq 20)$.
+
+\item Hitung peluang-peluang ini secara tepat dan bandingkan dengan batas-batas pada
+(b).
+\end{enumerate}
+\i\label{exer 8.2.101} Misalkan $X$ adalah peubah acak kontinu dengan nilai yang berdistribusi
+normal pada $(-\infty,+\infty)$ dengan rata-rata $\mu = 0$ dan varians $\sigma^2 = 1$.
+\begin{enumerate}
+\item Dengan menggunakan Ketaksamaan Chebyshev, tentukan batas atas bagi
+peluang-peluang berikut: $P(|X| \geq 1)$, $P(|X| \geq 2)$, dan $P(|X| \geq 3)$.
+
+\item Luas di bawah kurva normal antara $-1$~dan~1 adalah .6827, antara
+$-2$~dan~2 adalah .9545, dan antara $-3$~dan~3 adalah .9973 (lihat tabel dalam
+Lampiran~A).  Bandingkan batas-batas Anda pada (a) dengan
+nilai-nilai tepat ini.  Seberapa baik Ketaksamaan Chebyshev dalam kasus ini?
+\end{enumerate}
+
+\i\label{exer 8.2.102} Jika $X$ berdistribusi normal, dengan rata-rata~$\mu$ dan
+varians~$\sigma^2$, tentukan batas atas bagi peluang-peluang berikut dengan menggunakan Ketaksamaan
+Chebyshev.
+\begin{enumerate}
+\item $P(|X - \mu| \geq \sigma)$.
+
+\item $P(|X - \mu| \geq 2\sigma)$.
+
+\item $P(|X - \mu| \geq 3\sigma)$.
+
+\item $P(|X - \mu| \geq 4\sigma)$.
+\end{enumerate}
+\noindent Sekarang tentukan nilai-nilai tepatnya menggunakan program {\bf NormalArea}\index{NormalArea (program)}
+atau tabel normal dalam Lampiran~A, lalu bandingkan.
+
+\i\label{exer 8.2.103} Jika $X$ adalah peubah acak dengan rata-rata~$\mu \ne 0$ dan varians~$\sigma^2$,
+definisikan \emx {simpangan relatif} $D$ dari $X$ terhadap rata-ratanya dengan
+$$
+D = \left| \frac {X - \mu}\mu \right|\ .
+$$
+\begin{enumerate}
+\item Tunjukkan bahwa $P(D \geq a) \leq \sigma^2/(\mu^2a^2)$.
+
+\item Jika $X$ adalah peubah acak dalam Latihan~\ref{exer 8.2.1}, tentukan
+batas atas bagi $P(D \geq .2)$, $P(D \geq .5)$, $P(D \geq .9)$, dan $P(D \geq
+2)$.
+\end{enumerate}
+
+\i\label{exer 8.2.104} Misalkan $X$ adalah peubah acak kontinu dan definisikan {\em
+versi baku} $X^*$ dari~$X$ dengan:
+$$
+X^* = \frac {X - \mu}\sigma\ .
+$$
+\begin{enumerate}
+\item Tunjukkan bahwa $P(|X^*| \geq a) \leq 1/a^2$.
+
+\item Jika $X$ adalah peubah acak dalam Latihan~\ref{exer 8.2.1}, tentukan
+batas bagi $P(|X^*| \geq 2)$, $P(|X^*| \geq 5)$, dan $P(|X^*| \geq 9)$.
+\end{enumerate}
+
+\i\label{exer 8.2.105}
+\begin{enumerate} 
+\item Misalkan sebuah bilangan $X$ dipilih secara acak dari $[0,20]$ dengan
+peluang seragam.  Tentukan batas bawah bagi peluang bahwa $X$ terletak antara
+8~dan~12, dengan menggunakan Ketaksamaan Chebyshev.
+
+\item Sekarang misalkan 20 bilangan real dipilih secara saling bebas dari $[0,20]$
+dengan peluang seragam.  Tentukan batas bawah bagi peluang bahwa
+rata-rata bilangan tersebut terletak antara 8~dan~12.
+
+\item Sekarang misalkan 100 bilangan real dipilih secara saling bebas dari
+$[0,20]$.  Tentukan batas bawah bagi peluang bahwa rata-ratanya terletak
+antara 8~dan~12.
+\end{enumerate}
+
+\i\label{exer 8.2.106} Nilai seorang mahasiswa pada suatu ujian akhir kalkulus merupakan peubah acak
+dengan nilai dalam $[0,100]$, rata-rata~70, dan varians~25.
+\begin{enumerate}
+\item Tentukan batas bawah bagi peluang bahwa nilai mahasiswa tersebut
+terletak antara 65~dan~75.
+
+\item Jika 100 mahasiswa mengikuti ujian akhir tersebut, tentukan batas bawah bagi peluang
+bahwa rata-rata kelas terletak antara 65~dan~75.
+\end{enumerate}
+
+\i\label{exer 8.2.107} Perusahaan bir Pilsdorff mengoperasikan armada truk di sepanjang jalan
+100~mil dari Hangtown ke Dry Gulch dan memelihara sebuah bengkel di tengah perjalanan. 
+Setiap truk dapat mengalami kerusakan di titik yang berjarak $X$~mil dari Hangtown,
+dengan $X$ peubah acak yang berdistribusi seragam pada $[0,100]$.
+\begin{enumerate}
+\item Tentukan batas bawah bagi peluang $P(|X - 50| \leq 10)$.
+
+\item Misalkan dalam satu pekan yang buruk, 20 truk mengalami kerusakan.  Tentukan batas bawah
+bagi peluang $P(|A_{20} - 50| \leq 10)$, dengan $A_{20}$ adalah rata-rata
+jarak dari Hangtown ketika kerusakan terjadi.
+\end{enumerate}
+
+\i\label{exer 8.2.12} Satu lembar saham biasa perusahaan bir Pilsdorff
+memiliki harga $Y_n$ pada hari kerja ke-$n$ dalam tahun tersebut.  Finn mengamati bahwa
+perubahan harga $X_n = Y_{n + 1} - Y_n$ tampaknya merupakan peubah acak dengan rata-rata
+$\mu = 0$ dan varians $\sigma^2 =1/4$.  Jika $Y_1 = 30$, tentukan batas bawah bagi
+peluang-peluang berikut, dengan asumsi bahwa semua $X_n$ saling bebas.
+\begin{enumerate}
+\item $P(25 \leq Y_2 \leq 35)$.
+
+\item $P(25 \leq Y_{11} \leq 35)$.
+
+\item $P(25 \leq Y_{101} \leq 35)$.
+\end{enumerate}
+
+\i\label{exer 8.2.108} Misalkan seratus bilangan $X_1$,~$X_2$, \dots,~$X_{100}$ dipilih
+secara acak dan saling bebas dari $[0,20]$.  Misalkan $S = X_1 + X_2 +\cdots+ X_{100}$
+adalah jumlahnya, $A = S/100$ rata-ratanya, dan $S^* = (S - 1000)/(10/\sqrt3)$ jumlah
+bakunya.  Tentukan batas bawah bagi peluang-peluang
+\begin{enumerate}
+\item $P(|S - 1000| \leq 100)$.
+
+\item $P(|A - 10| \leq 1)$.
+
+\item $P(|S^*| \leq \sqrt3)$.
+\end{enumerate}
+
+\i\label{exer 8.2.14} Misalkan $X$ adalah peubah acak kontinu yang berdistribusi
+normal pada $(-\infty,+\infty)$ dengan rata-rata~0 dan varians~1.  Dengan menggunakan
+tabel normal dalam Lampiran~A atau program {\bf NormalArea},
+tentukan nilai fungsi $f(x) = P(|X| \geq x)$ ketika $x$ meningkat dari
+0~hingga~4.0 dengan langkah~.25.  Perhatikan bahwa untuk $x \geq 0$, tabel memberikan
+$ NA(0,x) = P(0 \leq X \leq x)$ sehingga $P(|X| \geq x) = 2(.5 - NA(0,x)$.
+Gambarkan dengan tangan
+grafik~$f(x)$ menggunakan nilai-nilai ini dan grafik fungsi Chebyshev
+$g(x) = 1/x^2$, lalu bandingkan (lihat Latihan~\ref{exer 8.2.3}).
+
+\i\label{exer 8.2.109} Ulangi Latihan~\ref{exer 8.2.14}, tetapi kali ini dengan rata-rata~10 dan
+varians~3.  Perhatikan bahwa tabel dalam Lampiran~A menyajikan nilai bagi
+peubah normal baku.  Tentukan versi baku $X^*$ dari~$X$, tentukan
+nilai $f^*(x) = P(|X^*| \geq x)$ seperti dalam Latihan~\ref{exer 8.2.14}, lalu
+skalakan ulang nilai-nilai ini bagi $f(x) = P(|X -10| \geq x)$.  Gambarkan dan bandingkan
+fungsi ini dengan fungsi Chebyshev $g(x) = 3/x^2$.
+
+\i\label{exer 8.2.110} Misalkan $Z = X/Y$, dengan $X$~dan~$Y$ memiliki densitas normal dengan rata-rata~0 dan
+simpangan baku~1.  Dapat ditunjukkan bahwa $Z$ memiliki densitas Cauchy.
+\begin{enumerate}
+\item Tulis sebuah program untuk mengilustrasikan hasil ini dengan menggambar diagram batang dari
+1000 sampel yang diperoleh dengan membentuk rasio dua hasil normal baku. 
+Bandingkan diagram batang Anda dengan grafik densitas Cauchy.  Bergantung pada
+bahasa komputer yang digunakan, Anda mungkin perlu atau tidak perlu memberi tahu komputer cara menyimulasikan
+peubah acak normal.  Sebuah metode untuk melakukannya dijelaskan dalam Bagian~\ref{sec 5.2}.
+
+\item Kita telah melihat bahwa Hukum Bilangan Besar tidak berlaku bagi
+densitas Cauchy (lihat Contoh~\ref{exam 8.2.5}).  Simulasikan banyak
+percobaan dengan densitas Cauchy dan hitung rata-rata hasilnya.  Apakah
+rata-rata tersebut tampak mendekati suatu limit?  Jika demikian, dapatkah Anda menjelaskan mengapa
+hal ini mungkin terjadi?
+\end{enumerate}
+
+\i\label{exer 8.2.111} Tunjukkan bahwa, jika $X \geq 0$, maka $P(X \geq a) \leq E(X)/a$.
+
+\i\label{exer 8.2.112} (Lamperti\footnote{Komunikasi pribadi.})
+\index{LAMPERTI, J.} Misalkan $X$ adalah peubah acak tak-negatif.
+Apakah batas atas terbaik yang dapat Anda berikan bagi $P(X \geq a)$ jika diketahui
+\begin{enumerate}
+\item $E(X) = 20$.
+
+\item $E(X) = 20$ dan $V(X) = 25$.
+
+\item $E(X) = 20$, $V(X) = 25$, dan $X$ simetris terhadap rata-ratanya.
+\end{enumerate}
+\end{LJSItem}}
