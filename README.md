@@ -7,10 +7,16 @@ dan bukti QA yang dapat diputar ulang.
 
 ## Baca
 
+[Baca langsung di pembaca web](https://kokunoyumeto.github.io/introduction-to-probability-id/)
+
 [Unduh PDF edisi Bahasa Indonesia](release/PENGANTAR_PELUANG_GRINSTEAD_SNELL_ID.pdf)
 
 PDF final memuat 554 halaman Letter, seluruh 12 bab, tiga lampiran, indeks,
 GNU FDL 1.3, pemberitahuan modifikasi, dan bagian `Riwayat (History)`.
+Pembaca web menampilkan halaman secara terpusat dan selebar ruang baca,
+menyediakan daftar isi, pencarian teks, navigasi halaman, perbesaran, rotasi,
+tautan langsung per halaman, dan fallback PDF. Runtime PDF.js disimpan di
+repositori agar pembaca tidak bergantung pada CDN atau analitik pihak ketiga.
 
 ## Struktur
 
@@ -22,8 +28,21 @@ GNU FDL 1.3, pemberitahuan modifikasi, dan bagian `Riwayat (History)`.
   ulang teks ekspresi sumber Inggris;
 - `qa/` — manifest input dan receipt validasi final yang dipilih secara bounded;
 - `release/` — PDF pembaca yang terikat hash.
+- `index.html` dan `assets/` — pembaca web statis untuk GitHub Pages; PDF.js
+  berlisensi Apache-2.0 dan tidak mengubah lisensi buku.
 
 Petunjuk build terdapat di [BUILD.md](BUILD.md).
+
+## Pemeriksaan terminologi 2026-08-22
+
+Pencarian arXiv tidak menemukan naskah teori peluang berbahasa Indonesia
+dengan TeX yang sesuai; sumber arXiv:1706.07786 diperiksa tetapi prosa TeX-nya
+berbahasa Inggris. Fallback lapangan yang dipakai adalah *Teori Peluang*
+(Universitas Lambung Mangkurat, 2021). Bukti itu menguatkan `distribusi
+peluang`, yang diterapkan pada enam bentuk tidak konsisten di Bab 10 tanpa
+perubahan matematika. Identitas sumber, hash, perbandingan istilah, dan alasan
+keputusan ada di `qa/terminology-arxiv-qa/TERMINOLOGY_QA_REPORT.md`; PDF
+referensi eksternal tidak disertakan dalam rilis.
 
 ## Hak dan atribusi
 
@@ -31,6 +50,8 @@ Penulis asli: Charles M. Grinstead dan J. Laurie Snell. Versi GNU 2006:
 Peter G. Doyle / The CHANCE Project. Terjemahan dan modifikasi Bahasa
 Indonesia: KokunoYumeto, dengan bantuan Codex atas permintaan KokunoYumeto.
 Penerbit edisi ini: KokunoYumeto.
+
+OpenAI Codex gpt-5.6-sol, Ultra.
 
 Dokumen didistribusikan menurut GNU Free Documentation License 1.3 atau versi
 lebih baru, tanpa Invariant Sections, Front-Cover Texts, atau Back-Cover Texts.

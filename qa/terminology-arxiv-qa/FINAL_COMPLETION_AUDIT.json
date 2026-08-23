@@ -1,0 +1,66 @@
+{
+  "checks": {
+    "all_36_fonts_embedded": true,
+    "anonymous_public_file_sha256_readback": true,
+    "arxiv_source_package_inspected_and_rejected_honestly": true,
+    "backend_internal_validation": true,
+    "backend_public_validation_and_two_replays": true,
+    "backend_zip_members_crc_paths_content": true,
+    "credits_preserved_provenance_additive_only": true,
+    "doi_and_datacite_findable": true,
+    "durable_recovery_current": true,
+    "figshare_collection_membership_current": true,
+    "figshare_zero_file_same_item": true,
+    "glossary_119_with_status_closure": true,
+    "local_reader_identity": true,
+    "reader_554_pages_unencrypted": true,
+    "reader_provenance_once_old_term_zero": true,
+    "repository_provenance_exact": true,
+    "representative_fallback_bound_and_excluded_from_release": true,
+    "reproducible_reader_and_dvi": true,
+    "sanitized_receipt_complete": true,
+    "single_existing_concept_metadata": true,
+    "six_exact_terminology_substitutions_only": true,
+    "source_zip_contains_current_qa_and_tex": true,
+    "source_zip_members_crc_paths_content": true,
+    "withdrawn_duplicate_not_revived": true
+  },
+  "checks_passed": 24,
+  "checks_total": 24,
+  "evidence": {
+    "backend": {
+      "internal_records": 5875,
+      "public_records": 4716,
+      "stable_unit_ids": 800,
+      "terms": 119
+    },
+    "figshare_metadata_pointer": {
+      "article_id": 33314748,
+      "article_version": 1,
+      "collection_id": 8668413,
+      "collection_member_count": 24,
+      "collection_version": 40,
+      "file_count": 0,
+      "zenodo_concept_relation": "10.5281/zenodo.22048654"
+    },
+    "publication": {
+      "concept_doi": "10.5281/zenodo.22048654",
+      "datacite_state": "findable",
+      "file_count": 3,
+      "record_id": 22062144,
+      "total_bytes": 7229652,
+      "version_doi": "10.5281/zenodo.22062144"
+    },
+    "reader_pdf": {
+      "bytes": 3403487,
+      "pages": 554,
+      "sha256": "f4921540bb47b09bb938bb18a5a6f78fd5340835fb834fe865f1eb0930b8b2b8"
+    },
+    "source_archive_members": 152,
+    "terminology_corrections": 6
+  },
+  "failed_checks": [],
+  "result": "pass",
+  "schema": "r010.terminology-checkpoint-completion-audit",
+  "schema_version": "1.0.0"
+}

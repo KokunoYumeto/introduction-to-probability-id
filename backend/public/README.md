@@ -2,7 +2,7 @@
 
 This is the deterministic public view of the complete Bahasa Indonesia main
 book for R010, *Grinstead and Snell's Introduction to Probability*. It contains
-4,713 schema-versioned records with stable,
+4,716 schema-versioned records with stable,
 locale-neutral identities, Indonesian expressions, source locators and hashes,
 topology, concepts, terminology, rights, corrections, QA events, and artifact
 bindings. All 786 English authority

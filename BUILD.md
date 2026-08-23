@@ -38,14 +38,14 @@ python qa/finalize_main_pdf.py `
   --output prob-final.pdf
 ```
 
-Hasil yang dibuktikan pada 2026-08-21:
+Hasil yang dibuktikan pada 2026-08-22:
 
 - 554 halaman Letter;
-- 3.403.297 byte;
-- SHA-256 `531fd89180fe759056c4484020f855f9e393317566ba62147a5a378b5b7cae2f`;
+- 3.403.487 byte;
+- SHA-256 `f4921540bb47b09bb938bb18a5a6f78fd5340835fb834fe865f1eb0930b8b2b8`;
 - 36/36 font tertanam;
 - nol referensi/sitasi tak terdefinisi dan nol karakter hilang.
 
 Jalankan `python qa/generate_main_input_manifest.py` untuk membuktikan bahwa
 140 input build (20 file sumber/lisensi dan 120 gambar) sama byte demi byte
-dengan salinan build terisolasi. Manifest final memuat 9.500.177 byte input.
+dengan salinan build terisolasi. Manifest final memuat 9.500.200 byte input.

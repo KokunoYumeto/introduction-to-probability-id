@@ -98,7 +98,7 @@ def main() -> None:
         total_bytes += live_size
         lines.append(f"{live_hash}\t{live_size}\t{relative}\n")
 
-    if total_bytes != 9_500_177:
+    if total_bytes != 9_500_200:
         raise SystemExit(f"unexpected byte total: {total_bytes}")
 
     payload = "".join(lines).encode("utf-8")
