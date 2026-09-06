@@ -133,6 +133,13 @@ input:focus-visible,
   letter-spacing: 0.01em;
 }
 
+.federated-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+}
+
 .curriculum-return {
   display: inline-flex;
   align-items: center;

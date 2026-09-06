@@ -1,0 +1,25 @@
+{
+  "authoritative_original_url": "https://math.dartmouth.edu/~prob/prob/prob.pdf",
+  "course_id": "B90",
+  "documents": [
+    {
+      "bytes": 12422,
+      "link_counts": {
+        "en": 1,
+        "id": 2,
+        "marker": 1,
+        "original": 1
+      },
+      "path": "index.html",
+      "sha256": "6505bfe0bcc971832d4871eb38aae863211f291702688a5b50b5fad875585da5"
+    }
+  ],
+  "en_course_url": "https://kokunoyumeto.github.io/program-matematika-indonesia/en/#course-B90",
+  "html_documents": 1,
+  "id_course_url": "https://kokunoyumeto.github.io/program-matematika-indonesia/id/#course-B90",
+  "published_root": [
+    "."
+  ],
+  "repository": "introduction-to-probability-id",
+  "status": "pass"
+}
