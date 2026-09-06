@@ -11,6 +11,10 @@ dan bukti QA yang dapat diputar ulang.
 
 [Unduh PDF edisi Bahasa Indonesia](release/PENGANTAR_PELUANG_GRINSTEAD_SNELL_ID.pdf)
 
+[Kembali ke Program Matematika Indonesia — kursus B90](https://kokunoyumeto.github.io/program-matematika-indonesia/id/#course-B90)
+
+[Sumber asli resmi versi GNU 2006 — The CHANCE Project](https://math.dartmouth.edu/~prob/prob/prob.tar.gz)
+
 PDF final memuat 554 halaman Letter, seluruh 12 bab, tiga lampiran, indeks,
 GNU FDL 1.3, pemberitahuan modifikasi, dan bagian `Riwayat (History)`.
 Pembaca web menampilkan halaman secara terpusat dan selebar ruang baca,
